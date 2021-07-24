@@ -16,8 +16,7 @@ public class MyTestExecutionListener implements TestExecutionListener{
 		System.out.println(testIdentifier.getDisplayName());
 	}
 
-  public void testPlanExecutionFinished(TestPlan testPlan) {
-  	
+  public void testPlanExecutionFinished(TestPlan testPlan) {  	
     System.out.println("testPlanExecutionFinished: " + testPlan.toString());
   }
 }
