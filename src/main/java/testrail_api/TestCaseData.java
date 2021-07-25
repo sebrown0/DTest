@@ -3,14 +3,22 @@
  */
 package testrail_api;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.json.simple.JSONObject;
+import org.openqa.selenium.WebDriver;
+
+import com.gurock.testrail.APIClient;
+import com.gurock.testrail.APIException;
 
 /**
  * @author Brown
  * @Comment
  * The data in a test case from or to the API.
  */
-public class TestCaseData implements TestRailPost{
+public class TestCaseData implements TestCaseDataGetter{
 	private String belongsToTestRunId;
 	private String testId;
 	private TestStatus status;
@@ -47,16 +55,46 @@ public class TestCaseData implements TestRailPost{
 		return status;
 	}
 	
+	@Override
+	public Map<String, String> getData() {
+		Map<String, String> data = new HashMap<String, String>();
+		
+		data.put("status_id", String.valueOf(status.getStatus()));
+		data.put("comment", comment);
+		return data;
+	}
+
+	@Override
+	public String testCaseId() {
+		return testId;
+	}
+
+	@Override
+	public String testRunId() {
+		return belongsToTestRunId;
+	}
+
+	
+//	public JSONObject singleTest(APIClient client) {
+//		Map<String,String> data = new HashMap<String,String>();
+//		JSONObject json = null;
+//				
+//		data.put("status_id", String.valueOf(status.getStatus()));
+//		data.put("comment", "This test worked fine!");
+//		
+//		try {
+//			json = (JSONObject) client.sendPost("add_result_for_case/1/1", data);
+//		} catch (IOException | APIException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return json;
+//	}
+
 
 	@Override
 	public String toString() {
 		return "TestCaseData [belongsToTestRunId=" + belongsToTestRunId + ", testId=" + testId + ", status=" + status
 				+ ", comment=" + comment + "]";
 	}
-
-	@Override
-	public JSONObject getJSONObject() {
-		// TODO Auto-generated method stub
-		return null;
-	}			
 }
