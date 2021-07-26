@@ -2,32 +2,52 @@ package testrail;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.json.simple.JSONObject;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import com.gurock.testrail.APIClient;
+
+import exceptions.IncorrectTestStatusException;
 import listners.TestResultLogger;
-import testrail_api.TestRail;
+import testrail_api.MyTestRailAPI;
+import testrail_api.TestCaseData;
+import testrail_api.TestRailClient;
+import testrail_api.TestStatus;
+import testrail_api.TestStatusValues;
 
 @ExtendWith(TestResultLogger.class)
 class TestRailAPITest {
-
+	private static APIClient client;
+	private static MyTestRailAPI api = new MyTestRailAPI(client);
+		
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
+		client = TestRailClient.getInitialisedClient();
+		api = new MyTestRailAPI(client);		
+	}
+	
 	@Test
 	@Tag("R18")
-	@Tag("C2316")
+	@Tag("T3829")
 	void getClient_pass() {
-		TestRail api = new TestRail("sbrown@dakarsoftware.com", "12345");
-		APIClient client = api.getInitialisedClient();
 		assertEquals("sbrown@dakarsoftware.com", client.getUser());
 	}
 
 	@Test
 	@Tag("R18")
-	@Tag("C2317")
-	void getClient_fail() {
-		TestRail api = new TestRail("sbrown@dakarsoftware.com", "12345");
-		APIClient client = api.getInitialisedClient();
-		assertEquals("swhite@dakarsoftware.com", client.getUser());
+	@Tag("T3830")
+	void getClient_fail() {		
+		fail("This is a failling test.");
 	}
 
+	@Test
+	@Tag("R18")
+	@Tag("T3832")
+	void postResult() throws IncorrectTestStatusException {
+		TestCaseData data = new TestCaseData("R19", "T3831",	new TestStatus(TestStatusValues.PASSED()), "Test Passed");
+		JSONObject json = api.postSingleTest(data);
+		assertTrue(json.containsKey("comment"));
+	}
 }

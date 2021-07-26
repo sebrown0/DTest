@@ -3,15 +3,8 @@
  */
 package testrail_api;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.json.simple.JSONObject;
-import org.openqa.selenium.WebDriver;
-
-import com.gurock.testrail.APIClient;
-import com.gurock.testrail.APIException;
 
 /**
  * @author Brown
@@ -94,7 +87,7 @@ public class TestCaseData implements TestCaseDataGetter{
 
 	@Override
 	public String toString() {
-		return "TestCaseData [belongsToTestRunId=" + belongsToTestRunId + ", testId=" + testId + ", status=" + status
+		return "TestCaseData [belongsToTestRunId=" + belongsToTestRunId + ", testId=" + testId + ", status=" + status.getStatus()
 				+ ", comment=" + comment + "]";
 	}
 }

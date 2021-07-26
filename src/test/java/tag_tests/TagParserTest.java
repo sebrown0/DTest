@@ -19,6 +19,11 @@ class TagParserTest {
 	}
 	
 	@Test
+	void getTestNum_ReturnNum() {
+		assertEquals("123", TagParser.getTestNum("T123"));
+	}
+	
+	@Test
 	void getTestCaseNum_ReturnNoNum() {
 		assertEquals("0", TagParser.getTestCaseNum("X123"));
 	}
@@ -33,7 +38,7 @@ class TagParserTest {
 	void createTestCaseTagObj_FromSet() {
 		Set<String> tags = new HashSet<String>(Arrays.asList("R1","C1"));
 		TestCaseTag tagObj = TagParser.getTestCaseTag(tags);
-		assertEquals("R1:C1", tagObj.getTestRunNum() + ":" + tagObj.getTestCaseNum());
+		assertEquals("R1:C1", tagObj.getTestRunNum() + ":" + tagObj.getTestNum());
 	}
 
 }

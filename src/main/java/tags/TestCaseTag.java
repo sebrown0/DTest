@@ -6,19 +6,21 @@ package tags;
 /**
  * @author Steve Brown
  * @Comment
- * The tags that are associated with a test case.
+ * 
+ * The tags that are associated with a test case. 
  */
 public class TestCaseTag {
 
 	private String testRunNum;
-	private String testCaseNum;
+	private String testNum;			// Either the test or test case num, i.e T123 or C456
+	
 	
 	public TestCaseTag() {}
 	
-	public TestCaseTag(String testRunNum, String testCaseNum) {
+	public TestCaseTag(String testRunNum, String testNum) {
 		super();
 		this.testRunNum = testRunNum;
-		this.testCaseNum = testCaseNum;
+		this.testNum = testNum;
 	}
 	
 	public String getTestRunNum() {
@@ -27,16 +29,16 @@ public class TestCaseTag {
 	public void setTestRunNum(String testRunNum) {
 		this.testRunNum = testRunNum;
 	}
-	public String getTestCaseNum() {
-		return testCaseNum;
+	public String getTestNum() {
+		return testNum;
 	}
-	public void setTestCaseNum(String testCaseNum) {
-		this.testCaseNum = testCaseNum;
+	public void setTestNum(String testCaseNum) {
+		this.testNum = testCaseNum;
 	}
 	
 	@Override
 	public String toString() {
-		return "TestCaseTag [testRunNum=" + testRunNum + ", testCaseNum=" + testCaseNum + "]";
+		return "TestCaseTag [testRunNum=" + testRunNum + ", testNum=" + testNum + "]";
 	}
 		
 }

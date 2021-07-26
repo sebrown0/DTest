@@ -8,6 +8,7 @@ package testrail_api;
  *
  */
 public final class TestStatusValues {
+	
 	/*
 	 * Use like an enum.
 	 */

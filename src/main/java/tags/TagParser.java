@@ -4,9 +4,7 @@ import java.util.Set;
 
 /**
  * @author Steve Brown
- * @Comment
- * 
- * 
+ *  
  * 
  */
 public class TagParser {
@@ -20,7 +18,9 @@ public class TagParser {
 			if(type == 'R') {
 				tagObj.setTestRunNum(s);
 			}else if (type == 'C') {
-				tagObj.setTestCaseNum(s);
+				tagObj.setTestNum(s);
+			}else if (type == 'T') {
+				tagObj.setTestNum(s);
 			}
 		}		
 		return tagObj;
@@ -32,6 +32,10 @@ public class TagParser {
 	
 	public static String getTestCaseNum(String tag) {
 		 return getNumberForType('C', tag);
+	}
+	
+	public static String getTestNum(String tag) {
+		 return getNumberForType('T', tag);
 	}
 	
 	private static char getType(String tag) {

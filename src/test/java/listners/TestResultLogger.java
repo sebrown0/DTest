@@ -1,45 +1,51 @@
 package listners;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-
 import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestWatcher;
 
-import com.gurock.testrail.APIClient;
-
+import exceptions.IncorrectTestStatusException;
 import tags.TagParser;
 import tags.TestCaseTag;
-import testrail_api.TestRail;
+import testrail_api.MyTestRailAPI;
+import testrail_api.TestCaseData;
+import testrail_api.TestRailClient;
+import testrail_api.TestStatus;
+import testrail_api.TestStatusValues;
 
 public class TestResultLogger implements TestWatcher, AfterAllCallback {
 //	private List<TestResultStatus> testResultsStatus = new ArrayList<>();
-	TestRail api;
-	APIClient client;
-	Map<String, String> data;
+
+	private MyTestRailAPI api;
 	
-	public TestResultLogger() {
-		this.api = new TestRail("sbrown@dakarsoftware.com", "12345");
-		this.client = api.getInitialisedClient();
+	public TestResultLogger() {		
+		api = new MyTestRailAPI(TestRailClient.getInitialisedClient());
 	}
 	
+	private void updateResult(int status, String msg, ExtensionContext context) {
+		TestCaseTag tag = TagParser.getTestCaseTag(context.getTags());
+		TestStatus testStatus = null;
+		TestCaseData data;
+
+		try {
+			testStatus = new TestStatus(status);
+		} catch (IncorrectTestStatusException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		data = new TestCaseData(tag.getTestRunNum(), tag.getTestNum(), testStatus, msg);		
+		api.postSingleTest(data);
+	}	
   
   @Override
   public void testSuccessful(ExtensionContext context) {
-//  	System.out.printf("%nTest Successful for test {%s}: ", context.getDisplayName());
+  	updateResult(TestStatusValues.PASSED(), "Test passed", context);  	
 //    testResultsStatus.add(TestResultStatus.SUCCESSFUL);
   } 
   
   @Override
   public void testFailed(ExtensionContext context, Throwable cause) {  	
-  	TestCaseTag tagObj = TagParser.getTestCaseTag(context.getTags());
-  	System.out.printf("%nTest {%s} Failed for test run {%s}: test case {%s}", context.getDisplayName(), tagObj.getTestRunNum(), tagObj.getTestCaseNum());
-//    testResultsStatus.add(TestResultStatus.FAILED);
+  	updateResult(TestStatusValues.FAILED(), "Test failed", context);
   }
   
 	@Override
