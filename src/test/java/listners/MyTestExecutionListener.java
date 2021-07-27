@@ -11,7 +11,7 @@ public class MyTestExecutionListener implements TestExecutionListener{
 		System.out.println("MyTestExecutionListener");
 	}
 		
-	public void executionFinished​(TestIdentifier testIdentifier, TestExecutionResult testExecutionResult){
+	public void executionFinished(TestIdentifier testIdentifier, TestExecutionResult testExecutionResult){
 		System.out.println("executionFinished​");
 		System.out.println(testIdentifier.getDisplayName());
 	}
