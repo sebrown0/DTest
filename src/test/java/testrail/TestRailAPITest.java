@@ -10,7 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import com.gurock.testrail.APIClient;
 
 import exceptions.IncorrectTestStatusException;
-import listners.TestResultLogger;
+import listeners.TestResultLogger;
 import testrail_api.MyTestRailAPI;
 import testrail_api.TestCaseData;
 import testrail_api.TestRailClient;

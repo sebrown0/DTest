@@ -1,4 +1,4 @@
-package listner_tests;
+package listener_tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,10 +13,10 @@ import org.junit.platform.launcher.TestPlan;
 import org.junit.platform.launcher.listeners.TestExecutionSummary;
 import org.junit.platform.launcher.listeners.TestExecutionSummary.Failure;
 
-import listners.TestListner;
+import listeners.TestListener;
 
 
-class ListnerLauncher {
+class ListenerLauncher {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -28,7 +28,7 @@ class ListnerLauncher {
 
 	@Test
 	void test() {
-		TestListner listner = new TestListner();
+		TestListener listner = new TestListener();
 		TestExecutionSummary summary;
 		List<Failure> failed;
 		

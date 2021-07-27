@@ -1,0 +1,65 @@
+package object_model_tests.login;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.openqa.selenium.WebDriver;
+
+import drivers.DriverGetter;
+import drivers.GoogleDriver;
+import listeners.TestResultLogger;
+import object_models.helpers.User;
+import object_models.pages.HomePage;
+import object_models.pages.LoadablePage;
+import object_models.pages.UserLoginPage;
+
+@ExtendWith(TestResultLogger.class)
+class UserLoginTest {
+	private static WebDriver driver;
+	private static DriverGetter dg = new GoogleDriver();
+		
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {				
+		driver = dg.getDriver();
+	}
+
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
+		driver.quit();
+	}
+	
+	@Test
+	@Tag("R20")
+	@Tag("T3833")
+	void createUserLoginModel() {
+		LoadablePage userLogin = new UserLoginPage(driver);		
+		assertTrue(userLogin.isPageTitleCorrect());		
+	}
+
+	@ParameterizedTest
+	@MethodSource("resources.test_data.UserProvider#validPortalUser")
+	@Tag("R20")
+	@Tag("T3834")
+	void validUserLogin(User user) {		
+		UserLoginPage userLogin = new UserLoginPage(driver);		
+		HomePage hp = userLogin.loginValidUser(user);		
+		assertTrue(hp.isPageTitleCorrect());
+	}
+		
+	@ParameterizedTest
+	@MethodSource("resources.test_data.UserProvider#invalidUser")
+	@Tag("R20")
+	@Tag("T3835")
+	void invalidUserLogin(User user) {		
+		UserLoginPage userLogin = new UserLoginPage(driver);		
+		HomePage hp = userLogin.loginValidUser(user);		
+		assertTrue(!hp.isPageTitleCorrect());
+	}
+		
+}

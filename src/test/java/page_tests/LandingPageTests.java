@@ -11,7 +11,7 @@ import org.openqa.selenium.devtools.v91.page.Page;
 
 import drivers.DriverGetter;
 import drivers.GoogleDriver;
-import listners.TestResultLogger;
+import listeners.TestResultLogger;
 
 @ExtendWith(TestResultLogger.class)
 public class LandingPageTests {

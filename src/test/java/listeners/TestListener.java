@@ -1,4 +1,4 @@
-package listners;
+package listeners;
 
 import static org.junit.platform.engine.discovery.ClassNameFilter.includeClassNamePatterns;
 import static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;
@@ -13,13 +13,13 @@ import org.junit.platform.launcher.core.LauncherFactory;
 import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
 import org.junit.platform.launcher.listeners.TestExecutionSummary;
 
-public class TestListner {
+public class TestListener {
 	private LauncherDiscoveryRequest request;		
 	private Launcher launcher;
 //	private SummaryGeneratingListener listener = new SummaryGeneratingListener();
 	private MyTestExecutionListener listener = new MyTestExecutionListener();
 	
-	public TestListner() {
+	public TestListener() {
 		request = LauncherDiscoveryRequestBuilder.request()
 			.selectors(
 					selectPackage("demo.src.test.java.page_tests"),
