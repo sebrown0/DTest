@@ -10,25 +10,24 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
-import drivers.DriverGetter;
-import drivers.GoogleDriver;
+import factories.DriverFactory;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import resources.test_data.UserProvider;
+import xml_reader.ConfigReader;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 class HomepageElementsTest {
 	private static HomePage hp;
 	private static WebDriver driver;
-	private static DriverGetter dg = new GoogleDriver();
 	private static UserLoginPage userLogin;
 	
 	@BeforeAll	
 	static void setUpBeforeClass() throws Exception {				
-		driver = dg.getDriver();
+		driver = DriverFactory.getDriver(new ConfigReader());
 		userLogin = new UserLoginPage(driver);
 		hp = userLogin.loginValidUser(UserProvider.userPortal());		
 	}

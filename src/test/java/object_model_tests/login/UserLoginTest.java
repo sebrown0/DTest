@@ -11,22 +11,21 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
 
-import drivers.DriverGetter;
-import drivers.GoogleDriver;
+import factories.DriverFactory;
 import listeners.TestResultLogger;
 import object_models.helpers.User;
 import object_models.pages.HomePage;
 import object_models.pages.LoadablePage;
 import object_models.pages.UserLoginPage;
+import xml_reader.ConfigReader;
 
 @ExtendWith(TestResultLogger.class)
 class UserLoginTest {
 	private static WebDriver driver;
-	private static DriverGetter dg = new GoogleDriver();
 		
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception {				
-		driver = dg.getDriver();
+	static void setUpBeforeClass() throws Exception {
+		driver = DriverFactory.getDriver(new ConfigReader());
 	}
 
 	@AfterAll

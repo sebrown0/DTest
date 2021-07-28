@@ -3,12 +3,13 @@
  */
 package object_models.pages;
 
+import static providers.PageTitleProvider.LOGIN_PAGE_TITLE;
+import static providers.URIProvider.LOGIN_PAGE_URI;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import object_models.helpers.User;
-import static resources.PageTitleProvider.LOGIN_PAGE_TITLE;
-import static resources.URIProvider.LOGIN_PAGE_URI;
 
 /**
  * @author SteveBrown

@@ -1,4 +1,4 @@
-package resources;
+package providers;
 
 public class PageTitleProvider {	
 	public static final String LOGIN_PAGE_TITLE = "Dakar Software Systems";

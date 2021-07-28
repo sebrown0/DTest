@@ -3,7 +3,7 @@
  */
 package object_models.pages;
 
-import static resources.PageTitleProvider.HOME_PAGE_TITLE;
+import static providers.PageTitleProvider.HOME_PAGE_TITLE;
 
 import org.openqa.selenium.WebDriver;
 
@@ -26,7 +26,6 @@ public class HomePage extends Page {
 		topRightNavBar = new TopRightNavBar(driver);
 	}
 	
-
 	@Override
 	public boolean isPageTitleCorrect() {
 		return (driver.getTitle().equals(MY_TITLE)) ? true : false;
