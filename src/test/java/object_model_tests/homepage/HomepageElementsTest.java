@@ -43,4 +43,8 @@ class HomepageElementsTest {
 		assertTrue(hp.isPageTitleCorrect());
 	}
 
+	@Test
+	void topRightNavBarElementsOk() {
+		assertTrue(hp.getTopRightNavBar().isAllElementsCorrect());
+	}
 }

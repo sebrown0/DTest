@@ -1,19 +1,8 @@
 package listener_tests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.Iterator;
-import java.util.List;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.platform.launcher.LauncherDiscoveryRequest;
-import org.junit.platform.launcher.TestPlan;
-import org.junit.platform.launcher.listeners.TestExecutionSummary;
-import org.junit.platform.launcher.listeners.TestExecutionSummary.Failure;
-
-import listeners.TestListener;
 
 
 class ListenerLauncher {
@@ -28,9 +17,9 @@ class ListenerLauncher {
 
 	@Test
 	void test() {
-		TestListener listner = new TestListener();
-		TestExecutionSummary summary;
-		List<Failure> failed;
+//		TestListener listner = new TestListener();
+//		TestExecutionSummary summary;
+//		List<Failure> failed;
 		
 //		summary = listner.getSummary();
 //		
