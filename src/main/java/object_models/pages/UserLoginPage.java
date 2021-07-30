@@ -19,13 +19,10 @@ import object_models.helpers.User;
 public class UserLoginPage extends LoadablePage {
 	private By byUserName = By.name("user");
 	private By byUserPassword = By.name("password");
-	private By byBtnLogin = By.className("login100-form-btn");
-	
-	private static final String MY_TITLE = LOGIN_PAGE_TITLE;
-	private static final String MY_URI = LOGIN_PAGE_URI;
+	private By byBtnLogin = By.className("login100-form-btn");	
 	
 	public UserLoginPage(WebDriver driver) {
-		super(driver, MY_TITLE, MY_URI);
+		super(driver, LOGIN_PAGE_TITLE, LOGIN_PAGE_URI);
 	}
 		
 	public HomePage loginValidUser(User user) {		

@@ -14,7 +14,6 @@ import testrail_api.TestStatus;
 import testrail_api.TestStatusValues;
 
 public class TestResultLogger implements TestWatcher, AfterAllCallback {
-//	private List<TestResultStatus> testResultsStatus = new ArrayList<>();
 
 	private MyTestRailAPI api;
 	
@@ -30,7 +29,6 @@ public class TestResultLogger implements TestWatcher, AfterAllCallback {
 		try {
 			testStatus = new TestStatus(status);
 		} catch (IncorrectTestStatusException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		data = new TestCaseData(tag.getTestRunNum(), tag.getTestNum(), testStatus, msg);		
@@ -39,8 +37,7 @@ public class TestResultLogger implements TestWatcher, AfterAllCallback {
   
   @Override
   public void testSuccessful(ExtensionContext context) {
-  	updateResult(TestStatusValues.PASSED(), "Test passed", context);  	
-//    testResultsStatus.add(TestResultStatus.SUCCESSFUL);
+  	updateResult(TestStatusValues.PASSED(), "Test passed", context);
   } 
   
   @Override

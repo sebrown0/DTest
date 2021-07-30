@@ -27,8 +27,11 @@ class HomepageElementsTest {
 	
 	@BeforeAll	
 	static void setUpBeforeClass() throws Exception {				
+		// Get a web driver as specified in the config.xml		
 		driver = DriverFactory.getDriver(new ConfigReader());
+		// Get a login page
 		userLogin = new UserLoginPage(driver);
+		// Get a home page after successful login
 		hp = userLogin.loginValidUser(UserProvider.userPortal());		
 	}
 	
@@ -39,11 +42,13 @@ class HomepageElementsTest {
 	
 	@Test
 	void homepageLoadedOk() {
+		// Check that the home page has the correct title.
 		assertTrue(hp.isPageTitleCorrect());
 	}
 
 	@Test
 	void topRightNavBarElementsOk() {
+		// Check that the nav bar's elements are correct.
 		assertTrue(hp.getTopRightNavBar().isAllElementsCorrect());
 	}
 }

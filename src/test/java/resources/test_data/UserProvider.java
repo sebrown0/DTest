@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 import object_models.helpers.User;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 public class UserProvider {

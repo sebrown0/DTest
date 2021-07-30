@@ -25,6 +25,7 @@ class UserLoginTest {
 		
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		// Get a web driver as specified in the config.xml		
 		driver = DriverFactory.getDriver(new ConfigReader());
 	}
 
@@ -37,6 +38,7 @@ class UserLoginTest {
 	@Tag("R20")
 	@Tag("T3833")
 	void createUserLoginModel() {
+		// Check that a user login page is created.
 		LoadablePage userLogin = new UserLoginPage(driver);		
 		assertTrue(userLogin.isPageTitleCorrect());		
 	}
@@ -46,6 +48,7 @@ class UserLoginTest {
 	@Tag("R20")
 	@Tag("T3834")
 	void validUserLogin(User user) {		
+		// Supply valid user, login and check home page is loaded.
 		UserLoginPage userLogin = new UserLoginPage(driver);		
 		HomePage hp = userLogin.loginValidUser(user);		
 		assertTrue(hp.isPageTitleCorrect());
@@ -55,7 +58,8 @@ class UserLoginTest {
 	@MethodSource("resources.test_data.UserProvider#invalidUser")
 	@Tag("R20")
 	@Tag("T3835")
-	void invalidUserLogin(User user) {		
+	void invalidUserLogin(User user) {
+		// Supply invalid user, login (fail) and check home page is NOT loaded.
 		UserLoginPage userLogin = new UserLoginPage(driver);		
 		HomePage hp = userLogin.loginValidUser(user);		
 		assertTrue(!hp.isPageTitleCorrect());
