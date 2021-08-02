@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import factories.DriverFactory;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
+import providers.XMLFileProvider;
 import resources.test_data.UserProvider;
 import xml_reader.ConfigReader;
 
@@ -28,7 +29,7 @@ class HomepageElementsTest {
 	@BeforeAll	
 	static void setUpBeforeClass() throws Exception {				
 		// Get a web driver as specified in the config.xml		
-		driver = DriverFactory.getDriver(new ConfigReader());
+		driver = DriverFactory.getDriver(new ConfigReader(XMLFileProvider.TEST_CONFIG_FILE_PATH));
 		// Get a login page
 		userLogin = new UserLoginPage(driver);
 		// Get a home page after successful login

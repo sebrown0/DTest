@@ -4,6 +4,8 @@
 package xml_reader;
 import drivers.DriverGetter;
 import drivers.GoogleDriver;
+import reporting.strategy.ReportingStrategyFactory;
+import reporting.strategy.ResultWriter;
 import xml_file.XMLFile;
 
 /**
@@ -11,10 +13,15 @@ import xml_file.XMLFile;
  *
  */
 public class ConfigReader implements WebDriverNameGetter {
-	private XMLFile xmlFile = new XMLFile("./src/main/java/xml_files/config.xml");
+	private XMLFile xmlFile;
 	private DriverGetter dg = null;
 	private String webDriverName;
-	
+		
+	public ConfigReader(String filePath) {
+		super();		
+		xmlFile = new XMLFile(filePath);
+	}
+
 	public DriverGetter getDriverGetter() {
 		setDriverName();
 		if(webDriverName.equalsIgnoreCase("google")) {
@@ -24,7 +31,11 @@ public class ConfigReader implements WebDriverNameGetter {
 	}
 
 	private void setDriverName() {
-		webDriverName = xmlFile.getElement("web_driver").getTextContent();
+		webDriverName = xmlFile.getElement("WebDriver").getTextContent();
+	}
+	
+	public ResultWriter getResultWriter() {
+		return ReportingStrategyFactory.getResultWriter(xmlFile.getElement("Strategy").getTextContent());
 	}
 	
 	@Override

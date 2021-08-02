@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<config>
-	<aut>
-		<name>Dakar 2021</name>
-		<version>1.0.0</version>
-	</aut>
-	
-	<web_driver>Google</web_driver>
-</config>

@@ -17,6 +17,7 @@ import object_models.helpers.User;
 import object_models.pages.HomePage;
 import object_models.pages.LoadablePage;
 import object_models.pages.UserLoginPage;
+import providers.XMLFileProvider;
 import xml_reader.ConfigReader;
 
 @ExtendWith(TestResultLogger.class)
@@ -26,7 +27,7 @@ class UserLoginTest {
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		// Get a web driver as specified in the config.xml		
-		driver = DriverFactory.getDriver(new ConfigReader());
+		driver = DriverFactory.getDriver(new ConfigReader(XMLFileProvider.TEST_CONFIG_FILE_PATH));
 	}
 
 	@AfterAll
