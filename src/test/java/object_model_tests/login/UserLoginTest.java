@@ -11,7 +11,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
 
-import factories.DriverFactory;
 import listeners.TestResultLogger;
 import object_models.helpers.User;
 import object_models.pages.HomePage;
@@ -23,11 +22,13 @@ import xml_reader.ConfigReader;
 @ExtendWith(TestResultLogger.class)
 class UserLoginTest {
 	private static WebDriver driver;
-		
+	private static ConfigReader configReader;
+	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		configReader = new ConfigReader(XMLFileProvider.PROD_CONFIG_FILE_PATH);
 		// Get a web driver as specified in the config.xml		
-		driver = DriverFactory.getDriver(new ConfigReader(XMLFileProvider.TEST_CONFIG_FILE_PATH));
+		driver = configReader.getDriver();
 	}
 
 	@AfterAll
@@ -47,7 +48,7 @@ class UserLoginTest {
 	@ParameterizedTest
 	@MethodSource("resources.test_data.UserProvider#validPortalUser")
 	@Tag("R20")
-	@Tag("T3834")
+	@Tag("T3834")	
 	void validUserLogin(User user) {		
 		// Supply valid user, login and check home page is loaded.
 		UserLoginPage userLogin = new UserLoginPage(driver);		

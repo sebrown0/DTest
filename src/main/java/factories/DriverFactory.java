@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 
 import drivers.DriverGetter;
 import drivers.GoogleDriver;
-import xml_reader.WebDriverNameGetter;
 
 /**
  * @author SteveBrown
@@ -16,9 +15,11 @@ import xml_reader.WebDriverNameGetter;
  * If the name does not match then a default google driver is returned.
  */
 public class DriverFactory {
-	public static WebDriver getDriver(WebDriverNameGetter nameGetter) {
+	
+	public static WebDriver getDriver(String driverName) {
 		DriverGetter dg = null;
-		if(nameGetter.getTypeName().equalsIgnoreCase("XXXX")) {
+		
+		if(driverName.equalsIgnoreCase("XXXX")) {
 			// ANOTHER DRIVER
 		}else {
 			dg = new GoogleDriver();

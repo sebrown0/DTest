@@ -1,54 +1,47 @@
 package listeners;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestWatcher;
 
-import exceptions.IncorrectTestStatusException;
-import tags.TagParser;
-import tags.TestCaseTag;
-import testrail_api.MyTestRailAPI;
-import testrail_api.TestCaseData;
-import testrail_api.TestRailClient;
-import testrail_api.TestStatus;
-import testrail_api.TestStatusValues;
+import providers.XMLFileProvider;
+import reporting.strategy.ResultWriter;
+import test_result.ResultDisabled;
+import test_result.ResultFailed;
+import test_result.ResultPassed;
+import test_result.TestResult;
+import xml_reader.ConfigReader;
 
 public class TestResultLogger implements TestWatcher, AfterAllCallback {
-
-	private MyTestRailAPI api;
+	private ResultWriter resultWriter;
+	private ConfigReader configReader;
 	
-	public TestResultLogger() {		
-		api = new MyTestRailAPI(TestRailClient.getInitialisedClient());
+	public TestResultLogger() {
+		super();
+		configReader = new ConfigReader(XMLFileProvider.PROD_CONFIG_FILE_PATH);
+		resultWriter = configReader.getResultWriter();
 	}
-	
-	private void updateResult(int status, String msg, ExtensionContext context) {
-		TestCaseTag tag = TagParser.getTestCaseTag(context.getTags());
-		TestStatus testStatus = null;
-		TestCaseData data;
-
-		try {
-			testStatus = new TestStatus(status);
-		} catch (IncorrectTestStatusException e) {
-			e.printStackTrace();
-		}
-		data = new TestCaseData(tag.getTestRunNum(), tag.getTestNum(), testStatus, msg);		
-		api.postSingleTest(data);
-	}	
-  
-  @Override
-  public void testSuccessful(ExtensionContext context) {
-  	updateResult(TestStatusValues.PASSED(), "Test passed", context);
+		
+	@Override
+  public void testSuccessful(ExtensionContext context) {		
+		resultWriter.writeResult(new TestResult(new ResultPassed(), context));
   } 
   
   @Override
-  public void testFailed(ExtensionContext context, Throwable cause) {  	
-  	updateResult(TestStatusValues.FAILED(), "Test failed", context);
+  public void testFailed(ExtensionContext context, Throwable cause) {
+		resultWriter.writeResult(new TestResult(new ResultFailed(), context));
   }
   
 	@Override
+	public void testDisabled(ExtensionContext context, Optional<String> reason) {
+		resultWriter.writeResult(new TestResult(new ResultDisabled(), context));
+	}
+  
+	@Override
 	public void afterAll(ExtensionContext context) throws Exception {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 	
 //@Override
@@ -56,14 +49,7 @@ public class TestResultLogger implements TestWatcher, AfterAllCallback {
 //	System.out.printf("%nTest Aborted for test {%s}: ", context.getDisplayName());
 //  testResultsStatus.add(TestResultStatus.ABORTED);
 //}
-//@Override
-//public void testDisabled(ExtensionContext context, Optional<String> reason) {
-//    System.out.printf("%nTest Disabled for test {%s}: with reason :- {%s}", 
-//    context.getDisplayName(),
-//    reason.orElse("No reason"));
-//
-//  testResultsStatus.add(TestResultStatus.DISABLED);
-//}
+
 
 
 

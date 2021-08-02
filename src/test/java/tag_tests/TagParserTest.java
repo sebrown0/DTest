@@ -40,5 +40,4 @@ class TagParserTest {
 		TestCaseTag tagObj = TagParser.getTestCaseTag(tags);
 		assertEquals("R1:C1", tagObj.getTestRunNum() + ":" + tagObj.getTestNum());
 	}
-
 }

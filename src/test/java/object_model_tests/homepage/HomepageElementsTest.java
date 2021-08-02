@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
-import factories.DriverFactory;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import providers.XMLFileProvider;
@@ -25,11 +24,13 @@ class HomepageElementsTest {
 	private static HomePage hp;
 	private static WebDriver driver;
 	private static UserLoginPage userLogin;
+	private static ConfigReader configReader;
 	
 	@BeforeAll	
-	static void setUpBeforeClass() throws Exception {				
+	static void setUpBeforeClass() throws Exception {		
+		configReader = new ConfigReader(XMLFileProvider.PROD_CONFIG_FILE_PATH);
 		// Get a web driver as specified in the config.xml		
-		driver = DriverFactory.getDriver(new ConfigReader(XMLFileProvider.TEST_CONFIG_FILE_PATH));
+		driver = configReader.getDriver();
 		// Get a login page
 		userLogin = new UserLoginPage(driver);
 		// Get a home page after successful login

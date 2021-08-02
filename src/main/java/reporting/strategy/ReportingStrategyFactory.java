@@ -7,7 +7,7 @@ public class ReportingStrategyFactory {
 		if(strategyName.equalsIgnoreCase("console")) {
 			writer = new ConsoleWriter();
 		}else if(strategyName.equalsIgnoreCase("testrail")){
-			
+			writer = new TestRailWriter();
 		}
 		
 		return writer;

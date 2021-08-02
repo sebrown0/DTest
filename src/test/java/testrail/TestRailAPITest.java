@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import com.gurock.testrail.APIClient;
 
 import exceptions.IncorrectTestStatusException;
+import factories.TestResultDataFactory;
 import listeners.TestResultLogger;
 import testrail_api.MyTestRailAPI;
 import testrail_api.TestCaseData;
@@ -46,7 +47,13 @@ class TestRailAPITest {
 	@Tag("R18")
 	@Tag("T3832")
 	void postResult() throws IncorrectTestStatusException {
-		TestCaseData data = new TestCaseData("R19", "T3831",	new TestStatus(TestStatusValues.PASSED()), "Test Passed");
+		TestCaseData data =  TestResultDataFactory
+				.buildTestResultWith()
+				.setBelongsToTestRunId("R19")
+				.setTestId("T3831")
+				.setStatus(new TestStatus(TestStatusValues.PASSED()))
+				.setName("Post Result")
+				.setComment("Test Passed");
 		JSONObject json = api.postSingleTest(data);
 		assertTrue(json.containsKey("comment"));
 	}

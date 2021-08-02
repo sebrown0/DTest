@@ -3,10 +3,12 @@
  */
 package reporting.strategy;
 
+import test_result.TestResultGetter;
+
 /**
  * @author SteveBrown
  *
  */
 public interface ResultWriter {
-	void writePass();
+	void writeResult(TestResultGetter resultGetter);
 }

@@ -22,6 +22,9 @@ public class TagParser {
 			}else if (type == 'T') {
 				tagObj.setTestNum(s);
 			}
+//			else if (type == 'N') {
+//				tagObj.setTestName(getName(s));
+//			}
 		}		
 		return tagObj;
 	}
@@ -37,6 +40,10 @@ public class TagParser {
 	public static String getTestNum(String tag) {
 		 return getNumberForType('T', tag);
 	}
+	
+//	private static String getName(String tag) {
+//		return tag.substring(2);
+//	}
 	
 	private static char getType(String tag) {
 		return tag.charAt(0);

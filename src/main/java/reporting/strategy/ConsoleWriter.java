@@ -3,15 +3,15 @@
  */
 package reporting.strategy;
 
+import test_result.TestResultGetter;
+
 /**
  * @author Steve Brown
  *
  */
 public class ConsoleWriter implements ResultWriter {
-
 	@Override
-	public void writePass() {
-		System.out.println("Test passed");
+	public void writeResult(TestResultGetter resultGetter) {
+		System.out.println(resultGetter.getResult().toString());
 	}
-
 }
