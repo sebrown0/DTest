@@ -7,10 +7,10 @@ package exceptions;
  * @author Steve Brown
  *
  */
-public class IncorrectPageException extends Exception {
+public class ElementDoesNotExistException extends Exception {
 	private static final long serialVersionUID = 1L;
 
-	public IncorrectPageException(String errMsg) {
+	public ElementDoesNotExistException(String errMsg) {
 		super(errMsg);
 	}
 }

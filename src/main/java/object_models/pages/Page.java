@@ -20,7 +20,12 @@ public class Page implements PageTitle {
 		this.title = title;		
 	}
 	
-	@Override
+	public String getPageTitle() {
+		return title;
+	}
+	
+	// WRONG - SHOULD NOT BE TESTING HERE!!!!!!!!
+	@Override 
 	public boolean isPageTitleCorrect() {		
 		return (driver.getTitle().equals(title)) ? true : false;
 	}
