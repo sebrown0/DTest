@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorinterval="30" status="info" strict="true">
+ 
+  
+    <Properties>
+        <Property name="logPath">C:/Users/SteveBrown/eclipse-workspace/2021/DTest/logs</Property>
+        <Property name="rollingFileName">cucumber</Property>
+    </Properties>        
+    
+    <CustomLevels>
+    	<CustomLevel name="TEST" intLevel="150" />
+    </CustomLevels> 
+    
+    <Appenders>
+        <Appender type="Console" name="Console">
+            <Layout type="PatternLayout" pattern="%d %p [%t] %m%n" />
+        </Appender>
+                
+        <RollingFile 
+        	name="rollingFile" 
+        	fileName="${logPath}/${rollingFileName}.log" 
+        	filePattern="${logPath}/${rollingFileName}_%d{yyyy-MM-dd}.log"
+        	append="true">
+        <PatternLayout pattern="[%highlight{%-5level}] %d{DEFAULT} %c{1}.%M() - %msg%n%throwable{short.lineNumber}" />
+        <Policies>
+            <OnStartupTriggeringPolicy />
+            <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+        </Policies> 
+        </RollingFile>
+        
+    </Appenders>
+    <Loggers>
+    
+        <Logger name="TEST_LOGGER" level="TEST" additivity="false">
+        	<AppenderRef ref="rollingFile" />        
+            <AppenderRef ref="Console" />            
+        </Logger>  
+ 	        
+        <Root level="debug">
+            <AppenderRef ref="rollingFile" />
+            <AppenderRef ref="Console" />            
+        </Root>
+         
+    </Loggers>
+</Configuration>

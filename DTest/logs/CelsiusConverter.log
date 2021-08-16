@@ -1,0 +1,12 @@
+2021-08-16 10:47:35,836 DEBUG l.LogTests [main] a debug msg
+2021-08-16 10:55:45,642 DEBUG l.LogTests [main] a debug msg
+2021-08-16 10:57:32,204 DEBUG l.LogTests [main] a debug msg
+2021-08-16 10:59:12,122 DEBUG l.LogTests [main] a debug msg
+2021-08-16 10:59:39,364 DEBUG l.LogTests [main] a debug msg
+2021-08-16 11:01:05,808 TEST l.LogTests [main] a test msg
+2021-08-16 11:01:24,965 TEST l.LogTests [main] a test msg
+2021-08-16 11:01:56,398 DEBUG l.LogTests [main] a debug msg
+2021-08-16 11:02:10,568 DEBUG l.LogTests [main] a debug msg
+2021-08-16 11:04:04,383 DEBUG l.LogTests [main] a debug msg
+2021-08-16 11:05:26,301 DEBUG l.LogTests [main] a debug msg
+2021-08-16 11:05:38,237 DEBUG l.LogTests [main] a debug msg
