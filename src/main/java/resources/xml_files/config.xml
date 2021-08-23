@@ -9,7 +9,7 @@
 	<WebDriver>Google</WebDriver>
 	
 	<Reporting>
-		<Strategy>Console</Strategy>
+		<Strategy>Log</Strategy>
 		<Level>All</Level>
 	</Reporting>
 </Config>

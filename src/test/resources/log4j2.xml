@@ -3,43 +3,53 @@
  
   
     <Properties>
-        <Property name="logPath">C:/Users/SteveBrown/eclipse-workspace/2021/DTest/logs</Property>
-        <Property name="rollingFileName">cucumber</Property>
+        <Property name="logPath">logs</Property>
+        <Property name="appLogName">app.log</Property>
+        <Property name="testLogName">automated_tests</Property>
     </Properties>        
     
     <CustomLevels>
-    	<CustomLevel name="TEST" intLevel="150" />
+    	<CustomLevel name="FAILED" intLevel="900" />
+    	<CustomLevel name="PASSED" intLevel="800" />
+    	<CustomLevel name="IGNORED" intLevel="700" />    	
     </CustomLevels> 
     
     <Appenders>
         <Appender type="Console" name="Console">
             <Layout type="PatternLayout" pattern="%d %p [%t] %m%n" />
         </Appender>
+        
+        <Appender 
+        	type="File" 
+        	name="TestFile" 
+        	fileName="${logPath}/${testLogName}.log">
+            <Layout type="PatternLayout" pattern="%d, [%p] %msg; %n" />
+        </Appender>
                 
         <RollingFile 
         	name="rollingFile" 
-        	fileName="${logPath}/${rollingFileName}.log" 
-        	filePattern="${logPath}/${rollingFileName}_%d{yyyy-MM-dd}.log"
+        	fileName="${logPath}/${appLogName}.log" 
+        	filePattern="${logPath}/${appLogName}_%d{yyyy-MM-dd}.log"
         	append="true">
-        <PatternLayout pattern="[%highlight{%-5level}] %d{DEFAULT} %c{1}.%M() - %msg%n%throwable{short.lineNumber}" />
-        <Policies>
-            <OnStartupTriggeringPolicy />
-            <TimeBasedTriggeringPolicy interval="1" modulate="true" />
-        </Policies> 
+        <!-- <PatternLayout pattern="[%highlight{%-5level}] %d{DEFAULT} %c{1}.%M() - %msg%n%throwable{short.lineNumber}" /> -->
+	        <PatternLayout pattern="%d [%p] [%c{1}] [%M()] - %msg; %n" />
+	        <Policies>
+	            <OnStartupTriggeringPolicy />
+	            <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+	        </Policies> 
         </RollingFile>
         
     </Appenders>
-    <Loggers>
     
-        <Logger name="TEST_LOGGER" level="TEST" additivity="false">
-        	<AppenderRef ref="rollingFile" />        
+    <Loggers>    
+        <Logger name="TEST_LOGGER" level="FAILED" additivity="false">        
+        	<AppenderRef ref="TestFile" />        
             <AppenderRef ref="Console" />            
         </Logger>  
  	        
         <Root level="debug">
             <AppenderRef ref="rollingFile" />
             <AppenderRef ref="Console" />            
-        </Root>
-         
+        </Root>         
     </Loggers>
 </Configuration>

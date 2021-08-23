@@ -1,0 +1,5 @@
+2021-08-23 16:13:48,512, [PASSED] [TEST: log.LogTests.getRootLogger()], [ID: null.null], [COMMENTS: Test passed]; 
+2021-08-23 16:20:18,455, [PASSED] [TEST: log.LogTests.getRootLogger()], [ID: null.null], [COMMENTS: Test passed]; 
+2021-08-23 16:24:08,696, [IGNORED] [TEST: log.LogTests.testIsIgnored()], [ID: null.null], [COMMENTS: Test disabled for reason [void log.LogTests.testIsIgnored() is @Disabled]]; 
+2021-08-23 16:28:51,480, [FAILED] [TEST: log.LogTests.failedTestWithTags()], [ID: R1.T1], [COMMENTS: Test failed for reason []]; 
+2021-08-23 16:29:34,154, [FAILED] [TEST: log.LogTests.failedTestWithTags()], [ID: R1.T1], [COMMENTS: Test failed for reason [delibrate fail]]; 

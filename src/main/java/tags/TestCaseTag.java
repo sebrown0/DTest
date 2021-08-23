@@ -10,8 +10,6 @@ package tags;
  * The tags that are associated with a test case. 
  */
 public class TestCaseTag {
-
-//	private String testName;
 	private String testRunNum;
 	private String testNum;			// Either the test or test case num, i.e T123 or C456	
 	
@@ -23,12 +21,6 @@ public class TestCaseTag {
 		this.testNum = testNum;
 	}
 	
-//	public String getTestName() {
-//		return testName;
-//	}
-//	public void setTestName(String testName) {
-//		this.testName = testName;
-//	}
 	public String getTestRunNum() {
 		return testRunNum;
 	}

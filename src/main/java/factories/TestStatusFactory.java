@@ -1,6 +1,5 @@
 package factories;
 
-import exceptions.IncorrectTestStatusException;
 import testrail_api.TestStatus;
 import testrail_api.TestStatusValues;
 
@@ -27,14 +26,7 @@ public class TestStatusFactory {
 	}
 	
 	private static TestStatus getStatus(int statusValue) {
-		TestStatus status = null;
-		try {
-			status = new TestStatus(statusValue);
-			System.out.println("->" + status.getStatus());
-		} catch (IncorrectTestStatusException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		TestStatus status = new TestStatus(statusValue);
 		return status;
 	}
 }

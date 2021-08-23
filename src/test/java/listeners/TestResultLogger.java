@@ -25,18 +25,18 @@ public class TestResultLogger implements TestWatcher, AfterAllCallback {
 	}
 		
 	@Override
-  public void testSuccessful(ExtensionContext context) {		
+  public void testSuccessful(ExtensionContext context) {
 		resultWriter.writeResult(new TestResult(new ResultPassed(), context));
   } 
   
   @Override
   public void testFailed(ExtensionContext context, Throwable cause) {
-		resultWriter.writeResult(new TestResult(new ResultFailed(), context));
+		resultWriter.writeResult(new TestResult(new ResultFailed(cause), context));		
   }
   
 	@Override
 	public void testDisabled(ExtensionContext context, Optional<String> reason) {
-		resultWriter.writeResult(new TestResult(new ResultDisabled(), context));
+		resultWriter.writeResult(new TestResult(new ResultDisabled(reason), context));
 	}
   
 	@Override

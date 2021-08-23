@@ -1,10 +1,9 @@
 package testrail;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import exceptions.IncorrectTestStatusException;
 import testrail_api.TestStatus;
 import testrail_api.TestStatusValues;
 
@@ -22,23 +21,13 @@ class TestStatusTest {
 	
 	@Test
 	void createCorrectTestStatus() {
-		TestStatus status = null;
-		try {
-			status = new TestStatus(TestStatusValues.BLOCKED());
-		} catch (IncorrectTestStatusException e) {
-			// TODO Auto-generated catch block
-		}
+		TestStatus status = new TestStatus(TestStatusValues.BLOCKED());
 		assertTrue(status.getStatus() == TestStatusValues.BLOCKED());
 	}
 	
 	@Test
 	void createIncorrectTestStatus() {
-		TestStatus status = null;
-		try {
-			status = new TestStatus(-1);
-		} catch (IncorrectTestStatusException e) {
-			// TODO Auto-generated catch block
-		}
-		assertNull(status);
+		TestStatus status = new TestStatus(-1);
+		assertTrue(status.getStatus() == -1);
 	}
 }
