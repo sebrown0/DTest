@@ -9,7 +9,8 @@
 	<WebDriver>Google</WebDriver>
 	
 	<Reporting>
-		<Strategy>Console</Strategy>
+		<Strategy>Log</Strategy>
+		<LogDir>./logs</LogDir>
 		<Level>All</Level>
 	</Reporting>
 </Config>

@@ -1,0 +1,3 @@
+2021-08-24 13:51:19,326, [PASSED] [TEST: log.LogTests.getRootLogger()], [ID: R1.T1], [COMMENTS: Test passed]; 
+2021-08-24 13:51:19,332, [FAILED] [TEST: log.LogTests.failedTestWithTags()], [ID: R1.T3], [COMMENTS: Test failed for reason [failed test message]]; 
+2021-08-24 13:51:19,337, [IGNORED] [TEST: log.LogTests.testIsIgnored()], [ID: R1.T2], [COMMENTS: Test disabled for reason [because I can!]]; 

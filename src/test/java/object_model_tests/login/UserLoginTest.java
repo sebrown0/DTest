@@ -56,14 +56,14 @@ class UserLoginTest {
 		assertTrue(hp.isPageTitleCorrect());
 	}
 		
-	@ParameterizedTest
-	@MethodSource("resources.test_data.UserProvider#invalidUser")
-	@Tag("R20")
-	@Tag("T3835")
-	void invalidUserLogin(User user) {
-		// Supply invalid user, login (fail) and check home page is NOT loaded.
-		UserLoginPage userLogin = new UserLoginPage(driver);
-		userLogin.loginValidUser(user);
-	}
+//	@ParameterizedTest
+//	@MethodSource("resources.test_data.UserProvider#invalidUser")
+//	@Tag("R20")
+//	@Tag("T3835")
+//	void invalidUserLogin(User user) {
+//		// Supply invalid user, login (fail) and check home page is NOT loaded.
+//		UserLoginPage userLogin = new UserLoginPage(driver);
+//		userLogin.loginValidUser(user);
+//	}
 		
 }

@@ -13,6 +13,8 @@ import testrail_api.TestCaseData;
 /**
  * @author Steve Brown
  *
+ * 	Create a test result for a test case.
+ *  Populate the result depending on the result type.
  */	
 public class TestResult implements TestResultGetter {
 	private TestCaseData data = new TestCaseData();
@@ -63,32 +65,5 @@ public class TestResult implements TestResultGetter {
 	public Level getLogLevel() {		
 		return data.getLogLevel();
 	}
-	
-//	public TestResult() {	}
-
-//
-//	/*
-//	 * The result is in the data.
-//	 */
-//	public TestResult(TestCaseData data) {		
-//		this.data = data;
-//	}
-//	
-//	/*
-//	 * The result has been partly set. The TestResultSetter finishes the job.
-//	 */
-//	public TestResult(TestResultSetter resultSetter, TestCaseData data) {		
-//		this.data = data;
-////		resultSetter.setResult(data);
-//	}
-//	
-//	/*
-//	 * Set the result from the context of the test.
-//	 */
-//	public TestResult(TestResultSetter resultSetter, ExtensionContext context) {
-//		setDataUsingContext(context);
-////		resultSetter.setResult(data);
-//	}
-//		
 	
 }

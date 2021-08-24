@@ -19,7 +19,8 @@ public class LogFactory {
 		return LogManager.getLogger(clazz.getClass());
 	}
 	
-	public static Logger getTestLog() {
-		return LogManager.getLogger("TEST_LOGGER");
+	public static Logger getTestLog() {		
+		Logger logger = LogManager.getLogger("TEST_LOGGER");		
+		return logger;
 	}
 }

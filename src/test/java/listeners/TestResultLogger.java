@@ -2,7 +2,7 @@ package listeners;
 
 import java.util.Optional;
 
-import org.junit.jupiter.api.extension.AfterAllCallback;
+import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestWatcher;
 
@@ -14,18 +14,27 @@ import test_result.ResultPassed;
 import test_result.TestResult;
 import xml_reader.ConfigReader;
 
-public class TestResultLogger implements TestWatcher, AfterAllCallback {
+/**
+ * @author SteveBrown
+ * 
+ * A test watcher that updates the results.
+ * 
+ * @params
+ * ConfigReader: reads the config file.
+ * ResultWriter: writes the result to a specified place, i.e. console, log etc. 
+ */
+public class TestResultLogger implements TestWatcher, BeforeAllCallback {
 	private ResultWriter resultWriter;
 	private ConfigReader configReader;
 	
-	public TestResultLogger() {
-		super();
-		configReader = new ConfigReader(XMLFileProvider.PROD_CONFIG_FILE_PATH);
-		resultWriter = configReader.getResultWriter();
-	}
-		
 	@Override
-  public void testSuccessful(ExtensionContext context) {
+	public void beforeAll(ExtensionContext context) throws Exception {
+		configReader = new ConfigReader(XMLFileProvider.PROD_CONFIG_FILE_PATH);
+		resultWriter = configReader.getResultWriter(context.getDisplayName());		
+	}
+	
+	@Override
+  public void testSuccessful(ExtensionContext context) {		
 		resultWriter.writeResult(new TestResult(new ResultPassed(), context));
   } 
   
@@ -35,22 +44,14 @@ public class TestResultLogger implements TestWatcher, AfterAllCallback {
   }
   
 	@Override
-	public void testDisabled(ExtensionContext context, Optional<String> reason) {
+	public void testDisabled(ExtensionContext context, Optional<String> reason) {		
 		resultWriter.writeResult(new TestResult(new ResultDisabled(reason), context));
 	}
-  
-	@Override
-	public void afterAll(ExtensionContext context) throws Exception {
-		// TODO Auto-generated method stub		
-	}
-	
+  		
 //@Override
 //public void testAborted(ExtensionContext context, Throwable cause) {
 //	System.out.printf("%nTest Aborted for test {%s}: ", context.getDisplayName());
 //  testResultsStatus.add(TestResultStatus.ABORTED);
 //}
-
-
-
 
 }

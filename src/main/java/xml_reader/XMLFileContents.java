@@ -12,4 +12,8 @@ public class XMLFileContents {
 	public static String getResultStrategyName(XMLFile xmlFile) {
 		 return xmlFile.getElement("Strategy").getTextContent();
 	}
+	
+	public static String getLogDir(XMLFile xmlFile) {
+		 return xmlFile.getElement("LogDir").getTextContent();
+	}
 }

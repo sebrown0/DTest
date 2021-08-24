@@ -1,2 +1,0 @@
-2021-08-23 16:13:48,494 [DEBUG] [LogTests] [getRootLogger()] - a debug msg; 
-2021-08-23 16:13:48,503 [ERROR] [LogTests] [getRootLogger()] - an error msg; 

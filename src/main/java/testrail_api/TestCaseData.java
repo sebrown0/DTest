@@ -41,28 +41,10 @@ public class TestCaseData implements TestCaseDataGetter{
 	}
 	
 	@Override
-	public Map<String, String> getData() {
-		Map<String, String> data = new HashMap<String, String>();		
-		data.put("status_id", String.valueOf(status.getStatus()));
-		data.put("comment", comment);
-		return data;
+	public String toString() {
+		return "TestCaseData [belongsToTestRunId=" + belongsToTestRunId + ", testId=" + testId + ", status=" + status.getStatus()
+				+ ", comment=" + comment + ", name=" + name + "]";
 	}
-
-	@Override
-	public String testCaseId() {
-		return testId;
-	}
-
-	@Override
-	public String testRunId() {
-		return belongsToTestRunId;
-	}
-	
-//	@Override
-//	public String toString() {
-//		return "TestCaseData [belongsToTestRunId=" + belongsToTestRunId + ", testId=" + testId + ", status=" + status.getStatus()
-//				+ ", comment=" + comment + ", name=" + name + "]";
-//	}
 		
 	public TestCaseData setBelongsToTestRunId(String belongsToTestRunId) {
 		this.belongsToTestRunId = belongsToTestRunId;
@@ -129,9 +111,6 @@ public class TestCaseData implements TestCaseDataGetter{
 	public String getBelongsToTestRunId() {
 		return belongsToTestRunId;
 	}
-//	public Level getLevel() {
-//		return LogLevel.getForStatus(status.getStatus());
-//	}
 	public String getClassName() {
 		return className;
 	}
@@ -147,4 +126,27 @@ public class TestCaseData implements TestCaseDataGetter{
 	public Level getLogLevel() {
 		return logLevel;
 	}
+	
+	/*
+	 * TestCaseDataGetter below.
+	 * This is legacy for the TestRailsAPI.
+	 */
+	@Override
+	public Map<String, String> getData() {
+		Map<String, String> data = new HashMap<String, String>();		
+		data.put("status_id", String.valueOf(status.getStatus()));
+		data.put("comment", comment);
+		return data;
+	}
+
+	@Override
+	public String testCaseId() {
+		return testId;
+	}
+
+	@Override
+	public String testRunId() {
+		return belongsToTestRunId;
+	}
+	/* TestCaseDataGetter above. */
 }

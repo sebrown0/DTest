@@ -1,0 +1,2 @@
+2021-08-24 13:44:15,100, [PASSED] [TEST: object_model_tests.login.UserLoginTest.[1] object_models.helpers.User@5a67e962], [ID: R20.T3834], [COMMENTS: Test passed]; 
+2021-08-24 13:44:15,322, [PASSED] [TEST: object_model_tests.login.UserLoginTest.createUserLoginModel()], [ID: R20.T3833], [COMMENTS: Test passed]; 
