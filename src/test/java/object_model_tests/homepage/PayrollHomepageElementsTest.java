@@ -10,8 +10,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
+import exceptions.ElementDoesNotExistException;
 import object_models.modules.PayrollModuleLoader;
+import object_models.navigation.top_right_nav_bar.ElementChecker;
+import object_models.navigation.top_right_nav_bar.TopRightNavBar;
+import object_models.navigation.top_right_nav_bar.TopRightNavBarElements;
 import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLinks;
+import object_models.navigation.top_right_nav_bar.nav_bar_clicker.PayrollNavBarClicker;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import providers.ModuleNames;
@@ -42,27 +47,39 @@ class PayrollHomepageElementsTest {
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-		driver.quit();
+//		driver.quit();
 	}
 	
-//	@Test
-//	void homepageLoadedOk() {
-//		// Check that the home page has the correct title.
-//		assertTrue(hp.isPageTitleCorrect());
-//	}
-//
-//	@Test 
-//	void checkModuleName() {
-//		assertTrue(ModuleNames.isValidName(hp.getModuleName()));
-//		assertTrue(hp.getModuleName().equals(ModuleNames.PAYROLL_NAME));
-//	}
+	@Test
+	void homepageLoadedOk() {
+		// Check that the home page has the correct title.
+		assertTrue(hp.isPageTitleCorrect());
+	}
+
+	@Test 
+	void checkModuleName() {
+		assertTrue(ModuleNames.isValidName(hp.getModuleName()));
+		assertTrue(hp.getModuleName().equals(ModuleNames.PAYROLL_NAME));
+	}
 	
 	@Test
 	void topRightNavBarElementsOk() {
-		// Check that the nav bar's elements are correct.
-		assertTrue(hp.getTopRightNavBar().isAllElementsCorrect());
+		TopRightNavBar topRightNavBar = hp.getTopRightNavBar();
+		ElementChecker elementChecker = topRightNavBar;
+		assertTrue(elementChecker.checkElementTitles());
 	}
 	
+	@Test
+	void clickEmployeeCreation() {
+		TopRightNavBar topRightNavBar = hp.getTopRightNavBar();
+		PayrollNavBarClicker clicker = (PayrollNavBarClicker) topRightNavBar.getNavBarClicker();
+		try {
+			clicker.clickEmployeeCreation();
+		} catch (ElementDoesNotExistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 //	@Test
 //	void useQuickLink_toLoadPayroll() {
 //		QuickLinks links = hp.getTopRightNavBar().getNavBarElements().getQuickLinks();

@@ -18,7 +18,7 @@ import object_models.navigation.top_right_nav_bar.TopRightNavBar;;
 
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 public class HomePage extends Page {
@@ -32,16 +32,16 @@ public class HomePage extends Page {
 
 		this.moduleLoader = moduleLoader;
 		
-		implicitlyWaitForThePageToLoad();
+//		implicitlyWaitForThePageToLoad();
 		loadModuleIfSuppliedOrDefault();
 		createNavAndMenus();
 	}
 
-	private void implicitlyWaitForThePageToLoad() {
-		if (driver != null) {
-			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		}			
-	}
+//	private void implicitlyWaitForThePageToLoad() {
+//		if (driver != null) {
+//			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+//		}			
+//	}
 	
 	private void loadModuleIfSuppliedOrDefault() {
 		if(moduleLoader == null) {			
@@ -60,14 +60,15 @@ public class HomePage extends Page {
 		leftMenu = new LeftMenu(driver);
 	}
 	
+	/*
+	 * Getters Below
+	 */
 	public String getModuleName() {		
 		return driver.findElement(byXpathModuleName).getAttribute("innerHTML");
 	}
-
 	public TopRightNavBar getTopRightNavBar() {
 		return topRightNavBar;
-	}
-	
+	}	
 	public LeftMenu getLeftMenu() {
 		return leftMenu;
 	}

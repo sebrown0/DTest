@@ -1,31 +1,26 @@
 /**
  * 
  */
-package object_models.navigation.top_right_nav_bar;
+package object_models.navigation.top_right_nav_bar.nav_bar_clicker;
 
 import java.util.Map;
 
 import exceptions.ElementDoesNotExistException;
 import object_models.navigation.NavBarElement;
 import object_models.navigation.top_right_nav_bar.elements.NavBarElementStrategy;
-import object_models.navigation.top_right_nav_bar.elements.NavBarEmployeeCreation;
 
 /**
  * @author Steve Brown
  *
  */
-public class NavBarClicker {
+public abstract class NavBarClicker {
 	private Map<String, NavBarElement> elements;	
 	
 	public NavBarClicker(NavBarElementStrategy elementStrategy) {
 		elements = elementStrategy.getElements();
 	}
-	
-	public void employeeCreation() throws ElementDoesNotExistException {
-		click(NavBarEmployeeCreation.ORIGINAL_NAME);		
-	}
-	
-	private void click(String elementName) throws ElementDoesNotExistException {
+		
+	protected void click(String elementName) throws ElementDoesNotExistException {
 		NavBarElement el = elements.get(elementName);
 		if (elementExists(el.getOriginalName())) {
 			el.clickElement();	

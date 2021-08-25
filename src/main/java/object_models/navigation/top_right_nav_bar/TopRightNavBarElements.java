@@ -3,9 +3,10 @@
  */
 package object_models.navigation.top_right_nav_bar;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +17,11 @@ import object_models.navigation.top_right_nav_bar.elements.NavBarElementStrategy
 import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLinks;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
+ * 
+ * All the components of the top right nav bar.
+ * The elements are loaded according to the NavBarElementStrategy.
+ * For example, for the payroll nav bar the NavBarPayrollElements are loaded.
  * 
  */
 public class TopRightNavBarElements {
@@ -24,52 +29,24 @@ public class TopRightNavBarElements {
 	private List<WebElement> navElements;
 	private QuickLinks quickLinks;
 	private Map<String, NavBarElement> navBarElements;
-	
-	private static final List<String> NAV_LINK_TITLES = Arrays.asList( 
-			"Employee Creation",
-			"Employee CV",
-			"Employee Grid View",
-			"Visual Reports",
-			"Dakar Intelligence",
-			"Organisation Chart",
-			"My Company / Last Viewed",
-			"Notifications",
-			"New Employments",			
-			"Terminations");	
-	
+			
 	public TopRightNavBarElements(WebDriver driver, NavBarElementStrategy elementStrategy) {		
 		this.driver = driver;
 		navBarElements = elementStrategy.getElements();
 		loadElements();
 	}
-
+	
 	private void loadElements() {
-//		navElements = driver.findElements(By.cssSelector(".nav-item.dropdown.dropdown-slide.d-md-down-none"));
+		navElements = driver.findElements(By.cssSelector(".nav-item.dropdown.dropdown-slide.d-md-down-none"));
 		quickLinks = new QuickLinks(driver);
 	}
 	
-	public boolean allElementsPresentAndCorrect() {
-		return navElementCheck();
-	}
-	
-	private boolean navElementCheck() {
-		boolean badElement = false;
-		int elementCount = 0;
-		String originalTitle;		
-		
-		for (WebElement webElement : navElements) {
-			originalTitle = webElement.findElement(By.tagName("i")).getAttribute("data-original-title");
-			System.out.println(originalTitle );
-			if(!NAV_LINK_TITLES.contains(originalTitle)) {
-				badElement = true;
-			}
-			elementCount++;
+	public Optional<NavBarElement> getNavBarElement(String elementTitle) {
+		NavBarElement navBarElement = null;
+		if(navBarElements.containsKey(elementTitle)) {
+			navBarElement = navBarElements.get(elementTitle);
 		}
-		return (badElement == false && elementCount == NAV_LINK_TITLES.size()) ? true : false;
-	}	
-	
-	public NavBarElement getElement(String elementName) {
-		return navBarElements.get(elementName);
+		return Optional.of(navBarElement);
 	}
 	
 //	public WebElement getNavBarElement(NavBarElement elem) {
@@ -87,11 +64,23 @@ public class TopRightNavBarElements {
 //			}			
 //		}
 //		return webElem;
-//		return wait.until(ExpectedConditions.elementToBeClickable(webElem));
-//		return null;
+////		return wait.until(ExpectedConditions.elementToBeClickable(webElem));
+////		return null;
 //	}
 
+	/*
+	 * Getters below
+	 */
 	public QuickLinks getQuickLinks() {
 		return quickLinks;
+	}	
+	public List<String> getNavBarElementTitles(){
+		return new ArrayList<>(navBarElements.keySet());
+	}
+	public NavBarElement getElement(String elementName) {
+		return navBarElements.get(elementName);
+	}
+	public List<WebElement> getNavElements() {
+		return navElements;
 	}
 }
