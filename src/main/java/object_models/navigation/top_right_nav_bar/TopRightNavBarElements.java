@@ -6,7 +6,6 @@ package object_models.navigation.top_right_nav_bar;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +13,6 @@ import org.openqa.selenium.WebElement;
 
 import object_models.navigation.NavBarElement;
 import object_models.navigation.top_right_nav_bar.elements.NavBarElementStrategy;
-import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLinks;
 
 /**
  * @author Steve Brown
@@ -26,28 +24,27 @@ import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLink
  */
 public class TopRightNavBarElements {
 	private WebDriver driver;
-	private List<WebElement> navElements;
-	private QuickLinks quickLinks;
+	private List<WebElement> navElements;	
 	private Map<String, NavBarElement> navBarElements;
 			
 	public TopRightNavBarElements(WebDriver driver, NavBarElementStrategy elementStrategy) {		
-		this.driver = driver;
-		navBarElements = elementStrategy.getElements();
-		loadElements();
+		this.driver = driver;		
+		loadElements(elementStrategy);
 	}
 	
-	private void loadElements() {
+	private void loadElements(NavBarElementStrategy elementStrategy) {
+		navBarElements = elementStrategy.getElements();		
 		navElements = driver.findElements(By.cssSelector(".nav-item.dropdown.dropdown-slide.d-md-down-none"));
-		quickLinks = new QuickLinks(driver);
+//		quickLinks = new QuickLinks(driver);
 	}
 	
-	public Optional<NavBarElement> getNavBarElement(String elementTitle) {
-		NavBarElement navBarElement = null;
-		if(navBarElements.containsKey(elementTitle)) {
-			navBarElement = navBarElements.get(elementTitle);
-		}
-		return Optional.of(navBarElement);
-	}
+//	public Optional<NavBarElement> getNavBarElement(String elementTitle) {
+//		NavBarElement navBarElement = null;
+//		if(navBarElements.containsKey(elementTitle)) {
+//			navBarElement = navBarElements.get(elementTitle);
+//		}
+//		return Optional.of(navBarElement);
+//	}
 	
 //	public WebElement getNavBarElement(NavBarElement elem) {
 //		WebElement webElem = null;
@@ -70,10 +67,7 @@ public class TopRightNavBarElements {
 
 	/*
 	 * Getters below
-	 */
-	public QuickLinks getQuickLinks() {
-		return quickLinks;
-	}	
+	 */	
 	public List<String> getNavBarElementTitles(){
 		return new ArrayList<>(navBarElements.keySet());
 	}

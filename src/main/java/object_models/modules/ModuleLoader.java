@@ -11,5 +11,6 @@ import object_models.navigation.top_right_nav_bar.elements.NavBarElementStrategy
  */
 public interface ModuleLoader {
 	void loadModule(); 
+	String getModuleName();
 	NavBarElementStrategy getElementStrategy();
 }

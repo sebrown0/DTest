@@ -15,7 +15,7 @@ import test_result.TestResult;
 import xml_reader.ConfigReader;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  * 
  * A test watcher that updates the results.
  * 

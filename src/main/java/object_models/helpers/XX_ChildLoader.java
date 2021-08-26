@@ -4,9 +4,9 @@
 package object_models.helpers;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
-public interface HasChild {
+public interface XX_ChildLoader {
 	ChildElement loadChild();
 }

@@ -7,11 +7,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 public class QuickLinkPersonnel extends QuickLink{
-	private static final By LOCATOR = By.xpath("/html/body/form/header/ul[4]/li[12]/div/div[2]/a[2]"); 
+	private static final By LOCATOR = By.xpath(".//a/i[contains(@class, 'fa fa-users')]");	
 	
 	public QuickLinkPersonnel(WebDriver driver) {
 		super(driver, LOCATOR);

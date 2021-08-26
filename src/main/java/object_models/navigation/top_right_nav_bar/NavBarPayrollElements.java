@@ -21,8 +21,10 @@ import object_models.navigation.top_right_nav_bar.elements.NavBarNotifications;
 import object_models.navigation.top_right_nav_bar.elements.NavBarTerminations;
 import object_models.navigation.top_right_nav_bar.elements.NavBarUserManagment;
 import object_models.navigation.top_right_nav_bar.elements.NavBarVisualReports;
-import object_models.navigation.top_right_nav_bar.nav_bar_clicker.NavBarClicker;
-import object_models.navigation.top_right_nav_bar.nav_bar_clicker.PayrollNavBarClicker;
+import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLinks;
+import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLinksPayroll;
+import object_models.navigation.top_right_nav_bar.xx_nav_bar_clicker.XX_NavBarClicker;
+import object_models.navigation.top_right_nav_bar.xx_nav_bar_clicker.XX_PayrollNavBarClicker;
 
 /**
  * @author Steve Brown
@@ -33,12 +35,14 @@ import object_models.navigation.top_right_nav_bar.nav_bar_clicker.PayrollNavBarC
  */
 public class NavBarPayrollElements implements NavBarElementStrategy {
 	private Map<String, NavBarElement> elements;	
+	private WebDriver driver;
 	
-	public NavBarPayrollElements(WebDriver driver) {		
-		setElements(driver);
+	public NavBarPayrollElements(WebDriver driver) {
+		this.driver = driver;
+		setElements();
 	}
 
-	private void setElements(WebDriver driver){
+	private void setElements(){
 		elements = Stream.of(new Object[][] {
 			{NavBarEmployeeCreation.ORIGINAL_NAME, new NavBarEmployeeCreation(driver)},
 			{NavBarEmployeeCVPayroll.ORIGINAL_NAME, new NavBarEmployeeCVPayroll(driver)},
@@ -59,7 +63,12 @@ public class NavBarPayrollElements implements NavBarElementStrategy {
 	}
 
 	@Override
-	public NavBarClicker getNavBarClicker() {
-		return new PayrollNavBarClicker(this);
+	public XX_NavBarClicker getNavBarClicker() {
+		return new XX_PayrollNavBarClicker(this);
+	}
+
+	@Override
+	public QuickLinks getQuickLinks() {
+		return new QuickLinksPayroll(driver);
 	}
 }

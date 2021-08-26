@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_models.navigation.top_right_nav_bar.nav_bar_clicker;
+package object_models.navigation.top_right_nav_bar.xx_nav_bar_clicker;
 
 import exceptions.ElementDoesNotExistException;
 import object_models.navigation.top_right_nav_bar.elements.NavBarElementStrategy;
@@ -11,9 +11,9 @@ import object_models.navigation.top_right_nav_bar.elements.NavBarEmployeeCreatio
  * @author Steve Brown
  *
  */
-public final class PayrollNavBarClicker extends NavBarClicker {
+public final class XX_PayrollNavBarClicker extends XX_NavBarClicker {
 
-	public PayrollNavBarClicker(NavBarElementStrategy elementStrategy) {
+	public XX_PayrollNavBarClicker(NavBarElementStrategy elementStrategy) {
 		super(elementStrategy);
 	}
 

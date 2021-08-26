@@ -3,49 +3,50 @@
  */
 package object_models.navigation.top_right_nav_bar;
 
+import java.util.Optional;
+
 import org.openqa.selenium.WebDriver;
 
 import object_models.helpers.WebElementTitleChecker;
+import object_models.navigation.NavBarElement;
+import object_models.navigation.top_right_nav_bar.elements.NavBarElementGetter;
 import object_models.navigation.top_right_nav_bar.elements.NavBarElementStrategy;
-import object_models.navigation.top_right_nav_bar.nav_bar_clicker.NavBarClicker;
+import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLinks;
 
 /**
  * @author Steve Brown
  *
  */
-public class TopRightNavBar implements ElementChecker {
+public class TopRightNavBar implements ElementChecker, NavBarElementGetter {
 	private TopRightNavBarElements navBarElements; 
-	private NavBarClicker navBarClicker;
+	private QuickLinks quickLinks;
 	
 	public TopRightNavBar(WebDriver driver, NavBarElementStrategy elementStrategy) {
 		navBarElements = new TopRightNavBarElements(driver, elementStrategy);
-//		navBarClicker = new NavBarClicker(elementStrategy);
-		navBarClicker = elementStrategy.getNavBarClicker();
+		quickLinks = elementStrategy.getQuickLinks();
 	}
 		
-//	public NavBarClicker clickElement() {
-//		return navBarClicker;
-//	}
-//		
-//	public void clickNavbarElement(String originalName) {
-//		NavBarElement elem = navBarElements.getElement(originalName);		
-//		System.out.println("clickNavbarElement = " + elem.getOriginalName());
-////		elem.clickElement();
-//	}
-
+	public void clickElement(String elementName) {
+		navBarElements.getElement(elementName);
+	}
+	
+	@Override
+	public boolean checkElementTitles() {
+		return WebElementTitleChecker.allTitlesPresentAndCorrect(navBarElements.getNavElements(), navBarElements.getNavBarElementTitles());
+	}
+	
 	/*
 	 * Getters below
 	 */
 	public TopRightNavBarElements getNavBarElements() {
 		return navBarElements;
 	}
-	
-	public NavBarClicker getNavBarClicker() {
-		return navBarClicker;
-	}
+	public QuickLinks getQuickLinks() {
+		return quickLinks;
+	}		
 
 	@Override
-	public boolean checkElementTitles() {
-		return WebElementTitleChecker.allTitlesPresentAndCorrect(navBarElements.getNavElements(), navBarElements.getNavBarElementTitles());
+	public Optional<NavBarElement> getNavBarElement(String elementName) {		
+		return Optional.ofNullable(navBarElements.getElement(elementName));
 	}
 }

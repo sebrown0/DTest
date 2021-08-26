@@ -5,13 +5,14 @@ package object_models.panels;
 
 import org.openqa.selenium.WebDriver;
 
+import object_models.helpers.ChildElement;
 import object_models.helpers.IFrame;
 
 /**
  * @author Steve Brown
  *
  */
-public class EmployeeCreationWizard {	
+public class EmployeeCreationWizard implements ChildElement {	
 	private WebDriver driver;	
 	private IFrame iFrame;
 	public static final String PANEL_TITLE = "Employee Creation Wizard";

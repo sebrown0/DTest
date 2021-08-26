@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+	<ApplicationUnderTest>
+		<Name>Dakar 2021</Name>
+		<Version>1.0.0</Version>
+	</ApplicationUnderTest>
+	
+	<WebDriver>Google</WebDriver>
+	
+	<Reporting>
+		<Strategy>TestRail</Strategy>
+		<Level>All</Level>
+	</Reporting>
+</Config>
+
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_models.navigation.top_right_nav_bar.nav_bar_clicker;
+package object_models.navigation.top_right_nav_bar.xx_nav_bar_clicker;
 
 import java.util.Map;
 
@@ -13,10 +13,10 @@ import object_models.navigation.top_right_nav_bar.elements.NavBarElementStrategy
  * @author Steve Brown
  *
  */
-public abstract class NavBarClicker {
+public abstract class XX_NavBarClicker {
 	private Map<String, NavBarElement> elements;	
 	
-	public NavBarClicker(NavBarElementStrategy elementStrategy) {
+	public XX_NavBarClicker(NavBarElementStrategy elementStrategy) {
 		elements = elementStrategy.getElements();
 	}
 		

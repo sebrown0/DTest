@@ -1,20 +1,21 @@
 package object_model_tests.navigation;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import exceptions.NullDriverException;
 import object_models.modules.PayrollModuleLoader;
-import object_models.navigation.top_right_nav_bar.elements.NavBarEmployeeCVPayroll;
+import object_models.navigation.NavBarElement;
+import object_models.navigation.top_right_nav_bar.elements.NavBarElementGetter;
+import object_models.navigation.top_right_nav_bar.elements.NavBarEmployeeCreation;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
-import object_models.panels.EmployeeCV;
 import providers.XMLFileProvider;
 import resources.test_data.UserProvider;
 import xml_reader.ConfigReader;
@@ -41,6 +42,14 @@ class TopRightNavBarElementsTests {
 		driver.quit();
 	}
 	
+
+	@Test
+	void clickEmployeeCreation_usingElement() {
+		NavBarElementGetter navBarElemGetter = hp.getTopRightNavBar();
+		Optional<NavBarElement> empCreation = navBarElemGetter.getNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME);
+		empCreation.ifPresentOrElse(ec -> ec.clickElement(), fail("Failed to click employee creation."));
+	}
+	
 //	@Test
 //	void getEmpCreationElement_Using_NavBarPayrollElements_PayrollStrategy() {
 //		NavBarElementStrategy elementStrategy = new NavBarPayrollElements(null);
@@ -57,21 +66,21 @@ class TopRightNavBarElementsTests {
 //		empCreattionWizard.close();		
 //	}	
 	
-	@Test
-	void getEmpCV_Using_TopRightNavBarElements_With_PayrollStrategy() throws InterruptedException {
-		NavBarEmployeeCVPayroll navEmpCV = (NavBarEmployeeCVPayroll) hp.getTopRightNavBar().getNavBarElements().getElement(NavBarEmployeeCVPayroll.ORIGINAL_NAME);
-		
-		EmployeeCV panelEmpCv = (EmployeeCV) navEmpCV.loadChild();
-		assertEquals(panelEmpCv.getTitle().getExpectedTitle(), panelEmpCv.getTitle().getActualTitle(driver));
-
-		panelEmpCv.switchToIFrame();
-//		EmployeeCV empCV = (EmployeeCV) panelEmpCv;
-//		assertTrue(empCV.getCompanyLabel().getLabelText().equals("Company"));
-		
-//		String companyLabelText = driver.findElement(By.className("col-md-2")).getText();
-//		assertTrue(companyLabelText.contains("Company"));		
-		panelEmpCv.close();
-	}
+//	@Test
+//	void getEmpCV_Using_TopRightNavBarElements_With_PayrollStrategy() throws InterruptedException {
+//		NavBarEmployeeCVPayroll navEmpCV = (NavBarEmployeeCVPayroll) hp.getTopRightNavBar().getNavBarElements().getElement(NavBarEmployeeCVPayroll.ORIGINAL_NAME);
+//		
+//		EmployeeCV panelEmpCv = (EmployeeCV) navEmpCV.loadChild();
+//		assertEquals(panelEmpCv.getTitle().getExpectedTitle(), panelEmpCv.getTitle().getActualTitle(driver));
+//
+//		panelEmpCv.switchToIFrame();
+////		EmployeeCV empCV = (EmployeeCV) panelEmpCv;
+////		assertTrue(empCV.getCompanyLabel().getLabelText().equals("Company"));
+//		
+////		String companyLabelText = driver.findElement(By.className("col-md-2")).getText();
+////		assertTrue(companyLabelText.contains("Company"));		
+//		panelEmpCv.close();
+//	}
 	
 //	
 //	@Test
@@ -110,4 +119,18 @@ class TopRightNavBarElementsTests {
 //		assertEquals("Employee Creation", empCreation.getOriginalName());
 //	}
 
+	
+/*
+ * Keep this as an example of how we could use the clicker to load elements.
+ */
+//	@Test
+//	void clickEmployeeCreation_usingNavClicker() {
+//		TopRightNavBar topRightNavBar = hp.getTopRightNavBar();
+//		XX_PayrollNavBarClicker clicker = (XX_PayrollNavBarClicker) topRightNavBar.getNavBarClicker();
+//		try {
+//			clicker.clickEmployeeCreation();
+//		} catch (ElementDoesNotExistException e) {
+//			fail("Failed to click employee creation.");
+//		}
+//	}
 }

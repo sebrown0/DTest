@@ -6,6 +6,7 @@ package object_models.navigation.top_right_nav_bar.elements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import object_models.helpers.ChildElement;
 import object_models.navigation.NavBarElement;
 
 /**
@@ -23,5 +24,11 @@ public class NavBarVisualReports extends NavBarElement {
 	@Override
 	public String getOriginalName() {
 		return ORIGINAL_NAME;
+	}
+
+	@Override
+	public ChildElement clickElement() {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 }

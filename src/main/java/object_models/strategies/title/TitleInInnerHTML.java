@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_models.helpers;
+package object_models.strategies.title;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
