@@ -5,36 +5,36 @@ package object_models.navigation;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import object_models.helpers.ChildElement;
 
 /**
  * @author SteveBrown
- * <p> Represents an element on the nav bar.
+ * 
+ * Represents an element on the nav bar.
+ * 
  */
 public abstract class NavBarElement {
-	protected WebDriver driver;	
-	private By locator;	
+	protected WebDriver driver;
+	protected WebElement navBar;
 	
-	public NavBarElement(WebDriver driver, By locator) {
-		this.driver = driver;
-		this.locator = locator;		
-	}
-
-//	public void clickElement() {
-//		System.out.println("NavBarElement.clickElement is depreciated!!!!!!!!");
-////		String jsString =	driver.findElement(locator).getAttribute("onclick");
-////		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-////		if (jsString != null) {
-////			jsString.replaceAll("javascript:", "");
-////			jsExecutor.executeScript(jsString);
-////		}
-//	}
-
-	public By getLocator() {
-		return locator;
+	private String originalName;
+	private static final By NAV_BAR_LOCATOR = By.cssSelector("body > form > header > ul.nav.navbar-nav.ml-auto");
+	
+	public NavBarElement(WebDriver driver, String originalName) {
+		this.driver = driver;			
+		this.originalName = originalName;
+		navBar = driver.findElement(NAV_BAR_LOCATOR);		
 	}
 	
+	public String getOriginalName() {
+		return originalName;
+	}
+	
+	/*
+	 * Click the element and return its child.
+	 */
 	public abstract ChildElement clickElement(); 
-	public abstract String getOriginalName();	
+	
 }

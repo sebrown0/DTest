@@ -11,19 +11,20 @@ import object_models.navigation.left_side_menu.LeftMenu;
 import object_models.navigation.top_right_nav_bar.NavBarPayrollElements;
 import object_models.navigation.top_right_nav_bar.TopRightNavBar;
 import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLink;
-import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLinkPayroll;
+import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLinkPersonnel;
 import providers.ModuleNames;
 
 /**
  * @author Steve Brown
  *
  */
-public class PayrollModuleLoader implements ModuleLoader {
-	private QuickLink quickLinkPayroll;
+public class PersonnelModuleLoader implements ModuleLoader {
+	private QuickLink quickLinkPersonnel;
 	private WebDriver driver;
 	private Logger logger = LogManager.getLogger();
+	private static final String MY_NAME = ModuleNames.PERSONNEL_NAME;
 	
-	public PayrollModuleLoader(WebDriver driver) {
+	public PersonnelModuleLoader(WebDriver driver) {
 		if (driver == null) {
 			logger.error("Null driver");
 		}else {
@@ -33,29 +34,29 @@ public class PayrollModuleLoader implements ModuleLoader {
 	}
 	
 	private void setQuickLink() {
-		quickLinkPayroll = new QuickLinkPayroll(driver);					
+		quickLinkPersonnel = new QuickLinkPersonnel(driver);					
 	}
 	
 	@Override
 	public void loadModule(TopRightNavBar topRightNavBar, LeftMenu leftMenu) {
-		if(!ModuleChecker.getCurrentModule(driver).equalsIgnoreCase(ModuleNames.PAYROLL_NAME)){			
-			logger.info("Payroll module not loaded. Loading now");
-			quickLinkPayroll.clickMe();
+		if(!ModuleChecker.getCurrentModule(driver).equalsIgnoreCase(MY_NAME)){			
+			logger.info("Personnel module not loaded. Loading now");
+			quickLinkPersonnel.clickMe();
 			createNavAndMenus(topRightNavBar, leftMenu);				
 		}else {
-			logger.info("Payroll module already loaded");
+			logger.info("Personnel module already loaded");
 		}
 	}
 	
 	private void createNavAndMenus(TopRightNavBar topRightNavBar, LeftMenu leftMenu) {
-		logger.debug("Creating nav bar and menus for payroll module");
+		logger.debug("Creating nav bar and menus for personnel module");
 		topRightNavBar.loadElements(new NavBarPayrollElements(driver));
 		leftMenu = new LeftMenu(driver);
 	}
 	
 	@Override
 	public String getModuleName() {
-		return ModuleNames.PAYROLL_NAME;
+		return MY_NAME;
 	}
 	
 }

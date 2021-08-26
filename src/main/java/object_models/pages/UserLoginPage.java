@@ -13,7 +13,7 @@ import object_models.helpers.User;
 import object_models.modules.ModuleLoader;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 

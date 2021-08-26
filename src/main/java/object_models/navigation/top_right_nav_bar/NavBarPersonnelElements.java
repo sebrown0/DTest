@@ -23,19 +23,20 @@ import object_models.navigation.top_right_nav_bar.elements.NavBarUserManagment;
 import object_models.navigation.top_right_nav_bar.elements.NavBarVisualReports;
 import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLinks;
 import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLinksPayroll;
+import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLinksPersonnel;
 
 /**
  * @author Steve Brown
  * 
- * Set a map of payroll elements for the top right nav bar.
+ * Set a map of personnel elements for the top right nav bar.
  * 	Key: 	Name of the element.
  * 	Value:	Object representing the element.
  */
-public class NavBarPayrollElements implements NavBarElementStrategy {
+public class NavBarPersonnelElements implements NavBarElementStrategy {
 	private Map<String, NavBarElement> elements;	
 	private WebDriver driver;
 	
-	public NavBarPayrollElements(WebDriver driver) {
+	public NavBarPersonnelElements(WebDriver driver) {
 		this.driver = driver;
 		setElements();
 	}
@@ -62,6 +63,6 @@ public class NavBarPayrollElements implements NavBarElementStrategy {
 
 	@Override
 	public QuickLinks getQuickLinks() {
-		return new QuickLinksPayroll(driver);
+		return new QuickLinksPersonnel(driver);
 	}
 }

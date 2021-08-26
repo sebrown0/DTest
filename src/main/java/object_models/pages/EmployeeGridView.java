@@ -6,17 +6,18 @@ package object_models.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import object_models.helpers.ChildElement;
+
 /**
  * @author Steve Brown
  *
  */
-public class EmployeeGridView {
+public class EmployeeGridView implements ChildElement {
 	private WebDriver driver;	
 	private By byClickLogin = By.cssSelector("[data-original-title='Employee Grid View']");	
 	
 	public EmployeeGridView(WebDriver driver) {
-		this.driver = driver;
-		System.out.println("EmployeeGridView");
+		this.driver = driver;		
 	}
 
 //	@Override

@@ -5,7 +5,6 @@ package object_models.navigation.top_right_nav_bar.elements;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import object_models.helpers.ChildElement;
 import object_models.navigation.NavBarElement;
@@ -16,17 +15,23 @@ import object_models.strategies.click.ClickUsingJavaScript;
  * @author Steve Brown
  *
  */
-public class NavBarEmployeeCreation extends NavBarElement {
-	public static final String ORIGINAL_NAME = "Employee Creation";
-		
-	public NavBarEmployeeCreation(WebDriver driver) {
+public class NavBarAuthorisations extends NavBarElement {
+	private static final By LOCATOR = By.xpath("html/body/form/header/ul[4]/li[1]/a/i");
+	public static final String ORIGINAL_NAME = "Authorisations";
+	
+	public NavBarAuthorisations(WebDriver driver) {
 		super(driver, ORIGINAL_NAME);
 	}
 	
 	@Override
+	public String getOriginalName() {
+		return ORIGINAL_NAME;
+	}
+
+	@Override
 	public ChildElement clickElement() {
-		WebElement empCreation = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-plus')]"));
-		ClickUsingJavaScript.performClick(driver, empCreation);
+		ClickUsingJavaScript.performClick(driver, LOCATOR);
 		return new EmployeeCreationWizard(driver);
 	}
+
 }

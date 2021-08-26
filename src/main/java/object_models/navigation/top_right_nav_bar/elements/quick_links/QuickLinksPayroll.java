@@ -5,12 +5,14 @@ package object_models.navigation.top_right_nav_bar.elements.quick_links;
 
 import org.openqa.selenium.WebDriver;
 
+import object_models.modules.ModuleLoader;
+
 /**
  * @author Steve Brown
  * 
  * All the quick links available in payroll.
  */
-public class QuickLinksPayroll extends QuickLinks {
+public class QuickLinksPayroll extends QuickLinks implements PersonnelLoader{
 	private QuickLinkPrint print;	
 	private QuickLinkPersonnel personnel;
 	private QuickLinkAbsence absence;
@@ -44,6 +46,12 @@ public class QuickLinksPayroll extends QuickLinks {
 
 	public QuickLinkAppraisal getAppraisal() {
 		return appraisal;
+	}
+
+	@Override
+	public ModuleLoader load() {
+		personnel.clickMe();
+		return null;
 	}
 	
 }

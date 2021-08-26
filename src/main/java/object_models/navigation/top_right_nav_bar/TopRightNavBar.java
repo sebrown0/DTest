@@ -18,18 +18,19 @@ import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLink
  *
  */
 public class TopRightNavBar implements ElementChecker, NavBarElementGetter {
+	private WebDriver driver;
 	private TopRightNavBarElements navBarElements; 
 	private QuickLinks quickLinks;
+		
+	public TopRightNavBar(WebDriver driver) {
+		this.driver = driver;
+	}
 	
-	public TopRightNavBar(WebDriver driver, NavBarElementStrategy elementStrategy) {
+	public void loadElements(NavBarElementStrategy elementStrategy) {
 		navBarElements = new TopRightNavBarElements(driver, elementStrategy);
 		quickLinks = elementStrategy.getQuickLinks();
 	}
-		
-	public void clickElement(String elementName) {
-		navBarElements.getElement(elementName);
-	}
-	
+			
 	@Override
 	public boolean checkElementTitles() {
 		return WebElementTitleChecker.allTitlesPresentAndCorrect(navBarElements.getNavElements(), navBarElements.getNavBarElementTitles());

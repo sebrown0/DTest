@@ -11,7 +11,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import object_models.modules.ModuleLoader;
-import object_models.modules.PayrollModuleLoader;
 import object_models.navigation.left_side_menu.LeftMenu;
 import object_models.navigation.top_right_nav_bar.TopRightNavBar;;
 
@@ -24,31 +23,25 @@ public class HomePage extends Page {
 	private TopRightNavBar topRightNavBar;
 	private LeftMenu leftMenu;
 	private By byXpathModuleName = By.xpath("html/body/form/header/div/div");
-	private ModuleLoader moduleLoader;
 	private Logger logger = LogManager.getLogger();
 	
 	public HomePage(WebDriver driver, ModuleLoader moduleLoader) {		
 		super(driver, HOME_PAGE_TITLE);		
-
-		this.moduleLoader = moduleLoader;
-		loadModuleIfSuppliedOrDefault();
-		createNavAndMenus();
-	}
-	
-	private void loadModuleIfSuppliedOrDefault() {
-		if(moduleLoader == null) {			
-			logger.info("No module supplied so loading default");
-			moduleLoader = new PayrollModuleLoader(driver);
-		}
-		moduleLoader.loadModule();
-	}
-	
-	private void createNavAndMenus() {
-		logger.debug("Creating nav bar and menus");
-		topRightNavBar = new TopRightNavBar(driver, moduleLoader.getElementStrategy());
+		
+		topRightNavBar = new TopRightNavBar(driver);
 		leftMenu = new LeftMenu(driver);
+		loadModule(moduleLoader);		
 	}
 	
+	public void loadModule(ModuleLoader moduleLoader) {
+		if(moduleLoader == null) {			
+			logger.error("No module supplied");
+			
+		}else {
+			moduleLoader.loadModule(topRightNavBar, leftMenu);	
+		}		
+	}
+		
 	/*
 	 * Getters Below
 	 */
