@@ -23,4 +23,7 @@
 # Logs
 ######
 *.log
+*.txt
+*/logs/*
+
 /target/

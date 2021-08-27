@@ -10,8 +10,9 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import object_models.modules.ModuleElements;
 import object_models.modules.ModuleLoader;
-import object_models.navigation.left_side_menu.LeftMenu;
+import object_models.navigation.left_side_menu.LeftMenuPayroll;
 import object_models.navigation.top_right_nav_bar.TopRightNavBar;;
 
 
@@ -21,23 +22,23 @@ import object_models.navigation.top_right_nav_bar.TopRightNavBar;;
  */
 public class HomePage extends Page {
 	private TopRightNavBar topRightNavBar;
-	private LeftMenu leftMenu;
-	private By byXpathModuleName = By.xpath("html/body/form/header/div/div");
+	private LeftMenuPayroll leftMenu;
+	private By byXpathActualModuleName = By.xpath("html/body/form/header/div/div");
 	private Logger logger = LogManager.getLogger();
 	
-	public HomePage(WebDriver driver, ModuleLoader moduleLoader) {		
+	public HomePage(WebDriver driver, ModuleElements moduleElements) {		
 		super(driver, HOME_PAGE_TITLE);		
 		
 		topRightNavBar = new TopRightNavBar(driver);
-		leftMenu = new LeftMenu(driver);
-		loadModule(moduleLoader);		
+		leftMenu = new LeftMenuPayroll(driver);
+		loadModule(moduleElements);		
 	}
 	
-	public void loadModule(ModuleLoader moduleLoader) {
-		if(moduleLoader == null) {			
-			logger.error("No module supplied");
-			
+	public void loadModule(ModuleElements moduleElements) {
+		if(moduleElements == null) {			
+			logger.error("No module supplied");			
 		}else {
+			ModuleLoader moduleLoader = new ModuleLoader(driver, moduleElements);
 			moduleLoader.loadModule(topRightNavBar, leftMenu);	
 		}		
 	}
@@ -45,13 +46,13 @@ public class HomePage extends Page {
 	/*
 	 * Getters Below
 	 */
-	public String getModuleName() {		
-		return driver.findElement(byXpathModuleName).getAttribute("innerHTML");
+	public String getActualModuleName() {		
+		return driver.findElement(byXpathActualModuleName).getAttribute("innerHTML");
 	}
 	public TopRightNavBar getTopRightNavBar() {
 		return topRightNavBar;
 	}	
-	public LeftMenu getLeftMenu() {
+	public LeftMenuPayroll getLeftMenu() {
 		return leftMenu;
 	}
 //	public QuickLink getQuickLinks() {

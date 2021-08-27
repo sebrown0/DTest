@@ -9,17 +9,17 @@ import org.openqa.selenium.WebElement;
 
 import object_models.helpers.ChildElement;
 import object_models.navigation.NavBarElement;
-import object_models.panels.EmployeeCv;
+import object_models.panels.EmployeeCvHr;
 import object_models.strategies.click.ClickUsingJavaScript;
 
 /**
  * @author Steve Brown
  *
  */
-public class NavBarEmployeeCVPayroll extends NavBarElement {
+public class NavBarEmployeeCvHr extends NavBarElement {
 	public static final String ORIGINAL_NAME = "Employee CV";
 	
-	public NavBarEmployeeCVPayroll(WebDriver driver) {
+	public NavBarEmployeeCvHr(WebDriver driver) {
 		super(driver, ORIGINAL_NAME);
 	}
 			
@@ -27,6 +27,6 @@ public class NavBarEmployeeCVPayroll extends NavBarElement {
 	public ChildElement clickElement() {
 		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-user')]"));
 		ClickUsingJavaScript.performClick(driver, el);
-		return new EmployeeCv(super.driver, "Employee Payroll CV");
+		return new EmployeeCvHr(super.driver);
 	}
 }

@@ -60,8 +60,8 @@ class PayrollHomepageElementsTest {
 	@Test 
 	@Order(2)
 	void checkModuleName() {
-		assertTrue(ModuleNames.isValidName(hp.getModuleName()));
-		assertTrue(hp.getModuleName().equals(ModuleNames.PAYROLL_NAME));
+		assertTrue(ModuleNames.isValidName(hp.getActualModuleName()));
+		assertTrue(hp.getActualModuleName().equals(ModuleNames.PAYROLL_NAME));
 	}
 	
 	@Test

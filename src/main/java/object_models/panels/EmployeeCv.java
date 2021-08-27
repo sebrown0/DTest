@@ -15,12 +15,12 @@ import object_models.strategies.title.TitleInInnerHTML;
  * @author Steve Brown
  *
  */
-public class EmployeeCV implements ChildElement{	
+public class EmployeeCv implements ChildElement{	
 	private JSPanelWithIFrame panel;
 	private Title title;
 	private Label company = new Label(By.className(""), "Company");
 		
-	public EmployeeCV(WebDriver driver, String panelTitle) {
+	public EmployeeCv(WebDriver driver, String panelTitle) {
 		title = new Title(By.cssSelector("span.jsPanel-title"), panelTitle, new TitleInInnerHTML());
 		panel = new JSPanelWithIFrame(driver, title);
 	}

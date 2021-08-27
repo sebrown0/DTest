@@ -14,7 +14,7 @@ import utils.HrefLink;
  * @author Steve Brown
  *
  * An element on the QuickLink grid.
- * The @param linkLocator is supplied by the sub-class and finishes the path to the 'link'.
+ * The instance variable linkLocator is supplied by the sub-class and finishes the path to the 'link'.
  */
 public class QuickLink {
 	protected WebDriver driver;
@@ -28,8 +28,6 @@ public class QuickLink {
 	}
 	
 	public void clickMe() {		
-//		WebDriverWait wait = new WebDriverWait(driver, 15);		
-		
 		WebElement grid = driver.findElement(QL_GRID_LOCATOR); 		
 		//Get link from unique grid element. Then move up a level to the link.
 		WebElement link = grid.findElement(linkLocator).findElement(By.xpath("./..")); 

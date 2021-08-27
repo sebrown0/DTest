@@ -3,13 +3,13 @@
  */
 package object_models.modules;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
+import exceptions.ElementDoesNotExistException;
 import object_models.navigation.left_side_menu.LeftMenu;
+import object_models.navigation.left_side_menu.LeftMenuPayroll;
 import object_models.navigation.top_right_nav_bar.NavBarPayrollElements;
-import object_models.navigation.top_right_nav_bar.TopRightNavBar;
+import object_models.navigation.top_right_nav_bar.elements.NavBarElementStrategy;
 import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLink;
 import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLinkPayroll;
 import providers.ModuleNames;
@@ -17,45 +17,34 @@ import providers.ModuleNames;
 /**
  * @author Steve Brown
  *
+ * The required elements of the payroll module.
+ * 
  */
-public class PayrollModuleLoader implements ModuleLoader {
-	private QuickLink quickLinkPayroll;
+public class PayrollModuleLoader implements ModuleElements {
 	private WebDriver driver;
-	private Logger logger = LogManager.getLogger();
 	
 	public PayrollModuleLoader(WebDriver driver) {
-		if (driver == null) {
-			logger.error("Null driver");
-		}else {
-			this.driver = driver;
-			setQuickLink();	
-		}		
+		this.driver = driver;
 	}
-	
-	private void setQuickLink() {
-		quickLinkPayroll = new QuickLinkPayroll(driver);					
-	}
-	
+
 	@Override
-	public void loadModule(TopRightNavBar topRightNavBar, LeftMenu leftMenu) {
-		if(!ModuleChecker.getCurrentModule(driver).equalsIgnoreCase(ModuleNames.PAYROLL_NAME)){			
-			logger.info("Payroll module not loaded. Loading now");
-			quickLinkPayroll.clickMe();
-			createNavAndMenus(topRightNavBar, leftMenu);				
-		}else {
-			logger.info("Payroll module already loaded");
-		}
+	public NavBarElementStrategy getElementStrategy() {
+		return new NavBarPayrollElements(driver);
 	}
-	
-	private void createNavAndMenus(TopRightNavBar topRightNavBar, LeftMenu leftMenu) {
-		logger.debug("Creating nav bar and menus for payroll module");
-		topRightNavBar.loadElements(new NavBarPayrollElements(driver));
-		leftMenu = new LeftMenu(driver);
+
+	@Override
+	public QuickLink getQuickLinkToLoadModule() {
+		return new QuickLinkPayroll(driver);
 	}
-	
+
 	@Override
 	public String getModuleName() {
 		return ModuleNames.PAYROLL_NAME;
 	}
-	
+
+	@Override
+	public LeftMenu getLeftMenu() throws ElementDoesNotExistException {
+		return new LeftMenuPayroll(driver);
+	}
+		
 }

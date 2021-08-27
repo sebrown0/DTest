@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import object_models.helpers.User;
-import object_models.modules.ModuleLoader;
+import object_models.modules.ModuleElements;
 
 /**
  * @author Steve Brown
@@ -18,7 +18,7 @@ import object_models.modules.ModuleLoader;
  */
 
 public class UserLoginPage extends LoadablePage {
-	private ModuleLoader moduleLoader;
+	private ModuleElements moduleLoader;
 	private By byUserName = By.name("user");
 	private By byUserPassword = By.name("password");
 	private By byBtnLogin = By.className("login100-form-btn");	
@@ -27,7 +27,7 @@ public class UserLoginPage extends LoadablePage {
 		super(driver, LOGIN_PAGE_TITLE, LOGIN_PAGE_URI);		
 	}
 	
-	public UserLoginPage(WebDriver driver, ModuleLoader moduleLoader) {
+	public UserLoginPage(WebDriver driver, ModuleElements moduleLoader) {
 		super(driver, LOGIN_PAGE_TITLE, LOGIN_PAGE_URI);
 		this.moduleLoader = moduleLoader;
 	}
