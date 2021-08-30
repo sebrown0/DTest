@@ -22,6 +22,7 @@ import object_models.navigation.top_right_nav_bar.elements.NavBarMyCoLastViewed;
 import object_models.navigation.top_right_nav_bar.elements.NavBarNewEmployments;
 import object_models.navigation.top_right_nav_bar.elements.NavBarNotifications;
 import object_models.navigation.top_right_nav_bar.elements.NavBarTerminations;
+import object_models.navigation.top_right_nav_bar.elements.NavBarUserAvatar;
 import object_models.navigation.top_right_nav_bar.elements.NavBarUserManagment;
 import object_models.navigation.top_right_nav_bar.elements.NavBarVisualReports;
 import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLinks;
@@ -145,5 +146,13 @@ class TopRightNavBar_Payroll_ElementsTests {
 		NavBarElement user = hp.getTopRightNavBar().getNavBarElement(NavBarUserManagment.ORIGINAL_NAME).get();
 		user.clickElement();
 		assertEquals(NavBarUserManagment.ORIGINAL_NAME, user.getOriginalName());
+	}
+	
+	@Test
+	@Order(13)
+	void clickUserAvatar() {
+		NavBarElement avatar = hp.getTopRightNavBar().getNavBarElement(NavBarUserAvatar.ORIGINAL_NAME).get();
+		avatar.clickElement();
+		assertEquals(NavBarUserAvatar.ORIGINAL_NAME, avatar.getOriginalName());
 	}
 }

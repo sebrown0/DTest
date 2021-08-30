@@ -19,6 +19,7 @@ import object_models.navigation.top_right_nav_bar.elements.NavBarMyCoLastViewed;
 import object_models.navigation.top_right_nav_bar.elements.NavBarNewEmployments;
 import object_models.navigation.top_right_nav_bar.elements.NavBarNotifications;
 import object_models.navigation.top_right_nav_bar.elements.NavBarTerminations;
+import object_models.navigation.top_right_nav_bar.elements.NavBarUserAvatar;
 import object_models.navigation.top_right_nav_bar.elements.NavBarUserManagment;
 import object_models.navigation.top_right_nav_bar.elements.NavBarVisualReports;
 import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLinks;
@@ -51,7 +52,8 @@ public class NavBarPayrollElements implements NavBarElementStrategy {
 			{NavBarNotifications.ORIGINAL_NAME, new NavBarNotifications(driver)},
 			{NavBarNewEmployments.ORIGINAL_NAME, new NavBarNewEmployments(driver)},
 			{NavBarTerminations.ORIGINAL_NAME, new NavBarTerminations(driver)},
-			{NavBarUserManagment.ORIGINAL_NAME, new NavBarUserManagment(driver)}
+			{NavBarUserManagment.ORIGINAL_NAME, new NavBarUserManagment(driver)},
+			{NavBarUserAvatar.ORIGINAL_NAME, new NavBarUserAvatar(driver)}
 		}).collect(Collectors.toMap(data -> (String) data[0], data -> (NavBarElement) data[1]));		
 	}
 

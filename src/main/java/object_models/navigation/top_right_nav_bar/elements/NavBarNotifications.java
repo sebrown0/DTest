@@ -8,8 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import object_models.helpers.ChildElement;
+import object_models.helpers.JqueryToolTip;
+import object_models.helpers.NoElement;
 import object_models.navigation.NavBarElement;
-import object_models.strategies.click.ClickUsingJavaScript;
 
 /**
  * @author Steve Brown
@@ -25,7 +26,7 @@ public class NavBarNotifications extends NavBarElement {
 	@Override
 	public ChildElement clickElement() {
 		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-sticky-note')]"));
-		ClickUsingJavaScript.performClick(driver, el);
-		return null; //TODO create notifications obj.
+		JqueryToolTip.goToToolTip(driver, el);	
+		return new NoElement(ORIGINAL_NAME); //TODO create notifications obj.
 	}
 }

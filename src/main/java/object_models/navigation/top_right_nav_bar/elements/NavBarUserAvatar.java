@@ -16,17 +16,17 @@ import object_models.navigation.NavBarElement;
  * @author Steve Brown
  *
  */
-public class NavBarNewEmployments extends NavBarElement {	
-	public static final String ORIGINAL_NAME = "New Employments";
+public class NavBarUserAvatar extends NavBarElement {
+	public static final String ORIGINAL_NAME = "User Avatar";
 	
-	public NavBarNewEmployments(WebDriver driver) {
+	public NavBarUserAvatar(WebDriver driver) {
 		super(driver, ORIGINAL_NAME);
 	}
-	
+			
 	@Override
 	public ChildElement clickElement() {
-		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-user-plus')]"));
+		WebElement el = driver.findElement(By.cssSelector("a[class='nav-link nav-pill user-avatar']"));
 		JqueryToolTip.goToToolTip(driver, el);	
-		return new NoElement(ORIGINAL_NAME); //TODO create new employments obj.
+		return new NoElement(ORIGINAL_NAME); //TODO create user avatar object
 	}
 }

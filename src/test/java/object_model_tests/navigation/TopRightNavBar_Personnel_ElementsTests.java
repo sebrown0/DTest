@@ -32,7 +32,7 @@ import resources.test_data.UserProvider;
 import xml_reader.ConfigReader;
 
 @ExtendWith(TestResultLogger.class)
-class TopRightNavBar_Personnel_ElementsTests2 {	
+class TopRightNavBar_Personnel_ElementsTests {	
 	private static HomePage hp;
 	private static WebDriver driver;
 	private static UserLoginPage userLogin;
