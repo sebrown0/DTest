@@ -11,12 +11,11 @@ import org.openqa.selenium.interactions.Actions;
  * @author Steve Brown
  *
  */
-public class JqueryToolTip {
+public class Jquery {
 	
-	public static void goToToolTip(WebDriver driver, WebElement toolTip) {
+	public static void goToElement(WebDriver driver, WebElement element) {
 		Actions builder = new Actions(driver);
-		builder.moveToElement(toolTip).click().build().perform();					
-//    builder.moveToElement(toolTip).build().perform();
+		builder.moveToElement(element).click().build().perform();
 	}
 	
 }

@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 import object_models.helpers.ChildElement;
 import object_models.navigation.NavBarElement;
-import object_models.panels.EmployeeCreationWizard;
+import object_models.panels.employee_creation.EmployeeCreationWizard;
 import object_models.strategies.click.ClickUsingJavaScript;
 
 /**

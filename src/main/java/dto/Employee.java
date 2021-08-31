@@ -55,6 +55,7 @@ public class Employee {
 	public String getFirstName() {
 		return firstName;
 	}
+	
 	public String getLastName() {
 		return lastName;
 	}
@@ -278,9 +279,13 @@ public class Employee {
 		return this;
 	}
 
-
 	public static RequiredFields withRequiredFields() {
 		return requiredFields;
+	}
+	
+	@Override
+	public String toString() {
+		return "Employee [firstName=" + firstName + ", lastName=" + lastName + ", empCode=" + empCode + "]";
 	}
 	
 	@SuppressWarnings("unused")

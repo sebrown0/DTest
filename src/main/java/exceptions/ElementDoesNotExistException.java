@@ -18,4 +18,10 @@ public class ElementDoesNotExistException extends Exception {
 		Logger logger = LogManager.getLogger(this.getClass().getSimpleName());	
 		logger.error(errMsg);
 	}
+	
+	public static void reportError(String errMsg) {
+		System.out.println("xxxxxxxxxxxxxxxxxxxxx");
+		Logger logger = LogManager.getLogger(ElementDoesNotExistException.class.getName());	
+		logger.error(errMsg);
+	}
 }
