@@ -6,6 +6,7 @@ package object_models.panels.employee_creation;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import controls.PageMap;
 import dto.Employee;
 import loaders.DateSelectorLoader;
 import object_models.date_picker.DatePickerPage;
@@ -15,12 +16,12 @@ import object_models.helpers.Jquery;
  * @author Steve Brown
  *
  */
-public class WizardStepTwo extends WizardStep {	
-
-	public WizardStepTwo(WebDriver driver) {
-		super(driver, 2);		
-	}
+public class WizardStepTwo extends WizardStep {
 	
+	public WizardStepTwo(PageMap pageMap, WebDriver driver, int stepNumber) {
+		super(pageMap, driver, stepNumber);
+	}
+
 	@Override
 	public WizardStepExecutor writeValues(Employee emp) {
 		DatePickerPage datePickerPage = new DatePickerPage(driver);

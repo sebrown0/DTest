@@ -7,30 +7,29 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import object_models.element.ComboSelect;
 import object_models.element.InputWriter;
+import object_models.element.InputText;
 import object_models.panels.employee_creation.WizardStepExecutor;
 
 /**
  * @author Steve Brown
  *
  */
-public class WizardLoaderCombo extends WizardLoader {
-	private ComboSelect input;	
+public class ZZZ_WizardLoaderText extends WizardLoader {
+	private InputText input;	
 	
-	public WizardLoaderCombo(WebDriver driver, WizardStepExecutor stepExecutor) {
-		super(driver, stepExecutor, By.className("select2-selection__rendered"));	
+	public ZZZ_WizardLoaderText(WebDriver driver, WizardStepExecutor stepExecutor) {
+		super(driver, stepExecutor, By.xpath(".//input[contains(@id, 'ST_')]"));	
 	}	
 	
 	@Override
 	public InputWriter getControlObject(WebElement e) {
-		WebElement placeholder = e.findElement(By.className("select2-selection__placeholder"));
-		String inputIdentifier = placeholder.getAttribute("textContent");
-		input = new ComboSelect(driver, e, inputIdentifier);
+		String inputIdentifier = e.getAttribute("placeholder");
+		input = new InputText(driver, e, inputIdentifier)		;
 		super.logger.debug("Found control [" + input.getMyIdentifier() + "]");
 		return input;
 	}
-		
+	
 	@Override
 	public String getIdentifier() {
 		return input.getMyIdentifier();

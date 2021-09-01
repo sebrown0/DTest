@@ -6,6 +6,7 @@ package object_models.panels.employee_creation;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import controls.PageMap;
 import dto.Employee;
 import object_models.helpers.Jquery;
 
@@ -13,23 +14,23 @@ import object_models.helpers.Jquery;
  * @author Steve Brown
  *
  */
-public class WizardStepOne extends WizardStep {	
-
-	public WizardStepOne(WebDriver driver) {
-		super(driver, 1);		
-	}
+public class WizardStepOne extends WizardStep {
 	
+	public WizardStepOne(PageMap pageMap, WebDriver driver, int stepNumber) {
+		super(pageMap, driver, stepNumber);
+	}
+
 	@Override
-	public WizardStepExecutor writeValues(Employee emp) {
-		textBoxes.get("Name").writeInput(emp.getFirstName());		
-		textBoxes.get("Surname").writeInput(emp.getLastName());
-		textBoxes.get("Identity Card Number").writeInput(emp.getIdCardNumber());
-		textBoxes.get("Employee Code").writeInput(emp.getEmpCode());
-		textBoxes.get("Address").writeInput(emp.getAddressOne());
-		textBoxes.get("Street").writeInput(emp.getStreet());
-		textBoxes.get("Post Code").writeInput(emp.getPostCode());
-		combos.get("Select a Town").writeInput(emp.getTown());
-		combos.get("Select a Country").writeInput(emp.getCountry());
+	public WizardStepExecutor writeValues(Employee emp) {		
+		pageMap.getTextBox("Name").writeInput(emp.getFirstName());		
+		pageMap.getTextBox("Surname").writeInput(emp.getLastName());
+		pageMap.getTextBox("Identity Card Number").writeInput(emp.getIdCardNumber());
+		pageMap.getTextBox("Employee Code").writeInput(emp.getEmpCode());
+		pageMap.getTextBox("Address").writeInput(emp.getAddressOne());
+		pageMap.getTextBox("Street").writeInput(emp.getStreet());
+		pageMap.getTextBox("Post Code").writeInput(emp.getPostCode());
+		pageMap.getCombo("Select a Town").writeInput(emp.getTown());
+		pageMap.getCombo("Select a Country").writeInput(emp.getCountry());
 		return this;
 	}
 
@@ -37,6 +38,6 @@ public class WizardStepOne extends WizardStep {
 	public WizardStepExecutor getNext() {
 		WebElement nextBtn = driver.findElement(super.byNext);		
 		Jquery.goToElement(driver, nextBtn);
-		return new WizardStepTwo(driver);	
+		return new WizardStepTwo(pageMap, driver, 2);	
 	}
 }

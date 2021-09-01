@@ -21,7 +21,7 @@ public abstract class WizardLoader implements LoaderData{
 	protected final WebDriver driver;
 	protected Logger logger = LogManager.getLogger();
 	private String stepLevel;
-	private By by;
+	protected By by;
 	
 	public WizardLoader(final WebDriver driver, WizardStepExecutor stepExecutor, By by) {
 		this.driver = driver;
@@ -29,6 +29,7 @@ public abstract class WizardLoader implements LoaderData{
 		this.by = by;
 	}
 	
+	//TOP LEVEL ELEMENT
 	@Override
 	public List<WebElement> getElements() {
 		WebElement wizard = driver.findElement(By.id("wizard-p-" + stepLevel));
