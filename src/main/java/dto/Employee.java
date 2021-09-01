@@ -5,7 +5,6 @@ package dto;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import enums.ContractType;
@@ -28,8 +27,8 @@ public class Employee {
 	private String town;
 	private String country;
 	private Gender gender;
-	private Date dateOfBirth;
-	private Date dateOfEmployement;
+	private String dateOfBirth;
+	private String dateOfEmployement;
 	private String taxNumber;
 	private String niNumber;
 	private String bank;
@@ -52,6 +51,16 @@ public class Employee {
 	private BigDecimal hourlyRate;
 	private static RequiredFields requiredFields = new RequiredFields();
 			
+//	private static final String DATE_FORMAT = "dd MMMM yyyy";
+//	private static final DateTimeFormatter DTF = new DateTimeFormatterBuilder()
+//      .parseCaseInsensitive()
+//      .appendPattern(DATE_FORMAT)
+//      .toFormatter(Locale.ENGLISH);
+//	
+//	public String getDateOfBirthForParse() {
+//		return DTF.format(LocalDate.of(this.dateOfBirth));
+//	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -83,10 +92,10 @@ public class Employee {
 	public Gender getGender() {
 		return gender;
 	}
-	public Date getDateOfBirth() {
+	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public Date getDateOfEmployement() {
+	public String getDateOfEmployement() {
 		return dateOfEmployement;
 	}
 	public String getTaxNumber() {
@@ -190,11 +199,11 @@ public class Employee {
 		this.gender = gender;
 		return this;
 	}
-	public Employee setDateOfBirth(Date dateOfBirth) {
+	public Employee setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 		return this;
 	}
-	public Employee setDateOfEmployement(Date dateOfEmployement) {
+	public Employee setDateOfEmployement(String dateOfEmployement) {
 		this.dateOfEmployement = dateOfEmployement;
 		return this;
 	}
@@ -324,11 +333,11 @@ public class Employee {
 			emp.setGender(gender);
 			return this;
 		}
-		public RequiredFields dateOfBirth(Date dateOfBirth) {
+		public RequiredFields dateOfBirth(String dateOfBirth) {
 			emp.setDateOfBirth(dateOfBirth);
 			return this;
 		}
-		public RequiredFields dateOfEmployement(Date dateOfEmployement) {
+		public RequiredFields dateOfEmployement(String dateOfEmployement) {
 			emp.setDateOfEmployement(dateOfEmployement);
 			return this;
 		}

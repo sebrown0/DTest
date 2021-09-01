@@ -16,9 +16,7 @@ import object_models.helpers.Jquery;
 public class WizardStepOne extends WizardStep {	
 
 	public WizardStepOne(WebDriver driver) {
-		super(driver, 1);
-		WizardStepLoader stepLoader = new WizardStepLoader(driver, this);
-		stepLoader.loadControls();		
+		super(driver, 1);		
 	}
 	
 	@Override

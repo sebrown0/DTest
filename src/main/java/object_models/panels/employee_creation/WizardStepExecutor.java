@@ -3,11 +3,7 @@
  */
 package object_models.panels.employee_creation;
 
-import java.util.Map;
-
 import dto.Employee;
-import object_models.element.ComboSelect;
-import object_models.element.TextInput;
 
 /**
  * @author Steve Brown
@@ -15,8 +11,9 @@ import object_models.element.TextInput;
  */
 public interface WizardStepExecutor {
 	int getStepNumber();
-	void setTextBoxes(Map<String, TextInput> textBoxes);
-	void setTextCombos(Map<String, ComboSelect> combos);
+	void loadControls();
+//	void setTextBoxes(Map<String, InputWriter> textBoxes);	
+//	void setTextCombos(Map<String, InputWriter> combos);
 	WizardStepExecutor writeValues(Employee emp);
-	WizardStepExecutor getNext();//WizardMove
+	WizardStepExecutor getNext();
 }

@@ -3,9 +3,7 @@
  */
 package employee_tests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.sql.Date;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +19,7 @@ class EmployeeClassTests {
 	@Test
 	void simpleEmployee() {
 		Employee emp = new Employee();
-		emp.setFirstName("Steve").setDateOfBirth(Date.valueOf("2000-01-22"));
+		emp.setFirstName("Steve").setDateOfBirth("2000-01-22");
 		assertEquals("Steve", emp.getFirstName());
 	}
 	

@@ -1,12 +1,7 @@
 package object_model_tests.employee_creation;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.sql.Date;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -56,8 +51,8 @@ class EmployeeCreationTests {
 				.town("Attard")
 				.country("MALTA")
 				.gender(Gender.MALE)
-				.dateOfBirth(Date.valueOf("2000-01-22"))
-				.dateOfEmployement(Date.valueOf("2021-08-31"))
+				.dateOfBirth("21 May 2002")
+				.dateOfEmployement("01 January 2021")
 				.taxNumber("123456")
 				.niNumber("123456")				
 				.build();	

@@ -18,7 +18,6 @@ public class TextInput implements InputWriter {
 	private String id;
 	private String placeHolder;
 	private By byLocator;
-//	private WebDriver driver;
 	private WebElement element;
 	
 	private String myIdentifier;
@@ -31,16 +30,6 @@ public class TextInput implements InputWriter {
 		this.id = id;
 		this.placeHolder = placeHolder;
 	}
-//	public TextInput(WebDriver driver, String id, String placeHolder) {
-//		this.driver = driver;
-//		this.id = id;
-//		this.placeHolder = placeHolder;
-//	}
-//	public TextInput(WebDriver driver, By byLocator, String placeHolder) {
-//		this.driver = driver;
-//		this.byLocator = byLocator;
-//		this.placeHolder = placeHolder;
-//	}
 	
 	@Override
 	public void writeInput(String txt) {		
