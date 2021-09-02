@@ -13,6 +13,10 @@ import org.openqa.selenium.WebElement;
  *
  */
 public class ClickUsingJavaScript {
+	public static void performClick(WebDriver driver, String jsString) {		
+		runJavaScript(driver, jsString);
+	}
+	
 	public static void performClick(WebDriver driver, WebElement element) {		
 		runJavaScript(driver, element.getAttribute("onclick"));
 	}

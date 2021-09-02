@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 
 import object_models.modules.ModuleElements;
 import object_models.modules.ModuleLoader;
-import object_models.navigation.left_side_menu.LeftMenuPayroll;
+import object_models.navigation.left_side_menu.LeftMenu;
 import object_models.navigation.top_right_nav_bar.TopRightNavBar;;
 
 
@@ -22,7 +22,7 @@ import object_models.navigation.top_right_nav_bar.TopRightNavBar;;
  */
 public class HomePage extends Page {
 	private TopRightNavBar topRightNavBar;
-	private LeftMenuPayroll leftMenu;
+	private LeftMenu leftMenu;
 	private By byXpathActualModuleName = By.xpath("html/body/form/header/div/div");
 	private Logger logger = LogManager.getLogger();
 	
@@ -30,7 +30,7 @@ public class HomePage extends Page {
 		super(driver, HOME_PAGE_TITLE);		
 		
 		topRightNavBar = new TopRightNavBar(driver);
-		leftMenu = new LeftMenuPayroll(driver);
+		leftMenu =  new LeftMenu(driver);
 		loadModule(moduleElements);		
 	}
 	
@@ -39,7 +39,7 @@ public class HomePage extends Page {
 			logger.error("No module supplied");			
 		}else {
 			ModuleLoader moduleLoader = new ModuleLoader(driver, moduleElements);
-			moduleLoader.loadModule(topRightNavBar, leftMenu);	
+			moduleLoader.loadModule(topRightNavBar);	
 		}		
 	}
 		
@@ -52,7 +52,7 @@ public class HomePage extends Page {
 	public TopRightNavBar getTopRightNavBar() {
 		return topRightNavBar;
 	}	
-	public LeftMenuPayroll getLeftMenu() {
+	public LeftMenu getLeftMenu() {
 		return leftMenu;
 	}
 //	public QuickLink getQuickLinks() {

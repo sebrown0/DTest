@@ -6,8 +6,8 @@ package object_models.modules;
 import org.openqa.selenium.WebDriver;
 
 import exceptions.ElementDoesNotExistException;
-import object_models.navigation.left_side_menu.LeftMenu;
-import object_models.navigation.left_side_menu.LeftMenuPayroll;
+import object_models.navigation.left_side_menu.ZZZ_LeftMenu;
+import object_models.navigation.left_side_menu.ZZZ_LeftMenuPayroll;
 import object_models.navigation.top_right_nav_bar.NavBarPayrollElements;
 import object_models.navigation.top_right_nav_bar.elements.NavBarElementStrategy;
 import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLink;
@@ -43,8 +43,8 @@ public class PayrollModuleLoader implements ModuleElements {
 	}
 
 	@Override
-	public LeftMenu getLeftMenu() throws ElementDoesNotExistException {
-		return new LeftMenuPayroll(driver);
+	public ZZZ_LeftMenu getLeftMenu() throws ElementDoesNotExistException {
+		return new ZZZ_LeftMenuPayroll(driver);
 	}
 		
 }

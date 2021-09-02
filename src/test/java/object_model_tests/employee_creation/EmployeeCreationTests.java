@@ -1,5 +1,7 @@
 package object_model_tests.employee_creation;
 
+import java.math.BigDecimal;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -43,19 +45,22 @@ class EmployeeCreationTests {
 		// Create the employee we're going to use with required fields.
 		emp = 
 				Employee.withRequiredFields()
-				.firstName("Steve")
-				.lastName("Brown")
-				.idCardNumber("0144213A")
-				.empCode("SB_101")
-				.addressOne("1")
-				.town("Attard")
-				.country("MALTA")
-				.gender(Gender.MALE)
-				.dateOfBirth("21 May 2002")
-				.dateOfEmployement("01 January 2021")
-				.taxNumber("123456")
-				.niNumber("123456")				
-				.build();	
+								.firstName("Steve")
+								.lastName("Brown")
+								.idCardNumber("0144213A")
+								.empCode("SB_101")
+								.addressOne("1")
+								.town("Attard")
+								.country("MALTA")
+								.gender(Gender.MALE)
+								.dateOfBirth("21/05/2002")
+								.dateOfEmployement("01/01/2021")
+								.taxNumber("123456")
+								.niNumber("123456")	
+								.payGroup("Fourweekly")
+								.annualSalary(BigDecimal.valueOf(10000))								
+								.hourlyRate(BigDecimal.valueOf(10))
+								.build();	
 	}
 	
 	@AfterAll
@@ -64,7 +69,7 @@ class EmployeeCreationTests {
 	}
 	
 	@Test
-	void enterFirstName() {
+	void createEmployee() {
 		wizard.createEmployee(emp);
 	}
 }

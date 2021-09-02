@@ -19,7 +19,7 @@ public class PageMap {
 	public void addTextBox(String key, InputWriter value) {
 		if(key != null && key != "") {
 			textBoxes.put(key, value);
-			System.out.println("adding text box - " + key);
+//			System.out.println("adding text box - " + key);
 		}
 	}
 	
@@ -30,7 +30,7 @@ public class PageMap {
 	public void addComboBox(String key, InputWriter value) {
 		if(key != null && key != "") {
 			comboBoxes.put(key, value);
-			System.out.println("adding combo box - " + key);
+//			System.out.println("adding combo box - " + key);
 		}
 	}
 	

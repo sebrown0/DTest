@@ -43,16 +43,17 @@ public class EmployeeCreationWizard implements ChildElement {
 		waitForLoad();
 		switchToIFrame();
 		mapper = new PageMapper(new MappingStrategyWizard(driver));
-		pageMap = mapper.mapControls().getPageMap();
-				
+		pageMap = mapper.mapControls().getPageMap();				
 	}
 	
 	public void createEmployee(Employee emp)  {
-		logger.debug("Creating elements");
-		WizardStepExecutor stepOne = new WizardStepOne(pageMap, driver, 1);
-		stepOne.writeValues(emp);
-//		WizardStepExecutor stepTwo = stepOne.writeValues(emp).getNext();
-//		stepTwo.writeValues(emp);
+		logger.debug("Creating employee with wizard");
+		WizardStepExecutor step1 = new WizardStepOne(pageMap, driver, 1);
+		WizardStepExecutor step2 = step1.writeValues(emp).getNext();
+		WizardStepExecutor step3 = step2.writeValues(emp).getNext();		
+		WizardStepExecutor step4 = step3.writeValues(emp).getNext();
+		WizardStepExecutor step5 = step4.writeValues(emp).getNext();
+		step5.writeValues(emp).getNext();
 	}
 		
 	public void switchToIFrame() {
@@ -79,6 +80,7 @@ public class EmployeeCreationWizard implements ChildElement {
 			MapControl[] objs = {
 					new ControlText(driver, By.cssSelector("input[type='text']"), "placeholder"),
 					new ControlCombo(driver, By.cssSelector("span[class='select2-selection__placeholder']"), "textContent")};
+
 			return List.of(objs);
 		}		
 	}	

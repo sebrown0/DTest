@@ -18,6 +18,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
+import object_models.helpers.AppDates;
+
 /**
  * @author Steve Brown
  *
@@ -29,7 +31,8 @@ import org.openqa.selenium.support.PageFactory;
  * Then click the given day.
  */
 public class DatePickerDay {
-  private static final String DATE_FORMAT = "dd MMMM yyyy";
+  public static final String DATE_FORMAT = "dd MMMM yyyy";
+  
   private static final String DAY_FIRST = "01";
   private static final String SPACE = " ";  
   private static final DateTimeFormatter DTF = new DateTimeFormatterBuilder()
@@ -53,9 +56,11 @@ public class DatePickerDay {
   	PageFactory.initElements(driver, this);
   }
   
+  //Pass the date as an App date string, i.e. dd/mm/yyyy.
   public void setDate(String date) {
-  	long diff = this.getDateDifferenceInMonths(date);
-    int day = this.getDay(date);
+  	String pickerDate = AppDates.getAsDatePicker(date);
+  	long diff = this.getDateDifferenceInMonths(pickerDate);
+    int day = this.getDay(pickerDate);
     
     WebElement arrow = (diff >= 0 ? next : prev);
     diff = Math.abs(diff);

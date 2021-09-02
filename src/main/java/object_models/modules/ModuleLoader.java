@@ -7,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
-import object_models.navigation.left_side_menu.LeftMenuPayroll;
 import object_models.navigation.top_right_nav_bar.TopRightNavBar;
 
 /**
@@ -36,20 +35,20 @@ public class ModuleLoader {
 		if (driver == null) {	logger.error("Null driver"); }
 	}
 		
-	public void loadModule(TopRightNavBar topRightNavBar, LeftMenuPayroll leftMenu) {
+	public void loadModule(TopRightNavBar topRightNavBar) {
 		if(!ModuleChecker.getCurrentModule(driver).equalsIgnoreCase(moduleName)){			
 			logger.info(moduleName + " module not loaded. Loading now");
 			moduleElements.getQuickLinkToLoadModule().clickMe();
-			createNavAndMenus(topRightNavBar, leftMenu);				
+			createNavAndMenus(topRightNavBar);				
 		}else {
 			logger.info(moduleName + " module already loaded");
 		}
 	}
 	
-	private void createNavAndMenus(TopRightNavBar topRightNavBar, LeftMenuPayroll leftMenu) {
-		logger.debug("Creating nav bar and menus for " + moduleName + " module");
+	private void createNavAndMenus(TopRightNavBar topRightNavBar) {
+		logger.info("Creating nav bar and menus for " + moduleName + " module");
 		topRightNavBar.loadElements(moduleElements.getElementStrategy());
-		leftMenu = new LeftMenuPayroll(driver);
+//		leftMenu = new ZZZ_LeftMenuPayroll(driver);
 	}
 	
 }

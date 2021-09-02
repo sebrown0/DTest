@@ -5,6 +5,8 @@ package factories;
 
 import java.time.Duration;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import drivers.DriverGetter;
@@ -25,12 +27,14 @@ public class DriverFactory {
 	public static WebDriver getDriver(String driverName) {
 		DriverGetter dg = null;
 		WebDriver driver;
+		Logger logger = LogManager.getLogger();
 		
 		if(driverName.equalsIgnoreCase("XXXX")) {
 			// ANOTHER DRIVER
 		}else {
 			// Default
 			dg = new GoogleDriver();
+			logger.info("Using Google driver");
 		}			
 		driver = dg.getDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));

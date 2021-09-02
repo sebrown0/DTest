@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 
 import controls.PageMap;
 import dto.Employee;
-import loaders.DateSelectorLoader;
 import object_models.date_picker.DatePickerPage;
 import object_models.helpers.Jquery;
 
@@ -26,19 +25,19 @@ public class WizardStepTwo extends WizardStep {
 	public WizardStepExecutor writeValues(Employee emp) {
 		DatePickerPage datePickerPage = new DatePickerPage(driver);
 		
-		combos.get("Select a Gender").writeInput(emp.getGender().name());		
-		combos.get("Select a Bank").writeInput("REVOLUT");
+		pageMap.getCombo("Select a Gender").writeInput(emp.getGender().name());		
 		
-		DateSelectorLoader loader = new DateSelectorLoader(driver);
-		loader.printSelectors();
-//		datePickerPage.getDatePicker().setDate("21 August 2000");
-//		System.out.println("selected = " + datePickerPage.getSelectedDate());
-	
-		
-//		datePickerPage.getDatePicker().setDate(emp.getDateOfBirth());
-		
-//		textBoxes.get("Date of Birth").writeInput("21/03/2000");
-//		textBoxes.get("Date of Employment").writeInput("21/03/2000");
+		//Write directly to the date text box and then confirm using the date picker.
+		datePickerPage.writeDate("Date of Birth", pageMap.getTextBox("Date of Birth"), emp.getDateOfBirth());		
+		//Use the date picker to 'move' the date.
+		datePickerPage.getDatePicker("Date of Employment").setDate(emp.getDateOfEmployement());
+
+		pageMap.getTextBox("Tax Number").writeInput(emp.getTaxNumber());
+		pageMap.getTextBox("NI Number").writeInput(emp.getNiNumber());
+//	pageMap.getCombo("Select a Bank").writeInput("REVOLUT");
+		pageMap.getTextBox("IBAN Number").writeInput(emp.getIbanNumber());
+		pageMap.getTextBox("Email Address").writeInput(emp.getEmailAddress());
+		pageMap.getTextBox("Mobile Number").writeInput(emp.getMobileNumber());
 		return this;
 	}
 
@@ -46,6 +45,6 @@ public class WizardStepTwo extends WizardStep {
 	public WizardStepExecutor getNext() {
 		WebElement nextBtn = driver.findElement(super.byNext);		
 		Jquery.goToElement(driver, nextBtn);
-		return null;	
+		return new WizardStepThree(pageMap, driver, 3);	
 	}
 }
