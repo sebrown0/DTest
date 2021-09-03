@@ -6,7 +6,6 @@ package object_models.panels;
 import org.openqa.selenium.WebDriver;
 
 import object_models.helpers.IFrame;
-import object_models.helpers.Title;
 
 /**
  * @author Steve Brown
@@ -14,10 +13,10 @@ import object_models.helpers.Title;
  */
 public class JSPanelWithIFrame extends JSPanel {
 	private IFrame iFrame;
-	
-	public JSPanelWithIFrame(WebDriver driver, Title title) {
-		super(driver, title);
-		iFrame = new IFrame(driver, title.getExpectedTitle());
+		
+	public JSPanelWithIFrame(WebDriver driver, String expectedTitle) {
+		super(driver, expectedTitle);	
+		iFrame = new IFrame(driver, expectedTitle);
 	}
 
 	public void switchToIFrame() {

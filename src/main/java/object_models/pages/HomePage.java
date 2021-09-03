@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import object_models.helpers.TitleHomePage;
 import object_models.modules.ModuleElements;
 import object_models.modules.ModuleLoader;
 import object_models.navigation.left_side_menu.LeftMenu;
@@ -22,18 +23,19 @@ import object_models.navigation.top_right_nav_bar.TopRightNavBar;;
  */
 public class HomePage extends Page {
 	private TopRightNavBar topRightNavBar;
-	private LeftMenu leftMenu;
-	private By byXpathActualModuleName = By.xpath("html/body/form/header/div/div");
+	private LeftMenu leftMenu;	
 	private Logger logger = LogManager.getLogger();
 	
+	private static By byXpathActualModuleName = By.xpath("html/body/form/header/div/div");
+	
 	public HomePage(WebDriver driver, ModuleElements moduleElements) {		
-		super(driver, HOME_PAGE_TITLE);		
+		super(driver, new TitleHomePage(HOME_PAGE_TITLE, driver));		
 		
 		topRightNavBar = new TopRightNavBar(driver);
 		leftMenu =  new LeftMenu(driver);
 		loadModule(moduleElements);		
 	}
-	
+		
 	public void loadModule(ModuleElements moduleElements) {
 		if(moduleElements == null) {			
 			logger.error("No module supplied");			
@@ -55,7 +57,4 @@ public class HomePage extends Page {
 	public LeftMenu getLeftMenu() {
 		return leftMenu;
 	}
-//	public QuickLink getQuickLinks() {
-//		return topRightNavBar
-//	}
 }

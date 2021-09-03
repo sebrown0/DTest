@@ -10,6 +10,13 @@ import org.openqa.selenium.WebDriver;
  * @author Steve Brown
  *
  */
-public interface TitleStrategy {
+
+/*
+ * 
+ * REMOVE
+ * 
+ */
+public interface ZZZ_TitleStrategy {
 	String getTitle(WebDriver driver, By titleLocator);
+	String getTitle();
 }

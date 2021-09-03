@@ -1,7 +1,7 @@
 /**
  * 
  */
-package providers.employee;
+package providers;
 
 import java.math.BigDecimal;
 
@@ -13,26 +13,32 @@ import org.w3c.dom.NodeList;
 
 import dto.Employee;
 import enums.Gender;
-import providers.XMLFileProvider;
 import xml_file.XMLFile;
 
 /**
  * @author Steve Brown
  *
  */
-public class EmployeeFromXml {
+public class EmployeeFromXml implements EmployeeProvider {
 	private XMLFile xmlFile = new XMLFile(XMLFileProvider.EMPLOYEE_FILE_PATH);
 	private Employee emp;
 	private Logger logger = LogManager.getLogger();
 	
-	public Employee getEmployee(String idNum) {
+	@Override
+	public Employee getEmployeeAll(String recordNum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public Employee getEmployeeRequired(String recordNum) {
 		NodeList emps = getEmployees();
 	  for (int idx = 0; idx < emps.getLength(); idx++) {
 	  	Node n = emps.item(idx);
 	  	if (n.getNodeType() == Node.ELEMENT_NODE) {
 	  		Element el = (Element) n;	  		
 	  		String id = el.getAttribute("id");
-	  		if(id.equals(idNum)) {
+	  		if(id.equals(recordNum)) {
 	  			logger.info("Getting employee XML record [" + id + "]");
 	  			mapEmployee(n);
 	  			break;

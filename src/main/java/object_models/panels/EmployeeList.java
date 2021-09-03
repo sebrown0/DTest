@@ -3,21 +3,20 @@
  */
 package object_models.panels;
 
-import static providers.PageTitleProvider.EMPLOYEE_LIST_TITLE;
-
 import org.openqa.selenium.WebDriver;
 
+import object_models.helpers.TitlePanel;
 import object_models.pages.Page;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 public class EmployeeList extends Page {
-
+	public static final String PANEL_TITLE = "Employee List";
+	
 	public EmployeeList(WebDriver driver) {
-		super(driver, EMPLOYEE_LIST_TITLE);
+		super(driver, new TitlePanel(PANEL_TITLE, driver));
+	
 	}
-
-
 }

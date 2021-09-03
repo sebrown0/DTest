@@ -46,16 +46,23 @@ class LeftMenuElementTests {
 	}
 	
 	@Test
-	void clickEmployees_then_EmployeeOthers() {
+	void click_EmployeeList() {
+		
+	}
+	
+	@Test
+	void click_Employees_then_EmployeeOthers() {
 		menu.clickParent("Employees");
 		menu.clickParent("Employee Others");
 	}
 	
 	@Test
-	void clickEmployees_and_get_EmployeeDetails() {
+	void click_Employees_and_get_EmployeeDetails() {
 		EmployeeDetails empDetails = (EmployeeDetails) menu.clickParent("Employees").clickChild("Employee Details");
 		assertTrue(empDetails.employeeCode().getTextByValue().length() > 0);
 		empDetails.closePanel();
 	}
+	
+	
 	
 }

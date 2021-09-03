@@ -16,6 +16,7 @@ public class Jquery {
 	public static void goToElement(WebDriver driver, WebElement element) {
 		Actions builder = new Actions(driver);
 		builder.moveToElement(element).click().build().perform();
+		
 	}
 	
 }

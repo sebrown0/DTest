@@ -5,39 +5,35 @@ package object_models.panels;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import object_models.element.ComboSelect;
 import object_models.element.TextInOut;
 import object_models.element.TextOut;
 import object_models.helpers.ChildElement;
-import object_models.helpers.Title;
-import object_models.strategies.title.TitleInInnerHTML;
+import object_models.helpers.PageTitle;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 public class EmployeeDetails implements ChildElement{
-
 	private WebDriver driver;	
 	private JSPanelWithIFrame panel;
-	private Title title;
+	private Tab myTabs;
 	
 	public static final String PANEL_TITLE = "Employee Details";
 			
-	public EmployeeDetails(WebDriver driver, String panelTitle) {
-		this.driver = driver;
-//		this.title = new Title(By.cssSelector("span.jsPanel-title"), panelTitle, new TitleInInnerHTML());
-		this.title = new Title(By.cssSelector("span[class='jsPanel-title']"), panelTitle, new TitleInInnerHTML());
-//		this.title = new Title(By.className("jsPanel-title"), panelTitle, new TitleInInnerHTML());
-		
-		this.panel = new JSPanelWithIFrame(driver, title);
-		
+	public EmployeeDetails(WebDriver driver) {
+		this.driver = driver;		
+		this.panel = new JSPanelWithIFrame(driver, PANEL_TITLE);
+		this.myTabs = new Tab();
+
 		switchToIFrame();		
 	}
 	
-	public Title getTitle() {
-		return title;
+	public PageTitle getTitle() {
+		return panel.getTitle();
 	}
 	
 	private void switchToIFrame() {
@@ -48,6 +44,12 @@ public class EmployeeDetails implements ChildElement{
 		panel.close();
 	}
 	
+	// Tabs
+	public Tab tab() {
+		return this.myTabs;
+	}
+	
+	// Basic Details
 	public TextInOut employeeCode() {
 		return new TextInOut(driver, By.id("FORM_ID"));
 	}
@@ -66,5 +68,35 @@ public class EmployeeDetails implements ChildElement{
 	}
 	public TextOut age() {
 		return new TextOut(driver, By.id("AGE"));
+	}
+	
+	// Settings
+	public TextInOut partTimerHoursPerDay() {
+		return new TextInOut(driver, By.id("ACTUAL_BASIC"));
+	}
+	
+	public class Tab{	
+		private WebElement tab;
+				
+		public Tab basicDetails() {
+			tab = driver.findElement(By.xpath("//a[@href='#tab1']"));
+			return this;
+		}
+		public Tab settings() {
+			tab = driver.findElement(By.xpath("//a[@href='#tab2']"));
+			return this;
+		}
+		public Tab suspension() {
+			tab = driver.findElement(By.xpath("//a[@href='#tab3']"));
+			return this;
+		}
+		public Tab govtBonus() {
+			tab = driver.findElement(By.xpath("//a[@href='#tab4']"));
+			return this;
+		}
+		
+		public void click() {
+			tab.click();			
+		}
 	}
 }

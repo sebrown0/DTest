@@ -26,4 +26,9 @@ public class TextInOut {
 		text.clear();
 		text.sendKeys(txt);
 	}
+	
+	public void clear() {
+		
+		text.clear();		
+	}
 }

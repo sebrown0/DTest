@@ -8,8 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
 import dto.Employee;
+import providers.EmployeeFromXml;
+import providers.EmployeeProvider;
 import providers.XMLFileProvider;
-import providers.employee.EmployeeFromXml;
 import xml_reader.ConfigReader;
 
 class XMLReaderTests {
@@ -36,8 +37,8 @@ class XMLReaderTests {
 	
 	@Test
 	void getEmployee() {
-		EmployeeFromXml empXml = new EmployeeFromXml();
-		Employee emp = empXml.getEmployee("1");
+		EmployeeProvider empXml = new EmployeeFromXml();
+		Employee emp = empXml.getEmployeeAll("1");
 		assertEquals("EMP_23", emp.getEmpCode());
 		assertEquals("123456", emp.getNiNumber());
 	}

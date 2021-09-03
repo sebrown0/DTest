@@ -9,26 +9,32 @@ import object_models.helpers.ChildElement;
 import object_models.helpers.PageTitle;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 public class Page implements PageTitle, ChildElement {
 	protected WebDriver driver;
-	protected String title;	
+	private PageTitle title;	
 
-	public Page(WebDriver driver, String title) {
+	public Page(WebDriver driver, PageTitle title) {
 		this.driver = driver;
 		this.title = title;		
 	}
-	
-	public String getPageTitle() {
-		return title;
+
+	@Override
+	public String getExpected() {
+		return title.getExpected();
+	}
+
+	@Override
+	public String getActual() {
+		return title.getActual();
 	}
 	
 	// WRONG - SHOULD NOT BE TESTING HERE!!!!!!!!
-	@Override 
-	public boolean isPageTitleCorrect() {		
-		return (driver.getTitle().equals(title)) ? true : false;
-	}
+//	@Override 
+//	public boolean isPageTitleCorrect() {		
+//		return (driver.getTitle().equals(title)) ? true : false;
+//	}
 	
 }

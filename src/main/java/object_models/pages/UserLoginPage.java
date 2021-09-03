@@ -3,7 +3,6 @@
  */
 package object_models.pages;
 
-import static providers.PageTitleProvider.LOGIN_PAGE_TITLE;
 import static providers.URIProvider.LOGIN_PAGE_URI;
 
 import org.openqa.selenium.By;
@@ -24,11 +23,11 @@ public class UserLoginPage extends LoadablePage {
 	private By byBtnLogin = By.className("login100-form-btn");	
 	
 	public UserLoginPage(WebDriver driver) {
-		super(driver, LOGIN_PAGE_TITLE, LOGIN_PAGE_URI);		
+		super(driver, null, LOGIN_PAGE_URI);		
 	}
 	
 	public UserLoginPage(WebDriver driver, ModuleElements moduleLoader) {
-		super(driver, LOGIN_PAGE_TITLE, LOGIN_PAGE_URI);
+		super(driver, null, LOGIN_PAGE_URI);
 		this.moduleLoader = moduleLoader;
 	}
 		

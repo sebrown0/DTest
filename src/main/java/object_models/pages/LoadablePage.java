@@ -7,20 +7,23 @@ import org.openqa.selenium.WebDriver;
 
 import exceptions.IncorrectPageException;
 import object_models.helpers.LoadPage;
+import object_models.helpers.TitlePanel;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
+ * -- Only used for Login --
  */
-public class LoadablePage extends Page implements LoadPage {	
+public class LoadablePage extends Page implements LoadPage {		
 	private String uri;
 
-	public LoadablePage(WebDriver driver, String title, String uri) {
-		super(driver, title);		
+	public LoadablePage(WebDriver driver, TitlePanel title, String uri) {
+		super(driver, title);
 		this.uri = uri;
 		loadPage();
 	}
 
+		
 	private void loadPage() {		
 		try {
 			loadUsingURI();
@@ -33,9 +36,9 @@ public class LoadablePage extends Page implements LoadPage {
 	@Override
 	public void loadUsingURI() throws IncorrectPageException {
 		driver.get(uri);
-		if (!isPageTitleCorrect()) {
-			throw new IncorrectPageException("Incorrect page");
-		}
+//		if (!isPageTitleCorrect()) {
+//			throw new IncorrectPageException("Incorrect page");
+//		}
 	}
 
 }

@@ -18,9 +18,8 @@ import controls.PageMap;
 import controls.PageMapper;
 import dto.Employee;
 import object_models.helpers.ChildElement;
-import object_models.helpers.Title;
+import object_models.helpers.PageTitle;
 import object_models.panels.JSPanelWithIFrame;
-import object_models.strategies.title.TitleInInnerHTML;
 
 /**
  * @author Steve Brown
@@ -29,7 +28,6 @@ import object_models.strategies.title.TitleInInnerHTML;
 public class EmployeeCreationWizard implements ChildElement {	
 	private WebDriver driver;	
 	private JSPanelWithIFrame panel;
-	private Title title;
 	private Logger logger = LogManager.getLogger();
 	private PageMapper mapper;
 	private PageMap pageMap;
@@ -37,9 +35,8 @@ public class EmployeeCreationWizard implements ChildElement {
 	public static final String PANEL_TITLE = "Employee Creation Wizard";
 		
 	public EmployeeCreationWizard(WebDriver driver) {
-		this.driver = driver;
-		this.title = new Title(By.cssSelector("span.jsPanel-title"), PANEL_TITLE, new TitleInInnerHTML());
-		this.panel = new JSPanelWithIFrame(driver, title);
+		this.driver = driver;		
+		this.panel = new JSPanelWithIFrame(driver, PANEL_TITLE);
 			
 		switchToIFrame();
 		mapper = new PageMapper(new MappingStrategyWizard(driver));
@@ -59,7 +56,12 @@ public class EmployeeCreationWizard implements ChildElement {
 	public void switchToIFrame() {
 		panel.switchToIFrame();
 	}
-	
+	public void close() {
+		panel.close();
+	}
+	public PageTitle getTitle() {
+		return panel.getTitle();
+	}
 	/*
 	 * This object's mapping strategy.
 	 */

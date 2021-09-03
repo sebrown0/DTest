@@ -50,7 +50,7 @@ public class LeftMenu {
 			ChildElement child = null;
 			switch (childName) {
 			case "Employee Details":
-				child = new EmployeeDetails(driver, childName);
+				child = new EmployeeDetails(driver);
 				break;
 
 			default:

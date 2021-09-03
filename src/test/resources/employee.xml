@@ -3,7 +3,7 @@
 <Employees>
 	<Employee id = "1">
 		<Required>
-			<Code>EMP_23</Code>
+			<Code>HS_234</Code>
 			<FirstName>Homer</FirstName>
 			<Surname>Simpson</Surname>
 			<IdCardNumber>0134213A</IdCardNumber>

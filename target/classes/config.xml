@@ -9,8 +9,8 @@
 	<WebDriver>Google</WebDriver>
 	
 	<Reporting>
-		<Strategy>TestRail</Strategy>
+		<Strategy>Log</Strategy>
+		<LogDir>./logs</LogDir>
 		<Level>All</Level>
 	</Reporting>
 </Config>
-
