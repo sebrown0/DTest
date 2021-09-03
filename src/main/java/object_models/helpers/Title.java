@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import object_models.strategies.title.TitleStrategy;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 public class Title {

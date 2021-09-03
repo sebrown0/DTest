@@ -14,7 +14,7 @@ import org.openqa.selenium.WebElement;
 public class TitleInInnerHTML implements TitleStrategy{
 
 	@Override
-	public String getTitle(WebDriver driver, By titleLocator) {
+	public String getTitle(WebDriver driver, By titleLocator) {		
 		WebElement we = driver.findElement(titleLocator); 
 		return we.getAttribute("innerHTML");
 	}

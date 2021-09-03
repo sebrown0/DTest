@@ -18,7 +18,7 @@ public class IFrame {
 		this.driver = driver;
 		this.title = title;
 	}
-	
+		
 	public void switchUsingTitle() {
 		driver.switchTo().frame(driver.findElement(byCssUsingTitle()));
 	}

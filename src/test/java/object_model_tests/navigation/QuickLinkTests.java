@@ -16,6 +16,7 @@ import xml_reader.ConfigReader;
 
 class QuickLinkTests {	
 	private static WebDriver driver;
+	@SuppressWarnings("unused")
 	private static TopRightNavBar navBar;
 	
 	@BeforeAll	

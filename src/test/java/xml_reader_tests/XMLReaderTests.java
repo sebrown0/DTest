@@ -1,12 +1,15 @@
 package xml_reader_tests;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
+import dto.Employee;
 import providers.XMLFileProvider;
+import providers.employee.EmployeeFromXml;
 import xml_reader.ConfigReader;
 
 class XMLReaderTests {
@@ -29,6 +32,14 @@ class XMLReaderTests {
 		WebDriver driver = reader.getDriver();
 		assertNotNull(driver);
 		driver.quit();
+	}
+	
+	@Test
+	void getEmployee() {
+		EmployeeFromXml empXml = new EmployeeFromXml();
+		Employee emp = empXml.getEmployee("1");
+		assertEquals("EMP_23", emp.getEmpCode());
+		assertEquals("123456", emp.getNiNumber());
 	}
 	
 //	@Test

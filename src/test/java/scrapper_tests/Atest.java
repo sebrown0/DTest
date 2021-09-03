@@ -1,7 +1,5 @@
 package scrapper_tests;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -18,6 +16,7 @@ import xml_reader.ConfigReader;
 
 class Atest {
 
+	@SuppressWarnings("unused")
 	private static HomePage hp;
 	private static WebDriver driver;
 	private static UserLoginPage userLogin;

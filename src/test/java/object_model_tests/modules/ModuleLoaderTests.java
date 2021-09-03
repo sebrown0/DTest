@@ -12,6 +12,7 @@ import resources.test_data.UserProvider;
 import xml_reader.ConfigReader;
 
 class ModuleLoaderTests {
+	@SuppressWarnings("unused")
 	private static HomePage hp;
 	private static WebDriver driver;
 	private static UserLoginPage userLogin;

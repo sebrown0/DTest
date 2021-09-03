@@ -50,16 +50,6 @@ public class Employee {
 	private BigDecimal annualSalary;
 	private BigDecimal hourlyRate;
 	private static RequiredFields requiredFields = new RequiredFields();
-			
-//	private static final String DATE_FORMAT = "dd MMMM yyyy";
-//	private static final DateTimeFormatter DTF = new DateTimeFormatterBuilder()
-//      .parseCaseInsensitive()
-//      .appendPattern(DATE_FORMAT)
-//      .toFormatter(Locale.ENGLISH);
-//	
-//	public String getDateOfBirthForParse() {
-//		return DTF.format(LocalDate.of(this.dateOfBirth));
-//	}
 	
 	public String getFirstName() {
 		return firstName;
@@ -297,7 +287,6 @@ public class Employee {
 		return "Employee [firstName=" + firstName + ", lastName=" + lastName + ", empCode=" + empCode + "]";
 	}
 	
-	@SuppressWarnings("unused")
 	public static class RequiredFields {
 		private Employee emp = new Employee();
 		

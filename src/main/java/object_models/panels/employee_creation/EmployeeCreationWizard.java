@@ -3,15 +3,12 @@
  */
 package object_models.panels.employee_creation;
 
-import java.time.Duration;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import controls.ControlCombo;
 import controls.ControlText;
@@ -21,7 +18,9 @@ import controls.PageMap;
 import controls.PageMapper;
 import dto.Employee;
 import object_models.helpers.ChildElement;
-import object_models.helpers.IFrame;
+import object_models.helpers.Title;
+import object_models.panels.JSPanelWithIFrame;
+import object_models.strategies.title.TitleInInnerHTML;
 
 /**
  * @author Steve Brown
@@ -29,7 +28,8 @@ import object_models.helpers.IFrame;
  */
 public class EmployeeCreationWizard implements ChildElement {	
 	private WebDriver driver;	
-	private IFrame iFrame;	
+	private JSPanelWithIFrame panel;
+	private Title title;
 	private Logger logger = LogManager.getLogger();
 	private PageMapper mapper;
 	private PageMap pageMap;
@@ -38,12 +38,12 @@ public class EmployeeCreationWizard implements ChildElement {
 		
 	public EmployeeCreationWizard(WebDriver driver) {
 		this.driver = driver;
-		
-		iFrame = new IFrame(driver, PANEL_TITLE);		
-		waitForLoad();
+		this.title = new Title(By.cssSelector("span.jsPanel-title"), PANEL_TITLE, new TitleInInnerHTML());
+		this.panel = new JSPanelWithIFrame(driver, title);
+			
 		switchToIFrame();
 		mapper = new PageMapper(new MappingStrategyWizard(driver));
-		pageMap = mapper.mapControls().getPageMap();				
+		pageMap = mapper.mapControls().getPageMap();			
 	}
 	
 	public void createEmployee(Employee emp)  {
@@ -57,12 +57,7 @@ public class EmployeeCreationWizard implements ChildElement {
 	}
 		
 	public void switchToIFrame() {
-		iFrame.switchUsingTitle();
-	}
-
-	public void waitForLoad() {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-		wait.until(ExpectedConditions.attributeContains(By.className("jsPanel-title"), "innerHTML", PANEL_TITLE));		
+		panel.switchToIFrame();
 	}
 	
 	/*
