@@ -26,6 +26,10 @@ public class ComboSelect {
 		return combo.getAttribute("value");
 	}
 	
+	public String getText() {
+		return combo.getText();
+	}
+	
 	public void writeText(String txt) {
 		combo.clear();
 		combo.sendKeys(txt);

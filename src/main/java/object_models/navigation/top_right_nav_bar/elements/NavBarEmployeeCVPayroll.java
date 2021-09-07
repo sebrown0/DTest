@@ -27,6 +27,6 @@ public class NavBarEmployeeCVPayroll extends NavBarElement {
 	public ChildElement clickElement() {
 		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-user')]"));
 		ClickUsingJavaScript.performClick(driver, el);
-		return new EmployeeCv(super.driver, "Employee Payroll CV");
+		return new EmployeeCv(super.driver);
 	}
 }

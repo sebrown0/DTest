@@ -27,6 +27,6 @@ public class NavBarDakarIntelligence extends NavBarElement {
 	public ChildElement clickElement() {
 		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-server')]"));
 		ClickUsingJavaScript.performClick(driver, el);
-		return new DakarIntelligence(driver, null);
+		return new DakarIntelligence(driver);
 	}
 }

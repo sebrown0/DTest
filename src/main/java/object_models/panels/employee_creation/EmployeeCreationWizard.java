@@ -17,28 +17,22 @@ import controls.MappingStrategy;
 import controls.PageMap;
 import controls.PageMapper;
 import dto.Employee;
-import object_models.helpers.ChildElement;
-import object_models.helpers.PageTitle;
 import object_models.panels.JSPanelWithIFrame;
 
 /**
  * @author Steve Brown
  *
  */
-public class EmployeeCreationWizard implements ChildElement {	
-	private WebDriver driver;	
-	private JSPanelWithIFrame panel;
+public class EmployeeCreationWizard extends JSPanelWithIFrame {
 	private Logger logger = LogManager.getLogger();
 	private PageMapper mapper;
 	private PageMap pageMap;
 	
-	public static final String PANEL_TITLE = "Employee Creation Wizard";
-		
+	public static final String PANEL_TITLE = "Employee Creation Wizard";		
+	
 	public EmployeeCreationWizard(WebDriver driver) {
-		this.driver = driver;		
-		this.panel = new JSPanelWithIFrame(driver, PANEL_TITLE);
-			
-		switchToIFrame();
+		super(driver, PANEL_TITLE);
+		
 		mapper = new PageMapper(new MappingStrategyWizard(driver));
 		pageMap = mapper.mapControls().getPageMap();			
 	}
@@ -53,15 +47,6 @@ public class EmployeeCreationWizard implements ChildElement {
 		step5.writeValues(emp).getNext();
 	}
 		
-	public void switchToIFrame() {
-		panel.switchToIFrame();
-	}
-	public void close() {
-		panel.close();
-	}
-	public PageTitle getTitle() {
-		return panel.getTitle();
-	}
 	/*
 	 * This object's mapping strategy.
 	 */

@@ -47,7 +47,7 @@ class EmployeeCreationTests {
 	
 	@AfterAll
 	static void teardown() {
-//		driver.quit();
+		driver.quit();
 	}
 	
 	@Test

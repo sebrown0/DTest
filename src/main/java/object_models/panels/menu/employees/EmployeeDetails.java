@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_models.panels;
+package object_models.panels.menu.employees;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,42 +10,26 @@ import org.openqa.selenium.WebElement;
 import object_models.element.ComboSelect;
 import object_models.element.TextInOut;
 import object_models.element.TextOut;
-import object_models.helpers.ChildElement;
-import object_models.helpers.PageTitle;
+import object_models.panels.JSPanelWithIFrame;
 
 /**
  * @author Steve Brown
  *
  */
-public class EmployeeDetails implements ChildElement{
-	private WebDriver driver;	
-	private JSPanelWithIFrame panel;
-	private Tab myTabs;
+public class EmployeeDetails extends JSPanelWithIFrame {
+	private EmpDetailsTabs myTabs;
 	
 	public static final String PANEL_TITLE = "Employee Details";
-			
+	public static final String MENU_TITLE = PANEL_TITLE;
+	
 	public EmployeeDetails(WebDriver driver) {
-		this.driver = driver;		
-		this.panel = new JSPanelWithIFrame(driver, PANEL_TITLE);
-		this.myTabs = new Tab();
-
-		switchToIFrame();		
-	}
-	
-	public PageTitle getTitle() {
-		return panel.getTitle();
-	}
-	
-	private void switchToIFrame() {
-		panel.switchToIFrame();
-	}
+		super(driver, PANEL_TITLE);
 		
-	public void closePanel() {
-		panel.close();
+		this.myTabs = new EmpDetailsTabs();
 	}
-	
+				
 	// Tabs
-	public Tab tab() {
+	public EmpDetailsTabs tab() {
 		return this.myTabs;
 	}
 	
@@ -57,8 +41,7 @@ public class EmployeeDetails implements ChildElement{
 		return new TextInOut(driver, By.id("IDENTITY_CARD_NO"));
 	}	
 	public ComboSelect title() {
-		return new ComboSelect(driver, By.cssSelector("#tab1 > div:nth-child(5) > div:nth-child(2) > span > span.selection > span"));
-		
+		return new ComboSelect(driver, By.cssSelector("#tab1 > div:nth-child(5) > div:nth-child(2) > span > span.selection > span"));		
 	}	
 	public TextInOut name() {
 		return new TextInOut(driver, By.id("NAME"));
@@ -75,22 +58,22 @@ public class EmployeeDetails implements ChildElement{
 		return new TextInOut(driver, By.id("ACTUAL_BASIC"));
 	}
 	
-	public class Tab{	
+	public class EmpDetailsTabs{	
 		private WebElement tab;
 				
-		public Tab basicDetails() {
+		public EmpDetailsTabs basicDetails() {
 			tab = driver.findElement(By.xpath("//a[@href='#tab1']"));
 			return this;
 		}
-		public Tab settings() {
+		public EmpDetailsTabs settings() {
 			tab = driver.findElement(By.xpath("//a[@href='#tab2']"));
 			return this;
 		}
-		public Tab suspension() {
+		public EmpDetailsTabs suspension() {
 			tab = driver.findElement(By.xpath("//a[@href='#tab3']"));
 			return this;
 		}
-		public Tab govtBonus() {
+		public EmpDetailsTabs govtBonus() {
 			tab = driver.findElement(By.xpath("//a[@href='#tab4']"));
 			return this;
 		}

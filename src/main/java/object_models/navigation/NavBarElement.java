@@ -34,7 +34,7 @@ public abstract class NavBarElement {
 	
 	/*
 	 * Click the element and return its child.
-	 */
+	 */	
 	public abstract ChildElement clickElement(); 
 	
 }

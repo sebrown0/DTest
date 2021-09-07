@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 
 import exceptions.IncorrectPageException;
 import object_models.helpers.LoadPage;
-import object_models.helpers.TitlePanel;
 
 /**
  * @author Steve Brown
@@ -17,12 +16,11 @@ import object_models.helpers.TitlePanel;
 public class LoadablePage extends Page implements LoadPage {		
 	private String uri;
 
-	public LoadablePage(WebDriver driver, TitlePanel title, String uri) {
-		super(driver, title);
+	public LoadablePage(WebDriver driver, String expectedTitle, String uri) {
+		super(driver, null);
 		this.uri = uri;
 		loadPage();
 	}
-
 		
 	private void loadPage() {		
 		try {
@@ -40,5 +38,11 @@ public class LoadablePage extends Page implements LoadPage {
 //			throw new IncorrectPageException("Incorrect page");
 //		}
 	}
+
+	@Override
+	public void close() {
+	
+	}
+	
 
 }

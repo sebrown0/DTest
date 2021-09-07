@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_models.helpers;
+package object_models.helpers.title;
 
 import java.util.List;
 

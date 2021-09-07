@@ -1,10 +1,10 @@
 /**
  * 
  */
-package object_models.helpers;
+package object_models.helpers.title;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 public interface PageTitle {

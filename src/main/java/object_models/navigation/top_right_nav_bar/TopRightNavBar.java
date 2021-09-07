@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import org.openqa.selenium.WebDriver;
 
-import object_models.helpers.WebElementTitleChecker;
+import object_models.helpers.title.WebElementTitleChecker;
 import object_models.navigation.NavBarElement;
 import object_models.navigation.top_right_nav_bar.elements.NavBarElementGetter;
 import object_models.navigation.top_right_nav_bar.elements.NavBarElementStrategy;

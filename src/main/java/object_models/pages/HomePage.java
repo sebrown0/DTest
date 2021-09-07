@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import object_models.helpers.TitleHomePage;
 import object_models.modules.ModuleElements;
 import object_models.modules.ModuleLoader;
 import object_models.navigation.left_side_menu.LeftMenu;
@@ -27,13 +26,14 @@ public class HomePage extends Page {
 	private Logger logger = LogManager.getLogger();
 	
 	private static By byXpathActualModuleName = By.xpath("html/body/form/header/div/div");
+	public static final String PAGE_TITLE = HOME_PAGE_TITLE;
 	
 	public HomePage(WebDriver driver, ModuleElements moduleElements) {		
-		super(driver, new TitleHomePage(HOME_PAGE_TITLE, driver));		
-		
+		super(driver, PAGE_TITLE);		
+
 		topRightNavBar = new TopRightNavBar(driver);
-		leftMenu =  new LeftMenu(driver);
 		loadModule(moduleElements);		
+		leftMenu =  new LeftMenu(driver);
 	}
 		
 	public void loadModule(ModuleElements moduleElements) {
@@ -45,6 +45,11 @@ public class HomePage extends Page {
 		}		
 	}
 		
+	@Override
+	public void close() {
+	
+	}
+	
 	/*
 	 * Getters Below
 	 */

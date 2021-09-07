@@ -36,7 +36,6 @@ public class MenuMap {
 			return anchors;
 		});
 	}
-
 	
 	private void addAnchor(String name, WebElement el) {
 		if(name != null && name != "") {

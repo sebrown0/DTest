@@ -5,21 +5,21 @@ package object_models.pages;
 
 import org.openqa.selenium.WebDriver;
 
-import object_models.helpers.PageTitle;
+import object_models.panels.JSPanelWithIFrame;
 
 /**
  * @author Steve Brown
  *
  */
-public class DakarIntelligence extends Page{
-	
+public class DakarIntelligence extends JSPanelWithIFrame {
+	public static final String PANEL_TITLE = "Reports";
 
-	public DakarIntelligence(WebDriver driver, PageTitle title) {
-		super(driver, title);
-		// TODO Auto-generated constructor stub
+	public DakarIntelligence(WebDriver driver) {
+		super(driver, PANEL_TITLE);		
 	}
 
-	public static final String PAGE_TITLE = "Reports";
-	
+	// Elements
+
+	// Tabs
 
 }

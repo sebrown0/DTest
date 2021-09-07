@@ -19,7 +19,7 @@ import listeners.TestResultLogger;
 import object_models.modules.PayrollModuleLoader;
 import object_models.navigation.left_side_menu.LeftMenu;
 import object_models.pages.UserLoginPage;
-import object_models.panels.EmployeeDetails;
+import object_models.panels.menu.employees.EmployeeDetails;
 import providers.EmployeeFromXml;
 import providers.EmployeeProvider;
 import providers.XMLFileProvider;
@@ -50,7 +50,7 @@ class EmployeeDetailsTests {
 		// Load the menu.
 		menu = new LeftMenu(driver);
 		// Load the employee details page.
-		empDetails = (EmployeeDetails) menu.clickParent("Employees").clickChild("Employee Details");
+		empDetails = (EmployeeDetails) menu.clickParent("Employees").load(EmployeeDetails.MENU_TITLE);
 		// Get the employee we're going to use with required fields from the provider.
 		EmployeeProvider empProvider = new EmployeeFromXml();
 		emp = empProvider.getEmployeeRequired("1");
@@ -78,6 +78,6 @@ class EmployeeDetailsTests {
 	
 	@AfterAll
 	static void tearDown() {		
-//		driver.quit();
+		driver.quit();
 	}
 }
