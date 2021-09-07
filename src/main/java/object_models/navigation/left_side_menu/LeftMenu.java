@@ -15,6 +15,8 @@ import controls.MenuMap;
 import object_models.forms.ContainerAction;
 import object_models.forms.menu.payroll.CloseAndLockPayroll;
 import object_models.forms.menu.payroll.InitialisePayroll;
+import object_models.panels.menu.absence_statistics.EmployeeAccruals;
+import object_models.panels.menu.absence_statistics.OtherAbsenceStatistics;
 import object_models.panels.menu.additional_hours.ApplyAdditionalHours;
 import object_models.panels.menu.additional_hours.Authorisation;
 import object_models.panels.menu.employee_others.AbsenceEntitlements;
@@ -23,6 +25,8 @@ import object_models.panels.menu.employee_others.Covid19Supplement;
 import object_models.panels.menu.employee_others.Loans;
 import object_models.panels.menu.employee_others.Pensions;
 import object_models.panels.menu.employee_others.TaxArrears;
+import object_models.panels.menu.employee_statistics.Fs3QuickView;
+import object_models.panels.menu.employee_statistics.PayslipQuickView;
 import object_models.panels.menu.employees.Banks;
 import object_models.panels.menu.employees.CareerProgression;
 import object_models.panels.menu.employees.ContactNumbers;
@@ -34,6 +38,7 @@ import object_models.panels.menu.employees.Schedule;
 import object_models.panels.menu.employees.Unions;
 import object_models.panels.menu.parents.Documents;
 import object_models.panels.menu.parents.EmployeeList;
+import object_models.panels.menu.parents.PayrollStatistics;
 import object_models.panels.menu.payroll.CalculatePayroll;
 import object_models.panels.menu.payroll.CalculationStatistics;
 import object_models.panels.menu.payroll.DetailedAdjustments;
@@ -43,6 +48,14 @@ import object_models.panels.menu.payroll.GlobalAdjustments;
 import object_models.panels.menu.payroll.GlobalExtras;
 import object_models.panels.menu.payroll.PayrollDetails;
 import object_models.panels.menu.payroll.PayrollDetailsDrillDown;
+import object_models.panels.menu.reports.AbsenceRelatedReports;
+import object_models.panels.menu.reports.AdjustmentsReports;
+import object_models.panels.menu.reports.ChequePrinting;
+import object_models.panels.menu.reports.DirectCredits;
+import object_models.panels.menu.reports.GlobalPayrollAnalysis;
+import object_models.panels.menu.reports.HrRelatedReports;
+import object_models.panels.menu.reports.PayrollReports;
+import object_models.panels.menu.reports.Payslips;
 import object_models.strategies.click.ClickUsingJavaScript;
 
 /**
@@ -53,6 +66,7 @@ public class LeftMenu {
 	private Map<String, WebElement> anchors;	
 	private WebDriver driver;
 	private Logger logger = LogManager.getLogger();
+	private LeftMenuElements elements;
 	
 	public LeftMenu(WebDriver driver) {
 		this.driver = driver;
@@ -63,6 +77,14 @@ public class LeftMenu {
 		}
 	}
 		
+	public void setElements(LeftMenuElements elements) {
+		this.elements = elements;		
+	}
+	
+	public LeftMenuElements getElements() {
+		return elements;
+	}
+	
 	public LeftMenu clickParent(String prntName) {
 		WebElement e = anchors.get(prntName);			
 //		System.out.println("href - " + e.getAttribute("href"));
@@ -82,16 +104,18 @@ public class LeftMenu {
 			ContainerAction child = null;
 			
 			switch (childName) {
-			// Employees
-			case EmployeeDetails.MENU_TITLE:
-				child = new EmployeeDetails(driver);
-				break;
-			case EmployeeList.MENU_TITLE:
-				child = new EmployeeList(driver);
-				break;
 			case Documents.MENU_TITLE:
 				child = new Documents(driver);
 				break;
+				
+			case EmployeeList.MENU_TITLE:
+				child = new EmployeeList(driver);
+				break;
+				
+			// Employees
+			case EmployeeDetails.MENU_TITLE:
+				child = new EmployeeDetails(driver);
+				break;			
 			case ContactNumbers.MENU_TITLE:
 				child = new ContactNumbers(driver);
 				break;
@@ -179,6 +203,53 @@ public class LeftMenu {
 			case CalculationStatistics.MENU_TITLE:
 				child = new CalculationStatistics(driver);
 				break;						
+				
+			// Employee Statistics
+			case PayslipQuickView.MENU_TITLE:
+				child = new PayslipQuickView(driver);
+				break;
+			case Fs3QuickView.MENU_TITLE:
+				child = new Fs3QuickView(driver);
+				break;
+				
+			// Payroll Statistics
+			case PayrollStatistics.MENU_TITLE:
+				child = new PayrollStatistics(driver);
+				break;
+				
+			// Absence Statistics
+			case EmployeeAccruals.MENU_TITLE:
+				child = new EmployeeAccruals(driver);
+				break;
+			case OtherAbsenceStatistics.MENU_TITLE:
+				child = new OtherAbsenceStatistics(driver);
+				break;	
+				
+			// Reports
+			case PayrollReports.MENU_TITLE:
+				child = new PayrollReports(driver);
+				break;
+			case Payslips.MENU_TITLE:
+				child = new Payslips(driver);
+				break;
+			case DirectCredits.MENU_TITLE:
+				child = new DirectCredits(driver);
+				break;
+			case GlobalPayrollAnalysis.MENU_TITLE:
+				child = new GlobalPayrollAnalysis(driver);
+				break;
+			case ChequePrinting.MENU_TITLE:
+				child = new ChequePrinting(driver);
+				break;
+			case AdjustmentsReports.MENU_TITLE:
+				child = new AdjustmentsReports(driver);
+				break;
+			case HrRelatedReports.MENU_TITLE:
+				child = new HrRelatedReports(driver);
+				break;
+			case AbsenceRelatedReports.MENU_TITLE:
+				child = new AbsenceRelatedReports(driver);
+				break;	
 				
 			default:
 				LogManager.getLogger().error("Could not create [" + childName + "]");				

@@ -1,7 +1,9 @@
 package object_model_tests.navigation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.junit.jupiter.api.AfterAll;
@@ -18,8 +20,11 @@ import object_models.forms.menu.payroll.InitialisePayroll;
 import object_models.helpers.title.PageTitle;
 import object_models.modules.PayrollModuleLoader;
 import object_models.navigation.left_side_menu.LeftMenu;
+import object_models.navigation.left_side_menu.LeftMenuPayroll;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
+import object_models.panels.menu.absence_statistics.EmployeeAccruals;
+import object_models.panels.menu.absence_statistics.OtherAbsenceStatistics;
 import object_models.panels.menu.additional_hours.ApplyAdditionalHours;
 import object_models.panels.menu.additional_hours.Authorisation;
 import object_models.panels.menu.employee_others.AbsenceEntitlements;
@@ -28,6 +33,8 @@ import object_models.panels.menu.employee_others.Covid19Supplement;
 import object_models.panels.menu.employee_others.Loans;
 import object_models.panels.menu.employee_others.Pensions;
 import object_models.panels.menu.employee_others.TaxArrears;
+import object_models.panels.menu.employee_statistics.Fs3QuickView;
+import object_models.panels.menu.employee_statistics.PayslipQuickView;
 import object_models.panels.menu.employees.Banks;
 import object_models.panels.menu.employees.CareerProgression;
 import object_models.panels.menu.employees.ContactNumbers;
@@ -39,6 +46,7 @@ import object_models.panels.menu.employees.Schedule;
 import object_models.panels.menu.employees.Unions;
 import object_models.panels.menu.parents.Documents;
 import object_models.panels.menu.parents.EmployeeList;
+import object_models.panels.menu.parents.PayrollStatistics;
 import object_models.panels.menu.payroll.CalculatePayroll;
 import object_models.panels.menu.payroll.CalculationStatistics;
 import object_models.panels.menu.payroll.DetailedAdjustments;
@@ -48,6 +56,14 @@ import object_models.panels.menu.payroll.GlobalAdjustments;
 import object_models.panels.menu.payroll.GlobalExtras;
 import object_models.panels.menu.payroll.PayrollDetails;
 import object_models.panels.menu.payroll.PayrollDetailsDrillDown;
+import object_models.panels.menu.reports.AbsenceRelatedReports;
+import object_models.panels.menu.reports.AdjustmentsReports;
+import object_models.panels.menu.reports.ChequePrinting;
+import object_models.panels.menu.reports.DirectCredits;
+import object_models.panels.menu.reports.GlobalPayrollAnalysis;
+import object_models.panels.menu.reports.HrRelatedReports;
+import object_models.panels.menu.reports.PayrollReports;
+import object_models.panels.menu.reports.Payslips;
 import providers.XMLFileProvider;
 import resources.test_data.UserProvider;
 import xml_reader.ConfigReader;
@@ -68,25 +84,55 @@ class LeftMenuElementTests {
 		userLogin = new UserLoginPage(driver, new PayrollModuleLoader(driver));
 		// Login.
 		HomePage hp = userLogin.loginValidUser(UserProvider.userPortal());
-		// Get the menu from homepage.
+		// Get the menu from home page.
 		menu = hp.getLeftMenu();
 	}
 			
 //	@Test
-//	void click_and_get_EmployeeList() {
-//		ContainerAction empList = menu.load(EmployeeList.MENU_TITLE);
-//		PageTitle title = empList.getTitle();
-//		assertEquals(title.getExpected(), title.getActual());
-//		empList.closeElement();
+//	void checkEmployees() {
+//		LeftMenuPayroll elements = (LeftMenuPayroll) menu.getElements();
+//		List<String> elementNames = elements.getEmployees();
+//		checkList(elementNames);
 //	}
-//	
+	
+	void checkList(List<String> elementNames) {
+		int nameCount = 0;
+		for (String name : elementNames) {
+			ContainerAction empList = menu.load(name);
+			PageTitle title = empList.getTitle();
+			assertEquals(title.getExpected(), title.getActual());
+			empList.closeElement();	
+			System.out.println(name);
+			nameCount++;
+		}
+		assertTrue(nameCount == elementNames.size());
+	}
+	
 //	@Test
-//	void click_and_get_Documents() {
-//		ContainerAction doc = menu.load(Documents.MENU_TITLE);
-//		PageTitle title = doc.getTitle();
-//		assertEquals(title.getExpected(), title.getActual());
-//		doc.closeElement();
+//	void checkAll() {
+//		LeftMenuPayroll elements = (LeftMenuPayroll) menu.getElements();
+//		List<List<String>> all = elements.getAll();
+//		for (List<String> list : all) {
+//			checkList(list);
+//		}
 //	}
+	
+	
+	@Test
+	void click_and_get_EmployeeList() {
+		ContainerAction empList = menu.load(EmployeeList.MENU_TITLE);
+		PageTitle title = empList.getTitle();
+		assertEquals(title.getExpected(), title.getActual());
+		empList.closeElement();
+	}
+	
+	@Test
+	void click_and_get_Documents() {
+		ContainerAction doc = menu.load(Documents.MENU_TITLE);
+		PageTitle title = doc.getTitle();
+		assertEquals(title.getExpected(), title.getActual());
+		doc.closeElement();
+	}
 	
 	@Test
 	void click_Employees_and_get_EmployeeDetails() {
@@ -254,6 +300,86 @@ class LeftMenuElementTests {
 	void click_Payroll_and_get_CalculationStatistics() {
 		ContainerAction obj = loadAndCheckTitle("Payroll", CalculationStatistics.MENU_TITLE);
 		closePanelAndParent(obj, "Payroll");
+	}
+
+	@Test
+	void click_EmployeeStatistics_and_get_PayslipQuickView() {
+		ContainerAction obj = loadAndCheckTitle("Employee Statistics", PayslipQuickView.MENU_TITLE);
+		closePanelAndParent(obj, "Employee Statistics");
+	}
+
+	@Test
+	void click_EmployeeStatistics_and_get_item() {
+		ContainerAction obj = loadAndCheckTitle("Employee Statistics", Fs3QuickView.MENU_TITLE);
+		closePanelAndParent(obj, "Employee Statistics");
+	}
+
+	@Test
+	void click_and_get_PayrollStatistics() {
+		ContainerAction obj = menu.load(PayrollStatistics.MENU_TITLE);
+		PageTitle title = obj.getTitle();
+		assertEquals(title.getExpected(), title.getActual());
+		obj.closeElement();
+	}
+	
+	@Test
+	void click_AbsenceStatistics_and_get_EmployeeAccruals() {
+		ContainerAction obj = loadAndCheckTitle("Absence Statistics", EmployeeAccruals.MENU_TITLE);
+		closePanelAndParent(obj, "Absence Statistics");
+	}
+
+	@Test
+	void click_AbsenceStatistics_and_get_OtherAbsenceStatistics() {
+		ContainerAction obj = loadAndCheckTitle("Absence Statistics", OtherAbsenceStatistics.MENU_TITLE);
+		closePanelAndParent(obj, "Absence Statistics");
+	}
+	
+	@Test
+	void click_Reports_and_get_PayrollReports() {
+		ContainerAction obj = loadAndCheckTitle("Reports", PayrollReports.MENU_TITLE);
+		closePanelAndParent(obj, "Reports");
+	}
+	
+	@Test
+	void click_Reports_and_get_Payslips() {
+		ContainerAction obj = loadAndCheckTitle("Reports", Payslips.MENU_TITLE);
+		closePanelAndParent(obj, "Reports");
+	}
+
+	@Test
+	void click_Reports_and_get_DirectCredits() {
+		ContainerAction obj = loadAndCheckTitle("Reports", DirectCredits.MENU_TITLE);
+		closePanelAndParent(obj, "Reports");
+	}
+
+	@Test
+	void click_Reports_and_get_GlobalPayrollAnalysis() {
+		ContainerAction obj = loadAndCheckTitle("Reports", GlobalPayrollAnalysis.MENU_TITLE);
+		closePanelAndParent(obj, "Reports");
+	}
+
+	@Test
+	void click_Reports_and_get_ChequePrinting() {
+		ContainerAction obj = loadAndCheckTitle("Reports", ChequePrinting.MENU_TITLE);
+		closePanelAndParent(obj, "Reports");
+	}
+
+	@Test
+	void click_Reports_and_get_AdjustmentsReports() {
+		ContainerAction obj = loadAndCheckTitle("Reports", AdjustmentsReports.MENU_TITLE);
+		closePanelAndParent(obj, "Reports");
+	}
+
+	@Test
+	void click_Reports_and_get_HrRelatedReports() {
+		ContainerAction obj = loadAndCheckTitle("Reports", HrRelatedReports.MENU_TITLE);
+		closePanelAndParent(obj, "Reports");
+	}
+
+	@Test
+	void click_Reports_and_get_AbsenceRelatedReports() {
+		ContainerAction obj = loadAndCheckTitle("Reports", AbsenceRelatedReports.MENU_TITLE);
+		closePanelAndParent(obj, "Reports");
 	}
 
 

@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
+import object_models.navigation.left_side_menu.LeftMenu;
 import object_models.navigation.top_right_nav_bar.TopRightNavBar;
 
 /**
@@ -19,12 +20,15 @@ public class ModuleLoader {
 	private Logger logger = LogManager.getLogger();
 	private ModuleElements moduleElements;
 	private String moduleName;
+	private TopRightNavBar topRightNavBar;
+	private LeftMenu leftMenu;	
 	
 	public ModuleLoader(WebDriver driver, ModuleElements moduleElements) {		
 		this.moduleElements = moduleElements;
 		this.driver = driver;
 		setModuleName();
-		checkDriver();		
+		checkDriver();
+		loadModule();
 	}
 
 	private void setModuleName() {
@@ -35,20 +39,35 @@ public class ModuleLoader {
 		if (driver == null) {	logger.error("Null driver"); }
 	}
 		
-	public void loadModule(TopRightNavBar topRightNavBar) {
+	private void loadModule() {
 		if(!ModuleChecker.getCurrentModule(driver).equalsIgnoreCase(moduleName)){			
 			logger.info(moduleName + " module not loaded. Loading now");
-			moduleElements.getQuickLinkToLoadModule().clickMe();
-			createNavAndMenus(topRightNavBar);				
+			moduleElements.getQuickLinkToLoadModule().clickMe();					
 		}else {
 			logger.info(moduleName + " module already loaded");
 		}
 	}
 	
-	private void createNavAndMenus(TopRightNavBar topRightNavBar) {
-		logger.info("Creating nav bar and menus for " + moduleName + " module");
+	public TopRightNavBar setNavBar() {
+		logger.info("Creating nav bar for " + moduleName + " module");
+		topRightNavBar = new TopRightNavBar(driver);
 		topRightNavBar.loadElements(moduleElements.getElementStrategy());
-//		leftMenu = new ZZZ_LeftMenuPayroll(driver);
+		return topRightNavBar;
+	}
+	
+	public LeftMenu setLeftMenu() {
+		logger.info("Creating left menu for " + moduleName + " module");
+		leftMenu =  new LeftMenu(driver);
+		moduleElements.setLeftMenuElements(leftMenu);
+		return leftMenu;
+	}
+	
+	public TopRightNavBar getTopRightNavBar() {
+		return topRightNavBar;
+	}
+	
+	public LeftMenu getlLeftMenu() {
+		return leftMenu;
 	}
 	
 }

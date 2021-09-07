@@ -31,17 +31,16 @@ public class HomePage extends Page {
 	public HomePage(WebDriver driver, ModuleElements moduleElements) {		
 		super(driver, PAGE_TITLE);		
 
-		topRightNavBar = new TopRightNavBar(driver);
-		loadModule(moduleElements);		
-		leftMenu =  new LeftMenu(driver);
+		loadModule(moduleElements);
 	}
 		
 	public void loadModule(ModuleElements moduleElements) {
 		if(moduleElements == null) {			
 			logger.error("No module supplied");			
-		}else {
+		}else {			
 			ModuleLoader moduleLoader = new ModuleLoader(driver, moduleElements);
-			moduleLoader.loadModule(topRightNavBar);	
+			topRightNavBar = moduleLoader.setNavBar();
+			leftMenu = moduleLoader.setLeftMenu();
 		}		
 	}
 		

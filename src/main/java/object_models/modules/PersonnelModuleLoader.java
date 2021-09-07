@@ -3,9 +3,9 @@
  */
 package object_models.modules;
 
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.WebDriver;
 
-import exceptions.ElementDoesNotExistException;
 import object_models.navigation.left_side_menu.LeftMenu;
 import object_models.navigation.top_right_nav_bar.NavBarPersonnelElements;
 import object_models.navigation.top_right_nav_bar.elements.NavBarElementStrategy;
@@ -41,13 +41,8 @@ public class PersonnelModuleLoader implements ModuleElements {
 	}
 
 	@Override
-	public LeftMenu getLeftMenu() throws ElementDoesNotExistException {		
-		throw new ElementDoesNotExistException("Left menu for [" + getModuleName() + "] does not exist");		
+	public void setLeftMenuElements(LeftMenu menu) {
+		LogManager.getLogger().error("Not implemented");
+		
 	}
-
-//	@Override
-//	public LeftMenu getLeftMenu() {
-//		// TODO Auto-generated method stub
-//		return new NoElement(getModuleName());
-//	}	
 }
