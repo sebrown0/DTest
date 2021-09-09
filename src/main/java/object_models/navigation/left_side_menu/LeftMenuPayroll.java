@@ -12,6 +12,8 @@ import object_models.panels.menu.absence_statistics.EmployeeAccruals;
 import object_models.panels.menu.absence_statistics.OtherAbsenceStatistics;
 import object_models.panels.menu.additional_hours.ApplyAdditionalHours;
 import object_models.panels.menu.additional_hours.Authorisation;
+import object_models.panels.menu.bulk_updates.ColaSalaryUpdates;
+import object_models.panels.menu.bulk_updates.EmployeeCreation;
 import object_models.panels.menu.employee_others.AbsenceEntitlements;
 import object_models.panels.menu.employee_others.AdvancesAndPayments;
 import object_models.panels.menu.employee_others.Covid19Supplement;
@@ -29,7 +31,10 @@ import object_models.panels.menu.employees.Schedule;
 import object_models.panels.menu.employees.Unions;
 import object_models.panels.menu.parents.Documents;
 import object_models.panels.menu.parents.EmployeeList;
+import object_models.panels.menu.parents.MonthlyReports;
 import object_models.panels.menu.parents.PayrollStatistics;
+import object_models.panels.menu.parents.SettingsPayroll;
+import object_models.panels.menu.parents.YearlyReports;
 import object_models.panels.menu.payroll.CalculatePayroll;
 import object_models.panels.menu.payroll.CalculationStatistics;
 import object_models.panels.menu.payroll.DetailedAdjustments;
@@ -39,6 +44,14 @@ import object_models.panels.menu.payroll.GlobalAdjustments;
 import object_models.panels.menu.payroll.GlobalExtras;
 import object_models.panels.menu.payroll.PayrollDetails;
 import object_models.panels.menu.payroll.PayrollDetailsDrillDown;
+import object_models.panels.menu.reports.AbsenceRelatedReports;
+import object_models.panels.menu.reports.AdjustmentsReports;
+import object_models.panels.menu.reports.ChequePrinting;
+import object_models.panels.menu.reports.DirectCredits;
+import object_models.panels.menu.reports.GlobalPayrollAnalysis;
+import object_models.panels.menu.reports.HrRelatedReports;
+import object_models.panels.menu.reports.PayrollReports;
+import object_models.panels.menu.reports.Payslips;
 
 /**
  * @author Steve Brown
@@ -136,10 +149,64 @@ public class LeftMenuPayroll implements LeftMenuElements{
 		return ABSENCE_STATISTICS;	
 	}
 	
+	private static final List<String> REPORTS = Arrays.asList(
+			PayrollReports.MENU_TITLE,
+			Payslips.MENU_TITLE,
+			DirectCredits.MENU_TITLE,
+			GlobalPayrollAnalysis.MENU_TITLE,			
+			ChequePrinting.MENU_TITLE,
+			AdjustmentsReports.MENU_TITLE,
+			HrRelatedReports.MENU_TITLE,
+			AbsenceRelatedReports.MENU_TITLE
+	);
+	public List<String> getReports() {
+		return REPORTS;	
+	}
+	
+	private static final List<String> MONTHLY_REPORTS = Arrays.asList(
+			MonthlyReports.MENU_TITLE
+	);
+	public List<String> getMonthlyReports() {
+		return MONTHLY_REPORTS;	
+	}
+	
+	private static final List<String> YEARLY_REPORTS = Arrays.asList(
+			YearlyReports.MENU_TITLE
+	);
+	public List<String> getYearlyReports() {
+		return YEARLY_REPORTS;	
+	}
+	
+	private static final List<String> BULK_UPDATES = Arrays.asList(
+			ColaSalaryUpdates.MENU_TITLE,
+			EmployeeCreation.MENU_TITLE
+	);
+	public List<String> getBulkUpdates() {
+		return BULK_UPDATES;	
+	}
+	
+	private static final List<String> SETTINGS = Arrays.asList(
+			SettingsPayroll.MENU_TITLE
+	);
+	public List<String> getSettings() {
+		return SETTINGS;	
+	}
+	
 	public List<List<String>> getAll(){
 		return Arrays.asList(
+				EMPLOYEE_LIST,
+				DOCUMENTS,
 				EMPLOYEES,
-				EMPLOYEE_LIST
+				EMPLOYEE_OTHERS,
+				ADDITIONAL_HOURS,
+				PAYROLL,
+				EMPLOYEE_STATISTICS,
+				PAYROLL_STATISTICS,
+				ABSENCE_STATISTICS,
+				REPORTS,
+				MONTHLY_REPORTS,
+				YEARLY_REPORTS,
+				BULK_UPDATES
 		);
 	}
 }

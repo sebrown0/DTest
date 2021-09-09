@@ -5,6 +5,8 @@ package object_models.panels;
 
 import java.time.Duration;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,20 +26,25 @@ public class JSPanel implements ContainerAction , ChildElement { // remove Child
 	protected WebDriver driver;
 	private PageTitle title = null;
 	private String expectedTitle;
-	
+	private Logger logger = LogManager.getLogger();
 	private static final By TITLE_SELECTOR = By.cssSelector("span[class='jsPanel-title']");
 	
 	public JSPanel(WebDriver driver, String expectedTitle) {
 		this.driver = driver;
 		this.expectedTitle = expectedTitle;
 		
-		waitForLoad();
+		try {
+			waitForLoad();
+		} catch (Exception e) {
+			logger.error("Could not load panel [" + expectedTitle + "]");
+			closeElement();
+		}
 		setTitle();
 	}
 
-	private void waitForLoad() {
+	private void waitForLoad() throws Exception {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-		wait.until(ExpectedConditions.attributeContains(TITLE_SELECTOR, "innerHTML", expectedTitle));		
+		wait.until(ExpectedConditions.attributeContains(TITLE_SELECTOR, "innerHTML", expectedTitle));				
 	}
 
 	private void setTitle() {
@@ -52,7 +59,11 @@ public class JSPanel implements ContainerAction , ChildElement { // remove Child
 	@Override
 	public void closeElement() {
 		CloserPanel closer = new CloserPanel(driver);
-		closer.close();
+		try {
+			closer.close();
+		} catch (Exception e) {
+			logger.error("Could not close panel [" + expectedTitle + "]");
+		}
 	}
 
 }

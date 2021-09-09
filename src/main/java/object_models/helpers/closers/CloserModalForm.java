@@ -8,10 +8,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
-public class CloserModalForm implements Closable{
+public class CloserModalForm implements Closable {
 	private WebDriver driver;
 	
 	public CloserModalForm(WebDriver driver) {
@@ -19,7 +19,7 @@ public class CloserModalForm implements Closable{
 	}
 	
 	@Override
-	public void close() {
+	public void close() throws Exception {
 		By byLocator = By.cssSelector("body > div.modal.show > div > div > div.modal-header > button");
 		WebElement we = driver.findElement(byLocator);
 		we.click();

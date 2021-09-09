@@ -1,9 +1,7 @@
 package object_model_tests.navigation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.junit.jupiter.api.AfterAll;
@@ -20,13 +18,14 @@ import object_models.forms.menu.payroll.InitialisePayroll;
 import object_models.helpers.title.PageTitle;
 import object_models.modules.PayrollModuleLoader;
 import object_models.navigation.left_side_menu.LeftMenu;
-import object_models.navigation.left_side_menu.LeftMenuPayroll;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import object_models.panels.menu.absence_statistics.EmployeeAccruals;
 import object_models.panels.menu.absence_statistics.OtherAbsenceStatistics;
 import object_models.panels.menu.additional_hours.ApplyAdditionalHours;
 import object_models.panels.menu.additional_hours.Authorisation;
+import object_models.panels.menu.bulk_updates.ColaSalaryUpdates;
+import object_models.panels.menu.bulk_updates.EmployeeCreation;
 import object_models.panels.menu.employee_others.AbsenceEntitlements;
 import object_models.panels.menu.employee_others.AdvancesAndPayments;
 import object_models.panels.menu.employee_others.Covid19Supplement;
@@ -46,7 +45,10 @@ import object_models.panels.menu.employees.Schedule;
 import object_models.panels.menu.employees.Unions;
 import object_models.panels.menu.parents.Documents;
 import object_models.panels.menu.parents.EmployeeList;
+import object_models.panels.menu.parents.MonthlyReports;
 import object_models.panels.menu.parents.PayrollStatistics;
+import object_models.panels.menu.parents.SettingsPayroll;
+import object_models.panels.menu.parents.YearlyReports;
 import object_models.panels.menu.payroll.CalculatePayroll;
 import object_models.panels.menu.payroll.CalculationStatistics;
 import object_models.panels.menu.payroll.DetailedAdjustments;
@@ -87,37 +89,7 @@ class LeftMenuElementTests {
 		// Get the menu from home page.
 		menu = hp.getLeftMenu();
 	}
-			
-//	@Test
-//	void checkEmployees() {
-//		LeftMenuPayroll elements = (LeftMenuPayroll) menu.getElements();
-//		List<String> elementNames = elements.getEmployees();
-//		checkList(elementNames);
-//	}
-	
-	void checkList(List<String> elementNames) {
-		int nameCount = 0;
-		for (String name : elementNames) {
-			ContainerAction empList = menu.load(name);
-			PageTitle title = empList.getTitle();
-			assertEquals(title.getExpected(), title.getActual());
-			empList.closeElement();	
-			System.out.println(name);
-			nameCount++;
-		}
-		assertTrue(nameCount == elementNames.size());
-	}
-	
-//	@Test
-//	void checkAll() {
-//		LeftMenuPayroll elements = (LeftMenuPayroll) menu.getElements();
-//		List<List<String>> all = elements.getAll();
-//		for (List<String> list : all) {
-//			checkList(list);
-//		}
-//	}
-	
-	
+				
 	@Test
 	void click_and_get_EmployeeList() {
 		ContainerAction empList = menu.load(EmployeeList.MENU_TITLE);
@@ -382,7 +354,36 @@ class LeftMenuElementTests {
 		closePanelAndParent(obj, "Reports");
 	}
 
+	@Test
+	void load_and_check_MonthlyReports() {
+		ContainerAction obj = loadAndCheckTitle(MonthlyReports.MENU_TITLE);
+		closePanel(obj);
+	}
 
+	@Test
+	void load_and_check_YearlyReports() {
+		ContainerAction obj = loadAndCheckTitle(YearlyReports.MENU_TITLE);
+		closePanel(obj);
+	}
+	
+	@Test
+	void click_BulkUpdates_and_get_ColaSalaryUpdates() {
+		ContainerAction obj = loadAndCheckTitle("Bulk Updates", ColaSalaryUpdates.MENU_TITLE);
+		closePanelAndParent(obj, "Bulk Updates");
+	}
+	
+	@Test
+	void click_BulkUpdates_and_get_EmployeeCreation() {
+		ContainerAction obj = loadAndCheckTitle("Bulk Updates", EmployeeCreation.MENU_TITLE);
+		closePanelAndParent(obj, "Bulk Updates");
+	}
+
+	@Test
+	void load_and_check_PayrollSettings() {
+		ContainerAction obj = loadAndCheckTitle(SettingsPayroll.MENU_TITLE);
+		closePanel(obj);
+	}
+	
 	@AfterAll
 	static void tearDown() {
 		driver.quit();
@@ -398,9 +399,20 @@ class LeftMenuElementTests {
 		return obj;
 	}
 	
+	private ContainerAction loadAndCheckTitle(String menuTitle) {
+		ContainerAction obj = menu.load(menuTitle);
+		PageTitle title = obj.getTitle();
+		assertEquals(title.getExpected(), title.getActual());
+		return obj;
+	}
+	
 	private void closePanelAndParent(ContainerAction closer, String prntName) {
 		closeElement(closer);
 		closeParent(prntName);
+	}
+	
+	private void closePanel(ContainerAction closer) {
+		closeElement(closer);		
 	}
 	
 	private void closeElement(ContainerAction closer) {

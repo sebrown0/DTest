@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * @author Steve Brown
  *
  */
-public class CloserPanel implements Closable{
+public class CloserPanel implements Closable {
 	private WebDriver driver;
 	
 	public CloserPanel(WebDriver driver) {
@@ -23,7 +23,7 @@ public class CloserPanel implements Closable{
 	}
 
 	@Override
-	public void close() {
+	public void close() throws Exception {
 		By byLocator = By.cssSelector(".jsPanel-btn.jsPanel-btn-close");
 		driver.switchTo().defaultContent();
 		WebElement we = driver.findElement(byLocator);

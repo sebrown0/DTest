@@ -8,5 +8,5 @@ package object_models.helpers.closers;
  *
  */
 public interface Closable {
-	void close();
+	void close() throws Exception;
 }

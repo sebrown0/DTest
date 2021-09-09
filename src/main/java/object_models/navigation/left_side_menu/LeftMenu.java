@@ -5,6 +5,9 @@ package object_models.navigation.left_side_menu;
 
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +22,8 @@ import object_models.panels.menu.absence_statistics.EmployeeAccruals;
 import object_models.panels.menu.absence_statistics.OtherAbsenceStatistics;
 import object_models.panels.menu.additional_hours.ApplyAdditionalHours;
 import object_models.panels.menu.additional_hours.Authorisation;
+import object_models.panels.menu.bulk_updates.ColaSalaryUpdates;
+import object_models.panels.menu.bulk_updates.EmployeeCreation;
 import object_models.panels.menu.employee_others.AbsenceEntitlements;
 import object_models.panels.menu.employee_others.AdvancesAndPayments;
 import object_models.panels.menu.employee_others.Covid19Supplement;
@@ -38,7 +43,10 @@ import object_models.panels.menu.employees.Schedule;
 import object_models.panels.menu.employees.Unions;
 import object_models.panels.menu.parents.Documents;
 import object_models.panels.menu.parents.EmployeeList;
+import object_models.panels.menu.parents.MonthlyReports;
 import object_models.panels.menu.parents.PayrollStatistics;
+import object_models.panels.menu.parents.SettingsPayroll;
+import object_models.panels.menu.parents.YearlyReports;
 import object_models.panels.menu.payroll.CalculatePayroll;
 import object_models.panels.menu.payroll.CalculationStatistics;
 import object_models.panels.menu.payroll.DetailedAdjustments;
@@ -96,7 +104,24 @@ public class LeftMenu {
 		WebElement e = anchors.get(elementName);
 		logger.info("Loading [" + elementName + "]");
 		ClickUsingJavaScript.performClick(driver, e.getAttribute("href"));
-		return ChildElementFactory.getChild(elementName, driver);
+		ContainerAction child = null;
+//		return ChildElementFactory.getChild(elementName, driver);
+		try {
+			child = get(elementName).get();
+		} catch (InterruptedException | ExecutionException e1) {
+			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+		}
+		return child;
+	}
+	
+	private Future<ContainerAction> get(String elementName){
+		ExecutorService executor = Executors.newSingleThreadExecutor();
+//		ContainerAction child = null;
+		return executor.submit(() -> {
+			return ChildElementFactory.getChild(elementName, driver);
+		});
+//		return child;//ChildElementFactory.getChild(elementName, driver);
 	}
 
 	private static class ChildElementFactory{
@@ -250,6 +275,29 @@ public class LeftMenu {
 			case AbsenceRelatedReports.MENU_TITLE:
 				child = new AbsenceRelatedReports(driver);
 				break;	
+				
+			// Monthly Reports
+			case MonthlyReports.MENU_TITLE:
+				child = new MonthlyReports(driver);
+				break;
+				
+			// Yearly Reports
+			case YearlyReports.MENU_TITLE:
+				child = new YearlyReports(driver);
+				break;
+
+			// Bulk Updates
+			case ColaSalaryUpdates.MENU_TITLE:
+				child = new ColaSalaryUpdates(driver);
+				break;
+			case EmployeeCreation.MENU_TITLE:
+				child = new EmployeeCreation(driver);
+				break;
+
+			// Payroll Settings
+			case SettingsPayroll.MENU_TITLE:
+				child = new SettingsPayroll(driver);
+				break;
 				
 			default:
 				LogManager.getLogger().error("Could not create [" + childName + "]");				
