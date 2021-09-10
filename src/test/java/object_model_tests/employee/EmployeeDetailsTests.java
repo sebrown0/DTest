@@ -50,7 +50,7 @@ class EmployeeDetailsTests {
 		// Load the menu.
 		menu = new LeftMenu(driver);
 		// Load the employee details page.
-		empDetails = (EmployeeDetails) menu.clickParent("Employees").load(EmployeeDetails.MENU_TITLE);
+		empDetails = (EmployeeDetails) menu.clickParent("Employees").load(EmployeeDetails.MENU_TITLE).get();
 		// Get the employee we're going to use with required fields from the provider.
 		EmployeeProvider empProvider = new EmployeeFromXml();
 		emp = empProvider.getEmployeeRequired("1");

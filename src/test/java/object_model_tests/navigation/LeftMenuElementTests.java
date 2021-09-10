@@ -1,7 +1,9 @@
 package object_model_tests.navigation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 import org.junit.jupiter.api.AfterAll;
@@ -92,7 +94,7 @@ class LeftMenuElementTests {
 				
 	@Test
 	void click_and_get_EmployeeList() {
-		ContainerAction empList = menu.load(EmployeeList.MENU_TITLE);
+		ContainerAction empList = menu.load(EmployeeList.MENU_TITLE).get();
 		PageTitle title = empList.getTitle();
 		assertEquals(title.getExpected(), title.getActual());
 		empList.closeElement();
@@ -100,7 +102,7 @@ class LeftMenuElementTests {
 	
 	@Test
 	void click_and_get_Documents() {
-		ContainerAction doc = menu.load(Documents.MENU_TITLE);
+		ContainerAction doc = menu.load(Documents.MENU_TITLE).get();
 		PageTitle title = doc.getTitle();
 		assertEquals(title.getExpected(), title.getActual());
 		doc.closeElement();
@@ -108,187 +110,187 @@ class LeftMenuElementTests {
 	
 	@Test
 	void click_Employees_and_get_EmployeeDetails() {
-		ContainerAction obj = loadAndCheckTitle("Employees", EmployeeDetails.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Employees", EmployeeDetails.MENU_TITLE).get();
 		closePanelAndParent(obj, "Employees");
 	}
 	
 	@Test
 	void click_Employees_and_get_ContactNumbers() {
-		ContainerAction obj = loadAndCheckTitle("Employees", ContactNumbers.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Employees", ContactNumbers.MENU_TITLE).get();
 		closePanelAndParent(obj, "Employees");		
 	}
 	
 	@Test
 	void click_Employees_and_get_Banks() {
-		ContainerAction obj = loadAndCheckTitle("Employees", Banks.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Employees", Banks.MENU_TITLE).get();
 		closePanelAndParent(obj, "Employees");		
 	}
 	
 	@Test
 	void click_Employees_and_get_SalaryDetails() {
-		ContainerAction obj = loadAndCheckTitle("Employees", SalaryDetails.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Employees", SalaryDetails.MENU_TITLE).get();
 		closePanelAndParent(obj, "Employees");		
 	}
 	
 	@Test
 	void click_Employees_and_get_CareerProgression() {
-		ContainerAction obj = loadAndCheckTitle("Employees", CareerProgression.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Employees", CareerProgression.MENU_TITLE).get();
 		closePanelAndParent(obj, "Employees");		
 	}
 	
 	@Test
 	void click_Employees_and_get_Schedule() {
-		ContainerAction obj = loadAndCheckTitle("Employees", Schedule.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Employees", Schedule.MENU_TITLE).get();
 		closePanelAndParent(obj, "Employees");		
 	}
 	
 	@Test
 	void click_Employees_and_get_PermanentAllowances() {
-		ContainerAction obj = loadAndCheckTitle("Employees", PermanentAllowances.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Employees", PermanentAllowances.MENU_TITLE).get();
 		closePanelAndParent(obj, "Employees");
 	}
 	
 	@Test
 	void click_Employees_and_get_PreviousEmployement() {
-		ContainerAction obj = loadAndCheckTitle("Employees", PreviousEmployement.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Employees", PreviousEmployement.MENU_TITLE).get();
 		closePanelAndParent(obj, "Employees");		
 	}
 	
 	@Test
 	void click_Employees_and_get_Unions() {
-		ContainerAction obj = loadAndCheckTitle("Employees", Unions.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Employees", Unions.MENU_TITLE).get();
 		closePanelAndParent(obj, "Employees");		
 	}
 	
 	@Test
 	void click_EmployeeOthers_and_get_AbsenceEntitlements() {
-		ContainerAction obj = loadAndCheckTitle("Employee Others", AbsenceEntitlements.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Employee Others", AbsenceEntitlements.MENU_TITLE).get();
 		closePanelAndParent(obj, "Employee Others");
 	}
 	
 	@Test
 	void click_EmployeeOthers_and_get_AdvancesAndPayments() {
-		ContainerAction obj = loadAndCheckTitle("Employee Others", AdvancesAndPayments.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Employee Others", AdvancesAndPayments.MENU_TITLE).get();
 		closePanelAndParent(obj, "Employee Others");		
 	}
 	
 	@Test
 	void click_EmployeeOthers_and_get_TaxArrears() {
-		ContainerAction obj = loadAndCheckTitle("Employee Others", TaxArrears.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Employee Others", TaxArrears.MENU_TITLE).get();
 		closePanelAndParent(obj, "Employee Others");
 	}
 	
 	@Test
 	void click_EmployeeOthers_and_get_Loans() {
-		ContainerAction obj = loadAndCheckTitle("Employee Others", Loans.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Employee Others", Loans.MENU_TITLE).get();
 		closePanelAndParent(obj, "Employee Others");		
 	}
 	
 	@Test
 	void click_EmployeeOthers_and_get_Pensions() {
-		ContainerAction obj = loadAndCheckTitle("Employee Others", Pensions.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Employee Others", Pensions.MENU_TITLE).get();
 		closePanelAndParent(obj, "Employee Others");
 	}
 	
 	@Test
 	void click_EmployeeOthers_and_get_Covid19Supplement() {
-		ContainerAction obj = loadAndCheckTitle("Additional Hours", Covid19Supplement.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Additional Hours", Covid19Supplement.MENU_TITLE).get();
 		closePanelAndParent(obj, "Employee Others");
 	}
 	
 	@Test
 	void click_AdditionalHours_and_get_ApplyAdditionalHours() {
-		ContainerAction obj = loadAndCheckTitle("Additional Hours", ApplyAdditionalHours.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Additional Hours", ApplyAdditionalHours.MENU_TITLE).get();
 		closePanelAndParent(obj, "Additional Hours");
 	}
 	
 	@Test
 	void click_AdditionalHours_and_get_Authorisation() {
-		ContainerAction obj = loadAndCheckTitle("Additional Hours", Authorisation.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Additional Hours", Authorisation.MENU_TITLE).get();
 		closePanelAndParent(obj, "Additional Hours");
 	}
 	
 	@Test
 	void click_Payroll_and_get_InitialisePayroll() {
-		ContainerAction obj = loadAndCheckTitle("Payroll", InitialisePayroll.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Payroll", InitialisePayroll.MENU_TITLE).get();
 		closePanelAndParent(obj, "Payroll");		
 	}
 	
 	@Test
 	void click_Payroll_and_get_PayrollDetailsDrillDown() {
-		ContainerAction obj = loadAndCheckTitle("Payroll", PayrollDetailsDrillDown.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Payroll", PayrollDetailsDrillDown.MENU_TITLE).get();
 		closePanelAndParent(obj, "Payroll");
 	}
 
 	@Test
 	void click_Payroll_and_get_DetailedAdjustments() {
-		ContainerAction obj = loadAndCheckTitle("Payroll", DetailedAdjustments.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Payroll", DetailedAdjustments.MENU_TITLE).get();
 		closePanelAndParent(obj, "Payroll");
 	}
 
 	@Test
 	void click_Payroll_and_get_GlobalAdjustments() {
-		ContainerAction obj = loadAndCheckTitle("Payroll", GlobalAdjustments.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Payroll", GlobalAdjustments.MENU_TITLE).get();
 		closePanelAndParent(obj, "Payroll");
 	}
 	
 	@Test
 	void click_Payroll_and_get_GlobalAbsences() {
-		ContainerAction obj = loadAndCheckTitle("Payroll", GlobalAbsences.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Payroll", GlobalAbsences.MENU_TITLE).get();
 		closePanelAndParent(obj, "Payroll");
 	}
 
 	@Test
 	void click_Payroll_and_get_GlobalExtras() {
-		ContainerAction obj = loadAndCheckTitle("Payroll", GlobalExtras.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Payroll", GlobalExtras.MENU_TITLE).get();
 		closePanelAndParent(obj, "Payroll");
 	}
 
 	@Test
 	void click_Payroll_and_get_CalculatePayroll() {
-		ContainerAction obj = loadAndCheckTitle("Payroll", CalculatePayroll.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Payroll", CalculatePayroll.MENU_TITLE).get();
 		closePanelAndParent(obj, "Payroll");
 	}
 
 	@Test
 	void click_Payroll_and_get_CloseAndLockPayroll() {
-		ContainerAction obj = loadAndCheckTitle("Payroll", CloseAndLockPayroll.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Payroll", CloseAndLockPayroll.MENU_TITLE).get();
 		closePanelAndParent(obj, "Payroll");
 	}
 
 	@Test
 	void click_Payroll_and_get_PayrollDetails() {
-		ContainerAction obj = loadAndCheckTitle("Payroll", PayrollDetails.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Payroll", PayrollDetails.MENU_TITLE).get();
 		closePanelAndParent(obj, "Payroll");
 	}
 
 	@Test
 	void click_Payroll_and_get_ExcelPayrollUploads() {
-		ContainerAction obj = loadAndCheckTitle("Payroll", ExcelPayrollUploads.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Payroll", ExcelPayrollUploads.MENU_TITLE).get();
 		closePanelAndParent(obj, "Payroll");
 	}
 
 	@Test
 	void click_Payroll_and_get_CalculationStatistics() {
-		ContainerAction obj = loadAndCheckTitle("Payroll", CalculationStatistics.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Payroll", CalculationStatistics.MENU_TITLE).get();
 		closePanelAndParent(obj, "Payroll");
 	}
 
 	@Test
 	void click_EmployeeStatistics_and_get_PayslipQuickView() {
-		ContainerAction obj = loadAndCheckTitle("Employee Statistics", PayslipQuickView.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Employee Statistics", PayslipQuickView.MENU_TITLE).get();
 		closePanelAndParent(obj, "Employee Statistics");
 	}
 
 	@Test
 	void click_EmployeeStatistics_and_get_item() {
-		ContainerAction obj = loadAndCheckTitle("Employee Statistics", Fs3QuickView.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Employee Statistics", Fs3QuickView.MENU_TITLE).get();
 		closePanelAndParent(obj, "Employee Statistics");
 	}
 
 	@Test
 	void click_and_get_PayrollStatistics() {
-		ContainerAction obj = menu.load(PayrollStatistics.MENU_TITLE);
+		ContainerAction obj = menu.load(PayrollStatistics.MENU_TITLE).get();
 		PageTitle title = obj.getTitle();
 		assertEquals(title.getExpected(), title.getActual());
 		obj.closeElement();
@@ -296,91 +298,91 @@ class LeftMenuElementTests {
 	
 	@Test
 	void click_AbsenceStatistics_and_get_EmployeeAccruals() {
-		ContainerAction obj = loadAndCheckTitle("Absence Statistics", EmployeeAccruals.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Absence Statistics", EmployeeAccruals.MENU_TITLE).get();
 		closePanelAndParent(obj, "Absence Statistics");
 	}
 
 	@Test
 	void click_AbsenceStatistics_and_get_OtherAbsenceStatistics() {
-		ContainerAction obj = loadAndCheckTitle("Absence Statistics", OtherAbsenceStatistics.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Absence Statistics", OtherAbsenceStatistics.MENU_TITLE).get();
 		closePanelAndParent(obj, "Absence Statistics");
 	}
 	
 	@Test
 	void click_Reports_and_get_PayrollReports() {
-		ContainerAction obj = loadAndCheckTitle("Reports", PayrollReports.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Reports", PayrollReports.MENU_TITLE).get();
 		closePanelAndParent(obj, "Reports");
 	}
 	
 	@Test
 	void click_Reports_and_get_Payslips() {
-		ContainerAction obj = loadAndCheckTitle("Reports", Payslips.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Reports", Payslips.MENU_TITLE).get();
 		closePanelAndParent(obj, "Reports");
 	}
 
 	@Test
 	void click_Reports_and_get_DirectCredits() {
-		ContainerAction obj = loadAndCheckTitle("Reports", DirectCredits.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Reports", DirectCredits.MENU_TITLE).get();
 		closePanelAndParent(obj, "Reports");
 	}
 
 	@Test
 	void click_Reports_and_get_GlobalPayrollAnalysis() {
-		ContainerAction obj = loadAndCheckTitle("Reports", GlobalPayrollAnalysis.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Reports", GlobalPayrollAnalysis.MENU_TITLE).get();
 		closePanelAndParent(obj, "Reports");
 	}
 
 	@Test
 	void click_Reports_and_get_ChequePrinting() {
-		ContainerAction obj = loadAndCheckTitle("Reports", ChequePrinting.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Reports", ChequePrinting.MENU_TITLE).get();
 		closePanelAndParent(obj, "Reports");
 	}
 
 	@Test
 	void click_Reports_and_get_AdjustmentsReports() {
-		ContainerAction obj = loadAndCheckTitle("Reports", AdjustmentsReports.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Reports", AdjustmentsReports.MENU_TITLE).get();
 		closePanelAndParent(obj, "Reports");
 	}
 
 	@Test
 	void click_Reports_and_get_HrRelatedReports() {
-		ContainerAction obj = loadAndCheckTitle("Reports", HrRelatedReports.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Reports", HrRelatedReports.MENU_TITLE).get();
 		closePanelAndParent(obj, "Reports");
 	}
 
 	@Test
 	void click_Reports_and_get_AbsenceRelatedReports() {
-		ContainerAction obj = loadAndCheckTitle("Reports", AbsenceRelatedReports.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Reports", AbsenceRelatedReports.MENU_TITLE).get();
 		closePanelAndParent(obj, "Reports");
 	}
 
 	@Test
 	void load_and_check_MonthlyReports() {
-		ContainerAction obj = loadAndCheckTitle(MonthlyReports.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle(MonthlyReports.MENU_TITLE).get();
 		closePanel(obj);
 	}
 
 	@Test
 	void load_and_check_YearlyReports() {
-		ContainerAction obj = loadAndCheckTitle(YearlyReports.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle(YearlyReports.MENU_TITLE).get();
 		closePanel(obj);
 	}
 	
 	@Test
 	void click_BulkUpdates_and_get_ColaSalaryUpdates() {
-		ContainerAction obj = loadAndCheckTitle("Bulk Updates", ColaSalaryUpdates.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Bulk Updates", ColaSalaryUpdates.MENU_TITLE).get();
 		closePanelAndParent(obj, "Bulk Updates");
 	}
 	
 	@Test
 	void click_BulkUpdates_and_get_EmployeeCreation() {
-		ContainerAction obj = loadAndCheckTitle("Bulk Updates", EmployeeCreation.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle("Bulk Updates", EmployeeCreation.MENU_TITLE).get();
 		closePanelAndParent(obj, "Bulk Updates");
 	}
 
 	@Test
 	void load_and_check_PayrollSettings() {
-		ContainerAction obj = loadAndCheckTitle(SettingsPayroll.MENU_TITLE);
+		ContainerAction obj = loadAndCheckTitle(SettingsPayroll.MENU_TITLE).get();
 		closePanel(obj);
 	}
 	
@@ -392,18 +394,27 @@ class LeftMenuElementTests {
 	/* 
 	 * Helpers below
 	 */
-	private ContainerAction loadAndCheckTitle(String prntName, String menuTitle) {
-		ContainerAction obj = menu.clickParent(prntName).load(menuTitle);
-		PageTitle title = obj.getTitle();
-		assertEquals(title.getExpected(), title.getActual());
+	private Optional<ContainerAction> loadAndCheckTitle(String prntName, String menuTitle) {
+		Optional<ContainerAction> obj = menu.clickParent(prntName).load(menuTitle);
+		x(obj, menuTitle);
 		return obj;
 	}
 	
-	private ContainerAction loadAndCheckTitle(String menuTitle) {
-		ContainerAction obj = menu.load(menuTitle);
-		PageTitle title = obj.getTitle();
-		assertEquals(title.getExpected(), title.getActual());
+	private Optional<ContainerAction> loadAndCheckTitle(String menuTitle) {
+		Optional<ContainerAction> obj = menu.load(menuTitle);
+		x(obj, menuTitle);
+//		PageTitle title = obj.getTitle();
+//		assertEquals(title.getExpected(), title.getActual());
 		return obj;
+	}
+	
+	private void x(Optional<ContainerAction> obj, String menuTitle) {
+		obj.ifPresentOrElse(o -> {
+			PageTitle title = o.getTitle();
+			assertEquals(title.getExpected(), title.getActual());	
+		}, 
+			fail("[" + menuTitle + "] failed" )
+		);		
 	}
 	
 	private void closePanelAndParent(ContainerAction closer, String prntName) {

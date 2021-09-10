@@ -3,7 +3,10 @@
  */
 package object_models.navigation.left_side_menu;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -11,6 +14,7 @@ import java.util.concurrent.Future;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -85,6 +89,25 @@ public class LeftMenu {
 		}
 	}
 		
+
+	/*
+	 * Get a list of all the names in the menu.
+	 * Remove any leading or trailing spaces and the &nbsp; char (160).
+	 */
+	public static List<String> getActualListOfNames(WebDriver driver){
+		WebElement nav = driver.findElement(By.id("nav-accordion"));
+		List<String> titles = new ArrayList<>();
+		if(nav != null) {
+			List<WebElement> rawTitles = nav.findElements(By.cssSelector("a"));
+			for (WebElement e : rawTitles) {
+				String title = e.getAttribute("textContent").trim();
+				title = title.replace(String.valueOf(((char)160)), "");
+				titles.add(title);
+			}	
+		}
+		return titles;
+	}
+	
 	public void setElements(LeftMenuElements elements) {
 		this.elements = elements;		
 	}
@@ -100,28 +123,25 @@ public class LeftMenu {
 		return this;
 	}
 	
-	public ContainerAction load(String elementName) {
+	public Optional<ContainerAction> load(String elementName) {
 		WebElement e = anchors.get(elementName);
 		logger.info("Loading [" + elementName + "]");
 		ClickUsingJavaScript.performClick(driver, e.getAttribute("href"));
-		ContainerAction child = null;
-//		return ChildElementFactory.getChild(elementName, driver);
+		Optional<ContainerAction> child = Optional.empty();
+
 		try {
-			child = get(elementName).get();
-		} catch (InterruptedException | ExecutionException e1) {
-			// TODO Auto-generated catch block
-//			e1.printStackTrace();
+			child = Optional.of(get(elementName).get());
+		} catch (Exception ex) {
+			logger.error("Could not get menu element [" + elementName + "]");
 		}
 		return child;
 	}
 	
 	private Future<ContainerAction> get(String elementName){
 		ExecutorService executor = Executors.newSingleThreadExecutor();
-//		ContainerAction child = null;
 		return executor.submit(() -> {
 			return ChildElementFactory.getChild(elementName, driver);
 		});
-//		return child;//ChildElementFactory.getChild(elementName, driver);
 	}
 
 	private static class ChildElementFactory{

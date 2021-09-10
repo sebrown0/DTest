@@ -5,6 +5,10 @@ package object_models.navigation.left_side_menu;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import object_models.forms.menu.payroll.CloseAndLockPayroll;
 import object_models.forms.menu.payroll.InitialisePayroll;
@@ -20,6 +24,9 @@ import object_models.panels.menu.employee_others.Covid19Supplement;
 import object_models.panels.menu.employee_others.Loans;
 import object_models.panels.menu.employee_others.Pensions;
 import object_models.panels.menu.employee_others.TaxArrears;
+import object_models.panels.menu.employee_statistics.EmployeePayrollStatistics;
+import object_models.panels.menu.employee_statistics.Fs3QuickView;
+import object_models.panels.menu.employee_statistics.PayslipQuickView;
 import object_models.panels.menu.employees.Banks;
 import object_models.panels.menu.employees.CareerProgression;
 import object_models.panels.menu.employees.ContactNumbers;
@@ -58,8 +65,9 @@ import object_models.panels.menu.reports.Payslips;
  *
  * LeftMenuElements IS A MARKER.
  */
-public class LeftMenuPayroll implements LeftMenuElements{
-		
+public class LeftMenuPayroll <K,V> implements LeftMenuElements{
+//	Map<String, List<String>> elements;	
+	
 	private static final List<String> EMPLOYEE_LIST = Arrays.asList(
 			EmployeeList.MENU_TITLE
 	);	
@@ -127,8 +135,9 @@ public class LeftMenuPayroll implements LeftMenuElements{
 	}
 
 	private static final List<String> EMPLOYEE_STATISTICS = Arrays.asList(
-			ApplyAdditionalHours.MENU_TITLE,
-			Authorisation.MENU_TITLE
+			PayslipQuickView.MENU_TITLE,
+			Fs3QuickView.MENU_TITLE,
+			EmployeePayrollStatistics.MENU_TITLE
 	);
 	public List<String> getEmployeeStatistics() {
 		return EMPLOYEE_STATISTICS;	
@@ -159,9 +168,9 @@ public class LeftMenuPayroll implements LeftMenuElements{
 			HrRelatedReports.MENU_TITLE,
 			AbsenceRelatedReports.MENU_TITLE
 	);
-	public List<String> getReports() {
-		return REPORTS;	
-	}
+//	public List<String> getReports() {
+//		return REPORTS;	
+//	}
 	
 	private static final List<String> MONTHLY_REPORTS = Arrays.asList(
 			MonthlyReports.MENU_TITLE
@@ -191,22 +200,59 @@ public class LeftMenuPayroll implements LeftMenuElements{
 	public List<String> getSettings() {
 		return SETTINGS;	
 	}
-	
-	public List<List<String>> getAll(){
-		return Arrays.asList(
-				EMPLOYEE_LIST,
-				DOCUMENTS,
-				EMPLOYEES,
-				EMPLOYEE_OTHERS,
-				ADDITIONAL_HOURS,
-				PAYROLL,
-				EMPLOYEE_STATISTICS,
-				PAYROLL_STATISTICS,
-				ABSENCE_STATISTICS,
-				REPORTS,
-				MONTHLY_REPORTS,
-				YEARLY_REPORTS,
-				BULK_UPDATES
-		);
+		
+	public static Map<String, MenuItem> getAll(){				
+		return Stream.of(new Object[][] {
+				{EmployeeList.MENU_TITLE, new MenuItem(EmployeeList.MENU_TITLE, Optional.empty())},
+				{Documents.MENU_TITLE, new MenuItem(Documents.MENU_TITLE, Optional.empty())},
+				{"Employees", new MenuItem("Employees", Optional.of(EMPLOYEES))},
+				{"Employee Others", new MenuItem("Employee Others", Optional.of(EMPLOYEE_OTHERS))},
+				{"Additional Hours", new MenuItem("Additional Hours", Optional.of(ADDITIONAL_HOURS))},
+				{"Payroll", new MenuItem("Payroll", Optional.of(PAYROLL))},
+				{"Employee Statistics", new MenuItem("Employee Statistics", Optional.of(EMPLOYEE_STATISTICS))},
+				{PayrollStatistics.MENU_TITLE, new MenuItem(PayrollStatistics.MENU_TITLE, Optional.empty())},
+				{"Absence Statistics", new MenuItem("Absence Statistics", Optional.of(ABSENCE_STATISTICS))},
+				{"Reports", new MenuItem("Reports", Optional.of(REPORTS))},
+				{MonthlyReports.MENU_TITLE, new MenuItem(MonthlyReports.MENU_TITLE, Optional.empty())},
+				{YearlyReports.MENU_TITLE, new MenuItem(YearlyReports.MENU_TITLE, Optional.empty())},
+				{"Bulk Updates", new MenuItem("Bulk Updates", Optional.of(BULK_UPDATES))},
+				{SettingsPayroll.MENU_TITLE, new MenuItem(SettingsPayroll.MENU_TITLE, Optional.empty())}
+		}).collect(Collectors.toMap(d -> (String) d[0], d -> ((MenuItem) d[1])));		
 	}
+		
+	public static class MenuItem {
+		private String parentName;
+		private Optional<List<String>> childNames;
+		
+		public MenuItem(String parentName, Optional<List<String>> childNames) {
+			this.parentName = parentName;
+			this.childNames = childNames;
+		}
+		public String getParentName() {
+			return parentName;
+		}
+		public Optional<List<String>> getChildNames() {
+			return childNames;
+		}		
+	}
+//	public static List<List<String>> getAll(){
+//		return Arrays.asList(
+//				EMPLOYEE_LIST, //
+//				DOCUMENTS, //
+//				EMPLOYEES,
+//				EMPLOYEE_OTHERS,
+//				ADDITIONAL_HOURS,
+//				PAYROLL,
+//				EMPLOYEE_STATISTICS,
+//				PAYROLL_STATISTICS, //
+//				ABSENCE_STATISTICS,
+//				REPORTS,
+//				MONTHLY_REPORTS, //
+//				YEARLY_REPORTS, //
+//				BULK_UPDATES,
+//				SETTINGS //
+//		);
+//	}
+	
+	
 }

@@ -1,11 +1,14 @@
 package object_model_tests.navigation;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
+
+import javax.swing.MenuElement;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -20,6 +23,7 @@ import object_models.helpers.title.PageTitle;
 import object_models.modules.PayrollModuleLoader;
 import object_models.navigation.left_side_menu.LeftMenu;
 import object_models.navigation.left_side_menu.LeftMenuPayroll;
+import object_models.navigation.left_side_menu.LeftMenuPayroll.MenuItem;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import providers.XMLFileProvider;
@@ -33,6 +37,11 @@ class LeftMenuElementTestsAll {
 	private static ConfigReader configReader;	
 	private static LeftMenu menu;
 	
+//	private List<String> failedNames = new ArrayList<>();
+	private String failedNames = "";
+	
+	int jj = 0;
+	
 	@BeforeAll	
 	static void setup() throws NullDriverException, InterruptedException, ExecutionException {	
 		configReader = new ConfigReader(XMLFileProvider.PROD_CONFIG_FILE_PATH);
@@ -45,57 +54,102 @@ class LeftMenuElementTestsAll {
 		// Get the menu from home page.
 		menu = hp.getLeftMenu();
 	}
-			
+	
 //	@Test
-//	void checkEmployees() {
-//		LeftMenuPayroll elements = (LeftMenuPayroll) menu.getElements();
-//		List<String> elementNames = elements.getEmployees();
-//		checkList(elementNames);
+//	void ffff() {
+//		Map<String, List<MenuItem>> expected = LeftMenuPayroll.getAll();
+//		List<String> actual = LeftMenu.getActualListOfNames(driver);
+//		act
+//		expected.entrySet().forEach((set) -> {
+//			String key = set.getKey();
+//			System.out.println("Looking for Parent = " + key);
+//			
+//		});
 //	}
 	
-	@Test
-	void checkReports() {
-		LeftMenuPayroll elements = (LeftMenuPayroll) menu.getElements();
-		List<String> elementNames = elements.getReports();
-		checkList(elementNames);
-	}
+//	@Test
+//	void ffff() {
+//		LeftMenuPayroll.getAll().forEach(item -> {
+//			System.out.println("Parent = " + item.getParentName());
+//			item.getChildNames()
+//					.ifPresent(
+//							names -> {
+//								names.forEach(name ->	System.out.println("  Child = " + name)
+//								);
+//							}
+//					);
+//		});
+//	}
+	
 
-	@Test
-	void checkAll() {
-		LeftMenuPayroll elements = (LeftMenuPayroll) menu.getElements();
-		List<List<String>> all = elements.getAll();
-		for (List<String> list : all) {
-			checkList(list);
-		}
-	}
+				
+//	@Test
+//	void checkReports() {
+//		LeftMenuPayroll elements = (LeftMenuPayroll) menu.getElements();
+//		List<String> elementNames = elements.getReports();
+//		checkList(elementNames);
+//	}
+//
+//	@Test
+//	void checkAll() {
+//		LeftMenuPayroll elements = (LeftMenuPayroll) menu.getElements();
+//		List<List<String>> all = elements.getAll();
+//		for (List<String> list : all) {
+//			checkList(list);
+//		}
+//	}
 		
 	void checkList(List<String> elementNames) {
 		int nameCount = 0;
 		for (String name : elementNames) {
 			loadAndCheckTitle(name);
-//			System.out.println(name);
 			nameCount++;
 		}
 		assertTrue(nameCount == elementNames.size());
+		writeFailedList(nameCount, elementNames.size());
 	}
 		
 	@AfterAll
 	static void tearDown() {
-//		driver.quit();
+		driver.quit();
 	}
 	
 	/* 
 	 * Helpers below
 	 */
-	private void loadAndCheckTitle(String menuTitle) {
-		ContainerAction obj = menu.load(menuTitle);		
-		if(obj != null) {
-			PageTitle title = obj.getTitle();
-			assertEquals(title.getExpected(), title.getActual());
-			obj.closeElement();
-		}else {
-			System.out.println(menuTitle + " failed test.");
-			fail(menuTitle + " failed test.");
-		}		
+	private void loadAndCheckTitle(String menuTitle) {		
+		Optional<ContainerAction> obj = menu.load(menuTitle);		
+		obj.ifPresentOrElse(o -> {
+			PageTitle title = o.getTitle();			
+			if(!title.getExpected().equals(title.getActual())) {
+				addNameToFailList(menuTitle);
+			}
+			o.closeElement();
+		}, 
+			addNameToFailList(menuTitle)							
+		);		
 	}		
+	
+	private Runnable addNameToFailList(String menuTitle) {		
+		return new Runnable() {			
+			@Override
+			public void run() {
+				if(failedNames.length() > 0 ) {
+					failedNames += ":" + menuTitle ;	
+				}else {
+					failedNames += menuTitle;
+				}				
+//				failedNames.add(menuTitle);				
+			}
+		};
+	}
+	
+	private void writeFailedList(int nameCount, int listSize) {
+		if(failedNames.length() > 0 ) {
+			fail("The elements [" + failedNames + "] failed");
+		}else if (nameCount != listSize){
+			fail("The elements [" + failedNames + "] failed");
+		}
+	}
+	
 }
