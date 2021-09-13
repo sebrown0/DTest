@@ -34,9 +34,10 @@ public class LeftMenuMapper {
 		PageFactory.initElements(driver, this);
 	}
 	
-	public void map() {
+	public LeftMenuMapper map() {
 		mapSingleElements();
-		mapMultipleElements();		
+		mapMultipleElements();
+		return this;
 	}
 	
 	private void mapSingleElements() {

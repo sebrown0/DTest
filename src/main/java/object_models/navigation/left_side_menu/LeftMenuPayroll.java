@@ -168,9 +168,9 @@ public class LeftMenuPayroll <K,V> implements LeftMenuElements{
 			HrRelatedReports.MENU_TITLE,
 			AbsenceRelatedReports.MENU_TITLE
 	);
-//	public List<String> getReports() {
-//		return REPORTS;	
-//	}
+	public List<String> getReports() {
+		return REPORTS;	
+	}
 	
 	private static final List<String> MONTHLY_REPORTS = Arrays.asList(
 			MonthlyReports.MENU_TITLE
@@ -187,8 +187,8 @@ public class LeftMenuPayroll <K,V> implements LeftMenuElements{
 	}
 	
 	private static final List<String> BULK_UPDATES = Arrays.asList(
-			ColaSalaryUpdates.MENU_TITLE,
-			EmployeeCreation.MENU_TITLE
+			ColaSalaryUpdates.MENU_TITLE
+//			EmployeeCreation.MENU_TITLE
 	);
 	public List<String> getBulkUpdates() {
 		return BULK_UPDATES;	
@@ -200,26 +200,34 @@ public class LeftMenuPayroll <K,V> implements LeftMenuElements{
 	public List<String> getSettings() {
 		return SETTINGS;	
 	}
-		
-	public static Map<String, MenuItem> getAll(){				
+			
+	private static final List<String> MISSING_TEST = Arrays.asList(
+			"Missing sub menu 1",
+			"Missing sub menu 2"
+	);
+	
+	@SuppressWarnings("unchecked")
+	public static Map<String, Optional<List<String>>> getAll(){				
 		return Stream.of(new Object[][] {
-				{EmployeeList.MENU_TITLE, new MenuItem(EmployeeList.MENU_TITLE, Optional.empty())},
-				{Documents.MENU_TITLE, new MenuItem(Documents.MENU_TITLE, Optional.empty())},
-				{"Employees", new MenuItem("Employees", Optional.of(EMPLOYEES))},
-				{"Employee Others", new MenuItem("Employee Others", Optional.of(EMPLOYEE_OTHERS))},
-				{"Additional Hours", new MenuItem("Additional Hours", Optional.of(ADDITIONAL_HOURS))},
-				{"Payroll", new MenuItem("Payroll", Optional.of(PAYROLL))},
-				{"Employee Statistics", new MenuItem("Employee Statistics", Optional.of(EMPLOYEE_STATISTICS))},
-				{PayrollStatistics.MENU_TITLE, new MenuItem(PayrollStatistics.MENU_TITLE, Optional.empty())},
-				{"Absence Statistics", new MenuItem("Absence Statistics", Optional.of(ABSENCE_STATISTICS))},
-				{"Reports", new MenuItem("Reports", Optional.of(REPORTS))},
-				{MonthlyReports.MENU_TITLE, new MenuItem(MonthlyReports.MENU_TITLE, Optional.empty())},
-				{YearlyReports.MENU_TITLE, new MenuItem(YearlyReports.MENU_TITLE, Optional.empty())},
-				{"Bulk Updates", new MenuItem("Bulk Updates", Optional.of(BULK_UPDATES))},
-				{SettingsPayroll.MENU_TITLE, new MenuItem(SettingsPayroll.MENU_TITLE, Optional.empty())}
-		}).collect(Collectors.toMap(d -> (String) d[0], d -> ((MenuItem) d[1])));		
+			{EmployeeList.MENU_TITLE,  Optional.empty()},
+			{Documents.MENU_TITLE, Optional.empty()},
+			{"Employees", Optional.of(EMPLOYEES)},
+			{"Employee Others", Optional.of(EMPLOYEE_OTHERS)},
+			{"Additional Hours", Optional.of(ADDITIONAL_HOURS)},
+			{"Payroll", Optional.of(PAYROLL)},
+			{"Employee Statistics", Optional.of(EMPLOYEE_STATISTICS)},
+			{PayrollStatistics.MENU_TITLE, Optional.empty()},
+//			{"Absence Statistics", Optional.of(ABSENCE_STATISTICS)},
+			{"Reports", Optional.of(REPORTS)},
+			{MonthlyReports.MENU_TITLE, Optional.empty()},
+			{YearlyReports.MENU_TITLE, Optional.empty()},
+			{"Bulk Updates", Optional.of(BULK_UPDATES)},
+			{SettingsPayroll.MENU_TITLE, Optional.empty()},
+			{"Missing Test Menu With Sub Menu", Optional.of(MISSING_TEST)},
+			{"Missing Test Menu Without Sub Menu", Optional.empty()}
+		}).collect(Collectors.toMap(d -> (String) d[0], d -> ((Optional<List<String>>) d[1])));		
 	}
-		
+			
 	public static class MenuItem {
 		private String parentName;
 		private Optional<List<String>> childNames;
@@ -256,3 +264,20 @@ public class LeftMenuPayroll <K,V> implements LeftMenuElements{
 	
 	
 }
+
+//public static Map<String, Optional<List<String>>> getAll(){
+//Map<String, Optional<List<String>>> expected = new HashMap<>();
+//expected.put(EmployeeList.MENU_TITLE,  Optional.empty());		
+//expected.put(Documents.MENU_TITLE, Optional.empty());
+//expected.put("Employees", Optional.of(EMPLOYEES));		
+//expected.put("Employee Others", Optional.of(EMPLOYEE_OTHERS));
+//expected.put("Additional Hours", Optional.of(ADDITIONAL_HOURS));		
+//expected.put("Payroll", Optional.of(PAYROLL));		
+//expected.put("Employee Statistics", Optional.of(EMPLOYEE_STATISTICS));
+//expected.put(PayrollStatistics.MENU_TITLE, Optional.empty());		
+//expected.put("Absence Statistics", Optional.of(ABSENCE_STATISTICS));
+//expected.put("Reports",  Optional.of(REPORTS));		
+//expected.put("Bulk Updates", Optional.of(BULK_UPDATES));
+//expected.put(SettingsPayroll.MENU_TITLE, Optional.empty());		
+//return expected;		
+//}

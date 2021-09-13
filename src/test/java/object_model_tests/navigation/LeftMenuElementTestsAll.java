@@ -1,14 +1,12 @@
 package object_model_tests.navigation;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
-
-import javax.swing.MenuElement;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,16 +16,25 @@ import org.openqa.selenium.WebDriver;
 
 import exceptions.NullDriverException;
 import listeners.TestResultLogger;
-import object_models.forms.ContainerAction;
-import object_models.helpers.title.PageTitle;
+import object_models.helpers.MenuChecker;
 import object_models.modules.PayrollModuleLoader;
-import object_models.navigation.left_side_menu.LeftMenu;
 import object_models.navigation.left_side_menu.LeftMenuPayroll;
 import object_models.navigation.left_side_menu.LeftMenuPayroll.MenuItem;
-import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
+import object_models.panels.menu.employees.Banks;
+import object_models.panels.menu.employees.CareerProgression;
+import object_models.panels.menu.employees.ContactNumbers;
+import object_models.panels.menu.employees.EmployeeDetails;
+import object_models.panels.menu.employees.PermanentAllowances;
+import object_models.panels.menu.employees.PreviousEmployement;
+import object_models.panels.menu.employees.SalaryDetails;
+import object_models.panels.menu.employees.Schedule;
+import object_models.panels.menu.employees.Unions;
+import object_models.panels.menu.parents.Documents;
+import object_models.panels.menu.parents.EmployeeList;
 import providers.XMLFileProvider;
 import resources.test_data.UserProvider;
+import utils_tests.LeftMenuMapper;
 import xml_reader.ConfigReader;
 
 @ExtendWith(TestResultLogger.class)
@@ -35,12 +42,38 @@ class LeftMenuElementTestsAll {
 	private static WebDriver driver;
 	private static UserLoginPage userLogin;
 	private static ConfigReader configReader;	
-	private static LeftMenu menu;
+
 	
-//	private List<String> failedNames = new ArrayList<>();
-	private String failedNames = "";
+	private static List<String> actual = Arrays.asList(
+			"Employee List", 
+			"Documents", 
+			"Banks", 
+			"Employees", 
+			"Additional Item",
+			"Employee Details",
+			"Contact Numbers",
+			"Salary Details",
+			"Schedule",
+			"Unions",
+			"Permanent Allowances",
+			"Previous Employment");
 	
-	int jj = 0;
+	public static Map<String, MenuItem> expected = 				
+		Stream.of(new Object[][] {
+				{EmployeeList.MENU_TITLE, new MenuItem(EmployeeList.MENU_TITLE, Optional.empty())},
+				{Documents.MENU_TITLE, new MenuItem(Documents.MENU_TITLE, Optional.empty())},
+				{"Employees", new MenuItem("Employees", Optional.of(Arrays.asList(
+						EmployeeDetails.MENU_TITLE,
+						ContactNumbers.MENU_TITLE,
+						Banks.MENU_TITLE,
+						SalaryDetails.MENU_TITLE,
+						CareerProgression.MENU_TITLE,
+						Schedule.MENU_TITLE,
+						PermanentAllowances.MENU_TITLE,
+						PreviousEmployement.MENU_TITLE,
+						Unions.MENU_TITLE
+				)))}
+		}).collect(Collectors.toMap(d -> (String) d[0], d -> ((MenuItem) d[1])));		
 	
 	@BeforeAll	
 	static void setup() throws NullDriverException, InterruptedException, ExecutionException {	
@@ -50,106 +83,34 @@ class LeftMenuElementTestsAll {
 		// Get a login page, with the required module loaded.
 		userLogin = new UserLoginPage(driver, new PayrollModuleLoader(driver));
 		// Login.
-		HomePage hp = userLogin.loginValidUser(UserProvider.userPortal());
-		// Get the menu from home page.
-		menu = hp.getLeftMenu();
+		userLogin.loginValidUser(UserProvider.userPortal());
+	}	
+	
+//	@Test
+//	void test() {
+//		TitleChecker checker = new TitleChecker(expected, actual);
+//		checker.mapMissing().isCorrect();
+//		checker.report();
+//	}
+	
+	@Test
+	void menuMapper() {
+		LeftMenuMapper mapper = new LeftMenuMapper(driver);
+		mapper.map();
+		mapper.print();		
 	}
-	
-//	@Test
-//	void ffff() {
-//		Map<String, List<MenuItem>> expected = LeftMenuPayroll.getAll();
-//		List<String> actual = LeftMenu.getActualListOfNames(driver);
-//		act
-//		expected.entrySet().forEach((set) -> {
-//			String key = set.getKey();
-//			System.out.println("Looking for Parent = " + key);
-//			
-//		});
-//	}
-	
-//	@Test
-//	void ffff() {
-//		LeftMenuPayroll.getAll().forEach(item -> {
-//			System.out.println("Parent = " + item.getParentName());
-//			item.getChildNames()
-//					.ifPresent(
-//							names -> {
-//								names.forEach(name ->	System.out.println("  Child = " + name)
-//								);
-//							}
-//					);
-//		});
-//	}
-	
 
-				
-//	@Test
-//	void checkReports() {
-//		LeftMenuPayroll elements = (LeftMenuPayroll) menu.getElements();
-//		List<String> elementNames = elements.getReports();
-//		checkList(elementNames);
-//	}
-//
-//	@Test
-//	void checkAll() {
-//		LeftMenuPayroll elements = (LeftMenuPayroll) menu.getElements();
-//		List<List<String>> all = elements.getAll();
-//		for (List<String> list : all) {
-//			checkList(list);
-//		}
-//	}
-		
-	void checkList(List<String> elementNames) {
-		int nameCount = 0;
-		for (String name : elementNames) {
-			loadAndCheckTitle(name);
-			nameCount++;
-		}
-		assertTrue(nameCount == elementNames.size());
-		writeFailedList(nameCount, elementNames.size());
+	@Test
+	void checkMenu() {
+		LeftMenuMapper mapper = new LeftMenuMapper(driver);
+		MenuChecker checker = new MenuChecker(LeftMenuPayroll.getAll(), mapper.map().getMenu());
+		checker.checkMenu();
+
 	}
-		
+	
 	@AfterAll
 	static void tearDown() {
 		driver.quit();
-	}
-	
-	/* 
-	 * Helpers below
-	 */
-	private void loadAndCheckTitle(String menuTitle) {		
-		Optional<ContainerAction> obj = menu.load(menuTitle);		
-		obj.ifPresentOrElse(o -> {
-			PageTitle title = o.getTitle();			
-			if(!title.getExpected().equals(title.getActual())) {
-				addNameToFailList(menuTitle);
-			}
-			o.closeElement();
-		}, 
-			addNameToFailList(menuTitle)							
-		);		
-	}		
-	
-	private Runnable addNameToFailList(String menuTitle) {		
-		return new Runnable() {			
-			@Override
-			public void run() {
-				if(failedNames.length() > 0 ) {
-					failedNames += ":" + menuTitle ;	
-				}else {
-					failedNames += menuTitle;
-				}				
-//				failedNames.add(menuTitle);				
-			}
-		};
-	}
-	
-	private void writeFailedList(int nameCount, int listSize) {
-		if(failedNames.length() > 0 ) {
-			fail("The elements [" + failedNames + "] failed");
-		}else if (nameCount != listSize){
-			fail("The elements [" + failedNames + "] failed");
-		}
-	}
+	}	
 	
 }
