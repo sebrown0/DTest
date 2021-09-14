@@ -88,23 +88,11 @@ public class LeftMenu {
 	}
 		
 	/*
-	 * Get a map of all the names in the menu.	 * 
+	 * Get a map of all the names in the menu.
 	 */
 	public static Map<String, Optional<List<String>>> getActualMenu(WebDriver driver){
 		LeftMenuMapper mapper = new LeftMenuMapper(driver);
-		return mapper.map().getMenu();
-		
-//		WebElement nav = driver.findElement(By.id("nav-accordion"));
-//		List<String> titles = new ArrayList<>();
-//		if(nav != null) {
-//			List<WebElement> rawTitles = nav.findElements(By.cssSelector("a"));
-//			for (WebElement e : rawTitles) {
-//				String title = e.getAttribute("textContent").trim();
-//				title = title.replace(String.valueOf(((char)160)), "");
-//				titles.add(title);
-//			}	
-//		}
-//		return titles;
+		return mapper.map().getMenu();		
 	}
 	
 	public void setElements(LeftMenuElements elements) {

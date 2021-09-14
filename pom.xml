@@ -4,25 +4,24 @@
   <artifactId>demo</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
-	<dependencies>  
-	
+	<dependencies>  	
 	 
-	<dependency>
-	    <groupId>org.apache.logging.log4j</groupId>
-	    <artifactId>log4j-api</artifactId>
-	    <version>2.1</version>
-  	</dependency>
-  	<dependency>
-	    <groupId>org.apache.logging.log4j</groupId>
-	    <artifactId>log4j-core</artifactId>
-	    <version>2.1</version>
-  	</dependency>
-	<dependency>
-		<groupId>org.projectlombok</groupId>
-		<artifactId>lombok</artifactId>
-		<version>1.18.20</version>
-		<scope>provided</scope>
-	</dependency>
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-api</artifactId>
+		    <version>2.1</version>
+	  	</dependency>
+	  	<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-core</artifactId>
+		    <version>2.1</version>
+	  	</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.20</version>
+			<scope>provided</scope>
+		</dependency>
 
 	  	<dependency>
 		    <groupId>com.codeborne</groupId>
@@ -35,31 +34,24 @@
 		    <groupId>org.junit.jupiter</groupId>
 		    <artifactId>junit-jupiter-api</artifactId>
 		    <version>5.7.0</version>		    
-		</dependency>
-		
+		</dependency>		
 		<dependency>
 		    <groupId>org.junit.jupiter</groupId>
 		    <artifactId>junit-jupiter-engine</artifactId>
 		    <version>5.7.0</version>
-		    <scope>test</scope>
+		    <!-- <scope>test</scope>  -->
 		</dependency>
-
-        
+	    <dependency>
+	        <groupId>org.junit.platform</groupId>
+	        <artifactId>junit-platform-launcher</artifactId>
+	        <version>1.7.0</version>
+	    </dependency>        
         <dependency>
 		    <groupId>org.junit.jupiter</groupId>
 		    <artifactId>junit-jupiter-params</artifactId>
 		    <version>5.7.0</version>
-		    <scope>test</scope>
-		</dependency>
-		
-		        
-		<dependency>
-		  	<groupId>org.junit.platform</groupId>
-			<artifactId>junit-platform-launcher</artifactId>
-			<version>1.7.0</version>
-			<scope>test</scope>
-		</dependency>
-		
+		    <!-- <scope>test</scope>  -->
+		</dependency>		
 		<dependency>
 		    <groupId>org.junit.platform</groupId>
 		    <artifactId>junit-platform-commons</artifactId>
