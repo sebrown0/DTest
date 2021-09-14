@@ -15,7 +15,7 @@ import org.openqa.selenium.WebDriver;
 
 import dto.Employee;
 import exceptions.NullDriverException;
-import listeners.TestResultLogger;
+import logging.TestResultLogger;
 import object_models.modules.PayrollModuleLoader;
 import object_models.navigation.left_side_menu.LeftMenu;
 import object_models.pages.UserLoginPage;

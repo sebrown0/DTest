@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 
-import listeners.TestResultLogger;
+import logging.TestResultLogger;
 import object_models.modules.PayrollModuleLoader;
 import object_models.navigation.top_right_nav_bar.ElementChecker;
 import object_models.navigation.top_right_nav_bar.TopRightNavBar;

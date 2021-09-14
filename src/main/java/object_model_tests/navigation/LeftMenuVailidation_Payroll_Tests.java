@@ -11,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 
 import exceptions.NullDriverException;
-import object_model_tests.TestResultLogger;
+import logging.TestResultLogger;
 import object_models.helpers.MenuChecker;
 import object_models.modules.PayrollModuleLoader;
 import object_models.navigation.left_side_menu.LeftMenu;
@@ -19,7 +19,7 @@ import object_models.navigation.left_side_menu.LeftMenuPayroll;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import providers.XMLFileProvider;
-import resources.test_data.UserProvider;
+import test_data.UserProvider;
 import xml_reader.ConfigReader;
 
 @ExtendWith(TestResultLogger.class)

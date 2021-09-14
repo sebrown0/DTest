@@ -1,7 +1,7 @@
 /**
  * 
  */
-package resources.test_data;
+package test_data;
 
 import java.util.stream.Stream;
 

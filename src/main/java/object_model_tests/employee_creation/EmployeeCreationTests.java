@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 import dto.Employee;
 import exceptions.NullDriverException;
-import listeners.TestResultLogger;
+import logging.TestResultLogger;
 import object_models.modules.PayrollModuleLoader;
 import object_models.navigation.NavBarElement;
 import object_models.navigation.top_right_nav_bar.elements.NavBarEmployeeCreation;

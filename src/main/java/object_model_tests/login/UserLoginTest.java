@@ -9,7 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
 
-import object_model_tests.TestResultLogger;
+import logging.TestResultLogger;
 import object_models.helpers.User;
 import object_models.pages.UserLoginPage;
 import providers.XMLFileProvider;
@@ -51,7 +51,7 @@ class UserLoginTest {
 	}
 
 	@ParameterizedTest
-	@MethodSource("resources.test_data.UserProvider#validPortalUser")
+	@MethodSource("test_data.UserProvider#validPortalUser")
 	@Tag("R20")
 	@Tag("T3834")	
 	void validUserLogin(User user) {		
@@ -61,7 +61,7 @@ class UserLoginTest {
 	}
 		
 	@ParameterizedTest
-	@MethodSource("resources.test_data.UserProvider#invalidUser")
+	@MethodSource("test_data.UserProvider#invalidUser")
 	@Tag("R20")
 	@Tag("T3835")
 	void invalidUserLogin(User user) {

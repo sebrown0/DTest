@@ -1,4 +1,4 @@
-package object_model_tests;
+package logging;
 
 import java.util.Optional;
 

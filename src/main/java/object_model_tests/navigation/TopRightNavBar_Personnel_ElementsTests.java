@@ -10,7 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 
 import exceptions.NullDriverException;
-import listeners.TestResultLogger;
+import logging.TestResultLogger;
 import object_models.modules.PayrollModuleLoader;
 import object_models.navigation.NavBarElement;
 import object_models.navigation.top_right_nav_bar.elements.NavBarDakarIntelligence;
@@ -21,7 +21,6 @@ import object_models.navigation.top_right_nav_bar.elements.NavBarMyCoLastViewed;
 import object_models.navigation.top_right_nav_bar.elements.NavBarNewEmployments;
 import object_models.navigation.top_right_nav_bar.elements.NavBarNotifications;
 import object_models.navigation.top_right_nav_bar.elements.NavBarTerminations;
-import object_models.navigation.top_right_nav_bar.elements.NavBarUserAvatar;
 import object_models.navigation.top_right_nav_bar.elements.NavBarUserManagment;
 import object_models.navigation.top_right_nav_bar.elements.NavBarVisualReports;
 import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLinks;
@@ -30,13 +29,9 @@ import object_models.pages.UserLoginPage;
 import providers.XMLFileProvider;
 import test_data.UserProvider;
 import xml_reader.ConfigReader;
-/**
- * @author Steve Brown
- *
- * Test the elements of the Top-Right Nav-Bar for payroll module.
- */
+
 @ExtendWith(TestResultLogger.class)
-class TopRightNavBar_Payroll_ElementsTests {	
+class TopRightNavBar_Personnel_ElementsTests {	
 	private static HomePage hp;
 	private static WebDriver driver;
 	private static UserLoginPage userLogin;
@@ -74,6 +69,7 @@ class TopRightNavBar_Payroll_ElementsTests {
 	@Test
 	@Order(3)
 	void clickEmployeeCreation() {
+		// Does not work. But leave for know as it is an example of a failing test.
 		NavBarElement empCr = hp.getTopRightNavBar().getNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
 		empCr.clickElement();
 		assertEquals(NavBarEmployeeCreation.ORIGINAL_NAME, empCr.getOriginalName());
@@ -149,13 +145,5 @@ class TopRightNavBar_Payroll_ElementsTests {
 		NavBarElement user = hp.getTopRightNavBar().getNavBarElement(NavBarUserManagment.ORIGINAL_NAME).get();
 		user.clickElement();
 		assertEquals(NavBarUserManagment.ORIGINAL_NAME, user.getOriginalName());
-	}
-	
-	@Test
-	@Order(13)
-	void clickUserAvatar() {
-		NavBarElement avatar = hp.getTopRightNavBar().getNavBarElement(NavBarUserAvatar.ORIGINAL_NAME).get();
-		avatar.clickElement();
-		assertEquals(NavBarUserAvatar.ORIGINAL_NAME, avatar.getOriginalName());
 	}
 }

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 
 import exceptions.NullDriverException;
-import listeners.TestResultLogger;
+import logging.TestResultLogger;
 import object_models.forms.ContainerAction;
 import object_models.forms.menu.payroll.CloseAndLockPayroll;
 import object_models.forms.menu.payroll.InitialisePayroll;

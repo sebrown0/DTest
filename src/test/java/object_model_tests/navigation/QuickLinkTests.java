@@ -11,7 +11,7 @@ import object_models.navigation.top_right_nav_bar.TopRightNavBar;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import providers.XMLFileProvider;
-import resources.test_data.UserProvider;
+import test_data.UserProvider;
 import xml_reader.ConfigReader;
 
 class QuickLinkTests {	
