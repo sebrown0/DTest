@@ -64,10 +64,18 @@ import object_models.panels.menu.reports.Payslips;
  * @author Steve Brown
  *
  * LeftMenuElements IS A MARKER.
+ * 
+ * Represents the Left Menu for payroll.
+ * All Menu Items (top level) should be included.
+ * If a menu item has a sub-menu that is included in a 
+ * list of sub-menu items.
+ * 
+ * The final menu is returned as a map: 
+ * 	Key = menu item name, i.e. Employees.
+ *	Val = Optional list of sub-menu names. 
  */
-public class LeftMenuPayroll <K,V> implements LeftMenuElements{
-//	Map<String, List<String>> elements;	
-	
+public class LeftMenuPayroll implements LeftMenuElements{
+
 	private static final List<String> EMPLOYEE_LIST = Arrays.asList(
 			EmployeeList.MENU_TITLE
 	);	
@@ -187,8 +195,8 @@ public class LeftMenuPayroll <K,V> implements LeftMenuElements{
 	}
 	
 	private static final List<String> BULK_UPDATES = Arrays.asList(
-			ColaSalaryUpdates.MENU_TITLE
-//			EmployeeCreation.MENU_TITLE
+			ColaSalaryUpdates.MENU_TITLE,
+			EmployeeCreation.MENU_TITLE
 	);
 	public List<String> getBulkUpdates() {
 		return BULK_UPDATES;	
@@ -201,13 +209,8 @@ public class LeftMenuPayroll <K,V> implements LeftMenuElements{
 		return SETTINGS;	
 	}
 			
-	private static final List<String> MISSING_TEST = Arrays.asList(
-			"Missing sub menu 1",
-			"Missing sub menu 2"
-	);
-	
 	@SuppressWarnings("unchecked")
-	public static Map<String, Optional<List<String>>> getAll(){				
+	public Map<String, Optional<List<String>>> getAll(){				
 		return Stream.of(new Object[][] {
 			{EmployeeList.MENU_TITLE,  Optional.empty()},
 			{Documents.MENU_TITLE, Optional.empty()},
@@ -217,14 +220,13 @@ public class LeftMenuPayroll <K,V> implements LeftMenuElements{
 			{"Payroll", Optional.of(PAYROLL)},
 			{"Employee Statistics", Optional.of(EMPLOYEE_STATISTICS)},
 			{PayrollStatistics.MENU_TITLE, Optional.empty()},
-//			{"Absence Statistics", Optional.of(ABSENCE_STATISTICS)},
-			{"Reports", Optional.of(REPORTS)},
+			{"Absence Statistics", Optional.of(ABSENCE_STATISTICS)},
+//			{"Reports", Optional.of(REPORTS)},
+			{"PayrollStatistics.MENU_TITLE", Optional.empty()},
 			{MonthlyReports.MENU_TITLE, Optional.empty()},
 			{YearlyReports.MENU_TITLE, Optional.empty()},
 			{"Bulk Updates", Optional.of(BULK_UPDATES)},
-			{SettingsPayroll.MENU_TITLE, Optional.empty()},
-			{"Missing Test Menu With Sub Menu", Optional.of(MISSING_TEST)},
-			{"Missing Test Menu Without Sub Menu", Optional.empty()}
+			{SettingsPayroll.MENU_TITLE, Optional.empty()}
 		}).collect(Collectors.toMap(d -> (String) d[0], d -> ((Optional<List<String>>) d[1])));		
 	}
 			
@@ -242,42 +244,5 @@ public class LeftMenuPayroll <K,V> implements LeftMenuElements{
 		public Optional<List<String>> getChildNames() {
 			return childNames;
 		}		
-	}
-//	public static List<List<String>> getAll(){
-//		return Arrays.asList(
-//				EMPLOYEE_LIST, //
-//				DOCUMENTS, //
-//				EMPLOYEES,
-//				EMPLOYEE_OTHERS,
-//				ADDITIONAL_HOURS,
-//				PAYROLL,
-//				EMPLOYEE_STATISTICS,
-//				PAYROLL_STATISTICS, //
-//				ABSENCE_STATISTICS,
-//				REPORTS,
-//				MONTHLY_REPORTS, //
-//				YEARLY_REPORTS, //
-//				BULK_UPDATES,
-//				SETTINGS //
-//		);
-//	}
-	
-	
+	}	
 }
-
-//public static Map<String, Optional<List<String>>> getAll(){
-//Map<String, Optional<List<String>>> expected = new HashMap<>();
-//expected.put(EmployeeList.MENU_TITLE,  Optional.empty());		
-//expected.put(Documents.MENU_TITLE, Optional.empty());
-//expected.put("Employees", Optional.of(EMPLOYEES));		
-//expected.put("Employee Others", Optional.of(EMPLOYEE_OTHERS));
-//expected.put("Additional Hours", Optional.of(ADDITIONAL_HOURS));		
-//expected.put("Payroll", Optional.of(PAYROLL));		
-//expected.put("Employee Statistics", Optional.of(EMPLOYEE_STATISTICS));
-//expected.put(PayrollStatistics.MENU_TITLE, Optional.empty());		
-//expected.put("Absence Statistics", Optional.of(ABSENCE_STATISTICS));
-//expected.put("Reports",  Optional.of(REPORTS));		
-//expected.put("Bulk Updates", Optional.of(BULK_UPDATES));
-//expected.put(SettingsPayroll.MENU_TITLE, Optional.empty());		
-//return expected;		
-//}

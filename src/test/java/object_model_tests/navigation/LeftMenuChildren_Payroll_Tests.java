@@ -1,7 +1,6 @@
 package object_model_tests.navigation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
@@ -71,9 +70,18 @@ import object_models.panels.menu.reports.Payslips;
 import providers.XMLFileProvider;
 import resources.test_data.UserProvider;
 import xml_reader.ConfigReader;
-
+/**
+ * @author Steve Brown
+ * 
+ * Check that clicking an element of the 
+ * left menu takes the user to the correct place.
+ * 
+ * This could either be expanding the menu to show a sub-menu,
+ * i.e. Reports, or opening a new page, 
+ * i.e. Reports -> Payroll Reports
+ */
 @ExtendWith(TestResultLogger.class)
-class LeftMenuElementTests {	
+class LeftMenuChildren_Payroll_Tests {	
 	private static WebDriver driver;
 	private static UserLoginPage userLogin;
 	private static ConfigReader configReader;	
@@ -396,26 +404,36 @@ class LeftMenuElementTests {
 	 */
 	private Optional<ContainerAction> loadAndCheckTitle(String prntName, String menuTitle) {
 		Optional<ContainerAction> obj = menu.clickParent(prntName).load(menuTitle);
-		x(obj, menuTitle);
+//		x(obj, menuTitle);
+		PageTitle title = obj.get().getTitle();
+		assertEquals(title.getExpected(), title.getActual());
 		return obj;
 	}
 	
 	private Optional<ContainerAction> loadAndCheckTitle(String menuTitle) {
 		Optional<ContainerAction> obj = menu.load(menuTitle);
-		x(obj, menuTitle);
-//		PageTitle title = obj.getTitle();
-//		assertEquals(title.getExpected(), title.getActual());
+//		x(obj, menuTitle);
+		PageTitle title = obj.get().getTitle();
+		assertEquals(title.getExpected(), title.getActual());
 		return obj;
 	}
 	
-	private void x(Optional<ContainerAction> obj, String menuTitle) {
-		obj.ifPresentOrElse(o -> {
-			PageTitle title = o.getTitle();
-			assertEquals(title.getExpected(), title.getActual());	
-		}, 
-			fail("[" + menuTitle + "] failed" )
-		);		
-	}
+//	private void x(Optional<ContainerAction> obj, String menuTitle) {
+//		obj.ifPresentOrElse(o -> {
+//			PageTitle title = o.getTitle();
+//			assertEquals(title.getExpected(), title.getActual());	
+//		}, 
+////				new Runnable() {
+////					
+////					@Override
+////					public void run() {
+////						// TODO Auto-generated method stub
+////						
+////					}
+////				}
+//			fail("[" + menuTitle + "] failed" )
+//		);		
+//	}
 	
 	private void closePanelAndParent(ContainerAction closer, String prntName) {
 		closeElement(closer);

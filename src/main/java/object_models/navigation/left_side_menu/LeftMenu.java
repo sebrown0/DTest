@@ -3,7 +3,6 @@
  */
 package object_models.navigation.left_side_menu;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -14,7 +13,6 @@ import java.util.concurrent.Future;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -89,23 +87,24 @@ public class LeftMenu {
 		}
 	}
 		
-
 	/*
-	 * Get a list of all the names in the menu.
-	 * Remove any leading or trailing spaces and the &nbsp; char (160).
+	 * Get a map of all the names in the menu.	 * 
 	 */
-	public static List<String> getActualListOfNames(WebDriver driver){
-		WebElement nav = driver.findElement(By.id("nav-accordion"));
-		List<String> titles = new ArrayList<>();
-		if(nav != null) {
-			List<WebElement> rawTitles = nav.findElements(By.cssSelector("a"));
-			for (WebElement e : rawTitles) {
-				String title = e.getAttribute("textContent").trim();
-				title = title.replace(String.valueOf(((char)160)), "");
-				titles.add(title);
-			}	
-		}
-		return titles;
+	public static Map<String, Optional<List<String>>> getActualMenu(WebDriver driver){
+		LeftMenuMapper mapper = new LeftMenuMapper(driver);
+		return mapper.map().getMenu();
+		
+//		WebElement nav = driver.findElement(By.id("nav-accordion"));
+//		List<String> titles = new ArrayList<>();
+//		if(nav != null) {
+//			List<WebElement> rawTitles = nav.findElements(By.cssSelector("a"));
+//			for (WebElement e : rawTitles) {
+//				String title = e.getAttribute("textContent").trim();
+//				title = title.replace(String.valueOf(((char)160)), "");
+//				titles.add(title);
+//			}	
+//		}
+//		return titles;
 	}
 	
 	public void setElements(LeftMenuElements elements) {

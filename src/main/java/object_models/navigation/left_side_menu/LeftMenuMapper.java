@@ -1,7 +1,7 @@
 /**
  * 
  */
-package utils_tests;
+package object_models.navigation.left_side_menu;
 
 import java.util.ArrayList;
 import java.util.HashMap;

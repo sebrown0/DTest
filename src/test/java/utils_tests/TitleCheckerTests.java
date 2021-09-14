@@ -1,6 +1,6 @@
 package utils_tests;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,36 +11,47 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+import listeners.TestResultLogger;
 import object_models.helpers.MenuChecker;
 
 /**
  * @author Steve Brown
  *
+ * Using the data in expected & actual,
+ * each test should fail and write the relevant 
+ * missing, additional and new menu elements to 
+ * the test log.
+ * 
+ * These test cases are designed to check the 
+ * functionality of MenuChecker without having
+ * to load the web page. 
  */
+@ExtendWith(TestResultLogger.class)
 class TitleCheckerTests {
 	private static MenuChecker checker;
 	
 	@SuppressWarnings("unchecked")
 	public static Map<String, Optional<List<String>>> expected = 				
 		Stream.of(new Object[][] {
-			{"Menu Item Without Sub Menus 1", Optional.empty()}, // Correct T
-			{"Menu Item Without Sub Menus 2", Optional.empty()}, // Correct T
-			{"Menu Item Without Sub Menus 3", Optional.empty()}, // Missing from actual X
-			{"Menu Item With Sub Menus A", Optional.of(Arrays.asList("Item A1", "Item A2"))}, // Has additional Item A3 T
-			{"Menu Item With Sub Menus B", Optional.of(Arrays.asList("Item B1", "Item B2", "Item B3"))}	// Missing B2,B3 T		
+			{"Menu Item Without Sub Menus 1", Optional.empty()}, 
+			{"Menu Item Without Sub Menus 2", Optional.empty()}, 
+			{"Menu Item Without Sub Menus 3", Optional.empty()}, 
+			{"Menu Item With Sub Menus A", Optional.of(Arrays.asList("Item A1", "Item A2"))},
+			{"Menu Item With Sub Menus B", Optional.of(Arrays.asList("Item B1", "Item B2", "Item B3"))}			
 		}).collect(Collectors.toMap(d -> (String) d[0], d -> ((Optional<List<String>>) d[1])));
 	
 	@SuppressWarnings("unchecked")
 	public static Map<String, Optional<List<String>>> actual = 				
 		Stream.of(new Object[][] {
-			{"Additional Menu Item Without Sub Menus 1", Optional.empty()},	// Not in expected T
-			{"Additional Menu Item Without Sub Menus 2", Optional.empty()},	// Not in expected T
-			{"Additional Menu Item With Sub Menus AA",  Optional.of(Arrays.asList("Item AA1"))}, // Not in expected T
-			{"Menu Item Without Sub Menus 1", Optional.empty()}, // Correct T
-			{"Menu Item Without Sub Menus 2", Optional.empty()}, // Correct T
-			{"Menu Item With Sub Menus A", Optional.of(Arrays.asList("Item A1", "Item A2", "Item A3"))}, // Has additional Item A3 T
-			{"Menu Item With Sub Menus B", Optional.of(Arrays.asList("Item B1"))}	// Missing B2,B3 T			
+			{"New Menu Item Without Sub Menus 1", Optional.empty()},	// Not in expected 
+			{"New Menu Item Without Sub Menus 2", Optional.empty()},	// Not in expected
+			{"New Menu Item With Sub Menus AA",  Optional.of(Arrays.asList("Item AA1"))}, // Not in expected
+			{"Menu Item Without Sub Menus 1", Optional.empty()}, // Correct
+			{"Menu Item Without Sub Menus 2", Optional.empty()}, // Correct
+			{"Menu Item With Sub Menus A", Optional.of(Arrays.asList("Item A1", "Item A2", "Item A3"))}, // Has additional Item A3 
+			{"Menu Item With Sub Menus B", Optional.of(Arrays.asList("Item B1"))}	// Missing B2,B3 
 		}).collect(Collectors.toMap(d -> (String) d[0], d -> ((Optional<List<String>>) d[1])));		
 	
 	@BeforeAll
@@ -50,20 +61,26 @@ class TitleCheckerTests {
 	}
 				
 	@Test
-	void checkMissing() {
-		assertEquals(2,checker.getMissingItems().size());
-		checker.getMissingItems().forEach(x -> System.out.println(x));
+	void checkForMissing() {
+		int missing = checker.getMissingItems().size();
+		if(missing > 0) {
+			fail("Menu has [" + missing + "] missing elements -> " + checker.getMissingItems().toString());
+		}
 	}
 	
 	@Test
-	void checkAdditionalMenus() {
-		assertEquals(2,checker.getAdditonalMenuItems().size());
-		checker.getAdditonalMenuItems().forEach(x -> System.out.println(x));
+	void checkForNew() {		
+		int nu = checker.getNewMenuItems().size();
+		if(nu > 0) {
+			fail("Menu has [" + nu + "] new elements -> " + checker.getNewMenuItems().toString());
+		}
 	}
 	
 	@Test
-	void checkAdditionalMenusWithSubMenus() {
-		assertEquals(1,checker.getAdditonalMenuAndSubMenuItems().size());
-		checker.getAdditonalMenuAndSubMenuItems().forEach(x -> System.out.println(x));
+	void checkForAdditional() {		
+		int nu = checker.getAdditonalMenuAndSubMenuItems().size();
+		if(nu > 0) {
+			fail("Menu has [" + nu + "] additional elements -> " + checker.getAdditonalMenuAndSubMenuItems().toString());
+		}
 	}	
 }
