@@ -12,7 +12,7 @@ import test_result.ResultDisabled;
 import test_result.ResultFailed;
 import test_result.ResultPassed;
 import test_result.TestResult;
-import xml_reader.ConfigReader;
+import xml_reader.config_file.ConfigReader;
 
 /**
  * @author Steve Brown

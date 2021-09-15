@@ -28,7 +28,7 @@ import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import providers.XMLFileProvider;
 import test_data.UserProvider;
-import xml_reader.ConfigReader;
+import xml_reader.config_file.ConfigReader;
 
 @ExtendWith(TestResultLogger.class)
 class TopRightNavBar_Personnel_ElementsTests {	

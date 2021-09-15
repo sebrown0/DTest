@@ -69,7 +69,7 @@ import object_models.panels.menu.reports.PayrollReports;
 import object_models.panels.menu.reports.Payslips;
 import providers.XMLFileProvider;
 import test_data.UserProvider;
-import xml_reader.ConfigReader;
+import xml_reader.config_file.ConfigReader;
 /**
  * @author Steve Brown
  * 

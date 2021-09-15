@@ -3,7 +3,7 @@
  */
 package app;
 
-import xml_reader.TestPackage;
+import xml_reader.test_file.TestPackage;
 
 /**
  * @author Steve Brown

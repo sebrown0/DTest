@@ -1,7 +1,7 @@
 /**
  * 
  */
-package xml_reader;
+package xml_reader.test_file;
 
 /**
  * @author Steve Brown

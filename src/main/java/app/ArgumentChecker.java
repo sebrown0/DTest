@@ -13,8 +13,8 @@ import org.apache.logging.log4j.Logger;
 import exceptions.InvalidArgumentException;
 import object_models.modules.Modules;
 import providers.XMLFileProvider;
-import xml_reader.TestPackage;
-import xml_reader.IncludedTestsReader;
+import xml_reader.test_file.IncludedTestsReader;
+import xml_reader.test_file.TestPackage;
 
 /**
  * @author Steve Brown

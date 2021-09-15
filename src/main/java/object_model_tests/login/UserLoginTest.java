@@ -13,7 +13,7 @@ import logging.TestResultLogger;
 import object_models.helpers.User;
 import object_models.pages.UserLoginPage;
 import providers.XMLFileProvider;
-import xml_reader.ConfigReader;
+import xml_reader.config_file.ConfigReader;
 
 /**
  * @author Steve Brown

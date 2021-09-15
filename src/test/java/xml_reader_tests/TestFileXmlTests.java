@@ -8,10 +8,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import providers.XMLFileProvider;
-import xml_reader.TestClass;
-import xml_reader.IncludedTestsReader;
-import xml_reader.TestClass.TestPriority;
-import xml_reader.TestPackage;
+import xml_reader.test_file.IncludedTestsReader;
+import xml_reader.test_file.TestClass;
+import xml_reader.test_file.TestPackage;
+import xml_reader.test_file.TestClass.TestPriority;
 
 /**
  * @author Steve Brown

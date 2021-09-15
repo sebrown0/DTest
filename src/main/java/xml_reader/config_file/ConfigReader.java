@@ -1,7 +1,7 @@
 /**
  * 
  */
-package xml_reader;
+package xml_reader.config_file;
 import org.openqa.selenium.WebDriver;
 
 import factories.DriverFactory;

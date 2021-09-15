@@ -11,7 +11,7 @@ import dto.Employee;
 import providers.EmployeeFromXml;
 import providers.EmployeeProvider;
 import providers.XMLFileProvider;
-import xml_reader.ConfigReader;
+import xml_reader.config_file.ConfigReader;
 
 class XMLReaderTests {
 	private static ConfigReader reader;
