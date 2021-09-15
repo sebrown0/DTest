@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ** The name of the TestPackage and file should be the 
+  ** same as the package that the test classe(s) are in.
+  
+  ** Applicable is the module(s) that the test(s) are
+  ** applicable for.
+  
+  ** Each class is a JUNIT test class in the TestPackage.
+  ** The priority of the test class is represented 
+  ** by the enum { HIGH, MED, LOW }  
+ -->
+<TestPackage name="login" applicable="all">	
+	<Classes>
+		<Class priority="high">UserLoginTest</Class>
+	</Classes>		
+</TestPackage>

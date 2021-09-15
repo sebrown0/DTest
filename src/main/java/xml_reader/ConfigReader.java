@@ -23,14 +23,14 @@ public class ConfigReader implements WebDriverGetter, ResultWritterGetter {
 
 	@Override
 	public WebDriver getDriver() {
-		return DriverFactory.getDriver(XMLFileContents.getDriverName(xmlFile));
+		return DriverFactory.getDriver(ConfigFileContents.getDriverName(xmlFile));
 	}
 
 	@Override
 	public ResultWriter getResultWriter(String testSuiteName) {		
 		return ReportingStrategyFactory.getResultWriter(
-				XMLFileContents.getResultStrategyName(xmlFile), 
-				XMLFileContents.getLogDir(xmlFile), 
+				ConfigFileContents.getResultStrategyName(xmlFile), 
+				ConfigFileContents.getLogDir(xmlFile), 
 				testSuiteName);
 	}
 }

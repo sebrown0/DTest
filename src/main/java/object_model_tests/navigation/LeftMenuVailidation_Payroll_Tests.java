@@ -28,7 +28,7 @@ class LeftMenuVailidation_Payroll_Tests {
 	private static UserLoginPage userLogin;
 	private static ConfigReader configReader;
 	private static LeftMenuPayroll menuPayroll;
-
+	
 	@BeforeAll	
 	static void setup() throws NullDriverException, InterruptedException, ExecutionException {	
 		configReader = new ConfigReader(XMLFileProvider.PROD_CONFIG_FILE_PATH);

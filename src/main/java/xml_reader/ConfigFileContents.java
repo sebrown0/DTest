@@ -2,8 +2,8 @@ package xml_reader;
 
 import xml_file.XMLFile;
 
-public class XMLFileContents {
-	private XMLFileContents() {	}
+public class ConfigFileContents {
+	private ConfigFileContents() {	}
 	
 	public static String getDriverName(XMLFile xmlFile) {
 		 return xmlFile.getElement("WebDriver").getTextContent();
