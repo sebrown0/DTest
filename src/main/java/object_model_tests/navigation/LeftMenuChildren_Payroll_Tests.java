@@ -81,7 +81,7 @@ import xml_reader.config_file.ConfigReader;
  * i.e. Reports -> Payroll Reports
  */
 @ExtendWith(TestResultLogger.class)
-class LeftMenuChildren_Payroll_Tests {	
+public class LeftMenuChildren_Payroll_Tests {	
 	private static WebDriver driver;
 	private static UserLoginPage userLogin;
 	private static ConfigReader configReader;	
