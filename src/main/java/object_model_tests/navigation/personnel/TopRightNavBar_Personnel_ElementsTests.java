@@ -1,4 +1,4 @@
-package object_model_tests.navigation;
+package object_model_tests.navigation.personnel;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

@@ -1,20 +1,24 @@
 
 package app.test_runner;
 
+import static org.junit.platform.engine.discovery.ClassNameFilter.includeClassNamePatterns;
 import static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.asynchttpclient.util.HttpConstants.Methods;
-import org.junit.jupiter.api.Test;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.platform.engine.DiscoverySelector;
+import org.junit.platform.engine.discovery.ClassSelector;
+import org.junit.platform.launcher.Launcher;
+import org.junit.platform.launcher.LauncherDiscoveryRequest;
+import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder;
+import org.junit.platform.launcher.core.LauncherFactory;
+import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
 
 import app.AppArguments;
-import logging.LogFactory;
-import object_model_tests.TestClass;
-import providers.XMLFileProvider;
-import xml_reader.config_file.ConfigReader;
+import xml_reader.test_file.TestClass;
 import xml_reader.test_file.TestPackage;
 
 /**
@@ -24,65 +28,58 @@ import xml_reader.test_file.TestPackage;
 public class TestRunner {
 	private AppArguments args;
 	private TestPackage testPackage;
+	private Logger logger = LogManager.getLogger();
 	
-	LogFactory l;
 	public TestRunner(AppArguments args) {
 		this.args = args;
 		this.testPackage = args.getTestPackage();
 	}
-	
+		
 	public void runTests() {
 		System.out.println("\nRunning tests for: " + args.getTestFileName());
 		System.out.println("\nRunning package: " + args.getTestPackage().getPackageName());
 		
-//		SummaryGeneratingListener listner = new SummaryGeneratingListener();
-//		
-//		LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder.request()
-//			.selectors(getSelectors())
-//			.filters(includeClassNamePatterns(".*"))				
-//			.build();
-//		
-//		Launcher launcher = LauncherFactory.create();
-//				launcher.registerTestExecutionListeners(listner);
-//				launcher.execute(request);
-		getSelectors();
-	}
-
-	private DiscoverySelector[] getSelectors() {
-		DiscoverySelector[] selectors = new DiscoverySelector[testPackage.getTestClasses().size()];
-		final String packagePath = "object_model_tests."  + testPackage.getPackageName() + "."; 
+		SummaryGeneratingListener listner = new SummaryGeneratingListener();
 		
-		testPackage.getTestClasses().forEach(c -> {
-			int i = 0;
-			final String clazzName = packagePath + c.getName();
-			try {
-				Class<?> clazz = Class.forName(clazzName);
-//				Class<?> clazz = Class.forName("app.test_runner.XXX");
-				TestClass testClazz = (TestClass)clazz.getDeclaredConstructor(ConfigReader.class).newInstance(new ConfigReader(XMLFileProvider.PROD_CONFIG_FILE_PATH));
-				Method[] methods = testClazz.getMethods();
-				loopMethods(methods, testClazz);
-				testClazz.tearDown();
-				selectors[i] = selectClass(Class.forName(clazzName));
-//			} catch (IllegalArgumentException | SecurityException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-			} catch (IllegalArgumentException | SecurityException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}				
-		});
-		return selectors;
+		DiscoverySelector[] selectors  = getSelectors();
+
+		LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder.request()
+		.selectors(selectors)
+		.filters(includeClassNamePatterns(".*"))				
+		.build();
+		
+		Launcher launcher = LauncherFactory.create();
+			launcher.registerTestExecutionListeners(listner);
+			launcher.execute(request);
+	}
+		
+	private DiscoverySelector[] getSelectors() {
+		List<DiscoverySelector> selectors = new ArrayList<>();		
+		List<TestClass> classes = testPackage.getTestClasses();		
+		
+		createSelectorsFromTestClasses(selectors, classes);
+		return selectors.toArray(new DiscoverySelector[0]);
 	}
 
-	private void loopMethods(Method[] methods, TestClass testClazz) {
-		for (Method m : methods) {
-			if(m.getAnnotation(Test.class) != null) {
-				System.out.println("->" + m.getName());
-				try {
-					m.invoke(testClazz, null);
-				} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+	private void createSelectorsFromTestClasses(List<DiscoverySelector> selectors, List<TestClass> classes) {
+		final String packagePath = "object_model_tests."  + testPackage.getPackageName() + ".";		
+		for (TestClass testClass : classes) {
+			final String clazzName = packagePath + testClass.getName();
+			try {				
+				ClassSelector selector = selectClass(Class.forName(clazzName));
+				if(!(selector == null)) {
+					selectors.add(selector);
+				}else {
+					logger.error("Selector for [" + clazzName + "] is null");
+				}				 				
+			} catch (Exception e) {
+				logger.error("Could not get class for name [" + clazzName + "]. This test suite will be ignored");
+			}			
 		}
-	}
+	}	
 }
+
+
+
+
+
