@@ -14,7 +14,7 @@
 <TestPackage name="navigation.payroll" applicable="Payroll">	
 	<Classes>
 		<Class priority="high">LeftMenuVailidation_Payroll_Tests</Class>
-		<Class priority="high">TopRightNavBar_Payroll_ElementsTests</Class>  
+		<!-- <Class priority="high">TopRightNavBar_Payroll_ElementsTests</Class> -->  
 		<!-- <Class priority="high">TopRightNavBar_Payroll_ElementsTests</Class>  --> 
 	</Classes>		
 </TestPackage>

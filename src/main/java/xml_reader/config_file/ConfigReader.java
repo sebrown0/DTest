@@ -15,9 +15,16 @@ import xml_file.XMLFile;
  */
 public class ConfigReader implements WebDriverGetter, ResultWritterGetter {
 	private XMLFile xmlFile;
-		
+	private static final String CONFIG_FILE_PATH = "./config/config.xml";
+	
+	public ConfigReader() {
+		System.out.println("ConfigReader()");
+		xmlFile = new XMLFile(CONFIG_FILE_PATH);
+	}	
+	
+	// Use if we want to specifiy the location of the config file.
 	public ConfigReader(String filePath) {
-		super();		
+		System.out.println("ConfigReader(String filePath)");
 		xmlFile = new XMLFile(filePath);
 	}	
 

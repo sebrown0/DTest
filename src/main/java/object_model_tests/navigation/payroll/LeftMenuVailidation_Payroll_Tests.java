@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 
+import app.test_runner.ConfigParameterResolver;
 import exceptions.NullDriverException;
 import logging.TestResultLogger;
 import object_models.helpers.MenuChecker;
@@ -18,20 +19,18 @@ import object_models.navigation.left_side_menu.LeftMenu;
 import object_models.navigation.left_side_menu.LeftMenuPayroll;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
-import providers.XMLFileProvider;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
+@ExtendWith(ConfigParameterResolver.class)
 @ExtendWith(TestResultLogger.class)
 public class LeftMenuVailidation_Payroll_Tests {	
 	private static WebDriver driver;
-	private static UserLoginPage userLogin;
-	private static ConfigReader configReader;
-	private static LeftMenuPayroll menuPayroll;	
-		
+	private static UserLoginPage userLogin;	
+	private static LeftMenuPayroll menuPayroll;
+	
 	@BeforeAll	
-	public static void setup() throws NullDriverException, InterruptedException, ExecutionException {	
-		configReader = new ConfigReader(XMLFileProvider.PROD_CONFIG_FILE_PATH);
+	public static void setup(ConfigReader configReader) throws NullDriverException, InterruptedException, ExecutionException {
 		// Get a web driver as specified in the config.xml		
 		driver = configReader.getDriver();
 		// Get a login page, with the required module loaded.
@@ -78,3 +77,16 @@ public class LeftMenuVailidation_Payroll_Tests {
 	}
 	
 }
+//private ConfigReader configReader;
+
+//public LeftMenuVailidation_Payroll_Tests(ConfigReader configReader)	throws NullDriverException, InterruptedException, ExecutionException {
+//	this.configReader = configReader;
+//	// Get a web driver as specified in the config.xml		
+//	driver = configReader.getDriver();
+//	// Get a login page, with the required module loaded.
+//	userLogin = new UserLoginPage(driver, new PayrollModuleLoader(driver));
+//	// Login.
+//	HomePage hp = userLogin.loginValidUser(UserProvider.userPortal());
+//	// Get the payroll elements.
+//	menuPayroll = (LeftMenuPayroll) hp.getLeftMenu().getElements();		
+//}

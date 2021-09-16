@@ -4,9 +4,10 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
 import org.junit.jupiter.api.extension.TestWatcher;
 
-import providers.XMLFileProvider;
+import app.test_runner.ConfigParameterResolver;
 import reporting.strategy.ResultWriter;
 import test_result.ResultDisabled;
 import test_result.ResultFailed;
@@ -26,27 +27,43 @@ import xml_reader.config_file.ConfigReader;
 public class TestResultLogger implements TestWatcher, BeforeAllCallback {
 	private ResultWriter resultWriter;
 	private ConfigReader configReader;
+	private String className;
 	
-	@Override
-	public void beforeAll(ExtensionContext context) throws Exception {
-		configReader = new ConfigReader(XMLFileProvider.PROD_CONFIG_FILE_PATH);
-		resultWriter = configReader.getResultWriter(context.getDisplayName());		
+	/*
+	 * The ConfigReader is loaded by ConfigParameterResolver
+	 * and will not be available in this classes beforeAll
+	 * method as that is loaded b4 ConfigParameterResolver.
+	 * So the first time the ResultWriter is required from
+	 * ConfigReader it's loaded from the store.   
+	 */
+	private ResultWriter getResultWriter(ExtensionContext context) {		
+		if(resultWriter == null) {
+			configReader = (ConfigReader) context.getStore(Namespace.GLOBAL).get(ConfigParameterResolver.PROJECT_ID);
+			resultWriter = configReader.getResultWriter(className);		
+		}
+		return resultWriter;
 	}
 	
 	@Override
-  public void testSuccessful(ExtensionContext context) {		
-		resultWriter.writeResult(new TestResult(new ResultPassed(), context));
+	public void beforeAll(ExtensionContext context) throws Exception {
+		className = context.getDisplayName();
+	}
+	
+	@Override
+  public void testSuccessful(ExtensionContext context) {
+		getResultWriter(context).writeResult(new TestResult(new ResultPassed(), context));
   } 
   
   @Override
   public void testFailed(ExtensionContext context, Throwable cause) {
-		resultWriter.writeResult(new TestResult(new ResultFailed(cause), context));		
+  	getResultWriter(context).writeResult(new TestResult(new ResultFailed(cause), context));		
   }
   
 	@Override
 	public void testDisabled(ExtensionContext context, Optional<String> reason) {		
-		resultWriter.writeResult(new TestResult(new ResultDisabled(reason), context));
+		getResultWriter(context).writeResult(new TestResult(new ResultDisabled(reason), context));
 	}
+
   		
 //@Override
 //public void testAborted(ExtensionContext context, Throwable cause) {
