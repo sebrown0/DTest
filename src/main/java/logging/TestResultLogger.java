@@ -40,7 +40,7 @@ public class TestResultLogger implements TestWatcher, BeforeAllCallback {
 	 */
 	private ResultWriter getResultWriter(ExtensionContext context) {		
 		if(resultWriter == null) {
-			configReader = (ConfigReader) context.getStore(Namespace.GLOBAL).get(ConfigParameterResolver.PROJECT_ID);
+			configReader = (ConfigReader) context.getStore(Namespace.GLOBAL).get(ConfigParameterResolver.CONFIG_PARAM_ID);
 			resultWriter = configReader.getResultWriter(className);		
 		}
 		return resultWriter;

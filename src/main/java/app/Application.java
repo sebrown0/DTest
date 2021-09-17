@@ -17,7 +17,7 @@ public class Application {
 	 **/
 	public static void main(String[] args) {
 		StartUp startUp = new StartUp(args);
-		startUp.start().runTests().finish();		
+		startUp.welcome().runTests().finish();		
 	}
 	
 }

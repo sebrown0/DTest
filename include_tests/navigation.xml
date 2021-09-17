@@ -2,7 +2,7 @@
 
 <!--
   ** The name of the TestPackage and file should be the 
-  ** same as the package that the test classe(s) are in.
+  ** same as the package that the test class(es) are in.
   
   ** Applicable is the module(s) that the test(s) are
   ** applicable for.

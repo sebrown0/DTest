@@ -20,6 +20,11 @@ import providers.XMLFileProvider;
 /**
  * @author Steve Brown
  *
+ * Starts the application.
+ * 	1. Writes welcome msg.
+ *  2. Checks that the cmnd line args are valid.
+ *  3. If valid run the tests (TestRunner).
+ *  4. If not valid log and quit. *  
  */
 public class StartUp {
 	private String[] args;	
@@ -27,10 +32,10 @@ public class StartUp {
 	private ExecutorService executor = Executors.newFixedThreadPool(2);
 	
 	public StartUp(String[] args) {
-		this.args = args;		
+		this.args = args;
 	}
 
-	public StartUp start() {		
+	public StartUp welcome() {		
 		logWelcomeMessage();		
 		return this;
 	}	
@@ -80,9 +85,7 @@ public class StartUp {
 	private void logAndQuit(LogMessage logError) {		
 		FutureTask<String> future = new FutureTask<String>(logError, "Msg Written");
 		executor.submit(future);
-		while(!future.isDone()) {
-			// Block
-		}
+		blockUntilValuesWrittenToLog(future);
 		logError.quit();	
 	}
 
@@ -138,9 +141,11 @@ public class StartUp {
 		LogMessage logInfo = new LogInfo("-- Finished --", executor);
 		FutureTask<String> future = new FutureTask<String>(logInfo, "Msg Written");
 		executor.submit(future);
-		while(!future.isDone()) {
-			// Block
-		}
+		blockUntilValuesWrittenToLog(future);
 		logInfo.quit();	
+	}
+	
+	public void blockUntilValuesWrittenToLog(FutureTask<String> future) {
+		while(!future.isDone()) {} // Block
 	}
 }

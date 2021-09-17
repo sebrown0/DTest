@@ -24,22 +24,24 @@ import xml_reader.test_file.TestPackage;
 /**
  * @author Steve Brown
  *
+ * Discover and run tests.
  */
 public class TestRunner {
-	private AppArguments args;
 	private TestPackage testPackage;
 	private Logger logger = LogManager.getLogger();
+	private String fileName;
+	private String packageName;
 	
 	public TestRunner(AppArguments args) {
-		this.args = args;
 		this.testPackage = args.getTestPackage();
+		this.fileName = args.getTestFileName();
+		this.packageName = args.getTestPackage().getPackageName();
 	}
 		
-	public void runTests() {
-		System.out.println("\nRunning tests for: " + args.getTestFileName());
-		System.out.println("\nRunning package: " + args.getTestPackage().getPackageName());
-		
+	public void runTests() {		
 		SummaryGeneratingListener listner = new SummaryGeneratingListener();
+		
+		writeStartMsgForTestClass();
 		
 		DiscoverySelector[] selectors  = getSelectors();
 
@@ -53,6 +55,13 @@ public class TestRunner {
 			launcher.execute(request);
 	}
 		
+	private void writeStartMsgForTestClass() {
+		System.out.println("\nRunning tests for: " + fileName);
+		System.out.println("\nRunning package: " + packageName);
+//		logger.info("\nRunning tests for: " + fileName);
+//		logger.info("\nRunning package: " + packageName);
+	}
+	
 	private DiscoverySelector[] getSelectors() {
 		List<DiscoverySelector> selectors = new ArrayList<>();		
 		List<TestClass> classes = testPackage.getTestClasses();		
@@ -64,16 +73,18 @@ public class TestRunner {
 	private void createSelectorsFromTestClasses(List<DiscoverySelector> selectors, List<TestClass> classes) {
 		final String packagePath = "object_model_tests."  + testPackage.getPackageName() + ".";		
 		for (TestClass testClass : classes) {
-			final String clazzName = packagePath + testClass.getName();
+			final String clazzUnderTest = testClass.getName();
+			final String clazzPath = packagePath + clazzUnderTest;
+			logger.info("Starting process for [" + clazzUnderTest + "]");
 			try {				
-				ClassSelector selector = selectClass(Class.forName(clazzName));
-				if(!(selector == null)) {
+				ClassSelector selector = selectClass(Class.forName(clazzPath));
+				if(!(selector == null)) {					
 					selectors.add(selector);
 				}else {
-					logger.error("Selector for [" + clazzName + "] is null");
+					logger.error("Selector for [" + clazzPath + "] is null");
 				}				 				
 			} catch (Exception e) {
-				logger.error("Could not get class for name [" + clazzName + "]. This test suite will be ignored");
+				logger.error("Could not get class for name [" + clazzPath + "]. This test suite will be ignored");
 			}			
 		}
 	}	

@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.launcher.Launcher;
 import org.junit.platform.launcher.LauncherDiscoveryRequest;
-import org.junit.platform.launcher.TestPlan;
+//import org.junit.platform.launcher.TestPlan;
 import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder;
 import org.junit.platform.launcher.core.LauncherFactory;
 import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
@@ -34,7 +34,7 @@ class TestRunnerTests {
 					.filters(includeClassNamePatterns(".*"))					
 					.build();
 			Launcher launcher = LauncherFactory.create();
-			TestPlan testPlan = launcher.discover(request);
+//			TestPlan testPlan = launcher.discover(request);
 			launcher.registerTestExecutionListeners(listner);
 			launcher.execute(request);	
 		}

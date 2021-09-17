@@ -21,7 +21,7 @@ public class LoginPageResolverPayroll extends LoginPageResolver {
 	
 	@Override
 	public Object resolveParameter(ParameterContext pc, ExtensionContext ec) throws ParameterResolutionException {
-		ConfigReader reader = (ConfigReader) ec.getStore(Namespace.GLOBAL).get(ConfigParameterResolver.PROJECT_ID);
+		ConfigReader reader = (ConfigReader) ec.getStore(Namespace.GLOBAL).get(ConfigParameterResolver.CONFIG_PARAM_ID);
 		WebDriver driver = reader.getDriver();
 		return new UserLoginPage(driver, new PayrollModuleLoader(driver));
 	}

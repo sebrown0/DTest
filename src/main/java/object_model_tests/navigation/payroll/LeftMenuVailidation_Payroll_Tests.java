@@ -70,16 +70,3 @@ public class LeftMenuVailidation_Payroll_Tests {
 	}
 	
 }
-//private ConfigReader configReader;
-
-//public LeftMenuVailidation_Payroll_Tests(ConfigReader configReader)	throws NullDriverException, InterruptedException, ExecutionException {
-//	this.configReader = configReader;
-//	// Get a web driver as specified in the config.xml		
-//	driver = configReader.getDriver();
-//	// Get a login page, with the required module loaded.
-//	userLogin = new UserLoginPage(driver, new PayrollModuleLoader(driver));
-//	// Login.
-//	HomePage hp = userLogin.loginValidUser(UserProvider.userPortal());
-//	// Get the payroll elements.
-//	menuPayroll = (LeftMenuPayroll) hp.getLeftMenu().getElements();		
-//}

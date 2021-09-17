@@ -14,9 +14,10 @@ import xml_reader.config_file.ConfigReader;
 /**
  * @author Steve Brown
  *
+ * Get a default ConfigReader.
  */
 public class ConfigParameterResolver implements ParameterResolver {
-	public static final String PROJECT_ID = ConfigReader.class.getName() + ".PROJECT_ID";
+	public static final String CONFIG_PARAM_ID = ConfigReader.class.getName() + ".PARAM_ID";
 	
 	@Override
 	public boolean supportsParameter(ParameterContext pc, ExtensionContext ec) throws ParameterResolutionException {    
@@ -26,7 +27,7 @@ public class ConfigParameterResolver implements ParameterResolver {
 	@Override
 	public Object resolveParameter(ParameterContext pc, ExtensionContext ec) throws ParameterResolutionException {
 		ConfigReader reader = new ConfigReader();
-		ec.getStore(Namespace.GLOBAL).put(PROJECT_ID, reader);
+		ec.getStore(Namespace.GLOBAL).put(CONFIG_PARAM_ID, reader);
 		return reader;
 	}
 
