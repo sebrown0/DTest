@@ -18,8 +18,6 @@ import org.openqa.selenium.WebElement;
 
 import controls.MenuMap;
 import object_models.forms.ContainerAction;
-import object_models.forms.menu.payroll.CloseAndLockPayroll;
-import object_models.forms.menu.payroll.InitialisePayroll;
 import object_models.panels.menu.absence_statistics.EmployeeAccruals;
 import object_models.panels.menu.absence_statistics.OtherAbsenceStatistics;
 import object_models.panels.menu.additional_hours.ApplyAdditionalHours;
@@ -51,11 +49,13 @@ import object_models.panels.menu.parents.SettingsPayroll;
 import object_models.panels.menu.parents.YearlyReports;
 import object_models.panels.menu.payroll.CalculatePayroll;
 import object_models.panels.menu.payroll.CalculationStatistics;
+import object_models.panels.menu.payroll.CloseAndLockPayroll;
 import object_models.panels.menu.payroll.DetailedAdjustments;
 import object_models.panels.menu.payroll.ExcelPayrollUploads;
 import object_models.panels.menu.payroll.GlobalAbsences;
 import object_models.panels.menu.payroll.GlobalAdjustments;
 import object_models.panels.menu.payroll.GlobalExtras;
+import object_models.panels.menu.payroll.InitialisePayroll;
 import object_models.panels.menu.payroll.PayrollDetails;
 import object_models.panels.menu.payroll.PayrollDetailsDrillDown;
 import object_models.panels.menu.reports.AbsenceRelatedReports;
@@ -72,11 +72,11 @@ import object_models.strategies.click.ClickUsingJavaScript;
  * @author Steve Brown
  *
  */
-public class LeftMenu {
+public class LeftMenu implements LeftMenuActions {
 	private Map<String, WebElement> anchors;	
 	private WebDriver driver;
 	private Logger logger = LogManager.getLogger();
-	private LeftMenuElements elements;
+	private LeftMenuElements elements;	
 	
 	public LeftMenu(WebDriver driver) {
 		this.driver = driver;
@@ -103,34 +103,36 @@ public class LeftMenu {
 		return elements;
 	}
 	
-	public LeftMenu clickParent(String prntName) {
+	@Override
+	public LeftMenuActions clickParent(String prntName) {
 		WebElement e = anchors.get(prntName);			
-//		System.out.println("href - " + e.getAttribute("href"));
+		//System.out.println("href - " + e.getAttribute("href"));
 		e.click();
 		return this;
 	}
-	
-	public Optional<ContainerAction> load(String elementName) {
+
+	@Override
+	public Optional<ContainerAction> clickAndLoad(String elementName) {
 		WebElement e = anchors.get(elementName);
 		logger.info("Loading [" + elementName + "]");
 		ClickUsingJavaScript.performClick(driver, e.getAttribute("href"));
 		Optional<ContainerAction> child = Optional.empty();
-
+		
 		try {
-			child = Optional.of(get(elementName).get());
+			child = Optional.of(getElement(elementName).get());
 		} catch (Exception ex) {
 			logger.error("Could not get menu element [" + elementName + "]");
 		}
 		return child;
 	}
-	
-	private Future<ContainerAction> get(String elementName){
+
+	private Future<ContainerAction> getElement(String elementName) {
 		ExecutorService executor = Executors.newSingleThreadExecutor();
 		return executor.submit(() -> {
 			return ChildElementFactory.getChild(elementName, driver);
 		});
 	}
-
+	
 	private static class ChildElementFactory{
 		public static ContainerAction getChild(String childName, WebDriver driver) {
 			ContainerAction child = null;
@@ -314,4 +316,6 @@ public class LeftMenu {
 			return child;
 		}
 	}
+
+
 }

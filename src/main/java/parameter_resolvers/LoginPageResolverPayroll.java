@@ -9,7 +9,7 @@ import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.openqa.selenium.WebDriver;
 
-import object_models.modules.PayrollModuleLoader;
+import object_models.modules.payroll.PayrollModuleLoader;
 import object_models.pages.UserLoginPage;
 import xml_reader.config_file.ConfigReader;
 

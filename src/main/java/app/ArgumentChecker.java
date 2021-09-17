@@ -11,7 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import exceptions.InvalidArgumentException;
-import object_models.modules.Modules;
+import object_models.modules.common.Modules;
 import providers.XMLFileProvider;
 import xml_reader.test_file.IncludedTestsReader;
 import xml_reader.test_file.TestPackage;

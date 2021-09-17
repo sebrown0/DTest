@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_models.modules;
+package object_models.modules.common;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

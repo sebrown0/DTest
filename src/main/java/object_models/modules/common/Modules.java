@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_models.modules;
+package object_models.modules.common;
 
 import java.util.Arrays;
 import java.util.List;

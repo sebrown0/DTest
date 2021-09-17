@@ -10,8 +10,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import object_models.forms.menu.payroll.CloseAndLockPayroll;
-import object_models.forms.menu.payroll.InitialisePayroll;
 import object_models.panels.menu.absence_statistics.EmployeeAccruals;
 import object_models.panels.menu.absence_statistics.OtherAbsenceStatistics;
 import object_models.panels.menu.additional_hours.ApplyAdditionalHours;
@@ -44,11 +42,13 @@ import object_models.panels.menu.parents.SettingsPayroll;
 import object_models.panels.menu.parents.YearlyReports;
 import object_models.panels.menu.payroll.CalculatePayroll;
 import object_models.panels.menu.payroll.CalculationStatistics;
+import object_models.panels.menu.payroll.CloseAndLockPayroll;
 import object_models.panels.menu.payroll.DetailedAdjustments;
 import object_models.panels.menu.payroll.ExcelPayrollUploads;
 import object_models.panels.menu.payroll.GlobalAbsences;
 import object_models.panels.menu.payroll.GlobalAdjustments;
 import object_models.panels.menu.payroll.GlobalExtras;
+import object_models.panels.menu.payroll.InitialisePayroll;
 import object_models.panels.menu.payroll.PayrollDetails;
 import object_models.panels.menu.payroll.PayrollDetailsDrillDown;
 import object_models.panels.menu.reports.AbsenceRelatedReports;
@@ -74,7 +74,7 @@ import object_models.panels.menu.reports.Payslips;
  * 	Key = menu item name, i.e. Employees.
  *	Val = Optional list of sub-menu names. 
  */
-public class LeftMenuPayroll implements LeftMenuElements{
+public class LeftMenuPayroll implements LeftMenuElements {
 
 	private static final List<String> EMPLOYEE_LIST = Arrays.asList(
 			EmployeeList.MENU_TITLE

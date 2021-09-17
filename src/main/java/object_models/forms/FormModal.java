@@ -12,7 +12,7 @@ import object_models.helpers.title.TitleModalForm;
  * @author Steve Brown
  *
  */
-public class FormModal implements ContainerAction {
+public abstract class FormModal implements ContainerAction {
 	private WebDriver driver;
 	private PageTitle title;
 	private Logger logger = LogManager.getLogger();
@@ -37,4 +37,5 @@ public class FormModal implements ContainerAction {
 		}		
 	}
 		
+	public abstract String getParentName();
 }

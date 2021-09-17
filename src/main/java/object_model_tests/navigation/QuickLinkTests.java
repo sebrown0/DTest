@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
 import exceptions.NullDriverException;
-import object_models.modules.PayrollModuleLoader;
+import object_models.modules.payroll.PayrollModuleLoader;
 import object_models.navigation.top_right_nav_bar.TopRightNavBar;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;

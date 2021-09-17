@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_models.modules;
+package object_models.modules.common;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

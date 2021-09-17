@@ -1,11 +1,12 @@
 /**
  * 
  */
-package object_models.modules;
+package object_models.modules.personnel;
 
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.WebDriver;
 
+import object_models.modules.common.ModuleElements;
 import object_models.navigation.left_side_menu.LeftMenu;
 import object_models.navigation.top_right_nav_bar.NavBarPersonnelElements;
 import object_models.navigation.top_right_nav_bar.elements.NavBarElementStrategy;

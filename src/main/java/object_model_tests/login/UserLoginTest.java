@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 import logging.TestResultLogger;
 import object_models.helpers.User;
 import object_models.pages.UserLoginPage;
-import providers.XMLFileProvider;
+import parameter_resolvers.ConfigParameterResolver;
 import xml_reader.config_file.ConfigReader;
 
 /**
@@ -20,14 +20,15 @@ import xml_reader.config_file.ConfigReader;
  *
  * Login for a given user from resources.test_data.UserProvider
  */
-@ExtendWith(TestResultLogger.class)
+@ExtendWith({ 
+	ConfigParameterResolver.class, 
+	TestResultLogger.class 
+})
 class UserLoginTest {
 	private static WebDriver driver;
-	private static ConfigReader configReader;
-	
+
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-		configReader = new ConfigReader(XMLFileProvider.PROD_CONFIG_FILE_PATH);
+	static void setUpBeforeClass(ConfigReader configReader) throws Exception {
 		// Get a web driver as specified in the config.xml		
 		driver = configReader.getDriver();
 	}

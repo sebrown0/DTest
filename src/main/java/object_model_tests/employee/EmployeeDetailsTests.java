@@ -16,7 +16,7 @@ import org.openqa.selenium.WebDriver;
 import dto.Employee;
 import exceptions.NullDriverException;
 import logging.TestResultLogger;
-import object_models.modules.PayrollModuleLoader;
+import object_models.modules.payroll.PayrollModuleLoader;
 import object_models.navigation.left_side_menu.LeftMenu;
 import object_models.pages.UserLoginPage;
 import object_models.panels.menu.employees.EmployeeDetails;
@@ -50,7 +50,7 @@ class EmployeeDetailsTests {
 		// Load the menu.
 		menu = new LeftMenu(driver);
 		// Load the employee details page.
-		empDetails = (EmployeeDetails) menu.clickParent("Employees").load(EmployeeDetails.MENU_TITLE).get();
+		empDetails = (EmployeeDetails) menu.clickParent("Employees").clickAndLoad(EmployeeDetails.MENU_TITLE).get();
 		// Get the employee we're going to use with required fields from the provider.
 		EmployeeProvider empProvider = new EmployeeFromXml();
 		emp = empProvider.getEmployeeRequired("1");

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_models.modules;
+package object_models.modules.common;
 
 import object_models.navigation.left_side_menu.LeftMenu;
 import object_models.navigation.top_right_nav_bar.elements.NavBarElementStrategy;

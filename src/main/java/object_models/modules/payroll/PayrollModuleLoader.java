@@ -1,10 +1,11 @@
 /**
  * 
  */
-package object_models.modules;
+package object_models.modules.payroll;
 
 import org.openqa.selenium.WebDriver;
 
+import object_models.modules.common.ModuleElements;
 import object_models.navigation.left_side_menu.LeftMenu;
 import object_models.navigation.left_side_menu.LeftMenuPayroll;
 import object_models.navigation.top_right_nav_bar.NavBarPayrollElements;

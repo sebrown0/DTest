@@ -1,9 +1,8 @@
-package object_model_tests.navigation;
+package object_model_tests.navigation.payroll;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -11,14 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 
-import exceptions.NullDriverException;
 import logging.TestResultLogger;
 import object_models.forms.ContainerAction;
-import object_models.forms.menu.payroll.CloseAndLockPayroll;
-import object_models.forms.menu.payroll.InitialisePayroll;
 import object_models.helpers.title.PageTitle;
-import object_models.modules.PayrollModuleLoader;
-import object_models.navigation.left_side_menu.LeftMenu;
+import object_models.navigation.left_side_menu.LeftMenuActions;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import object_models.panels.menu.absence_statistics.EmployeeAccruals;
@@ -52,11 +47,13 @@ import object_models.panels.menu.parents.SettingsPayroll;
 import object_models.panels.menu.parents.YearlyReports;
 import object_models.panels.menu.payroll.CalculatePayroll;
 import object_models.panels.menu.payroll.CalculationStatistics;
+import object_models.panels.menu.payroll.CloseAndLockPayroll;
 import object_models.panels.menu.payroll.DetailedAdjustments;
 import object_models.panels.menu.payroll.ExcelPayrollUploads;
 import object_models.panels.menu.payroll.GlobalAbsences;
 import object_models.panels.menu.payroll.GlobalAdjustments;
 import object_models.panels.menu.payroll.GlobalExtras;
+import object_models.panels.menu.payroll.InitialisePayroll;
 import object_models.panels.menu.payroll.PayrollDetails;
 import object_models.panels.menu.payroll.PayrollDetailsDrillDown;
 import object_models.panels.menu.reports.AbsenceRelatedReports;
@@ -67,7 +64,8 @@ import object_models.panels.menu.reports.GlobalPayrollAnalysis;
 import object_models.panels.menu.reports.HrRelatedReports;
 import object_models.panels.menu.reports.PayrollReports;
 import object_models.panels.menu.reports.Payslips;
-import providers.XMLFileProvider;
+import parameter_resolvers.ConfigParameterResolver;
+import parameter_resolvers.LoginPageResolverPayroll;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 /**
@@ -80,29 +78,24 @@ import xml_reader.config_file.ConfigReader;
  * i.e. Reports, or opening a new page, 
  * i.e. Reports -> Payroll Reports
  */
-@ExtendWith(TestResultLogger.class)
+@ExtendWith({ 
+	ConfigParameterResolver.class, 
+	TestResultLogger.class, 
+	LoginPageResolverPayroll.class })
 public class LeftMenuChildren_Payroll_Tests {	
-	private static WebDriver driver;
-	private static UserLoginPage userLogin;
-	private static ConfigReader configReader;	
-	private static LeftMenu menu;
+	private static WebDriver driver;	
+	private static LeftMenuActions menu;
 	
 	@BeforeAll	
-	static void setup() throws NullDriverException, InterruptedException, ExecutionException {	
-		configReader = new ConfigReader(XMLFileProvider.PROD_CONFIG_FILE_PATH);
-		// Get a web driver as specified in the config.xml		
-		driver = configReader.getDriver();
-		// Get a login page, with the required module loaded.
-		userLogin = new UserLoginPage(driver, new PayrollModuleLoader(driver));
-		// Login.
+	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
 		HomePage hp = userLogin.loginValidUser(UserProvider.userPortal());
-		// Get the menu from home page.
+		driver = hp.getWebDriver();
 		menu = hp.getLeftMenu();
 	}
 				
 	@Test
 	void click_and_get_EmployeeList() {
-		ContainerAction empList = menu.load(EmployeeList.MENU_TITLE).get();
+		ContainerAction empList = menu.clickAndLoad(EmployeeList.MENU_TITLE).get();
 		PageTitle title = empList.getTitle();
 		assertEquals(title.getExpected(), title.getActual());
 		empList.closeElement();
@@ -110,7 +103,7 @@ public class LeftMenuChildren_Payroll_Tests {
 	
 	@Test
 	void click_and_get_Documents() {
-		ContainerAction doc = menu.load(Documents.MENU_TITLE).get();
+		ContainerAction doc = menu.clickAndLoad(Documents.MENU_TITLE).get();
 		PageTitle title = doc.getTitle();
 		assertEquals(title.getExpected(), title.getActual());
 		doc.closeElement();
@@ -298,7 +291,7 @@ public class LeftMenuChildren_Payroll_Tests {
 
 	@Test
 	void click_and_get_PayrollStatistics() {
-		ContainerAction obj = menu.load(PayrollStatistics.MENU_TITLE).get();
+		ContainerAction obj = menu.clickAndLoad(PayrollStatistics.MENU_TITLE).get();
 		PageTitle title = obj.getTitle();
 		assertEquals(title.getExpected(), title.getActual());
 		obj.closeElement();
@@ -403,38 +396,19 @@ public class LeftMenuChildren_Payroll_Tests {
 	 * Helpers below
 	 */
 	private Optional<ContainerAction> loadAndCheckTitle(String prntName, String menuTitle) {
-		Optional<ContainerAction> obj = menu.clickParent(prntName).load(menuTitle);
-//		x(obj, menuTitle);
+		Optional<ContainerAction> obj = menu.clickParent(prntName).clickAndLoad(menuTitle);
 		PageTitle title = obj.get().getTitle();
 		assertEquals(title.getExpected(), title.getActual());
 		return obj;
 	}
 	
 	private Optional<ContainerAction> loadAndCheckTitle(String menuTitle) {
-		Optional<ContainerAction> obj = menu.load(menuTitle);
-//		x(obj, menuTitle);
+		Optional<ContainerAction> obj = menu.clickAndLoad(menuTitle);
 		PageTitle title = obj.get().getTitle();
 		assertEquals(title.getExpected(), title.getActual());
 		return obj;
 	}
-	
-//	private void x(Optional<ContainerAction> obj, String menuTitle) {
-//		obj.ifPresentOrElse(o -> {
-//			PageTitle title = o.getTitle();
-//			assertEquals(title.getExpected(), title.getActual());	
-//		}, 
-////				new Runnable() {
-////					
-////					@Override
-////					public void run() {
-////						// TODO Auto-generated method stub
-////						
-////					}
-////				}
-//			fail("[" + menuTitle + "] failed" )
-//		);		
-//	}
-	
+		
 	private void closePanelAndParent(ContainerAction closer, String prntName) {
 		closeElement(closer);
 		closeParent(prntName);
