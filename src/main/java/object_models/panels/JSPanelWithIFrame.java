@@ -3,6 +3,7 @@
  */
 package object_models.panels;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -22,9 +23,9 @@ public class JSPanelWithIFrame extends JSPanel {
 	}
 
 	private void switchToIFrame(WebDriver driver, String expectedTitle) {
-		iFrame = new IFrame(driver, expectedTitle);
+		iFrame = new IFrame(driver, By.cssSelector("iframe[title='" + expectedTitle + "']"));
 		iFrame.switchUsingTitle();
-	}
+	}	
 		
 	public WebElement getIFrameElement() {
 		return iFrame.getIFrameElement();

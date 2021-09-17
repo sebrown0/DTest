@@ -13,7 +13,7 @@ import object_models.helpers.title.TitleModalForm;
  *
  */
 public abstract class FormModal implements ContainerAction {
-	private WebDriver driver;
+	protected WebDriver driver;
 	private PageTitle title;
 	private Logger logger = LogManager.getLogger();
 			
@@ -28,6 +28,7 @@ public abstract class FormModal implements ContainerAction {
 	}
 
 	@Override
+	//IF WE'RE IN THE iFRAME WILL HAVE TO SWITCH BACK TO THE FORM.
 	public void closeElement() {
 		CloserModalForm closer = new CloserModalForm(driver);
 		try {
@@ -36,6 +37,5 @@ public abstract class FormModal implements ContainerAction {
 			logger.error("Could not close form [" + title.getExpected() + "]");
 		}		
 	}
-		
-	public abstract String getParentName();
+
 }

@@ -12,7 +12,7 @@ import java.util.concurrent.Future;
 
 import org.openqa.selenium.WebElement;
 
-import object_models.navigation.left_side_menu.LeftMenuFactory;
+import object_models.left_menu.common.LeftMenuFactory;
 
 /**
  * @author Steve Brown

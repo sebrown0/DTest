@@ -12,26 +12,23 @@ import org.openqa.selenium.WebElement;
  *
  */
 public class IFrame {
-	private WebDriver driver;	
-	private String title;
+	private WebDriver driver;
+	private By byLocator;
 	private WebElement iFrame;
 	
-	public IFrame(WebDriver driver, String title) {
+	public IFrame(WebDriver driver, By byLocator) {
 		this.driver = driver;
-		this.title = title;
+		this.byLocator = byLocator;
 	}
 		
 	public IFrame switchUsingTitle() {
-		iFrame = driver.findElement(byCssUsingTitle());
+		iFrame = driver.findElement(byLocator);
 		driver.switchTo().frame(iFrame);
 		return this;
 	}
-	
+		
 	public WebElement getIFrameElement() {
 		return iFrame;
 	}
 	
-	private By byCssUsingTitle() {
-		return By.cssSelector("iframe[title='" + title + "']");
-	}
 }

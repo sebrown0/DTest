@@ -5,13 +5,13 @@ package object_models.modules.payroll;
 
 import org.openqa.selenium.WebDriver;
 
+import object_models.left_menu.common.LeftMenu;
+import object_models.left_menu.payroll_only.LeftMenuPayroll;
 import object_models.modules.common.ModuleElements;
-import object_models.navigation.left_side_menu.LeftMenu;
-import object_models.navigation.left_side_menu.LeftMenuPayroll;
-import object_models.navigation.top_right_nav_bar.NavBarPayrollElements;
-import object_models.navigation.top_right_nav_bar.elements.NavBarElementStrategy;
-import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLink;
-import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLinkPayroll;
+import object_models.top_right_nav_bar.all_elements.NavBarElementStrategy;
+import object_models.top_right_nav_bar.payroll.NavBarPayrollElements;
+import object_models.top_right_nav_bar.quick_links.QuickLink;
+import object_models.top_right_nav_bar.quick_links.QuickLinkPayroll;
 import providers.ModuleNames;
 
 /**

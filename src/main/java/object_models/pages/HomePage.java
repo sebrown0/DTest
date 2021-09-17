@@ -10,10 +10,10 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import object_models.left_menu.common.LeftMenu;
 import object_models.modules.common.ModuleElements;
 import object_models.modules.common.ModuleLoader;
-import object_models.navigation.left_side_menu.LeftMenu;
-import object_models.navigation.top_right_nav_bar.TopRightNavBar;;
+import object_models.top_right_nav_bar.common.TopRightNavBar;;
 
 
 /**

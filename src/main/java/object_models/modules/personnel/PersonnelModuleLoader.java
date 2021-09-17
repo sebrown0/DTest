@@ -6,12 +6,12 @@ package object_models.modules.personnel;
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.WebDriver;
 
+import object_models.left_menu.common.LeftMenu;
 import object_models.modules.common.ModuleElements;
-import object_models.navigation.left_side_menu.LeftMenu;
-import object_models.navigation.top_right_nav_bar.NavBarPersonnelElements;
-import object_models.navigation.top_right_nav_bar.elements.NavBarElementStrategy;
-import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLink;
-import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLinkPersonnel;
+import object_models.top_right_nav_bar.all_elements.NavBarElementStrategy;
+import object_models.top_right_nav_bar.personnel.NavBarPersonnelElements;
+import object_models.top_right_nav_bar.quick_links.QuickLink;
+import object_models.top_right_nav_bar.quick_links.QuickLinkPersonnel;
 import providers.ModuleNames;
 
 

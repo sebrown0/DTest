@@ -11,7 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import object_models.panels.employee_creation.WizardStepExecutor;
+import object_models.employee_creation.WizardStepExecutor;
 
 /**
  * @author Steve Brown

@@ -14,11 +14,11 @@ import org.openqa.selenium.WebDriver;
 
 import logging.TestResultLogger;
 import object_models.modules.payroll.PayrollModuleLoader;
-import object_models.navigation.top_right_nav_bar.ElementChecker;
-import object_models.navigation.top_right_nav_bar.TopRightNavBar;
-import object_models.navigation.top_right_nav_bar.elements.quick_links.QuickLinksPayroll;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
+import object_models.top_right_nav_bar.common.ElementChecker;
+import object_models.top_right_nav_bar.common.TopRightNavBar;
+import object_models.top_right_nav_bar.quick_links.QuickLinksPayroll;
 import providers.ModuleNames;
 import providers.XMLFileProvider;
 import test_data.UserProvider;

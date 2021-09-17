@@ -5,24 +5,17 @@ package object_models.helpers.closers;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 /**
  * @author Steve Brown
  *
  */
-public class CloserModalForm implements Closable {
-	private WebDriver driver;
+public class CloserModalForm extends Closer {
+	private static final By LOCATOR = 
+			By.cssSelector("body > div.modal.show > div > div > div.modal-header > button");
 	
 	public CloserModalForm(WebDriver driver) {
-		this.driver = driver;
+		super(driver, LOCATOR);
 	}
-	
-	@Override
-	public void close() throws Exception {
-		By byLocator = By.cssSelector("body > div.modal.show > div > div > div.modal-header > button");
-		WebElement we = driver.findElement(byLocator);
-		we.click();
-	}
-
 }
+

@@ -10,8 +10,8 @@ import org.openqa.selenium.WebDriver;
 
 import logging.TestResultLogger;
 import object_models.helpers.MenuChecker;
-import object_models.navigation.left_side_menu.LeftMenu;
-import object_models.navigation.left_side_menu.LeftMenuPayroll;
+import object_models.left_menu.common.LeftMenu;
+import object_models.left_menu.payroll_only.LeftMenuPayroll;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import parameter_resolvers.ConfigParameterResolver;
@@ -26,17 +26,19 @@ import xml_reader.config_file.ConfigReader;
 public class LeftMenuVailidation_Payroll_Tests {	
 	private static WebDriver driver;
 	private static LeftMenuPayroll menuPayroll;
+	private static LeftMenu leftMenu;
 	
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
 		HomePage hp = userLogin.loginValidUser(UserProvider.userPortal());
 		driver = hp.getWebDriver();
-		menuPayroll = (LeftMenuPayroll) hp.getLeftMenu().getElements();
+		leftMenu = hp.getLeftMenu();
+		menuPayroll = (LeftMenuPayroll) leftMenu.getElements(); 
 	}		
 
 	@Test
 	public void checkForMissing() {
-		MenuChecker checker = new MenuChecker(menuPayroll.getAll(), LeftMenu.getActualMenu(driver));
+		MenuChecker checker = new MenuChecker(menuPayroll.getAll(), leftMenu.getActualMenu());
 		checker.checkMenu();
 		int missing = checker.getMissingItems().size();
 		if(missing > 0) {
@@ -46,7 +48,7 @@ public class LeftMenuVailidation_Payroll_Tests {
 	
 	@Test	
 	public void checkForNew() {		
-		MenuChecker checker = new MenuChecker(menuPayroll.getAll(), LeftMenu.getActualMenu(driver));
+		MenuChecker checker = new MenuChecker(menuPayroll.getAll(), leftMenu.getActualMenu());
 		checker.checkMenu();
 		int nu = checker.getNewMenuItems().size();
 		if(nu > 0) {
@@ -56,7 +58,7 @@ public class LeftMenuVailidation_Payroll_Tests {
 	
 	@Test
 	public void checkForAdditional() {
-		MenuChecker checker = new MenuChecker(menuPayroll.getAll(), LeftMenu.getActualMenu(driver));
+		MenuChecker checker = new MenuChecker(menuPayroll.getAll(), leftMenu.getActualMenu());
 		checker.checkMenu();
 		int nu = checker.getAdditonalMenuAndSubMenuItems().size();
 		if(nu > 0) {
