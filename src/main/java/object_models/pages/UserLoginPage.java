@@ -38,5 +38,4 @@ public class UserLoginPage extends LoadablePage {
 		
 		return new HomePage(driver, moduleLoader);
 	}
-
 }

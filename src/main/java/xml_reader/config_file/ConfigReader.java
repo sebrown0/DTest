@@ -10,7 +10,7 @@ import reporting.strategy.ResultWriter;
 import xml_file.XMLFile;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 public class ConfigReader implements WebDriverGetter, ResultWritterGetter {
@@ -18,13 +18,11 @@ public class ConfigReader implements WebDriverGetter, ResultWritterGetter {
 	private static final String CONFIG_FILE_PATH = "./config/config.xml";
 	
 	public ConfigReader() {
-		System.out.println("ConfigReader()");
 		xmlFile = new XMLFile(CONFIG_FILE_PATH);
 	}	
 	
 	// Use if we want to specifiy the location of the config file.
 	public ConfigReader(String filePath) {
-		System.out.println("ConfigReader(String filePath)");
 		xmlFile = new XMLFile(filePath);
 	}	
 

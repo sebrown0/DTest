@@ -5,9 +5,11 @@ import java.util.Optional;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
+
+import parameter_resolvers.ConfigParameterResolver;
+
 import org.junit.jupiter.api.extension.TestWatcher;
 
-import app.test_runner.ConfigParameterResolver;
 import reporting.strategy.ResultWriter;
 import test_result.ResultDisabled;
 import test_result.ResultFailed;
@@ -31,7 +33,7 @@ public class TestResultLogger implements TestWatcher, BeforeAllCallback {
 	
 	/*
 	 * The ConfigReader is loaded by ConfigParameterResolver
-	 * and will not be available in this classes beforeAll
+	 * and will not be available in this class's beforeAll
 	 * method as that is loaded b4 ConfigParameterResolver.
 	 * So the first time the ResultWriter is required from
 	 * ConfigReader it's loaded from the store.   

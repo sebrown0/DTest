@@ -2,42 +2,35 @@ package object_model_tests.navigation.payroll;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.util.concurrent.ExecutionException;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 
-import app.test_runner.ConfigParameterResolver;
-import exceptions.NullDriverException;
 import logging.TestResultLogger;
 import object_models.helpers.MenuChecker;
-import object_models.modules.PayrollModuleLoader;
 import object_models.navigation.left_side_menu.LeftMenu;
 import object_models.navigation.left_side_menu.LeftMenuPayroll;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
+import parameter_resolvers.ConfigParameterResolver;
+import parameter_resolvers.LoginPageResolverPayroll;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
-@ExtendWith(ConfigParameterResolver.class)
-@ExtendWith(TestResultLogger.class)
+@ExtendWith({ 
+	ConfigParameterResolver.class, 
+	TestResultLogger.class, 
+	LoginPageResolverPayroll.class })
 public class LeftMenuVailidation_Payroll_Tests {	
 	private static WebDriver driver;
-	private static UserLoginPage userLogin;	
 	private static LeftMenuPayroll menuPayroll;
 	
 	@BeforeAll	
-	public static void setup(ConfigReader configReader) throws NullDriverException, InterruptedException, ExecutionException {
-		// Get a web driver as specified in the config.xml		
-		driver = configReader.getDriver();
-		// Get a login page, with the required module loaded.
-		userLogin = new UserLoginPage(driver, new PayrollModuleLoader(driver));
-		// Login.
+	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
 		HomePage hp = userLogin.loginValidUser(UserProvider.userPortal());
-		// Get the payroll elements.
+		driver = hp.getWebDriver();
 		menuPayroll = (LeftMenuPayroll) hp.getLeftMenu().getElements();
 	}		
 

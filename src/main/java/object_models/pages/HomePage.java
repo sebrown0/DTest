@@ -24,13 +24,14 @@ public class HomePage extends Page {
 	private TopRightNavBar topRightNavBar;
 	private LeftMenu leftMenu;	
 	private Logger logger = LogManager.getLogger();
+	private WebDriver driver;
 	
 	private static By byXpathActualModuleName = By.xpath("html/body/form/header/div/div");
 	public static final String PAGE_TITLE = HOME_PAGE_TITLE;
 	
 	public HomePage(WebDriver driver, ModuleElements moduleElements) {		
 		super(driver, PAGE_TITLE);		
-
+		this.driver = driver;
 		loadModule(moduleElements);
 	}
 		
@@ -60,5 +61,8 @@ public class HomePage extends Page {
 	}	
 	public LeftMenu getLeftMenu() {
 		return leftMenu;
+	}
+	public WebDriver getWebDriver() {
+		return driver;
 	}
 }
