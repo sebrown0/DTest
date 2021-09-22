@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_models.helpers;
+package entities;
 
 /**
  * @author SteveBrown

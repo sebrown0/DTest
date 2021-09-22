@@ -8,7 +8,7 @@ import static providers.URIProvider.LOGIN_PAGE_URI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import object_models.helpers.User;
+import entities.User;
 import object_models.modules.common.ModuleElements;
 
 /**

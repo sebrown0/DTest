@@ -5,7 +5,7 @@ package test_data;
 
 import java.util.stream.Stream;
 
-import object_models.helpers.User;
+import entities.User;
 
 /**
  * @author Steve Brown

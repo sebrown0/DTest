@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import object_models.left_menu.common.LeftMenu;
+import object_models.left_nav_bar.LeftNavBar;
 import object_models.top_right_nav_bar.common.TopRightNavBar;
 
 /**
@@ -20,6 +21,7 @@ public class ModuleLoader {
 	private Logger logger = LogManager.getLogger();
 	private ModuleElements moduleElements;
 	private String moduleName;
+	private LeftNavBar leftNavBar;
 	private TopRightNavBar topRightNavBar;
 	private LeftMenu leftMenu;	
 	
@@ -48,8 +50,14 @@ public class ModuleLoader {
 		}
 	}
 	
+	public LeftNavBar setLeftNavBar() {
+		logger.info("Creating left nav-bar for " + moduleName + " module");
+		leftNavBar =  new LeftNavBar(driver);		
+		return leftNavBar;
+	}
+	
 	public TopRightNavBar setNavBar() {
-		logger.info("Creating nav bar for " + moduleName + " module");
+		logger.info("Creating top-right nav-bar for " + moduleName + " module");
 		topRightNavBar = new TopRightNavBar(driver);
 		topRightNavBar.loadElements(moduleElements.getElementStrategy());
 		return topRightNavBar;

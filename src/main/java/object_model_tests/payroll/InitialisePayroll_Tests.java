@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import logging.TestResultLogger;
+import object_models.element.ComboSelect;
 import object_models.forms.ContainerAction;
 import object_models.left_menu.common.LeftMenuActions;
 import object_models.left_menu.payroll.InitialisePayroll;
@@ -65,43 +65,50 @@ public final class InitialisePayroll_Tests {
 		}
 	}
 
+	@Test
+	void checkCompany() {
+		ComboSelect selectComp = initPay.getSelectCompany(); 
+		assertEquals("Mars Incorporated Ltd", selectComp.getText());
+	}
+	
+	@Test
+	void checkPayGroup() {
+		ComboSelect selectPayGroup = initPay.getSelectPayGroup(); 
+		assertEquals("Monthly Paygroup", selectPayGroup.getText());
+	}
+
+	@Test
+	void checkPayPeriod() {
+		ComboSelect selectPayPeriod = initPay.getSelectPayPeriod(); 
+		assertTrue(selectPayPeriod.getText().length() > 0);
+	}
+	
 //	@Test
 //	void checkCompany() {
 //		Optional<WebElement> selectComp = initPay.getSelectCompany(); 
-//		selectComp.ifPresentOrElse(s -> System.out.println("->" + s.getText()), new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				fail("Select Company could not be found");				
-//			}
-//		});
+//		selectComp.ifPresentOrElse(s -> 
+//			assertEquals("Mars Incorporated Ltd", s.getText()), 
+//			new TestFail("Select Company could not be found")
+//		);
 //	}
-	@Test
-	void checkCompany() {
-		Optional<WebElement> selectComp = initPay.getSelectCompany(); 
-		selectComp.ifPresentOrElse(s -> 
-			assertEquals("Mars Incorporated Ltd", s.getText()), 
-			new TestFail("Select Company could not be found")
-		);
-	}
 	
-	private class TestFail implements Runnable {
-		private String msg;
-		
-		public TestFail(String msg) {
-			this.msg = msg;			
-		}
-
-		@Override
-		public void run() {
-			fail(msg);
-		}		
-	}
+//	private class TestFail implements Runnable {
+//		private String msg;
+//		
+//		public TestFail(String msg) {
+//			this.msg = msg;			
+//		}
+//
+//		@Override
+//		public void run() {
+//			fail(msg);
+//		}		
+//	}
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-//		initPay.closeElement();
-//		driver.quit();
+		initPay.closeElement();
+		driver.quit();
 	}
 
 }

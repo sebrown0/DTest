@@ -14,6 +14,10 @@ import org.openqa.selenium.WebElement;
 public class ComboSelect {
 	private WebElement combo;
 	
+	public ComboSelect(WebElement element) {
+		this.combo = element;
+	}
+	
 	public ComboSelect(WebDriver driver, By findBy) {
 		this.combo = driver.findElement(findBy);
 	}
@@ -23,11 +27,11 @@ public class ComboSelect {
 	}
 	
 	public String getTextByValue() {
-		return combo.getAttribute("value");
+		return combo.getAttribute("value").trim();
 	}
 	
 	public String getText() {
-		return combo.getText();
+		return combo.getText().trim();
 	}
 	
 	public void writeText(String txt) {

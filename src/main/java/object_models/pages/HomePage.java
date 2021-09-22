@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import object_models.left_menu.common.LeftMenu;
+import object_models.left_nav_bar.LeftNavBar;
 import object_models.modules.common.ModuleElements;
 import object_models.modules.common.ModuleLoader;
 import object_models.top_right_nav_bar.common.TopRightNavBar;;
@@ -21,6 +22,7 @@ import object_models.top_right_nav_bar.common.TopRightNavBar;;
  *
  */
 public class HomePage extends Page {
+	private LeftNavBar leftNavBar;
 	private TopRightNavBar topRightNavBar;
 	private LeftMenu leftMenu;	
 	private Logger logger = LogManager.getLogger();
@@ -40,6 +42,7 @@ public class HomePage extends Page {
 			logger.error("No module supplied");			
 		}else {			
 			ModuleLoader moduleLoader = new ModuleLoader(driver, moduleElements);
+			leftNavBar = moduleLoader.setLeftNavBar();
 			topRightNavBar = moduleLoader.setNavBar();
 			leftMenu = moduleLoader.setLeftMenu();
 		}		
@@ -55,6 +58,9 @@ public class HomePage extends Page {
 	 */
 	public String getActualModuleName() {		
 		return driver.findElement(byXpathActualModuleName).getAttribute("innerHTML");
+	}
+	public LeftNavBar getLeftNavBar() {
+		return leftNavBar;
 	}
 	public TopRightNavBar getTopRightNavBar() {
 		return topRightNavBar;
