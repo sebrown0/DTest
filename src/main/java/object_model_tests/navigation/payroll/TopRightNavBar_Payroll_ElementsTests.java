@@ -9,12 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import logging.TestResultLogger;
-import object_models.drop_down_forms.MyCompanyLastViewed;
 import object_models.employee.EmployeeCv;
 import object_models.employee.EmployeeGridView;
 import object_models.employee_creation.EmployeeCreationWizard;
 import object_models.helpers.Closable;
-import object_models.left_menu.bulk_updates.EmployeeCreation;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import object_models.reports.DakarIntelligence;
@@ -40,6 +38,8 @@ import xml_reader.config_file.ConfigReader;
  * @author Steve Brown
  *
  * Test the elements of the Top-Right Nav-Bar for payroll module.
+ * Each item in the nav-bar is clicked and its child element returned.
+ * The child is then closed.
  */
 @ExtendWith({ 
 	ConfigParameterResolver.class, 
@@ -57,7 +57,7 @@ class TopRightNavBar_Payroll_ElementsTests {
 	
 	@AfterAll
 	static void teardown() {
-//		homepagePayroll.close();
+		homepagePayroll.close();
 	}
 	
 	@Test
@@ -65,7 +65,7 @@ class TopRightNavBar_Payroll_ElementsTests {
 	void clickEmployeeCreation() {
 		NavBarElement empCr = navBar.getNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
 		EmployeeCreationWizard wiz = (EmployeeCreationWizard) empCr.clickElement();
-		wiz.closeElement();
+		wiz.close();
 		assertEquals(NavBarEmployeeCreation.ORIGINAL_NAME, empCr.getOriginalName());
 	}
 	
@@ -74,7 +74,7 @@ class TopRightNavBar_Payroll_ElementsTests {
 	void clickEmployeeCV() {
 		NavBarElement empCV = navBar.getNavBarElement(NavBarEmployeeCVPayroll.ORIGINAL_NAME).get();
 		EmployeeCv empCv = (EmployeeCv) empCV.clickElement();
-		empCv.closeElement();
+		empCv.close();
 		assertEquals(NavBarEmployeeCVPayroll.ORIGINAL_NAME, empCV.getOriginalName());
 	}
 	
@@ -83,7 +83,7 @@ class TopRightNavBar_Payroll_ElementsTests {
 	void clickEmployeeGridView() {
 		NavBarElement empGrid = navBar.getNavBarElement(NavBarEmpGridView.ORIGINAL_NAME).get();
 		EmployeeGridView empGridView = (EmployeeGridView) empGrid.clickElement();
-		empGridView.closeElement();
+		empGridView.close();
 		assertEquals(NavBarEmpGridView.ORIGINAL_NAME, empGrid.getOriginalName());
 	}
 	
@@ -92,7 +92,7 @@ class TopRightNavBar_Payroll_ElementsTests {
 	void clickVisualReports() {
 		NavBarElement rep = navBar.getNavBarElement(NavBarVisualReports.ORIGINAL_NAME).get();
 		VisualReports visReports = (VisualReports) rep.clickElement();
-		visReports.closeElement();
+		visReports.close();
 		assertEquals(NavBarVisualReports.ORIGINAL_NAME, rep.getOriginalName());
 	}
 	
@@ -101,7 +101,7 @@ class TopRightNavBar_Payroll_ElementsTests {
 	void clickDakarIntelligence() {
 		NavBarElement dak = navBar.getNavBarElement(NavBarDakarIntelligence.ORIGINAL_NAME).get();
 		DakarIntelligence dakInt = (DakarIntelligence) dak.clickElement();
-		dakInt.closeElement();
+		dakInt.close();
 		assertEquals(NavBarDakarIntelligence.ORIGINAL_NAME, dak.getOriginalName());
 	}
 	
@@ -109,48 +109,53 @@ class TopRightNavBar_Payroll_ElementsTests {
 	@Order(6)
 	void clickCompanyLastViewed() {
 		NavBarElement myCo = navBar.getNavBarElement(NavBarMyCoLastViewed.ORIGINAL_NAME).get();
-		Closable myCompanyLastViewed =  (Closable) myCo.clickElement();
-		myCompanyLastViewed.closeElement();
+		Closable myCompanyLastViewed = myCo.clickElement();
+		myCompanyLastViewed.close();
 		assertEquals(NavBarMyCoLastViewed.ORIGINAL_NAME, myCo.getOriginalName());
 	}
 	
-//	@Test
-//	@Order(7)
-//	void clickNotifications() {
-//		NavBarElement not = homepagePayroll.getTopRightNavBar().getNavBarElement(NavBarNotifications.ORIGINAL_NAME).get();
-//		not.clickElement();
-//		assertEquals(NavBarNotifications.ORIGINAL_NAME, not.getOriginalName());
-//	}
-//
-//	@Test
-//	@Order(8)
-//	void clickNewEmployments() {
-//		NavBarElement newEmps = homepagePayroll.getTopRightNavBar().getNavBarElement(NavBarNewEmployments.ORIGINAL_NAME).get();
-//		newEmps.clickElement();
-//		assertEquals(NavBarNewEmployments.ORIGINAL_NAME, newEmps.getOriginalName());
-//	}
-//
-//	@Test
-//	@Order(9)
-//	void clickTerminations() {
-//		NavBarElement term = homepagePayroll.getTopRightNavBar().getNavBarElement(NavBarTerminations.ORIGINAL_NAME).get();
-//		term.clickElement();
-//		assertEquals(NavBarTerminations.ORIGINAL_NAME, term.getOriginalName());
-//	}
-//	
-//	@Test
-//	@Order(10)
-//	void clickUserManagement() {
-//		NavBarElement user = homepagePayroll.getTopRightNavBar().getNavBarElement(NavBarUserManagment.ORIGINAL_NAME).get();
-//		user.clickElement();
-//		assertEquals(NavBarUserManagment.ORIGINAL_NAME, user.getOriginalName());
-//	}
-//	
-//	@Test
-//	@Order(11)
-//	void clickUserAvatar() {
-//		NavBarElement avatar = homepagePayroll.getTopRightNavBar().getNavBarElement(NavBarUserAvatar.ORIGINAL_NAME).get();
-//		avatar.clickElement();
-//		assertEquals(NavBarUserAvatar.ORIGINAL_NAME, avatar.getOriginalName());
-//	}
+	@Test
+	@Order(7)
+	void clickNotifications() {
+		NavBarElement not = navBar.getNavBarElement(NavBarNotifications.ORIGINAL_NAME).get();
+		Closable notifications = not.clickElement();
+		notifications.close();
+		assertEquals(NavBarNotifications.ORIGINAL_NAME, not.getOriginalName());
+	}
+
+	@Test
+	@Order(8)
+	void clickNewEmployments() {
+		NavBarElement newEmps = navBar.getNavBarElement(NavBarNewEmployments.ORIGINAL_NAME).get();
+		Closable newEmpsForm= newEmps.clickElement();
+		newEmpsForm.close();
+		assertEquals(NavBarNewEmployments.ORIGINAL_NAME, newEmps.getOriginalName());
+	}
+
+	@Test
+	@Order(9)
+	void clickTerminations() {
+		NavBarElement term = navBar.getNavBarElement(NavBarTerminations.ORIGINAL_NAME).get();
+		Closable termForm = term.clickElement();
+		termForm.close();
+		assertEquals(NavBarTerminations.ORIGINAL_NAME, term.getOriginalName());
+	}
+	
+	@Test
+	@Order(10)
+	void clickUserManagement() {
+		NavBarElement user = navBar.getNavBarElement(NavBarUserManagment.ORIGINAL_NAME).get();
+		Closable userManForm = user.clickElement();
+		userManForm.close();
+		assertEquals(NavBarUserManagment.ORIGINAL_NAME, user.getOriginalName());
+	}
+	
+	@Test
+	@Order(11)
+	void clickUserAvatar() {
+		NavBarElement avatar = navBar.getNavBarElement(NavBarUserAvatar.ORIGINAL_NAME).get();
+		Closable userAvatarForm = avatar.clickElement();
+		userAvatarForm.close();
+		assertEquals(NavBarUserAvatar.ORIGINAL_NAME, avatar.getOriginalName());
+	}
 }

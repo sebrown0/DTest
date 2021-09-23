@@ -36,7 +36,7 @@ public class JSPanel implements ContainerAction { // ContainerAction extends Clo
 			waitForLoad();
 		} catch (Exception e) {
 			logger.error("Could not load panel [" + expectedTitle + "]");
-			closeElement();
+			close();
 		}
 		setTitle();
 	}
@@ -56,7 +56,7 @@ public class JSPanel implements ContainerAction { // ContainerAction extends Clo
 	}
 
 	@Override
-	public void closeElement() {
+	public void close() {
 		CloserPanel closer = new CloserPanel(driver);
 		try {
 			closer.close();

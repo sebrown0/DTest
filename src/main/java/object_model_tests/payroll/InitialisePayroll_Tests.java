@@ -107,7 +107,7 @@ public final class InitialisePayroll_Tests {
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-		initPay.closeElement();
+		initPay.close();
 		driver.quit();
 	}
 

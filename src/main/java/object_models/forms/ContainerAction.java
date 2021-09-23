@@ -11,6 +11,5 @@ import object_models.helpers.title.PageTitle;
  *
  */
 public interface ContainerAction extends Closable{
-	PageTitle getTitle();
-//	void closeElement();	
+	PageTitle getTitle();	
 }

@@ -27,7 +27,7 @@ public class NoElement implements Closable, ElementDoesNotExist{
 	}
 
 	@Override
-	public void closeElement() {
+	public void close() {
 		// TODO Auto-generated method stub
 		
 	}

@@ -37,6 +37,7 @@ public class HomePage extends Page {
 		loadModule(moduleElements);
 	}
 		
+	// Actions
 	public void loadModule(ModuleElements moduleElements) {
 		if(moduleElements == null) {			
 			logger.error("No module supplied");			

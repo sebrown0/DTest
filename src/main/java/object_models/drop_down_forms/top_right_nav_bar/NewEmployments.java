@@ -1,7 +1,4 @@
-/**
- * 
- */
-package object_models.drop_down_forms;
+package object_models.drop_down_forms.top_right_nav_bar;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,18 +10,18 @@ import object_models.helpers.Closable;
  * @author Steve Brown
  *
  */
-public class MyCompanyLastViewed implements Closable {
+public class NewEmployments implements Closable {
 	private WebDriver driver;
 	private String title;
 	
-	public MyCompanyLastViewed(WebDriver driver, String title) {
+	public NewEmployments(WebDriver driver, String title) {
 		this.driver = driver;
 		this.title = title;
 	}
 	
 	// Actions
 	@Override
-	public void closeElement() {
+	public void close() {
 		WebElement navBar = driver.findElement(By.cssSelector("header[class='app-header navbar']"));
 		navBar.click();
 	}
@@ -37,6 +34,4 @@ public class MyCompanyLastViewed implements Closable {
 	public String getTitle() {
 		return title;
 	}
-
-	
 }

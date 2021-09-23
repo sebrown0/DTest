@@ -9,5 +9,5 @@ package object_models.helpers;
  * Use for an element that is closable, i.e. JS Panel.
  */
 public interface Closable {
-	void closeElement();	
+	void close();	
 }

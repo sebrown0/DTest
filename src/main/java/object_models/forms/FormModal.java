@@ -29,7 +29,7 @@ public abstract class FormModal implements ContainerAction {
 
 	@Override
 	//IF WE'RE IN THE iFRAME WILL HAVE TO SWITCH BACK TO THE FORM.
-	public void closeElement() {
+	public void close() {
 		CloserModalForm closer = new CloserModalForm(driver);
 		try {
 			closer.close();

@@ -96,7 +96,7 @@ public class LeftMenuChildren_Payroll_Tests {
 		ContainerAction empList = menu.clickAndLoad(EmployeeList.MENU_TITLE).get();
 		PageTitle title = empList.getTitle();
 		assertEquals(title.getExpected(), title.getActual());
-		empList.closeElement();
+		empList.close();
 	}
 	
 	@Test
@@ -104,7 +104,7 @@ public class LeftMenuChildren_Payroll_Tests {
 		ContainerAction doc = menu.clickAndLoad(Documents.MENU_TITLE).get();
 		PageTitle title = doc.getTitle();
 		assertEquals(title.getExpected(), title.getActual());
-		doc.closeElement();
+		doc.close();
 	}
 	
 	@Test
@@ -292,7 +292,7 @@ public class LeftMenuChildren_Payroll_Tests {
 		ContainerAction obj = menu.clickAndLoad(PayrollStatistics.MENU_TITLE).get();
 		PageTitle title = obj.getTitle();
 		assertEquals(title.getExpected(), title.getActual());
-		obj.closeElement();
+		obj.close();
 	}
 	
 	@Test
@@ -417,7 +417,7 @@ public class LeftMenuChildren_Payroll_Tests {
 	}
 	
 	private void closeElement(ContainerAction closer) {
-		closer.closeElement();
+		closer.close();
 	}
 	
 	private void closeParent(String prntName) {

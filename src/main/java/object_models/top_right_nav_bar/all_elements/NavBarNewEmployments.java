@@ -7,9 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import object_models.drop_down_forms.top_right_nav_bar.NewEmployments;
 import object_models.helpers.Closable;
-import object_models.helpers.Jquery;
-import object_models.helpers.NoElement;
 import object_models.top_right_nav_bar.common.NavBarElement;
 
 /**
@@ -26,7 +25,7 @@ public class NavBarNewEmployments extends NavBarElement {
 	@Override
 	public Closable clickElement() {
 		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-user-plus')]"));
-		Jquery.goToElement(driver, el);	
-		return new NoElement(ORIGINAL_NAME); //TODO create new employments obj.
+		el.click();
+		return new NewEmployments(driver, ORIGINAL_NAME);
 	}
 }

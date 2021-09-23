@@ -18,19 +18,14 @@ import object_models.helpers.title.TitlePage;
 public class Page implements ContainerAction, Closable {
 	protected WebDriver driver;
 	private PageTitle title;	
-//	private ContainerAction pageElement;
 	private String expectedTitle;
 	
 	public Page(WebDriver driver, String expectedTitle) {
 		this.driver = driver;
 	}
 	
-//	public void close() {
-////		pageElement.closeElement();
-//	}
-
 	@Override
-	public void closeElement() {
+	public void close() {
 		LogManager.getLogger().error("closeElement not implemented for Page");
 	}
 
