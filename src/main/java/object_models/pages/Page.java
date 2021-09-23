@@ -7,7 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.WebDriver;
 
 import object_models.forms.ContainerAction;
-import object_models.helpers.ChildElement;
+import object_models.helpers.Closable;
 import object_models.helpers.title.PageTitle;
 import object_models.helpers.title.TitlePage;
 
@@ -15,7 +15,7 @@ import object_models.helpers.title.TitlePage;
  * @author Steve Brown
  *
  */
-public class Page implements ContainerAction, ChildElement {
+public class Page implements ContainerAction, Closable {
 	protected WebDriver driver;
 	private PageTitle title;	
 //	private ContainerAction pageElement;
@@ -25,9 +25,9 @@ public class Page implements ContainerAction, ChildElement {
 		this.driver = driver;
 	}
 	
-	public void close() {
-//		pageElement.closeElement();
-	}
+//	public void close() {
+////		pageElement.closeElement();
+//	}
 
 	@Override
 	public void closeElement() {

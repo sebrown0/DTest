@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import object_models.employee_creation.EmployeeCreationWizard;
-import object_models.helpers.ChildElement;
+import object_models.helpers.Closable;
 import object_models.strategies.click.ClickUsingJavaScript;
 import object_models.top_right_nav_bar.common.NavBarElement;
 
@@ -29,7 +29,7 @@ public class NavBarAuthorisations extends NavBarElement {
 	}
 
 	@Override
-	public ChildElement clickElement() {
+	public Closable clickElement() {
 		ClickUsingJavaScript.performClick(driver, LOCATOR);
 		return new EmployeeCreationWizard(driver);
 	}

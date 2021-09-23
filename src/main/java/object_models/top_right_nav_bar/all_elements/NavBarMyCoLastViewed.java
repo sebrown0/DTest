@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import object_models.drop_down_forms.MyCompanyLastViewed;
-import object_models.helpers.ChildElement;
+import object_models.helpers.Closable;
 import object_models.top_right_nav_bar.common.NavBarElement;
 
 /**
@@ -23,7 +23,7 @@ public class NavBarMyCoLastViewed extends NavBarElement {
 	}	
 
 	@Override
-	public ChildElement clickElement() {
+	public Closable clickElement() {
 		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-building')]"));
 		el.click();
 //		Jquery.goToElement(driver, el);		NO NEED FOR Jquery. SIMPLE CLICK SUFFICES

@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import object_models.forms.ContainerAction;
-import object_models.helpers.ChildElement;
 import object_models.helpers.closers.CloserPanel;
 import object_models.helpers.title.PageTitle;
 import object_models.helpers.title.TitlePanel;
@@ -22,7 +21,7 @@ import object_models.helpers.title.TitlePanel;
  * @author Steve Brown
  *
  */
-public class JSPanel implements ContainerAction , ChildElement { // remove ChildElement
+public class JSPanel implements ContainerAction { // ContainerAction extends Closable (was ChildElement)
 	protected WebDriver driver;
 	private PageTitle title = null;
 	private String expectedTitle;

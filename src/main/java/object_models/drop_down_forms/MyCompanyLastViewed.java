@@ -7,15 +7,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import object_models.helpers.ChildElement;
-import object_models.helpers.Jquery;
+import object_models.helpers.Closable;
 
 /**
  * @author Steve Brown
  *
  */
-public class MyCompanyLastViewed implements ChildElement {
-//	private WebElement lastViewed;
+public class MyCompanyLastViewed implements Closable {
 	private WebDriver driver;
 	private String title;
 	
@@ -24,17 +22,11 @@ public class MyCompanyLastViewed implements ChildElement {
 		this.title = title;
 	}
 	
-//	public MyCompanyLastViewed(WebElement lastViewed, String title) {
-//		this.lastViewed = lastViewed;
-//		this.title = title;
-//	}
-
-	public void click() {
+	// Actions
+	@Override
+	public void closeElement() {
 		WebElement navBar = driver.findElement(By.cssSelector("header[class='app-header navbar']"));
 		navBar.click();
-//		WebElement el = driver.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-building')]"));
-//		Jquery.goToElement(driver, el);
-//		lastViewed.click();
 	}
 	
 	// Elements
@@ -46,4 +38,5 @@ public class MyCompanyLastViewed implements ChildElement {
 		return title;
 	}
 
+	
 }

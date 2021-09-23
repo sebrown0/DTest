@@ -13,6 +13,7 @@ import object_models.drop_down_forms.MyCompanyLastViewed;
 import object_models.employee.EmployeeCv;
 import object_models.employee.EmployeeGridView;
 import object_models.employee_creation.EmployeeCreationWizard;
+import object_models.helpers.Closable;
 import object_models.left_menu.bulk_updates.EmployeeCreation;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
@@ -108,8 +109,8 @@ class TopRightNavBar_Payroll_ElementsTests {
 	@Order(6)
 	void clickCompanyLastViewed() {
 		NavBarElement myCo = navBar.getNavBarElement(NavBarMyCoLastViewed.ORIGINAL_NAME).get();
-		MyCompanyLastViewed myCompanyLastViewed =  (MyCompanyLastViewed) myCo.clickElement();
-		myCompanyLastViewed.click();
+		Closable myCompanyLastViewed =  (Closable) myCo.clickElement();
+		myCompanyLastViewed.closeElement();
 		assertEquals(NavBarMyCoLastViewed.ORIGINAL_NAME, myCo.getOriginalName());
 	}
 	

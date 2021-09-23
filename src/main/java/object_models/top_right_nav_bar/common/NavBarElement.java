@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import object_models.helpers.ChildElement;
+import object_models.helpers.Closable;
 
 /**
  * @author SteveBrown
@@ -35,6 +35,6 @@ public abstract class NavBarElement {
 	/*
 	 * Click the element and return its child.
 	 */	
-	public abstract ChildElement clickElement(); 
+	public abstract Closable clickElement(); 
 	
 }

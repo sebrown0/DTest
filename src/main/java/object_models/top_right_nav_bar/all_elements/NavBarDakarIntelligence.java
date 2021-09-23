@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import object_models.helpers.ChildElement;
+import object_models.helpers.Closable;
 import object_models.reports.DakarIntelligence;
 import object_models.strategies.click.ClickUsingJavaScript;
 import object_models.top_right_nav_bar.common.NavBarElement;
@@ -24,7 +24,7 @@ public class NavBarDakarIntelligence extends NavBarElement {
 	}
 	
 	@Override
-	public ChildElement clickElement() {
+	public Closable clickElement() {
 		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-server')]"));
 		ClickUsingJavaScript.performClick(driver, el);
 		return new DakarIntelligence(driver);
