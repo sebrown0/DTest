@@ -39,7 +39,7 @@ public class TopRightNavBar implements ElementChecker, NavBarElementGetter {
 	 * Getters below
 	 */
 	public TopRightNavBarElements getNavBarElements() {
-		return navBarElements;
+		return navBarElements.locateNavBar();
 	}
 	public QuickLinks getQuickLinks() {
 		return quickLinks;

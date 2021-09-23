@@ -11,4 +11,5 @@ package object_models.helpers;
  */
 public interface ChildElement {
 	// nothing
+	void closeElement();	
 }

@@ -5,17 +5,13 @@ package object_model_tests.navigation.left_nav_bar;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.WebDriver;
 
 import entities.Company;
 import logging.TestResultLogger;
-import object_models.helpers.TestFail;
 import object_models.left_nav_bar.LeftNavBar;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
@@ -33,15 +29,14 @@ import xml_reader.config_file.ConfigReader;
 	ConfigParameterResolver.class, 
 	TestResultLogger.class, 
 	LoginPageResolverPayroll.class })
-public class LeftNavBarTests {	
-	private static WebDriver driver;
+public class LeftNavBarTests {
+	private static HomePage homepagePayroll; 
 	private static LeftNavBar leftNavBar;
 	
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
-		HomePage hp = userLogin.loginValidUser(UserProvider.userPortal());
-		driver = hp.getWebDriver();
-		leftNavBar = hp.getLeftNavBar();
+		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
+		leftNavBar = homepagePayroll.getLeftNavBar();
 	}		
 	
 	@Test
@@ -58,7 +53,7 @@ public class LeftNavBarTests {
 	
 	@AfterAll
 	public static void tearDown() {			
-		driver.quit();
+		homepagePayroll.close();
 	}
 
 }

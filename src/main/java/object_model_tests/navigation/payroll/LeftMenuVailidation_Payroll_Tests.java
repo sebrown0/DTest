@@ -6,7 +6,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.WebDriver;
 
 import logging.TestResultLogger;
 import object_models.helpers.MenuChecker;
@@ -24,15 +23,15 @@ import xml_reader.config_file.ConfigReader;
 	TestResultLogger.class, 
 	LoginPageResolverPayroll.class })
 public class LeftMenuVailidation_Payroll_Tests {	
-	private static WebDriver driver;
+//	private static WebDriver driver;
+	private static HomePage homepagePayroll;
 	private static LeftMenuPayroll menuPayroll;
 	private static LeftMenu leftMenu;
 	
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
-		HomePage hp = userLogin.loginValidUser(UserProvider.userPortal());
-		driver = hp.getWebDriver();
-		leftMenu = hp.getLeftMenu();
+		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
+		leftMenu = homepagePayroll.getLeftMenu();
 		menuPayroll = (LeftMenuPayroll) leftMenu.getElements(); 
 	}		
 
@@ -68,7 +67,7 @@ public class LeftMenuVailidation_Payroll_Tests {
 	
 	@AfterAll
 	public static void tearDown() {			
-		driver.quit();
+		homepagePayroll.close();
 	}
 	
 }

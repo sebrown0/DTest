@@ -18,7 +18,7 @@ import object_models.helpers.title.TitlePage;
 public class Page implements ContainerAction, ChildElement {
 	protected WebDriver driver;
 	private PageTitle title;	
-	private ContainerAction pageElement;
+//	private ContainerAction pageElement;
 	private String expectedTitle;
 	
 	public Page(WebDriver driver, String expectedTitle) {
@@ -26,7 +26,7 @@ public class Page implements ContainerAction, ChildElement {
 	}
 	
 	public void close() {
-		pageElement.closeElement();
+//		pageElement.closeElement();
 	}
 
 	@Override

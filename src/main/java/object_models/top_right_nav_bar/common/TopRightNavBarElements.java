@@ -33,8 +33,13 @@ public class TopRightNavBarElements {
 	
 	private void loadElements(NavBarElementStrategy elementStrategy) {
 		navBarElements = elementStrategy.getElements();		
-		navElements = driver.findElements(By.cssSelector(".nav-item.dropdown.dropdown-slide.d-md-down-none"));
+		locateNavBar();
 //		quickLinks = new QuickLinks(driver);
+	}
+	
+	public TopRightNavBarElements locateNavBar() {
+		navElements = driver.findElements(By.cssSelector(".nav-item.dropdown.dropdown-slide.d-md-down-none"));
+		return this;
 	}
 	
 //	public Optional<NavBarElement> getNavBarElement(String elementTitle) {

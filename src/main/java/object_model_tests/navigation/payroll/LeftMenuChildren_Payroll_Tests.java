@@ -8,7 +8,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.WebDriver;
 
 import logging.TestResultLogger;
 import object_models.forms.ContainerAction;
@@ -82,15 +81,14 @@ import xml_reader.config_file.ConfigReader;
 	ConfigParameterResolver.class, 
 	TestResultLogger.class, 
 	LoginPageResolverPayroll.class })
-public class LeftMenuChildren_Payroll_Tests {	
-	private static WebDriver driver;	
+public class LeftMenuChildren_Payroll_Tests {
 	private static LeftMenuActions menu;
+	private static HomePage homepagePayroll;
 	
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
-		HomePage hp = userLogin.loginValidUser(UserProvider.userPortal());
-		driver = hp.getWebDriver();
-		menu = hp.getLeftMenu();
+		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
+		menu = homepagePayroll.getLeftMenu();
 	}
 				
 	@Test
@@ -389,7 +387,7 @@ public class LeftMenuChildren_Payroll_Tests {
 	
 	@AfterAll
 	static void tearDown() {
-		driver.quit();
+		homepagePayroll.close();
 	}
 	
 	/* 

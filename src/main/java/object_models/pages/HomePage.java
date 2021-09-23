@@ -50,7 +50,7 @@ public class HomePage extends Page {
 		
 	@Override
 	public void close() {
-	
+		driver.quit();
 	}
 	
 	/*

@@ -3,13 +3,14 @@
  */
 package object_models.forms;
 
+import object_models.helpers.ChildElement;
 import object_models.helpers.title.PageTitle;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
-public interface ContainerAction {
+public interface ContainerAction extends ChildElement{
 	PageTitle getTitle();
-	void closeElement();	
+//	void closeElement();	
 }

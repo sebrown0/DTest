@@ -7,9 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import object_models.drop_down_forms.MyCompanyLastViewed;
 import object_models.helpers.ChildElement;
-import object_models.helpers.Jquery;
-import object_models.helpers.NoElement;
 import object_models.top_right_nav_bar.common.NavBarElement;
 
 /**
@@ -26,7 +25,8 @@ public class NavBarMyCoLastViewed extends NavBarElement {
 	@Override
 	public ChildElement clickElement() {
 		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-building')]"));
-		Jquery.goToElement(driver, el);		
-		return new NoElement(ORIGINAL_NAME); //TODO create company last viewed
+		el.click();
+//		Jquery.goToElement(driver, el);		NO NEED FOR Jquery. SIMPLE CLICK SUFFICES
+		return new MyCompanyLastViewed(driver, ORIGINAL_NAME);
 	}
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_models.pages;
+package object_models.reports;
 
 import org.openqa.selenium.WebDriver;
 

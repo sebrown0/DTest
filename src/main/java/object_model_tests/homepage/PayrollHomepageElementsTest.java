@@ -7,20 +7,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.WebDriver;
 
 import logging.TestResultLogger;
-import object_models.modules.payroll.PayrollModuleLoader;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import object_models.top_right_nav_bar.common.ElementChecker;
 import object_models.top_right_nav_bar.common.TopRightNavBar;
 import object_models.top_right_nav_bar.quick_links.QuickLinksPayroll;
+import parameter_resolvers.ConfigParameterResolver;
+import parameter_resolvers.LoginPageResolverPayroll;
 import providers.ModuleNames;
-import providers.XMLFileProvider;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
@@ -29,54 +27,39 @@ import xml_reader.config_file.ConfigReader;
  *
  * Test the elements of the home page for payroll.
  */
-@ExtendWith(TestResultLogger.class)
+@ExtendWith({ 
+	ConfigParameterResolver.class, 
+	TestResultLogger.class, 
+	LoginPageResolverPayroll.class })
 class PayrollHomepageElementsTest {
-	private static HomePage hp;
-	private static WebDriver driver;
-	private static UserLoginPage userLogin;
-	private static ConfigReader configReader;
+	private static HomePage homepagePayroll;
 	
 	@BeforeAll	
-	static void setUpBeforeClass() throws Exception {		
-		configReader = new ConfigReader(XMLFileProvider.PROD_CONFIG_FILE_PATH);
-		// Get a web driver as specified in the config.xml		
-		driver = configReader.getDriver();
-		// Get a login page, with the required module loaded.
-		userLogin = new UserLoginPage(driver, new PayrollModuleLoader(driver));
-		// Get a home page after successful login
-		hp = userLogin.loginValidUser(UserProvider.userPortal());		
+	public static void setup(ConfigReader configReader, UserLoginPage userLoginPayroll) {
+		homepagePayroll = userLoginPayroll.loginValidUser(UserProvider.userPortal());
 	}
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-		driver.quit();
+		homepagePayroll.close();
 	}
 	
 	@Test
-	@Order(1)
-	void homepageLoadedOk() {
-//		assertTrue(hp.isPageTitleCorrect());
-	}
-
-	@Test 
-	@Order(2)
 	void checkModuleName() {
-		assertTrue(ModuleNames.isValidName(hp.getActualModuleName()));
-		assertTrue(hp.getActualModuleName().equals(ModuleNames.PAYROLL_NAME));
+		assertTrue(ModuleNames.isValidName(homepagePayroll.getActualModuleName()));
+		assertTrue(homepagePayroll.getActualModuleName().equals(ModuleNames.PAYROLL_NAME));
 	}
 	
 	@Test
-	@Order(3)
 	void topRightNavBarElementsOk() {
-		TopRightNavBar topRightNavBar = hp.getTopRightNavBar();
+		TopRightNavBar topRightNavBar = homepagePayroll.getTopRightNavBar();
 		ElementChecker elementChecker = topRightNavBar;
 		assertTrue(elementChecker.checkElementTitles());
 	}
 
 	@Test
-	@Order(4)
 	void loadPersonnel() {
-		QuickLinksPayroll links = (QuickLinksPayroll) hp.getTopRightNavBar().getQuickLinks();
+		QuickLinksPayroll links = (QuickLinksPayroll) homepagePayroll.getTopRightNavBar().getQuickLinks();
 		links.getPersonnel().clickMe();
 	}
 }

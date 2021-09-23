@@ -1,24 +1,29 @@
 /**
  * 
  */
-package object_models.pages;
+package object_models.employee;
 
 import org.openqa.selenium.WebDriver;
 
 import object_models.helpers.ChildElement;
+import object_models.panels.JSPanelWithIFrame;
 
 /**
  * @author Steve Brown
  *
  */
-public class EmployeeGridView implements ChildElement {
-	@SuppressWarnings("unused")
-	private WebDriver driver;	
-//	private By byClickLogin = By.cssSelector("[data-original-title='Employee Grid View']");	
+public class EmployeeGridView extends JSPanelWithIFrame implements ChildElement {
+	public static final String PANEL_TITLE = "Employee Details";
 	
 	public EmployeeGridView(WebDriver driver) {
-		this.driver = driver;		
+		super(driver, PANEL_TITLE);
 	}
+
+//	private By byClickLogin = By.cssSelector("[data-original-title='Employee Grid View']");	
+	
+//	public EmployeeGridView(WebDriver driver) {
+//		this.driver = driver;		
+//	}
 
 //	@Override
 //	public void clickElement(WebElement webElem) {		

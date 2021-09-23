@@ -5,8 +5,6 @@ package object_model_tests.employee;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.concurrent.ExecutionException;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -14,15 +12,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 
 import dto.Employee;
-import exceptions.NullDriverException;
 import logging.TestResultLogger;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.employees.EmployeeDetails;
-import object_models.modules.payroll.PayrollModuleLoader;
+import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
+import parameter_resolvers.ConfigParameterResolver;
+import parameter_resolvers.LoginPageResolverPayroll;
 import providers.EmployeeFromXml;
 import providers.EmployeeProvider;
-import providers.XMLFileProvider;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
@@ -31,7 +29,10 @@ import xml_reader.config_file.ConfigReader;
  *
  * Verify and employee loaded by EmployeeProvider.
  */
-@ExtendWith(TestResultLogger.class)
+@ExtendWith({ 
+	ConfigParameterResolver.class, 
+	TestResultLogger.class, 
+	LoginPageResolverPayroll.class })
 class EmployeeDetailsTests {
 	private static WebDriver driver;	
 	private static LeftMenu menu;
@@ -39,16 +40,12 @@ class EmployeeDetailsTests {
 	private static Employee emp;
 	
 	@BeforeAll	
-	static void setup() throws NullDriverException, InterruptedException, ExecutionException {	
-		ConfigReader configReader = new ConfigReader(XMLFileProvider.PROD_CONFIG_FILE_PATH);
-		// Get a web driver as specified in the config.xml		
-		driver = configReader.getDriver();
-		// Get a login page, with the required module loaded.
-		UserLoginPage userLogin = new UserLoginPage(driver, new PayrollModuleLoader(driver));
-		// Login.
-		userLogin.loginValidUser(UserProvider.userPortal());
+	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
+		// Login to the homepage
+		HomePage hp = userLogin.loginValidUser(UserProvider.userPortal());
+		driver = hp.getWebDriver();
 		// Load the menu.
-		menu = new LeftMenu(driver);
+		menu = hp.getLeftMenu();
 		// Load the employee details page.
 		empDetails = (EmployeeDetails) menu.clickParent("Employees").clickAndLoad(EmployeeDetails.MENU_TITLE).get();
 		// Get the employee we're going to use with required fields from the provider.
