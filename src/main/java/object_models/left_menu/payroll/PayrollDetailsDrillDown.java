@@ -2,6 +2,7 @@ package object_models.left_menu.payroll;
 
 import org.openqa.selenium.WebDriver;
 
+import object_models.dk_grid.DkGridToolBarReader;
 import object_models.panels.JSPanelWithIFrame;
 
 /**
@@ -17,6 +18,14 @@ public final class PayrollDetailsDrillDown extends JSPanelWithIFrame {
 		super(driver, PANEL_TITLE);
 	}
 
+	// Grid	
+	public void readGrid() {
+//		System.out.println("->read grid->" + super.getIFrameAsElement().getAttribute("index"));
+
+//		DkGridToolBarReader toolBarReader = new DkGridToolBarReader(driver);
+//		toolBarReader.read();
+	}
+	
 	// Elements
 
 	// Tabs

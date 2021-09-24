@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import object_models.dk_grid.DkGridEmployeeDetails;
 import object_models.element.ComboSelect;
 import object_models.element.TextInOut;
 import object_models.element.TextOut;
@@ -29,6 +30,13 @@ public class EmployeeDetails extends JSPanelWithIFrame {
 		this.myTabs = new EmpDetailsTabs();
 	}
 				
+	// Actions
+	public DkGridEmployeeDetails showEmpDetailsGrid() {
+		WebElement e = driver.findElement(By.cssSelector("i[class='fa fw fa-table']"));
+		e.click();		
+		return new DkGridEmployeeDetails(driver);
+	}
+	
 	// Tabs
 	public EmpDetailsTabs tab() {
 		return this.myTabs;

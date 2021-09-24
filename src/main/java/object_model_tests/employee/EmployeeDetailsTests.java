@@ -9,7 +9,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.WebDriver;
 
 import dto.Employee;
 import logging.TestResultLogger;
@@ -34,7 +33,7 @@ import xml_reader.config_file.ConfigReader;
 	TestResultLogger.class, 
 	LoginPageResolverPayroll.class })
 class EmployeeDetailsTests {
-	private static WebDriver driver;	
+	private static HomePage homepagePayroll;	
 	private static LeftMenu menu;
 	private static EmployeeDetails empDetails;
 	private static Employee emp;
@@ -42,10 +41,9 @@ class EmployeeDetailsTests {
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
 		// Login to the homepage
-		HomePage hp = userLogin.loginValidUser(UserProvider.userPortal());
-		driver = hp.getWebDriver();
+		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());		
 		// Load the menu.
-		menu = hp.getLeftMenu();
+		menu = homepagePayroll.getLeftMenu();
 		// Load the employee details page.
 		empDetails = (EmployeeDetails) menu.clickParent("Employees").clickAndLoad(EmployeeDetails.MENU_TITLE).get();
 		// Get the employee we're going to use with required fields from the provider.
@@ -75,6 +73,6 @@ class EmployeeDetailsTests {
 	
 	@AfterAll
 	static void tearDown() {		
-		driver.quit();
+		homepagePayroll.close();
 	}
 }

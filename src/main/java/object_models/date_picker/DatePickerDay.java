@@ -30,7 +30,7 @@ import object_models.helpers.AppDates;
  * 
  * Then click the given day.
  */
-public class DatePickerDay {
+public class DatePickerDay implements DateSetter {
   public static final String DATE_FORMAT = "dd MMMM yyyy";
   
   private static final String DAY_FIRST = "01";
@@ -57,6 +57,7 @@ public class DatePickerDay {
   }
   
   //Pass the date as an App date string, i.e. dd/mm/yyyy.
+  @Override
   public void setDate(String date) {
   	String pickerDate = AppDates.getAsDatePicker(date);
   	long diff = this.getDateDifferenceInMonths(pickerDate);
@@ -89,4 +90,5 @@ public class DatePickerDay {
 	private String getCurrentMonthFromDatePicker() {
     return this.curDate.getText();
 	}
+
 }

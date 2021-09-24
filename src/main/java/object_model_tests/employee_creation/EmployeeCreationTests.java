@@ -4,7 +4,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.WebDriver;
 
 import dto.Employee;
 import logging.TestResultLogger;
@@ -25,17 +24,16 @@ import xml_reader.config_file.ConfigReader;
 	TestResultLogger.class, 
 	LoginPageResolverPayroll.class })
 class EmployeeCreationTests {
-	private static WebDriver driver;	
+	private static HomePage homepagePayroll;
 	private static EmployeeCreationWizard wizard; 
 	private static Employee emp;
 	
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
 		// Login to the homepage
-		HomePage hp = userLogin.loginValidUser(UserProvider.userPortal());
-		driver = hp.getWebDriver();
+		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
 		// Get the employee creation wizard from the nav bar.
-		NavBarElement navEmpWizard = hp.getTopRightNavBar().getNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
+		NavBarElement navEmpWizard = homepagePayroll.getTopRightNavBar().getNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
 		// Open the wizard.
 		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();
 		// Get the employee we're going to use with required fields from the provider.
@@ -50,7 +48,7 @@ class EmployeeCreationTests {
 	
 	@AfterAll
 	static void teardown() {
-		driver.quit();
+		homepagePayroll.close();
 	}
 	
 }

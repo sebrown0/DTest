@@ -23,7 +23,6 @@ import xml_reader.config_file.ConfigReader;
 	TestResultLogger.class, 
 	LoginPageResolverPayroll.class })
 public class LeftMenuVailidation_Payroll_Tests {	
-//	private static WebDriver driver;
 	private static HomePage homepagePayroll;
 	private static LeftMenuPayroll menuPayroll;
 	private static LeftMenu leftMenu;
