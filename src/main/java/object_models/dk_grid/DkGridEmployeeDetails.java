@@ -9,20 +9,20 @@ import object_models.panels.JSPanelWithIFrame;
  *
  */
 public final class DkGridEmployeeDetails extends JSPanelWithIFrame {	
-	private DkGrid grid;
+	private DkGrid<FindRowByEmpCode> grid;
 	
 	public static final String PANEL_TITLE = "Employee Details";	
 
 	public DkGridEmployeeDetails(WebDriver driver) {
 		super(driver, PANEL_TITLE);
 		
-		grid = new DkGrid(driver);
+		grid = new DkGrid<>(driver, new FindRowByEmpCode());
 		grid.loadToolBar();
 		grid.loadContent();
 	}
 	
 	// Grid
-	public DkGrid getGrid() {
+	public DkGrid<FindRowByEmpCode> getGrid() {
 		return grid;
 	}
 	

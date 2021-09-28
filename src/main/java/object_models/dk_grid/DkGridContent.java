@@ -3,17 +3,21 @@
  */
 package object_models.dk_grid;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import object_models.dk_grid.Row.KeyStrategyRow;
 
 /**
  * @author Steve Brown
  *
  */
-public class DkGridContent {	
-	private WebElement element;
+public class DkGridContent <T extends KeyStrategyRow> {	
+	private GridData<T> gridData;
 	
 	public DkGridContent() {
-//		this.element = element;
+		gridData = new GridData<>();
 	}
+
+	public GridData<T> getGridData() {
+		return gridData;
+	}
+	
 }

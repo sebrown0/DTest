@@ -5,19 +5,22 @@ package object_models.dk_grid;
 
 import org.openqa.selenium.WebDriver;
 
+import object_models.dk_grid.Row.KeyStrategyRow;
+
 /**
  * @author Steve Brown
  *
  */
-public class DkGrid {
+public class DkGrid <T extends KeyStrategyRow> {
 	private DkGridToolBarReader toolBarReader;
 	private DkGridToolBar toolBar = new DkGridToolBar();
-	private DkGridContentReader contentReader;
-	private DkGridContent gridContent = new DkGridContent();
+	private DkGridContentReader<?> contentReader;
+	private DkGridContent<T> gridContent = new DkGridContent<>();;
+//	private KeyStrategyRow keyStrategyRows;
 	
-	public DkGrid(WebDriver driver) {
+	public DkGrid(WebDriver driver, KeyStrategyRow keyStrategyRows) {		
 		this.toolBarReader = new DkGridToolBarReader(driver, toolBar);
-		this.contentReader = new DkGridContentReader(driver, gridContent);
+		this.contentReader = new DkGridContentReader<>(driver, gridContent, keyStrategyRows);
 	}
 
 	public void loadToolBar() {
@@ -30,7 +33,8 @@ public class DkGrid {
 	public void loadContent() {
 		contentReader.read();
 	}	
-	public DkGridContent getContent() {
+	public DkGridContent<T> getContent() {
 		return gridContent;
 	}
+	
 }

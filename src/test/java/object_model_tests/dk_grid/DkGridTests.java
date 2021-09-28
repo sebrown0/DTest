@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import logging.TestResultLogger;
-import object_models.date_picker.DatePickerDay;
 import object_models.date_picker.DateSetter;
 import object_models.dk_grid.DkGrid;
 import object_models.dk_grid.DkGridContent;
@@ -39,9 +38,9 @@ public class DkGridTests {
 	private static HomePage homepagePayroll;
 	private static LeftMenu menuPayroll;
 	private static DkGridEmployeeDetails empDetailsGrid; // CHANGE TO INTERFACE???
-	private static DkGrid grid;
+	private static DkGrid<?> grid;
 	private static DkGridToolBar toolbar;
-	private static DkGridContent content;
+	private static DkGridContent<?> content;
 		
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {

@@ -3,7 +3,6 @@
  */
 package object_models.dk_grid;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -12,23 +11,26 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import object_models.dk_grid.Row.KeyStrategyRow;
+
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
-public class DkGridContentReader {
+public class DkGridContentReader <T extends KeyStrategyRow>{
 	private WebDriver driver;
 	private WebElement gridElement;
 	private WebElement contentElement;	
 	private Logger logger = LogManager.getLogger();	
-	private DkGridContent gridContent;
+	private DkGridContent<?> gridContent;	
+	private String[] containerNames = new String[3];
+	private KeyStrategyRow keyStrategyRows;
 	
-	private String[] containerNames = new String[3];	
+	//has to have KeyStrategyRow to get new row 
 	
-	
-	public DkGridContentReader(WebDriver driver, DkGridContent gridContent) {
+	public DkGridContentReader(WebDriver driver, DkGridContent<?> gridContent, KeyStrategyRow keyStrategyRows) {
 		this.driver = driver;
-		this.gridContent = gridContent;
+		this.keyStrategyRows = keyStrategyRows;
 		setContainerNames();
 		setGridElement();
 		setContentElement();
@@ -60,17 +62,47 @@ public class DkGridContentReader {
 		WebElement container = null;		
 		for (String className : containerNames) {			
 			container = contentElement.findElement(By.cssSelector("div[class='" + className + "']"));
-			System.out.println("->" + container.getAttribute("ref"));
+//			System.out.println("->" + container.getAttribute("ref"));
 			getRowsInContainer(container);
 		}
 	}
 	
 	private void getRowsInContainer(WebElement container) {
+		String containerName = container.getAttribute("ref");
 //		container.findElements(By.cssSelector("div[role='row']")).forEach(r -> System.out.println("r->" + r.getText()));
-		container.findElements(By.cssSelector("div[role='row']")).forEach(r -> getColsInRow(r));
+//		container.findElements(By.cssSelector("div[role='row']")).forEach(r -> getColsInRow(r));
+		container.findElements(By.cssSelector("div[role='row']")).forEach(r -> mapRowToContainer(r, containerName));
 	}
 	
-	private void getColsInRow(WebElement row) {
+	private void mapRowToContainer(WebElement rowElement, String containerName) {
+		Row<T> row = (Row<T>) keyStrategyRows.getNewRow();		
+		gridContent.getGridData().addRow(containerName, row);
+		
+		
+//		row1.addCell(ColumnName.EMP_CODE.value, cell1);
+//		row1.addCell(ColumnName.ALL_NAME.value, cell2);		
+		
+		rowElement.findElements(By.cssSelector("div[role='gridcell']")).forEach(c -> System.out.println("->" + c.getAttribute("col-id")));
+		System.out.println("->FINISHED mapRowToContainer");
+//		for (ColumnName n : ColumnName.values()) {
+//			WebElement cell = null;
+////			System.out.println("mrtc->" + n.name() + "mrtc->" + n.value);
+//			try {
+////				String s = "div[@role='gridcell' and @col-id='" + n.value + "']";
+//				String s = "div[@role='gridcell' and @col-id='all_name']";
+//				System.out.println("s->" + s);
+//				cell = rowElement.findElement(By.xpath("div[@role='gridcell' and @col-id='all_name']"));
+////				if(cell != null) {
+//					System.out.println("->" + cell.getText());	
+////					System.out.println("->" + cell.getAttribute("col-id"));
+////				}	
+//			} catch (Exception e) {
+//				System.out.println("->EXCEPTION");
+//			}			
+//		}
+	}
+	
+	private void getCellsInRow(WebElement row) {
 		row.findElements(By.cssSelector("div[role='gridcell']")).forEach(c -> System.out.println(c.getAttribute("col-id").toLowerCase()));
 	}
 }

@@ -8,10 +8,10 @@ public class Cell {
 	private String unselectable;
 	private String value;
 	
-	public enum ColumnName {
-		COL_ID, EMP_CODE, ALL_NAME, IDENTITY_CARD_NO, TITLE, SURNAME, 
-		NAME, TOWN, POST_CODE, COUNTRY, DOB
-	}
+//	public enum ZZ_ColumnName {
+//		COL_ID, EMP_CODE, ALL_NAME, IDENTITY_CARD_NO, TITLE, SURNAME, 
+//		NAME, TOWN, POST_CODE, COUNTRY, DOB
+//	}
 	
 	public Cell(String id, String value, String compId, String unselectable) {
 		this.id = id;
