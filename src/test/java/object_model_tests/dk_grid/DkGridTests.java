@@ -13,6 +13,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import logging.TestResultLogger;
 import object_models.date_picker.DatePickerDay;
 import object_models.date_picker.DateSetter;
+import object_models.dk_grid.DkGrid;
+import object_models.dk_grid.DkGridContent;
 import object_models.dk_grid.DkGridEmployeeDetails;
 import object_models.dk_grid.DkGridToolBar;
 import object_models.element.ElementButton;
@@ -37,7 +39,9 @@ public class DkGridTests {
 	private static HomePage homepagePayroll;
 	private static LeftMenu menuPayroll;
 	private static DkGridEmployeeDetails empDetailsGrid; // CHANGE TO INTERFACE???
+	private static DkGrid grid;
 	private static DkGridToolBar toolbar;
+	private static DkGridContent content;
 		
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
@@ -50,9 +54,13 @@ public class DkGridTests {
 		Optional<ContainerAction> obj = menuPayroll
 				.clickParent(EmployeeDetails.MENU_PARENT_NAME)
 				.clickAndLoad(EmployeeDetails.MENU_TITLE);
+		
 		EmployeeDetails empDetails = (EmployeeDetails) obj.get();
+		
 		empDetailsGrid = empDetails.showEmpDetailsGrid();
-		toolbar = empDetailsGrid.getGrid().getToolBar();
+		grid = empDetailsGrid.getGrid();
+		toolbar = grid.getToolBar();
+		content = grid.getContent();
 	}
 	
 	@Test
@@ -156,6 +164,11 @@ public class DkGridTests {
 		);		
 	}
 	
+	@Test
+	void checkContentExists() {
+		
+	}
+	
 	private class TestFail implements Runnable {
 		private String msg;
 
@@ -169,7 +182,7 @@ public class DkGridTests {
 	
 	@AfterAll
 	public static void tearDown() {			
-//		homepagePayroll.close();
+		homepagePayroll.close();
 	}
 	
 }

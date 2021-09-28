@@ -20,6 +20,14 @@ import object_models.element.ElementPointInTime;
 /**
  * @author Steve Brown
  *
+ * Read a DK Grid toolbar.
+ * 
+ * The common buttons [save, download to excel etc] are
+ * put into a Map<K,V> [DkGridToolBar.buttons].
+ * 	K = 1. the element text. 2 the element title or 3. the name of the fa-fa. TODO * fa-fa has to be found and converted to key *
+ *  V = the element.
+ *  
+ * Additional items, i.e. HitList are mapped to their own object.
  */
 public class DkGridToolBarReader {
 	private WebDriver driver;

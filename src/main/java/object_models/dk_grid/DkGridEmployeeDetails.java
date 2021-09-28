@@ -18,6 +18,7 @@ public final class DkGridEmployeeDetails extends JSPanelWithIFrame {
 		
 		grid = new DkGrid(driver);
 		grid.loadToolBar();
+		grid.loadContent();
 	}
 	
 	// Grid
