@@ -39,19 +39,25 @@ class GridsTests {
 		gridData.addRow("centreContainer", row2);		
 	}
 
-	@Test
-	void ffffffffffffffff() {
-//		String name = Element.H.name();
-//		System.out.println("->" + name);
-//		System.out.println("->" + Element.valueOf(Element.class, name));
-		for (ColumnName e : ColumnName.values()) {
-			System.out.println("->" + e.name() + " ->" + e.value);
-		}
-	}
+//	@Test
+//	void ffffffffffffffff() {
+////		String name = Element.H.name();
+////		System.out.println("->" + name);
+////		System.out.println("->" + ColumnName.valueOf(ColumnName.class, "@id"));
+////		ColumnName n = ColumnName.EMP_CODE;
+////		System.out.println("n->" + n.value);
+//		for (ColumnName e : ColumnName.values()) {
+//			if(e.value.equalsIgnoreCase("@id")) {
+//				System.out.println("------>" + e.name() + " ->" + e.value);
+//				break;
+//			}
+//			
+//		}
+//	}
 	
 	@Test
 	void getRowByEmployeeCode_Using_Cell_1() {
-		Optional<Row<FindRowByEmpCode>> row = gridData.getRow("leftContainer", "EMP_CODE_DMS1");
+		Optional<Row<?>> row = gridData.getRow("leftContainer", "EMP_CODE_DMS1");
 		row.ifPresentOrElse(r ->
 				assertEquals("Duck McScrooge", r.getCell(ColumnName.ALL_NAME.value).getValue().get()), 
 				new TestFail("Row for value is missing"));
@@ -59,7 +65,7 @@ class GridsTests {
 	
 	@Test
 	void getRowByEmployeeCode_Using_Cell_2() {		
-		Optional<Row<FindRowByEmpCode>> row = gridData.getRow("leftContainer", "EMP_CODE_DMS2");
+		Optional<Row<?>> row = gridData.getRow("leftContainer", "EMP_CODE_DMS2");
 		row.ifPresentOrElse(r ->
 				assertEquals("Malta", r.getCell(ColumnName.COUNTRY.value).getValue().get()), 
 				new TestFail("Row for value is missing"));

@@ -7,12 +7,7 @@ public class Cell {
 	private String compId;
 	private String unselectable;
 	private String value;
-	
-//	public enum ZZ_ColumnName {
-//		COL_ID, EMP_CODE, ALL_NAME, IDENTITY_CARD_NO, TITLE, SURNAME, 
-//		NAME, TOWN, POST_CODE, COUNTRY, DOB
-//	}
-	
+		
 	public Cell(String id, String value, String compId, String unselectable) {
 		this.id = id;
 		this.value = value;
@@ -35,5 +30,11 @@ public class Cell {
 	public String getUnselectable() {
 		return unselectable;
 	}
+
+	@Override
+	public String toString() {
+		return "Cell [id=" + id + ", compId=" + compId + ", unselectable=" + unselectable + ", value=" + value + "]";
+	}
+	
 	
 }

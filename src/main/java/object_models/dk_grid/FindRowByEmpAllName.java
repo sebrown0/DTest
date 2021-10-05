@@ -19,7 +19,7 @@ public class FindRowByEmpAllName implements KeyStrategyRow {
 	}
 
 	@Override
-	public Row<?> getNewRow() {
+	public <T extends KeyStrategyRow> Row<T> getNewRow() {
 		return new Row<>(this);
 	}
 }

@@ -3,6 +3,7 @@ package object_model_tests.dk_grid;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.Map;
 import java.util.Optional;
 
 import org.junit.jupiter.api.AfterAll;
@@ -12,14 +13,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import logging.TestResultLogger;
 import object_models.date_picker.DateSetter;
+import object_models.dk_grid.ColumnName;
 import object_models.dk_grid.DkGrid;
 import object_models.dk_grid.DkGridContent;
 import object_models.dk_grid.DkGridEmployeeDetails;
 import object_models.dk_grid.DkGridToolBar;
+import object_models.dk_grid.Row;
 import object_models.element.ElementButton;
 import object_models.element.ElementInput;
 import object_models.element.ElementPointInTime;
 import object_models.forms.ContainerAction;
+import object_models.helpers.TestFail;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.employees.EmployeeDetails;
 import object_models.pages.HomePage;
@@ -165,23 +169,26 @@ public class DkGridTests {
 	
 	@Test
 	void checkContentExists() {
+		Map<String, Map<String, Row<?>>> containers = content.getGridData().getContainers();
+		System.out.println("num conts->" + containers.size());
+		containers.forEach((k,v) -> {
+			System.out.println("Continaer: " + k);
+			v.forEach( (k1, rw) -> {
+				System.out.println("[" + rw.getCell(ColumnName.ALL_NAME.value) + "]:" + rw.getCell(ColumnName.ALL_NAME.value));
+			});
+		});
 		
+//		Optional<Map<String, Row<?>>> eLeftContainer = content.getGridData().getContainer("eLeftContainer");
+//		eLeftContainer.ifPresent(c -> System.out.println("->HHHHHHHHHHHHHHHHHHHHHHHHHHH"));
+		
+//		Optional<Row<?>> row = content.getGridData().getRow("eLeftContainer", "F");
+//		content.getGridData().getRow("eLeftContainer", "F").ifPresent(z -> System.out.println("got roooooooooooooooow"));
+//		System.out.println("x->" + row.get().getCell(ColumnName.ALL_NAME.name()));
 	}
-	
-	private class TestFail implements Runnable {
-		private String msg;
-
-		public TestFail(String msg) {
-			this.msg = msg;
-		}
-
-		@Override
-		public void run() {	fail(msg);	}
-	}
-	
+		
 	@AfterAll
 	public static void tearDown() {			
-		homepagePayroll.close();
+//		homepagePayroll.close();
 	}
 	
 }

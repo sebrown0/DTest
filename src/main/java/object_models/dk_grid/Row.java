@@ -25,12 +25,16 @@ public class Row <T extends KeyStrategyRow> {
 	public interface KeyStrategyRow {
 		Optional<String> getKey(Map<String, Cell> columns);
 		String getStrategyName();
-		Row<?> getNewRow();
+		public <T extends KeyStrategyRow> Row<T> getNewRow();
 	}
 	
 	private KeyStrategyRow rowKeyStrategy;
 	private Map<String, Cell> cells = new HashMap<>();
 		
+	public Map<String, Cell> getCells() {
+		return cells;
+	}
+
 	/*
 	 * Instantiate with the strategy for 
 	 */
@@ -38,8 +42,9 @@ public class Row <T extends KeyStrategyRow> {
 		this.rowKeyStrategy = rowKeyStrategy;
 	}
 	
-	public void addCell(String key, Cell col) {
-		cells.putIfAbsent(key, col);
+	public void addCell(String key, Cell cell) {
+		System.out.println("addCell -> key =" + key + " " + cell.toString() );
+		cells.putIfAbsent(key, cell);
 	}
 	
 	public Cell getCell(String key){

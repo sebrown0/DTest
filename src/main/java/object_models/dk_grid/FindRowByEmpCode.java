@@ -15,11 +15,13 @@ public class FindRowByEmpCode implements KeyStrategyRow {
 	
 	@Override
 	public String getStrategyName() {
+		System.out.println("getStrategyName ->" + KEY);
 		return KEY;
 	}
-
+	
 	@Override
-	public Row<?> getNewRow() {
+	public <T extends KeyStrategyRow> Row<T> getNewRow() {
 		return new Row<>(this);
 	}
+
 }
