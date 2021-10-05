@@ -24,40 +24,34 @@ public class GridData <T extends KeyStrategyRow> {
 	private Map<String, Map<String, Row<?>>> containers = new HashMap<>();
 	private Logger logger = LogManager.getLogger();
 	
-	public void addRow(String containerName, Row<?> row) {		
-//		System.out.println("addRow->adding row for container: " + containerName);
-		
-		row.getCells().forEach((k,v) -> { 
-//			System.out.println("X->" + k);
-			mapRowToContainer(containerName, row, k);
-		});
-		
-//		row.getKey().ifPresentOrElse(
-//				k -> mapRowToContainer(containerName, row, k), 
-//				new Runnable() {					
-//					@Override
-//					public void run() {
-//						System.out.println("->>Could not get key using key strategy [" + row.getKeyStrategy().getStrategyName() + "]");
-//						logger.debug("Could not get key using key strategy [" + row.getKeyStrategy().getStrategyName() + "]");
-//					}
-//				});		
+	public void addRow(String containerName, Row<?> row) {
+		mapRowToContainer(containerName, row);			
 	}
 
-	private void mapRowToContainer(String containerName, Row<?> row, String rowKey) {
-//		System.out.println("->mapRowToContainer");
+	private void mapRowToContainer(String containerName, Row<?> row) {
 		Optional<Map<String, Row<?>>> container = Optional.ofNullable(containers.get(containerName));
 		
 		if(container.isPresent()) {
-//			System.out.println("Adding to existing container [" + containerName + "]" + " [" + rowKey + "]");
-			container.get().putIfAbsent(rowKey, row);
+			logger.debug("Adding to existing container [" + containerName +"]");
+			container.get().putIfAbsent(row.getRowIdx(), row);
 		}else {
 			logger.debug("Adding new container [" + containerName +"]");
-//			System.out.println("Adding to new container [" + containerName + "]" + " [" + rowKey + "]");
-//			System.out.println("Adding new container [" + containerName +"]");
 			Map<String, Row<?>> rowMap = new HashMap<>();
-			rowMap.put(rowKey, row);
+			rowMap.put(row.getRowIdx(), row);
 			containers.put(containerName, rowMap);
 		}
+	}
+	
+	public Optional<Map<String, Row<?>>> getLeftContainer() {
+		return Optional.ofNullable(containers.get("eLeftContainer"));
+	}
+	
+	public Optional<Map<String, Row<?>>> getCentreContainer() {
+		return Optional.ofNullable(containers.get("eCenterContainer"));
+	}
+	
+	public Optional<Map<String, Row<?>>> getRighttContainer() {
+		return Optional.ofNullable(containers.get("eRightContainer"));
 	}
 	
 	public Optional<Map<String, Row<?>>> getContainer(String containerName) {

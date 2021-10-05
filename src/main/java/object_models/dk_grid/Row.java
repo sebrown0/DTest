@@ -1,8 +1,11 @@
 package object_models.dk_grid;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import org.openqa.selenium.WebElement;
 
 import object_models.dk_grid.Row.KeyStrategyRow;
 
@@ -30,6 +33,10 @@ public class Row <T extends KeyStrategyRow> {
 	
 	private KeyStrategyRow rowKeyStrategy;
 	private Map<String, Cell> cells = new HashMap<>();
+//	private Cell key = null;
+	private String keyColumnName;
+	private String keyRow;
+	private String rowIdx;
 		
 	public Map<String, Cell> getCells() {
 		return cells;
@@ -42,20 +49,62 @@ public class Row <T extends KeyStrategyRow> {
 		this.rowKeyStrategy = rowKeyStrategy;
 	}
 	
-	public void addCell(String key, Cell cell) {
-		System.out.println("addCell -> key =" + key + " " + cell.toString() );
-		cells.putIfAbsent(key, cell);
+	public void setRowIdx(String rowIdx) {
+		this.rowIdx = rowIdx;
+	}
+	
+	public String getRowIdx() {
+		return rowIdx;
+	}
+	
+	public void setKeyColumnName(List<WebElement> cellElements) {
+		String id = null;
+		String idCol = rowKeyStrategy.getStrategyName();
+		
+		for (WebElement e : cellElements) {
+			id = e.getAttribute("col-id");		
+			if(id.equalsIgnoreCase(idCol)) {
+				keyColumnName = id;				
+				break;
+			}
+		}
+	}	
+	
+	public String getKeyColumnName() {
+		return keyColumnName;
+	}
+	
+	public void setKeyForRow(String keyRow) {
+		this.keyRow = keyRow;
+	}
+	
+	public String getKeyForRow() {
+		return keyRow;
+	}
+	
+	public void addCells(Map<String, Cell> cells) {
+		this.cells = cells;
 	}
 	
 	public Cell getCell(String key){
 		return cells.get(key);
 	}
 	
-	public Optional<String> getKey() {
-		return rowKeyStrategy.getKey(cells);
-	}
+//	public Optional<String> getKey() {
+//		return rowKeyStrategy.getKey(cells);
+//	}
 	
 	public KeyStrategyRow getKeyStrategy() {
 		return rowKeyStrategy;
 	}
 }
+
+//public void addCell(String key, Cell cell) {
+//System.out.println("addCell -> key =" + key + " " + cell.toString() );
+//cells.putIfAbsent(key, cell);
+//}
+//public void addCell(Cell cell) {
+//System.out.println("addCell -> key =" + key + " " + cell.toString() );
+//cells.putIfAbsent(cell.getColumnId(), cell);
+//}
+//

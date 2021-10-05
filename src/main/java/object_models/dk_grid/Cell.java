@@ -7,12 +7,14 @@ public class Cell {
 	private String compId;
 	private String unselectable;
 	private String value;
+	private String rowNum;
 		
-	public Cell(String id, String value, String compId, String unselectable) {
+	public Cell(String id, String value, String compId, String unselectable, String rowNum) {
 		this.id = id;
 		this.value = value;
 		this.compId = compId;
 		this.unselectable = unselectable;
+		this.rowNum = rowNum;
 	}
 	
 	public String getColumnId() {
@@ -33,8 +35,8 @@ public class Cell {
 
 	@Override
 	public String toString() {
-		return "Cell [id=" + id + ", compId=" + compId + ", unselectable=" + unselectable + ", value=" + value + "]";
+		return "Cell [id=" + id + ", compId=" + compId + ", unselectable=" + unselectable + ", value=" + value + ", rowNum="
+				+ rowNum + "]";
 	}
-	
 	
 }

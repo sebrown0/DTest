@@ -15,7 +15,6 @@ public class FindRowByEmpCode implements KeyStrategyRow {
 	
 	@Override
 	public String getStrategyName() {
-		System.out.println("getStrategyName ->" + KEY);
 		return KEY;
 	}
 	

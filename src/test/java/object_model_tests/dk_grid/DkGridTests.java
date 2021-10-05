@@ -1,7 +1,7 @@
 package object_model_tests.dk_grid;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Map;
 import java.util.Optional;
@@ -13,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import logging.TestResultLogger;
 import object_models.date_picker.DateSetter;
+import object_models.dk_grid.Cell;
 import object_models.dk_grid.ColumnName;
 import object_models.dk_grid.DkGrid;
 import object_models.dk_grid.DkGridContent;
@@ -167,28 +168,44 @@ public class DkGridTests {
 		);		
 	}
 	
+//	@Test
+//	void checkContentExists() {
+//		Map<String, Map<String, Row<?>>> containers = content.getGridData().getContainers();
+//		System.out.println("num conts->" + containers.size());
+//		containers.forEach((k,v) -> {
+//			System.out.println("Continaer: " + k);
+//			v.forEach( (k1, rw) -> {
+//				rw.getCells().forEach((k2, cell) -> {
+//					System.out.println("T-->" + cell);
+//				});
+////				System.out.println("[" + k1 + "]:" + rw.getCell(ColumnName.ALL_NAME.name()));
+//			});
+//		});
+//		
+//	}
+
 	@Test
-	void checkContentExists() {
-		Map<String, Map<String, Row<?>>> containers = content.getGridData().getContainers();
-		System.out.println("num conts->" + containers.size());
-		containers.forEach((k,v) -> {
-			System.out.println("Continaer: " + k);
-			v.forEach( (k1, rw) -> {
-				System.out.println("[" + rw.getCell(ColumnName.ALL_NAME.value) + "]:" + rw.getCell(ColumnName.ALL_NAME.value));
-			});
-		});
-		
-//		Optional<Map<String, Row<?>>> eLeftContainer = content.getGridData().getContainer("eLeftContainer");
-//		eLeftContainer.ifPresent(c -> System.out.println("->HHHHHHHHHHHHHHHHHHHHHHHHHHH"));
-		
-//		Optional<Row<?>> row = content.getGridData().getRow("eLeftContainer", "F");
-//		content.getGridData().getRow("eLeftContainer", "F").ifPresent(z -> System.out.println("got roooooooooooooooow"));
-//		System.out.println("x->" + row.get().getCell(ColumnName.ALL_NAME.name()));
+	void checkContentForRow1() {
+		Optional<Row<?>> row1 = content.getRowForRowIndex("1");		
+		assertEquals("1", row1.get().getRowIdx());		
 	}
 		
+	@Test
+	void checkRowNumber_WithKey() {
+		Optional<String> rowIdx = content.getRowNumForKey("F");		
+		assertTrue(Integer.parseInt(rowIdx.get()) >= 0);		
+	}
+	
+	@Test
+	void checkContentForRow_WithKey() {
+		Optional<Row<?>> rowIdx = content.getRowForKeyValue("F");		
+		Cell c = rowIdx.get().getCell(ColumnName.TOWN.name());
+		assertEquals("Birkirkara", c.getValue().get());
+	}
+	
 	@AfterAll
 	public static void tearDown() {			
-//		homepagePayroll.close();
+		homepagePayroll.close();
 	}
 	
 }

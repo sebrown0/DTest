@@ -3,11 +3,13 @@
  */
 package object_models.dk_grid;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,20 +24,23 @@ public class DkGridContentReader <T extends KeyStrategyRow>{
 	private WebDriver driver;
 	private WebElement gridElement;
 	private WebElement contentElement;	
-	private Logger logger = LogManager.getLogger();	
+	private Logger logger = LogManager.getLogger();
+//	private Logger logger = LogManager.getLogger();	
 	private DkGridContent<?> gridContent;	
 	private String[] containerNames = new String[3];
 	private KeyStrategyRow keyStrategyRows;
-
+	private String currentContainerName;
+	
 	public DkGridContentReader(WebDriver driver, DkGridContent<?> gridContent, KeyStrategyRow keyStrategyRows) {
 		this.driver = driver;
 		this.gridContent = gridContent;
 		this.keyStrategyRows = keyStrategyRows;
+
 		setContainerNames();
 		setGridElement();
 		setContentElement();
 	}
-	
+		
 	private void setContainerNames() {
 		containerNames[0] = "ag-pinned-left-cols-container";
 		containerNames[1] = "ag-center-cols-container";
@@ -55,65 +60,93 @@ public class DkGridContentReader <T extends KeyStrategyRow>{
 	}
 	
 	private void loopContainers(){
-		WebElement container = null;		
-		for (String className : containerNames) {			
-			container = contentElement.findElement(By.cssSelector("div[class='" + className + "']"));
-			getRowsInContainer(container);
-		}
+		mapLeftPinned();
+		mapCentre();
+//		mapRightPinned();		
 	}
+	
+	private void mapLeftPinned() {
+		WebElement container = contentElement.findElement(By.cssSelector("div[class='" + containerNames[0] + "']"));
+		currentContainerName = containerNames[0];
+		getRowsInContainer(container);
+	}
+	
+	private void mapCentre() {
+		WebElement container = contentElement.findElement(By.cssSelector("div[class='" + containerNames[1] + "']"));
+		currentContainerName = containerNames[1];
+		getRowsInContainer(container);
+	}
+	
+//	private void mapRightPinned() {
+//		WebElement container = contentElement.findElement(By.cssSelector("div[class='" + containerNames[2] + "']"));
+//		currentContainerName = containerNames[2];
+//		getRowsInContainer(container);
+//	}
 	
 	private void getRowsInContainer(WebElement container) {
-		String containerName = container.getAttribute("ref");
-		container.findElements(By.cssSelector("div[role='row']")).forEach(r -> mapRowToContainer(r, containerName));
+		if(container != null) {
+			String containerName = container.getAttribute("ref");						
+			container
+				.findElements(By.cssSelector("div[role='row']"))
+				.forEach(row -> { 
+					mapRowToContainer(row, containerName); 
+				});	
+		}else {
+			logger.info("No rows in container [" + currentContainerName + "]");
+		}
+		
 	}
 	
-	private void mapRowToContainer(WebElement rowElement, String containerName) {
-		Row<T> newRow = keyStrategyRows.getNewRow();		
-		mapCellsInRow(rowElement.findElements(By.cssSelector("div[role='gridcell']")), newRow);
-		gridContent.getGridData().addRow(containerName, newRow);
+	private void mapRowToContainer(WebElement rowElement, String containerName) {				
+		String rowIdx = rowElement.getAttribute("row-index");
+		gridContent.getGridData().addRow(
+				containerName, 
+				mapCellsInRow(rowElement.findElements(By.cssSelector("div[role='gridcell']")), rowIdx));
+	}
+	
+	private Row<T> mapCellsInRow(List<WebElement> cellElements, String rowIdx) {		
+		Map<String, Cell> cells = new HashMap<>();
+		Row<T> newRow  = getNewRowWithKey(cellElements, rowIdx);
+		String colId = null;
+		String value = null;
+		
+		for (WebElement cellElement : cellElements) {
+			colId = cellElement.getAttribute("col-id");
+			value = cellElement.getText();
+			Cell newCell = new Cell(
+					colId, 
+					value, 
+					cellElement.getAttribute("comp-id"), 
+					cellElement.getAttribute("unselectable"), 
+					rowIdx);		
+			
+			addCellToList(cells, newCell);
+			setAsRowKeyIfTheCellIsUsedAsKey(newRow, colId, value);
+		}		
+		addCellsToRow(newRow, cells);
+		return newRow;
 	}
 
-	private void mapCellsInRow(List<WebElement> cells, Row<T> row) {
-		for (WebElement cell : cells) {
-			Cell newCell = new Cell(
-					cell.getAttribute("aria-colindex"), 
-					cell.getText(), 
-					cell.getAttribute("comp-id"), 
-					cell.getAttribute("unselectable"));
-			
-//			Optional<String> key = Optional.ofNullable(cell.getAttribute("col-id"));
-			
-			/*
-			 * MAPPING KEY BY
-			 */
-			Optional<String> key = Optional.ofNullable(row.getKeyStrategy().getStrategyName());
-			
-			key.ifPresentOrElse(
-					k -> { 
-//						System.out.println("mapCellsInRow->" + findKey(k));  
-						row.addCell(findKey(k), newCell); }, 
-//					k -> row.addCell(findKey(k), newCell),
-					new Runnable() {						
-						@Override
-						public void run() {
-							System.out.println("->could not get key for cell" + cell.getAttribute("comp-id"));	
-							logger.error("Could not get key for cell" + cell.getAttribute("comp-id"));
-						}
-					});			
+	private void setAsRowKeyIfTheCellIsUsedAsKey(Row<T> newRow, String colId, String value) {
+		if(colId.equalsIgnoreCase(newRow.getKeyColumnName())) {
+			newRow.setKeyForRow(value);
 		}
+	}
+
+	private Row<T> getNewRowWithKey(List<WebElement> cellElements, String rowNum){
+		Row<T> newRow = keyStrategyRows.getNewRow();
+		newRow.setRowIdx(rowNum);
+		newRow.setKeyColumnName(cellElements);
+		return newRow;
 	}
 	
-	private String findKey(String colId) {
-		String key = null;
-//		System.out.println("------>trying to find key for col id: " + colId);
-		for (ColumnName e : ColumnName.values()) {
-			if(e.value.equalsIgnoreCase(colId)) {
-//				System.out.println("------>" + e.name() + " ->" + e.value);
-				key = e.name();
-				break;
-			}
-			
-		}
-		return key;
+	private void addCellToList(Map<String, Cell> cells, Cell newCell) {
+		cells.putIfAbsent(newCell.getColumnId(), newCell);
 	}
+		
+	private void addCellsToRow(Row<T> newRow, Map<String, Cell> cells) {
+		newRow.addCells(cells);
+	}
+		
 }
+
