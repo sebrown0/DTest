@@ -69,6 +69,11 @@ public class Row <T extends KeyStrategyRow> {
 		}
 	}	
 	
+	public void addCell(String key, Cell cell) {
+//		System.out.println("addCell -> key =" + key + " " + cell.toString() );
+		cells.putIfAbsent(key, cell);
+	}
+	
 	public String getKeyColumnName() {
 		return keyColumnName;
 	}
@@ -98,12 +103,6 @@ public class Row <T extends KeyStrategyRow> {
 	}
 }
 
-//public void addCell(String key, Cell cell) {
-//System.out.println("addCell -> key =" + key + " " + cell.toString() );
-//cells.putIfAbsent(key, cell);
-//}
-//public void addCell(Cell cell) {
-//System.out.println("addCell -> key =" + key + " " + cell.toString() );
-//cells.putIfAbsent(cell.getColumnId(), cell);
-//}
+
+
 //

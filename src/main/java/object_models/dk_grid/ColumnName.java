@@ -18,6 +18,8 @@ public enum ColumnName {
 	TOWN("town"),
 	POST_CODE("post_code"),
 	COUNTRY("country"),
+	AGE("age"),
+	GENDER("sex"),
 	DOB("date_of_birth");
 
   public final String value;

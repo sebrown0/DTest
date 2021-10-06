@@ -21,7 +21,7 @@ public class IFrame {
 		this.byLocator = byLocator;
 	}
 		
-	public IFrame switchUsingTitle() {
+	public IFrame switchUsingLocator() {
 		iFrame = driver.findElement(byLocator);	
 		driver.switchTo().frame(iFrame);	
 		return this;

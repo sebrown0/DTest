@@ -11,6 +11,7 @@ import object_models.dk_grid.DkGridEmployeeDetails;
 import object_models.element.ComboSelect;
 import object_models.element.TextInOut;
 import object_models.element.TextOut;
+import object_models.employee.EmployeeSelection;
 import object_models.panels.JSPanelWithIFrame;
 
 /**
@@ -19,6 +20,7 @@ import object_models.panels.JSPanelWithIFrame;
  */
 public class EmployeeDetails extends JSPanelWithIFrame {
 	private EmpDetailsTabs myTabs;
+	private boolean isChildLoaded = false;
 	
 	public static final String PANEL_TITLE = "Employee Details";
 	public static final String MENU_TITLE = PANEL_TITLE;
@@ -29,12 +31,32 @@ public class EmployeeDetails extends JSPanelWithIFrame {
 		
 		this.myTabs = new EmpDetailsTabs();
 	}
-				
+		
 	// Actions
+	public EmployeeSelection showEmployeeSelection() {
+		WebElement e = driver.findElement(By.cssSelector("i[class='fa fa-list']"));
+		e.click();
+		isChildLoaded = true;
+		return new EmployeeSelection(driver);
+	}
+	
 	public DkGridEmployeeDetails showEmpDetailsGrid() {
 		WebElement e = driver.findElement(By.cssSelector("i[class='fa fw fa-table']"));
 		e.click();		
+		isChildLoaded = true;
 		return new DkGridEmployeeDetails(driver);
+	}
+	
+	private void switchBackToMeIfNecessary() {
+		if(isChildLoaded == true) {
+			switchToMe();
+		}			
+	}
+	
+	private void switchToMe() {
+		driver.switchTo().defaultContent();
+		super.switchToIFrame();		
+		isChildLoaded = false;
 	}
 	
 	// Tabs
@@ -44,9 +66,11 @@ public class EmployeeDetails extends JSPanelWithIFrame {
 	
 	// Basic Details
 	public TextInOut employeeCode() {
+		switchBackToMeIfNecessary();
 		return new TextInOut(driver, By.id("FORM_ID"));
 	}
 	public TextInOut iDCardNumber() {
+		switchBackToMeIfNecessary();
 		return new TextInOut(driver, By.id("IDENTITY_CARD_NO"));
 	}	
 	public ComboSelect title() {
@@ -69,11 +93,16 @@ public class EmployeeDetails extends JSPanelWithIFrame {
 	
 	public class EmpDetailsTabs{	
 		private WebElement tab;
-				
-		public EmpDetailsTabs basicDetails() {
-			tab = driver.findElement(By.xpath("//a[@href='#tab1']"));
-			return this;
+		
+		public BasicDetails basicDetails() {			
+			return new BasicDetails();
 		}
+		
+		
+//		public EmpDetailsTabs basicDetails() {
+//			tab = driver.findElement(By.xpath("//a[@href='#tab1']"));
+//			return this;
+//		}
 		public EmpDetailsTabs settings() {
 			tab = driver.findElement(By.xpath("//a[@href='#tab2']"));
 			return this;
@@ -90,5 +119,23 @@ public class EmployeeDetails extends JSPanelWithIFrame {
 		public void click() {
 			tab.click();			
 		}
+		
+		public class BasicDetails {
+			private WebElement tab;
+			
+			public BasicDetails() {
+				switchBackToMeIfNecessary();
+				tab = driver.findElement(By.xpath("//a[@href='#tab1']"));
+				tab.click();
+			}
+
+			public TextInOut iDCardNumber() {				
+				return new TextInOut(driver, By.id("IDENTITY_CARD_NO"));
+			}
+			
+		}
+		
+		
+		
 	}
 }

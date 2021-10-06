@@ -24,7 +24,7 @@ public class FormWithIFrame extends FormModal {
 
 	private void switchToIFrame(WebDriver driver, String iFrameName) {
 		iFrame = new IFrame(driver, By.cssSelector("iframe[name='" + iFrameName + "']"));
-		iFrame.switchUsingTitle();
+		iFrame.switchUsingLocator();
 	}
 	
 	public WebElement getIFrameElement() {

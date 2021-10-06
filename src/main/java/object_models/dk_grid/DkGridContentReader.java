@@ -100,8 +100,9 @@ public class DkGridContentReader <T extends KeyStrategyRow>{
 	
 	private void mapRowToContainer(WebElement rowElement, String containerName) {				
 		String rowIdx = rowElement.getAttribute("row-index");
+				
 		gridContent.getGridData().addRow(
-				containerName, 
+				containerName,
 				mapCellsInRow(rowElement.findElements(By.cssSelector("div[role='gridcell']")), rowIdx));
 	}
 	
@@ -111,8 +112,13 @@ public class DkGridContentReader <T extends KeyStrategyRow>{
 		String colId = null;
 		String value = null;
 		
+//		System.out.println("->" + cellElements.size());
 		for (WebElement cellElement : cellElements) {
 			colId = cellElement.getAttribute("col-id");
+			
+//			System.out.println(colId);//
+			
+			
 			value = cellElement.getText();
 			Cell newCell = new Cell(
 					colId, 

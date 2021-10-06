@@ -167,22 +167,6 @@ public class DkGridTests {
 		);		
 	}
 	
-//	@Test
-//	void checkContentExists() {
-//		Map<String, Map<String, Row<?>>> containers = content.getGridData().getContainers();
-//		System.out.println("num conts->" + containers.size());
-//		containers.forEach((k,v) -> {
-//			System.out.println("Continaer: " + k);
-//			v.forEach( (k1, rw) -> {
-//				rw.getCells().forEach((k2, cell) -> {
-//					System.out.println("T-->" + cell);
-//				});
-////				System.out.println("[" + k1 + "]:" + rw.getCell(ColumnName.ALL_NAME.name()));
-//			});
-//		});
-//		
-//	}
-
 	@Test
 	void checkContentForRow1() {
 		Optional<Row<?>> row1 = content.getRowForRowIndex("1");		
@@ -198,16 +182,13 @@ public class DkGridTests {
 	@Test
 	void checkContentForRow_WithKey() {
 		Optional<Row<?>> rowIdx = content.getRowForKeyValue("F");		
-		Cell c = rowIdx.get().getCell(ColumnName.TOWN.name());
-		
-		System.out.println("->" + c);
-		System.out.println("->" + content.getLastRowNum());
+		Cell c = rowIdx.get().getCell(ColumnName.TOWN.name());		
 		assertEquals("Birkirkara", c.getValue().get());
 	}
 	
 	@AfterAll
 	public static void tearDown() {			
-//		homepagePayroll.close();
+		homepagePayroll.close();
 	}
 	
 }

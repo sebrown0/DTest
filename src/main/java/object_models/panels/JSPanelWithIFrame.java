@@ -24,9 +24,13 @@ public class JSPanelWithIFrame extends JSPanel {
 
 	private void switchToIFrame(WebDriver driver, String expectedTitle) { 
 		iFrame = new IFrame(driver, By.cssSelector("iframe[title='" + expectedTitle + "']"));
-		iFrame.switchUsingTitle();
+		iFrame.switchUsingLocator();
 	}	
-		
+	
+	protected void switchToIFrame() {
+		iFrame.switchUsingLocator();
+	}	
+	
 	public WebElement getIFrameAsElement() {
 		return iFrame.getIFrameElement();
 	}

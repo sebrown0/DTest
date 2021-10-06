@@ -5,6 +5,10 @@ import java.util.Optional;
 
 import object_models.dk_grid.Row.KeyStrategyRow;
 
+/**
+ * @author Steve Brown
+ * 
+ */
 public class FindRowByEmpCode implements KeyStrategyRow {
 	private static final String KEY = ColumnName.EMP_CODE.value;
 	

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import dto.Employee;
 import logging.TestResultLogger;
+import object_models.employee.EmployeeSelection;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.employees.EmployeeDetails;
 import object_models.pages.HomePage;
@@ -51,28 +52,47 @@ class EmployeeDetailsTests {
 		emp = empProvider.getEmployeeRequired("1");
 	}
 		
-	@Test	
-	void checkCode() {
-		empDetails.tab().basicDetails().click();
-		assertEquals(emp.getEmpCode(), empDetails.employeeCode().getTextByValue());		
-	}
+//	@Test	
+//	void checkCode() {
+//		empDetails.tab().basicDetails().click();
+//		assertEquals(emp.getEmpCode(), empDetails.employeeCode().getTextByValue());		
+//	}
 
+//	@Test
+//	void checkIdCardNo() {
+//		empDetails.tab().basicDetails().click();
+//		assertEquals(emp.getIdCardNumber(), empDetails.iDCardNumber().getTextByValue());
+//	}
+//	
+//	@Test
+//	void set_and_check_PartTimerHoursPerDay() {
+//		empDetails.tab().settings().click();
+//		empDetails.partTimerHoursPerDay().clear();
+//		empDetails.partTimerHoursPerDay().writeText("5");
+//		assertEquals("5", empDetails.partTimerHoursPerDay().getTextByValue());
+//	}
+	
+	// Employee selection start
 	@Test
-	void checkIdCardNo() {
-		empDetails.tab().basicDetails().click();
-		assertEquals(emp.getIdCardNumber(), empDetails.iDCardNumber().getTextByValue());
+	void display_employeeSelection() {
+//		EmployeeSelection empSelection = empDetails.showEmployeeSelection();
+//		empSelection.companySelect().click();
+//		empSelection.departmentSelect().click();
+//		empSelection.filterSelect().click();
 	}
 	
 	@Test
-	void set_and_check_PartTimerHoursPerDay() {
-		empDetails.tab().settings().click();
-		empDetails.partTimerHoursPerDay().clear();
-		empDetails.partTimerHoursPerDay().writeText("5");
-		assertEquals("5", empDetails.partTimerHoursPerDay().getTextByValue());
+	void selectEmployee() {
+		EmployeeSelection empSelection = empDetails.showEmployeeSelection();		
+		empSelection.clickRow("3");		
+		assertEquals("475070M", empDetails.tab().basicDetails().iDCardNumber().getTextByValue());
+		
+//		assertEquals("475070M", empDetails.iDCardNumber().getTextByValue());		
 	}
 	
+	// Employee selection end
 	@AfterAll
 	static void tearDown() {		
-		homepagePayroll.close();
+//		homepagePayroll.close();
 	}
 }
