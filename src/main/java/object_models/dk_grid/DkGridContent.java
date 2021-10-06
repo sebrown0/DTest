@@ -15,7 +15,8 @@ import object_models.dk_grid.Row.KeyStrategyRow;
  */
 public class DkGridContent <T extends KeyStrategyRow> {	
 	private GridData<T> gridData;
-	
+	private int lastRowNum;
+
 	public DkGridContent() {
 		gridData = new GridData<>();
 	}
@@ -63,6 +64,13 @@ public class DkGridContent <T extends KeyStrategyRow> {
 				.findFirst();		
 		
 		return row;
-	}
+	}	
 	
+	public int getLastRowNum() {
+		return lastRowNum;
+	}
+
+	public void setLastRowNum(int lastRowNum) {
+		this.lastRowNum = lastRowNum;
+	}
 }

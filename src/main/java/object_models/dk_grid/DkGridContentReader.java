@@ -30,6 +30,7 @@ public class DkGridContentReader <T extends KeyStrategyRow>{
 	private String[] containerNames = new String[3];
 	private KeyStrategyRow keyStrategyRows;
 	private String currentContainerName;
+	private int currentLastRow = -1;
 	
 	public DkGridContentReader(WebDriver driver, DkGridContent<?> gridContent, KeyStrategyRow keyStrategyRows) {
 		this.driver = driver;
@@ -122,6 +123,7 @@ public class DkGridContentReader <T extends KeyStrategyRow>{
 			
 			addCellToList(cells, newCell);
 			setAsRowKeyIfTheCellIsUsedAsKey(newRow, colId, value);
+			updateLastRowIfNecessary(Integer.parseInt(rowIdx));
 		}		
 		addCellsToRow(newRow, cells);
 		return newRow;
@@ -148,5 +150,12 @@ public class DkGridContentReader <T extends KeyStrategyRow>{
 		newRow.addCells(cells);
 	}
 		
+	private void updateLastRowIfNecessary(int rowIdx) {
+		if(rowIdx > currentLastRow) {
+			currentLastRow = rowIdx;
+			gridContent.setLastRowNum(currentLastRow);
+		}
+	}
+	
 }
 

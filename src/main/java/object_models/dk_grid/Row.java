@@ -33,7 +33,6 @@ public class Row <T extends KeyStrategyRow> {
 	
 	private KeyStrategyRow rowKeyStrategy;
 	private Map<String, Cell> cells = new HashMap<>();
-//	private Cell key = null;
 	private String keyColumnName;
 	private String keyRow;
 	private String rowIdx;

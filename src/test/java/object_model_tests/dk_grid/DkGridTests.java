@@ -3,7 +3,6 @@ package object_model_tests.dk_grid;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Map;
 import java.util.Optional;
 
 import org.junit.jupiter.api.AfterAll;
@@ -200,12 +199,15 @@ public class DkGridTests {
 	void checkContentForRow_WithKey() {
 		Optional<Row<?>> rowIdx = content.getRowForKeyValue("F");		
 		Cell c = rowIdx.get().getCell(ColumnName.TOWN.name());
+		
+		System.out.println("->" + c);
+		System.out.println("->" + content.getLastRowNum());
 		assertEquals("Birkirkara", c.getValue().get());
 	}
 	
 	@AfterAll
 	public static void tearDown() {			
-		homepagePayroll.close();
+//		homepagePayroll.close();
 	}
 	
 }
