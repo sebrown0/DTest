@@ -32,6 +32,11 @@ public class EmployeeDetails extends JSPanelWithIFrame {
 		this.myTabs = new EmpDetailsTabs();
 	}
 		
+	// Elements
+	public TextInOut employeeCode() {
+		return new TextInOut(driver, By.id("FORM_ID"));
+	}
+	
 	// Actions
 	public EmployeeSelection showEmployeeSelection() {
 		WebElement e = driver.findElement(By.cssSelector("i[class='fa fa-list']"));
@@ -47,7 +52,7 @@ public class EmployeeDetails extends JSPanelWithIFrame {
 		return new DkGridEmployeeDetails(driver);
 	}
 	
-	private void switchBackToMeIfNecessary() {
+	private void switchBackToFormIfNecessary() {
 		if(isChildLoaded == true) {
 			switchToMe();
 		}			
@@ -59,83 +64,90 @@ public class EmployeeDetails extends JSPanelWithIFrame {
 		isChildLoaded = false;
 	}
 	
-	// Tabs
 	public EmpDetailsTabs tab() {
 		return this.myTabs;
 	}
-	
-	// Basic Details
-	public TextInOut employeeCode() {
-		switchBackToMeIfNecessary();
-		return new TextInOut(driver, By.id("FORM_ID"));
-	}
-	public TextInOut iDCardNumber() {
-		switchBackToMeIfNecessary();
-		return new TextInOut(driver, By.id("IDENTITY_CARD_NO"));
-	}	
-	public ComboSelect title() {
-		return new ComboSelect(driver, By.cssSelector("#tab1 > div:nth-child(5) > div:nth-child(2) > span > span.selection > span"));		
-	}	
-	public TextInOut name() {
-		return new TextInOut(driver, By.id("NAME"));
-	}
-	public TextInOut surname() {
-		return new TextInOut(driver, By.id("SURNAME"));
-	}
-	public TextOut age() {
-		return new TextOut(driver, By.id("AGE"));
-	}
-	
-	// Settings
-	public TextInOut partTimerHoursPerDay() {
-		return new TextInOut(driver, By.id("ACTUAL_BASIC"));
-	}
-	
-	public class EmpDetailsTabs{	
-		private WebElement tab;
 		
+	public class EmpDetailsTabs{
 		public BasicDetails basicDetails() {			
 			return new BasicDetails();
+		}		
+		public Settings settings() {			
+			return new Settings();
+		}		
+		public Suspension suspension() {			
+			return new Suspension();
 		}
-		
-		
-//		public EmpDetailsTabs basicDetails() {
-//			tab = driver.findElement(By.xpath("//a[@href='#tab1']"));
-//			return this;
-//		}
-		public EmpDetailsTabs settings() {
-			tab = driver.findElement(By.xpath("//a[@href='#tab2']"));
-			return this;
+		public GovtBonus govtBonus() {			
+			return new GovtBonus();
 		}
-		public EmpDetailsTabs suspension() {
-			tab = driver.findElement(By.xpath("//a[@href='#tab3']"));
-			return this;
-		}
-		public EmpDetailsTabs govtBonus() {
-			tab = driver.findElement(By.xpath("//a[@href='#tab4']"));
-			return this;
-		}
-		
-		public void click() {
-			tab.click();			
-		}
-		
+				
 		public class BasicDetails {
 			private WebElement tab;
 			
 			public BasicDetails() {
-				switchBackToMeIfNecessary();
+				switchBackToFormIfNecessary();
 				tab = driver.findElement(By.xpath("//a[@href='#tab1']"));
 				tab.click();
 			}
 
-			public TextInOut iDCardNumber() {				
+			// This tab's elements						
+			public TextInOut iDCardNumber() {
 				return new TextInOut(driver, By.id("IDENTITY_CARD_NO"));
+			}	
+			public ComboSelect title() {
+				return new ComboSelect(driver, By.cssSelector("#tab1 > div:nth-child(5) > div:nth-child(2) > span > span.selection > span"));		
+			}	
+			public TextInOut name() {
+				return new TextInOut(driver, By.id("NAME"));
 			}
-			
+			public TextInOut surname() {
+				return new TextInOut(driver, By.id("SURNAME"));
+			}
+			public TextOut age() {
+				return new TextOut(driver, By.id("AGE"));
+			}
 		}
 		
+		public class Settings {
+			private WebElement tab;
+			
+			public Settings() {
+				switchBackToFormIfNecessary();
+				tab = driver.findElement(By.xpath("//a[@href='#tab2']"));
+				tab.click();
+			}
+
+			// This tab's elements
+			public TextInOut partTimerHoursPerDay() {
+				return new TextInOut(driver, By.id("ACTUAL_BASIC"));
+			}						
+		}		
+
+		public class Suspension {
+			private WebElement tab;
+			
+			public Suspension() {
+				switchBackToFormIfNecessary();
+				tab = driver.findElement(By.xpath("//a[@href='#tab3']"));
+				tab.click();
+			}
+
+			// This tab's elements
+						
+		}
 		
-		
+		public class GovtBonus {
+			private WebElement tab;
+			
+			public GovtBonus() {
+				switchBackToFormIfNecessary();
+				tab = driver.findElement(By.xpath("//a[@href='#tab4']"));
+				tab.click();
+			}
+
+			// This tab's elements
+						
+		}
 	}
 }

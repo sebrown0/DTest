@@ -11,11 +11,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.WebDriver;
 
 import logging.TestResultLogger;
 import object_models.element.ComboSelect;
 import object_models.forms.ContainerAction;
+import object_models.forms.DialogOkCancel;
 import object_models.left_menu.common.LeftMenuActions;
 import object_models.left_menu.payroll.InitialisePayroll;
 import object_models.pages.HomePage;
@@ -34,7 +34,7 @@ import xml_reader.config_file.ConfigReader;
 	LoginPageResolverPayroll.class, 
 	TestResultLogger.class })
 public final class InitialisePayroll_Tests {
-	private static WebDriver driver;
+	private static HomePage hp;
 	private static LeftMenuActions leftMenu;
 	private static Optional<ContainerAction> contPay;
 	private static InitialisePayroll initPay;
@@ -42,13 +42,12 @@ public final class InitialisePayroll_Tests {
 	
 	@BeforeAll
 	static void setUpBeforeClass(ConfigReader configReader, UserLoginPage userLogin) throws Exception {
-		HomePage hp = userLogin.loginValidUser(UserProvider.userPortal());
-		driver = hp.getWebDriver();
+		hp = userLogin.loginValidUser(UserProvider.userPortal());
 		leftMenu = hp.getLeftMenu();
 		contPay = leftMenu
 				.clickParent(InitialisePayroll.MENU_PARENT_NAME)
 				.clickAndLoad(InitialisePayroll.MENU_TITLE);
-		
+
 		if(contPay.isPresent()) {
 			initPay = (InitialisePayroll) contPay.get();
 			initPayrollLoaded = true;
@@ -56,7 +55,7 @@ public final class InitialisePayroll_Tests {
 			fail("Could not get InitialisePayroll object");
 		}	
 	}
-
+	
 	@Test
 	@Order(1)
 	void loadInitialisePayroll() {		
@@ -83,6 +82,16 @@ public final class InitialisePayroll_Tests {
 		assertTrue(selectPayPeriod.getText().length() > 0);
 	}
 	
+	@Test
+	void click_initialisePayroll() {
+		DialogOkCancel okCancel = (DialogOkCancel) initPay.clickInitialisePayroll();
+		okCancel.getBtnCancel().get().click();
+		assertEquals("Are you sure you want to Initialise the Payroll ?", okCancel.getMsg().get());
+		assertEquals("Payroll Initialisation", okCancel.getTitle().get());
+		assertEquals("OK", okCancel.getBtnOk().get().getElementKey());
+		assertEquals("Cancel", okCancel.getBtnCancel().get().getElementKey());
+	}
+	
 //	@Test
 //	void checkCompany() {
 //		Optional<WebElement> selectComp = initPay.getSelectCompany(); 
@@ -92,23 +101,12 @@ public final class InitialisePayroll_Tests {
 //		);
 //	}
 	
-//	private class TestFail implements Runnable {
-//		private String msg;
-//		
-//		public TestFail(String msg) {
-//			this.msg = msg;			
-//		}
-//
-//		@Override
-//		public void run() {
-//			fail(msg);
-//		}		
-//	}
+
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-		initPay.close();
-		driver.quit();
+//		initPay.close();
+//		hp.close();
 	}
 
 }

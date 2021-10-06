@@ -67,7 +67,6 @@ import object_models.left_menu.reports.GlobalPayrollAnalysis;
 import object_models.left_menu.reports.HrRelatedReports;
 import object_models.left_menu.reports.PayrollReports;
 import object_models.left_menu.reports.Payslips;
-import object_models.strategies.click.ClickUsingJavaScript;
 
 /**
  * @author Steve Brown
@@ -121,7 +120,7 @@ public class LeftMenu implements LeftMenuActions {
 	}
 	
 	@Override
-	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {
+	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
 		Optional<ContainerAction> item = null;
 		try {
 			String prntName = (String) clazz.getField("MENU_PARENT_NAME").get(null);
@@ -134,10 +133,11 @@ public class LeftMenu implements LeftMenuActions {
 	}
 
 	@Override
-	public Optional<ContainerAction> clickAndLoad(String elementName) {
+	public Optional<ContainerAction> clickAndLoad(String elementName) {		
 		WebElement e = anchors.get(elementName);
-		logger.info("Loading [" + elementName + "]");
-		ClickUsingJavaScript.performClick(driver, e.getAttribute("href"));
+		logger.info("Loading [" + elementName + "]");		
+//		ClickUsingJavaScript.performClick(driver, e.getAttribute("href")); // changed to basic click 06/10/2021
+		e.click();
 		Optional<ContainerAction> child = Optional.empty();
 		
 		try {
