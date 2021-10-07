@@ -38,7 +38,7 @@ public class ArgumentChecker {
 			moduleName = args[0];
 			testFileName = args[1];	
 		}
-		testFilePath = XMLFileProvider.INCLUDE_TESTS_FILE_PATH + "\\" + testFileName;// + ".xml";
+		testFilePath = XMLFileProvider.INCLUDE_TESTS_FILE_PATH + "\\" + testFileName + ".xml";
 		return this;
 	}
 	

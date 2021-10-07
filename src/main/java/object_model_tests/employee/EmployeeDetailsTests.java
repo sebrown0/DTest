@@ -10,7 +10,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import controls.PageControl;
 import dto.Employee;
+import enums.control_names.EmployeeControlNames;
 import logging.TestResultLogger;
 import object_models.element.TextInOut;
 import object_models.employee.EmployeeSelection;
@@ -53,12 +55,19 @@ class EmployeeDetailsTests {
 		emp = empProvider.getEmployeeRequired("1");
 	}
 		
+	// Controls - Start
 	@Test	
 	void checkCode() {
-		empDetails.tab().basicDetails();
-		assertEquals(emp.getEmpCode(), empDetails.employeeCode().getTextByValue());		
+		PageControl control = empDetails.getEmployeeControl();
+		assertEquals(emp.getEmpCode(), control.getTextOut(EmployeeControlNames.EMP_CODE).get().getTextByValue());		
+	}	
+	@Test
+	void checkEmployeeName() {
+		PageControl control = empDetails.getEmployeeControl();
+		assertEquals(emp.getFullName(), control.getTextOut(EmployeeControlNames.EMP_NAME).get().getTextByValue());
 	}
-
+	// Controls - End
+	
 	@Test
 	void checkIdCardNo() {		
 		assertEquals(emp.getIdCardNumber(), empDetails.tab().basicDetails().iDCardNumber().getTextByValue());
@@ -83,6 +92,6 @@ class EmployeeDetailsTests {
 	
 	@AfterAll
 	static void tearDown() {		
-//		homepagePayroll.close();
+		homepagePayroll.close();
 	}
 }
