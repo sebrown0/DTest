@@ -4,6 +4,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
+/**
+ * @author Steve Brown
+ *
+ * Given a web element map its common elements.
+ * 
+ * Try to use the element's text as its key (identifier).
+ * 
+ * If there is no text, work up through the attributes until
+ * exhausted or key found.
+ * 
+ */
 public class Element {
 	private WebElement element;	
 	private String elmntText = "NONE";

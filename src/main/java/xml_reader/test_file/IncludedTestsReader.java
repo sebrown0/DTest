@@ -40,7 +40,8 @@ public class IncludedTestsReader {
 	}
 	
 	private List<TestClass> getClasses() {
-		NodeList nodeList = xmlFile.getNodes("Class");
+//		NodeList nodeList = xmlFile.getNodes("Class");
+		NodeList nodeList = xmlFile.getNodes("Test");
 		List<TestClass> testClasses = new ArrayList<>();
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			Node node =nodeList.item(i);

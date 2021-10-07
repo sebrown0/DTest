@@ -7,14 +7,14 @@
   ** Applicable is the module(s) that the test(s) are
   ** applicable for.
   
-  ** Each class is a JUNIT test class in the TestPackage.
+  ** Each test is a JUNIT test class in the TestPackage.
   ** The priority of the test class is represented 
   ** by the enum { HIGH, MED, LOW }  
  -->
 <TestPackage name="navigation.payroll" applicable="Payroll">	
-	<Classes>
-		<Class priority="high">LeftMenuVailidation_Payroll_Tests</Class>
-		<!-- <Class priority="high">TopRightNavBar_Payroll_ElementsTests</Class> -->  
-		<!-- <Class priority="high">TopRightNavBar_Payroll_ElementsTests</Class>  --> 
-	</Classes>		
+	<Tests>
+		<Test priority="high">LeftMenuVailidation_Payroll_Tests</Test>
+		<Test priority="high">TopRightNavBar_Payroll_ElementsTests</Test>  
+		<Test priority="high">TopRightNavBar_Payroll_ElementsTests</Test>   
+	</Tests>		
 </TestPackage>

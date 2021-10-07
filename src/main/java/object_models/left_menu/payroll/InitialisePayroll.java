@@ -1,8 +1,13 @@
 package object_models.left_menu.payroll;
 
+import java.time.Duration;
+import java.util.Optional;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import object_models.element.ComboSelect;
 import object_models.forms.Dialog;
@@ -15,6 +20,7 @@ import object_models.forms.FormWithIFrame;
  */
 public class InitialisePayroll extends FormWithIFrame {	
 	private WebElement container;
+	private WebDriverWait waitForMsg;
 	
 	public static final String MENU_TITLE = "Initialise Payroll";
 	public static final String PANEL_TITLE = MENU_TITLE;
@@ -23,6 +29,7 @@ public class InitialisePayroll extends FormWithIFrame {
 	public InitialisePayroll(WebDriver driver) {
 		super(driver, PANEL_TITLE, "_iframex-DEFAULT");
 		container = driver.findElement(By.cssSelector("body > form > div"));
+		waitForMsg = new WebDriverWait(driver, Duration.ofSeconds(20));
 	}
 		
 	public String getIframeTitle() {
@@ -38,6 +45,17 @@ public class InitialisePayroll extends FormWithIFrame {
 		return new DialogOkCancel(driver.findElement(By.cssSelector("div[class='modal-dialog']")));
 	}
 	
+	public Optional<String> getPayrollInitialisedMsg() {
+		waitForMsg.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body > form > div > div:nth-child(8) > div")));
+		return Optional.ofNullable(driver.findElement(By.cssSelector("body > form > div > div:nth-child(8) > div")).getText());
+	}
+	
+	public Optional<String> getPayrollAlreadyInitialisedMsg() {		
+		waitForMsg.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body > form > div > div:nth-child(9) > div.col-md-12 > div")));
+		return Optional.ofNullable(driver.findElement(By.cssSelector("body > form > div > div:nth-child(9) > div.col-md-12 > div")).getText());
+	}
+	
+
 	// Elements
 	public ComboSelect getSelectCompany() {
 		return new ComboSelect(container.findElement(By.cssSelector("div:nth-child(3) > div:nth-child(2) > select")));		

@@ -65,25 +65,29 @@ public final class InitialisePayroll_Tests {
 	}
 
 	@Test
+	@Order(2)
 	void checkCompany() {
 		ComboSelect selectComp = initPay.getSelectCompany(); 
 		assertEquals("Mars Incorporated Ltd", selectComp.getText());
 	}
 	
 	@Test
+	@Order(3)
 	void checkPayGroup() {
 		ComboSelect selectPayGroup = initPay.getSelectPayGroup(); 
 		assertEquals("Monthly Paygroup", selectPayGroup.getText());
 	}
 
 	@Test
+	@Order(4)
 	void checkPayPeriod() {
 		ComboSelect selectPayPeriod = initPay.getSelectPayPeriod(); 
 		assertTrue(selectPayPeriod.getText().length() > 0);
 	}
 	
 	@Test
-	void click_initialisePayroll() {
+	@Order(5)
+	void click_initialisePayroll_check_DialogAppears_and_clickCancel() {
 		DialogOkCancel okCancel = (DialogOkCancel) initPay.clickInitialisePayroll();
 		okCancel.getBtnCancel().get().click();
 		assertEquals("Are you sure you want to Initialise the Payroll ?", okCancel.getMsg().get());
@@ -93,20 +97,23 @@ public final class InitialisePayroll_Tests {
 	}
 	
 //	@Test
-//	void checkCompany() {
-//		Optional<WebElement> selectComp = initPay.getSelectCompany(); 
-//		selectComp.ifPresentOrElse(s -> 
-//			assertEquals("Mars Incorporated Ltd", s.getText()), 
-//			new TestFail("Select Company could not be found")
-//		);
+//	@Order(6)
+//	void click_initialisePayroll_then_clickOk() {
+//		DialogOkCancel okCancel = (DialogOkCancel) initPay.clickInitialisePayroll();
+//		okCancel.getBtnOk().get().click();
+//		Optional<String> msg = initPay.getPayrollInitialisedMsg();
 //	}
 	
-
-	
+	@Test
+	@Order(7)
+	void assert_that_payroll_is_already_initialised() {
+		assertEquals("This Payroll has already been Initialised", initPay.getPayrollAlreadyInitialisedMsg().get());
+	}
+		
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-//		initPay.close();
-//		hp.close();
+		initPay.close();
+		hp.close();
 	}
 
 }

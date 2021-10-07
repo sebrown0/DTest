@@ -4,7 +4,7 @@
 package providers;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 public class XMLFileProvider {
