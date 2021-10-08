@@ -20,6 +20,7 @@ import object_models.helpers.Reload;
  * @author Steve Brown
  *
  */
+@SuppressWarnings("unused")
 public class DropdownCombo extends FormModal implements Control {
 	private IFrame iFrame;
 	private Reload reloadEmpDetails;

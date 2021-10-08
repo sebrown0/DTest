@@ -15,7 +15,7 @@ import org.openqa.selenium.WebElement;
  * @author Steve Brown
  *
  */
-public class PanelId {
+public class JsPanelId {
 	private static Optional<String> panelId = Optional.empty();
 	
 	public static Optional<String> getPanelIdForTitle(WebDriver driver, String expectedTitle) {		

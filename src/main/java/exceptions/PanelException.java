@@ -10,17 +10,22 @@ import org.apache.logging.log4j.Logger;
  * @author Steve Brown
  *
  */
-public class ElementDoesNotExistException extends Exception {
+public class PanelException extends Exception implements Runnable {
+	private String errMsg;
 	private static final long serialVersionUID = 1L;
 
-	public ElementDoesNotExistException(String errMsg) {
+	public PanelException(String errMsg) {
 		super(errMsg);
-		Logger logger = LogManager.getLogger(this.getClass().getSimpleName());	
-		logger.error(errMsg);
+		this.errMsg = errMsg;		
 	}
 	
 	public static void reportError(String errMsg) {
-		Logger logger = LogManager.getLogger(ElementDoesNotExistException.class.getName());	
+		Logger logger = LogManager.getLogger(PanelException.class.getName());	
 		logger.error(errMsg);
+	}
+
+	@Override
+	public void run() {
+		reportError(errMsg);
 	}
 }

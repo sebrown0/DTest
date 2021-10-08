@@ -124,6 +124,6 @@ class EmployeeDetailsTests {
 	
 	@AfterAll
 	static void tearDown() {		
-//		homepagePayroll.close();
+		homepagePayroll.close();
 	}
 }

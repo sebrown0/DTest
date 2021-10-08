@@ -10,6 +10,7 @@ import object_models.panels.JSPanelWithIFrame;
  * @author Steve Brown
  *
  */
+@SuppressWarnings("unused")
 public final class DkGridEmployeeDetails extends JSPanelWithIFrame implements Control {	
 	private DkGrid<FindRowByEmpCode> grid;
 	private Reload reloadEmpDetails;
