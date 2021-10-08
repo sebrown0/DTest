@@ -6,7 +6,7 @@ package controls;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import object_models.employee.EmployeeSelection;
+import object_models.controls.EmployeeSelection;
 import object_models.helpers.Reload;
 
 /**
@@ -27,7 +27,7 @@ public final class ControlGetterEmployeeSelection implements ControlGetter {
 	@Override
 	public Control getControl() {
 		driver.findElement(findBy).click();
-		return new EmployeeSelection(driver, findBy, reloadEmpDetails);
+		return new EmployeeSelection(driver, reloadEmpDetails);
 	}
 
 }

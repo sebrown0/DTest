@@ -8,8 +8,8 @@ import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 
+import object_models.controls.EmployeeSelection;
 import object_models.element.TextOut;
-import object_models.employee.EmployeeSelection;
 
 /**
  * @author Steve Brown

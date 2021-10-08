@@ -14,8 +14,8 @@ import controls.PageControl;
 import dto.Employee;
 import enums.control_names.EmployeeControlNames;
 import logging.TestResultLogger;
+import object_models.controls.EmployeeSelection;
 import object_models.element.TextInOut;
-import object_models.employee.EmployeeSelection;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.employees.EmployeeDetails;
 import object_models.pages.HomePage;
@@ -91,6 +91,6 @@ class EmployeeDetailsTests {
 	
 	@AfterAll
 	static void tearDown() {		
-//		homepagePayroll.close();
+		homepagePayroll.close();
 	}
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_models.employee;
+package object_models.controls;
 
 import java.time.Duration;
 
@@ -27,7 +27,6 @@ import object_models.helpers.Reload;
  */
 public final class EmployeeSelection extends FormModal implements Control {
 	private IFrame iFrame;
-	private By selectionBtnLocator;
 	private WebElement container;
 	private WebElement table;
 	private Reload reloadEmpDetails;
@@ -36,22 +35,14 @@ public final class EmployeeSelection extends FormModal implements Control {
 	public static final String PANEL_TITLE = "Employees";
 	public static final String MENU_PARENT_NAME = "Payroll";
 	
-	public EmployeeSelection(WebDriver driver, By selectionBtnLocator, Reload reloadEmpDetails) {
+	public EmployeeSelection(WebDriver driver, Reload reloadEmpDetails) {
 		super(driver, PANEL_TITLE);
 		
-		this.selectionBtnLocator = selectionBtnLocator;
 		this.reloadEmpDetails = reloadEmpDetails;
 		switchToIframe();
 		loadTopLevelContainer();
 	}
-	
-	public void click() {
-		WebElement btn = driver.findElement(selectionBtnLocator);
-		btn.click();
-		switchToIframe();
-		loadTopLevelContainer();
-	}
-	
+		
 	private void switchToIframe() {
 		iFrame = new IFrame(driver, By.cssSelector("iframe[name='_iframex-IPORTAL_HR_EMPLOYEEDETAILS_EXT']"));
 		iFrame.switchUsingLocator();		
