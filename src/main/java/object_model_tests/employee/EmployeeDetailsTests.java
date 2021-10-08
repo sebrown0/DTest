@@ -14,8 +14,10 @@ import controls.PageControl;
 import dto.Employee;
 import enums.control_names.EmployeeControlNames;
 import logging.TestResultLogger;
+import object_models.controls.DropdownCombo;
 import object_models.controls.EmployeeSelection;
 import object_models.element.TextInOut;
+import object_models.element.TextOut;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.employees.EmployeeDetails;
 import object_models.pages.HomePage;
@@ -59,20 +61,27 @@ class EmployeeDetailsTests {
 	@Test	
 	void checkCode() {
 		PageControl control = empDetails.getEmployeeControl();
-		assertEquals(emp.getEmpCode(), control.getTextOut(EmployeeControlNames.EMP_CODE).get().getTextByValue());		
+		TextOut textOut = (TextOut) control.getControl(EmployeeControlNames.EMP_CODE).get();
+		assertEquals(emp.getEmpCode(), textOut.getTextByValue());		
 	}	
 	@Test
 	void checkEmployeeName() {
 		PageControl control = empDetails.getEmployeeControl();
-		assertEquals(emp.getFullName(), control.getTextOut(EmployeeControlNames.EMP_NAME).get().getTextByValue());
+		TextOut textOut = (TextOut) control.getControl(EmployeeControlNames.EMP_NAME).get();
+		assertEquals(emp.getFullName(), textOut.getTextByValue());
 	}
 	@Test
 	void selectEmployee() {
 		PageControl control = empDetails.getEmployeeControl();
-		EmployeeSelection empSelection = control.getEmployeeSelection(EmployeeControlNames.SELECT_EMP).get();
+		EmployeeSelection empSelection = (EmployeeSelection) control.getControl(EmployeeControlNames.SELECT_EMP).get();
 		empSelection.clickRow("3");		
 		assertEquals("475070M", empDetails.tab().basicDetails().iDCardNumber().getTextByValue());				
 	}	
+	@Test
+	void openCombos() {
+		PageControl control = empDetails.getEmployeeControl();
+		DropdownCombo combos = (DropdownCombo) control.getControl(EmployeeControlNames.COMBOS).get();
+	}
 	// Controls - End
 	
 	@Test
@@ -91,6 +100,6 @@ class EmployeeDetailsTests {
 	
 	@AfterAll
 	static void tearDown() {		
-		homepagePayroll.close();
+//		homepagePayroll.close();
 	}
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import controls.ControlBuilder;
+import controls.ControlGetterDropdownCombo;
 import controls.ControlGetterEmployeeSelection;
 import controls.ControlGetterTextOut;
 import controls.PageControl;
@@ -46,7 +47,8 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 		builder
 			.addControl(EmployeeControlNames.EMP_CODE, new ControlGetterTextOut(driver, By.id("FORM_ID")))
 			.addControl(EmployeeControlNames.EMP_NAME, new ControlGetterTextOut(driver, By.xpath("/html/body/form/div[3]/div[3]/div[2]/input")))
-			.addControl(EmployeeControlNames.SELECT_EMP, new ControlGetterEmployeeSelection(driver, By.cssSelector("i[class='fa fa-list']"), this));
+			.addControl(EmployeeControlNames.SELECT_EMP, new ControlGetterEmployeeSelection(driver, By.cssSelector("i[class='fa fa-list']"), this))
+			.addControl(EmployeeControlNames.COMBOS, new ControlGetterDropdownCombo(driver, By.cssSelector("i[class='fa fa-window-maximize']"), this));
 		
 		empControl = new PageControl(builder);				
 	}
