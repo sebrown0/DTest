@@ -135,7 +135,7 @@ public class LeftMenu implements LeftMenuActions {
 	@Override
 	public Optional<ContainerAction> clickAndLoad(String elementName) {		
 		WebElement e = anchors.get(elementName);
-		logger.info("Loading [" + elementName + "]");		
+		logger.info("Loading [" + elementName + "]");
 //		ClickUsingJavaScript.performClick(driver, e.getAttribute("href")); // changed to basic click 06/10/2021
 		e.click();
 		Optional<ContainerAction> child = Optional.empty();

@@ -16,7 +16,7 @@ public abstract class FormModal implements ContainerAction {
 	protected WebDriver driver;
 	private PageTitle title;
 	private Logger logger = LogManager.getLogger();
-			
+		
 	public FormModal(WebDriver driver, String expectedTitle) {
 		this.driver = driver;
 		this.title = new TitleModalForm(expectedTitle, driver);		

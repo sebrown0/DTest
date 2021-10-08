@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 
 import object_models.element.TextOut;
+import object_models.employee.EmployeeSelection;
 
 /**
  * @author Steve Brown
@@ -18,7 +19,7 @@ import object_models.element.TextOut;
  * and they are passed via the builder.
  */
 public class PageControl {
-	private Map<String, Control> controls;
+	private Map<String, ControlGetter> controls;
 
 	public PageControl(BuildControls builder) {
 		this.controls = builder.build();
@@ -26,11 +27,20 @@ public class PageControl {
 	
 	public Optional<TextOut> getTextOut(ControlName cntrlName) {
 		if(controls.containsKey(cntrlName.getName())) {
-			return Optional.of((TextOut) controls.get(cntrlName.getName()));
+			return Optional.of((TextOut) controls.get(cntrlName.getName()).getControl());
 		}else {
 			writeErrorMsg("TextOut", cntrlName.getName());			
 			return Optional.empty();
 		}			
+	}
+	
+	public Optional<EmployeeSelection> getEmployeeSelection(ControlName cntrlName){
+		if(controls.containsKey(cntrlName.getName())) {
+			return Optional.of((EmployeeSelection) controls.get(cntrlName.getName()).getControl());
+		}else {
+			writeErrorMsg("EmployeeSelection", cntrlName.getName());			
+			return Optional.empty();
+		}
 	}
 	
 	private void writeErrorMsg(String cntrlType, String key) {

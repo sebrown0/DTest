@@ -6,12 +6,6 @@ package controls;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import object_models.element.TextOut;
-
 /**
  * @author Steve Brown
  *
@@ -20,25 +14,15 @@ import object_models.element.TextOut;
  * Where the control is 'built'.
  */
 public class ControlBuilder implements BuildControls {
-	private Map<String, Control> controls = new HashMap<>();
-	private WebDriver driver;
-	
-	public ControlBuilder(WebDriver driver) {
-		this.driver = driver;
-	}
-	
-	public ControlBuilder addTextOut(ControlName cntrlName, WebElement e) {
-		controls.put(cntrlName.getName(), new TextOut(e));
-		return this;
-	}
-	
-	public ControlBuilder addTextOut(ControlName cntrlName, By findBy) {
-		controls.put(cntrlName.getName(), new TextOut(driver, findBy));
+	private Map<String, ControlGetter> controls = new HashMap<>();
+		
+	public ControlBuilder addControl(ControlName cntrlName, ControlGetter controlGetter) {
+		controls.put(cntrlName.getName(), controlGetter);
 		return this;
 	}
 		
 	@Override
-	public Map<String, Control> build(){
+	public Map<String, ControlGetter> build(){
 		return controls;
 	}
 }

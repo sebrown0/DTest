@@ -66,6 +66,13 @@ class EmployeeDetailsTests {
 		PageControl control = empDetails.getEmployeeControl();
 		assertEquals(emp.getFullName(), control.getTextOut(EmployeeControlNames.EMP_NAME).get().getTextByValue());
 	}
+	@Test
+	void selectEmployee() {
+		PageControl control = empDetails.getEmployeeControl();
+		EmployeeSelection empSelection = control.getEmployeeSelection(EmployeeControlNames.SELECT_EMP).get();
+		empSelection.clickRow("3");		
+		assertEquals("475070M", empDetails.tab().basicDetails().iDCardNumber().getTextByValue());				
+	}	
 	// Controls - End
 	
 	@Test
@@ -81,17 +88,9 @@ class EmployeeDetailsTests {
 		assertEquals("5", partTimerHoursPerDay.getTextByValue());
 	}
 	
-	// Employee selection start		
-	@Test
-	void selectEmployee() {
-		EmployeeSelection empSelection = empDetails.showEmployeeSelection();		
-		empSelection.clickRow("3");		
-		assertEquals("475070M", empDetails.tab().basicDetails().iDCardNumber().getTextByValue());				
-	}	
-	// Employee selection end
 	
 	@AfterAll
 	static void tearDown() {		
-		homepagePayroll.close();
+//		homepagePayroll.close();
 	}
 }

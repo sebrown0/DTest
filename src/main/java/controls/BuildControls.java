@@ -10,5 +10,5 @@ import java.util.Map;
  *
  */
 public interface BuildControls {
-	public Map<String, Control> build();		
+	public Map<String, ControlGetter> build();		
 }

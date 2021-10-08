@@ -8,23 +8,25 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import controls.ControlBuilder;
+import controls.ControlGetterEmployeeSelection;
+import controls.ControlGetterTextOut;
 import controls.PageControl;
 import enums.control_names.EmployeeControlNames;
 import object_models.dk_grid.DkGridEmployeeDetails;
 import object_models.element.ComboSelect;
 import object_models.element.TextInOut;
 import object_models.element.TextOut;
-import object_models.employee.EmployeeSelection;
+import object_models.helpers.Reload;
 import object_models.panels.JSPanelWithIFrame;
 
 /**
  * @author Steve Brown
  *
+ * Employee details page.
  */
-public class EmployeeDetails extends JSPanelWithIFrame {
+public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 	private EmpDetailsTabs myTabs;
 	private PageControl empControl;
-	private WebElement container;
 	private boolean isChildLoaded = false;
 	
 	public static final String PANEL_TITLE = "Employee Details";
@@ -33,39 +35,26 @@ public class EmployeeDetails extends JSPanelWithIFrame {
 	
 	public EmployeeDetails(WebDriver driver) {
 		super(driver, PANEL_TITLE);
-		
+				
 		this.myTabs = new EmpDetailsTabs();
-		this.container = driver.findElement(By.cssSelector("body > form > div.container-fluid"));
 		buildControl();
 	}
 	
 	// Control
 	private void buildControl() {
-		ControlBuilder builder = new ControlBuilder(driver);
+		ControlBuilder builder = new ControlBuilder();
 		builder
-			.addTextOut(EmployeeControlNames.EMP_CODE, By.id("FORM_ID"))
-			.addTextOut(EmployeeControlNames.EMP_NAME, 
-					container.findElement(By.cssSelector("div:nth-child(10) > div.col-md-8 > input[type=text]")));
+			.addControl(EmployeeControlNames.EMP_CODE, new ControlGetterTextOut(driver, By.id("FORM_ID")))
+			.addControl(EmployeeControlNames.EMP_NAME, new ControlGetterTextOut(driver, By.xpath("/html/body/form/div[3]/div[3]/div[2]/input")))
+			.addControl(EmployeeControlNames.SELECT_EMP, new ControlGetterEmployeeSelection(driver, By.cssSelector("i[class='fa fa-list']"), this));
+		
 		empControl = new PageControl(builder);				
 	}
 		
 	public PageControl getEmployeeControl() {
 		return empControl;
 	}
-	
-	// Elements
-//	public TextInOut employeeCode() {
-//		return new TextInOut(driver, By.id("FORM_ID"));
-//	}
-	
-	// Actions
-	public EmployeeSelection showEmployeeSelection() {
-		WebElement e = driver.findElement(By.cssSelector("i[class='fa fa-list']"));
-		e.click();
-		isChildLoaded = true;
-		return new EmployeeSelection(driver);
-	}
-	
+			
 	public DkGridEmployeeDetails showEmpDetailsGrid() {
 		WebElement e = driver.findElement(By.cssSelector("i[class='fa fw fa-table']"));
 		e.click();		
@@ -73,10 +62,9 @@ public class EmployeeDetails extends JSPanelWithIFrame {
 		return new DkGridEmployeeDetails(driver);
 	}
 	
-	private void switchBackToFormIfNecessary() {
-		if(isChildLoaded == true) {
-			switchToMe();
-		}			
+	@Override
+	public void reloadDefault() {
+		switchToMe();		
 	}
 	
 	private void switchToMe() {
@@ -85,6 +73,12 @@ public class EmployeeDetails extends JSPanelWithIFrame {
 		isChildLoaded = false;
 	}
 	
+	private void switchBackToFormIfNecessary() {
+		if(isChildLoaded == true) {
+			switchToMe();
+		}			
+	}
+		
 	public EmpDetailsTabs tab() {
 		return this.myTabs;
 	}
@@ -171,4 +165,13 @@ public class EmployeeDetails extends JSPanelWithIFrame {
 						
 		}
 	}
+
 }
+
+// Actions
+//public EmployeeSelection showEmployeeSelection() {
+//	WebElement e = driver.findElement(By.cssSelector("i[class='fa fa-list']"));
+//	e.click();
+//	isChildLoaded = true;
+//	return new EmployeeSelection(driver);
+//}
