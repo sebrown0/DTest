@@ -17,7 +17,7 @@ import object_models.helpers.IFrame;
 import object_models.helpers.Reload;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 public class DropdownCombo extends FormModal implements Control {
@@ -50,5 +50,8 @@ public class DropdownCombo extends FormModal implements Control {
 		table = topLevelContainer.findElement(By.id("myGrid1"));
 	}
 
+	/*
+	 * Add close method and reload emp details
+	 */
 
 }

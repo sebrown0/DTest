@@ -4,6 +4,7 @@
 package object_models.panels;
 
 import java.time.Duration;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,19 +26,21 @@ public class JSPanel implements ContainerAction { // ContainerAction extends Clo
 	protected WebDriver driver;
 	private PageTitle title = null;
 	private String expectedTitle;
+	private Optional<String> panelId;
 	private Logger logger = LogManager.getLogger();
 	private static final By TITLE_SELECTOR = By.cssSelector("span[class='jsPanel-title']");
 	
 	public JSPanel(WebDriver driver, String expectedTitle) {
 		this.driver = driver;
 		this.expectedTitle = expectedTitle;
-		
+				
 		try {
 			waitForLoad();
 		} catch (Exception e) {
 			logger.error("Could not load panel [" + expectedTitle + "]");
 			close();
 		}
+		setPanelId();
 		setTitle();
 	}
 
@@ -46,6 +49,11 @@ public class JSPanel implements ContainerAction { // ContainerAction extends Clo
 		wait.until(ExpectedConditions.attributeContains(TITLE_SELECTOR, "innerHTML", expectedTitle));				
 	}
 
+	private void setPanelId() {
+		panelId = PanelId.getPanelIdForTitle(driver, expectedTitle);
+		System.out.println("Found id for ->" + expectedTitle + "=" + title + "->" + panelId.get());	
+	}
+	
 	private void setTitle() {
 		title = new TitlePanel(expectedTitle, driver);
 	}
@@ -65,4 +73,7 @@ public class JSPanel implements ContainerAction { // ContainerAction extends Clo
 		}
 	}
 
+	public Optional<String> getPanelId() {
+		return panelId;
+	}
 }

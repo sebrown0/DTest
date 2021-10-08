@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import enums.control_names.EmployeeControlNames;
 import logging.TestResultLogger;
 import object_models.date_picker.DateSetter;
 import object_models.dk_grid.Cell;
@@ -41,7 +42,7 @@ import xml_reader.config_file.ConfigReader;
 public class DkGridTests {	
 	private static HomePage homepagePayroll;
 	private static LeftMenu menuPayroll;
-	private static DkGridEmployeeDetails empDetailsGrid; // CHANGE TO INTERFACE???
+	private static DkGridEmployeeDetails empDetailsGrid;
 	private static DkGrid<?> grid;
 	private static DkGridToolBar toolbar;
 	private static DkGridContent<?> content;
@@ -60,16 +61,14 @@ public class DkGridTests {
 		
 		EmployeeDetails empDetails = (EmployeeDetails) obj.get();
 		
-		empDetailsGrid = empDetails.showEmpDetailsGrid();
+		empDetailsGrid = (DkGridEmployeeDetails) empDetails.getEmployeeControl().getControl(EmployeeControlNames.GRID_VIEW).get();
 		grid = empDetailsGrid.getGrid();
 		toolbar = grid.getToolBar();
 		content = grid.getContent();
 	}
 	
 	@Test
-	void checkSaveIsPresent() {
-//		toolbar.getButtons().forEach((k,v) -> System.out.println("->" + k + "<-"));		
-		
+	void checkSaveIsPresent() {		
 		Optional<ElementButton> save = toolbar.getButton(DkGridToolBar.BTN_SAVE);
 		save.ifPresentOrElse(
 				b ->  assertTrue(true), 

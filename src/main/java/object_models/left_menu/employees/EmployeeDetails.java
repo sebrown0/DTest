@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import controls.ControlBuilder;
+import controls.ControlGetterDkGridEmployeeDetails;
 import controls.ControlGetterDropdownCombo;
 import controls.ControlGetterEmployeeSelection;
 import controls.ControlGetterTextOut;
@@ -41,14 +42,15 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 		buildControl();
 	}
 	
-	// Control
+	// Controls
 	private void buildControl() {
 		ControlBuilder builder = new ControlBuilder();
 		builder
 			.addControl(EmployeeControlNames.EMP_CODE, new ControlGetterTextOut(driver, By.id("FORM_ID")))
 			.addControl(EmployeeControlNames.EMP_NAME, new ControlGetterTextOut(driver, By.xpath("/html/body/form/div[3]/div[3]/div[2]/input")))
 			.addControl(EmployeeControlNames.SELECT_EMP, new ControlGetterEmployeeSelection(driver, By.cssSelector("i[class='fa fa-list']"), this))
-			.addControl(EmployeeControlNames.COMBOS, new ControlGetterDropdownCombo(driver, By.cssSelector("i[class='fa fa-window-maximize']"), this));
+			.addControl(EmployeeControlNames.COMBOS, new ControlGetterDropdownCombo(driver, By.cssSelector("i[class='fa fa-window-maximize']"), this))
+			.addControl(EmployeeControlNames.GRID_VIEW, new ControlGetterDkGridEmployeeDetails(driver, By.cssSelector("i[class='fa fw fa-table']"), this));
 		
 		empControl = new PageControl(builder);				
 	}
@@ -57,13 +59,6 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 		return empControl;
 	}
 			
-	public DkGridEmployeeDetails showEmpDetailsGrid() {
-		WebElement e = driver.findElement(By.cssSelector("i[class='fa fw fa-table']"));
-		e.click();		
-		isChildLoaded = true;
-		return new DkGridEmployeeDetails(driver);
-	}
-	
 	@Override
 	public void reloadDefault() {
 		switchToMe();		
