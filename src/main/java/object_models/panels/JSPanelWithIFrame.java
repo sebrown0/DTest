@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import context_manager.JsPanelContextManager;
 import object_models.helpers.IFrame;
 
 /**
@@ -15,13 +16,14 @@ import object_models.helpers.IFrame;
  */
 public class JSPanelWithIFrame extends JSPanel implements JsPanelContext {
 	private IFrame iFrame;
-	protected JsPanelContextManager contextManager;
+	private JsPanelContextManager contextManager;
 	
 	public JSPanelWithIFrame(WebDriver driver, String expectedTitle) {
 		super(driver, expectedTitle);
 		
 		setContextManager();
-		switchToIFrame(driver, expectedTitle);
+		setToIFrame(driver, expectedTitle);
+		switchToIFrame();
 	}
 
 	private void setContextManager() {
@@ -29,16 +31,13 @@ public class JSPanelWithIFrame extends JSPanel implements JsPanelContext {
 		super.setPanelContext(contextManager);
 	}
 	
-	private void switchToIFrame(WebDriver driver, String expectedTitle) {
+	private void setToIFrame(WebDriver driver, String expectedTitle) {
 		By byLocator = By.cssSelector("iframe[title='" + expectedTitle + "']");
 		iFrame = new IFrame(driver, byLocator);
-		iFrame.switchUsingLocator();
 	}	
 	
-	protected void switchToIFrame() {
+	public void switchToIFrame() {
 		contextManager.switchToIFrame();
-//		super.frameOrPanel = FrameOrPanel.FRAME;
-//		iFrame.switchUsingLocator();
 	}	
 	
 	public IFrame getIframe() {
@@ -52,6 +51,10 @@ public class JSPanelWithIFrame extends JSPanel implements JsPanelContext {
 	@Override
 	public JSPanelWithIFrame getPanelWithIFrame() {
 		return this;
+	}
+
+	public JsPanelContextManager getContextManager() {
+		return contextManager;
 	}
 		
 }

@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import context_manager.JsPanelContextManager;
 import controls.ControlBuilder;
 import controls.ControlGetterDkGridEmployeeDetails;
 import controls.ControlGetterDropdownCombo;
@@ -19,7 +20,6 @@ import object_models.element.TextInOut;
 import object_models.element.TextOut;
 import object_models.helpers.Reload;
 import object_models.panels.JSPanelWithIFrame;
-import object_models.panels.JsPanelContextManager;
 
 /**
  * @author Steve Brown
@@ -30,7 +30,6 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 	private EmpDetailsTabs myTabs;
 	private PageControl empControl;
 	private JsPanelContextManager contextManager;
-	private boolean isChildLoaded = false;
 	
 	public static final String PANEL_TITLE = "Employee Details";
 	public static final String MENU_TITLE = PANEL_TITLE;
@@ -40,7 +39,7 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 		super(driver, PANEL_TITLE);
 				
 		this.myTabs = new EmpDetailsTabs();
-		this.contextManager = super.contextManager;
+		this.contextManager = super.getContextManager();
 		buildControl();
 	}
 	
@@ -59,36 +58,15 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 		
 	public PageControl getEmployeeControl() {
 		contextManager.loadFrameIfNecessary();
-//		loadFrameIfNecessary();
-		isChildLoaded = true;
+		contextManager.childIsLoaded();
 		return empControl;
 	}
 			
 	@Override
 	public void reloadDefault() {
 		contextManager.switchToMe();
-//		super.frameOrPanel = FrameOrPanel.FRAME;
-//		switchToMe();		
 	}
-	
-//	private void switchToMe() {
-//		driver.switchTo().defaultContent();
-//		super.switchToIFrame();		
-//		isChildLoaded = false;
-//	}
-//	
-//	private void switchBackToFormIfNecessary() {
-//		if(isChildLoaded == true) {
-//			switchToMe();
-//		}			
-//	}
-//		
-//	private void loadFrameIfNecessary() {
-//		if(super.frameOrPanel == FrameOrPanel.PANEL) {
-//			super.switchToIFrame();
-//		}
-//	}
-	
+		
 	public EmpDetailsTabs tab() {		
 		contextManager.loadFrameIfNecessary();
 		return this.myTabs;
@@ -178,11 +156,3 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 	}
 
 }
-
-// Actions
-//public EmployeeSelection showEmployeeSelection() {
-//	WebElement e = driver.findElement(By.cssSelector("i[class='fa fa-list']"));
-//	e.click();
-//	isChildLoaded = true;
-//	return new EmployeeSelection(driver);
-//}

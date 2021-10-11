@@ -107,7 +107,7 @@ public class LeftMenu implements LeftMenuActions {
 	@Override
 	public LeftMenuActions clickParent(String prntName) {
 		WebElement activeMenuItem = getActiveMenuItem();
-		if(!(activeMenuItem == null)) {
+		if(activeMenuItem != null) {
 			String currentlyActive = activeMenuItem.getText().trim();			
 			if(!currentlyActive.equalsIgnoreCase(prntName)) {
 				anchors.get(prntName).click();

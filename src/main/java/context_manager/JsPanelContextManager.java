@@ -1,16 +1,18 @@
 /**
  * 
  */
-package object_models.panels;
+package context_manager;
 
 import org.openqa.selenium.WebDriver;
+
+import object_models.panels.JSPanelWithIFrame;
+import object_models.panels.JsPanelContext;
 
 /**
  * @author Steve Brown
  *
  */
 public class JsPanelContextManager {
-//	private JsPanelContext panelContext;
 	private FrameOrPanel frameOrPanel = FrameOrPanel.FRAME;
 	private JSPanelWithIFrame panel;
 	private boolean isChildLoaded = false;
@@ -21,16 +23,19 @@ public class JsPanelContextManager {
 	}
 	
 	public JsPanelContextManager(JsPanelContext panelContext) {
-//		this.panelContext = panelContext;
 		panel = panelContext.getPanelWithIFrame();
-		driver = panel.driver;
+		driver = panel.getDriver();
 	}
 	
 	public void switchToMe() {
-		panel.driver.switchTo().defaultContent();
+		panel.getDriver().switchTo().defaultContent();
 		panel.switchToIFrame();		
 		isChildLoaded = false;
 		frameOrPanel = FrameOrPanel.FRAME;
+	}
+	
+	public void childIsLoaded() {
+		isChildLoaded = true;
 	}
 	
 	public void switchBackToFormIfNecessary() {
@@ -45,20 +50,18 @@ public class JsPanelContextManager {
 		}
 	}
 	
-	protected void switchToIFrame() {
+	public void switchToIFrame() {
 		panel.getIframe().switchUsingLocator();
 		frameOrPanel = FrameOrPanel.FRAME;
 	}	
 	
 	public void switchToPanelIfNecessary() {		
 		if(frameOrPanel == FrameOrPanel.FRAME) {
-//			System.out.println("->is frame going to panel");
 			driver.switchTo().defaultContent();
 			frameOrPanel = FrameOrPanel.PANEL;	
 		}		
 	}
 	
-
 	public FrameOrPanel getFrameOrPanel() {
 		return frameOrPanel;
 	}

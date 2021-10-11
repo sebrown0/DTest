@@ -7,14 +7,16 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import context_manager.JsPanelContextManager;
 import enums.control_names.EmployeeControlNames;
 import logging.TestResultLogger;
 import object_models.left_menu.common.LeftMenu;
+import object_models.left_menu.employees.Banks;
+import object_models.left_menu.employees.ContactNumbers;
 import object_models.left_menu.employees.EmployeeDetails;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import object_models.panels.JSPanel;
-import object_models.panels.JsPanelContextManager;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import test_data.UserProvider;
@@ -58,8 +60,19 @@ class PanelTests {
 		assertEquals(JsPanelContextManager.FrameOrPanel.FRAME, empDetails.getContextManager().getFrameOrPanel());
 	}
 	
+	@Test
+	void closePanel() {
+		empDetails.getHeaderBar().getControlBar().clickClose();
+	}
+
+	@Test
+	void assasasaasasas() {
+		menu.clickParent("Employees").clickAndLoad(ContactNumbers.MENU_TITLE);
+//		menu.clickParent("Employees").clickAndLoad(Banks.MENU_TITLE);
+	}
+	
 	@AfterAll
 	static void tearDown() {		
-		homepagePayroll.close();
+//		homepagePayroll.close();
 	}
 }
