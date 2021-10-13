@@ -3,7 +3,9 @@
  */
 package context_manager;
 
+import java.util.LinkedList;
 import java.util.Optional;
+import java.util.Queue;
 
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +16,7 @@ import org.openqa.selenium.WebDriver;
  * 
  */
 public class ContextManager {
+	private Queue<Context> contextQueue = new LinkedList<>();
 	private Context context;
 	private WebDriver driver;
 	// The state that initiates the context, i.e. LeftMenu
@@ -23,7 +26,13 @@ public class ContextManager {
 	public ContextManager(WebDriver driver) {
 		this.driver = driver;
 	}
-			
+		
+	public ContextManager setNextState(State state) {
+		State current = context.getState();
+		current.setNext(Optional.ofNullable(state));
+		return this;
+	}
+	
 	public void moveNext(){
 		context.moveNext();
 	}
@@ -63,6 +72,7 @@ public class ContextManager {
 	}
 	public void setContext(Context context) {
 		this.context = context;
+		contextQueue.add(context);
 //		this.context.setState(callingState.getState(context));
 	}
 	public WebDriver getDriver() {

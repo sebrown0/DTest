@@ -14,7 +14,6 @@ import org.openqa.selenium.By;
 public class StateTop extends State {
 	private State next;
 	
-
 	public StateTop(Context context, Optional<State> prev) {
 		super(context, prev);
 	}
@@ -37,5 +36,6 @@ public class StateTop extends State {
 	public void switchToMe() {
 		context.getDriver().findElement(By.cssSelector("body > form > div.app-body"));		
 	}
+
 
 }

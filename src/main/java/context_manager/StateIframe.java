@@ -40,6 +40,4 @@ public class StateIframe extends State {
 		// TODO Auto-generated method stub
 
 	}
-
-
 }

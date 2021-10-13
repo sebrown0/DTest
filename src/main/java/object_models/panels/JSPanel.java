@@ -17,6 +17,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import context_manager.ContextManager;
 import context_manager.ContextPanel;
 import context_manager.ContextSetter;
+import context_manager.State;
+import context_manager.StateHeaderPanel;
 import exceptions.PanelException;
 import object_models.forms.ContainerAction;
 import object_models.helpers.closers.CloserPanel;
@@ -51,6 +53,11 @@ public class JSPanel implements ContainerAction, ContextSetter {
 		setTitle(); //SHOULD THIS BE PART OF THE HEADER BAR???
 		setHeaderBar();
 		setContext();
+		
+		State header = new StateHeaderPanel(contextManager.getContext(), Optional.ofNullable(contextManager.getContext().getState()), headerBar.getControlBar());
+		contextManager
+			.setNextState(header)
+			.moveNext();
 	}
 
 	@Override

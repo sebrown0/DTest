@@ -24,7 +24,7 @@ public class ContextPanel implements Context {
 		this.firstState = new StateTop(this, null);
 		
 		setState(firstState);
-		setState(contextManager.getCallingState().getState(this, Optional.of(firstState)));
+		setState(contextManager.getCallingState().getState(this, Optional.of(firstState)));		
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class ContextPanel implements Context {
 	public void moveNext() {
 		Optional<State> next = currentState.getNext();
 		next.ifPresentOrElse(n -> 
-			{	this.currentState = n; }, 
+			{	this.currentState = n; System.out.println("moveNext->" + n.toString()); }, 
 			new Runnable() {				
 				@Override
 				public void run() {

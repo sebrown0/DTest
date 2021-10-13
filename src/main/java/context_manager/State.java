@@ -11,9 +11,10 @@ import java.util.Optional;
  */
 public abstract class State {	
 	protected Context context;
+	protected Optional<State> next;
 	
-	private Optional<State> prev;	
-
+	private Optional<State> prev;
+	
 	public State(Context context) {
 		this.context = context;	
 	}
@@ -24,7 +25,7 @@ public abstract class State {
 	}
 
 	public abstract Optional<State> getNext();
-	public abstract Optional<State> close();
+	public abstract Optional<State> close();	
 	public abstract void switchToMe();
 	
 	public void setPrev(Optional<State> prev) {
@@ -33,6 +34,10 @@ public abstract class State {
 
 	public Optional<State> getPrev() {
 		return prev;
+	}
+
+	public void setNext(Optional<State> next) {
+		this.next = next;
 	}
 	
 }

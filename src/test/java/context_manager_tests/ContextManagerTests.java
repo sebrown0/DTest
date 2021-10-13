@@ -55,9 +55,11 @@ class ContextManagerTests {
 	
 	@Test
 	void loadDocument_and_checkState() {		
-		lm.clickAndLoad(Documents.MENU_TITLE);		
-		assertTrue(cm.getContext().getState() instanceof StateLeftMenu);	
-		cm.closeCurrent();		
+		lm.clickAndLoad(Documents.MENU_TITLE);
+		System.out.println("is->" + cm.getContext().getState());
+		cm.closeCurrent();
+		System.out.println("is->" + cm.getContext().getState());
+		assertTrue(cm.getContext().getState() instanceof StateLeftMenu);				
 	}
 	
 	@Test
