@@ -5,6 +5,7 @@ package object_models.employee;
 
 import org.openqa.selenium.WebDriver;
 
+import context_manager.ContextManager;
 import object_models.helpers.Closable;
 import object_models.panels.JSPanelWithIFrame;
 
@@ -15,8 +16,8 @@ import object_models.panels.JSPanelWithIFrame;
 public class EmployeeGridView extends JSPanelWithIFrame implements Closable {
 	public static final String PANEL_TITLE = "Employee Details";
 	
-	public EmployeeGridView(WebDriver driver) {
-		super(driver, PANEL_TITLE);
+	public EmployeeGridView(WebDriver driver, ContextManager contextManager) {
+		super(driver, PANEL_TITLE, contextManager);
 	}
 
 //	private By byClickLogin = By.cssSelector("[data-original-title='Employee Grid View']");	

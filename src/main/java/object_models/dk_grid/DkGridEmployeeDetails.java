@@ -2,6 +2,7 @@ package object_models.dk_grid;
 
 import org.openqa.selenium.WebDriver;
 
+import context_manager.ContextManager;
 import controls.Control;
 import object_models.helpers.Reload;
 import object_models.panels.JSPanelWithIFrame;
@@ -17,8 +18,8 @@ public final class DkGridEmployeeDetails extends JSPanelWithIFrame implements Co
 	
 	public static final String PANEL_TITLE = "Employee Details";	
 
-	public DkGridEmployeeDetails(WebDriver driver, Reload reloadEmpDetails) {
-		super(driver, PANEL_TITLE);
+	public DkGridEmployeeDetails(WebDriver driver, Reload reloadEmpDetails, ContextManager contextManager) {
+		super(driver, PANEL_TITLE, contextManager);
 		
 		this.reloadEmpDetails = reloadEmpDetails;
 		grid = new DkGrid<>(driver, new FindRowByEmpCode());

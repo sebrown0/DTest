@@ -26,7 +26,15 @@ class QuickLinkTests {
 		// Get a web driver as specified in the config.xml		
 		driver = configReader.getDriver();
 		// Get a login page, with the required module loaded.
+		
+		/*
+		 * ADD CONTEXT MANAGER
+		 */
 		UserLoginPage userLogin = new UserLoginPage(driver, new PayrollModuleLoader(driver));
+		/*
+		 * ADD CONTEXT MANAGER
+		 */
+		
 		// Get a home page after successful login
 		HomePage hp = userLogin.loginValidUser(UserProvider.userPortal());
 		// Get top-right-nav-bar

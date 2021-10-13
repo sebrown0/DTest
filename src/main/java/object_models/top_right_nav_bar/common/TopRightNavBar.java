@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.openqa.selenium.WebDriver;
 
+import context_manager.ContextManager;
 import object_models.helpers.title.WebElementTitleChecker;
 import object_models.top_right_nav_bar.all_elements.NavBarElementGetter;
 import object_models.top_right_nav_bar.all_elements.NavBarElementStrategy;
@@ -20,9 +21,12 @@ public class TopRightNavBar implements ElementChecker, NavBarElementGetter {
 	private WebDriver driver;
 	private TopRightNavBarElements navBarElements; 
 	private QuickLinks quickLinks;
-		
-	public TopRightNavBar(WebDriver driver) {
+	@SuppressWarnings("unused")
+	private ContextManager contextManager;
+	
+	public TopRightNavBar(WebDriver driver, ContextManager contextManager) {
 		this.driver = driver;
+		this.contextManager = contextManager;
 	}
 	
 	public void loadElements(NavBarElementStrategy elementStrategy) {

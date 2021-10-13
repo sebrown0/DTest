@@ -8,7 +8,7 @@ import java.util.Optional;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import context_manager.JsPanelContextManager;
+import context_manager.ZZZ_ContextManager;
 
 /**
  * @author Steve Brown
@@ -18,7 +18,7 @@ public class JsPanelHeaderBar {
 	private WebElement headerBar;
 	private JsPanelControlBar controlBar;
 	
-	public JsPanelHeaderBar(WebElement container, JsPanelContextManager contextManager) {		
+	public JsPanelHeaderBar(WebElement container, ZZZ_ContextManager contextManager) {		
 		setHeaderBar(container);
 		setControlBar(contextManager);
 	}
@@ -27,7 +27,7 @@ public class JsPanelHeaderBar {
 		headerBar = container.findElement(By.cssSelector("div[class='jsPanel-headerbar']"));
 	}
 	
-	private void setControlBar(JsPanelContextManager contextManager) {
+	private void setControlBar(ZZZ_ContextManager contextManager) {
 		controlBar = new JsPanelControlBar(headerBar, contextManager);
 	}
 	

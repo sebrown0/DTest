@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import context_manager.ContextManager;
 import object_models.helpers.IFrame;
 
 /**
@@ -16,8 +17,8 @@ import object_models.helpers.IFrame;
 public class FormWithIFrame extends FormModal {
 	private IFrame iFrame;
 		
-	public FormWithIFrame(WebDriver driver, String expectedTitle, String iFrameName) {
-		super(driver, expectedTitle);	
+	public FormWithIFrame(WebDriver driver, String expectedTitle, String iFrameName, ContextManager contextManager) {
+		super(driver, expectedTitle, contextManager);	
 				
 		switchToIFrame(driver, iFrameName);
 	}

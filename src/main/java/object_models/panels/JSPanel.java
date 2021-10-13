@@ -14,7 +14,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import context_manager.JsPanelContextManager;
+import context_manager.ContextManager;
+import context_manager.ContextPanel;
+import context_manager.ZZZ_IsContext;
+import context_manager.ZZZ_ContextManager;
 import exceptions.PanelException;
 import object_models.forms.ContainerAction;
 import object_models.helpers.closers.CloserPanel;
@@ -25,10 +28,11 @@ import object_models.helpers.title.TitlePanel;
  * @author Steve Brown
  *
  */
-public class JSPanel implements ContainerAction { // ContainerAction extends Closable (was ChildElement)
+public class JSPanel implements ContainerAction {//, IsContext { 
 	protected WebDriver driver;
+	protected ContextManager contextManager;
 	
-	private JsPanelContextManager contextManager;
+	private ZZZ_ContextManager zzz_contextManager;	
 	private PageTitle title = null;
 	private String expectedTitle;
 	private Optional<String> panelId;
@@ -38,10 +42,14 @@ public class JSPanel implements ContainerAction { // ContainerAction extends Clo
 		
 	private static final By TITLE_SELECTOR = By.cssSelector("span[class='jsPanel-title']");
 	
-	public JSPanel(WebDriver driver, String expectedTitle) {
+	public JSPanel(WebDriver driver, String expectedTitle, ContextManager contextManager) {
 		this.driver = driver;
 		this.expectedTitle = expectedTitle;
-				
+		this.contextManager = contextManager;
+		System.out.println("JSPanel->1");
+		contextManager.setContext(new ContextPanel());
+		System.out.println("JSPanel->2");
+		
 		try {
 			waitForLoad();
 		} catch (Exception e) {
@@ -54,6 +62,19 @@ public class JSPanel implements ContainerAction { // ContainerAction extends Clo
 		setHeaderBar();
 	}
 
+//	@Override
+//	public void setContextManager(ContextManager contextManager) {
+//		System.out.println("JSPanel->3");
+//		this.contextManager = contextManager;
+//		this.contextManager.setContext(new ContextPanel());
+//		if(contextManager == null) {
+//			System.out.println("JSPanel->4");
+//		}else {
+//			System.out.println("JSPanel->5");
+//			System.out.println("->" +	contextManager.getContext().getState().toString());
+//		}
+//	}
+	
 	private void waitForLoad() throws Exception {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		wait.until(ExpectedConditions.attributeContains(TITLE_SELECTOR, "innerHTML", expectedTitle));				
@@ -74,7 +95,7 @@ public class JSPanel implements ContainerAction { // ContainerAction extends Clo
 	}
 	
 	private void setHeaderBar() {
-		headerBar = new JsPanelHeaderBar(container, contextManager);
+//		headerBar = new JsPanelHeaderBar(container, zzz_contextManager);
 	}
 	
 	@Override
@@ -97,17 +118,19 @@ public class JSPanel implements ContainerAction { // ContainerAction extends Clo
 	}
 	
 	public JsPanelHeaderBar getHeaderBar() {
-		contextManager.switchToPanelIfNecessary();
+		zzz_contextManager.switchToPanelIfNecessary();
 		return headerBar;
 	}
 		
-	public void setPanelContext(JsPanelContextManager contextManager) {
-		this.contextManager = contextManager;
-	}
-
-	public JsPanelContextManager getContextManager() {
-		return contextManager;
-	}
+	
+	
+//	public void setPanelContext(ZZZ_ContextManager contextManager) {
+//		this.zzz_contextManager = contextManager;
+//	}
+//
+//	public ZZZ_ContextManager getContextManager() {
+//		return zzz_contextManager;
+//	}
 	
 	public WebDriver getDriver() {
 		return driver;

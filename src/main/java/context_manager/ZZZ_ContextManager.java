@@ -12,17 +12,25 @@ import object_models.panels.JsPanelContext;
  * @author Steve Brown
  *
  */
-public class JsPanelContextManager {
+public class ZZZ_ContextManager {
 	private FrameOrPanel frameOrPanel = FrameOrPanel.FRAME;
 	private JSPanelWithIFrame panel;
 	private boolean isChildLoaded = false;
 	private WebDriver driver;
 	
+	/*
+	 * HAS TO HAVE 
+	 *  DRIVER FROM HOMEPAGE
+	 *  CURRENT PANEL, FORM, IFRAME ETCs
+	 *  
+	 *  HOW IS EACH REPRESENTED? ContainerAction?
+	 *  WHAT DO WE NEED FROM EACH?
+	 */
 	public static enum FrameOrPanel {
 		FRAME, PANEL
 	}
 	
-	public JsPanelContextManager(JsPanelContext panelContext) {
+	public ZZZ_ContextManager(JsPanelContext panelContext) {
 		panel = panelContext.getPanelWithIFrame();
 		driver = panel.getDriver();
 	}

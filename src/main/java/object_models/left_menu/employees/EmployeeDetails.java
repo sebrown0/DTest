@@ -7,7 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import context_manager.JsPanelContextManager;
+import context_manager.ContextManager;
+import context_manager.ZZZ_ContextManager;
 import controls.ControlBuilder;
 import controls.ControlGetterDkGridEmployeeDetails;
 import controls.ControlGetterDropdownCombo;
@@ -29,17 +30,16 @@ import object_models.panels.JSPanelWithIFrame;
 public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 	private EmpDetailsTabs myTabs;
 	private PageControl empControl;
-	private JsPanelContextManager contextManager;
+	private ZZZ_ContextManager contextManager;
 	
 	public static final String PANEL_TITLE = "Employee Details";
 	public static final String MENU_TITLE = PANEL_TITLE;
 	public static final String MENU_PARENT_NAME = "Employees";
 	
-	public EmployeeDetails(WebDriver driver) {
-		super(driver, PANEL_TITLE);
+	public EmployeeDetails(WebDriver driver, ContextManager contextManager) {
+		super(driver, PANEL_TITLE, contextManager);
 				
 		this.myTabs = new EmpDetailsTabs();
-		this.contextManager = super.getContextManager();
 		buildControl();
 	}
 	
@@ -49,9 +49,9 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 		builder
 			.addControl(EmployeeControlNames.EMP_CODE, new ControlGetterTextOut(driver, By.id("FORM_ID")))
 			.addControl(EmployeeControlNames.EMP_NAME, new ControlGetterTextOut(driver, By.xpath("/html/body/form/div[3]/div[3]/div[2]/input")))
-			.addControl(EmployeeControlNames.SELECT_EMP, new ControlGetterEmployeeSelection(driver, By.cssSelector("i[class='fa fa-list']"), this))
-			.addControl(EmployeeControlNames.COMBOS, new ControlGetterDropdownCombo(driver, By.cssSelector("i[class='fa fa-window-maximize']"), this))
-			.addControl(EmployeeControlNames.GRID_VIEW, new ControlGetterDkGridEmployeeDetails(driver, By.cssSelector("i[class='fa fw fa-table']"), this));
+			.addControl(EmployeeControlNames.SELECT_EMP, new ControlGetterEmployeeSelection(driver, By.cssSelector("i[class='fa fa-list']"), this, super.contextManager))
+			.addControl(EmployeeControlNames.COMBOS, new ControlGetterDropdownCombo(driver, By.cssSelector("i[class='fa fa-window-maximize']"), this, super.contextManager))
+			.addControl(EmployeeControlNames.GRID_VIEW, new ControlGetterDkGridEmployeeDetails(driver, By.cssSelector("i[class='fa fw fa-table']"), this, super.contextManager));
 		
 		empControl = new PageControl(builder);				
 	}

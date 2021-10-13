@@ -11,38 +11,42 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import context_manager.ContextManager;
 import entities.Company;
 
 /**
  * @author Steve Brown
  *
  */
+
 public class LeftNavBar {
 	private WebDriver driver;
 	private WebElement appHeader;
 	private Company currentCompany;
+	@SuppressWarnings("unused")
+	private ContextManager contextManager;
 	private Logger logger = LogManager.getLogger();
 	
-	public LeftNavBar(WebDriver driver) {
+	public LeftNavBar(WebDriver driver, ContextManager contextManager) {
 		this.driver = driver;
-	
+		this.contextManager = contextManager;
 		setHeader();
 	}
 	
-	public LeftNavBar(WebDriver driver, String forCompanyName) {
-		this.driver = driver;
-
-		setHeader();
-		setCompany(forCompanyName);
-	}
+//	public LeftNavBar(WebDriver driver, String forCompanyName, ContextManager contextManager) {
+//		this.driver = driver;
+//		this.contextManager = contextManager;
+//		setHeader();
+//		setCompany(forCompanyName);
+//	}
 	
 	private void setHeader() {
 		appHeader = driver.findElement(By.cssSelector("header[class='app-header navbar']"));
 	}
 
-	private void setCompany(String forCompanyName) {
-		currentCompany = new Company(forCompanyName);
-	}
+//	private void setCompany(String forCompanyName) {
+//		currentCompany = new Company(forCompanyName);
+//	}
 	
 	public Company getCompany() {
 		if(currentCompany == null) {

@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import context_manager.ContextManager;
 import controls.ControlCombo;
 import controls.ControlText;
 import controls.MapControl;
@@ -24,14 +25,16 @@ import object_models.panels.JSPanelWithIFrame;
  *
  */
 public class EmployeeCreationWizard extends JSPanelWithIFrame {
+	protected ContextManager contextManager;
+	
 	private Logger logger = LogManager.getLogger();
 	private PageMapper mapper;
 	private PageMap pageMap;
 	
 	public static final String PANEL_TITLE = "Employee Creation Wizard";		
 	
-	public EmployeeCreationWizard(WebDriver driver) {
-		super(driver, PANEL_TITLE);
+	public EmployeeCreationWizard(WebDriver driver, ContextManager contextManager) {
+		super(driver, PANEL_TITLE, contextManager);
 		
 		mapper = new PageMapper(new MappingStrategyWizard(driver));
 		pageMap = mapper.mapControls().getPageMap();			

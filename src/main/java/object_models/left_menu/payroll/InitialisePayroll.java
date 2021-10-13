@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import context_manager.ContextManager;
 import object_models.element.ComboSelect;
 import object_models.forms.Dialog;
 import object_models.forms.DialogOkCancel;
@@ -26,8 +27,8 @@ public class InitialisePayroll extends FormWithIFrame {
 	public static final String PANEL_TITLE = MENU_TITLE;
 	public static final String MENU_PARENT_NAME = "Payroll";	
 	
-	public InitialisePayroll(WebDriver driver) {
-		super(driver, PANEL_TITLE, "_iframex-DEFAULT");
+	public InitialisePayroll(WebDriver driver, ContextManager contextManager) {
+		super(driver, PANEL_TITLE, "_iframex-DEFAULT", contextManager);
 		container = driver.findElement(By.cssSelector("body > form > div"));
 		waitForMsg = new WebDriverWait(driver, Duration.ofSeconds(20));
 	}

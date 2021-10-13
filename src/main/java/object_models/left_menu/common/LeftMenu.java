@@ -17,6 +17,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import context_manager.ContextManager;
+import context_manager.ZZZ_IsContext;
 import controls.MenuMap;
 import object_models.forms.ContainerAction;
 import object_models.left_menu.absence_statistics.EmployeeAccruals;
@@ -77,10 +79,12 @@ public class LeftMenu implements LeftMenuActions {
 	private WebDriver driver;
 	private Logger logger = LogManager.getLogger();
 	private LeftMenuElements elements;	
-	private LeftMenuMapper menuMapper;
+	private LeftMenuMapper menuMapper;	
+	private ContextManager contextManager;
 	
-	public LeftMenu(WebDriver driver) {
+	public LeftMenu(WebDriver driver, ContextManager contextManager) {
 		this.driver = driver;
+		this.contextManager = contextManager;
 		this.menuMapper = new LeftMenuMapper(driver);
 		try {
 			this.anchors = new MenuMap(new LeftMenuFactory(driver)).getAnchors().get();
@@ -88,6 +92,8 @@ public class LeftMenu implements LeftMenuActions {
 			logger.error("Unable to get anchors from menu map");
 		}
 	}
+
+	// Getters & Setters
 		
 	/*
 	 * Get a map of all the names in the menu.
@@ -104,6 +110,47 @@ public class LeftMenu implements LeftMenuActions {
 		return elements;
 	}
 
+	// LeftMenuActions	
+	@Override
+	/*
+	 * 	NOT WORKING !!!!
+	 */
+	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
+		Optional<ContainerAction> item = null;
+		try {
+			String prntName = (String) clazz.getField("MENU_PARENT_NAME").get(null);
+			String menuName = (String) clazz.getField("MENU_TITLE").get(null);
+//			System.out.println("->" + prntName + "-" + menuName);
+			item = clickParent(prntName).clickAndLoad(menuName);
+		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
+			logger.error("Failed to get parent or menu name using reflection");
+		}		
+		return item;
+	}
+	
+	@Override
+	public Optional<ContainerAction> clickAndLoad(String elementName) {		
+		WebElement e = anchors.get(elementName);
+		logger.info("Loading [" + elementName + "]");
+		e.click();
+		Optional<ContainerAction> child = Optional.empty();		
+		try {
+			child = Optional.of(getElement(elementName).get());
+			child.ifPresent(c -> {
+//				System.out.println("clickAndLoadclickAndLoad->1");
+//				IsContext x = (IsContext) c;
+//				System.out.println("clickAndLoadclickAndLoad->2");
+//				x.setContextManager(contextManager);	
+//				System.out.println("clickAndLoadclickAndLoad->3");
+			});
+			
+//			ContextSetter.setContext(child, contextManager);
+		} catch (Exception ex) {
+			logger.error("Could not get menu element [" + elementName + "]");
+		}
+		return child;
+	}
+	
 	@Override
 	public LeftMenuActions clickParent(String prntName) {
 		WebElement activeMenuItem = getActiveMenuItem();
@@ -111,7 +158,6 @@ public class LeftMenu implements LeftMenuActions {
 			String currentlyActive = activeMenuItem.getText().trim();			
 			if(!currentlyActive.equalsIgnoreCase(prntName)) {
 				anchors.get(prntName).click();
-			}		else {
 			}	
 		}	else {
 			anchors.get(prntName).click();
@@ -119,35 +165,6 @@ public class LeftMenu implements LeftMenuActions {
 		return this;
 	}
 	
-	@Override
-	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
-		Optional<ContainerAction> item = null;
-		try {
-			String prntName = (String) clazz.getField("MENU_PARENT_NAME").get(null);
-			String menuName = (String) clazz.getField("MENU_TITLEX").get(null);
-			item = clickParent(prntName).clickAndLoad(menuName);
-		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-			logger.error("Failed to get parent or menu name using reflection");
-		}		
-		return item;
-	}
-
-	@Override
-	public Optional<ContainerAction> clickAndLoad(String elementName) {		
-		WebElement e = anchors.get(elementName);
-		logger.info("Loading [" + elementName + "]");
-//		ClickUsingJavaScript.performClick(driver, e.getAttribute("href")); // changed to basic click 06/10/2021
-		e.click();
-		Optional<ContainerAction> child = Optional.empty();
-		
-		try {
-			child = Optional.of(getElement(elementName).get());
-		} catch (Exception ex) {
-			logger.error("Could not get menu element [" + elementName + "]");
-		}
-		return child;
-	}
-
 	@Override
 	public WebElement getActiveMenuItem() {
 		WebElement activeMenuItem = null;
@@ -160,187 +177,186 @@ public class LeftMenu implements LeftMenuActions {
 		}
 		return activeMenuItem;
 	}
-
+	
 	private Future<ContainerAction> getElement(String elementName) {
 		ExecutorService executor = Executors.newSingleThreadExecutor();
 		return executor.submit(() -> {
-			return ChildElementFactory.getChild(elementName, driver);
+			return ChildElementFactory.getChild(elementName, driver, contextManager);
 		});
 	}
 	
 	private static class ChildElementFactory{
-		public static ContainerAction getChild(String childName, WebDriver driver) {
+		public static ContainerAction getChild(String childName, WebDriver driver, ContextManager contextManager) {
 			ContainerAction child = null;
-			
 			switch (childName) {
 			case Documents.MENU_TITLE:
-				child = new Documents(driver);
+				child = new Documents(driver, contextManager);
 				break;
 				
 			case EmployeeList.MENU_TITLE:
-				child = new EmployeeList(driver);
+				child = new EmployeeList(driver, contextManager);
 				break;
 				
 			// Employees
 			case EmployeeDetails.MENU_TITLE:
-				child = new EmployeeDetails(driver);
+				child = new EmployeeDetails(driver, contextManager);
 				break;			
 			case ContactNumbers.MENU_TITLE:
-				child = new ContactNumbers(driver);
+				child = new ContactNumbers(driver, contextManager);
 				break;
 			case Banks.MENU_TITLE:
-				child = new Banks(driver);
+				child = new Banks(driver, contextManager);
 				break;
 			case SalaryDetails.MENU_TITLE:
-				child = new SalaryDetails(driver);
+				child = new SalaryDetails(driver, contextManager);
 				break;
 			case CareerProgression.MENU_TITLE:
-				child = new CareerProgression(driver);
+				child = new CareerProgression(driver, contextManager);
 				break;	
 			case Schedule.MENU_TITLE:
-				child = new Schedule(driver);
+				child = new Schedule(driver, contextManager);
 				break;	
 			case PermanentAllowances.MENU_TITLE:
-				child = new PermanentAllowances(driver);
+				child = new PermanentAllowances(driver, contextManager);
 				break;		
 			case PreviousEmployement.MENU_TITLE:
-				child = new PreviousEmployement(driver);
+				child = new PreviousEmployement(driver, contextManager);
 				break;		
 			case Unions.MENU_TITLE:
-				child = new Unions(driver);
+				child = new Unions(driver, contextManager);
 				break;
 				
 			// Employee Others
 			case AbsenceEntitlements.MENU_TITLE:
-				child = new AbsenceEntitlements(driver);
+				child = new AbsenceEntitlements(driver, contextManager);
 				break;
 			case AdvancesAndPayments.MENU_TITLE:
-				child = new AdvancesAndPayments(driver);
+				child = new AdvancesAndPayments(driver, contextManager);
 				break;	
 			case TaxArrears.MENU_TITLE:
-				child = new TaxArrears(driver);
+				child = new TaxArrears(driver, contextManager);
 				break;		
 			case Loans.MENU_TITLE:
-				child = new Loans(driver);
+				child = new Loans(driver, contextManager);
 				break;	
 			case Pensions.MENU_TITLE:
-				child = new Pensions(driver);
+				child = new Pensions(driver, contextManager);
 				break;	
 			case Covid19Supplement.MENU_TITLE:
-				child = new Covid19Supplement(driver);
+				child = new Covid19Supplement(driver, contextManager);
 				break;
 				
 			// Additional Hours
 			case ApplyAdditionalHours.MENU_TITLE:
-				child = new ApplyAdditionalHours(driver);
+				child = new ApplyAdditionalHours(driver, contextManager);
 				break;
 			case Authorisation.MENU_TITLE:
-				child = new Authorisation(driver);
+				child = new Authorisation(driver, contextManager);
 				break;
 
 			// Payroll
 			case InitialisePayroll.MENU_TITLE:
-				child = new InitialisePayroll(driver);
+				child = new InitialisePayroll(driver, contextManager);
 				break;
 			case PayrollDetailsDrillDown.MENU_TITLE:
-				child = new PayrollDetailsDrillDown(driver);
+				child = new PayrollDetailsDrillDown(driver, contextManager);
 				break;
 			case DetailedAdjustments.MENU_TITLE:
-				child = new DetailedAdjustments(driver);
+				child = new DetailedAdjustments(driver, contextManager);
 				break;
 			case GlobalAdjustments.MENU_TITLE:
-				child = new GlobalAdjustments(driver);
+				child = new GlobalAdjustments(driver, contextManager);
 				break;
 			case GlobalAbsences.MENU_TITLE:
-				child = new GlobalAbsences(driver);
+				child = new GlobalAbsences(driver, contextManager);
 				break;
 			case GlobalExtras.MENU_TITLE:
-				child = new GlobalExtras(driver);
+				child = new GlobalExtras(driver, contextManager);
 				break;		
 			case CalculatePayroll.MENU_TITLE:
-				child = new CalculatePayroll(driver);
+				child = new CalculatePayroll(driver, contextManager);
 				break;		
 			case CloseAndLockPayroll.MENU_TITLE:
-				child = new CloseAndLockPayroll(driver);
+				child = new CloseAndLockPayroll(driver, contextManager);
 				break;		
 			case PayrollDetails.MENU_TITLE:
-				child = new PayrollDetails(driver);
+				child = new PayrollDetails(driver, contextManager);
 				break;		
 			case ExcelPayrollUploads.MENU_TITLE:
-				child = new ExcelPayrollUploads(driver);
+				child = new ExcelPayrollUploads(driver, contextManager);
 				break;		
 			case CalculationStatistics.MENU_TITLE:
-				child = new CalculationStatistics(driver);
+				child = new CalculationStatistics(driver, contextManager);
 				break;						
 				
 			// Employee Statistics
 			case PayslipQuickView.MENU_TITLE:
-				child = new PayslipQuickView(driver);
+				child = new PayslipQuickView(driver, contextManager);
 				break;
 			case Fs3QuickView.MENU_TITLE:
-				child = new Fs3QuickView(driver);
+				child = new Fs3QuickView(driver, contextManager);
 				break;
 				
 			// Payroll Statistics
 			case PayrollStatistics.MENU_TITLE:
-				child = new PayrollStatistics(driver);
+				child = new PayrollStatistics(driver, contextManager);
 				break;
 				
 			// Absence Statistics
 			case EmployeeAccruals.MENU_TITLE:
-				child = new EmployeeAccruals(driver);
+				child = new EmployeeAccruals(driver, contextManager);
 				break;
 			case OtherAbsenceStatistics.MENU_TITLE:
-				child = new OtherAbsenceStatistics(driver);
+				child = new OtherAbsenceStatistics(driver, contextManager);
 				break;	
 				
 			// Reports
 			case PayrollReports.MENU_TITLE:
-				child = new PayrollReports(driver);
+				child = new PayrollReports(driver, contextManager);
 				break;
 			case Payslips.MENU_TITLE:
-				child = new Payslips(driver);
+				child = new Payslips(driver, contextManager);
 				break;
 			case DirectCredits.MENU_TITLE:
-				child = new DirectCredits(driver);
+				child = new DirectCredits(driver, contextManager);
 				break;
 			case GlobalPayrollAnalysis.MENU_TITLE:
-				child = new GlobalPayrollAnalysis(driver);
+				child = new GlobalPayrollAnalysis(driver, contextManager);
 				break;
 			case ChequePrinting.MENU_TITLE:
-				child = new ChequePrinting(driver);
+				child = new ChequePrinting(driver, contextManager);
 				break;
 			case AdjustmentsReports.MENU_TITLE:
-				child = new AdjustmentsReports(driver);
+				child = new AdjustmentsReports(driver, contextManager);
 				break;
 			case HrRelatedReports.MENU_TITLE:
-				child = new HrRelatedReports(driver);
+				child = new HrRelatedReports(driver, contextManager);
 				break;
 			case AbsenceRelatedReports.MENU_TITLE:
-				child = new AbsenceRelatedReports(driver);
+				child = new AbsenceRelatedReports(driver, contextManager);
 				break;	
 				
 			// Monthly Reports
 			case MonthlyReports.MENU_TITLE:
-				child = new MonthlyReports(driver);
+				child = new MonthlyReports(driver, contextManager);
 				break;
 				
 			// Yearly Reports
 			case YearlyReports.MENU_TITLE:
-				child = new YearlyReports(driver);
+				child = new YearlyReports(driver, contextManager);
 				break;
 
 			// Bulk Updates
 			case ColaSalaryUpdates.MENU_TITLE:
-				child = new ColaSalaryUpdates(driver);
+				child = new ColaSalaryUpdates(driver, contextManager);
 				break;
 			case EmployeeCreation.MENU_TITLE:
-				child = new EmployeeCreation(driver);
+				child = new EmployeeCreation(driver, contextManager);
 				break;
 
 			// Payroll Settings
 			case SettingsPayroll.MENU_TITLE:
-				child = new SettingsPayroll(driver);
+				child = new SettingsPayroll(driver, contextManager);
 				break;
 				
 			default:

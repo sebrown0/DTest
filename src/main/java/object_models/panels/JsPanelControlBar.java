@@ -6,7 +6,7 @@ package object_models.panels;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import context_manager.JsPanelContextManager;
+import context_manager.ZZZ_ContextManager;
 
 /**
  * @author SteveBrown
@@ -14,9 +14,9 @@ import context_manager.JsPanelContextManager;
  */
 public class JsPanelControlBar {
 	private WebElement controlBar;
-	private JsPanelContextManager contextManager;
+	private ZZZ_ContextManager contextManager;
 	
-	public JsPanelControlBar(WebElement headerBar, JsPanelContextManager contextManager) {
+	public JsPanelControlBar(WebElement headerBar, ZZZ_ContextManager contextManager) {
 		this.contextManager = contextManager;
 		setControlBar(headerBar);
 	}

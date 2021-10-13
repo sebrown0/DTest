@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
+import context_manager.ContextManager;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_nav_bar.LeftNavBar;
 import object_models.top_right_nav_bar.common.TopRightNavBar;
@@ -24,10 +25,11 @@ public class ModuleLoader {
 	private LeftNavBar leftNavBar;
 	private TopRightNavBar topRightNavBar;
 	private LeftMenu leftMenu;	
-	
+		
 	public ModuleLoader(WebDriver driver, ModuleElements moduleElements) {		
 		this.moduleElements = moduleElements;
 		this.driver = driver;
+	
 		setModuleName();
 		checkDriver();
 		loadModule();
@@ -50,22 +52,22 @@ public class ModuleLoader {
 		}
 	}
 	
-	public LeftNavBar setLeftNavBar() {
+	public LeftNavBar setLeftNavBar(ContextManager contextManager) {
 		logger.info("Creating left nav-bar for " + moduleName + " module");
-		leftNavBar =  new LeftNavBar(driver);		
+		leftNavBar =  new LeftNavBar(driver, contextManager);		
 		return leftNavBar;
 	}
 	
-	public TopRightNavBar setNavBar() {
+	public TopRightNavBar setNavBar(ContextManager contextManager) {
 		logger.info("Creating top-right nav-bar for " + moduleName + " module");
-		topRightNavBar = new TopRightNavBar(driver);
+		topRightNavBar = new TopRightNavBar(driver, contextManager);
 		topRightNavBar.loadElements(moduleElements.getElementStrategy());
 		return topRightNavBar;
 	}
 	
-	public LeftMenu setLeftMenu() {
+	public LeftMenu setLeftMenu(ContextManager contextManager) {
 		logger.info("Creating left menu for " + moduleName + " module");
-		leftMenu =  new LeftMenu(driver);
+		leftMenu =  new LeftMenu(driver, contextManager);
 		moduleElements.setLeftMenuElements(leftMenu);
 		return leftMenu;
 	}

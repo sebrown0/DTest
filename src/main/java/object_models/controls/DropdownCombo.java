@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import context_manager.ContextManager;
 import controls.Control;
 import object_models.forms.FormModal;
 import object_models.helpers.IFrame;
@@ -31,10 +32,10 @@ public class DropdownCombo extends FormModal implements Control {
 	public static final String MENU_TITLE = "Combos";
 	public static final String PANEL_TITLE = "Dropdown Combo";
 	
-	public DropdownCombo(WebDriver driver, Reload reloadEmpDetails) {
-		super(driver, PANEL_TITLE);
+	public DropdownCombo(WebDriver driver, Reload reloadEmpDetails, ContextManager contextManager) {
+		super(driver, PANEL_TITLE, contextManager);
 		
-		this.reloadEmpDetails = reloadEmpDetails;
+		this.reloadEmpDetails = reloadEmpDetails;		
 		switchToIframe();
 		loadContainers();
 	}

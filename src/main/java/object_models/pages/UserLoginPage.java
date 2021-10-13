@@ -8,6 +8,7 @@ import static providers.URIProvider.LOGIN_PAGE_URI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import context_manager.ContextManager;
 import entities.User;
 import object_models.modules.common.ModuleElements;
 
@@ -18,6 +19,7 @@ import object_models.modules.common.ModuleElements;
 
 public class UserLoginPage extends LoadablePage {
 	private ModuleElements moduleLoader;
+	private ContextManager contextManager = new ContextManager();
 	private By byUserName = By.name("user");
 	private By byUserPassword = By.name("password");
 	private By byBtnLogin = By.className("login100-form-btn");	
@@ -44,7 +46,7 @@ public class UserLoginPage extends LoadablePage {
 		if(moduleLoader == null) {
 			return null;
 		}else {
-			return new HomePage(driver, moduleLoader);
+			return new HomePage(driver, moduleLoader, contextManager);
 		}
 	}
 }

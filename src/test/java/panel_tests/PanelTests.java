@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import context_manager.JsPanelContextManager;
+import context_manager.ZZZ_ContextManager;
 import enums.control_names.EmployeeControlNames;
 import logging.TestResultLogger;
 import object_models.left_menu.common.LeftMenu;
@@ -53,11 +53,11 @@ class PanelTests {
 	
 	@Test
 	void switchFromFrame_to_panel_then_PanelToFrame() {		
-		assertEquals(JsPanelContextManager.FrameOrPanel.FRAME, empDetails.getContextManager().getFrameOrPanel());
+		assertEquals(ZZZ_ContextManager.FrameOrPanel.FRAME, empDetails.getContextManager().getFrameOrPanel());
 		empDetails.getHeaderBar().getTitle().get();
-		assertEquals(JsPanelContextManager.FrameOrPanel.PANEL, empDetails.getContextManager().getFrameOrPanel());
+		assertEquals(ZZZ_ContextManager.FrameOrPanel.PANEL, empDetails.getContextManager().getFrameOrPanel());
 		empDetails.getEmployeeControl().getControl(EmployeeControlNames.SELECT_EMP).get();
-		assertEquals(JsPanelContextManager.FrameOrPanel.FRAME, empDetails.getContextManager().getFrameOrPanel());
+		assertEquals(ZZZ_ContextManager.FrameOrPanel.FRAME, empDetails.getContextManager().getFrameOrPanel());
 	}
 	
 	@Test

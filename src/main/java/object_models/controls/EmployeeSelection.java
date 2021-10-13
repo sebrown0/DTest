@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import context_manager.ContextManager;
 import controls.Control;
 import object_models.element.ComboSelect;
 import object_models.forms.FormModal;
@@ -34,8 +35,8 @@ public final class EmployeeSelection extends FormModal implements Control {
 	public static final String MENU_TITLE = "Select from a list of employees within the chosen company";
 	public static final String PANEL_TITLE = "Employees";
 		
-	public EmployeeSelection(WebDriver driver, Reload reloadEmpDetails) {
-		super(driver, PANEL_TITLE);
+	public EmployeeSelection(WebDriver driver, Reload reloadEmpDetails, ContextManager contextManager) {
+		super(driver, PANEL_TITLE, contextManager);
 		
 		this.reloadEmpDetails = reloadEmpDetails;
 		switchToIframe();

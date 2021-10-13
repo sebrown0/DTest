@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import context_manager.ContextManager;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_nav_bar.LeftNavBar;
 import object_models.modules.common.ModuleElements;
@@ -25,15 +26,20 @@ public class HomePage extends Page {
 	private LeftNavBar leftNavBar;
 	private TopRightNavBar topRightNavBar;
 	private LeftMenu leftMenu;	
+	private ContextManager contextManager;
 	private Logger logger = LogManager.getLogger();
 	private WebDriver driver;
-	
+		
 	private static By byXpathActualModuleName = By.xpath("html/body/form/header/div/div");
+	
 	public static final String PAGE_TITLE = HOME_PAGE_TITLE;
 	
-	public HomePage(WebDriver driver, ModuleElements moduleElements) {		
+	public HomePage(WebDriver driver, ModuleElements moduleElements, ContextManager contextManager) {		
 		super(driver, PAGE_TITLE);		
+		
 		this.driver = driver;
+		this.contextManager = contextManager;
+		
 		loadModule(moduleElements);
 	}
 		
@@ -43,9 +49,9 @@ public class HomePage extends Page {
 			logger.error("No module supplied");			
 		}else {			
 			ModuleLoader moduleLoader = new ModuleLoader(driver, moduleElements);
-			leftNavBar = moduleLoader.setLeftNavBar();
-			topRightNavBar = moduleLoader.setNavBar();
-			leftMenu = moduleLoader.setLeftMenu();
+			leftNavBar = moduleLoader.setLeftNavBar(contextManager);
+			topRightNavBar = moduleLoader.setNavBar(contextManager);
+			leftMenu = moduleLoader.setLeftMenu(contextManager);
 		}		
 	}
 		
@@ -71,5 +77,8 @@ public class HomePage extends Page {
 	}
 	public WebDriver getWebDriver() {
 		return driver;
+	}
+	public ContextManager getContextManager() {
+		return contextManager;
 	}
 }

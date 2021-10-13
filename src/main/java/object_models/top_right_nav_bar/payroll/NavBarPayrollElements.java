@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import org.openqa.selenium.WebDriver;
 
+import context_manager.ContextManager;
 import object_models.top_right_nav_bar.all_elements.NavBarDakarIntelligence;
 import object_models.top_right_nav_bar.all_elements.NavBarElementStrategy;
 import object_models.top_right_nav_bar.all_elements.NavBarEmpGridView;
@@ -35,25 +36,27 @@ import object_models.top_right_nav_bar.quick_links.QuickLinksPayroll;
 public class NavBarPayrollElements implements NavBarElementStrategy {
 	private Map<String, NavBarElement> elements;	
 	private WebDriver driver;
+	private ContextManager contextManager;
 	
-	public NavBarPayrollElements(WebDriver driver) {
+	public NavBarPayrollElements(WebDriver driver, ContextManager contextManager) {
 		this.driver = driver;
+		this.contextManager = contextManager;
 		setElements();
 	}
 
 	private void setElements(){
 		elements = Stream.of(new Object[][] {
-			{NavBarEmployeeCreation.ORIGINAL_NAME, new NavBarEmployeeCreation(driver)},
-			{NavBarEmployeeCVPayroll.ORIGINAL_NAME, new NavBarEmployeeCVPayroll(driver)},
-			{NavBarEmpGridView.ORIGINAL_NAME, new NavBarEmpGridView(driver)},
-			{NavBarVisualReports.ORIGINAL_NAME, new NavBarVisualReports(driver)},
-			{NavBarDakarIntelligence.ORIGINAL_NAME, new NavBarDakarIntelligence(driver)},
-			{NavBarMyCoLastViewed.ORIGINAL_NAME, new NavBarMyCoLastViewed(driver)},			
-			{NavBarNotifications.ORIGINAL_NAME, new NavBarNotifications(driver)},
-			{NavBarNewEmployments.ORIGINAL_NAME, new NavBarNewEmployments(driver)},
-			{NavBarTerminations.ORIGINAL_NAME, new NavBarTerminations(driver)},
-			{NavBarUserManagment.ORIGINAL_NAME, new NavBarUserManagment(driver)},
-			{NavBarUserAvatar.ORIGINAL_NAME, new NavBarUserAvatar(driver)}
+			{NavBarEmployeeCreation.ORIGINAL_NAME, new NavBarEmployeeCreation(driver, contextManager)},
+			{NavBarEmployeeCVPayroll.ORIGINAL_NAME, new NavBarEmployeeCVPayroll(driver, contextManager)},
+			{NavBarEmpGridView.ORIGINAL_NAME, new NavBarEmpGridView(driver, contextManager)},
+			{NavBarVisualReports.ORIGINAL_NAME, new NavBarVisualReports(driver, contextManager)},
+			{NavBarDakarIntelligence.ORIGINAL_NAME, new NavBarDakarIntelligence(driver, contextManager)},
+			{NavBarMyCoLastViewed.ORIGINAL_NAME, new NavBarMyCoLastViewed(driver, contextManager)},			
+			{NavBarNotifications.ORIGINAL_NAME, new NavBarNotifications(driver, contextManager)},
+			{NavBarNewEmployments.ORIGINAL_NAME, new NavBarNewEmployments(driver, contextManager)},
+			{NavBarTerminations.ORIGINAL_NAME, new NavBarTerminations(driver, contextManager)},
+			{NavBarUserManagment.ORIGINAL_NAME, new NavBarUserManagment(driver, contextManager)},
+			{NavBarUserAvatar.ORIGINAL_NAME, new NavBarUserAvatar(driver, contextManager)}
 		}).collect(Collectors.toMap(data -> (String) data[0], data -> (NavBarElement) data[1]));		
 	}
 

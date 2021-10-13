@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import context_manager.ContextManager;
 import object_models.helpers.Closable;
 import object_models.reports.DakarIntelligence;
 import object_models.strategies.click.ClickUsingJavaScript;
@@ -19,14 +20,14 @@ import object_models.top_right_nav_bar.common.NavBarElement;
 public class NavBarDakarIntelligence extends NavBarElement { 	 
 	public static final String ORIGINAL_NAME = "Dakar Intelligence";
 	
-	public NavBarDakarIntelligence(WebDriver driver) {
-		super(driver, ORIGINAL_NAME);
+	public NavBarDakarIntelligence(WebDriver driver, ContextManager contextManager) {
+		super(driver, ORIGINAL_NAME, contextManager);
 	}
 	
 	@Override
 	public Closable clickElement() {
 		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-server')]"));
 		ClickUsingJavaScript.performClick(driver, el);
-		return new DakarIntelligence(driver);
+		return new DakarIntelligence(driver, super.contextManager);
 	}
 }

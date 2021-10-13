@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import context_manager.ContextManager;
 import object_models.helpers.Closable;
 
 /**
@@ -18,13 +19,15 @@ import object_models.helpers.Closable;
 public abstract class NavBarElement {
 	protected WebDriver driver;
 	protected WebElement navBar;
+	protected ContextManager contextManager;
 	
 	private String originalName;
 	private static final By NAV_BAR_LOCATOR = By.cssSelector("body > form > header > ul.nav.navbar-nav.ml-auto");
 	
-	public NavBarElement(WebDriver driver, String originalName) {
+	public NavBarElement(WebDriver driver, String originalName, ContextManager contextManager) {
 		this.driver = driver;			
 		this.originalName = originalName;
+		this.contextManager = contextManager;
 		navBar = driver.findElement(NAV_BAR_LOCATOR);		
 	}
 	
