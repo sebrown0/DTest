@@ -38,7 +38,7 @@ public class ContextManager {
 	}
 	
 	public void closeCurrent(){
-		System.out.println("closeCurrent->" + context.getState().toString());
+//		System.out.println("closeCurrent->" + context.getState().toString());
 		Optional<State> prev = closeStateAndGetPrev();
 		revertToPreviousState(prev);
 	}
@@ -73,7 +73,6 @@ public class ContextManager {
 	public void setContext(Context context) {
 		this.context = context;
 		contextQueue.add(context);
-//		this.context.setState(callingState.getState(context));
 	}
 	public WebDriver getDriver() {
 		return driver;

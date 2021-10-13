@@ -88,10 +88,9 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 	public LeftMenu(WebDriver driver, ContextManager contextManager) {
 		this.driver = driver;
 		this.contextManager = contextManager;
-		this.contextManager.setCallingState(this);
-//		this.contextManager.getContext().setState(new StateLeftMenu(this.contextManager.getContext(), null));
-		
+		this.contextManager.setCallingState(this);		
 		this.menuMapper = new LeftMenuMapper(driver);
+		
 		try {
 			this.anchors = new MenuMap(new LeftMenuFactory(driver)).getAnchors().get();
 		} catch (InterruptedException | ExecutionException e) {
@@ -135,24 +134,13 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 	}
 	
 	@Override
-	public Optional<ContainerAction> clickAndLoad(String elementName) {		
-//		StateTop s = (StateTop) contextManager.getContext().getFirstState();
-		
+	public Optional<ContainerAction> clickAndLoad(String elementName) {
 		WebElement e = anchors.get(elementName);
 		logger.info("Loading [" + elementName + "]");
 		e.click();
 		Optional<ContainerAction> child = Optional.empty();		
 		try {
-			child = Optional.of(getElement(elementName).get());
-			child.ifPresent(c -> {
-//				System.out.println("clickAndLoadclickAndLoad->1");
-//				IsContext x = (IsContext) c;
-//				System.out.println("clickAndLoadclickAndLoad->2");
-//				x.setContextManager(contextManager);	
-//				System.out.println("clickAndLoadclickAndLoad->3");
-			});
-			
-//			ContextSetter.setContext(child, contextManager);
+			child = Optional.of(getElement(elementName).get());			
 		} catch (Exception ex) {
 			logger.error("Could not get menu element [" + elementName + "]");
 		}

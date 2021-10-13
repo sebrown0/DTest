@@ -15,13 +15,7 @@ public class StateHeaderPanel extends State {
 	private JsPanelControlBar controlBar;
 	
 	public StateHeaderPanel(Context context, Optional<State> prev, JsPanelControlBar controlBar) {
-		super(context, prev);
-		
-		/*
-		 * no need to set this state in the context 
-		 * as it's the first state so it's set by JsPanel.
-		 */
-		
+		super(context, prev);				
 		this.controlBar = controlBar;
 	}
 	
@@ -32,7 +26,7 @@ public class StateHeaderPanel extends State {
 	
 	@Override
 	public Optional<State> close() {
-		System.out.println("->Close StateHeaderPanel"); // TODO - remove
+		logger.debug("Closing state");
 		controlBar.clickClose();
 		return super.getPrev();
 	}
@@ -40,7 +34,7 @@ public class StateHeaderPanel extends State {
 	@Override
 	public void switchToMe() {
 		// TODO Auto-generated method stub
+		logger.error("switchToMe not implemented!");
 	}
-
 
 }

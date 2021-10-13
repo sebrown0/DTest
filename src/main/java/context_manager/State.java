@@ -5,13 +5,18 @@ package context_manager;
 
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * @author Steve Brown
  *
+ * The current state of a Context.
  */
 public abstract class State {	
 	protected Context context;
 	protected Optional<State> next;
+	protected Logger logger = LogManager.getLogger();
 	
 	private Optional<State> prev;
 	

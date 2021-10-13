@@ -53,7 +53,7 @@ public class ContextPanel implements Context {
 			new Runnable() {				
 				@Override
 				public void run() {
-					System.out.println("ContextPanel->moveNext->no next"); // TODO - remove or log
+					LogManager.getLogger().debug("No next state for [" + currentState.toString() + "]");
 				}
 			});
 		

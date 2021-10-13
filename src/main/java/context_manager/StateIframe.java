@@ -25,8 +25,7 @@ public class StateIframe extends State {
 
 	@Override
 	public Optional<State> close() {
-		// TODO Add close logic
-		System.out.println("->Close StateIframe");
+		logger.debug("Closing state");
 		context.getDriver().switchTo().defaultContent();
 		return super.getPrev().get().close();
 	}
@@ -38,6 +37,6 @@ public class StateIframe extends State {
 	@Override
 	public void switchToMe() {
 		// TODO Auto-generated method stub
-
+		logger.error("switchToMe not implemented!");
 	}
 }

@@ -10,6 +10,8 @@ import org.openqa.selenium.By;
 /**
  * @author Steve Brown
  *
+ * The top state in a chain of states.
+ * The Context will always have one of these.
  */
 public class StateTop extends State {
 	private State next;
@@ -28,6 +30,7 @@ public class StateTop extends State {
 
 	@Override
 	public Optional<State> close() {
+		logger.debug("Closing state. This will end the session");
 		context.getDriver().close();
 		return Optional.empty();
 	}
@@ -36,6 +39,5 @@ public class StateTop extends State {
 	public void switchToMe() {
 		context.getDriver().findElement(By.cssSelector("body > form > div.app-body"));		
 	}
-
 
 }
