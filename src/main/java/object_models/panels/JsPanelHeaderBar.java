@@ -8,8 +8,6 @@ import java.util.Optional;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import context_manager.ZZZ_ContextManager;
-
 /**
  * @author Steve Brown
  *
@@ -18,17 +16,17 @@ public class JsPanelHeaderBar {
 	private WebElement headerBar;
 	private JsPanelControlBar controlBar;
 	
-	public JsPanelHeaderBar(WebElement container, ZZZ_ContextManager contextManager) {		
+	public JsPanelHeaderBar(WebElement container) {		
 		setHeaderBar(container);
-		setControlBar(contextManager);
+		setControlBar();
 	}
 	
 	private void setHeaderBar(WebElement container) {
 		headerBar = container.findElement(By.cssSelector("div[class='jsPanel-headerbar']"));
 	}
 	
-	private void setControlBar(ZZZ_ContextManager contextManager) {
-		controlBar = new JsPanelControlBar(headerBar, contextManager);
+	private void setControlBar() {
+		controlBar = new JsPanelControlBar(headerBar);
 	}
 	
 	public Optional<String> getTitle() {

@@ -16,7 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextManager;
 import context_manager.ContextPanel;
-import context_manager.ZZZ_IsContext;
+import context_manager.ContextSetter;
 import context_manager.ZZZ_ContextManager;
 import exceptions.PanelException;
 import object_models.forms.ContainerAction;
@@ -28,7 +28,7 @@ import object_models.helpers.title.TitlePanel;
  * @author Steve Brown
  *
  */
-public class JSPanel implements ContainerAction {//, IsContext { 
+public class JSPanel implements ContainerAction, ContextSetter { 
 	protected WebDriver driver;
 	protected ContextManager contextManager;
 	
@@ -46,38 +46,29 @@ public class JSPanel implements ContainerAction {//, IsContext {
 		this.driver = driver;
 		this.expectedTitle = expectedTitle;
 		this.contextManager = contextManager;
-		System.out.println("JSPanel->1");
-		contextManager.setContext(new ContextPanel());
-		System.out.println("JSPanel->2");
 		
-		try {
-			waitForLoad();
-		} catch (Exception e) {
-			logger.error("Could not load panel [" + expectedTitle + "]");
-			close();
-		}
+		
+		waitForLoad();		
 		setPanelId();
 		setContainer();
 		setTitle(); //SHOULD THIS BE PART OF THE HEADER BAR???
 		setHeaderBar();
+		setContext();
 	}
 
-//	@Override
-//	public void setContextManager(ContextManager contextManager) {
-//		System.out.println("JSPanel->3");
-//		this.contextManager = contextManager;
-//		this.contextManager.setContext(new ContextPanel());
-//		if(contextManager == null) {
-//			System.out.println("JSPanel->4");
-//		}else {
-//			System.out.println("JSPanel->5");
-//			System.out.println("->" +	contextManager.getContext().getState().toString());
-//		}
-//	}
+	@Override
+	public void setContext() {		
+		contextManager.setContext(new ContextPanel());		
+	}
 	
-	private void waitForLoad() throws Exception {
+	private void waitForLoad() {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-		wait.until(ExpectedConditions.attributeContains(TITLE_SELECTOR, "innerHTML", expectedTitle));				
+		try {
+			wait.until(ExpectedConditions.attributeContains(TITLE_SELECTOR, "innerHTML", expectedTitle));	
+		} catch (Exception e) {
+			logger.error("Could not load panel [" + expectedTitle + "]");
+			close();
+		}						
 	}
 
 	private void setPanelId() {
@@ -95,7 +86,7 @@ public class JSPanel implements ContainerAction {//, IsContext {
 	}
 	
 	private void setHeaderBar() {
-//		headerBar = new JsPanelHeaderBar(container, zzz_contextManager);
+		headerBar = new JsPanelHeaderBar(container);
 	}
 	
 	@Override

@@ -3,20 +3,23 @@
  */
 package context_manager;
 
+import java.util.Optional;
+
 /**
  * @author Steve Brown
  *
  */
 public class StateIframe extends State {
 
-	public StateIframe(ContextManager cm) {
-		super(cm);
-	}
+//	public StateIframe(ContextManager cm) {
+//		super(cm);
+//	}
+
 
 	@Override
-	public State getNext() {
-		// TODO Auto-generated method stub
-		return null;
+	public Optional<State> getNext(Optional<State> prev) {
+		prev.ifPresent(p -> super.prev = p);
+		return Optional.empty();
 	}
 
 	@Override

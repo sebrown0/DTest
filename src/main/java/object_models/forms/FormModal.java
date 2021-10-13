@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextManager;
+import context_manager.ContextSetter;
 import object_models.helpers.closers.CloserModalForm;
 import object_models.helpers.title.PageTitle;
 import object_models.helpers.title.TitleModalForm;
@@ -13,7 +14,7 @@ import object_models.helpers.title.TitleModalForm;
  * @author Steve Brown
  *
  */
-public abstract class FormModal implements ContainerAction {
+public abstract class FormModal implements ContainerAction, ContextSetter {
 	protected WebDriver driver;
 	protected ContextManager contextManager;
 	
@@ -25,7 +26,13 @@ public abstract class FormModal implements ContainerAction {
 		this.title = new TitleModalForm(expectedTitle, driver);		
 		this.contextManager = contextManager;
 	}
-
+	
+	@Override
+	public void setContext() {
+		System.out.println("FormModal->SET CONTEXT NOT IMPLEMENTED!!!!!!!!!");
+		contextManager.setContext(null);
+	}
+	
 	@Override
 	public PageTitle getTitle() {
 		return title;

@@ -19,12 +19,6 @@ public class ContextManager {
 	}
 
 	public void setContext(Context context) {
-		if(context == null) {
-			System.out.println("->ContextManager->is null");
-		}else {
-			System.out.println("->ContextManager->is NOT null");
-		}
-			
 		this.context = context;
 	}	
 	

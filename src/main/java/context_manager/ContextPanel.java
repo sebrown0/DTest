@@ -11,7 +11,7 @@ public class ContextPanel implements Context {
 	private State state;
 	
 	public ContextPanel() {
-		state = new StateHeaderPanel(null);
+		state = new StateHeaderPanel();
 	}
 
 	@Override

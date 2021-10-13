@@ -3,19 +3,22 @@
  */
 package context_manager;
 
+import java.util.Optional;
+
 /**
  * @author Steve Brown
  *
  */
 public class StateHeaderPanel extends State {
 
-	public StateHeaderPanel(ContextManager cm) {
-		super(cm);		
-	}
+//	public StateHeaderPanel(ContextManager cm) {
+//		super(cm);		
+//	}
 
 	@Override
-	public State getNext() {
-		return new StateIframe(super.contextManager);
+	public Optional<State> getNext(Optional<State> prev) {
+		prev.ifPresent(p -> super.prev = p);
+		return Optional.of(new StateIframe());
 	}
 
 	@Override
