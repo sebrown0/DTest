@@ -17,7 +17,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import context_manager.CallingState;
+import context_manager.Context;
 import context_manager.ContextManager;
+import context_manager.State;
+import context_manager.StateLeftMenu;
 import controls.MenuMap;
 import object_models.forms.ContainerAction;
 import object_models.left_menu.absence_statistics.EmployeeAccruals;
@@ -73,7 +77,7 @@ import object_models.left_menu.reports.Payslips;
  * @author Steve Brown
  *
  */
-public class LeftMenu implements LeftMenuActions {
+public class LeftMenu implements LeftMenuActions, CallingState {
 	private Map<String, WebElement> anchors;	
 	private WebDriver driver;
 	private Logger logger = LogManager.getLogger();
@@ -84,6 +88,9 @@ public class LeftMenu implements LeftMenuActions {
 	public LeftMenu(WebDriver driver, ContextManager contextManager) {
 		this.driver = driver;
 		this.contextManager = contextManager;
+		this.contextManager.setCallingState(this);
+//		this.contextManager.getContext().setState(new StateLeftMenu(this.contextManager.getContext(), null));
+		
 		this.menuMapper = new LeftMenuMapper(driver);
 		try {
 			this.anchors = new MenuMap(new LeftMenuFactory(driver)).getAnchors().get();
@@ -129,6 +136,8 @@ public class LeftMenu implements LeftMenuActions {
 	
 	@Override
 	public Optional<ContainerAction> clickAndLoad(String elementName) {		
+//		StateTop s = (StateTop) contextManager.getContext().getFirstState();
+		
 		WebElement e = anchors.get(elementName);
 		logger.info("Loading [" + elementName + "]");
 		e.click();
@@ -182,6 +191,12 @@ public class LeftMenu implements LeftMenuActions {
 		return executor.submit(() -> {
 			return ChildElementFactory.getChild(elementName, driver, contextManager);
 		});
+	}
+
+	@Override
+	public State getState(Context context, Optional<State> prev) {
+		// TODO - check optional
+		return new StateLeftMenu(context, prev);
 	}
 	
 	private static class ChildElementFactory{

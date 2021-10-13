@@ -19,7 +19,7 @@ import object_models.modules.common.ModuleElements;
 
 public class UserLoginPage extends LoadablePage {
 	private ModuleElements moduleLoader;
-	private ContextManager contextManager = new ContextManager();
+	private ContextManager contextManager;
 	private By byUserName = By.name("user");
 	private By byUserPassword = By.name("password");
 	private By byBtnLogin = By.className("login100-form-btn");	
@@ -31,6 +31,8 @@ public class UserLoginPage extends LoadablePage {
 	// Login with ModuleElements so a HomePage can be returned.
 	public UserLoginPage(WebDriver driver, ModuleElements moduleLoader) {
 		super(driver, null, LOGIN_PAGE_URI);
+		
+		this.contextManager = new ContextManager(driver);
 		this.moduleLoader = moduleLoader;
 	}
 		

@@ -17,7 +17,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import context_manager.ContextManager;
 import context_manager.ContextPanel;
 import context_manager.ContextSetter;
-import context_manager.ZZZ_ContextManager;
 import exceptions.PanelException;
 import object_models.forms.ContainerAction;
 import object_models.helpers.closers.CloserPanel;
@@ -31,8 +30,7 @@ import object_models.helpers.title.TitlePanel;
 public class JSPanel implements ContainerAction, ContextSetter { 
 	protected WebDriver driver;
 	protected ContextManager contextManager;
-	
-	private ZZZ_ContextManager zzz_contextManager;	
+		
 	private PageTitle title = null;
 	private String expectedTitle;
 	private Optional<String> panelId;
@@ -45,8 +43,7 @@ public class JSPanel implements ContainerAction, ContextSetter {
 	public JSPanel(WebDriver driver, String expectedTitle, ContextManager contextManager) {
 		this.driver = driver;
 		this.expectedTitle = expectedTitle;
-		this.contextManager = contextManager;
-		
+		this.contextManager = contextManager;		
 		
 		waitForLoad();		
 		setPanelId();
@@ -58,7 +55,7 @@ public class JSPanel implements ContainerAction, ContextSetter {
 
 	@Override
 	public void setContext() {		
-		contextManager.setContext(new ContextPanel());		
+		contextManager.setContext(new ContextPanel(contextManager, headerBar.getControlBar()));		
 	}
 	
 	private void waitForLoad() {
@@ -109,7 +106,7 @@ public class JSPanel implements ContainerAction, ContextSetter {
 	}
 	
 	public JsPanelHeaderBar getHeaderBar() {
-		zzz_contextManager.switchToPanelIfNecessary();
+//		zzz_contextManager.switchToPanelIfNecessary();
 		return headerBar;
 	}
 		

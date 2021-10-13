@@ -10,19 +10,28 @@ import java.util.Optional;
  *
  */
 public abstract class State {	
-	protected State prev;
-//	protected ContextManager contextManager;
-//	
-//	public State(ContextManager contextManager) {
-//		this.contextManager = contextManager;
-////		this.prev = contextManager.getContext().getPreviousState();
-//	}
+	protected Context context;
 	
-	public abstract Optional<State> getNext(Optional<State> prev);
-	public abstract State close();
+	private Optional<State> prev;	
+
+	public State(Context context) {
+		this.context = context;	
+	}
 	
-	public State getPrev() {
-//		return contextManager.getContext().getPreviousState();
+	public State(Context context, Optional<State> prev) {
+		this.context = context;
+		this.prev = prev;
+	}
+
+	public abstract Optional<State> getNext();
+	public abstract Optional<State> close();
+	public abstract void switchToMe();
+	
+	public void setPrev(Optional<State> prev) {
+		this.prev = prev;
+	}
+
+	public Optional<State> getPrev() {
 		return prev;
 	}
 	
