@@ -89,7 +89,7 @@ public class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter 
 	
 	@Override
 	public void setContext() {		
-		contextManager.setContext(new ContextPanel(contextManager, headerBar.getControlBar(), this));		
+		contextManager.setContext(new ContextPanel(contextManager, this, headerBar.getControlBar()));		
 	}
 
 	private void setContextStateToPanel() {
