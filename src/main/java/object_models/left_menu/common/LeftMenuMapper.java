@@ -30,7 +30,7 @@ public class LeftMenuMapper {
 	@FindBy(id = "nav-accordion")
 	WebElement nav;
 	
-	public LeftMenuMapper(WebDriver driver) {
+	public LeftMenuMapper(WebDriver driver) { 	
 		PageFactory.initElements(driver, this);
 	}
 	

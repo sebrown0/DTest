@@ -54,4 +54,8 @@ public class ContextQueue {
 		}
 		return Optional.ofNullable(returnVal);
 	}
+	
+	public int getSize() {
+		return queue.size();
+	}
 }

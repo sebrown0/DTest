@@ -30,7 +30,7 @@ public class MenuMap {
 	public Future<Map<String, WebElement>> getAnchors() {
 		return executor.submit(() -> {
 			List<WebElement> elements = lmf.getList();
-			for (WebElement e: elements) {
+			for (WebElement e: elements) { 	
 				addAnchor(e.getAttribute("textContent"), e);
 			}
 			return anchors;
@@ -40,7 +40,7 @@ public class MenuMap {
 	private void addAnchor(String name, WebElement el) {
 		if(name != null && name != "") {
 			anchors.put(formattedNameAsKey(name), el);
-//			System.out.println("adding anchor - " + trimmedName);
+//			System.out.println("adding anchor - " + formattedNameAsKey(name));
 		}		
 	}
 		

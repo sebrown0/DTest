@@ -18,8 +18,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import context_manager.CallingState;
-import context_manager.ContextState;
 import context_manager.ContextManager;
+import context_manager.ContextState;
 import context_manager.State;
 import context_manager.StateLeftMenu;
 import controls.MenuMap;
@@ -89,7 +89,12 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 		this.driver = driver;
 		this.contextManager = contextManager;
 		this.contextManager.setCallingState(this);		
-		this.menuMapper = new LeftMenuMapper(driver);
+		
+		mapAnchors();
+	}
+
+	private void mapAnchors() {
+		menuMapper = new LeftMenuMapper(driver);
 		
 		try {
 			this.anchors = new MenuMap(new LeftMenuFactory(driver)).getAnchors().get();
@@ -97,7 +102,7 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 			logger.error("Unable to get anchors from menu map");
 		}
 	}
-
+	
 	// Getters & Setters
 		
 	/*
@@ -116,11 +121,9 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 	}
 
 	// LeftMenuActions	
-	@Override
-	/*
-	 * 	NOT WORKING !!!!
-	 */
+	@Override	
 	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
+		contextManager.switchToFirstState();
 		Optional<ContainerAction> item = null;
 		try {
 			String prntName = (String) clazz.getField("MENU_PARENT_NAME").get(null);
@@ -135,14 +138,17 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 	
 	@Override
 	public Optional<ContainerAction> clickAndLoad(String elementName) {
-		WebElement e = anchors.get(elementName);
-		logger.info("Loading [" + elementName + "]");
-		e.click();
+		WebElement e =  anchors.get(elementName);
+
+		contextManager.switchToFirstState();		
+		logger.info("Loading [" + elementName + "]");		 	
+		
 		Optional<ContainerAction> child = Optional.empty();		
 		try {
+			e.click();			
 			child = Optional.of(getElement(elementName).get());			
 		} catch (Exception ex) {
-			logger.error("Could not get menu element [" + elementName + "]");
+			logger.error("Could not get menu element [" + elementName + "] [" + ex.getMessage() + "]");
 		}
 		return child;
 	}

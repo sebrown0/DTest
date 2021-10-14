@@ -27,7 +27,8 @@ public class StateIframe extends State {
 	public Optional<State> close() {
 		logger.debug("Closing state");
 		context.getDriver().switchTo().defaultContent();
-		return super.getPrev().get().close();
+		return super.getPrev();
+//		return super.getPrev().get().close();
 	}
 
 	public WebDriver f() {

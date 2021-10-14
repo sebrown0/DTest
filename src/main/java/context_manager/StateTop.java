@@ -38,10 +38,19 @@ public class StateTop extends State {
 
 	@Override
 	public void switchToMe() {
-		System.out.println("->switching to top");
+		logger.debug("Switching to top state");
 		WebDriver driver = context.getDriver();
-		driver.switchTo().defaultContent();
-		driver.findElement(By.cssSelector("body > form > div.app-body"));		
+		driver
+			.switchTo()
+			.defaultContent()
+			.findElement(By.cssSelector("form[name='tb']"));
+		/*
+		 * Not strictly necessary to 'goto' the form.
+		 * But for completeness we do.
+		 */
+//		WebElement e = driver.findElement(By.cssSelector("form[name='tb']")); 	
+//		e = driver.findElement(By.cssSelector("div[class='left-sidebar']"));
+				
 	}
 
 }

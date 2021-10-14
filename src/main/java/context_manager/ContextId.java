@@ -41,7 +41,7 @@ public class ContextId {
 		optionalId.ifPresent(id -> actualId = id);
 	}
 	
-	public String getContextId() {
+	public String getId() {
 		return expectedName + ":" + actualId;
 	}
 	
@@ -69,7 +69,7 @@ public class ContextId {
 	}
 	
 	private void checkForStringMatch(String find) {
-		if(getContextId().equalsIgnoreCase(find)) {
+		if(getId().equalsIgnoreCase(find)) {
 			matchType = ContextMatch.STRING_CONTEXT_ID;
 			matchFound = true;
 		}
@@ -84,7 +84,7 @@ public class ContextId {
 	
 	// TODO - we don't have case for getContextId() !! 
 	private void checkForObjectMatch(ContextId find) {
-		if(getContextId().equalsIgnoreCase(find.getContextId())){
+		if(getId().equalsIgnoreCase(find.getId())){
 			matchType = ContextMatch.OBJ_CONTEXT_ID;
 			matchFound = true;
 		}else if(expectedName.equalsIgnoreCase(find.getExpectedName())){
@@ -103,7 +103,7 @@ public class ContextId {
 
 	@Override
 	public String toString() {
-		return "ContextId [id = " + getContextId() + ", expectedName=" + expectedName + ", actualId=" + actualId + ", match=" + matchType + "]";
+		return "ContextId [id = " + getId() + ", expectedName=" + expectedName + ", actualId=" + actualId + ", match=" + matchType + "]";
 	}
 
 }

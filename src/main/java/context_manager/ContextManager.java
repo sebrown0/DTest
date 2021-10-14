@@ -33,7 +33,11 @@ public class ContextManager {
 	}
 	
 	public void switchToFirstState() {
-		contextState.getFirstState().switchToMe();
+		if(contextState != null) {
+			contextState.getFirstState().switchToMe();
+		}else {
+			System.out.println("-> context state is null" ); // TODO - remove or log 	
+		}			
 	}
 	
 	public void moveNext(){
@@ -41,14 +45,16 @@ public class ContextManager {
 	}
 	
 	public void closeCurrent(){
-//		System.out.println("closeCurrent->" + context.getState().toString());
+		System.out.println("closeCurrent->" + contextState.getState().toString());
 		Optional<State> prev = closeStateAndGetPrev();
-		revertToPreviousState(prev);
 		
-//		System.out.println("size->" + contextQueue.size()); // TODO - remove and/or log
-//		contextQueue.remove();
-//		System.out.println("size->" + contextQueue.size());
-		
+		if(prev.isPresent()) {
+			System.out.println("->should have switched to header"); // TODO - remove or log
+			revertToPreviousState(prev);
+		}else {
+			System.out.println("->remove context"); // TODO - remove or log
+			queue.getAndRemoveCurrent();
+		}		
 	}
 	
 	private Optional<State> closeStateAndGetPrev(){
@@ -90,6 +96,9 @@ public class ContextManager {
 	}
 	public CallingState getCallingState() {
 		return callingState;
+	}
+	public String getContextId() {
+		return contextState.getContextId().getId();
 	}
 	
 	// Queue

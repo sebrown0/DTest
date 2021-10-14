@@ -100,9 +100,10 @@ public class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter 
 				new StateHeaderPanel(
 						con, Optional.ofNullable(prev),	headerBar.getControlBar());
 		
-		contextManager
-			.setNextState(header)
-			.moveNext();
+		con.setState(header);
+//		contextManager // REMOVED 14/10/2021 REPLACED WITH ABOVE
+//			.setNextState(header)
+//			.moveNext();
 	}
 	
 	@Override

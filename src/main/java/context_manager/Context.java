@@ -17,10 +17,10 @@ import org.openqa.selenium.WebDriver;
  */
 public abstract class Context implements ContextState {
 	private ContextManager contextManager;
+	private ContextId contextId;
 	private State firstState;
 	private State currentState;
-	private ContextId contextId;
-	
+		
 	public Context(ContextManager contextManager, ContextIdGetter idGetter) {
 		this.contextManager = contextManager;		
 		this.firstState = new StateTop(this, null);
