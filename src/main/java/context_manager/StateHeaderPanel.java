@@ -14,7 +14,7 @@ import object_models.panels.JsPanelControlBar;
 public class StateHeaderPanel extends State {
 	private JsPanelControlBar controlBar;
 	
-	public StateHeaderPanel(Context context, Optional<State> prev, JsPanelControlBar controlBar) {
+	public StateHeaderPanel(ContextState context, Optional<State> prev, JsPanelControlBar controlBar) {
 		super(context, prev);				
 		this.controlBar = controlBar;
 	}

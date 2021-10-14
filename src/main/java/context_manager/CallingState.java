@@ -10,5 +10,5 @@ import java.util.Optional;
  *
  */
 public interface CallingState {
-	State getState(Context context, Optional<State> prev);	
+	State getState(ContextState context, Optional<State> prev);	
 }

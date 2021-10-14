@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import context_manager.ContextId;
 import context_manager.ContextManager;
 import context_manager.ContextPanel;
 import context_manager.StateHeaderPanel;
@@ -56,17 +57,25 @@ class ContextManagerTests {
 	@Test
 	void loadDocument_and_checkState() {		
 		lm.clickAndLoad(Documents.MENU_TITLE);
-		System.out.println("is->" + cm.getContext().getState());
+//		System.out.println("is->" + cm.getContext().getState());
 		cm.closeCurrent();
-		System.out.println("is->" + cm.getContext().getState());
+//		System.out.println("is->" + cm.getContext().getState());
 		assertTrue(cm.getContext().getState() instanceof StateLeftMenu);				
 	}
 	
 	@Test
 	void loadDocuments_then_employeeDetails_then_close_employeeDetails() {
 		lm.clickAndLoad(Documents.MENU_TITLE);
+		cm.switchToFirstState();
 		lm.clickAndLoad(EmployeeDetails.MENU_TITLE);
 //		cm.closeCurrent();
 //		assertTrue(cm.getContext().getState() == null);	
+	}
+	
+	@Test
+	void checkContextId() {
+		lm.clickAndLoad(Documents.MENU_TITLE);
+		ContextId id = cm.getContext().getContextId();
+		System.out.println("setPanelId->" + id.getContextId());
 	}
 }

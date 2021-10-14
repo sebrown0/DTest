@@ -16,8 +16,8 @@ import org.openqa.selenium.WebDriver;
  * 
  */
 public class ContextManager {
-	private Queue<Context> contextQueue = new LinkedList<>();
-	private Context context;
+	private Queue<ContextState> contextQueue = new LinkedList<>();
+	private ContextState context;
 	private WebDriver driver;
 	// The state that initiates the context, i.e. LeftMenu
 	// This has to be added to the firstState as the next state.	
@@ -33,6 +33,10 @@ public class ContextManager {
 		return this;
 	}
 	
+	public void switchToFirstState() {
+		context.getFirstState().switchToMe();
+	}
+	
 	public void moveNext(){
 		context.moveNext();
 	}
@@ -41,6 +45,11 @@ public class ContextManager {
 //		System.out.println("closeCurrent->" + context.getState().toString());
 		Optional<State> prev = closeStateAndGetPrev();
 		revertToPreviousState(prev);
+		
+		System.out.println("size->" + contextQueue.size());
+		contextQueue.remove();
+		System.out.println("size->" + contextQueue.size());
+		
 	}
 	
 	private Optional<State> closeStateAndGetPrev(){
@@ -66,11 +75,11 @@ public class ContextManager {
 	/*
 	 * Getters / Setters
 	 */
-	public Context getContext() {
+	public ContextState getContext() {
 		logInvalidContextIfNull();
 		return context;
 	}
-	public void setContext(Context context) {
+	public void setContext(ContextState context) {
 		this.context = context;
 		contextQueue.add(context);
 	}

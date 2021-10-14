@@ -13,7 +13,7 @@ import org.openqa.selenium.WebDriver;
  */
 public class StateIframe extends State {
 		
-	public StateIframe(Context context, Optional<State> prev) {
+	public StateIframe(ContextState context, Optional<State> prev) {
 		super(context, prev);		
 		context.setState(this);
 	}

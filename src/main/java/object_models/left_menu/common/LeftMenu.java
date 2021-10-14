@@ -18,7 +18,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import context_manager.CallingState;
-import context_manager.Context;
+import context_manager.ContextState;
 import context_manager.ContextManager;
 import context_manager.State;
 import context_manager.StateLeftMenu;
@@ -182,7 +182,7 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 	}
 
 	@Override
-	public State getState(Context context, Optional<State> prev) {
+	public State getState(ContextState context, Optional<State> prev) {
 		// TODO - check optional
 		return new StateLeftMenu(context, prev);
 	}

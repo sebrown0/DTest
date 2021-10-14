@@ -14,19 +14,25 @@ import object_models.panels.JsPanelControlBar;
  * @author Steve Brown
  *
  */
-public class ContextPanel implements Context {
+public final class ContextPanel implements ContextState {
 	private ContextManager contextManager;
 	private State firstState;
 	private State currentState;
+	private ContextId contextId;
 	
-	public ContextPanel(ContextManager contextManager, JsPanelControlBar controlBar) {
+	public ContextPanel(ContextManager contextManager, JsPanelControlBar controlBar, ContextIdGetter idGetter) {
 		this.contextManager = contextManager;		
 		this.firstState = new StateTop(this, null);
-		
+	
+		setContextId(idGetter);
 		setState(firstState);
 		setState(contextManager.getCallingState().getState(this, Optional.of(firstState)));		
 	}
 
+	public void setContextId(ContextIdGetter idGetter) {
+		contextId = idGetter.getContextId();
+	}
+	
 	@Override
 	public void setState(State state) {
 		State temp = currentState;
@@ -72,6 +78,11 @@ public class ContextPanel implements Context {
 	@Override
 	public State getFirstState() {
 		return firstState;
+	}
+
+	@Override
+	public ContextId getContextId() {
+		return contextId;
 	}
 
 }

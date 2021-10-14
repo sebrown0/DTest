@@ -14,6 +14,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import context_manager.ContextState;
+import context_manager.ContextId;
+import context_manager.ContextIdGetter;
 import context_manager.ContextManager;
 import context_manager.ContextPanel;
 import context_manager.ContextSetter;
@@ -29,7 +32,7 @@ import object_models.helpers.title.TitlePanel;
  * @author Steve Brown
  *
  */
-public class JSPanel implements ContainerAction, ContextSetter { 
+public class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter { 
 	protected WebDriver driver;
 	protected ContextManager contextManager;
 		
@@ -53,16 +56,7 @@ public class JSPanel implements ContainerAction, ContextSetter {
 		setTitle(); //SHOULD THIS BE PART OF THE HEADER BAR???
 		setHeaderBar();
 		setContext();
-		
-		State header = new StateHeaderPanel(contextManager.getContext(), Optional.ofNullable(contextManager.getContext().getState()), headerBar.getControlBar());
-		contextManager
-			.setNextState(header)
-			.moveNext();
-	}
-
-	@Override
-	public void setContext() {		
-		contextManager.setContext(new ContextPanel(contextManager, headerBar.getControlBar()));		
+		setContextStateToPanel();		
 	}
 	
 	private void waitForLoad() {
@@ -76,7 +70,7 @@ public class JSPanel implements ContainerAction, ContextSetter {
 	}
 
 	private void setPanelId() {
-		panelId = JsPanelId.getPanelIdForTitle(driver, expectedTitle);
+		panelId = JsPanelId.getPanelIdForTitle(driver, expectedTitle);		
 	}
 	
 	private void setContainer() {
@@ -91,6 +85,24 @@ public class JSPanel implements ContainerAction, ContextSetter {
 	
 	private void setHeaderBar() {
 		headerBar = new JsPanelHeaderBar(container);
+	}
+	
+	@Override
+	public void setContext() {		
+		contextManager.setContext(new ContextPanel(contextManager, headerBar.getControlBar(), this));		
+	}
+
+	private void setContextStateToPanel() {
+		ContextState con = contextManager.getContext();
+		State prev = con.getState();
+		
+		State header = 
+				new StateHeaderPanel(
+						con, Optional.ofNullable(prev),	headerBar.getControlBar());
+		
+		contextManager
+			.setNextState(header)
+			.moveNext();
 	}
 	
 	@Override
@@ -113,22 +125,16 @@ public class JSPanel implements ContainerAction, ContextSetter {
 	}
 	
 	public JsPanelHeaderBar getHeaderBar() {
-//		zzz_contextManager.switchToPanelIfNecessary();
 		return headerBar;
 	}
-		
-	
-	
-//	public void setPanelContext(ZZZ_ContextManager contextManager) {
-//		this.zzz_contextManager = contextManager;
-//	}
-//
-//	public ZZZ_ContextManager getContextManager() {
-//		return zzz_contextManager;
-//	}
-	
+			
 	public WebDriver getDriver() {
 		return driver;
+	}
+
+	@Override
+	public ContextId getContextId() {		
+		return new ContextId(expectedTitle, panelId.get());
 	}
 
 }

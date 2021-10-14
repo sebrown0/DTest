@@ -6,6 +6,7 @@ package context_manager;
 import java.util.Optional;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 /**
  * @author Steve Brown
@@ -16,7 +17,7 @@ import org.openqa.selenium.By;
 public class StateTop extends State {
 	private State next;
 	
-	public StateTop(Context context, Optional<State> prev) {
+	public StateTop(ContextState context, Optional<State> prev) {
 		super(context, prev);
 	}
 
@@ -37,7 +38,10 @@ public class StateTop extends State {
 
 	@Override
 	public void switchToMe() {
-		context.getDriver().findElement(By.cssSelector("body > form > div.app-body"));		
+		System.out.println("->switching to top");
+		WebDriver driver = context.getDriver();
+		driver.switchTo().defaultContent();
+		driver.findElement(By.cssSelector("body > form > div.app-body"));		
 	}
 
 }

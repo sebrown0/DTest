@@ -14,17 +14,17 @@ import org.apache.logging.log4j.Logger;
  * The current state of a Context.
  */
 public abstract class State {	
-	protected Context context;
+	protected ContextState context;
 	protected Optional<State> next;
 	protected Logger logger = LogManager.getLogger();
 	
 	private Optional<State> prev;
 	
-	public State(Context context) {
+	public State(ContextState context) {
 		this.context = context;	
 	}
 	
-	public State(Context context, Optional<State> prev) {
+	public State(ContextState context, Optional<State> prev) {
 		this.context = context;
 		this.prev = prev;
 	}
