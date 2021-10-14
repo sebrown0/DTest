@@ -3,7 +3,11 @@
  */
 package context_manager_tests;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,10 +16,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import context_manager.ContextId;
 import context_manager.ContextManager;
-import context_manager.ContextPanel;
-import context_manager.StateHeaderPanel;
-import context_manager.StateIframe;
-import context_manager.StateTop;
+import context_manager.ContextState;
 import context_manager.StateLeftMenu;
 import logging.TestResultLogger;
 import object_models.left_menu.common.LeftMenu;
@@ -33,49 +34,102 @@ import xml_reader.config_file.ConfigReader;
  *
  * Test the elements of the home page for payroll.
  */
+@SuppressWarnings("unlikely-arg-type")
 @ExtendWith({ 
 	ConfigParameterResolver.class, 
 	TestResultLogger.class, 
 	LoginPageResolverPayroll.class })
 class ContextManagerTests {
 	private static HomePage homepagePayroll;
-	private static ContextManager cm;
-	private static LeftMenu lm;
+	private static ContextManager manager;
+	private static LeftMenu menu;
 	
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLoginPayroll) {
 		homepagePayroll = userLoginPayroll.loginValidUser(UserProvider.userPortal());
-		cm = homepagePayroll.getContextManager();
-		lm = homepagePayroll.getLeftMenu();
+		manager = homepagePayroll.getContextManager();
+		menu = homepagePayroll.getLeftMenu();
 	}
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 //		homepagePayroll.close();
 	}
+
+	@Test
+	void checkContextId() {
+		menu.clickAndLoad(Documents.MENU_TITLE);
+		ContextId id = manager.getContext().getContextId();
+		manager.closeCurrent();
+		assertEquals("Employee Document Management:jsPanel-1", id.getContextId());
+	}
+	
+	@Test
+	void checkContextId_equalsValue() {
+		ContextId id = new ContextId("expected", Optional.of("actual"));
+		// Obj == Obj
+		assertTrue(id.equals(id));
+		// String
+		assertTrue(id.equals("expected:actual"));
+		assertFalse(id.equals("expected:actual-X"));
+		assertTrue(id.equals("expected"));
+		assertFalse(id.equals("expecte"));
+		assertTrue(id.equals("actual"));
+		assertFalse(id.equals("act"));
+		// Object
+		assertTrue(id.equals(new ContextId("expected", Optional.of("actual"))));
+		assertTrue(id.equals(new ContextId("expect", Optional.of("actual"))));
+		assertTrue(id.equals(new ContextId("expected", Optional.of("act"))));
+		assertFalse(id.equals(new ContextId("expect", Optional.of("act"))));
+	}
+	
+	@Test
+	void checkContextIsInQueue() {
+		menu.clickAndLoad(Documents.MENU_TITLE);
+		ContextState cs = manager.getEndOfQueue();
+		manager.closeCurrent();
+		assertTrue(cs.getContextId().equals("Employee Document Management"));
+	}
+	
+	@Test
+	void getContextFromQueue_usingContextId_actual() {
+		menu.clickAndLoad(Documents.MENU_TITLE);
+		ContextState cs = manager.findContext("jsPanel-1").get();
+		manager.closeCurrent();
+		assertEquals("Employee Document Management", cs.getContextId().getExpectedName());
+	}
+	
+	@Test
+	void getContextFromQueue_usingContextId_object() {
+		menu.clickAndLoad(Documents.MENU_TITLE);
+		ContextState cs = manager.findContext(new ContextId("Employee Document Management", Optional.of("jsPanel-1"))).get();
+		manager.closeCurrent();
+		assertEquals("Employee Document Management", cs.getContextId().getExpectedName());
+	}
+	
+	@Test
+	void removeContextFromQueue_usingContextId_actual() {
+		menu.clickAndLoad(Documents.MENU_TITLE);
+		ContextState cs = manager.findContext("jsPanel-1").get();
+		boolean isRemoved = manager.removeContextFromQueue(cs.getContextId());
+		manager.closeCurrent();
+		assertTrue(isRemoved);
+	}
 	
 	@Test
 	void loadDocument_and_checkState() {		
-		lm.clickAndLoad(Documents.MENU_TITLE);
-//		System.out.println("is->" + cm.getContext().getState());
-		cm.closeCurrent();
-//		System.out.println("is->" + cm.getContext().getState());
-		assertTrue(cm.getContext().getState() instanceof StateLeftMenu);				
+		menu.clickAndLoad(Documents.MENU_TITLE);
+		manager.closeCurrent();
+		assertTrue(manager.getContext().getState() instanceof StateLeftMenu);				
 	}
 	
 	@Test
 	void loadDocuments_then_employeeDetails_then_close_employeeDetails() {
-		lm.clickAndLoad(Documents.MENU_TITLE);
-		cm.switchToFirstState();
-		lm.clickAndLoad(EmployeeDetails.MENU_TITLE);
-//		cm.closeCurrent();
-//		assertTrue(cm.getContext().getState() == null);	
+		menu.clickAndLoad(Documents.MENU_TITLE);
+		manager.switchToFirstState();
+		menu.clickAndLoad(EmployeeDetails.MENU_TITLE);
+		manager.closeCurrent();
+		assertTrue(manager.getContext().getState() == null);	
 	}
 	
-	@Test
-	void checkContextId() {
-		lm.clickAndLoad(Documents.MENU_TITLE);
-		ContextId id = cm.getContext().getContextId();
-		System.out.println("setPanelId->" + id.getContextId());
-	}
 }

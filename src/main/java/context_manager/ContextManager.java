@@ -3,9 +3,7 @@
  */
 package context_manager;
 
-import java.util.LinkedList;
 import java.util.Optional;
-import java.util.Queue;
 
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.WebDriver;
@@ -13,11 +11,12 @@ import org.openqa.selenium.WebDriver;
 /**
  * @author Steve Brown
  *
+ * Manages the contexts within the app.
  * 
  */
 public class ContextManager {
-	private Queue<ContextState> contextQueue = new LinkedList<>();
-	private ContextState context;
+	private ContextQueue queue = new ContextQueue();
+	private ContextState contextState;
 	private WebDriver driver;
 	// The state that initiates the context, i.e. LeftMenu
 	// This has to be added to the firstState as the next state.	
@@ -28,17 +27,17 @@ public class ContextManager {
 	}
 		
 	public ContextManager setNextState(State state) {
-		State current = context.getState();
+		State current = contextState.getState();
 		current.setNext(Optional.ofNullable(state));
 		return this;
 	}
 	
 	public void switchToFirstState() {
-		context.getFirstState().switchToMe();
+		contextState.getFirstState().switchToMe();
 	}
 	
 	public void moveNext(){
-		context.moveNext();
+		contextState.moveNext();
 	}
 	
 	public void closeCurrent(){
@@ -46,28 +45,28 @@ public class ContextManager {
 		Optional<State> prev = closeStateAndGetPrev();
 		revertToPreviousState(prev);
 		
-		System.out.println("size->" + contextQueue.size());
-		contextQueue.remove();
-		System.out.println("size->" + contextQueue.size());
+//		System.out.println("size->" + contextQueue.size()); // TODO - remove and/or log
+//		contextQueue.remove();
+//		System.out.println("size->" + contextQueue.size());
 		
 	}
 	
 	private Optional<State> closeStateAndGetPrev(){
-		return context.getState().close();
+		return contextState.getState().close();
 	}
 	private void revertToPreviousState(Optional<State> prev) {
 		prev.ifPresentOrElse(
-				p -> context.setState(p), 
+				p -> contextState.setState(p), 
 				new Runnable() {			
 					@Override
 					public void run() {
-						context.setNullState();				
+						contextState.setNullState();				
 					}
 		});
 	}
 
 	private void logInvalidContextIfNull() {
-		if(context == null) {
+		if(contextState == null) {
 			LogManager.getLogger().error("Context is null");
 		}
 	}
@@ -77,11 +76,11 @@ public class ContextManager {
 	 */
 	public ContextState getContext() {
 		logInvalidContextIfNull();
-		return context;
+		return contextState;
 	}
-	public void setContext(ContextState context) {
-		this.context = context;
-		contextQueue.add(context);
+	public void setContext(ContextState contextState) {
+		this.contextState = contextState;
+		queue.addContextToQueue(contextState);
 	}
 	public WebDriver getDriver() {
 		return driver;
@@ -91,5 +90,22 @@ public class ContextManager {
 	}
 	public CallingState getCallingState() {
 		return callingState;
+	}
+	
+	// Queue
+	public ContextQueue getQueue() {
+		return queue;
+	}
+	public Optional<ContextState> findContext(Object obj) {
+		return queue.findContext(obj);
+	}
+	public ContextState getEndOfQueue() {
+		return queue.getCurrent();
+	}
+	public ContextState getAndRemoveEndOfQueue() {
+		return queue.getAndRemoveCurrent();
+	}	
+	public boolean removeContextFromQueue(Object obj) {
+		return queue.removeContext(obj);
 	}
 }

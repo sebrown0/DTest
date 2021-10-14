@@ -18,6 +18,14 @@ import java.util.Optional;
 public class ContextId {
 	private String expectedName;
 	private String actualId = null;
+	private ContextMatch matchType;
+	private boolean matchFound;
+	
+	public enum ContextMatch{ 
+		NONE,
+		STRING_CONTEXT_ID, STRING_EXPECTED, STRING_ACTUAL, 
+		OBJ_EXACT, OBJ_CONTEXT_ID, OBJ_EXPECTED, OBJ_ACTUAL 
+	}
 	
 	public ContextId(String expectedName, String actualId) {
 		this.expectedName = expectedName;
@@ -43,7 +51,60 @@ public class ContextId {
 	public String getActualId() {
 		return actualId;
 	}
+		
+	@Override
+	public boolean equals(Object obj) {
+		matchFound = false;
+		matchType = ContextMatch.NONE;
+		
+		if(obj == this) {
+			matchType = ContextMatch.OBJ_EXACT;
+			matchFound = true;
+		}else	if(obj instanceof String) {
+			checkForStringMatch((String) obj);
+		}else if(obj instanceof ContextId){
+			checkForObjectMatch((ContextId) obj);
+		}
+		return matchFound;		
+	}
 	
+	private void checkForStringMatch(String find) {
+		if(getContextId().equalsIgnoreCase(find)) {
+			matchType = ContextMatch.STRING_CONTEXT_ID;
+			matchFound = true;
+		}
+		else if(expectedName.equalsIgnoreCase(find)) {
+			matchType = ContextMatch.STRING_EXPECTED;
+			matchFound = true;
+		}else if (actualId.equalsIgnoreCase(find)) {
+			matchType = ContextMatch.STRING_ACTUAL;
+			matchFound = true;
+		}
+	}
 	
+	// TODO - we don't have case for getContextId() !! 
+	private void checkForObjectMatch(ContextId find) {
+		if(getContextId().equalsIgnoreCase(find.getContextId())){
+			matchType = ContextMatch.OBJ_CONTEXT_ID;
+			matchFound = true;
+		}else if(expectedName.equalsIgnoreCase(find.getExpectedName())){
+			matchType = ContextMatch.OBJ_EXPECTED;
+			matchFound = true;
+		}else if( actualId.equalsIgnoreCase(find.getActualId())) {
+			matchType = ContextMatch.OBJ_ACTUAL;
+			matchFound = true;
+		}
+	}
+	
+
+	public ContextMatch getMatch() {
+		return matchType;
+	}
+
+	@Override
+	public String toString() {
+		return "ContextId [id = " + getContextId() + ", expectedName=" + expectedName + ", actualId=" + actualId + ", match=" + matchType + "]";
+	}
+
 }
 

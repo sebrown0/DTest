@@ -11,6 +11,9 @@ import org.openqa.selenium.WebDriver;
 /**
  * @author Steve Brown
  *
+ * Represents a context in the app, i.e. a panel, form etc.
+ * Each context can have different states, i.e. header/container, iFrame etc.
+ * 
  */
 public abstract class Context implements ContextState {
 	private ContextManager contextManager;
