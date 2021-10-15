@@ -121,26 +121,84 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 	}
 
 	// LeftMenuActions	
+//	@Override	
+//	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
+//		contextManager.switchToFirstStateInCurrentContext();
+//		Optional<ContainerAction> item = null;
+//		try {
+//			String menuName = (String) clazz.getField("MENU_TITLE").get(null);
+//			String prntName = (String) clazz.getField("MENU_PARENT_NAME").get(null);
+//
+//			item = clickParent(prntName).clickAndLoad(menuName);
+//		} catch (NoSuchFieldException e1) {
+//			logger.error("Failed to get parent or menu name using reflection");
+//		} catch	(SecurityException | IllegalArgumentException | IllegalAccessException e2) {
+//			logger.error("Failed to get menu name using reflection");
+//		}
+//		return item;
+//	}
+
 	@Override	
 	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
-		contextManager.switchToFirstState();
+		contextManager.switchToFirstStateInCurrentContext();
 		Optional<ContainerAction> item = null;
-		try {
-			String prntName = (String) clazz.getField("MENU_PARENT_NAME").get(null);
-			String menuName = (String) clazz.getField("MENU_TITLE").get(null);
-//			System.out.println("->" + prntName + "-" + menuName);
-			item = clickParent(prntName).clickAndLoad(menuName);
-		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-			logger.error("Failed to get parent or menu name using reflection");
+		Optional<String> prntName = getParentName(clazz);
+		Optional<String> menuItem = getMenuItemName(clazz);
+		
+		if(isChildMenuItem(prntName, menuItem)) {		
+			item = clickParent(prntName.get()).clickAndLoad(menuItem.get());			
+		}else if (isParentMenuItem(prntName)) {
+			item = clickAndLoad(menuItem.get());
 		}		
 		return item;
+	}
+	
+	private Optional<String> getParentName(Class<?> clazz) {
+		try {
+			return Optional.ofNullable((String) clazz.getField("MENU_PARENT_NAME").get(null));
+		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+			logger.error("Failed to get parent name using reflection");
+			return Optional.empty();
+		}
+	}
+	
+	private Optional<String> getMenuItemName(Class<?> clazz) {
+		try {
+			return Optional.ofNullable((String) clazz.getField("MENU_TITLE").get(null));
+		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+			logger.error("Failed to get menu name using reflection");
+			return Optional.empty();
+		}
+	}
+	
+	private boolean isParentMenuItem(Optional<String> prntName) {
+		boolean retVal = false;
+		
+		if(prntName.isPresent()) {
+			String name = prntName.get();
+			if(name.equals("") || name.length() < 1) {
+				retVal = true;
+			}
+		}
+		return retVal;
+	}
+	
+	private boolean isChildMenuItem(Optional<String> prntName, Optional<String> menuIem) {
+		boolean retVal = false;
+		
+		if(prntName.isPresent()) {
+			if(prntName.get().length() > 1 && menuIem.isPresent()) {
+				retVal = true;
+			}
+		}
+		return retVal;
 	}
 	
 	@Override
 	public Optional<ContainerAction> clickAndLoad(String elementName) {
 		WebElement e =  anchors.get(elementName);
 
-		contextManager.switchToFirstState();		
+		contextManager.switchToFirstStateInCurrentContext();		
 		logger.info("Loading [" + elementName + "]");		 	
 		
 		Optional<ContainerAction> child = Optional.empty();		

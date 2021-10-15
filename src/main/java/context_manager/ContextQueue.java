@@ -3,9 +3,9 @@
  */
 package context_manager;
 
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Optional;
-import java.util.Queue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,28 +16,43 @@ import org.apache.logging.log4j.Logger;
  * A queue of context (states).
  */
 public class ContextQueue {
-	private Queue<ContextState> queue = new LinkedList<>();
+	private Deque<ContextState> queue = new LinkedList<>();
 	private Logger logger = LogManager.getLogger();
 	
 	public void addContextToQueue(ContextState contextState) {
-		queue.add(contextState);
+		if(contextState != null) {
+			logger.debug("Adding context [" + contextState.getContextId() + "] this will now be the current context");
+			queue.add(contextState);	
+		}else {
+			logger.error("Cannot add null context to queue");
+		}
+		
 	}
 	
-	public ContextState getCurrent() {
-		return queue.peek();
+	public ContextState getCurrentContext() {
+		return queue.peekLast();
 	}
 	
-	public ContextState getAndRemoveCurrent() {
+	public ContextState getAndRemoveCurrentContext() {
 		return queue.remove();		
 	}
 	
-	public boolean removeContext(Object obj) {
-		Optional<ContextState> cs = findContext(obj);
-//		System.out.println("->" + cs.get());
-		if(cs.isPresent()) {
+	public boolean removeCurrentContext() {
+		if(queue.isEmpty() == false) {			
+			logger.debug("Removing context [" + getCurrent().getContextId() + "]");
+			queue.removeLast();			 	
+			return true;
+		}else {
+			return false;
+		}		
+	}
+	
+	public boolean removeContextForContextId(Object contextId) {
+		Optional<ContextState> cs = findContext(contextId);
+		if(cs.isPresent()) { 	
 			return queue.remove(cs.get());
 		}else {
-			logger.debug("Could not remove context for object [" + obj + "]");
+			logger.debug("Could not remove context for object [" + contextId + "]");
 			return false;
 		}
 	}
@@ -55,6 +70,9 @@ public class ContextQueue {
 		return Optional.ofNullable(returnVal);
 	}
 	
+	public ContextState getCurrent() {
+		return queue.getLast();
+	}
 	public int getSize() {
 		return queue.size();
 	}

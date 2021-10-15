@@ -53,4 +53,13 @@ public class StateTop extends State {
 				
 	}
 
+	@Override
+	public boolean isContextCloser() {
+		return true;
+	}
+
+	@Override
+	public boolean isDefaultState() {
+		return false;
+	}
 }

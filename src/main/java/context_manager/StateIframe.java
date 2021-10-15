@@ -40,4 +40,14 @@ public class StateIframe extends State {
 		// TODO Auto-generated method stub
 		logger.error("switchToMe not implemented!");
 	}
+
+	@Override
+	public boolean isContextCloser() {
+		return false;
+	}
+
+	@Override
+	public boolean isDefaultState() {
+		return true;
+	}
 }

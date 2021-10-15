@@ -32,7 +32,7 @@ public class JSPanelWithIFrame extends JSPanel implements JsPanelContext {
 	
 	public void switchToIFrame() {
 		iFrame.switchUsingLocator();
-		super.contextManager.moveNext();		
+		super.contextManager.moveToNextStateInCurrentContext();		
 	}	
 	
 	public IFrame getIframe() {

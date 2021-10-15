@@ -54,9 +54,10 @@ public abstract class Context implements ContextState {
 
 	@Override
 	public void moveNext() {
+//		System.out.println("Context.moveNext for context ->" + this.contextId.getId()); // TODO - remove or log 	
 		Optional<State> next = currentState.getNext();
 		next.ifPresentOrElse(n -> 
-			{	this.currentState = n; System.out.println("moveNext->" + n.toString()); }, 
+			{	this.currentState = n; }, 
 			new Runnable() {				
 				@Override
 				public void run() {

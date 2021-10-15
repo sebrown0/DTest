@@ -10,6 +10,7 @@ import object_models.panels.JSPanelWithIFrame;
  *
  */
 public final class SettingsPayroll extends JSPanelWithIFrame {
+	public static final String MENU_PARENT_NAME = "";
 	public static final String MENU_TITLE = "Settings";
 	public static final String PANEL_TITLE = "Payroll Related Settings";
 

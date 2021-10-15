@@ -6,6 +6,7 @@ package context_manager;
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -16,8 +17,9 @@ import org.openqa.selenium.WebDriver;
  */
 public class ContextManager {
 	private ContextQueue queue = new ContextQueue();
-	private ContextState contextState;
+	private Logger logger = LogManager.getLogger();
 	private WebDriver driver;
+	
 	// The state that initiates the context, i.e. LeftMenu
 	// This has to be added to the firstState as the next state.	
 	private CallingState callingState;	
@@ -27,51 +29,94 @@ public class ContextManager {
 	}
 		
 	public ContextManager setNextState(State state) {
-		State current = contextState.getState();
+		State current = queue.getCurrentContext().getState();
 		current.setNext(Optional.ofNullable(state));
 		return this;
 	}
-	
-	public void switchToFirstState() {
+	 
+	/*
+	 * Actions - Start
+	 */
+	public void switchToFirstStateInCurrentContext() {
+		ContextState contextState = queue.getCurrentContext();
 		if(contextState != null) {
 			contextState.getFirstState().switchToMe();
 		}else {
-			System.out.println("-> context state is null" ); // TODO - remove or log 	
+			logger.debug("Context state is null"); 	
 		}			
 	}
 	
-	public void moveNext(){
-		contextState.moveNext();
+	public void moveToNextStateInCurrentContext(){
+		queue.getCurrentContext().moveNext();
 	}
 	
-	public void closeCurrent(){
-		System.out.println("closeCurrent->" + contextState.getState().toString());
-		Optional<State> prev = closeStateAndGetPrev();
-		
-		if(prev.isPresent()) {
-			System.out.println("->should have switched to header"); // TODO - remove or log
-			revertToPreviousState(prev);
+	private void setDefaultStateAfterClosingContext() {				
+		ContextState cs = queue.getCurrentContext(); 
+		State defaultState = getDefaultState(cs);
+		System.out.println("Current context is now [" + cs.getContextId() + "]. State (default) is [" + defaultState + "]"); // TODO - remove or log 	
+		logger.debug("Current context is now [" + cs.getContextId() + "]. State (default) is [" + defaultState + "]"); 	
+	}
+	
+	private State getDefaultState(ContextState cs) {
+		boolean foundDefault = false;
+		State s = cs.getState();
+		while (foundDefault == false && s != null && s.isDefaultState() == false) {
+			if(s.getNext().isPresent()) {
+				s = s.getNext().get();
+			}else {
+				s = null;
+			}
+		}
+		System.out.println("found ->" + s); // TODO - remove or log 	
+		return s;
+	}
+	
+	public void closeCurrentStateInCurrentContext(){
+		ContextState cs = queue.getCurrentContext(); 
+		if(cs != null) {
+			State currentState = cs.getState();
+			logger.debug("Closing state [" + currentState + "]"); 	
+			if(currentState.isContextCloser()) {
+				logger.debug("State [" + currentState + "] is a context closer so will close current context");						
+				queue.removeCurrentContext();
+				setDefaultStateAfterClosingContext();
+			}else {
+				Optional<State> prev = closeCurrentStateAndGetPrevForCurrentContext(currentState);
+				
+				if(prev.isPresent()) {
+//					System.out.println("reverting from ->" + current.toString()); // TODO - remove or log
+					revertToPreviousStateInCurrentContext(prev);
+				}else {
+//					System.out.println("->no prev, remove context"); // TODO - remove or log
+					queue.getAndRemoveCurrentContext();
+				}			
+			}	
 		}else {
-			System.out.println("->remove context"); // TODO - remove or log
-			queue.getAndRemoveCurrent();
+			logger.debug("No context so cannot close current state");
 		}		
 	}
 	
-	private Optional<State> closeStateAndGetPrev(){
-		return contextState.getState().close();
+	
+	private Optional<State> closeCurrentStateAndGetPrevForCurrentContext(State current){
+		return current.close();
 	}
-	private void revertToPreviousState(Optional<State> prev) {
+	private void revertToPreviousStateInCurrentContext(Optional<State> prev) {
 		prev.ifPresentOrElse(
-				p -> contextState.setState(p), 
+				p -> { 
+					queue.getCurrentContext().setState(p);
+//					System.out.print("to ->" + p.toString()); // TODO - remove or log 	
+				}, 
 				new Runnable() {			
 					@Override
 					public void run() {
-						contextState.setNullState();				
+						queue.getCurrentContext().setNullState();				
 					}
 		});
 	}
-
-	private void logInvalidContextIfNull() {
+	// Actions - End
+	
+	// Helpers
+	private void logInvalidContextIfNull(ContextState contextState) {
 		if(contextState == null) {
 			LogManager.getLogger().error("Context is null");
 		}
@@ -79,15 +124,12 @@ public class ContextManager {
 	
 	/*
 	 * Getters / Setters
-	 */
-	public ContextState getContext() {
-		logInvalidContextIfNull();
-		return contextState;
-	}
-	public void setContext(ContextState contextState) {
-		this.contextState = contextState;
+	 */		
+	public void setContext(ContextState contextState) {		 	
 		queue.addContextToQueue(contextState);
 	}
+	
+	// State
 	public WebDriver getDriver() {
 		return driver;
 	}
@@ -97,8 +139,15 @@ public class ContextManager {
 	public CallingState getCallingState() {
 		return callingState;
 	}
+	
+	// Context
 	public String getContextId() {
-		return contextState.getContextId().getId();
+		return queue.getCurrentContext().getContextId().getId();
+	}	
+	public ContextState getContext() {
+		ContextState cs = queue.getCurrentContext(); 
+		logInvalidContextIfNull(cs);
+		return cs;
 	}
 	
 	// Queue
@@ -109,12 +158,15 @@ public class ContextManager {
 		return queue.findContext(obj);
 	}
 	public ContextState getEndOfQueue() {
-		return queue.getCurrent();
+		return queue.getCurrentContext();
 	}
 	public ContextState getAndRemoveEndOfQueue() {
-		return queue.getAndRemoveCurrent();
+		return queue.getAndRemoveCurrentContext();
 	}	
-	public boolean removeContextFromQueue(Object obj) {
-		return queue.removeContext(obj);
+	public boolean removeCurrentContextFromQueue() {
+		return queue.removeCurrentContext();
+	}
+	public boolean removeContextFromQueueForContextId(Object contId) {
+		return queue.removeContextForContextId(contId);
 	}
 }

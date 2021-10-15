@@ -32,4 +32,13 @@ public class StateLeftMenu extends State {
 		context.getDriver().findElement(By.cssSelector("body > form > div.app-body > div"));		
 	}
 
+	@Override
+	public boolean isContextCloser() {
+		return true;
+	}
+
+	@Override
+	public boolean isDefaultState() {
+		return true;
+	}
 }

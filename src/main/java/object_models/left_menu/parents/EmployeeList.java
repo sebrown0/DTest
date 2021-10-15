@@ -15,6 +15,7 @@ import object_models.panels.JSPanelWithIFrame;
  *
  */
 public final class EmployeeList extends JSPanelWithIFrame {	
+	public static final String MENU_PARENT_NAME = "";
 	public static final String PANEL_TITLE = "Employee List";
 	public static final String MENU_TITLE = PANEL_TITLE;
 	

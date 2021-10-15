@@ -43,4 +43,13 @@ public class StateHeaderPanel extends State {
 		logger.error("switchToMe not implemented!");
 	}
 
+	@Override
+	public boolean isContextCloser() {
+		return true;
+	}
+
+	@Override
+	public boolean isDefaultState() {
+		return false;
+	}
 }

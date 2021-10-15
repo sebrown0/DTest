@@ -30,7 +30,9 @@ public abstract class State {
 	}
 
 	public abstract Optional<State> getNext();
-	public abstract Optional<State> close();	
+	public abstract Optional<State> close();
+	public abstract boolean isContextCloser();	
+	public abstract boolean isDefaultState();
 	public abstract void switchToMe();
 	
 	public void setPrev(Optional<State> prev) {
