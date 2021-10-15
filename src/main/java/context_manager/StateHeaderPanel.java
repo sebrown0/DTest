@@ -12,16 +12,21 @@ import object_models.panels.JsPanelControlBar;
  *
  */
 public class StateHeaderPanel extends State {
-	private JsPanelControlBar controlBar;
-	
-	public StateHeaderPanel(ContextState context, Optional<State> prev, JsPanelControlBar controlBar) {
-		super(context, prev);				
+	public StateHeaderPanel(ContextState context, JsPanelControlBar controlBar) {
+		super(context);
 		this.controlBar = controlBar;
 	}
+
+	private JsPanelControlBar controlBar;
+	
+//	public StateHeaderPanel(ContextState context, Optional<State> prev, JsPanelControlBar controlBar) {
+//		super(context, prev);				
+//		this.controlBar = controlBar;
+//	}
 	
 	@Override
 	public Optional<State> getNext() {		
-		return Optional.of(new StateIframe(super.context, Optional.of(this)));
+		return Optional.of(new StateIframe(super.context));
 	}
 	
 	@Override

@@ -13,8 +13,8 @@ import org.openqa.selenium.By;
  */
 public class StateLeftMenu extends State {
 	
-	public StateLeftMenu(ContextState context, Optional<State> prev) {
-		super(context, prev);
+	public StateLeftMenu(ContextState context) {
+		super(context);
 	}
 
 	@Override

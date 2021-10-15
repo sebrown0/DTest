@@ -147,6 +147,7 @@ class ContextManagerTests {
 		
 		manager.closeCurrentStateInCurrentContext();
 		manager.closeCurrentStateInCurrentContext();
+		assertTrue(manager.getContext().getState() instanceof StateLeftMenu);
 		assertEquals("Employee Document Management:jsPanel-1", manager.getContextId());
 	}
 	

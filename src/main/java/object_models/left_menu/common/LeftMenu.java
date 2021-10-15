@@ -121,23 +121,6 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 	}
 
 	// LeftMenuActions	
-//	@Override	
-//	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
-//		contextManager.switchToFirstStateInCurrentContext();
-//		Optional<ContainerAction> item = null;
-//		try {
-//			String menuName = (String) clazz.getField("MENU_TITLE").get(null);
-//			String prntName = (String) clazz.getField("MENU_PARENT_NAME").get(null);
-//
-//			item = clickParent(prntName).clickAndLoad(menuName);
-//		} catch (NoSuchFieldException e1) {
-//			logger.error("Failed to get parent or menu name using reflection");
-//		} catch	(SecurityException | IllegalArgumentException | IllegalAccessException e2) {
-//			logger.error("Failed to get menu name using reflection");
-//		}
-//		return item;
-//	}
-
 	@Override	
 	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
 		contextManager.switchToFirstStateInCurrentContext();
@@ -246,9 +229,8 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 	}
 
 	@Override
-	public State getState(ContextState context, Optional<State> prev) {
-		// TODO - check optional
-		return new StateLeftMenu(context, prev);
+	public State getState(ContextState context) { 
+		return new StateLeftMenu(context);
 	}
 	
 	private static class ChildElementFactory{

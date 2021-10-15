@@ -24,13 +24,10 @@ public abstract class Context implements ContextState {
 		
 	public Context(ContextManager contextManager, ContextIdGetter idGetter) {
 		this.contextManager = contextManager;		
-		this.firstState = new StateTop(this, null);
 	
 		setContextId(idGetter);
 		setFirstState();
 		setCallingState();
-//		setState(firstState);
-//		setState(contextManager.getCallingState().getState(this, Optional.of(firstState)));		
 	}
 		
 	public void setContextId(ContextIdGetter idGetter) {
@@ -38,30 +35,23 @@ public abstract class Context implements ContextState {
 	}
 
 	private void setFirstState() {
-		firstState = new StateTop(this, null);
-//		System.out.println("setFirstState 1 ->" + firstState); // TODO - remove or log 	
+		firstState = new StateTop(this); 	
+		this.setState(firstState);
 	}
 	
 	private void setCallingState() {
-		callingState = contextManager.getCallingState().getState(this, Optional.of(firstState));
-//		System.out.println("callingState 1 ->" + callingState); // TODO - remove or log
+		callingState = contextManager.getCallingState().getState(this);
 		firstState.setNext(Optional.ofNullable(callingState));
-//		System.out.println("setFirstState next ->" + firstState.getNext()); // TODO - remove or log
+		this.setState(callingState);
 	}
 	
 	@Override
-	public void setState(State state) {
+	public void setState(State state) { 	
 		State temp = currentState;
 		currentState = state;
-		if(temp != null) {
-			currentState.setPrev(Optional.ofNullable(temp));			
-		}else {
-//			currentState.setPrev(Optional.empty());
-		}
-
-//		System.out.println("Setting new state [" + state.toString() + "]"); // TODO - remove or log 	
+		currentState.setPrev(Optional.ofNullable(temp));			 	
 		LogManager.getLogger().debug("Setting new state [" + state.toString() + "]");
-	}
+	}	
 	
 	@Override
 	public State getState() {
@@ -82,8 +72,9 @@ public abstract class Context implements ContextState {
 	public void moveNext() {
 //		System.out.println("Context.moveNext for context ->" + this.contextId.getId()); // TODO - remove or log 	
 		Optional<State> next = currentState.getNext();
-		next.ifPresentOrElse(n -> 
-			{	this.currentState = n; }, 
+		next.ifPresentOrElse(n -> {	
+			this.setState(n); 
+			}, 
 			new Runnable() {				
 				@Override
 				public void run() {

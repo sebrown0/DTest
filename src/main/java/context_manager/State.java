@@ -18,18 +18,17 @@ public abstract class State {
 	protected Optional<State> next;
 	protected Logger logger = LogManager.getLogger();
 	
+	/*
+	 *  Set by ContextState.setState
+	 *  When a state is set the new state's
+	 *  previous state is set to the current state.
+	 */
 	private Optional<State> prev;
 	
 	public State(ContextState context) {
 		this.context = context;	
 	}
 	
-	public State(ContextState context, Optional<State> prev) {
-		this.context = context;
-		this.prev = prev;
-		System.out.println("State: new state with prev ->" + this + "---" + prev); // TODO - remove or log 	
-	}
-
 	public abstract Optional<State> getNext();
 	public abstract Optional<State> close();
 	public abstract boolean isContextCloser();	
@@ -47,14 +46,5 @@ public abstract class State {
 	public void setNext(Optional<State> next) {
 		this.next = next;
 	}
-
-//	@Override
-//	public String toString() {
-//		return 
-//				"State [name =" + this.getClass().getSimpleName() + 
-//				", context=" + context.getContextId() + 
-//				", next=" + next + 
-//				", prev=" + prev + "]";
-//	}
 	
 }

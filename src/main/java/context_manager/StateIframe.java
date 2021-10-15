@@ -11,10 +11,15 @@ import java.util.Optional;
  */
 public class StateIframe extends State {
 		
-	public StateIframe(ContextState context, Optional<State> prev) {
-		super(context, prev);		
-		context.setState(this);
+public StateIframe(ContextState context) {
+		super(context);
+		// TODO Auto-generated constructor stub
 	}
+
+//	public StateIframe(ContextState context, Optional<State> prev) {
+//		super(context, prev);		
+//		context.setState(this);
+//	}
 
 	@Override
 	public Optional<State> getNext() {
