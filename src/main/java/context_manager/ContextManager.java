@@ -57,17 +57,47 @@ public class ContextManager {
 		logger.debug("Current context is now [" + cs.getContextId() + "]. State (default) is [" + defaultState + "]"); 	
 	}
 	
-	private State getDefaultState(ContextState cs) {
-		boolean foundDefault = false;
-		State s = cs.getState();
-		while (foundDefault == false && s != null && s.isDefaultState() == false) {
-			if(s.getNext().isPresent()) {
-				s = s.getNext().get();
+	private State getDefaultState(ContextState cs) {		
+		State current = cs.getState();		
+		State start = getTopState(current);
+		System.out.println(">>>>>start->" + start + ":::::::" + start.getPrev()); // TODO - remove or log 	
+		State defaultState = goForwardThruStates(start);
+		
+		System.out.println("found ->" + defaultState); // TODO - remove or log 	
+		return defaultState;
+	}
+	
+	private State getTopState(State s) {
+		State top = s;
+//		State prev = null;
+		
+		while (s != null) {
+//			prev = s.getPrev();
+			if(s.getPrev() != null && s.getPrev().isPresent()) {
+				s = s.getPrev().get();
+				top = s;
+				System.out.println("getTopState ->" + top); // TODO - remove or log 	
 			}else {
 				s = null;
 			}
-		}
-		System.out.println("found ->" + s); // TODO - remove or log 	
+		} 	
+		return top;
+	}
+	
+	private State goForwardThruStates(State s) {
+		boolean foundDefault = false;
+		
+		while (foundDefault == false && s != null && s.isDefaultState() == false) {
+			System.out.println("s->" + s); // TODO - remove or log 	
+			if(s.getNext().isPresent()) {
+				
+				s = s.getNext().get();
+				System.out.println("next => " + s); // TODO - remove or log 	
+			}else {
+				System.out.println("->NO next" ); // TODO - remove or log
+				s = null;
+			}
+		} 	
 		return s;
 	}
 	

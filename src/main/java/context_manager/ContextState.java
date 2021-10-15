@@ -17,6 +17,7 @@ public interface ContextState {
 	void moveNext();
 	State getState();
 	State getFirstState();
+	State getCallingState();
 	Optional<State> getPreviousState();
 	WebDriver getDriver();
 	ContextId getContextId(); // Should not be in here! This is state not context. THINK IT'S OK!!

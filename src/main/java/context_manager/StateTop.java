@@ -15,18 +15,20 @@ import org.openqa.selenium.WebDriver;
  * The Context will always have one of these.
  */
 public class StateTop extends State {
-	private State next;
+//	private State next;
 	
 	public StateTop(ContextState context, Optional<State> prev) {
 		super(context, prev);
 	}
 
-	public void setNextState(State next) {
-		this.next = next;
-	}
+//	public void setNextState(State next) {
+//		this.next = next;
+//	}
+	
 	@Override
 	public Optional<State> getNext() {		
-		return Optional.ofNullable(next);
+		return super.next;
+//		return Optional.ofNullable(super.next);
 	}
 
 	@Override

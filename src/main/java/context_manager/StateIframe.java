@@ -5,8 +5,6 @@ package context_manager;
 
 import java.util.Optional;
 
-import org.openqa.selenium.WebDriver;
-
 /**
  * @author Steve Brown
  *
@@ -30,10 +28,6 @@ public class StateIframe extends State {
 		return super.getPrev();
 //		return super.getPrev().get().close();
 	}
-
-	public WebDriver f() {
-		return context.getDriver().switchTo().defaultContent();
-	}
 	
 	@Override
 	public void switchToMe() {
@@ -48,6 +42,6 @@ public class StateIframe extends State {
 
 	@Override
 	public boolean isDefaultState() {
-		return true;
+		return false;
 	}
 }

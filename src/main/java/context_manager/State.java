@@ -27,6 +27,7 @@ public abstract class State {
 	public State(ContextState context, Optional<State> prev) {
 		this.context = context;
 		this.prev = prev;
+		System.out.println("State: new state with prev ->" + this + "---" + prev); // TODO - remove or log 	
 	}
 
 	public abstract Optional<State> getNext();
@@ -46,5 +47,14 @@ public abstract class State {
 	public void setNext(Optional<State> next) {
 		this.next = next;
 	}
+
+//	@Override
+//	public String toString() {
+//		return 
+//				"State [name =" + this.getClass().getSimpleName() + 
+//				", context=" + context.getContextId() + 
+//				", next=" + next + 
+//				", prev=" + prev + "]";
+//	}
 	
 }

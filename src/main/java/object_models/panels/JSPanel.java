@@ -94,8 +94,9 @@ public class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter 
 
 	private void setContextStateToPanel() {
 		ContextState con = contextManager.getContext();
-		State prev = con.getState();
-		
+//		State prev = con.getState();
+		State prev = con.getCallingState();
+		System.out.println("setContextStateToPanel->"  +prev + ":" + con.getContextId() ); // TODO - remove or log 	
 		State header = 
 				new StateHeaderPanel(
 						con, Optional.ofNullable(prev),	headerBar.getControlBar());

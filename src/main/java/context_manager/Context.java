@@ -19,6 +19,7 @@ public abstract class Context implements ContextState {
 	private ContextManager contextManager;
 	private ContextId contextId;
 	private State firstState;
+	private State callingState;
 	private State currentState;
 		
 	public Context(ContextManager contextManager, ContextIdGetter idGetter) {
@@ -26,25 +27,50 @@ public abstract class Context implements ContextState {
 		this.firstState = new StateTop(this, null);
 	
 		setContextId(idGetter);
-		setState(firstState);
-		setState(contextManager.getCallingState().getState(this, Optional.of(firstState)));		
+		setFirstState();
+		setCallingState();
+//		setState(firstState);
+//		setState(contextManager.getCallingState().getState(this, Optional.of(firstState)));		
 	}
-	
+		
 	public void setContextId(ContextIdGetter idGetter) {
 		contextId = idGetter.getContextId();
 	}
 
+	private void setFirstState() {
+		firstState = new StateTop(this, null);
+//		System.out.println("setFirstState 1 ->" + firstState); // TODO - remove or log 	
+	}
+	
+	private void setCallingState() {
+		callingState = contextManager.getCallingState().getState(this, Optional.of(firstState));
+//		System.out.println("callingState 1 ->" + callingState); // TODO - remove or log
+		firstState.setNext(Optional.ofNullable(callingState));
+//		System.out.println("setFirstState next ->" + firstState.getNext()); // TODO - remove or log
+	}
+	
 	@Override
 	public void setState(State state) {
 		State temp = currentState;
 		currentState = state;
-		currentState.setPrev(Optional.ofNullable(temp));
+		if(temp != null) {
+			currentState.setPrev(Optional.ofNullable(temp));			
+		}else {
+//			currentState.setPrev(Optional.empty());
+		}
+
+//		System.out.println("Setting new state [" + state.toString() + "]"); // TODO - remove or log 	
 		LogManager.getLogger().debug("Setting new state [" + state.toString() + "]");
 	}
 	
 	@Override
 	public State getState() {
 		return currentState;
+	}
+
+	@Override
+	public State getCallingState() {
+		return callingState;
 	}
 
 	@Override
@@ -85,3 +111,4 @@ public abstract class Context implements ContextState {
 		return contextId;
 	}
 }
+
