@@ -1,11 +1,13 @@
 /**
  * 
  */
-package context_manager;
+package context_manager.states;
 
 import java.util.Optional;
 
 import org.openqa.selenium.By;
+
+import context_manager.ContextState;
 
 /**
  * @author Steve Brown

@@ -14,18 +14,19 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import context_manager.Context;
 import context_manager.ContextId;
 import context_manager.ContextManager;
-import context_manager.ContextPayroll;
 import context_manager.ContextState;
-import context_manager.StateHeaderPanel;
-import context_manager.StateLeftMenu;
+import context_manager.contexts.Context;
+import context_manager.contexts.ContextPayroll;
+import context_manager.states.State;
+import context_manager.states.StateHeaderPanel;
+import context_manager.states.StateLeftMenu;
+import context_manager.states.StateTop;
 import logging.TestResultLogger;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.employees.EmployeeDetails;
 import object_models.left_menu.parents.Documents;
-import object_models.left_menu.parents.EmployeeList;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import parameter_resolvers.ConfigParameterResolver;
@@ -152,19 +153,44 @@ class ContextManagerTests {
 		assertTrue(manager.getCurrentContext().getState() instanceof StateLeftMenu);
 		assertEquals("Employee Document Management:jsPanel-1", manager.getContextId());
 	}
+
+	@Test
+	void loadPayroll_checkContext_and_state() {
+		Context c = (Context) manager.getCurrentContext();
+		assertTrue(c instanceof ContextPayroll);
+		State s = c.getState();
+		assertEquals("StateModule", s.getClass().getSimpleName());
+	}
+
+	@Test
+	void findStateInContext_stateLeftMenu_notPresent() {
+		assertFalse(manager.getCurrentContext().isStateInContext(StateLeftMenu.class));
+	}
+
+	@Test
+	void findStateInContext_stateLeftMenu_isPresent() {
+		assertTrue(manager.getCurrentContext().isStateInContext(StateTop.class));
+	}
+	
+	@Test
+	void addNewStateToContext() {
+		manager.printCurrentStates();
+		Optional<State> s = manager.moveToStateInCurrentContext(StateLeftMenu.class);		
+		manager.printCurrentStates();
+		assertTrue(s.get() instanceof StateLeftMenu);
+	}
 	
 	@Test
 	void loadDocuments_then_close_context_currentContext_shouldBe_ContextPayroll() {
 		menu.clickAndLoad(Documents.MENU_TITLE);
-		manager.closeCurrentContext();
-		Context c = (Context) manager.getCurrentContext();
+		
+		Context c = (Context) manager.closeCurrentContext().getCurrentContext();
 		assertTrue(c instanceof ContextPayroll);
 		/*
 		 *  Try and close the current (Payroll) context.
 		 *  It should not be possible.
 		 */
-		manager.closeCurrentContext();
-		c = (Context) manager.getCurrentContext();
+		c = (Context) manager.closeCurrentContext().getCurrentContext();
 		assertTrue(c instanceof ContextPayroll);			 
 	}
 	

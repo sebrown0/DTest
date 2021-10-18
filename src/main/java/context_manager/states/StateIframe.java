@@ -1,9 +1,11 @@
 /**
  * 
  */
-package context_manager;
+package context_manager.states;
 
 import java.util.Optional;
+
+import context_manager.ContextState;
 
 /**
  * @author Steve Brown
@@ -16,11 +18,6 @@ public StateIframe(ContextState context) {
 		// TODO Auto-generated constructor stub
 	}
 
-//	public StateIframe(ContextState context, Optional<State> prev) {
-//		super(context, prev);		
-//		context.setState(this);
-//	}
-
 	@Override
 	public Optional<State> getNext() {
 		return Optional.empty();
@@ -31,7 +28,6 @@ public StateIframe(ContextState context) {
 		logger.debug("Closing state");
 		context.getDriver().switchTo().defaultContent();
 		return super.getPrev();
-//		return super.getPrev().get().close();
 	}
 	
 	@Override

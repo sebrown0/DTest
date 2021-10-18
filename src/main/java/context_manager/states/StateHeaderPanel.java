@@ -1,10 +1,11 @@
 /**
  * 
  */
-package context_manager;
+package context_manager.states;
 
 import java.util.Optional;
 
+import context_manager.ContextState;
 import object_models.panels.JsPanelControlBar;
 
 /**
@@ -12,17 +13,12 @@ import object_models.panels.JsPanelControlBar;
  *
  */
 public class StateHeaderPanel extends State {
+	private JsPanelControlBar controlBar;
+	
 	public StateHeaderPanel(ContextState context, JsPanelControlBar controlBar) {
 		super(context);
 		this.controlBar = controlBar;
 	}
-
-	private JsPanelControlBar controlBar;
-	
-//	public StateHeaderPanel(ContextState context, Optional<State> prev, JsPanelControlBar controlBar) {
-//		super(context, prev);				
-//		this.controlBar = controlBar;
-//	}
 	
 	@Override
 	public Optional<State> getNext() {		

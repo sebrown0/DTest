@@ -18,10 +18,10 @@ import context_manager.ContextState;
 import context_manager.ContextId;
 import context_manager.ContextIdGetter;
 import context_manager.ContextManager;
-import context_manager.ContextPanel;
 import context_manager.ContextSetter;
-import context_manager.State;
-import context_manager.StateHeaderPanel;
+import context_manager.contexts.ContextPanel;
+import context_manager.states.State;
+import context_manager.states.StateHeaderPanel;
 import exceptions.PanelException;
 import object_models.forms.ContainerAction;
 import object_models.helpers.closers.CloserPanel;
@@ -86,16 +86,16 @@ public class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter 
 	private void setHeaderBar() {
 		headerBar = new JsPanelHeaderBar(container);
 	}
-	
-	@Override
-	public void setContext() {		
-		contextManager.setContext(new ContextPanel(contextManager, this, headerBar.getControlBar()));		
-	}
 
 	private void setContextStateToPanel() {
 		ContextState con = contextManager.getCurrentContext();			 	
 		State header = new StateHeaderPanel(con, headerBar.getControlBar());		
 		con.setState(header);
+	}
+	
+	@Override
+	public void setContext() {		
+		contextManager.setContext(new ContextPanel(contextManager, this, headerBar));
 	}
 	
 	@Override

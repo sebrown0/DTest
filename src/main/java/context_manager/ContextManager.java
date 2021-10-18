@@ -9,6 +9,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
+import context_manager.contexts.Context;
+import context_manager.states.State;
+
 /**
  * @author Steve Brown
  *
@@ -41,16 +44,26 @@ public class ContextManager {
 	/*
 	 * Actions - Start
 	 */
-	public void closeCurrentContext() {
+	public <T extends State> Optional<State> moveToStateInCurrentContext(Class<T> clazzState) {
+		Optional<State> ret = Optional.empty();
+		String stateName = clazzState.getSimpleName();
+		
+		Optional<State> state = getCurrentContext().moveToState(clazzState);
+		if(state.isPresent()) {			
+			logger.debug("State [" + stateName + "] is present in context. Will move to this state");				
+			ret = state;			
+		}else {
+			logger.debug("State [" + stateName + "] is not present in context. Adding as the last state in context");			
+			ret = getCurrentContext().setLastState(clazzState);
+		}
+		return ret;		
+	}
+	
+	public ContextManager closeCurrentContext() {
 		ContextCloser contextCloser = (ContextCloser) getCurrentContext();
 		contextCloser.closeContext();
-//		State closing = cs.getClosingState();
-//		Optional<State> afterClose = closing.close();
-//		afterClose.ifPresent(s -> { 
-//			setDefaultStateAfterClosingContext(); 
-//		});
-				
-//		System.out.println("closeCurrentContext-> NOT IMPLEMENTED !!!!!!!!!!!!!!!"); // TODO - remove or log 	
+		// TODO - switch to default???????????????????????????????????????
+		return this;
 	}
 	
 	public void switchToFirstStateInCurrentContext() {
@@ -79,26 +92,32 @@ public class ContextManager {
 		} 	
 	}
 	
-	private State getDefaultState(ContextState cs) {		
-		State current = cs.getState();		
-		State start = getTopState(current);
+//	public boolean isStateInContext(Class<?> clazz) {
+//		String stateName = clazz.getSimpleName();
+////		State current = getCurrentContext().getState();		
+//		State start = getCurrentContext().getTopState();
+//		Optional<State> s = Optional.ofNullable(start);
+//		
+//		while(s != null) {			
+//			if(s.isPresent()) {
+//				State temp = s.get(); 	
+//				if(temp.getClass().getSimpleName().equals(stateName)) {
+//					return true;
+//				}
+//				s = temp.getNext();
+//			}else {
+//				s = null;
+//			}			
+//		}
+//		return false;
+//	}
+	
+	private State getDefaultState(ContextState cs) {				
+		State start = cs.getTopState();
 		State defaultState = goForwardThruStates(start); 	
 		return defaultState;
 	}
-	
-	private State getTopState(State s) {
-		State top = s;
-		while (s != null) {
-			if(s.getPrev() != null && s.getPrev().isPresent()) {
-				s = s.getPrev().get();
-				top = s;
-			}else {
-				s = null;
-			}
-		} 	
-		return top;
-	}
-	
+
 	private State goForwardThruStates(State s) {
 		boolean foundDefault = false;
 		
@@ -110,6 +129,24 @@ public class ContextManager {
 			}
 		} 	
 		return s;
+	}
+		
+	public boolean printCurrentStates() {
+//		State current = getCurrentContext().getState();		
+		State start = getCurrentContext().getTopState();
+		Optional<State> s = Optional.ofNullable(start);
+
+		System.out.println("*CURRENT STATES IN CURRENT CONTEXT*"); // TODO - remove or log
+		while(s != null) {			
+			if(s.isPresent()) {
+				State temp = s.get(); 	
+				System.out.println("  ->" + temp.getClass().getSimpleName()); // TODO - remove or log 				
+				s = temp.getNext();
+			}else {
+				s = null;
+			}			
+		}
+		return false;
 	}
 	
 	public void closeCurrentStateInCurrentContext(){

@@ -7,9 +7,12 @@ import java.util.Optional;
 
 import org.openqa.selenium.WebDriver;
 
+import context_manager.states.State;
+
 /**
  * @author Steve Brown
  *
+ * Manipulate states within a Context.
  */
 public interface ContextState {
 	void setNullState();	
@@ -19,10 +22,14 @@ public interface ContextState {
 	State getState();
 	State getFirstState();
 	State getCallingState();
+	State getTopState();
 
-//	State getClosingState();
-	
+	<T extends State> Optional<State> moveToState(Class<T> clazzState);
+	<T extends State> Optional<State> setLastState(Class<T> clazzState);
+	<T extends State> Optional<State> getNewInstanceOfState(Class<T> clazzState);
+
+	boolean isStateInContext(Class<?> clazz);	
 	Optional<State> getPreviousState();
 	WebDriver getDriver();
-	ContextId getContextId(); // Should not be in here! This is state not context. THINK IT'S OK!!
+	ContextId getContextId(); 
 }

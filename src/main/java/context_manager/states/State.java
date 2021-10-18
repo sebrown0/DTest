@@ -1,12 +1,14 @@
 /**
  * 
  */
-package context_manager;
+package context_manager.states;
 
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import context_manager.ContextState;
 
 /**
  * @author Steve Brown

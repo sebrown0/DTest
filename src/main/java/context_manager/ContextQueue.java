@@ -22,6 +22,7 @@ public class ContextQueue {
 	public void addContextToQueue(ContextState contextState) {
 		if(contextState != null) {
 			logger.debug("Adding context [" + contextState.getContextId() + "] this will now be the current context");
+//			System.out.println("Adding context [" + contextState.getContextId() + "] this will now be the current context");  // TODO - remove or log
 			queue.add(contextState);	
 		}else {
 			logger.error("Cannot add null context to queue");

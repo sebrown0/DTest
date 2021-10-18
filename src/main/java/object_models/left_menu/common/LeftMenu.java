@@ -21,8 +21,8 @@ import org.openqa.selenium.WebElement;
 import context_manager.CallingState;
 import context_manager.ContextManager;
 import context_manager.ContextState;
-import context_manager.State;
-import context_manager.StateLeftMenu;
+import context_manager.states.State;
+import context_manager.states.StateLeftMenu;
 import controls.MenuMap;
 import object_models.forms.ContainerAction;
 import object_models.left_menu.absence_statistics.EmployeeAccruals;
@@ -95,8 +95,7 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 	}
 
 	private void mapAnchors() {
-		menuMapper = new LeftMenuMapper(driver);
-		
+		menuMapper = new LeftMenuMapper(driver);		
 		try {
 			this.anchors = new MenuMap(new LeftMenuFactory(driver)).getAnchors().get();
 		} catch (InterruptedException | ExecutionException e) {
@@ -197,6 +196,14 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 	
 	@Override
 	public LeftMenuActions clickParent(String prntName) {
+		
+	// 
+		/*
+		 * FIND StateLeftMenu WITHIN CONTEXT
+		 * IF NOT THERE 
+		 */
+		contextManager.moveToStateInCurrentContext(StateLeftMenu.class); 
+		
 		WebElement activeMenuItem = getActiveMenuItem();
 		if(activeMenuItem != null) {
 			String currentlyActive = activeMenuItem.getText().trim();			
@@ -216,11 +223,10 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 			activeMenuItem = menuMapper
 					.getMenuElement()
 					.findElement(By.cssSelector("a[class='dcjq-parent active']"));
-		} catch (NoSuchSessionException e2) {
-			logger.error("No session found. Driver has probably been closed");
-			System.out.println("No session found. Driver has probably been closed"); // TODO - remove or log 	
-		} catch (Exception e1) {
-			logger.error("Failed to find active menu element");
+		} catch (NoSuchSessionException e) {
+			logger.error("No session found. Driver has probably been closed [" + e.getMessage() + "]"); 	
+		} catch (Exception e) {
+			logger.error("Failed to find active menu element [" + e.getMessage() + "]");
 		}
 		return activeMenuItem;
 	}

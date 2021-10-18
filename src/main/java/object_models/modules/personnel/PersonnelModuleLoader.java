@@ -6,8 +6,8 @@ package object_models.modules.personnel;
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.WebDriver;
 
-import context_manager.Context;
 import context_manager.ContextManager;
+import context_manager.contexts.Context;
 import object_models.left_menu.common.LeftMenu;
 import object_models.modules.common.ModuleElements;
 import object_models.top_right_nav_bar.all_elements.NavBarElementStrategy;
