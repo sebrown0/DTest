@@ -3,9 +3,15 @@
  */
 package object_models.modules.payroll;
 
+import java.util.Optional;
+
 import org.openqa.selenium.WebDriver;
 
+import context_manager.Context;
+import context_manager.ContextId;
+import context_manager.ContextIdGetter;
 import context_manager.ContextManager;
+import context_manager.ContextPayroll;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.payroll_only.LeftMenuPayroll;
 import object_models.modules.common.ModuleElements;
@@ -23,18 +29,26 @@ import providers.ModuleNames;
  */
 public class PayrollModuleLoader implements ModuleElements {
 	private WebDriver driver;
-	private ContextManager contextManager;
-	
+
 	public PayrollModuleLoader(WebDriver driver) {
 		this.driver = driver;		
 	}
 
-	public void setContextManager(ContextManager contextManager) {
-		this.contextManager = contextManager;
-	}
-
 	@Override
-	public NavBarElementStrategy getElementStrategy() {
+	public Context getContextForModule(ContextManager contextManager) { 	
+		return new ContextPayroll(
+				contextManager, 
+				new ContextIdGetter() {			
+						@Override
+						public ContextId getContextId() {							
+							return new ContextId("Payroll Module", Optional.empty());
+						}
+					}, 
+				null);				
+	}
+	
+	@Override
+	public NavBarElementStrategy getElementStrategy(ContextManager contextManager) {
 		return new NavBarPayrollElements(driver, contextManager);
 	}
 

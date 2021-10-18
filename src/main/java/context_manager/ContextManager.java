@@ -28,6 +28,10 @@ public class ContextManager {
 		this.driver = driver;
 	}
 		
+	public void setFirstContext(Context context) {
+		queue.addContextToQueue(context);
+	}
+	
 	public ContextManager setNextState(State state) {
 		State current = queue.getCurrentContext().getState();
 		current.setNext(Optional.ofNullable(state));
@@ -37,6 +41,18 @@ public class ContextManager {
 	/*
 	 * Actions - Start
 	 */
+	public void closeCurrentContext() {
+		ContextCloser contextCloser = (ContextCloser) getCurrentContext();
+		contextCloser.closeContext();
+//		State closing = cs.getClosingState();
+//		Optional<State> afterClose = closing.close();
+//		afterClose.ifPresent(s -> { 
+//			setDefaultStateAfterClosingContext(); 
+//		});
+				
+//		System.out.println("closeCurrentContext-> NOT IMPLEMENTED !!!!!!!!!!!!!!!"); // TODO - remove or log 	
+	}
+	
 	public void switchToFirstStateInCurrentContext() {
 		ContextState contextState = queue.getCurrentContext();
 		if(contextState != null) {
@@ -136,6 +152,10 @@ public class ContextManager {
 					}
 		});
 	}
+	
+	public void QuitApp() {
+		driver.close();
+	}	
 	// Actions - End
 	
 	// Helpers
@@ -172,7 +192,7 @@ public class ContextManager {
 			return null;
 		}
 	}	
-	public ContextState getContext() {
+	public ContextState getCurrentContext() {
 		ContextState cs = queue.getCurrentContext(); 
 		logInvalidContextIfNull(cs);
 		return cs;

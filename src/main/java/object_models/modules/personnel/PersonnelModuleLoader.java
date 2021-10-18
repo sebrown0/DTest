@@ -6,6 +6,7 @@ package object_models.modules.personnel;
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.WebDriver;
 
+import context_manager.Context;
 import context_manager.ContextManager;
 import object_models.left_menu.common.LeftMenu;
 import object_models.modules.common.ModuleElements;
@@ -22,18 +23,18 @@ import providers.ModuleNames;
  */
 public class PersonnelModuleLoader implements ModuleElements {
 	private WebDriver driver;
-	private ContextManager contextManager;
+//	private ContextManager contextManager;
 	
 	public PersonnelModuleLoader(WebDriver driver) {
 		this.driver = driver;		
 	}
 
-	public void setContextManager(ContextManager contextManager) {
-		this.contextManager = contextManager;
-	}
+//	public void setContextManager(ContextManager contextManager) {
+//		this.contextManager = contextManager;
+//	}
 
 	@Override
-	public NavBarElementStrategy getElementStrategy() {
+	public NavBarElementStrategy getElementStrategy(ContextManager contextManager) {
 		return new NavBarPersonnelElements(driver, contextManager);
 	}
 
@@ -51,5 +52,13 @@ public class PersonnelModuleLoader implements ModuleElements {
 	public void setLeftMenuElements(LeftMenu menu) {
 		LogManager.getLogger().error("Not implemented");
 		
+	}
+
+	@Override
+	public Context getContextForModule(ContextManager contextManager) {
+		System.out.println("NOT IMPLEMENTED!!"); // TODO - remove or log 	
+		LogManager.getLogger().error("NOT IMPLEMENTED!!");
+		// TODO - IMPLEMENT!!
+		return null;
 	}
 }

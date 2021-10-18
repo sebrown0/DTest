@@ -7,7 +7,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
+import context_manager.CallingState;
 import context_manager.ContextManager;
+import context_manager.ContextState;
+import context_manager.State;
+import context_manager.StateModule;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_nav_bar.LeftNavBar;
 import object_models.top_right_nav_bar.common.TopRightNavBar;
@@ -25,14 +29,28 @@ public class ModuleLoader {
 	private LeftNavBar leftNavBar;
 	private TopRightNavBar topRightNavBar;
 	private LeftMenu leftMenu;	
+	private ContextManager contextManager;
 		
-	public ModuleLoader(WebDriver driver, ModuleElements moduleElements) {		
+	public ModuleLoader(WebDriver driver, ModuleElements moduleElements, ContextManager contextManager) {		
 		this.moduleElements = moduleElements;
 		this.driver = driver;
-	
+		this.contextManager = contextManager;
+		
+		setInitialStateOfContextManager();
 		setModuleName();
 		checkDriver();
 		loadModule();
+	}
+
+	private void setInitialStateOfContextManager() {
+		logger.debug("Setting initial state of Context Manager");
+		contextManager.setCallingState(new CallingState() {			
+			@Override
+			public State getState(ContextState context) {
+				return new StateModule(context);
+			}
+		});
+		contextManager.setFirstContext(moduleElements.getContextForModule(contextManager));		
 	}
 
 	private void setModuleName() {
@@ -51,7 +69,7 @@ public class ModuleLoader {
 			logger.info(moduleName + " module already loaded");
 		}
 	}
-	
+		
 	public LeftNavBar setLeftNavBar(ContextManager contextManager) {
 		logger.info("Creating left nav-bar for " + moduleName + " module");
 		leftNavBar =  new LeftNavBar(driver, contextManager);		
@@ -61,7 +79,7 @@ public class ModuleLoader {
 	public TopRightNavBar setNavBar(ContextManager contextManager) {
 		logger.info("Creating top-right nav-bar for " + moduleName + " module");
 		topRightNavBar = new TopRightNavBar(driver, contextManager);
-		topRightNavBar.loadElements(moduleElements.getElementStrategy());
+		topRightNavBar.loadElements(moduleElements.getElementStrategy(contextManager));
 		return topRightNavBar;
 	}
 	

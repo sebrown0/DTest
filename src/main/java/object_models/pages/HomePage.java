@@ -48,7 +48,7 @@ public class HomePage extends Page {
 		if(moduleElements == null) {			
 			logger.error("No module supplied");			
 		}else {			
-			ModuleLoader moduleLoader = new ModuleLoader(driver, moduleElements);
+			ModuleLoader moduleLoader = new ModuleLoader(driver, moduleElements, contextManager);
 			leftNavBar = moduleLoader.setLeftNavBar(contextManager);
 			topRightNavBar = moduleLoader.setNavBar(contextManager);
 			leftMenu = moduleLoader.setLeftMenu(contextManager);

@@ -14,6 +14,7 @@ import java.util.concurrent.Future;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -215,7 +216,10 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 			activeMenuItem = menuMapper
 					.getMenuElement()
 					.findElement(By.cssSelector("a[class='dcjq-parent active']"));
-		} catch (Exception e) {
+		} catch (NoSuchSessionException e2) {
+			logger.error("No session found. Driver has probably been closed");
+			System.out.println("No session found. Driver has probably been closed"); // TODO - remove or log 	
+		} catch (Exception e1) {
 			logger.error("Failed to find active menu element");
 		}
 		return activeMenuItem;

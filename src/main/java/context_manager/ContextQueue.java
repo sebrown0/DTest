@@ -34,7 +34,8 @@ public class ContextQueue {
 	}
 	
 	public ContextState getAndRemoveCurrentContext() {
-		return queue.remove();		
+		logger.debug("Removing context [" + getCurrent().getContextId() + "] from context queue");
+		return queue.removeLast();		
 	}
 	
 	public boolean removeCurrentContext() {

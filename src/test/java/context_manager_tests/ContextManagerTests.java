@@ -14,8 +14,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import context_manager.Context;
 import context_manager.ContextId;
 import context_manager.ContextManager;
+import context_manager.ContextPayroll;
 import context_manager.ContextState;
 import context_manager.StateHeaderPanel;
 import context_manager.StateLeftMenu;
@@ -61,7 +63,7 @@ class ContextManagerTests {
 	@Test
 	void checkContextId() {
 		menu.clickAndLoad(Documents.MENU_TITLE);
-		ContextId id = manager.getContext().getContextId();
+		ContextId id = manager.getCurrentContext().getContextId();
 		manager.closeCurrentStateInCurrentContext();
 		assertEquals("Employee Document Management:jsPanel-1", id.getId());
 	}
@@ -122,21 +124,21 @@ class ContextManagerTests {
 	void loadDocument_and_checkState() {		
 		menu.clickAndLoad(Documents.MENU_TITLE);
 		manager.closeCurrentStateInCurrentContext();
-		assertTrue(manager.getContext().getState() instanceof StateLeftMenu);				
+		assertTrue(manager.getCurrentContext().getState() instanceof StateLeftMenu);				
 	}
 
 	@Test
 	void loadDocuments_then_employeeDetails_then_close_employeeDetailsState_newStateShouldBeHeaderPanel() {
 		menu.clickAndLoad(Documents.MENU_TITLE);
-		System.out.println("1->" + manager.getContextId());
 		assertEquals("Employee Document Management:jsPanel-1", manager.getContextId());
+		
 		menu.clickAndLoad(EmployeeDetails.class);
-		System.out.println("2->" + manager.getContextId());
 		assertEquals("Employee Details:jsPanel-2", manager.getContextId());
+		
 		manager.closeCurrentStateInCurrentContext();
-		assertTrue(manager.getContext().getState() instanceof StateHeaderPanel);
+		assertTrue(manager.getCurrentContext().getState() instanceof StateHeaderPanel);
 	}
-	
+
 	@Test
 	void loadDocuments_then_employeeDetails_then_close_employeeDetailsState_twice_newContextShouldBeDocuments() {
 		menu.clickAndLoad(Documents.MENU_TITLE);
@@ -147,8 +149,23 @@ class ContextManagerTests {
 		
 		manager.closeCurrentStateInCurrentContext();
 		manager.closeCurrentStateInCurrentContext();
-		assertTrue(manager.getContext().getState() instanceof StateLeftMenu);
+		assertTrue(manager.getCurrentContext().getState() instanceof StateLeftMenu);
 		assertEquals("Employee Document Management:jsPanel-1", manager.getContextId());
+	}
+	
+	@Test
+	void loadDocuments_then_close_context_currentContext_shouldBe_ContextPayroll() {
+		menu.clickAndLoad(Documents.MENU_TITLE);
+		manager.closeCurrentContext();
+		Context c = (Context) manager.getCurrentContext();
+		assertTrue(c instanceof ContextPayroll);
+		/*
+		 *  Try and close the current (Payroll) context.
+		 *  It should not be possible.
+		 */
+		manager.closeCurrentContext();
+		c = (Context) manager.getCurrentContext();
+		assertTrue(c instanceof ContextPayroll);			 
 	}
 	
 }

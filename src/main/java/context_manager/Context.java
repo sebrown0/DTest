@@ -6,6 +6,7 @@ package context_manager;
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -15,7 +16,9 @@ import org.openqa.selenium.WebDriver;
  * Each context can have different states, i.e. header/container, iFrame etc.
  * 
  */
-public abstract class Context implements ContextState {
+public abstract class Context implements ContextState, ContextCloser {
+	protected Logger logger = LogManager.getLogger();
+	
 	private ContextManager contextManager;
 	private ContextId contextId;
 	private State firstState;
@@ -44,13 +47,13 @@ public abstract class Context implements ContextState {
 		firstState.setNext(Optional.ofNullable(callingState));
 		this.setState(callingState);
 	}
-	
+		
 	@Override
 	public void setState(State state) { 	
 		State temp = currentState;
 		currentState = state;
 		currentState.setPrev(Optional.ofNullable(temp));			 	
-		LogManager.getLogger().debug("Setting new state [" + state.toString() + "]");
+		logger.debug("Setting new state [" + state.toString() + "]");
 	}	
 	
 	@Override
@@ -78,10 +81,11 @@ public abstract class Context implements ContextState {
 			new Runnable() {				
 				@Override
 				public void run() {
-					LogManager.getLogger().debug("No next state for [" + currentState.toString() + "]");
+					logger.debug("No next state for [" + currentState.toString() + "]");
 				}
 			});		
 	}
+	
 	@Override
 	public WebDriver getDriver() {		
 		return contextManager.getDriver();
@@ -100,6 +104,10 @@ public abstract class Context implements ContextState {
 	@Override
 	public ContextId getContextId() {
 		return contextId;
+	}
+	
+	protected ContextManager getContextManager() {
+		return contextManager;
 	}
 }
 

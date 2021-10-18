@@ -15,5 +15,9 @@ public final class ContextPanel extends Context {
 		super(contextManager, idGetter);
 		// TODO - NOT USING JsPanelControlBar - BUT WE MAY IN THE FUTURE.
 	}
-
+	
+	@Override
+	public void closeContext() {	 	
+		super.getContextManager().getQueue().getAndRemoveCurrentContext();
+	}
 }

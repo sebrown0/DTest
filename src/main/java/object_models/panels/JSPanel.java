@@ -93,7 +93,7 @@ public class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter 
 	}
 
 	private void setContextStateToPanel() {
-		ContextState con = contextManager.getContext();			 	
+		ContextState con = contextManager.getCurrentContext();			 	
 		State header = new StateHeaderPanel(con, headerBar.getControlBar());		
 		con.setState(header);
 	}
