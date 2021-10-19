@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import context_manager.ContextManager;
-import context_manager.ZZZ_ContextManager;
+import context_manager.states.StateIframe;
 import controls.ControlBuilder;
 import controls.ControlGetterDkGridEmployeeDetails;
 import controls.ControlGetterDropdownCombo;
@@ -30,15 +30,14 @@ import object_models.panels.JSPanelWithIFrame;
 public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 	private EmpDetailsTabs myTabs;
 	private PageControl empControl;
-	private ZZZ_ContextManager contextManager;
-	
+
 	public static final String PANEL_TITLE = "Employee Details";
 	public static final String MENU_TITLE = PANEL_TITLE;
 	public static final String MENU_PARENT_NAME = "Employees";
 	
 	public EmployeeDetails(WebDriver driver, ContextManager contextManager) {
 		super(driver, PANEL_TITLE, contextManager);
-				
+		
 		this.myTabs = new EmpDetailsTabs();
 		buildControl();
 	}
@@ -57,18 +56,19 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 	}
 		
 	public PageControl getEmployeeControl() {
-		contextManager.loadFrameIfNecessary();
-		contextManager.childIsLoaded();
+		contextManager.switchToStateInCurrentContext(StateIframe.class);
 		return empControl;
 	}
 			
 	@Override
 	public void reloadDefault() {
-		contextManager.switchToMe();
+		super.logger.error("NOT IMPLEMENTED - SEE EmployeeSelection");
+		System.out.println("NOT IMPLEMENTED - SEE EmployeeSelection" ); // TODO - remove or log 	
+//		contextManager.switchToMe();
 	}
 		
-	public EmpDetailsTabs tab() {		
-		contextManager.loadFrameIfNecessary();
+	public EmpDetailsTabs tab() {
+		contextManager.switchToStateInCurrentContext(StateIframe.class);
 		return this.myTabs;
 	}
 		
@@ -90,7 +90,6 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 			private WebElement tab;
 			
 			public BasicDetails() {
-				contextManager.switchBackToFormIfNecessary();
 				tab = driver.findElement(By.xpath("//a[@href='#tab1']"));
 				tab.click();
 			}
@@ -117,7 +116,6 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 			private WebElement tab;
 			
 			public Settings() {
-				contextManager.switchBackToFormIfNecessary();
 				tab = driver.findElement(By.xpath("//a[@href='#tab2']"));
 				tab.click();
 			}
@@ -132,7 +130,6 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 			private WebElement tab;
 			
 			public Suspension() {
-				contextManager.switchBackToFormIfNecessary();
 				tab = driver.findElement(By.xpath("//a[@href='#tab3']"));
 				tab.click();
 			}
@@ -145,7 +142,6 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 			private WebElement tab;
 			
 			public GovtBonus() {
-				contextManager.switchBackToFormIfNecessary();
 				tab = driver.findElement(By.xpath("//a[@href='#tab4']"));
 				tab.click();
 			}

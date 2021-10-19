@@ -58,6 +58,9 @@ public final class EmployeeSelection extends FormModal implements Control {
 	public void clickRow(String rowNum) {		
 		WebElement rw = table.findElement(By.id("RIZZ" + rowNum));
 		rw.click();
+		// TODO
+		// This should be a context. 
+		// When clicked the context should disappear and be replaced by the previous.
 		reloadEmpDetails.reloadDefault();
 	}
 	

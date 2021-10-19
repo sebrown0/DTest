@@ -35,11 +35,11 @@ import object_models.helpers.title.TitlePanel;
 public class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter { 
 	protected WebDriver driver;
 	protected ContextManager contextManager;
-		
+	protected Logger logger = LogManager.getLogger();
+	
 	private PageTitle title = null;
 	private String expectedTitle;
-	private Optional<String> panelId;
-	private Logger logger = LogManager.getLogger();
+	private Optional<String> panelId;	
 	private WebElement container;
 	private JsPanelHeaderBar headerBar;
 		

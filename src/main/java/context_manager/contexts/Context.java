@@ -155,7 +155,6 @@ public abstract class Context implements ContextState, ContextCloser {
 
 	@Override
 	public void moveNext() {
-//		System.out.println("Context.moveNext for context ->" + this.contextId.getId()); // TODO - remove or log 	
 		Optional<State> next = currentState.getNext();
 		next.ifPresentOrElse(n -> {	
 			this.setState(n); 
@@ -165,7 +164,7 @@ public abstract class Context implements ContextState, ContextCloser {
 				public void run() {
 					logger.debug("No next state for [" + currentState.toString() + "]");
 				}
-			});		
+			});		 	
 	}
 	
 	@Override

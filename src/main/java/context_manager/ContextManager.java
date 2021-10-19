@@ -31,6 +31,8 @@ import context_manager.states.State;
  * 
  * 5. Split states and contexts correctly. Add new helper classes as necessary.
  * 
+ * 6. When looking for a state, should the context be checked?
+ * 
  * USE GIT BRANCH context_manager.
  */
 public class ContextManager {
@@ -60,8 +62,7 @@ public class ContextManager {
 	 * Actions - Start
 	 */
 	public <T extends State> Optional<State> switchToStateInCurrentContext(Class<T> clazzRequiredState) {
-		String requiredStateName = clazzRequiredState.getSimpleName();
-		
+		String requiredStateName = clazzRequiredState.getSimpleName();		
 		if(isCurrentStateRequiredState(requiredStateName)) {
 			logger.debug("State [" + requiredStateName + "] is current state in context");
 			return Optional.ofNullable(getCurrentContext().getState());
@@ -74,7 +75,9 @@ public class ContextManager {
 	
 	public <T extends State> Optional<State> moveToStateInCurrentContext(Class<T> clazzRequiredState) {
 		String requiredStateName = clazzRequiredState.getSimpleName();		
+
 		Optional<State> state = getCurrentContext().moveToState(clazzRequiredState);
+
 		if(state.isPresent()) {			
 			logger.debug("State [" + requiredStateName + "] is present in context. Will move to this state");				
 			return state;			

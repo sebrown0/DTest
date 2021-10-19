@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -188,7 +185,7 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 		Optional<ContainerAction> child = Optional.empty();		
 		try {
 			e.click();			
-			child = Optional.of(getElement(elementName).get());			
+			child = Optional.of(getElement(elementName));//.get();			
 		} catch (Exception ex) {
 			logger.error("Could not get menu element [" + elementName + "] [" + ex.getMessage() + "]");
 		}
@@ -197,9 +194,7 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 	
 	@Override
 	public LeftMenuActions clickParent(String prntName) {
-
-		contextManager.switchToStateInCurrentContext(StateLeftMenu.class); 
-		
+		contextManager.switchToStateInCurrentContext(StateLeftMenu.class);		
 		WebElement activeMenuItem = getActiveMenuItem();
 		if(activeMenuItem != null) {
 			String currentlyActive = activeMenuItem.getText().trim();			
@@ -227,12 +222,16 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 		return activeMenuItem;
 	}
 	
-	private Future<ContainerAction> getElement(String elementName) {
-		ExecutorService executor = Executors.newSingleThreadExecutor();
-		return executor.submit(() -> {
+	private ContainerAction getElement(String elementName) {
 			return ChildElementFactory.getChild(elementName, driver, contextManager);
-		});
+		
 	}
+//	private Future<ContainerAction> getElement(String elementName) {
+//		ExecutorService executor = Executors.newSingleThreadExecutor();
+//		return executor.submit(() -> {
+//			return ChildElementFactory.getChild(elementName, driver, contextManager);
+//		});
+//	}
 
 	@Override
 	public State getState(ContextState context) { 
