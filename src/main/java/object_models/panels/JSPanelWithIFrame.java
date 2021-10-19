@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import context_manager.ContextManager;
-import context_manager.ZZZ_ContextManager;
 import object_models.helpers.IFrame;
 
 /**
@@ -48,9 +47,9 @@ public class JSPanelWithIFrame extends JSPanel implements JsPanelContext {
 		return this;
 	}
 
-	public ZZZ_ContextManager getContextManager() {
-//		return contextManager;
-		return null;
-	}
+//	public ZZZ_ContextManager getContextManager() {
+////		return contextManager;
+//		return null;
+//	}
 		
 }

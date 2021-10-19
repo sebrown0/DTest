@@ -30,6 +30,8 @@ import context_manager.states.State;
  * 4. Add more UTs for different scenarios.
  * 
  * 5. Split states and contexts correctly. Add new helper classes as necessary.
+ * 
+ * USE GIT BRANCH context_manager.
  */
 public class ContextManager {
 	private ContextQueue queue = new ContextQueue();
