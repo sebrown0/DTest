@@ -6,6 +6,7 @@ package context_manager.states;
 import java.util.Optional;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextState;
 
@@ -31,7 +32,10 @@ public class StateLeftMenu extends State {
 
 	@Override
 	public void switchToMe() {
-		context.getDriver().findElement(By.cssSelector("body > form > div.app-body > div"));		
+		System.out.println("switchToMe->StateLeftMenu"); // TODO - remove or log 	
+		WebDriver driver = context.getDriver();
+		driver.switchTo().defaultContent();
+		driver.findElement(By.cssSelector("body > form > div.app-body > div"));		
 	}
 
 	@Override

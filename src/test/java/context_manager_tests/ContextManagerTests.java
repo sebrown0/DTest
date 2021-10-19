@@ -22,9 +22,11 @@ import context_manager.contexts.ContextPayroll;
 import context_manager.states.State;
 import context_manager.states.StateHeaderPanel;
 import context_manager.states.StateLeftMenu;
+import context_manager.states.StateModule;
 import context_manager.states.StateTop;
 import logging.TestResultLogger;
 import object_models.left_menu.common.LeftMenu;
+import object_models.left_menu.employees.Banks;
 import object_models.left_menu.employees.EmployeeDetails;
 import object_models.left_menu.parents.Documents;
 import object_models.pages.HomePage;
@@ -141,6 +143,13 @@ class ContextManagerTests {
 	}
 
 	@Test
+	/*
+	 * Run and check log for these errors.
+	 * 2021-10-19 09:19:50,625 [ERROR] [JSPanel] [waitForLoad()] - Could not load panel [Employee Details]; 
+	 * 2021-10-19 09:19:51,722 [ERROR] [JSPanel] [close()] - Could not close panel [Employee Details]; 
+	 * 
+	 * NOT CLOSING PROPERLY. THIS COULD BE THE REASON OTHER TESTS ARE FAILING.
+	 */
 	void loadDocuments_then_employeeDetails_then_close_employeeDetailsState_twice_newContextShouldBeDocuments() {
 		menu.clickAndLoad(Documents.MENU_TITLE);
 		assertEquals("Employee Document Management:jsPanel-1", manager.getContextId());
@@ -154,6 +163,12 @@ class ContextManagerTests {
 		assertEquals("Employee Document Management:jsPanel-1", manager.getContextId());
 	}
 
+	@Test
+	void loadEmployeeBanks_then_loadDocuments() {
+		menu.clickAndLoad(Banks.class);
+		menu.clickAndLoad(Documents.MENU_TITLE);		
+	}
+	
 	@Test
 	void loadPayroll_checkContext_and_state() {
 		Context c = (Context) manager.getCurrentContext();
@@ -172,26 +187,55 @@ class ContextManagerTests {
 		assertTrue(manager.getCurrentContext().isStateInContext(StateTop.class));
 	}
 	
+//	@Test
+//	// STUCK HERE!
+//	void addNewStateToContext() {
+//		Optional<State> s = manager.moveToStateInCurrentContext(StateLeftMenu.class);		
+//		assertTrue(s.get() instanceof StateLeftMenu);
+//	}
+
 	@Test
-	void addNewStateToContext() {
-		manager.printCurrentStates();
-		Optional<State> s = manager.moveToStateInCurrentContext(StateLeftMenu.class);		
-		manager.printCurrentStates();
-		assertTrue(s.get() instanceof StateLeftMenu);
+	void isStateInContext() {
+		assertFalse(manager.isStateInCurrentContext(StateLeftMenu.class));
+		assertTrue(manager.isStateInCurrentContext(StateTop.class));
+	}
+	
+	@Test
+	void currentStateIsRequiredState() {
+		State current = manager.getCurrentContext().getState();
+		assertEquals(current, manager.moveToStateInCurrentContext(StateModule.class).get()); 	
+	}
+	
+	@Test
+	void currentStateIsNotRequiredState_but_isInContext() {
+		State current = manager.getCurrentContext().getState();
+		assertFalse(current.getClass().getSimpleName() == StateLeftMenu.class.getSimpleName()); 			
+		
+		assertTrue(manager.isStateInCurrentContext(StateTop.class));
+		current = manager.moveToStateInCurrentContext(StateTop.class).get();
+		assertEquals(current.getClass().getSimpleName(), StateTop.class.getSimpleName()); 	
+	}
+	
+	@Test
+	void currentStateIsNotRequiredState_and_isNotInContext() {
+		State current = manager.getCurrentContext().getState();
+		assertFalse(current.getClass().getSimpleName() == StateLeftMenu.class.getSimpleName()); 			
+		
+		assertFalse(manager.isStateInCurrentContext(StateLeftMenu.class));
+		current = manager.moveToStateInCurrentContext(StateLeftMenu.class).get();
+		assertEquals(current.getClass().getSimpleName(), StateLeftMenu.class.getSimpleName()); 	
 	}
 	
 	@Test
 	void loadDocuments_then_close_context_currentContext_shouldBe_ContextPayroll() {
-		menu.clickAndLoad(Documents.MENU_TITLE);
-		
+		menu.clickAndLoad(Documents.MENU_TITLE);		
 		Context c = (Context) manager.closeCurrentContext().getCurrentContext();
-		assertTrue(c instanceof ContextPayroll);
-		/*
-		 *  Try and close the current (Payroll) context.
-		 *  It should not be possible.
-		 */
+		assertTrue(c instanceof ContextPayroll);		
+		//  Try and close the current (Payroll) context.
+		// It should not be possible.		 
 		c = (Context) manager.closeCurrentContext().getCurrentContext();
 		assertTrue(c instanceof ContextPayroll);			 
 	}
 	
+
 }

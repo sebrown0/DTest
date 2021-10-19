@@ -17,6 +17,19 @@ import context_manager.states.State;
  *
  * Manages the contexts within the app.
  * 
+ * TODO - ISSUES
+ * -------------
+ * 1. Get ContextManagerTests to run all tests.
+ * 
+ * 2. Do we revert to default context (of prev con)
+ *    when closing current context?
+ *    
+ * 3. Clicking a left-menu element (that has children, i.e. Employees)
+ *    does not close the element if it's already open. 
+ *    
+ * 4. Add more UTs for different scenarios.
+ * 
+ * 5. Split states and contexts correctly. Add new helper classes as necessary.
  */
 public class ContextManager {
 	private ContextQueue queue = new ContextQueue();
@@ -44,19 +57,34 @@ public class ContextManager {
 	/*
 	 * Actions - Start
 	 */
-	public <T extends State> Optional<State> moveToStateInCurrentContext(Class<T> clazzState) {
-		Optional<State> ret = Optional.empty();
-		String stateName = clazzState.getSimpleName();
+	public <T extends State> Optional<State> switchToStateInCurrentContext(Class<T> clazzRequiredState) {
+		String requiredStateName = clazzRequiredState.getSimpleName();
 		
-		Optional<State> state = getCurrentContext().moveToState(clazzState);
-		if(state.isPresent()) {			
-			logger.debug("State [" + stateName + "] is present in context. Will move to this state");				
-			ret = state;			
+		if(isCurrentStateRequiredState(requiredStateName)) {
+			logger.debug("State [" + requiredStateName + "] is current state in context");
+			return Optional.ofNullable(getCurrentContext().getState());
 		}else {
-			logger.debug("State [" + stateName + "] is not present in context. Adding as the last state in context");			
-			ret = getCurrentContext().setLastState(clazzState);
-		}
-		return ret;		
+			Optional<State> state = moveToStateInCurrentContext(clazzRequiredState);
+			state.ifPresent(s -> s.switchToMe());
+			return state;
+		}				
+	}
+	
+	public <T extends State> Optional<State> moveToStateInCurrentContext(Class<T> clazzRequiredState) {
+		String requiredStateName = clazzRequiredState.getSimpleName();		
+		Optional<State> state = getCurrentContext().moveToState(clazzRequiredState);
+		if(state.isPresent()) {			
+			logger.debug("State [" + requiredStateName + "] is present in context. Will move to this state");				
+			return state;			
+		}else {
+			logger.debug("State [" + requiredStateName + "] is not present in context. Adding as the last state in context");			
+			return getCurrentContext().setLastState(clazzRequiredState);
+		}						
+	}
+		
+	private boolean isCurrentStateRequiredState(String requiredStateName) {
+		String currentStatesName = getCurrentContext().getState().getClass().getSimpleName(); 	
+		return currentStatesName.equals(requiredStateName);
 	}
 	
 	public ContextManager closeCurrentContext() {
@@ -92,25 +120,9 @@ public class ContextManager {
 		} 	
 	}
 	
-//	public boolean isStateInContext(Class<?> clazz) {
-//		String stateName = clazz.getSimpleName();
-////		State current = getCurrentContext().getState();		
-//		State start = getCurrentContext().getTopState();
-//		Optional<State> s = Optional.ofNullable(start);
-//		
-//		while(s != null) {			
-//			if(s.isPresent()) {
-//				State temp = s.get(); 	
-//				if(temp.getClass().getSimpleName().equals(stateName)) {
-//					return true;
-//				}
-//				s = temp.getNext();
-//			}else {
-//				s = null;
-//			}			
-//		}
-//		return false;
-//	}
+	public boolean isStateInCurrentContext(Class<?> clazz) {
+		return getCurrentContext().isStateInContext(clazz);
+	}
 	
 	private State getDefaultState(ContextState cs) {				
 		State start = cs.getTopState();
@@ -131,16 +143,15 @@ public class ContextManager {
 		return s;
 	}
 		
-	public boolean printCurrentStates() {
-//		State current = getCurrentContext().getState();		
+	public boolean printCurrentStates() {		
 		State start = getCurrentContext().getTopState();
 		Optional<State> s = Optional.ofNullable(start);
 
-		System.out.println("*CURRENT STATES IN CURRENT CONTEXT*"); // TODO - remove or log
+		System.out.println("*CURRENT STATES IN CURRENT CONTEXT*"); 
 		while(s != null) {			
 			if(s.isPresent()) {
 				State temp = s.get(); 	
-				System.out.println("  ->" + temp.getClass().getSimpleName()); // TODO - remove or log 				
+				System.out.println("  ->" + temp.getClass().getSimpleName()); 
 				s = temp.getNext();
 			}else {
 				s = null;

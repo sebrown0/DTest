@@ -123,7 +123,8 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 	// LeftMenuActions	
 	@Override	
 	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
-		contextManager.switchToFirstStateInCurrentContext();
+//		contextManager.switchToFirstStateInCurrentContext();
+		contextManager.switchToStateInCurrentContext(StateLeftMenu.class);
 		Optional<ContainerAction> item = null;
 		Optional<String> prntName = getParentName(clazz);
 		Optional<String> menuItem = getMenuItemName(clazz);
@@ -196,13 +197,8 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 	
 	@Override
 	public LeftMenuActions clickParent(String prntName) {
-		
-	// 
-		/*
-		 * FIND StateLeftMenu WITHIN CONTEXT
-		 * IF NOT THERE 
-		 */
-		contextManager.moveToStateInCurrentContext(StateLeftMenu.class); 
+
+		contextManager.switchToStateInCurrentContext(StateLeftMenu.class); 
 		
 		WebElement activeMenuItem = getActiveMenuItem();
 		if(activeMenuItem != null) {

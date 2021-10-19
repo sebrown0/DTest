@@ -30,18 +30,22 @@ public class ContextQueue {
 		
 	}
 	
+	public int getSize() {
+		return queue.size();
+	}
+	
 	public ContextState getCurrentContext() {
 		return queue.peekLast();
 	}
 	
 	public ContextState getAndRemoveCurrentContext() {
-		logger.debug("Removing context [" + getCurrent().getContextId() + "] from context queue");
+		logger.debug("Removing context [" + getCurrentContext().getContextId() + "] from context queue");
 		return queue.removeLast();		
 	}
 	
 	public boolean removeCurrentContext() {
 		if(queue.isEmpty() == false) {			
-			logger.debug("Removing context [" + getCurrent().getContextId() + "]");
+			logger.debug("Removing context [" + getCurrentContext().getContextId() + "]");
 			queue.removeLast();			 	
 			return true;
 		}else {
@@ -72,10 +76,5 @@ public class ContextQueue {
 		return Optional.ofNullable(returnVal);
 	}
 	
-	public ContextState getCurrent() {
-		return queue.getLast();
-	}
-	public int getSize() {
-		return queue.size();
-	}
+
 }
