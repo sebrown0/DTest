@@ -32,11 +32,11 @@ public abstract class State {
 	}
 	
 	public abstract Optional<State> getNext();
-	public abstract Optional<State> close();
+//	public abstract Optional<State> close();
 	public abstract boolean isContextCloser();	
 	public abstract boolean isDefaultState();
 	public abstract void switchToMe();
-	
+		
 	public void setPrev(Optional<State> prev) {
 		this.prev = prev;
 	}
@@ -49,4 +49,7 @@ public abstract class State {
 		this.next = next;
 	}
 	
+	public void close() {
+		logger.debug("Closing state [" + this + "]");
+	}
 }

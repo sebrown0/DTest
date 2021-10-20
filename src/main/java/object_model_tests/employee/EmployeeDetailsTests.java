@@ -82,7 +82,7 @@ class EmployeeDetailsTests {
 		empSelection.clickRow("3");		
 		assertEquals("475070M", empDetails.tab().basicDetails().iDCardNumber().getTextByValue());				
 	}	
-	@Test
+	@Test //
 	void openCombos() {
 		
 		WebDriver driver = homepagePayroll.getWebDriver();

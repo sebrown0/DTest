@@ -4,8 +4,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
+import context_manager.ContextId;
+import context_manager.ContextIdGetter;
 import context_manager.ContextManager;
 import context_manager.ContextSetter;
+import context_manager.contexts.ContextForm;
 import object_models.helpers.closers.CloserModalForm;
 import object_models.helpers.title.PageTitle;
 import object_models.helpers.title.TitleModalForm;
@@ -14,24 +17,51 @@ import object_models.helpers.title.TitleModalForm;
  * @author Steve Brown
  *
  */
-public abstract class FormModal implements ContainerAction, ContextSetter {
+public abstract class FormModal implements ContainerAction, ContextSetter, ContextIdGetter{
 	protected WebDriver driver;
 	protected ContextManager contextManager;
 	
 	private PageTitle title;
 	private Logger logger = LogManager.getLogger();
+
+	public FormModal(WebDriver driver, ContextManager contextManager) {
+		this.driver = driver;		
+		this.contextManager = contextManager;
 		
+		initialise();		
+	}	
+
 	public FormModal(WebDriver driver, String expectedTitle, ContextManager contextManager) {
 		this.driver = driver;
 		this.title = new TitleModalForm(expectedTitle, driver);		
 		this.contextManager = contextManager;
+		
+		initialise();
 	}
 	
-	@Override
-	public void setContext() {
-		System.out.println("FormModal->SET CONTEXT NOT IMPLEMENTED!!!!!!!!!");
-		contextManager.setContext(null);
+	private void initialise() {
+		waitForLoad();		
+//	setPanelId();
+//	setContainer();
+//	setTitle(); //SHOULD THIS BE PART OF THE HEADER BAR???
+//	setHeaderBar();
+		setContext();
+		setContextStateToPanel();
 	}
+	
+	protected void waitForLoad() {
+		//overload
+	}
+	
+	protected void setContextStateToPanel() {
+		//overload
+	}
+	
+	
+	@Override
+	public void setContext() {		
+		contextManager.setContext(new ContextForm(contextManager, this));
+	}	
 	
 	@Override
 	public PageTitle getTitle() {
@@ -49,4 +79,9 @@ public abstract class FormModal implements ContainerAction, ContextSetter {
 		}		
 	}
 
+	@Override
+	public ContextId getContextId() {
+		logger.error("NOT IMPLEMENTED");
+		return new ContextId("ERROR", "ERROR"); // TODO - IMPLEMENT 
+	}
 }

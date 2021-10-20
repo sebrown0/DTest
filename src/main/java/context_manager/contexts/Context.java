@@ -57,6 +57,11 @@ public abstract class Context implements ContextState, ContextCloser {
 	}
 		
 	@Override
+	public void setCurrentState(State currentState) {
+		this.currentState = currentState;
+	}
+	
+	@Override
 	public <T extends State> Optional<State> setLastState(Class<T> clazz){				
 		this.getNewInstanceOfState(clazz).ifPresentOrElse(s -> 
 				{ this.setState(s); 
@@ -117,7 +122,11 @@ public abstract class Context implements ContextState, ContextCloser {
 	public State getTopState() {
 		State s = currentState;
 		State top = s;
-		
+
+		if(contextId.getExpectedName().equalsIgnoreCase("Employee Document Management")) {
+			System.out.println("Employee Document Management"); // TODO - remove or log 	
+		}
+ 	
 		while (s != null) {
 			if(s.getPrev() != null && s.getPrev().isPresent()) {
 				s = s.getPrev().get();

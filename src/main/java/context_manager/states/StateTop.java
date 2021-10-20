@@ -29,10 +29,8 @@ public class StateTop extends State {
 	}
 
 	@Override
-	public Optional<State> close() {
-		logger.debug("Closing state. This will end the session");
-		context.getDriver().close();
-		return Optional.empty();
+	public void close() {
+		logger.debug("Cannot close state [" + this + "]");
 	}
 
 	@Override

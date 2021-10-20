@@ -22,6 +22,7 @@ public class JsPanelControlBar {
 	}
 	
 	public void clickClose() {
-		controlBar.findElement(By.cssSelector("div[class='jsPanel-btn jsPanel-btn-close']")).click();;
+		WebElement btn = controlBar.findElement(By.cssSelector("div[class='jsPanel-btn jsPanel-btn-close']"));		
+		btn.click();
 	}
 }

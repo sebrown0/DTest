@@ -26,11 +26,6 @@ public class StateLeftMenu extends State {
 	}
 
 	@Override
-	public Optional<State> close() {
-		return super.getPrev();
-	}
-
-	@Override
 	public void switchToMe() {
 		WebDriver driver = context.getDriver();
 		driver.switchTo().defaultContent();

@@ -75,6 +75,9 @@ public class ContextQueue {
 		}
 		return Optional.ofNullable(returnVal);
 	}
-	
 
+	public Deque<ContextState> getQueue() {
+		return queue;
+	}
+	
 }

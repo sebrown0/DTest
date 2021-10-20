@@ -105,6 +105,8 @@ public class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter 
 
 	@Override
 	public void close() {
+		logger.info("** Depreciated. Use ContextManager **");
+		
 		CloserPanel closer = new CloserPanel(driver);
 		try {
 			closer.close();
@@ -125,9 +127,13 @@ public class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter 
 		return driver;
 	}
 
+	
 	@Override
 	public ContextId getContextId() {		
 		return new ContextId(expectedTitle, panelId.get());
 	}
 
+	public ContextManager getContextManager() {
+		return contextManager;
+	}
 }

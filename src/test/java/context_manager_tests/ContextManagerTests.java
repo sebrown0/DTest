@@ -16,6 +16,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import context_manager.ContextId;
 import context_manager.ContextManager;
+import context_manager.ContextQueue;
 import context_manager.ContextState;
 import context_manager.contexts.Context;
 import context_manager.contexts.ContextPayroll;
@@ -142,14 +143,7 @@ class ContextManagerTests {
 		assertTrue(manager.getCurrentContext().getState() instanceof StateHeaderPanel);
 	}
 
-	@Test
-	/*
-	 * Run and check log for these errors.
-	 * 2021-10-19 09:19:50,625 [ERROR] [JSPanel] [waitForLoad()] - Could not load panel [Employee Details]; 
-	 * 2021-10-19 09:19:51,722 [ERROR] [JSPanel] [close()] - Could not close panel [Employee Details]; 
-	 * 
-	 * NOT CLOSING PROPERLY. THIS COULD BE THE REASON OTHER TESTS ARE FAILING.
-	 */
+	@Test	
 	void loadDocuments_then_employeeDetails_then_close_employeeDetailsState_twice_newContextShouldBeDocuments() {
 		menu.clickAndLoad(Documents.MENU_TITLE);
 		assertEquals("Employee Document Management:jsPanel-1", manager.getContextId());
@@ -157,10 +151,17 @@ class ContextManagerTests {
 		menu.clickAndLoad(EmployeeDetails.class);
 		assertEquals("Employee Details:jsPanel-2", manager.getContextId());
 		
+//		System.out.println("One"); // TODO - remove or log 	
+//		manager.printQueue();
+		
 		manager.closeCurrentStateInCurrentContext();
 		manager.closeCurrentStateInCurrentContext();
 		assertTrue(manager.getCurrentContext().getState() instanceof StateLeftMenu);
 		assertEquals("Employee Document Management:jsPanel-1", manager.getContextId());
+		
+//		System.out.println("Two"); // TODO - remove or log
+//		manager.printContexts();
+		manager.printQueue();
 	}
 
 	@Test
@@ -179,6 +180,7 @@ class ContextManagerTests {
 
 	@Test
 	void findStateInContext_stateLeftMenu_notPresent() {
+		manager.printQueue();
 		assertFalse(manager.getCurrentContext().isStateInContext(StateLeftMenu.class));
 	}
 
@@ -231,7 +233,7 @@ class ContextManagerTests {
 		menu.clickAndLoad(Documents.MENU_TITLE);		
 		Context c = (Context) manager.closeCurrentContext().getCurrentContext();
 		assertTrue(c instanceof ContextPayroll);		
-		//  Try and close the current (Payroll) context.
+		// Try and close the current (Payroll) context.
 		// It should not be possible.		 
 		c = (Context) manager.closeCurrentContext().getCurrentContext();
 		assertTrue(c instanceof ContextPayroll);			 

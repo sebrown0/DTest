@@ -26,16 +26,9 @@ public class StateHeaderPanel extends State {
 	}
 	
 	@Override
-	public Optional<State> close() {
-		// have to goto the prev xon from here.
-		logger.debug("Closing state");
-		controlBar.clickClose();
-		/*
-		 * Return empty to indicate that the context is closed.
-		 * The context manager can then remove it.
-		 */
-		return Optional.empty();
-//		return super.getPrev();
+	public void close() {
+		logger.debug("Closing state [" + this + "]");
+		controlBar.clickClose();		
 	}
 
 	@Override

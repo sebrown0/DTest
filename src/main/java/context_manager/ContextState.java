@@ -15,7 +15,8 @@ import context_manager.states.State;
  * Manipulate states within a Context.
  */
 public interface ContextState {
-	void setNullState();	
+	void setNullState();
+	void setCurrentState(State currentState);	
 	void setState(State state);
 	void moveNext();
 	

@@ -92,13 +92,6 @@ public class ContextManager {
 		return currentStatesName.equals(requiredStateName);
 	}
 	
-	public ContextManager closeCurrentContext() {
-		ContextCloser contextCloser = (ContextCloser) getCurrentContext();
-		contextCloser.closeContext();
-		// TODO - switch to default???????????????????????????????????????
-		return this;
-	}
-	
 	public void switchToFirstStateInCurrentContext() {
 		ContextState contextState = queue.getCurrentContext();
 		if(contextState != null) {
@@ -118,7 +111,8 @@ public class ContextManager {
 		if(defaultState != null) {
 //			System.out.println("Current context is now [" + cs.getContextId() + "]. State (default) is [" + defaultState + "]"); // TODO - remove or log 	
 			logger.debug("Current context is now [" + cs.getContextId() + "]. State (default) is [" + defaultState + "]");
-			cs.setState(defaultState);
+			cs.setCurrentState(defaultState);
+//			cs.setState(defaultState);
 		}else {
 //			System.out.println("Current context is now [" + cs.getContextId() + "]. Default state not found so state is current [" + cs.getState() + "]"); // TODO - remove or log 	
 			logger.debug("Current context is now [" + cs.getContextId() + "]. Default state not found so state is current [" + cs.getState() + "]");
@@ -147,16 +141,29 @@ public class ContextManager {
 		} 	
 		return s;
 	}
+
+	public void printContexts() {
+		for (ContextState cs : queue.getQueue()) {
+			System.out.println("CONTEXT: " + cs.getContextId()); // TODO - remove or log			
+		}
+	}
+	
+	public void printQueue() {
+		for (ContextState cs : queue.getQueue()) {
+			System.out.println("CONTEXT: " + cs.getContextId()); // TODO - remove or log
+			printStates(cs);
+		}
+	}
 		
-	public boolean printCurrentStates() {		
-		State start = getCurrentContext().getTopState();
+	public boolean printStates(ContextState cs) {		
+		State start = cs.getTopState();
 		Optional<State> s = Optional.ofNullable(start);
 
-		System.out.println("*CURRENT STATES IN CURRENT CONTEXT*"); 
+//		System.out.println("*CURRENT STATES IN CURRENT CONTEXT*"); 
 		while(s != null) {			
 			if(s.isPresent()) {
 				State temp = s.get(); 	
-				System.out.println("  ->" + temp.getClass().getSimpleName()); 
+				System.out.println("State: " + temp.getClass().getSimpleName()); 
 				s = temp.getNext();
 			}else {
 				s = null;
@@ -164,33 +171,52 @@ public class ContextManager {
 		}
 		return false;
 	}
+
+	public ContextManager closeCurrentContext() {
+		ContextCloser contextCloser = (ContextCloser) getCurrentContext();
+		contextCloser.closeContext();
+		// TODO - switch to default???????????????????????????????????????
+		return this;
+	}
+	
+	public void closeStateInCurrentContext(State state){
+		closeState(state);
+		updateContext(state);
+	}
+
+	private void closeState(State closeState) {
+		logger.debug("Closing state [" + closeState + "]"); 	
+		closeState.close();
+	}
+	
+	private void updateContext(State state) {
+		if(state.isContextCloser()) { 	
+			logger.debug("State [" + state + "] is a context closer so will close current context");						
+			queue.removeCurrentContext();
+			setDefaultStateAfterClosingContext();
+		}else { 	
+			Optional<State> prev = closeCurrentStateAndGetPrevForCurrentContext(state);
+			if(prev != null && prev.isPresent()) {
+				revertToPreviousStateInCurrentContext(prev);
+			}else {
+				queue.getAndRemoveCurrentContext();
+			}			
+		}
+	}
 	
 	public void closeCurrentStateInCurrentContext(){
 		ContextState cs = queue.getCurrentContext(); 
 		if(cs != null) {
-			State currentState = cs.getState();
-			logger.debug("Closing state [" + currentState + "]"); 	
-			if(currentState.isContextCloser()) { 	
-				logger.debug("State [" + currentState + "] is a context closer so will close current context");						
-				queue.removeCurrentContext();
-				setDefaultStateAfterClosingContext();
-			}else { 	
-				Optional<State> prev = closeCurrentStateAndGetPrevForCurrentContext(currentState);
-				if(prev != null && prev.isPresent()) {
-//					System.out.println("reverting from ->" + current.toString()); // TODO - remove or log
-					revertToPreviousStateInCurrentContext(prev);
-				}else {
-//					System.out.println("->no prev, remove context"); // TODO - remove or log
-					queue.getAndRemoveCurrentContext();
-				}			
-			}	
+			closeStateInCurrentContext(cs.getState());
 		}else {
 			logger.debug("No context so cannot close current state");
 		}		
 	}
 		
 	private Optional<State> closeCurrentStateAndGetPrevForCurrentContext(State current){
-		return current.close();
+		Optional<State> prev = current.getPrev();
+		current.close();
+		return prev;
 	}
 	private void revertToPreviousStateInCurrentContext(Optional<State> prev) {
 		prev.ifPresentOrElse(

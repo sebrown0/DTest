@@ -25,8 +25,8 @@ public class StateModule extends State {
 	}
 
 	@Override
-	public Optional<State> close() {
-		return super.getPrev();
+	public void close() {
+		logger.debug("Cannot close state [" + this + "]");
 	}
 
 	@Override
