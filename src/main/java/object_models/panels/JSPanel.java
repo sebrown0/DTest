@@ -57,7 +57,7 @@ public class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter 
 		setTitle(); //SHOULD THIS BE PART OF THE HEADER BAR???
 		setHeaderBar();
 		setContext();
-		setContextStateToPanel();		
+		setContextState();		
 	}
 	
 	private void waitForLoad(ExpectedCondition<?> expectedConditionFound) {
@@ -88,7 +88,7 @@ public class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter 
 		headerBar = new JsPanelHeaderBar(container);
 	}
 
-	private void setContextStateToPanel() {
+	private void setContextState() {
 		ContextState con = contextManager.getCurrentContext();			 	
 		State header = new StateHeaderPanel(con, headerBar.getControlBar());		
 		con.setState(header);
@@ -128,7 +128,6 @@ public class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter 
 	public WebDriver getDriver() {
 		return driver;
 	}
-
 	
 	@Override
 	public ContextId getContextId() {		

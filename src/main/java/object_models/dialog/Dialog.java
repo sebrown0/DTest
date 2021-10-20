@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_models.forms;
+package object_models.dialog;
 
 /**
  * @author Steve Brown

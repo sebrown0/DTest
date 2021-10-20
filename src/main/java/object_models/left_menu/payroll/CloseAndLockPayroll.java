@@ -2,6 +2,7 @@ package object_models.left_menu.payroll;
 
 import org.openqa.selenium.WebDriver;
 
+import context_manager.ContextId;
 import context_manager.ContextManager;
 import object_models.forms.FormModal;
 
@@ -16,6 +17,36 @@ public final class CloseAndLockPayroll extends FormModal {
 	
 	public CloseAndLockPayroll(WebDriver driver, ContextManager contextManager) {
 		super(driver, PANEL_TITLE, contextManager);
+	}
+
+	@Override
+	public void close() {
+		logger.error("NOT IMPLEMENTED");
+	}
+	@Override
+	public void waitForLoad() {
+		logger.error("NOT IMPLEMENTED");
+	}
+	@Override
+	public void setContextState() {
+		logger.error("NOT IMPLEMENTED");
+	}
+	@Override
+	public void setContainer() {
+		logger.error("NOT IMPLEMENTED");		
+	}
+	@Override
+	public void setHeader() {
+		logger.error("NOT IMPLEMENTED");
+	}
+	@Override
+	public void setTitle() {
+		logger.error("NOT IMPLEMENTED");
+	}
+	@Override
+	public ContextId getContextId() {
+		logger.error("NOT IMPLEMENTED");
+		return null;
 	}
 	
 	// Elements

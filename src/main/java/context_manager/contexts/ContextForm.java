@@ -18,7 +18,7 @@ import context_manager.states.State;
 public final class ContextForm extends Context {	
 	
 	public ContextForm(ContextManager contextManager, ContextIdGetter idGetter) {
-		super(contextManager, idGetter);
+		super(contextManager, idGetter); 	
 	}
 		
 	@Override

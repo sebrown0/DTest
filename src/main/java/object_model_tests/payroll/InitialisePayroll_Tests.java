@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import logging.TestResultLogger;
+import object_models.dialog.DialogOkCancel;
 import object_models.element.ComboSelect;
 import object_models.forms.ContainerAction;
-import object_models.forms.DialogOkCancel;
 import object_models.left_menu.common.LeftMenuActions;
 import object_models.left_menu.payroll.InitialisePayroll;
 import object_models.pages.HomePage;

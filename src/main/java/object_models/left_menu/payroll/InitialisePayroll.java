@@ -9,10 +9,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import context_manager.ContextId;
 import context_manager.ContextManager;
+import object_models.dialog.Dialog;
+import object_models.dialog.DialogOkCancel;
 import object_models.element.ComboSelect;
-import object_models.forms.Dialog;
-import object_models.forms.DialogOkCancel;
 import object_models.forms.FormWithIFrame;
 
 /**
@@ -70,4 +71,33 @@ public class InitialisePayroll extends FormWithIFrame {
 //	public ElementButton getInitialisePayroll() {
 //		return new ElementButton(container.findElement(By.cssSelector("body > form > div > div:nth-child(9) > div:nth-child(4) > div.btn.btn-warning")));
 //	}
+	@Override
+	public void close() {
+		logger.error("NOT IMPLEMENTED");
+	}
+	@Override
+	public void waitForLoad() {
+		logger.error("NOT IMPLEMENTED");
+	}
+	@Override
+	public void setContextState() {
+		logger.error("NOT IMPLEMENTED");
+	}
+	@Override
+	public void setContainer() {
+		logger.error("NOT IMPLEMENTED");		
+	}
+	@Override
+	public void setHeader() {
+		logger.error("NOT IMPLEMENTED");
+	}
+	@Override
+	public void setTitle() {
+		logger.error("NOT IMPLEMENTED");
+	}
+	@Override
+	public ContextId getContextId() {
+		logger.error("NOT IMPLEMENTED");
+		return null;
+	}
 }

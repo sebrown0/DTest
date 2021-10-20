@@ -56,7 +56,7 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 	}
 		
 	public PageControl getEmployeeControl() {
-		contextManager.switchToStateInCurrentContext(StateIframe.class);
+		contextManager.switchToStateInCurrentContext(StateIframe.class); 
 		return empControl;
 	}
 			

@@ -14,76 +14,70 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import context_manager.ContextId;
 import context_manager.ContextManager;
 import context_manager.ContextState;
-import context_manager.states.StateModalForm;
+import context_manager.states.StateHeaderForm;
 import object_models.helpers.ButtonClicker;
 import object_models.helpers.title.PageTitle;
 import object_models.helpers.title.Title;
+import object_models.helpers.title.TitleModalFadeShow;
 
 /**
  * @author Steve Brown
  *
  */
 public class FormFadeShow extends FormModal {
-	WebDriverWait wait;
-	WebElement frm;
+	@SuppressWarnings("unused")
+	private WebElement container;
 	
 	public FormFadeShow(WebDriver driver, ContextManager contextManager) {
-		super(driver, contextManager);
-		
-//		wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+		super(driver, "None", contextManager);		
 	}
-
+	
+	public FormFadeShow(WebDriver driver, String expectedTitle, ContextManager contextManager) {
+		super(driver, expectedTitle, contextManager);		
+	}
+	
 	@Override
-	protected void waitForLoad() {		
-		wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-		frm = wait.until(
+	public void waitForLoad() {		
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+		container = wait.until(
 				ExpectedConditions.visibilityOfElementLocated(
 						By.cssSelector("div[class='modal fade show']")));
 	}
-
+	
 	@Override
-	protected void setContextStateToPanel() {
+	public void setTitle() {
+		super.title = new TitleModalFadeShow("None", driver);
+	}
+	
+	@Override
+	public void setContextState() {
 		ContextState con = contextManager.getCurrentContext();
-		con.setState(new StateModalForm(con));
+		con.setState(new StateHeaderForm(con));
 	}
 	
 	@Override
 	public PageTitle getTitle() {
 		return new Title("", driver, By.className("modal-body"));
 	}
-	
-//	@Override
-//	public void close() {
-////		WebDriverWait btnWait = new WebDriverWait(driver, Duration.ofSeconds(3));
-////		By btnLocator = By.className("close");
-////		WebElement btn = frm.findElement(btnLocator);
-////		btnWait.until(ExpectedConditions.elementToBeClickable(btnLocator));
-////		btn.click();
-////				//frm.findElement(btnLocator);
-//		
-//		WebElement btn = frm.findElement(By.className("close"));
-////		WebElement btn = frm.findElement(By.cssSelector("button[class='btn btn-secondary']"));
-//		System.out.println("Close->FormFadeShow -> " + btn.getText()); // TODO - remove or log
-//		btn.click();
-//		
-////		contextManager.closeCurrentContext();
-//	}
-	
+		
 	@Override
 	public void close() {
 		ButtonClicker.clickUntilNotVisible(driver, By.className("close"), 25);
-//		By btnLocator = By.className("close");		
-//		int control = 0;
-//		while(ExpectedConditions.visibilityOfElementLocated(btnLocator) != null && ++control < 100) {
-//			WebElement btn = frm.findElement(btnLocator);
-//			System.out.println("Close->FormFadeShow -> " + btn.getText()); // TODO - remove or log
-//			btn.click();
-//		}
-//		contextManager.closeCurrentContext();
+		contextManager.closeCurrentContext();
 	}
 	
-	private WebElement getCloseBtn() {
-		return frm.findElement(By.className("close"));
+	@Override
+	public ContextId getContextId() {
+		return new ContextId(this.getClass().getSimpleName(), "None"); // TODO - IMPLEMENT 
 	}
 
+	@Override
+	public void setContainer() {
+		logger.error("NOT IMPLEMENTED");
+	}
+
+	@Override
+	public void setHeader() {
+		logger.error("NOT IMPLEMENTED");
+	}
 }

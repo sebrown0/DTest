@@ -11,9 +11,9 @@ import context_manager.ContextState;
  * @author Steve Brown
  *
  */
-public class StateModalForm extends State {
+public class StateHeaderForm extends State {
 	
-	public StateModalForm(ContextState context) {
+	public StateHeaderForm(ContextState context) {
 		super(context);
 	}
 	
@@ -37,6 +37,6 @@ public class StateModalForm extends State {
 	}
 	@Override
 	public boolean isDefaultState() {
-		return true;
+		return false;
 	}
 }

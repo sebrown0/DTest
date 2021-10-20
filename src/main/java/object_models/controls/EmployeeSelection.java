@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import context_manager.ContextId;
 import context_manager.ContextManager;
 import controls.Control;
 import object_models.element.ComboSelect;
@@ -75,11 +76,40 @@ public final class EmployeeSelection extends FormModal implements Control {
 	
 	public ComboSelect filterSelect() {
 		return getSelectBox("SelectURLNCA2");
-	}
-	
+	}	
 	
 	private ComboSelect getSelectBox(String id) {
 		WebElement select = topLevelContainer.findElement(By.cssSelector("select[name='" + id + "']")); 
 		return new ComboSelect(select); 
+	}
+	
+	@Override
+	public void close() {
+		logger.error("NOT IMPLEMENTED");
+	}
+	@Override
+	public void waitForLoad() {
+		logger.error("NOT IMPLEMENTED");
+	}
+	@Override
+	public void setContextState() {
+		logger.error("NOT IMPLEMENTED");
+	}
+	@Override
+	public void setContainer() {
+		logger.error("NOT IMPLEMENTED");		
+	}
+	@Override
+	public void setHeader() {
+		logger.error("NOT IMPLEMENTED");
+	}
+	@Override
+	public void setTitle() {
+		logger.error("NOT IMPLEMENTED");
+	}
+	@Override
+	public ContextId getContextId() {
+		logger.error("NOT IMPLEMENTED");
+		return null;
 	}
 }
