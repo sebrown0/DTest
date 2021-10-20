@@ -105,8 +105,10 @@ public class ContextManager {
 		}			
 	}
 	
-	public void moveToNextStateInCurrentContext(){
-		queue.getCurrentContext().moveNext();
+	public State moveToNextStateInCurrentContext(){
+		ContextState contextState = queue.getCurrentContext();
+		contextState.moveNext();
+		return contextState.getState();
 	}
 	
 	private void setDefaultStateAfterClosingContext() {				

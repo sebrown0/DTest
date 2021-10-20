@@ -26,11 +26,19 @@ public abstract class FormWithIFrame extends FormModal {
 
 	private void switchToIFrame(WebDriver driver, String iFrameName) {
 		iFrame = new IFrame(driver, By.cssSelector("iframe[name='" + iFrameName + "']"));
-		iFrame.switchUsingLocator();
+//		iFrame.switchUsingLocator();
 		super.contextManager
-			.setNextState(new StateIframe(super.contextManager.getCurrentContext()))
+			.setNextState(new StateIframe(super.contextManager.getCurrentContext(), iFrame))
 			.moveToNextStateInCurrentContext();		
 	}
+	
+//	private void switchToIFrame(WebDriver driver, String iFrameName) {
+//		iFrame = new IFrame(driver, By.cssSelector("iframe[name='" + iFrameName + "']"));
+//		iFrame.switchUsingLocator();
+//		super.contextManager
+//			.setNextState(new StateIframe(super.contextManager.getCurrentContext()))
+//			.moveToNextStateInCurrentContext();		
+//	}
 	
 	public WebElement getIFrameElement() {
 		return iFrame.getIFrameElement();

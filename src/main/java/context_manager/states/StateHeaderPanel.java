@@ -6,6 +6,7 @@ package context_manager.states;
 import java.util.Optional;
 
 import context_manager.ContextState;
+import object_models.helpers.IFrame;
 import object_models.panels.JsPanelControlBar;
 
 /**
@@ -14,15 +15,17 @@ import object_models.panels.JsPanelControlBar;
  */
 public class StateHeaderPanel extends State {
 	private JsPanelControlBar controlBar;
+	private IFrame iFrame;
 	
-	public StateHeaderPanel(ContextState context, JsPanelControlBar controlBar) {
+	public StateHeaderPanel(ContextState context, JsPanelControlBar controlBar, IFrame iFrame) {
 		super(context);
 		this.controlBar = controlBar;
+		this.iFrame = iFrame;
 	}
 	
 	@Override
 	public Optional<State> getNext() {		
-		return Optional.of(new StateIframe(super.context));
+		return Optional.of(new StateIframe(super.context, iFrame));
 	}
 	
 	@Override

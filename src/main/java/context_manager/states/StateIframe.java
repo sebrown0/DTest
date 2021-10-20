@@ -6,15 +6,18 @@ package context_manager.states;
 import java.util.Optional;
 
 import context_manager.ContextState;
+import object_models.helpers.IFrame;
 
 /**
  * @author Steve Brown
  *
  */
 public class StateIframe extends State {
-		
-	public StateIframe(ContextState context) {
-		super(context);	
+	private IFrame iFrame;
+	
+	public StateIframe(ContextState context, IFrame iFrame) {
+		super(context);
+		this.iFrame = iFrame;
 	}
 
 	@Override
@@ -30,8 +33,11 @@ public class StateIframe extends State {
 	
 	@Override
 	public void switchToMe() {
+		System.out.println("StateIframe->switchToMe"); // TODO - remove or log
+		iFrame.switchUsingLocator();
+		 	
 		// TODO Auto-generated method stub
-		logger.error("switchToMe not implemented!");
+//		logger.error("switchToMe not implemented!");
 	}
 
 	@Override

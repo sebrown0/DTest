@@ -19,10 +19,7 @@ import context_manager.ContextId;
 import context_manager.ContextIdGetter;
 import context_manager.ContextManager;
 import context_manager.ContextSetter;
-import context_manager.ContextState;
 import context_manager.contexts.ContextPanel;
-import context_manager.states.State;
-import context_manager.states.StateHeaderPanel;
 import exceptions.PanelException;
 import object_models.forms.ContainerAction;
 import object_models.helpers.closers.CloserPanel;
@@ -33,13 +30,13 @@ import object_models.helpers.title.TitlePanel;
  * @author Steve Brown
  *
  */
-public class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter { 
+public abstract class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter { 
 	protected WebDriver driver;
 	protected ContextManager contextManager;
 	protected Logger logger = LogManager.getLogger();
+	protected String expectedTitle;
 	
-	private PageTitle title = null;
-	private String expectedTitle;
+	private PageTitle title = null;	
 	private Optional<String> panelId;	
 	private WebElement container;
 	private JsPanelHeaderBar headerBar;
@@ -59,6 +56,9 @@ public class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter 
 		setContext();
 		setContextState();		
 	}
+	
+	// StateHeaderPanel needs an IFrame.
+	public abstract void setContextState();
 	
 	private void waitForLoad(ExpectedCondition<?> expectedConditionFound) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -88,11 +88,15 @@ public class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter 
 		headerBar = new JsPanelHeaderBar(container);
 	}
 
-	private void setContextState() {
-		ContextState con = contextManager.getCurrentContext();			 	
-		State header = new StateHeaderPanel(con, headerBar.getControlBar());		
-		con.setState(header);
+	protected JsPanelControlBar getControlBar() {
+		return headerBar.getControlBar();
 	}
+	
+//	private void setContextState() {
+//		ContextState con = contextManager.getCurrentContext();			 	
+//		State header = new StateHeaderPanel(con, headerBar.getControlBar(), null);		
+//		con.setState(header);
+//	}
 	
 	@Override
 	public void setContext() {		
