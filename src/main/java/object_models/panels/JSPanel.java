@@ -11,14 +11,15 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import context_manager.ContextState;
 import context_manager.ContextId;
 import context_manager.ContextIdGetter;
 import context_manager.ContextManager;
 import context_manager.ContextSetter;
+import context_manager.ContextState;
 import context_manager.contexts.ContextPanel;
 import context_manager.states.State;
 import context_manager.states.StateHeaderPanel;
@@ -50,7 +51,7 @@ public class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter 
 		this.expectedTitle = expectedTitle;
 		this.contextManager = contextManager;		
 		
-		waitForLoad();		
+		waitForLoad(ExpectedConditions.attributeContains(TITLE_SELECTOR, "innerHTML", expectedTitle));		
 		setPanelId();
 		setContainer();
 		setTitle(); //SHOULD THIS BE PART OF THE HEADER BAR???
@@ -59,10 +60,10 @@ public class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter 
 		setContextStateToPanel();		
 	}
 	
-	private void waitForLoad() {
+	private void waitForLoad(ExpectedCondition<?> expectedConditionFound) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		try {
-			wait.until(ExpectedConditions.attributeContains(TITLE_SELECTOR, "innerHTML", expectedTitle));	
+			wait.until(expectedConditionFound);
 		} catch (Exception e) {
 			logger.error("Could not load panel [" + expectedTitle + "]");
 			close();
@@ -106,6 +107,7 @@ public class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter 
 	@Override
 	public void close() {
 		logger.info("** Depreciated. Use ContextManager **");
+		System.out.println("** Depreciated. Use ContextManager **"); // TODO - remove or log 	
 		
 		CloserPanel closer = new CloserPanel(driver);
 		try {

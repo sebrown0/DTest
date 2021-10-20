@@ -123,10 +123,6 @@ public abstract class Context implements ContextState, ContextCloser {
 		State s = currentState;
 		State top = s;
 
-		if(contextId.getExpectedName().equalsIgnoreCase("Employee Document Management")) {
-			System.out.println("Employee Document Management"); // TODO - remove or log 	
-		}
- 	
 		while (s != null) {
 			if(s.getPrev() != null && s.getPrev().isPresent()) {
 				s = s.getPrev().get();

@@ -33,6 +33,10 @@ import context_manager.states.State;
  * 
  * 6. When looking for a state, should the context be checked?
  * 
+ * 7. Add a DQueue for states as well as contexts.
+ *    This would eliminate the need to loop thru state to get to
+ *    the top or bottom.
+ * 
  * USE GIT BRANCH context_manager.
  */
 public class ContextManager {
@@ -112,7 +116,6 @@ public class ContextManager {
 //			System.out.println("Current context is now [" + cs.getContextId() + "]. State (default) is [" + defaultState + "]"); // TODO - remove or log 	
 			logger.debug("Current context is now [" + cs.getContextId() + "]. State (default) is [" + defaultState + "]");
 			cs.setCurrentState(defaultState);
-//			cs.setState(defaultState);
 		}else {
 //			System.out.println("Current context is now [" + cs.getContextId() + "]. Default state not found so state is current [" + cs.getState() + "]"); // TODO - remove or log 	
 			logger.debug("Current context is now [" + cs.getContextId() + "]. Default state not found so state is current [" + cs.getState() + "]");

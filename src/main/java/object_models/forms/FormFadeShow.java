@@ -15,6 +15,7 @@ import context_manager.ContextId;
 import context_manager.ContextManager;
 import context_manager.ContextState;
 import context_manager.states.StateModalForm;
+import object_models.helpers.ButtonClicker;
 import object_models.helpers.title.PageTitle;
 import object_models.helpers.title.Title;
 
@@ -26,13 +27,14 @@ public class FormFadeShow extends FormModal {
 	WebDriverWait wait;
 	WebElement frm;
 	
-	
 	public FormFadeShow(WebDriver driver, ContextManager contextManager) {
-		super(driver, contextManager);		
+		super(driver, contextManager);
+		
+//		wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 	}
 
 	@Override
-	protected void waitForLoad() {
+	protected void waitForLoad() {		
 		wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 		frm = wait.until(
 				ExpectedConditions.visibilityOfElementLocated(
@@ -50,18 +52,38 @@ public class FormFadeShow extends FormModal {
 		return new Title("", driver, By.className("modal-body"));
 	}
 	
+//	@Override
+//	public void close() {
+////		WebDriverWait btnWait = new WebDriverWait(driver, Duration.ofSeconds(3));
+////		By btnLocator = By.className("close");
+////		WebElement btn = frm.findElement(btnLocator);
+////		btnWait.until(ExpectedConditions.elementToBeClickable(btnLocator));
+////		btn.click();
+////				//frm.findElement(btnLocator);
+//		
+//		WebElement btn = frm.findElement(By.className("close"));
+////		WebElement btn = frm.findElement(By.cssSelector("button[class='btn btn-secondary']"));
+//		System.out.println("Close->FormFadeShow -> " + btn.getText()); // TODO - remove or log
+//		btn.click();
+//		
+////		contextManager.closeCurrentContext();
+//	}
+	
 	@Override
 	public void close() {
-		System.out.println("Close->FormFadeShow"); // TODO - remove or log 	
-		WebElement btn = frm.findElement(By.className("close"));
-		btn.click();
-		contextManager.closeCurrentContext();
-//		CloserModalForm closer = new CloserModalForm(driver);
-//		try {
-//			closer.close();
-//		} catch (Exception e) {
-////			logger.error("Could not close form [" + title.getExpected() + "]");
-//		}		
+		ButtonClicker.clickUntilNotVisible(driver, By.className("close"), 25);
+//		By btnLocator = By.className("close");		
+//		int control = 0;
+//		while(ExpectedConditions.visibilityOfElementLocated(btnLocator) != null && ++control < 100) {
+//			WebElement btn = frm.findElement(btnLocator);
+//			System.out.println("Close->FormFadeShow -> " + btn.getText()); // TODO - remove or log
+//			btn.click();
+//		}
+//		contextManager.closeCurrentContext();
+	}
+	
+	private WebElement getCloseBtn() {
+		return frm.findElement(By.className("close"));
 	}
 
 }

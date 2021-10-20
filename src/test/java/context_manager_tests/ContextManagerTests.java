@@ -16,7 +16,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import context_manager.ContextId;
 import context_manager.ContextManager;
-import context_manager.ContextQueue;
 import context_manager.ContextState;
 import context_manager.contexts.Context;
 import context_manager.contexts.ContextPayroll;
@@ -41,6 +40,20 @@ import xml_reader.config_file.ConfigReader;
  * @author Steve Brown
  *
  * Test the elements of the home page for payroll.
+ * 
+ * ISSUES - TODO
+ * -------------
+ * 1. Tests run to the end but with errors.
+ * 		
+ * 		getContextFromQueue_usingContextId_object, 
+ * 		getContextFromQueue_usingContextId_actual & 
+ * 		removeContextFromQueue_usingContextId_actual
+ * 
+ * 		Have error this.actualId is null.
+ * 		
+ * 		This is probably because the context has been 
+ * 		reverted to a module and there is no actual id.
+ * 
  */
 @SuppressWarnings("unlikely-arg-type")
 @ExtendWith({ 
@@ -151,17 +164,10 @@ class ContextManagerTests {
 		menu.clickAndLoad(EmployeeDetails.class);
 		assertEquals("Employee Details:jsPanel-2", manager.getContextId());
 		
-//		System.out.println("One"); // TODO - remove or log 	
-//		manager.printQueue();
-		
 		manager.closeCurrentStateInCurrentContext();
 		manager.closeCurrentStateInCurrentContext();
 		assertTrue(manager.getCurrentContext().getState() instanceof StateLeftMenu);
-		assertEquals("Employee Document Management:jsPanel-1", manager.getContextId());
-		
-//		System.out.println("Two"); // TODO - remove or log
-//		manager.printContexts();
-		manager.printQueue();
+		assertEquals("Employee Document Management:jsPanel-1", manager.getContextId());		
 	}
 
 	@Test
@@ -189,12 +195,11 @@ class ContextManagerTests {
 		assertTrue(manager.getCurrentContext().isStateInContext(StateTop.class));
 	}
 	
-//	@Test
-//	// STUCK HERE!
-//	void addNewStateToContext() {
-//		Optional<State> s = manager.moveToStateInCurrentContext(StateLeftMenu.class);		
-//		assertTrue(s.get() instanceof StateLeftMenu);
-//	}
+	@Test
+	void addNewStateToContext() {
+		Optional<State> s = manager.moveToStateInCurrentContext(StateLeftMenu.class);		
+		assertTrue(s.get() instanceof StateLeftMenu);
+	}
 
 	@Test
 	void isStateInContext() {
