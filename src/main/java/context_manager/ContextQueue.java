@@ -87,6 +87,21 @@ public class ContextQueue {
 		}
 		return Optional.ofNullable(returnVal);
 	}
+	
+	//0 = not found. 1 = head of queue.
+	public int getPositionInQueue(Object obj) {		
+		int pos = 0;
+		for (ContextState cs : queue) {
+			pos++;
+			ContextId id = cs.getContextId();
+			System.out.println("getPositionInQueue->" + id); // TODO - remove or log 	
+			if(id.equals(obj)) {
+				break;
+			}
+			logger.debug("Unable to find position for [" + obj + "]");
+		}
+		return pos;
+	}
 
 	public Deque<ContextState> getQueue() {
 		return queue;

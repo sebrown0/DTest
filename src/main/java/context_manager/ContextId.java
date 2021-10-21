@@ -32,10 +32,10 @@ public class ContextId {
 		this.actualId = actualId;
 	}
 	
-	public ContextId(String expectedName, Optional<String> actualId) {
-		this.expectedName = expectedName;
-		getIdFromOptional(actualId);
-	}
+//	public ContextId(String expectedName, Optional<String> actualId) {
+//		this.expectedName = expectedName;
+//		getIdFromOptional(actualId);
+//	}
 	
 	private void getIdFromOptional(Optional<String> optionalId) {		
 		optionalId.ifPresent(id -> actualId = id);

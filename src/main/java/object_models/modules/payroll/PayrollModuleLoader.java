@@ -41,7 +41,7 @@ public class PayrollModuleLoader implements ModuleElements {
 				new ContextIdGetter() {			
 						@Override
 						public ContextId getContextId() {							
-							return new ContextId("Payroll Module", Optional.empty());
+							return new ContextId("Payroll Module", "Payroll Module");
 						}
 					});				
 	}

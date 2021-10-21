@@ -38,8 +38,10 @@ public class StateHeaderForm extends State {
 		// TODO Auto-generated method stub
 //		context.getDriver().findElement(null);
 //		logger.error("switchToMe not implemented!");
-		System.out.println("StateHeaderForm->switchToMe"); // TODO - remove or log 	
-		context.switchToDefaultContent();
+		System.out.println("StateHeaderForm->switchToMe"); // TODO - remove or log
+		
+		
+		
 		System.out.println("T->" + context.getDriver().getTitle()); // TODO - remove or log 	
 
 		myContainer.findElement(byHeaderLocator);

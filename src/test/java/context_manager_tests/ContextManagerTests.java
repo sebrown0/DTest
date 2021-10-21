@@ -90,7 +90,7 @@ class ContextManagerTests {
 	
 	@Test
 	void checkContextId_equalsValue() {
-		ContextId id = new ContextId("expected", Optional.of("actual"));
+		ContextId id = new ContextId("expected", "actual");
 		// Obj == Obj
 		assertTrue(id.equals(id));
 		// String
@@ -101,10 +101,10 @@ class ContextManagerTests {
 		assertTrue(id.equals("actual"));
 		assertFalse(id.equals("act"));
 		// Object
-		assertTrue(id.equals(new ContextId("expected", Optional.of("actual"))));
-		assertTrue(id.equals(new ContextId("expect", Optional.of("actual"))));
-		assertTrue(id.equals(new ContextId("expected", Optional.of("act"))));
-		assertFalse(id.equals(new ContextId("expect", Optional.of("act"))));
+		assertTrue(id.equals(new ContextId("expected", "actual")));
+		assertTrue(id.equals(new ContextId("expect", "actual")));
+		assertTrue(id.equals(new ContextId("expected", "act")));
+		assertFalse(id.equals(new ContextId("expect", "act")));
 	}
 	
 	@Test
@@ -126,7 +126,7 @@ class ContextManagerTests {
 	@Test
 	void getContextFromQueue_usingContextId_object() {
 		menu.clickAndLoad(Documents.MENU_TITLE);
-		ContextState cs = manager.findContext(new ContextId("Employee Document Management", Optional.of("jsPanel-1"))).get();
+		ContextState cs = manager.findContext(new ContextId("Employee Document Management", "jsPanel-1")).get();
 		manager.closeCurrentStateInCurrentContext();
 		assertEquals("Employee Document Management", cs.getContextId().getExpectedName());
 	}
@@ -256,12 +256,22 @@ class ContextManagerTests {
 		ContextState doc = manager.getPenultimateContext().get();
 		assertEquals("Employee Document Management", doc.getContextId().getExpectedName());
 	}
-	
+
 	@Test	
 	void penultimateContext_doesNotExist() {
 		Optional<ContextState> con = manager.getPenultimateContext();
 		con.ifPresent(c -> { 
 			fail("Should be no penultimate context [" + c.getContextId() + "]"); 
 		});
+	}
+	
+	@Test	
+	void getPosInQueue() {
+		menu.clickAndLoad(Banks.class);
+		menu.clickAndLoad(MonthlyReports.class);
+		menu.clickAndLoad(Documents.class);
+//		assertEquals(4, manager.getQueue().getPositionInQueue(MonthlyReports.PANEL_TITLE + ":jsPanel-2"));
+
+		assertEquals(3, manager.getQueue().getPositionInQueue(manager.getPenultimateContext()));		
 	}
 }
