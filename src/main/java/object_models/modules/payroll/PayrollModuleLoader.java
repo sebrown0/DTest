@@ -3,8 +3,6 @@
  */
 package object_models.modules.payroll;
 
-import java.util.Optional;
-
 import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextId;
@@ -43,7 +41,12 @@ public class PayrollModuleLoader implements ModuleElements {
 						public ContextId getContextId() {							
 							return new ContextId("Payroll Module", "Payroll Module");
 						}
-					});				
+
+						@Override
+						public String getContextExpectedName() {
+							return "Payroll Module";
+						}
+					}, null); // setting a NULL container action!				
 	}
 	
 	@Override

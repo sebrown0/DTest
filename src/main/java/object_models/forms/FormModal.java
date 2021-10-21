@@ -28,7 +28,6 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 	protected Header header;
 	protected WebElement container;
 		
-	@SuppressWarnings("unused")
 	private String expectedTitle;	
 	
 	public FormModal(WebDriver driver, String expectedTitle, ContextManager contextManager) {
@@ -39,6 +38,11 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 		
 		wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 		initialise();
+	}
+	
+	@Override
+	public String getContextExpectedName() {
+		return expectedTitle;
 	}
 	
 	private void initialise() {
@@ -59,7 +63,7 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 	
 	@Override
 	public void setContext() {		
-		contextManager.setContext(new ContextForm(contextManager, this));
+		contextManager.setContext(new ContextForm(contextManager, this, this));
 	}	
 	
 	@Override

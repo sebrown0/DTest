@@ -16,6 +16,7 @@ import context_manager.ContextManager;
 import context_manager.ContextState;
 import context_manager.states.State;
 import context_manager.states.StateTop;
+import object_models.forms.ContainerAction;
 
 /**
  * @author Steve Brown
@@ -29,14 +30,16 @@ public abstract class Context implements ContextState, ContextCloser {
 	
 	private ContextManager contextManager;
 	private ContextId contextId;
+	private ContainerAction containerAction;
 	private State firstState;
 	private State callingState;
 	private State currentState;
 	private State searchedState;
 		
-	public Context(ContextManager contextManager, ContextIdGetter idGetter) {
+	public Context(ContextManager contextManager, ContextIdGetter idGetter, ContainerAction containerAction) {
 		this.contextManager = contextManager;		
-	
+		this.containerAction = containerAction;
+		
 		setContextId(idGetter);
 		setFirstState();
 		setCallingState();
@@ -54,6 +57,11 @@ public abstract class Context implements ContextState, ContextCloser {
 	private void setCallingState() {
 		callingState = contextManager.getCallingState().getState(this);
 		this.setState(callingState);
+	}
+		
+	@Override
+	public ContainerAction getContinerAction() {
+		return containerAction;
 	}
 		
 	@Override

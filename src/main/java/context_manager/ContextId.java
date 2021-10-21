@@ -3,8 +3,6 @@
  */
 package context_manager;
 
-import java.util.Optional;
-
 /**
  * @author Steve Brown
  *
@@ -31,16 +29,7 @@ public class ContextId {
 		this.expectedName = expectedName;
 		this.actualId = actualId;
 	}
-	
-//	public ContextId(String expectedName, Optional<String> actualId) {
-//		this.expectedName = expectedName;
-//		getIdFromOptional(actualId);
-//	}
-	
-	private void getIdFromOptional(Optional<String> optionalId) {		
-		optionalId.ifPresent(id -> actualId = id);
-	}
-	
+		
 	public String getId() {
 		return expectedName + ":" + actualId;
 	}
@@ -64,6 +53,9 @@ public class ContextId {
 			checkForStringMatch((String) obj);
 		}else if(obj instanceof ContextId){
 			checkForObjectMatch((ContextId) obj);
+		}else if(obj instanceof ContextState){
+			ContextState cs = (ContextState) obj;
+			checkForObjectMatch(cs.getContextId());
 		}
 		return matchFound;		
 	}

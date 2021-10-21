@@ -10,6 +10,7 @@ import context_manager.ContextIdGetter;
 import context_manager.ContextManager;
 import context_manager.ContextState;
 import context_manager.states.State;
+import object_models.forms.ContainerAction;
 
 /**
  * @author Steve Brown
@@ -17,8 +18,8 @@ import context_manager.states.State;
  */
 public final class ContextPayroll extends Context {
 	
-	public ContextPayroll(ContextManager contextManager, ContextIdGetter idGetter) {
-		super(contextManager, idGetter);	
+	public ContextPayroll(ContextManager contextManager, ContextIdGetter idGetter, ContainerAction containerAction) {
+		super(contextManager, idGetter, containerAction);	
 	}
 		
 	@Override

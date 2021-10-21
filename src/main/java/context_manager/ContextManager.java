@@ -241,9 +241,6 @@ public class ContextManager {
 		});
 	}
 	
-	public void QuitApp() {
-		driver.close();
-	}	
 	// Actions - End
 	
 	// Helpers
@@ -289,6 +286,9 @@ public class ContextManager {
 	// Queue
 	public ContextQueue getQueue() {
 		return queue;
+	}
+	public Optional<ContextState> getPrevContext(ContextState curr){
+		return queue.getPrev(curr);
 	}
 	public Optional<ContextState> findContext(Object obj) {
 		return queue.findContext(obj);

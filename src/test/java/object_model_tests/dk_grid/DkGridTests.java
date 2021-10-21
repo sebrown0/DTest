@@ -57,7 +57,7 @@ public class DkGridTests {
 	private static void loadGrid() {
 		Optional<ContainerAction> obj = menuPayroll
 				.clickParent(EmployeeDetails.MENU_PARENT_NAME)
-				.clickAndLoad(EmployeeDetails.MENU_TITLE);
+				.clickAndLoad(EmployeeDetails.class);
 		
 		EmployeeDetails empDetails = (EmployeeDetails) obj.get();
 		

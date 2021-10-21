@@ -3,9 +3,8 @@
  */
 package context_manager;
 
-import java.util.Deque;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +16,8 @@ import org.apache.logging.log4j.Logger;
  * A queue of context (states).
  */
 public class ContextQueue {
-	private Deque<ContextState> queue = new LinkedList<>();
+	private List<ContextState> queue = new ArrayList<>();
+//	private Deque<ContextState> queue = new LinkedList<>();
 	private Logger logger = LogManager.getLogger();
 	
 	public void addContextToQueue(ContextState contextState) {
@@ -30,35 +30,44 @@ public class ContextQueue {
 		}
 		
 	}
-	
-	public Optional<ContextState> getPenultimate() {
-		Iterator<ContextState> it = queue.iterator();
-		Optional<ContextState> penultimate = Optional.empty();
-		int penultimateContext = getSize() - 1;
 
-		for (int i = 1; i <= penultimateContext ; i++) {
-			penultimate = Optional.of(it.next());			
+	public Optional<ContextState> getPenultimate() {
+//		int numElements = getSize();
+		if(getSize()>1) {
+			return Optional.of(queue.get(lastIdx()-1));	
+		}else {
+			return Optional.empty();
 		}
-		return penultimate;
+		
 	}
-	
+
+	private int lastIdx() {
+		return getSize()-1;
+	}
 	public int getSize() {		
 		return queue.size();
 	}
 	
 	public ContextState getCurrentContext() {
-		return queue.peekLast();
+		return queue.get(lastIdx());
 	}
 	
 	public ContextState getAndRemoveCurrentContext() {
 		logger.debug("Removing context [" + getCurrentContext().getContextId() + "] from context queue");
-		return queue.removeLast();		
+		return removeLast();
+	}
+	
+	private ContextState removeLast() {
+		ContextState cur = getCurrentContext(); 
+		queue.remove(cur);
+		return cur;
 	}
 	
 	public boolean removeCurrentContext() {
 		if(queue.isEmpty() == false) {			
 			logger.debug("Removing context [" + getCurrentContext().getContextId() + "]");
-			queue.removeLast();			 	
+//			queue.removeLast();
+			removeLast();		
 			return true;
 		}else {
 			return false;
@@ -88,23 +97,31 @@ public class ContextQueue {
 		return Optional.ofNullable(returnVal);
 	}
 	
-	//0 = not found. 1 = head of queue.
 	public int getPositionInQueue(Object obj) {		
 		int pos = 0;
-		for (ContextState cs : queue) {
+		for (ContextState cs : queue) {			
+			ContextId id = cs.getContextId();			
+			if(id.equals(obj)) { break;	}
 			pos++;
-			ContextId id = cs.getContextId();
-			System.out.println("getPositionInQueue->" + id); // TODO - remove or log 	
-			if(id.equals(obj)) {
-				break;
-			}
-			logger.debug("Unable to find position for [" + obj + "]");
 		}
 		return pos;
 	}
+	
+	public Optional<ContextState> getPrev(ContextState curr){
+		int currPos = getPositionInQueue(curr);
+		if(currPos >= 1) {
+			return Optional.of(queue.get(currPos-1));
+		}else {
+			return Optional.empty();
+		}
+	}
 
-	public Deque<ContextState> getQueue() {
+	public List<ContextState> getQueue() {
 		return queue;
 	}
+	
+//	public Deque<ContextState> getQueue() {
+//		return queue;
+//	}
 	
 }

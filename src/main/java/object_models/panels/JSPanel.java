@@ -42,7 +42,7 @@ public abstract class JSPanel implements ContainerAction, ContextSetter, Context
 	private JsPanelHeaderBar headerBar;
 		
 	private static final By TITLE_SELECTOR = By.cssSelector("span[class='jsPanel-title']");
-	
+		
 	public JSPanel(WebDriver driver, String expectedTitle, ContextManager contextManager) {
 		this.driver = driver;
 		this.expectedTitle = expectedTitle;
@@ -55,6 +55,11 @@ public abstract class JSPanel implements ContainerAction, ContextSetter, Context
 		setHeaderBar();
 		setContext();
 		setContextState();		
+	}
+	
+	@Override
+	public String getContextExpectedName() {
+		return expectedTitle;
 	}
 	
 	// StateHeaderPanel needs an IFrame.
@@ -100,7 +105,7 @@ public abstract class JSPanel implements ContainerAction, ContextSetter, Context
 	
 	@Override
 	public void setContext() {		
-		contextManager.setContext(new ContextPanel(contextManager, this, headerBar));
+		contextManager.setContext(new ContextPanel(contextManager, this, headerBar, this));
 	}
 	
 	@Override

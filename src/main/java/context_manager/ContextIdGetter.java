@@ -9,4 +9,5 @@ package context_manager;
  */
 public interface ContextIdGetter {
 	ContextId getContextId();
+	String getContextExpectedName();
 }

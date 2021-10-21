@@ -46,7 +46,7 @@ public final class InitialisePayroll_Tests {
 		leftMenu = hp.getLeftMenu();
 		contPay = leftMenu
 				.clickParent(InitialisePayroll.MENU_PARENT_NAME)
-				.clickAndLoad(InitialisePayroll.MENU_TITLE);
+				.clickAndLoad(InitialisePayroll.class);
 
 		if(contPay.isPresent()) {
 			initPay = (InitialisePayroll) contPay.get();

@@ -56,7 +56,7 @@ class EmployeeDetailsTests {
 		// Load the menu.
 		menu = homepagePayroll.getLeftMenu();
 		// Load the employee details page.
-		empDetails = (EmployeeDetails) menu.clickParent("Employees").clickAndLoad(EmployeeDetails.MENU_TITLE).get();
+		empDetails = (EmployeeDetails) menu.clickParent("Employees").clickAndLoad(EmployeeDetails.class).get();
 		// Get the employee we're going to use with required fields from the provider.
 		EmployeeProvider empProvider = new EmployeeFromXml();
 		emp = empProvider.getEmployeeRequired("1");
@@ -88,7 +88,7 @@ class EmployeeDetailsTests {
 		WebDriver driver = homepagePayroll.getWebDriver();
 		driver.switchTo().defaultContent();
 //		System.out.println("c1->" + driver.findElements(By.tagName("iframe")).size());
-		menu.clickParent("Employees").clickAndLoad(ContactNumbers.MENU_TITLE).get();
+		menu.clickParent("Employees").clickAndLoad(ContactNumbers.class).get();
 		driver.switchTo().defaultContent();
 //		System.out.println("c2->" + driver.findElements(By.tagName("iframe")).size());
 		WebElement p = driver.findElement(By.id("jsPanel-2"));

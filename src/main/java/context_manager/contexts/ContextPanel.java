@@ -10,6 +10,7 @@ import context_manager.ContextIdGetter;
 import context_manager.ContextManager;
 import context_manager.ContextState;
 import context_manager.states.State;
+import object_models.forms.ContainerAction;
 import object_models.panels.JsPanelControlBar;
 import object_models.panels.JsPanelHeaderBar;
 
@@ -20,8 +21,10 @@ import object_models.panels.JsPanelHeaderBar;
 public final class ContextPanel extends Context {
 	private JsPanelControlBar bar;
 	
-	public ContextPanel(ContextManager contextManager, ContextIdGetter idGetter, JsPanelHeaderBar bar) {
-		super(contextManager, idGetter);
+	public ContextPanel(ContextManager contextManager, ContextIdGetter idGetter, 
+												JsPanelHeaderBar bar, ContainerAction containerAction) {
+		super(contextManager, idGetter, containerAction);
+		
 		this.bar = bar.getControlBar();
 	}
 		

@@ -82,7 +82,7 @@ class ContextManagerTests {
 
 	@Test
 	void checkContextId() {
-		menu.clickAndLoad(Documents.MENU_TITLE);
+		menu.clickAndLoad(Documents.class);
 		ContextId id = manager.getCurrentContext().getContextId();
 		manager.closeCurrentStateInCurrentContext();
 		assertEquals("Employee Document Management:jsPanel-1", id.getId());
@@ -109,7 +109,7 @@ class ContextManagerTests {
 	
 	@Test
 	void checkContextIsInQueue() {
-		menu.clickAndLoad(Documents.MENU_TITLE);
+		menu.clickAndLoad(Documents.class);
 		ContextState cs = manager.getEndOfQueue();
 		manager.closeCurrentStateInCurrentContext();
 		assertTrue(cs.getContextId().equals("Employee Document Management"));
@@ -117,7 +117,7 @@ class ContextManagerTests {
 	
 	@Test
 	void getContextFromQueue_usingContextId_actual() {
-		menu.clickAndLoad(Documents.MENU_TITLE);
+		menu.clickAndLoad(Documents.class);
 		ContextState cs = manager.findContext("jsPanel-1").get();
 		manager.closeCurrentStateInCurrentContext();
 		assertEquals("Employee Document Management", cs.getContextId().getExpectedName());
@@ -125,7 +125,7 @@ class ContextManagerTests {
 	
 	@Test
 	void getContextFromQueue_usingContextId_object() {
-		menu.clickAndLoad(Documents.MENU_TITLE);
+		menu.clickAndLoad(Documents.class);
 		ContextState cs = manager.findContext(new ContextId("Employee Document Management", "jsPanel-1")).get();
 		manager.closeCurrentStateInCurrentContext();
 		assertEquals("Employee Document Management", cs.getContextId().getExpectedName());
@@ -133,7 +133,7 @@ class ContextManagerTests {
 	
 	@Test
 	void removeContextFromQueue_usingContextId_actual() {
-		menu.clickAndLoad(Documents.MENU_TITLE);
+		menu.clickAndLoad(Documents.class);
 		ContextState cs = manager.findContext("jsPanel-1").get();
 		boolean isRemoved = manager.removeContextFromQueueForContextId(cs.getContextId());
 		manager.closeCurrentStateInCurrentContext();
@@ -142,14 +142,14 @@ class ContextManagerTests {
 	
 	@Test
 	void loadDocument_and_checkState() {		
-		menu.clickAndLoad(Documents.MENU_TITLE);
+		menu.clickAndLoad(Documents.class);
 		manager.closeCurrentStateInCurrentContext();
 		assertTrue(manager.getCurrentContext().getState() instanceof StateLeftMenu);				
 	}
 
 	@Test
 	void loadDocuments_then_employeeDetails_then_close_employeeDetailsState_newStateShouldBeHeaderPanel() {
-		menu.clickAndLoad(Documents.MENU_TITLE);
+		menu.clickAndLoad(Documents.class);
 		assertEquals("Employee Document Management:jsPanel-1", manager.getContextId());
 		
 		menu.clickAndLoad(EmployeeDetails.class);
@@ -161,7 +161,7 @@ class ContextManagerTests {
 
 	@Test	
 	void loadDocuments_then_employeeDetails_then_close_employeeDetailsState_twice_newContextShouldBeDocuments() {
-		menu.clickAndLoad(Documents.MENU_TITLE);
+		menu.clickAndLoad(Documents.class);
 		assertEquals("Employee Document Management:jsPanel-1", manager.getContextId());
 		
 		menu.clickAndLoad(EmployeeDetails.class);
@@ -176,7 +176,7 @@ class ContextManagerTests {
 	@Test
 	void loadEmployeeBanks_then_loadDocuments() {
 		menu.clickAndLoad(Banks.class);
-		menu.clickAndLoad(Documents.MENU_TITLE);		
+		menu.clickAndLoad(Documents.class);		
 	}
 	
 	@Test
@@ -238,7 +238,7 @@ class ContextManagerTests {
 	
 	@Test
 	void loadDocuments_then_close_context_currentContext_shouldBe_ContextPayroll() {
-		menu.clickAndLoad(Documents.MENU_TITLE);		
+		menu.clickAndLoad(Documents.class);		
 		Context c = (Context) manager.closeCurrentContext().getCurrentContext();
 		assertTrue(c instanceof ContextPayroll);		
 		// Try and close the current (Payroll) context.
@@ -251,8 +251,8 @@ class ContextManagerTests {
 	void penultimateContext_exists() {
 		menu.clickAndLoad(Banks.class);
 		menu.clickAndLoad(MonthlyReports.class);
-		menu.clickAndLoad(Documents.MENU_TITLE);
-		menu.clickAndLoad(PayrollStatistics.MENU_TITLE);
+		menu.clickAndLoad(Documents.class);
+		menu.clickAndLoad(PayrollStatistics.class);
 		ContextState doc = manager.getPenultimateContext().get();
 		assertEquals("Employee Document Management", doc.getContextId().getExpectedName());
 	}
@@ -270,8 +270,36 @@ class ContextManagerTests {
 		menu.clickAndLoad(Banks.class);
 		menu.clickAndLoad(MonthlyReports.class);
 		menu.clickAndLoad(Documents.class);
-//		assertEquals(4, manager.getQueue().getPositionInQueue(MonthlyReports.PANEL_TITLE + ":jsPanel-2"));
+		ContextState penultimate = manager.getPenultimateContext().get();
+//		System.out.println("->" + penultimate.getContextId()); // TODO - remove or log 	
+		assertEquals(2, manager.getQueue().getPositionInQueue(penultimate));		
+	}
+	
+	@Test	
+	void findContextInQueue() {
+		menu.clickAndLoad(Banks.class);
+		menu.clickAndLoad(MonthlyReports.class);
+		menu.clickAndLoad(Documents.class);
+		assertEquals(
+				MonthlyReports.PANEL_TITLE + ":jsPanel-2", 
+				manager.findContext(MonthlyReports.PANEL_TITLE + ":jsPanel-2").get().getContextId().getId());		
+	}
 
-		assertEquals(3, manager.getQueue().getPositionInQueue(manager.getPenultimateContext()));		
+	@Test	
+	void findPrevContextInQueue() {
+		menu.clickAndLoad(Banks.class);
+		menu.clickAndLoad(MonthlyReports.class);
+		
+		ContextState forContext = manager.findContext(MonthlyReports.PANEL_TITLE + ":jsPanel-2").get();
+		ContextId prevId = manager.getPrevContext(forContext).get().getContextId(); 
+		assertEquals(Banks.PANEL_TITLE + ":jsPanel-1", prevId.getId());
+	}
+	
+	@Test	
+	void xxxxxx() {
+		menu.clickAndLoad(Banks.class);
+		menu.clickAndLoad(MonthlyReports.class);
+		Banks b = (Banks) menu.clickAndLoad(Banks.class).get();
+		assertEquals(Banks.PANEL_TITLE + ":jsPanel-1", b.getContextId().getId());
 	}
 }

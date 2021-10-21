@@ -34,7 +34,7 @@ class PanelTests {
 		// Load the menu.
 		menu = homepagePayroll.getLeftMenu();
 		// Load the employee details page.
-		empDetails = (EmployeeDetails) menu.clickParent("Employees").clickAndLoad(EmployeeDetails.MENU_TITLE).get();
+		empDetails = (EmployeeDetails) menu.clickParent("Employees").clickAndLoad(EmployeeDetails.class).get();
 	}
 	
 	@Test
@@ -63,7 +63,7 @@ class PanelTests {
 
 	@Test
 	void assasasaasasas() {
-		menu.clickParent("Employees").clickAndLoad(ContactNumbers.MENU_TITLE);
+		menu.clickParent("Employees").clickAndLoad(ContactNumbers.class);
 //		menu.clickParent("Employees").clickAndLoad(Banks.MENU_TITLE);
 	}
 	
