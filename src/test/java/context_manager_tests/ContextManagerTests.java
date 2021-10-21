@@ -271,7 +271,6 @@ class ContextManagerTests {
 		menu.clickAndLoad(MonthlyReports.class);
 		menu.clickAndLoad(Documents.class);
 		ContextState penultimate = manager.getPenultimateContext().get();
-//		System.out.println("->" + penultimate.getContextId()); // TODO - remove or log 	
 		assertEquals(2, manager.getQueue().getPositionInQueue(penultimate));		
 	}
 	

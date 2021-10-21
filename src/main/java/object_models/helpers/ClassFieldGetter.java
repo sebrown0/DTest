@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_models.left_menu.common;
+package object_models.helpers;
 
 import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
@@ -10,16 +10,16 @@ import org.apache.logging.log4j.Logger;
 /**
  * @author Steve Brown
  *
- * Retreive the field values for a Class<?>
+ * Retrieve the field values for a Class<?>
  */
-public class ClassFIeldGetter {
+public class ClassFieldGetter {
 	private Class<?> clazz;
 	private Logger logger = LogManager.getLogger();
-	private Optional<String> parentName;
-	private Optional<String> menuItemName;
-	private Optional<String> elementId;
+	private Optional<String> parentName = Optional.empty();
+	private Optional<String> menuItemName = Optional.empty();
+	private Optional<String> elementId = Optional.empty();
 	
-	public ClassFIeldGetter(Class<?> clazz) {
+	public ClassFieldGetter(Class<?> clazz) {
 		this.clazz = clazz;
 		setFields();
 	}
@@ -30,33 +30,30 @@ public class ClassFIeldGetter {
 		setElementId();
 	}
 	
-	public void setParentName() {
+	public void setParentName() {		
 		try {
 			parentName = Optional.ofNullable((String) clazz.getField("MENU_PARENT_NAME").get(null));
 		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
 			logger.error("Failed to get parent name using reflection");
-			parentName = Optional.empty();
 		}
 	}
 	
-	public void setMenuItemName() {
+	public void setMenuItemName() {		
 		try {
 			menuItemName = Optional.ofNullable((String) clazz.getField("MENU_TITLE").get(null));
 		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
 			logger.error("Failed to get menu name using reflection");
-			menuItemName = Optional.empty();
 		}
 	}
 	
-	public void setElementId() {
+	public void setElementId() {		
 		try {
 			elementId = Optional.ofNullable((String) clazz.getField("PANEL_TITLE").get(null));
 		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
 			logger.error("Failed to get element id using reflection");
-			elementId = Optional.empty();
 		}
 	}
-	
+		
 	public Optional<String> getParentName() {
 		return parentName;
 	}

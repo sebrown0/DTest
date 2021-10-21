@@ -26,6 +26,9 @@ import object_models.helpers.title.TitleModalFadeShow;
  *
  */
 public class FormFadeShow extends FormModal {
+	public static final String MENU_TITLE = "None";
+	public static final String PANEL_TITLE = "None";
+	
 	@SuppressWarnings("unused")
 	private WebElement container;
 	

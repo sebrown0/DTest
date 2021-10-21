@@ -1,27 +1,14 @@
 package object_model_tests.employee_creation;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.time.Duration;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import context_manager.states.StateHeaderPanel;
 import dto.Employee;
 import logging.TestResultLogger;
 import object_models.employee_creation.EmployeeCreationWizard;
 import object_models.forms.FormFadeShow;
-import object_models.helpers.title.PageTitle;
-import object_models.helpers.title.Title;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import object_models.top_right_nav_bar.all_elements.NavBarEmployeeCreation;

@@ -35,10 +35,10 @@ public class DropdownCombo extends FormWithIFrame implements Control {
 	private static final By byTable = By.id("myGrid1");
 	
 	public static final String MENU_TITLE = "Combos";
-	public static final String FORM_TITLE = "Dropdown Combo";
+	public static final String PANEL_TITLE = "Dropdown Combo";
 	
 	public DropdownCombo(WebDriver driver, Reload reloadEmpDetails, ContextManager contextManager) {
-		super(driver, FORM_TITLE, "_iframex-IPORTAL_POPUPS_MEDIUM4", contextManager);
+		super(driver, PANEL_TITLE, "_iframex-IPORTAL_POPUPS_MEDIUM4", contextManager);
 	
 		this.reloadEmpDetails = reloadEmpDetails;
 	}
@@ -74,7 +74,7 @@ public class DropdownCombo extends FormWithIFrame implements Control {
 	}
 	@Override
 	public ContextId getContextId() {		
-		return new ContextId(FORM_TITLE, "None");
+		return new ContextId(PANEL_TITLE, "None");
 	}
 	
 	/*

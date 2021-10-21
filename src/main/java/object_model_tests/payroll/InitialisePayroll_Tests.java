@@ -16,7 +16,7 @@ import logging.TestResultLogger;
 import object_models.dialog.DialogOkCancel;
 import object_models.element.ComboSelect;
 import object_models.forms.ContainerAction;
-import object_models.left_menu.common.LeftMenuActions;
+import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.payroll.InitialisePayroll;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
@@ -35,7 +35,7 @@ import xml_reader.config_file.ConfigReader;
 	TestResultLogger.class })
 public final class InitialisePayroll_Tests {
 	private static HomePage hp;
-	private static LeftMenuActions leftMenu;
+	private static LeftMenu leftMenu;
 	private static Optional<ContainerAction> contPay;
 	private static InitialisePayroll initPay;
 	private static boolean initPayrollLoaded = false;

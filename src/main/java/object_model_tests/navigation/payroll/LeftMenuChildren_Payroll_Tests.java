@@ -18,7 +18,7 @@ import object_models.left_menu.additional_hours.ApplyAdditionalHours;
 import object_models.left_menu.additional_hours.Authorisation;
 import object_models.left_menu.bulk_updates.ColaSalaryUpdates;
 import object_models.left_menu.bulk_updates.EmployeeCreation;
-import object_models.left_menu.common.LeftMenuActions;
+import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.employee_others.AbsenceEntitlements;
 import object_models.left_menu.employee_others.AdvancesAndPayments;
 import object_models.left_menu.employee_others.Covid19Supplement;
@@ -82,7 +82,7 @@ import xml_reader.config_file.ConfigReader;
 	TestResultLogger.class, 
 	LoginPageResolverPayroll.class })
 public class LeftMenuChildren_Payroll_Tests {
-	private static LeftMenuActions menu;
+	private static LeftMenu menu;
 	private static HomePage homepagePayroll;
 	
 	@BeforeAll	
