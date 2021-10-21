@@ -18,7 +18,7 @@ public interface LeftMenuActions {
 	LeftMenuActions clickParent(String prntName);
 	
 	// Load the page, form etc...
-	Optional<ContainerAction> loadElement(Class<?> clazz);
+	Optional<ContainerAction> loadElement(ClassFIeldGetter fieldGetter);
 	
 	// Get the menu name and parent name from the class using reflection.
 	// Then return the item.

@@ -133,46 +133,62 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 //		return item;
 //	}
 	
+	
+//	private Optional<String> getParentName(Class<?> clazz) {
+//		try {
+//			return Optional.ofNullable((String) clazz.getField("MENU_PARENT_NAME").get(null));
+//		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+//			logger.error("Failed to get parent name using reflection");
+//			return Optional.empty();
+//		}
+//	}
+//	
+//	private Optional<String> getMenuItemName(Class<?> clazz) {
+//		try {
+//			return Optional.ofNullable((String) clazz.getField("MENU_TITLE").get(null));
+//		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+//			logger.error("Failed to get menu name using reflection");
+//			return Optional.empty();
+//		}
+//	}
+//	
+//	private Optional<String> getElementId(Class<?> clazz) {
+//		try {
+//			return Optional.ofNullable((String) clazz.getField("PANEL_TITLE").get(null));
+//		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+//			logger.error("Failed to get element id using reflection");
+//			return Optional.empty();
+//		}
+//	}
+
 	@Override	
 	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {
+		ClassFIeldGetter fIeldGetter = new ClassFIeldGetter(clazz);
+		
 		contextManager.switchToStateInCurrentContext(StateLeftMenu.class);
 		Optional<ContainerAction> item = null;
-		Optional<String> prntName = getParentName(clazz);
-		Optional<String> menuItem = getMenuItemName(clazz);
+		Optional<String> prntName = fIeldGetter.getParentName();
+		Optional<String> menuItem = fIeldGetter.getMenuItemName();
+//		Optional<String> prntName = getParentName(clazz);
+//		Optional<String> menuItem = getMenuItemName(clazz);
 		
 		if(isChildMenuItem(prntName, menuItem)) {		
-			item = clickParent(prntName.get()).loadElement(clazz);			
+			item = clickParent(prntName.get()).loadElement(fIeldGetter);			
 		}else if (isParentMenuItem(prntName)) {
-			item = loadElement(clazz);
+			item = loadElement(fIeldGetter);
 		}		
 		return item;
 	}
-	
-	private Optional<String> getParentName(Class<?> clazz) {
-		try {
-			return Optional.ofNullable((String) clazz.getField("MENU_PARENT_NAME").get(null));
-		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
-			logger.error("Failed to get parent name using reflection");
-			return Optional.empty();
+
+	private boolean isChildMenuItem(Optional<String> prntName, Optional<String> menuIem) {
+		boolean retVal = false;
+		
+		if(prntName.isPresent()) {
+			if(prntName.get().length() > 1 && menuIem.isPresent()) {
+				retVal = true;
+			}
 		}
-	}
-	
-	private Optional<String> getMenuItemName(Class<?> clazz) {
-		try {
-			return Optional.ofNullable((String) clazz.getField("MENU_TITLE").get(null));
-		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
-			logger.error("Failed to get menu name using reflection");
-			return Optional.empty();
-		}
-	}
-	
-	private Optional<String> getElementId(Class<?> clazz) {
-		try {
-			return Optional.ofNullable((String) clazz.getField("PANEL_TITLE").get(null));
-		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
-			logger.error("Failed to get element id using reflection");
-			return Optional.empty();
-		}
+		return retVal;
 	}
 	
 	private boolean isParentMenuItem(Optional<String> prntName) {
@@ -187,73 +203,77 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 		return retVal;
 	}
 	
-	private boolean isChildMenuItem(Optional<String> prntName, Optional<String> menuIem) {
-		boolean retVal = false;
-		
-		if(prntName.isPresent()) {
-			if(prntName.get().length() > 1 && menuIem.isPresent()) {
-				retVal = true;
-			}
-		}
-		return retVal;
-	}
 	
 	@Override
-	public Optional<ContainerAction> loadElement(Class<?> clazz) {
-		String elementName = getMenuItemName(clazz).get();
-		String elementId = getElementId(clazz).get();
-		WebElement e =  anchors.get(elementName);
-
-		contextManager.switchToFirstStateInCurrentContext();		
-		logger.info("Loading [" + elementName + "]");		 	
-		
+//	public Optional<ContainerAction> loadElement(Class<?> clazz) {
+	public Optional<ContainerAction> loadElement(ClassFIeldGetter fieldGetter) {
 		Optional<ContainerAction> child = Optional.empty();		
-		try {
-			e.click();
-			
-			/*
-			 * check if exists in CM.
-			 * Yes: get obj from CM
-			 * No:  return new obj.
-			 */
-			Optional<ContextState> cs = contextManager.findContext(elementId);
-			
-			if(cs.isPresent()) {
-				ContextState c = cs.get();
-				System.out.println(c.getContextId().getId() +" alraedy exists");
+		Optional<String> elementName = fieldGetter.getMenuItemName();
+		Optional<String> elementId = fieldGetter.getElementId();
 				
-				ContainerAction el = c.getContinerAction();				
-				child = Optional.of(el);
-			}else {
-				System.out.println("does not exist: " + elementId ); // TODO - remove or log
-				child = Optional.of(getElement(elementName));//.get();
-			}
+		if(elementName.isPresent() && elementId.isPresent()) {
+			String name = elementName.get();
+			String id = elementId.get();
+			WebElement e =  anchors.get(name);
 			
-						
-		} catch (Exception ex) {
-			System.out.println(ex.getMessage() ); // TODO - remove or log
-			logger.error("Could not get menu element [" + elementName + "] [" + ex.getMessage() + "]");
-			 	
+			contextManager.switchToFirstStateInCurrentContext();		
+			logger.info("Loading [" + name + "]");
+			
+			try {
+				e.click();				
+				Optional<ContextState> cs = contextManager.findContext(id);				
+				if(cs.isPresent()) {
+					ContextState c = cs.get();
+//					System.out.println(c.getContextId().getId() +" alraedy exists");
+					
+					ContainerAction el = c.getContinerAction();				
+					child = Optional.of(el);
+				}else {
+//					System.out.println("does not exist: " + elementId ); // TODO - remove or log
+					child = Optional.of(getElement(name));//.get();
+				}
+				
+							
+			} catch (Exception ex) {
+//				System.out.println(ex.getMessage() ); // TODO - remove or log
+				logger.error("Could not get menu element [" + name + "] [" + ex.getMessage() + "]");
+				 	
+			}	
+		}else {
+			logger.error("Could not get menu element.");
 		}
 		return child;
-	}
-	
-//	@Override
-//	public Optional<ContainerAction> clickAndLoad(String elementName) {
-//		WebElement e =  anchors.get(elementName);
-//
+		
+		
+
 //		contextManager.switchToFirstStateInCurrentContext();		
 //		logger.info("Loading [" + elementName + "]");		 	
 //		
 //		Optional<ContainerAction> child = Optional.empty();		
 //		try {
-//			e.click();			
-//			child = Optional.of(getElement(elementName));//.get();			
+//			e.click();
+//			
+//			Optional<ContextState> cs = contextManager.findContext(elementId);
+//			
+//			if(cs.isPresent()) {
+//				ContextState c = cs.get();
+//				System.out.println(c.getContextId().getId() +" alraedy exists");
+//				
+//				ContainerAction el = c.getContinerAction();				
+//				child = Optional.of(el);
+//			}else {
+//				System.out.println("does not exist: " + elementId ); // TODO - remove or log
+//				child = Optional.of(getElement(elementName));//.get();
+//			}
+//			
+//						
 //		} catch (Exception ex) {
+//			System.out.println(ex.getMessage() ); // TODO - remove or log
 //			logger.error("Could not get menu element [" + elementName + "] [" + ex.getMessage() + "]");
+//			 	
 //		}
-//		return child;
-//	}
+		
+	}
 	
 	@Override
 	public LeftMenuActions clickParent(String prntName) {
@@ -286,8 +306,7 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 	}
 	
 	private ContainerAction getElement(String elementName) {
-			return ChildElementFactory.getChild(elementName, driver, contextManager);
-		
+			return ChildElementFactory.getChild(elementName, driver, contextManager);		
 	}
 
 	@Override
