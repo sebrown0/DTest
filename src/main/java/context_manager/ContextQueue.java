@@ -4,6 +4,7 @@
 package context_manager;
 
 import java.util.Deque;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Optional;
 
@@ -30,7 +31,18 @@ public class ContextQueue {
 		
 	}
 	
-	public int getSize() {
+	public Optional<ContextState> getPenultimate() {
+		Iterator<ContextState> it = queue.iterator();
+		Optional<ContextState> penultimate = Optional.empty();
+		int penultimateContext = getSize() - 1;
+
+		for (int i = 1; i <= penultimateContext ; i++) {
+			penultimate = Optional.of(it.next());			
+		}
+		return penultimate;
+	}
+	
+	public int getSize() {		
 		return queue.size();
 	}
 	

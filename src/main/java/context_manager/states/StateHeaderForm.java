@@ -5,6 +5,9 @@ package context_manager.states;
 
 import java.util.Optional;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
 import context_manager.ContextState;
 
 /**
@@ -12,14 +15,18 @@ import context_manager.ContextState;
  *
  */
 public class StateHeaderForm extends State {
+	private WebElement myContainer;
+	private By byHeaderLocator;
 	
-	public StateHeaderForm(ContextState context) {
+	public StateHeaderForm(ContextState context, WebElement myContainer, By byHeaderLocator) {
 		super(context);
+		this.myContainer = myContainer;
+		this.byHeaderLocator = byHeaderLocator;
 	}
 	
 	@Override
 	public Optional<State> getNext() {		
-		return Optional.empty();
+		return super.next;
 	}	
 	@Override
 	public void close() {
@@ -29,7 +36,13 @@ public class StateHeaderForm extends State {
 	@Override
 	public void switchToMe() {
 		// TODO Auto-generated method stub
-		logger.error("switchToMe not implemented!");
+//		context.getDriver().findElement(null);
+//		logger.error("switchToMe not implemented!");
+		System.out.println("StateHeaderForm->switchToMe"); // TODO - remove or log 	
+		context.switchToDefaultContent();
+		System.out.println("T->" + context.getDriver().getTitle()); // TODO - remove or log 	
+
+		myContainer.findElement(byHeaderLocator);
 	}
 	@Override
 	public boolean isContextCloser() {

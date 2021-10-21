@@ -16,6 +16,7 @@ import context_manager.ContextManager;
 import controls.Control;
 import object_models.element.ComboSelect;
 import object_models.forms.FormModal;
+import object_models.helpers.Header;
 import object_models.helpers.IFrame;
 import object_models.helpers.Reload;
 
@@ -99,16 +100,23 @@ public final class EmployeeSelection extends FormModal implements Control {
 	public void setContainer() {
 		logger.error("NOT IMPLEMENTED");		
 	}
-	@Override
-	public void setHeader() {
-		logger.error("NOT IMPLEMENTED");
-	}
+//	@Override
+//	public void setHeader() {
+//		logger.error("NOT IMPLEMENTED");
+//	}
 	@Override
 	public void setTitle() {
 		logger.error("NOT IMPLEMENTED");
 	}
 	@Override
 	public ContextId getContextId() {
+		logger.error("NOT IMPLEMENTED");
+		return null;
+	}
+
+	@Override
+	public Header getHeader() {
+		// TODO Auto-generated method stub
 		logger.error("NOT IMPLEMENTED");
 		return null;
 	}

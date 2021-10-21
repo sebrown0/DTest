@@ -16,6 +16,7 @@ import context_manager.ContextManager;
 import context_manager.ContextState;
 import context_manager.states.StateHeaderForm;
 import object_models.helpers.ButtonClicker;
+import object_models.helpers.Header;
 import object_models.helpers.title.PageTitle;
 import object_models.helpers.title.Title;
 import object_models.helpers.title.TitleModalFadeShow;
@@ -52,7 +53,8 @@ public class FormFadeShow extends FormModal {
 	@Override
 	public void setContextState() {
 		ContextState con = contextManager.getCurrentContext();
-		con.setState(new StateHeaderForm(con));
+		//CHECK THIS IS CORRECT
+		con.setState(new StateHeaderForm(con, container, By.className("modal-header")));
 	}
 	
 	@Override
@@ -73,11 +75,16 @@ public class FormFadeShow extends FormModal {
 
 	@Override
 	public void setContainer() {
-		logger.error("NOT IMPLEMENTED");
+		super.container = driver.findElement(By.className("div[class='modal fade show']"));
 	}
-
 	@Override
-	public void setHeader() {
+	public Header getHeader() {
+		// TODO Auto-generated method stub
 		logger.error("NOT IMPLEMENTED");
+		return null;
 	}
+//	@Override
+//	public void setHeader() {
+//		logger.error("NOT IMPLEMENTED");
+//	}
 }

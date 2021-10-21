@@ -11,7 +11,6 @@ import context_manager.ContextManager;
 import context_manager.ContextState;
 import context_manager.states.State;
 import context_manager.states.StateHeaderPanel;
-import context_manager.states.StateIframe;
 import object_models.helpers.IFrame;
 
 /**
@@ -23,9 +22,7 @@ public abstract class JSPanelWithIFrame extends JSPanel implements JsPanelContex
 		
 	public JSPanelWithIFrame(WebDriver driver, String expectedTitle, ContextManager contextManager) {
 		super(driver, expectedTitle, contextManager);
-		
-		
-//		setToIFrame(driver, expectedTitle);
+	
 		switchToIFrame();
 	}
 	
@@ -38,16 +35,10 @@ public abstract class JSPanelWithIFrame extends JSPanel implements JsPanelContex
 		con.setState(header);
 	}
 	
-//	private void setToIFrame(WebDriver driver, String expectedTitle) {
-//		By byLocator = By.cssSelector("iframe[title='" + expectedTitle + "']");
-//		iFrame = new IFrame(driver, byLocator);
-//	}	
-//	
 	private void switchToIFrame() {
 		super.contextManager
 			.moveToNextStateInCurrentContext()
-			.switchToMe();
-		
+			.switchToMe();		
 	}	
 	
 	public IFrame getIframe() {
@@ -62,10 +53,5 @@ public abstract class JSPanelWithIFrame extends JSPanel implements JsPanelContex
 	public JSPanelWithIFrame getPanelWithIFrame() {
 		return this;
 	}
-
-//	public ZZZ_ContextManager getContextManager() {
-////		return contextManager;
-//		return null;
-//	}
 		
 }

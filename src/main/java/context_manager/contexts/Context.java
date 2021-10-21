@@ -173,6 +173,11 @@ public abstract class Context implements ContextState, ContextCloser {
 	}
 	
 	@Override
+	public void switchToDefaultContent() {
+		contextManager.getDriver().switchTo().defaultContent();
+	}
+	
+	@Override
 	public WebDriver getDriver() {		
 		return contextManager.getDriver();
 	}

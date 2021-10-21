@@ -15,6 +15,7 @@ import object_models.dialog.Dialog;
 import object_models.dialog.DialogOkCancel;
 import object_models.element.ComboSelect;
 import object_models.forms.FormWithIFrame;
+import object_models.helpers.Header;
 
 /**
  * @author Steve Brown
@@ -88,9 +89,15 @@ public class InitialisePayroll extends FormWithIFrame {
 		logger.error("NOT IMPLEMENTED");		
 	}
 	@Override
-	public void setHeader() {
+	public Header getHeader() {
+		// TODO Auto-generated method stub
 		logger.error("NOT IMPLEMENTED");
+		return null;
 	}
+//	@Override
+//	public void setHeader() {
+//		logger.error("NOT IMPLEMENTED");
+//	}
 	@Override
 	public void setTitle() {
 		logger.error("NOT IMPLEMENTED");

@@ -65,6 +65,10 @@ public class ContextManager {
 	/*
 	 * Actions - Start
 	 */
+	public Optional<ContextState> getPenultimateContext() {
+		return queue.getPenultimate();
+	}
+	
 	public <T extends State> Optional<State> switchToStateInCurrentContext(Class<T> clazzRequiredState) {
 		String requiredStateName = clazzRequiredState.getSimpleName();		
 		if(isCurrentStateRequiredState(requiredStateName)) {

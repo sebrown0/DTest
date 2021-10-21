@@ -120,7 +120,6 @@ public class LeftMenu implements LeftMenuActions, CallingState {
 	// LeftMenuActions	
 	@Override	
 	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {
-		System.out.println("clickAndLoad->" + clazz.getSimpleName()); // TODO - remove or log 	
 		contextManager.switchToStateInCurrentContext(StateLeftMenu.class);
 		Optional<ContainerAction> item = null;
 		Optional<String> prntName = getParentName(clazz);

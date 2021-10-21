@@ -6,6 +6,7 @@ package context_manager_tests;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Optional;
 
@@ -29,6 +30,8 @@ import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.employees.Banks;
 import object_models.left_menu.employees.EmployeeDetails;
 import object_models.left_menu.parents.Documents;
+import object_models.left_menu.parents.MonthlyReports;
+import object_models.left_menu.parents.PayrollStatistics;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import parameter_resolvers.ConfigParameterResolver;
@@ -244,5 +247,21 @@ class ContextManagerTests {
 		assertTrue(c instanceof ContextPayroll);			 
 	}
 	
-
+	@Test
+	void penultimateContext_exists() {
+		menu.clickAndLoad(Banks.class);
+		menu.clickAndLoad(MonthlyReports.class);
+		menu.clickAndLoad(Documents.MENU_TITLE);
+		menu.clickAndLoad(PayrollStatistics.MENU_TITLE);
+		ContextState doc = manager.getPenultimateContext().get();
+		assertEquals("Employee Document Management", doc.getContextId().getExpectedName());
+	}
+	
+	@Test	
+	void penultimateContext_doesNotExist() {
+		Optional<ContextState> con = manager.getPenultimateContext();
+		con.ifPresent(c -> { 
+			fail("Should be no penultimate context [" + c.getContextId() + "]"); 
+		});
+	}
 }

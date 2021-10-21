@@ -28,16 +28,12 @@ public class StateIframe extends State {
 	@Override
 	public void close() {
 		logger.debug("Closing state [" + this + "]");
-		context.getDriver().switchTo().defaultContent();		
+		context.switchToDefaultContent();		
 	}
 	
 	@Override
 	public void switchToMe() {
-		System.out.println("StateIframe->switchToMe"); // TODO - remove or log
-		iFrame.switchUsingLocator();
-		 	
-		// TODO Auto-generated method stub
-//		logger.error("switchToMe not implemented!");
+		iFrame.switchUsingLocator();		 	
 	}
 
 	@Override

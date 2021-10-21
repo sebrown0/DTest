@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import context_manager.ContextId;
 import context_manager.ContextManager;
 import object_models.forms.FormModal;
+import object_models.helpers.Header;
 
 /**
  * @author Steve Brown
@@ -36,9 +37,15 @@ public final class CloseAndLockPayroll extends FormModal {
 		logger.error("NOT IMPLEMENTED");		
 	}
 	@Override
-	public void setHeader() {
+	public Header getHeader() {
+		// TODO Auto-generated method stub
 		logger.error("NOT IMPLEMENTED");
+		return null;
 	}
+//	@Override
+//	public void setHeader() {
+//		logger.error("NOT IMPLEMENTED");
+//	}
 	@Override
 	public void setTitle() {
 		logger.error("NOT IMPLEMENTED");

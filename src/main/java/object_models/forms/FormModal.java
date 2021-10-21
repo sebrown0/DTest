@@ -5,6 +5,7 @@ import java.time.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextIdGetter;
@@ -25,6 +26,7 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 	protected Logger logger = LogManager.getLogger();
 	protected WebDriverWait wait;
 	protected Header header;
+	protected WebElement container;
 		
 	@SuppressWarnings("unused")
 	private String expectedTitle;	
@@ -42,7 +44,7 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 	private void initialise() {
 		waitForLoad();
 		setContainer();		
-		setHeader();
+//		setHeader();
 		setTitle();
 		setContext();
 		setContextState();
@@ -51,7 +53,8 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 	public abstract void waitForLoad();
 	public abstract void setContextState();
 	public abstract void setContainer();
-	public abstract void setHeader();
+	public abstract Header getHeader();
+//	public abstract void setHeader();
 	public abstract void setTitle();
 	
 	@Override
@@ -64,9 +67,9 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 		return title;
 	}
 
-	public Header getHeader() {
-		return header;
-	}
+//	public Header getHeader() {
+//		return header;
+//	}
 //	@Override
 //	public ContextId getContextId() {
 //		logger.error("NOT IMPLEMENTED");

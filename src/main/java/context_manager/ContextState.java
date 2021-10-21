@@ -19,6 +19,7 @@ public interface ContextState {
 	void setCurrentState(State currentState);	
 	void setState(State state);
 	void moveNext();
+	void switchToDefaultContent();
 	
 	State getState();
 	State getFirstState();
