@@ -4,7 +4,7 @@
 package context_manager;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 public interface ContextSetter {

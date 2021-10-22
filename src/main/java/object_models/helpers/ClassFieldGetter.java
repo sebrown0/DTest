@@ -27,7 +27,7 @@ public class ClassFieldGetter {
 	private void setFields() {
 		setParentName();
 		setMenuItemName();
-		setElementId();
+		setPanelTitle();
 	}
 	
 	public void setParentName() {		
@@ -46,7 +46,7 @@ public class ClassFieldGetter {
 		}
 	}
 	
-	public void setElementId() {		
+	public void setPanelTitle() {		
 		try {
 			elementId = Optional.ofNullable((String) clazz.getField("PANEL_TITLE").get(null));
 		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
@@ -60,7 +60,7 @@ public class ClassFieldGetter {
 	public Optional<String> getMenuItemName() {
 		return menuItemName;
 	}
-	public Optional<String> getElementId() {
+	public Optional<String> getPanelTitle() {
 		return elementId;
 	}
 }

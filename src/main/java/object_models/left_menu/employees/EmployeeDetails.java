@@ -48,15 +48,15 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 		builder
 			.addControl(EmployeeControlNames.EMP_CODE, new ControlGetterTextOut(driver, By.id("FORM_ID")))
 			.addControl(EmployeeControlNames.EMP_NAME, new ControlGetterTextOut(driver, By.xpath("/html/body/form/div[3]/div[3]/div[2]/input")))
-			.addControl(EmployeeControlNames.SELECT_EMP, new ControlGetterEmployeeSelection(driver, By.cssSelector("i[class='fa fa-list']"), this, super.contextManager))
-			.addControl(EmployeeControlNames.COMBOS, new ControlGetterDropdownCombo(driver, By.cssSelector("i[class='fa fa-window-maximize']"), this, super.contextManager))
-			.addControl(EmployeeControlNames.GRID_VIEW, new ControlGetterDkGridEmployeeDetails(driver, By.cssSelector("i[class='fa fw fa-table']"), this, super.contextManager));
+			.addControl(EmployeeControlNames.SELECT_EMP, new ControlGetterEmployeeSelection(driver, By.cssSelector("i[class='fa fa-list']"), this, super.manager))
+			.addControl(EmployeeControlNames.COMBOS, new ControlGetterDropdownCombo(driver, By.cssSelector("i[class='fa fa-window-maximize']"), this, super.manager))
+			.addControl(EmployeeControlNames.GRID_VIEW, new ControlGetterDkGridEmployeeDetails(driver, By.cssSelector("i[class='fa fw fa-table']"), this, super.manager));
 		
 		empControl = new PageControl(builder);				
 	}
 		
 	public PageControl getEmployeeControl() {
-		contextManager.switchToStateInCurrentContext(StateIframe.class); 
+		manager.switchToStateInCurrentContext(StateIframe.class); 
 		return empControl;
 	}
 			
@@ -68,7 +68,7 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 	}
 		
 	public EmpDetailsTabs tab() {
-		contextManager.switchToStateInCurrentContext(StateIframe.class);
+		manager.switchToStateInCurrentContext(StateIframe.class);
 		return this.myTabs;
 	}
 		

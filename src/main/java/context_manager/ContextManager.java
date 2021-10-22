@@ -81,10 +81,20 @@ public class ContextManager {
 		}				
 	}
 	
-	public <T extends State> Optional<State> moveToStateInCurrentContext(Class<T> clazzRequiredState) {
-		String requiredStateName = clazzRequiredState.getSimpleName();		
-
-		Optional<State> state = getCurrentContext().moveToState(clazzRequiredState);
+	public <T extends State> Optional<State> switchToStateInContext(Class<T> clazzRequiredState, ContextState findCs) {
+		Optional<State> state = Optional.empty();		
+		if(findCs == getCurrentContext()) {
+			state = moveToStateInCurrentContext(clazzRequiredState);			
+		}else {
+			state = moveToStateInContext(clazzRequiredState, findCs);
+		}				
+		state.ifPresent(s -> s.switchToMe());
+		return state;
+	}
+	
+	public <T extends State> Optional<State> moveToStateInContext(Class<T> clazzRequiredState, ContextState cs) {
+		String requiredStateName = clazzRequiredState.getSimpleName();
+		Optional<State> state = cs.moveToState(clazzRequiredState);
 
 		if(state.isPresent()) {			
 			logger.debug("State [" + requiredStateName + "] is present in context. Will move to this state");				
@@ -94,7 +104,15 @@ public class ContextManager {
 			return getCurrentContext().setLastState(clazzRequiredState);
 		}						
 	}
-		
+	
+	public <T extends State> Optional<State> moveToStateInCurrentContext(Class<T> clazzRequiredState) {
+		return moveToStateInContext(clazzRequiredState, getCurrentContext());			
+	}
+	
+	public void moveToStateInCurrentContext(State state) {
+		getCurrentContext().setCurrentState(state);			
+	}
+	
 	private boolean isCurrentStateRequiredState(String requiredStateName) {
 		String currentStatesName = getCurrentContext().getState().getClass().getSimpleName(); 	
 		return currentStatesName.equals(requiredStateName);

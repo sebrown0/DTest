@@ -19,7 +19,10 @@ import context_manager.ContextId;
 import context_manager.ContextIdGetter;
 import context_manager.ContextManager;
 import context_manager.ContextSetter;
+import context_manager.ContextState;
 import context_manager.contexts.ContextPanel;
+import context_manager.states.State;
+import context_manager.states.StateHeaderPanel;
 import exceptions.PanelException;
 import object_models.forms.ContainerAction;
 import object_models.helpers.closers.CloserPanel;
@@ -30,9 +33,9 @@ import object_models.helpers.title.TitlePanel;
  * @author Steve Brown
  *
  */
-public abstract class JSPanel implements ContainerAction, ContextSetter, ContextIdGetter { 
+public abstract class JsPanel implements ContainerAction, ContextSetter, ContextIdGetter { 
 	protected WebDriver driver;
-	protected ContextManager contextManager;
+	protected ContextManager manager;
 	protected Logger logger = LogManager.getLogger();
 	protected String expectedTitle;
 	
@@ -43,10 +46,10 @@ public abstract class JSPanel implements ContainerAction, ContextSetter, Context
 		
 	private static final By TITLE_SELECTOR = By.cssSelector("span[class='jsPanel-title']");
 		
-	public JSPanel(WebDriver driver, String expectedTitle, ContextManager contextManager) {
+	public JsPanel(WebDriver driver, String expectedTitle, ContextManager contextManager) {
 		this.driver = driver;
 		this.expectedTitle = expectedTitle;
-		this.contextManager = contextManager;		
+		this.manager = contextManager;		
 		
 		waitForLoad(ExpectedConditions.attributeContains(TITLE_SELECTOR, "innerHTML", expectedTitle));		
 		setPanelId();
@@ -55,11 +58,6 @@ public abstract class JSPanel implements ContainerAction, ContextSetter, Context
 		setHeaderBar();
 		setContext();
 		setContextState();		
-	}
-	
-	@Override
-	public String getContextExpectedName() {
-		return expectedTitle;
 	}
 	
 	// StateHeaderPanel needs an IFrame.
@@ -75,6 +73,32 @@ public abstract class JSPanel implements ContainerAction, ContextSetter, Context
 		}						
 	}
 
+	public <T extends JsPanel> void switchToExistingPanel(Class<T> panel) {
+		ContextState cs = manager.getCurrentContext();
+		Optional<State> stateHdrPanel = manager.switchToStateInContext(StateHeaderPanel.class, cs);
+		stateHdrPanel.ifPresent(h -> {
+			StateHeaderPanel hdrPanel = (StateHeaderPanel) h;
+			hdrPanel.switchToExistingPanel(panel);
+		});		
+	}
+	
+//	public <T extends JsPanel> void switchToExistingPanel(Class<T> panel) {
+//		ClassFieldGetter fieldGetter = new ClassFieldGetter(panel);		
+//		Optional<String> panelTitle = fieldGetter.getPanelTitle();
+//		
+//		panelTitle.ifPresent(title -> {
+//			Optional<ContextState> csCurr = manager.findContext(title);
+//			if(csCurr.isPresent()) {
+//				ContextState cs = csCurr.get();
+//				manager.switchToStateInContext(StateHeaderPanel.class, cs);		//should StateHeaderPanel have header bar obj???????? 		
+//				getHeaderBar().getToolBar().switchToPanel(cs.getContextId().getActualId());
+//				logger.debug("Switched to panel [" + cs.getContextId() + "]"); 	
+//			}else {
+//				logger.error("Could not switch to panel [" + panel + "]"); 	
+//			}
+//		});		
+//	}
+	
 	private void setPanelId() {
 		panelId = JsPanelId.getPanelIdForTitle(driver, expectedTitle);		
 	}
@@ -90,22 +114,16 @@ public abstract class JSPanel implements ContainerAction, ContextSetter, Context
 	}
 	
 	private void setHeaderBar() {
-		headerBar = new JsPanelHeaderBar(container);
+		headerBar = new JsPanelHeaderBar(driver, container);
 	}
 
 	protected JsPanelControlBar getControlBar() {
 		return headerBar.getControlBar();
 	}
 	
-//	private void setContextState() {
-//		ContextState con = contextManager.getCurrentContext();			 	
-//		State header = new StateHeaderPanel(con, headerBar.getControlBar(), null);		
-//		con.setState(header);
-//	}
-	
 	@Override
 	public void setContext() {		
-		contextManager.setContext(new ContextPanel(contextManager, this, headerBar, this));
+		manager.setContext(new ContextPanel(manager, this, headerBar, this));
 	}
 	
 	@Override
@@ -137,13 +155,19 @@ public abstract class JSPanel implements ContainerAction, ContextSetter, Context
 	public WebDriver getDriver() {
 		return driver;
 	}
-	
+		
 	@Override
 	public ContextId getContextId() {		
 		return new ContextId(expectedTitle, panelId.get());
 	}
 
 	public ContextManager getContextManager() {
-		return contextManager;
+		return manager;
 	}
+
+	@Override
+	public String getContextExpectedName() {
+		return expectedTitle;
+	}
+	
 }

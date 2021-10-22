@@ -8,12 +8,17 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.time.Duration;
 import java.util.Optional;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextId;
 import context_manager.ContextManager;
@@ -34,6 +39,7 @@ import object_models.left_menu.parents.MonthlyReports;
 import object_models.left_menu.parents.PayrollStatistics;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
+import object_models.panels.JsPanel;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import test_data.UserProvider;
@@ -275,13 +281,23 @@ class ContextManagerTests {
 	}
 	
 	@Test	
-	void findContextInQueue() {
+	void findContextInQueue_usingFullId() {
 		menu.clickAndLoad(Banks.class);
 		menu.clickAndLoad(MonthlyReports.class);
 		menu.clickAndLoad(Documents.class);
 		assertEquals(
 				MonthlyReports.PANEL_TITLE + ":jsPanel-2", 
 				manager.findContext(MonthlyReports.PANEL_TITLE + ":jsPanel-2").get().getContextId().getId());		
+	}
+		
+	@Test	
+	void findContextInQueue_usingPanelTitle() {
+		menu.clickAndLoad(Banks.class);
+		menu.clickAndLoad(MonthlyReports.class);
+		menu.clickAndLoad(Documents.class);
+		assertEquals(
+				MonthlyReports.PANEL_TITLE + ":jsPanel-2", 
+				manager.findContext(MonthlyReports.PANEL_TITLE).get().getContextId().getId());		
 	}
 
 	@Test	
@@ -293,12 +309,62 @@ class ContextManagerTests {
 		ContextId prevId = manager.getPrevContext(forContext).get().getContextId(); 
 		assertEquals(Banks.PANEL_TITLE + ":jsPanel-1", prevId.getId());
 	}
-	
+
 	@Test	
-	void xxxxxx() {
+	void checkExistingContextIsLoaded_fromMenu() {
 		menu.clickAndLoad(Banks.class);
 		menu.clickAndLoad(MonthlyReports.class);
 		Banks b = (Banks) menu.clickAndLoad(Banks.class).get();
-		assertEquals(Banks.PANEL_TITLE + ":jsPanel-1", b.getContextId().getId());
+		assertEquals(Banks.PANEL_TITLE + ":jsPanel-1", b.getContextId().getId());		
+	}
+
+	@Test	
+	void checkExistingContextIsLoaded_fromContextManager() {
+		menu.clickAndLoad(MonthlyReports.class);
+		menu.clickAndLoad(Banks.class);		
+		
+		ContextState cs = manager.findContext(Banks.PANEL_TITLE + ":jsPanel-2").get();
+		State hdr = manager.switchToStateInContext(StateHeaderPanel.class, cs).get();
+		assertTrue(hdr instanceof StateHeaderPanel);
+	}
+
+	@Test	
+	void checkExistingContextIsLoaded_fromContextManager_loadAnotherFromDropdownMenu() {
+		menu.clickAndLoad(MonthlyReports.class);
+		menu.clickAndLoad(Banks.class);		
+		
+		/*
+		 * this could be current state
+		 */
+		ContextState csBanks = manager.findContext(Banks.PANEL_TITLE + ":jsPanel-2").get();
+		manager.switchToStateInContext(StateHeaderPanel.class, csBanks).get();		
+		
+		Banks b = (Banks) csBanks.getContinerAction();
+		/*
+		 * will have to get the required context (id) and pass that. 
+		 */
+		b.getHeaderBar().getToolBar().switchToPanel("jsPanel-1");
+		/*
+		 * if the switch is successful have to set as current context.
+		 */
+		WebDriverWait wait = new WebDriverWait(homepagePayroll.getWebDriver(), Duration.ofSeconds(2));
+		WebElement hdr = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class='jsPanel-titlebar']")));
+		assertEquals("Monthly Payroll Reports", hdr.getText());
+		
+		ContextState csReports = manager.getCurrentContext();
+		assertEquals(MonthlyReports.PANEL_TITLE +  ":jsPanel-1", csReports.getContextId().getId());
+	}
+	
+	@Test	
+	void xxxxxxxxxxxxxxxxx() {
+		menu.clickAndLoad(MonthlyReports.class);
+		menu.clickAndLoad(Banks.class);		
+		
+		ContextState csBanks = manager.getCurrentContext();
+		JsPanel panelBanks = (JsPanel) csBanks.getContinerAction();
+		panelBanks.switchToExistingPanel(MonthlyReports.class);
+
+		ContextState csReports = manager.getCurrentContext();
+		assertEquals(MonthlyReports.PANEL_TITLE +  ":jsPanel-1", csReports.getContextId().getId());
 	}
 }

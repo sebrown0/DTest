@@ -100,3 +100,38 @@ public class ContextId {
 
 }
 
+
+//private void checkForClassMatch(Object obj) {
+//System.out.println("->checkForClassMatch" ); // TODO - remove or log
+////isContextIdGetter(obj);
+//Optional<Class<ContextIdGetter>> idGetter = isContextIdGetter(obj);
+//idGetter.ifPresent(getter -> {
+//	System.out.println("------>" + getter); // TODO - remove or log 	
+//	ContextIdGetter id =  getter.getClass();//.cast(obj);
+//	if(expectedName.equalsIgnoreCase(id.getContextExpectedName())) {
+//		matchType = ContextMatch.STRING_EXPECTED;
+//		matchFound = true;
+//	}
+//});
+//}
+
+//@SuppressWarnings("unchecked")
+////private boolean isContextIdGetter(Object obj) {
+//private <T extends ContextIdGetter> Optional<Class<T>> isContextIdGetter(Object obj) {
+////if(obj instanceof ContextIdGetter) {
+////	System.out.println("->Yeeeeeeeeeeeeeeeeeee"); // TODO - remove or log 	
+////	return true;
+////}else {
+////	System.out.println("->Nooooooooooooooooooo"); // TODO - remove or log
+////	return false;
+////}
+//
+////Class<T> x = (Class<T>) obj.getClass();
+//Class<T> idGetter = null;
+//try {
+//	idGetter = (Class<T>) obj.getClass();
+//} catch (Exception e) {		
+//	System.out.println("->XXXXXXXXXXXXXXXXXXXXXXXXXXX" + e ); // TODO - remove or log 	
+//}
+//return Optional.ofNullable(idGetter);
+//}

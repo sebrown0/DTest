@@ -17,7 +17,7 @@ import object_models.helpers.IFrame;
  * @author Steve Brown
  *
  */
-public abstract class JSPanelWithIFrame extends JSPanel implements JsPanelContext {
+public abstract class JSPanelWithIFrame extends JsPanel implements JsPanelContext {
 	private IFrame iFrame;
 		
 	public JSPanelWithIFrame(WebDriver driver, String expectedTitle, ContextManager contextManager) {
@@ -30,13 +30,13 @@ public abstract class JSPanelWithIFrame extends JSPanel implements JsPanelContex
 		By byLocator = By.cssSelector("iframe[title='" + super.expectedTitle + "']");
 		iFrame = new IFrame(driver, byLocator);
 		
-		ContextState con = contextManager.getCurrentContext();			 	
-		State header = new StateHeaderPanel(con, super.getHeaderBar().getControlBar(), iFrame);		
+		ContextState con = manager.getCurrentContext();			 	
+		State header = new StateHeaderPanel(manager, super.getHeaderBar(), iFrame);		
 		con.setState(header);
 	}
 	
 	private void switchToIFrame() {
-		super.contextManager
+		super.manager
 			.moveToNextStateInCurrentContext()
 			.switchToMe();		
 	}	

@@ -17,7 +17,6 @@ import org.apache.logging.log4j.Logger;
  */
 public class ContextQueue {
 	private List<ContextState> queue = new ArrayList<>();
-//	private Deque<ContextState> queue = new LinkedList<>();
 	private Logger logger = LogManager.getLogger();
 	
 	public void addContextToQueue(ContextState contextState) {

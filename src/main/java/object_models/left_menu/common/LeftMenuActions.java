@@ -80,7 +80,7 @@ public class LeftMenuActions {
 	public Optional<ContainerAction> loadElement(ClassFieldGetter fieldGetter) {
 		Optional<ContainerAction> element = Optional.empty();		
 		Optional<String> elementName = fieldGetter.getMenuItemName();
-		Optional<String> elementId = fieldGetter.getElementId();
+		Optional<String> elementId = fieldGetter.getPanelTitle();
 				
 		if(elementName.isPresent() && elementId.isPresent()) {
 			String name = elementName.get();

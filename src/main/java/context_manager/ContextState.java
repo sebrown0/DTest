@@ -26,7 +26,7 @@ public interface ContextState {
 	State getFirstState();
 	State getCallingState();
 	State getTopState();
-
+	
 	<T extends State> Optional<State> moveToState(Class<T> clazzState);
 	<T extends State> Optional<State> setLastState(Class<T> clazzState);
 	<T extends State> Optional<State> getNewInstanceOfState(Class<T> clazzState);
@@ -35,5 +35,5 @@ public interface ContextState {
 	Optional<State> getPreviousState();
 	WebDriver getDriver();
 	ContextId getContextId();
-	ContainerAction getContinerAction();
+	ContainerAction getContinerAction();	
 }

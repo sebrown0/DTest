@@ -63,7 +63,7 @@ public class EmployeeCreationWizard extends JSPanelWithIFrame {
 //		WebElement title = frm.findElement(By.className("modal-body"));
 //		WebElement btn = frm.findElement(By.className("close"));
 		
-		return new FormFadeShow(driver, contextManager);
+		return new FormFadeShow(driver, manager);
 	}
 	/*
 	 * This object's mapping strategy.

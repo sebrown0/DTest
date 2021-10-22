@@ -39,6 +39,6 @@ public class StateLeftMenu extends State {
 
 	@Override
 	public boolean isDefaultState() {
-		return true;
+		return false;
 	}
 }
