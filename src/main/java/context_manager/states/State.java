@@ -16,7 +16,7 @@ import context_manager.ContextState;
  * The current state of a Context.
  */
 public abstract class State {	
-	protected ContextState context;
+	protected ContextState lastContext;
 	protected Optional<State> next;
 	protected Logger logger = LogManager.getLogger();
 	
@@ -27,8 +27,8 @@ public abstract class State {
 	 */
 	private Optional<State> prev;
 	
-	public State(ContextState context) {
-		this.context = context;	
+	public State(ContextState lastContext) {
+		this.lastContext = lastContext;	
 	}
 	
 	public abstract Optional<State> getNext();

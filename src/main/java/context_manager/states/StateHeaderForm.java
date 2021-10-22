@@ -42,7 +42,7 @@ public class StateHeaderForm extends State {
 		
 		
 		
-		System.out.println("T->" + context.getDriver().getTitle()); // TODO - remove or log 	
+		System.out.println("T->" + lastContext.getDriver().getTitle()); // TODO - remove or log 	
 
 		myContainer.findElement(byHeaderLocator);
 	}

@@ -28,7 +28,7 @@ public class StateIframe extends State {
 	@Override
 	public void close() {
 		logger.debug("Closing state [" + this + "]");
-		context.switchToDefaultContent();		
+		lastContext.switchToDefaultContent();		
 	}
 	
 	@Override

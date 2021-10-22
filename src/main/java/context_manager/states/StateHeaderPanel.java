@@ -23,7 +23,7 @@ public class StateHeaderPanel extends State {
 	private ContextManager manager;
 	
 	public StateHeaderPanel(ContextManager manager, JsPanelHeaderBar bar, IFrame iFrame) {
-		super(manager.getCurrentContext());
+		super(manager.getLastContext());
 		this.manager = manager;
 		this.bar = bar;
 		this.iFrame = iFrame;
@@ -36,28 +36,18 @@ public class StateHeaderPanel extends State {
 		panelTitle.ifPresent(title -> {			
 			Optional<ContextState> csCurr = manager.findContext(title);
 			csCurr.ifPresentOrElse(cs -> {
+				manager.moveToExistingContext(cs);
 				manager.moveToStateInCurrentContext(this); 		
 				bar.getToolBar().switchToPanel(cs.getContextId().getActualId());
 				logger.debug("Switched to panel [" + cs.getContextId() + "]"); 	
 			}, 
-			new PanelException("Could not switch to panel [" + panel + "]"));
-			
-			
-			
-//			if(csCurr.isPresent()) {				
-//				ContextState cs = csCurr.get();				
-//				manager.moveToStateInCurrentContext(this); 		
-//				bar.getToolBar().switchToPanel(cs.getContextId().getActualId());
-//				logger.debug("Switched to panel [" + cs.getContextId() + "]"); 	
-//			}else {
-//				logger.error("Could not switch to panel [" + panel + "]"); 	
-//			}
+			new PanelException("Could not switch to panel [" + panel + "]"));			
 		});		
 	}
 	
 	@Override
 	public Optional<State> getNext() {		
-		return Optional.of(new StateIframe(super.context, iFrame));
+		return Optional.of(new StateIframe(super.lastContext, iFrame));
 	}
 	
 	@Override
@@ -68,7 +58,7 @@ public class StateHeaderPanel extends State {
 
 	@Override
 	public void switchToMe() {
-		context.switchToDefaultContent();
+		lastContext.switchToDefaultContent();
 		System.out.println("StateHeaderPanel->switchToMe"); // TODO - remove or log 	
 //		logger.error("switchToMe not implemented!");
 	}

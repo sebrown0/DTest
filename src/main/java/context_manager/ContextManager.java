@@ -57,7 +57,7 @@ public class ContextManager {
 	}
 	
 	public ContextManager setNextState(State state) {
-		State current = queue.getCurrentContext().getState();
+		State current = queue.getLastContextInQueue().getState();
 		current.setNext(Optional.ofNullable(state));
 		return this;
 	}
@@ -73,7 +73,7 @@ public class ContextManager {
 		String requiredStateName = clazzRequiredState.getSimpleName();		
 		if(isCurrentStateRequiredState(requiredStateName)) {
 			logger.debug("State [" + requiredStateName + "] is current state in context");
-			return Optional.ofNullable(getCurrentContext().getState());
+			return Optional.ofNullable(getLastContext().getState());
 		}else {
 			Optional<State> state = moveToStateInCurrentContext(clazzRequiredState);
 			state.ifPresent(s -> s.switchToMe());
@@ -83,7 +83,7 @@ public class ContextManager {
 	
 	public <T extends State> Optional<State> switchToStateInContext(Class<T> clazzRequiredState, ContextState findCs) {
 		Optional<State> state = Optional.empty();		
-		if(findCs == getCurrentContext()) {
+		if(findCs == getLastContext()) {
 			state = moveToStateInCurrentContext(clazzRequiredState);			
 		}else {
 			state = moveToStateInContext(clazzRequiredState, findCs);
@@ -101,25 +101,25 @@ public class ContextManager {
 			return state;			
 		}else {
 			logger.debug("State [" + requiredStateName + "] is not present in context. Adding as the last state in context");			
-			return getCurrentContext().setLastState(clazzRequiredState);
+			return getLastContext().setLastState(clazzRequiredState);
 		}						
 	}
 	
 	public <T extends State> Optional<State> moveToStateInCurrentContext(Class<T> clazzRequiredState) {
-		return moveToStateInContext(clazzRequiredState, getCurrentContext());			
+		return moveToStateInContext(clazzRequiredState, getLastContext());			
 	}
 	
 	public void moveToStateInCurrentContext(State state) {
-		getCurrentContext().setCurrentState(state);			
+		getLastContext().setCurrentState(state);			
 	}
 	
 	private boolean isCurrentStateRequiredState(String requiredStateName) {
-		String currentStatesName = getCurrentContext().getState().getClass().getSimpleName(); 	
+		String currentStatesName = getLastContext().getState().getClass().getSimpleName(); 	
 		return currentStatesName.equals(requiredStateName);
 	}
 	
 	public void switchToFirstStateInCurrentContext() {
-		ContextState contextState = queue.getCurrentContext();
+		ContextState contextState = queue.getLastContextInQueue();
 		if(contextState != null) {
 			contextState.getFirstState().switchToMe();
 		}else {
@@ -128,13 +128,13 @@ public class ContextManager {
 	}
 	
 	public State moveToNextStateInCurrentContext(){
-		ContextState contextState = queue.getCurrentContext();
+		ContextState contextState = queue.getLastContextInQueue();
 		contextState.moveNext();
 		return contextState.getState();
 	}
 	
 	private void setDefaultStateAfterClosingContext() {				
-		ContextState cs = queue.getCurrentContext(); 
+		ContextState cs = queue.getLastContextInQueue(); 
 		State defaultState = getDefaultState(cs);
 		if(defaultState != null) {
 //			System.out.println("Current context is now [" + cs.getContextId() + "]. State (default) is [" + defaultState + "]"); // TODO - remove or log 	
@@ -147,7 +147,7 @@ public class ContextManager {
 	}
 	
 	public boolean isStateInCurrentContext(Class<?> clazz) {
-		return getCurrentContext().isStateInContext(clazz);
+		return getLastContext().isStateInContext(clazz);
 	}
 	
 	private State getDefaultState(ContextState cs) {				
@@ -200,7 +200,7 @@ public class ContextManager {
 	}
 
 	public ContextManager closeCurrentContext() {
-		ContextCloser contextCloser = (ContextCloser) getCurrentContext();
+		ContextCloser contextCloser = (ContextCloser) getLastContext();
 		contextCloser.closeContext();
 		// TODO - switch to default???????????????????????????????????????
 		return this;
@@ -219,20 +219,20 @@ public class ContextManager {
 	private void updateContext(State state) {
 		if(state.isContextCloser()) { 	
 			logger.debug("State [" + state + "] is a context closer so will close current context");						
-			queue.removeCurrentContext();
+			queue.removeLastContext();
 			setDefaultStateAfterClosingContext();
 		}else { 	
 			Optional<State> prev = closeCurrentStateAndGetPrevForCurrentContext(state);
 			if(prev != null && prev.isPresent()) {
 				revertToPreviousStateInCurrentContext(prev);
 			}else {
-				queue.getAndRemoveCurrentContext();
+				queue.getAndRemoveLastContext();
 			}			
 		}
 	}
 	
 	public void closeCurrentStateInCurrentContext(){
-		ContextState cs = queue.getCurrentContext(); 
+		ContextState cs = queue.getLastContextInQueue(); 
 		if(cs != null) {
 			closeStateInCurrentContext(cs.getState());
 		}else {
@@ -248,13 +248,13 @@ public class ContextManager {
 	private void revertToPreviousStateInCurrentContext(Optional<State> prev) {
 		prev.ifPresentOrElse(
 				p -> { 
-					queue.getCurrentContext().setState(p);
+					queue.getLastContextInQueue().setState(p);
 //					System.out.print("to ->" + p.toString()); // TODO - remove or log 	
 				}, 
 				new Runnable() {			
 					@Override
 					public void run() {
-						queue.getCurrentContext().setNullState();				
+						queue.getLastContextInQueue().setNullState();				
 					}
 		});
 	}
@@ -288,17 +288,25 @@ public class ContextManager {
 	
 	// Context
 	public String getContextId() {
-		ContextState cs = queue.getCurrentContext();
+		ContextState cs = queue.getLastContextInQueue();
 		if(cs != null) {
 			return cs.getContextId().getId();			
 		}else {
 			return null;
 		}
 	}	
-	public ContextState getCurrentContext() {
-		ContextState cs = queue.getCurrentContext(); 
+	public ContextState getLastContext() {
+		ContextState cs = queue.getLastContextInQueue(); 
 		logInvalidContextIfNull(cs);
 		return cs;
+	}
+	public ContextState getCurrentContext() {
+		ContextState cs = queue.getCurrentContextInQueue(); 
+		logInvalidContextIfNull(cs);
+		return cs;
+	}
+	public void moveToExistingContext(ContextState cs) {
+		queue.moveToExistingContext(cs);
 	}
 	
 	// Queue
@@ -312,13 +320,13 @@ public class ContextManager {
 		return queue.findContext(obj);
 	}
 	public ContextState getEndOfQueue() {
-		return queue.getCurrentContext();
+		return queue.getLastContextInQueue();
 	}
 	public ContextState getAndRemoveEndOfQueue() {
-		return queue.getAndRemoveCurrentContext();
+		return queue.getAndRemoveLastContext();
 	}	
 	public boolean removeCurrentContextFromQueue() {
-		return queue.removeCurrentContext();
+		return queue.removeLastContext();
 	}
 	public boolean removeContextFromQueueForContextId(Object contId) {
 		return queue.removeContextForContextId(contId);

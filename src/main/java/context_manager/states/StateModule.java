@@ -31,7 +31,7 @@ public class StateModule extends State {
 
 	@Override
 	public void switchToMe() {		
-		context.getDriver().findElement(By.cssSelector("body > form > header > div > a"));		
+		lastContext.getDriver().findElement(By.cssSelector("body > form > header > div > a"));		
 	}
 
 	@Override

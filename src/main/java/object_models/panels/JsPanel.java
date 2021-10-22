@@ -33,7 +33,7 @@ import object_models.helpers.title.TitlePanel;
  * @author Steve Brown
  *
  */
-public abstract class JsPanel implements ContainerAction, ContextSetter, ContextIdGetter { 
+public abstract class JsPanel implements ContainerAction, ContextSetter, ContextIdGetter, PanelSwitcher { 
 	protected WebDriver driver;
 	protected ContextManager manager;
 	protected Logger logger = LogManager.getLogger();
@@ -73,32 +73,16 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 		}						
 	}
 
+	@Override
 	public <T extends JsPanel> void switchToExistingPanel(Class<T> panel) {
-		ContextState cs = manager.getCurrentContext();
+		ContextState cs = manager.getLastContext();
 		Optional<State> stateHdrPanel = manager.switchToStateInContext(StateHeaderPanel.class, cs);
 		stateHdrPanel.ifPresent(h -> {
 			StateHeaderPanel hdrPanel = (StateHeaderPanel) h;
 			hdrPanel.switchToExistingPanel(panel);
 		});		
 	}
-	
-//	public <T extends JsPanel> void switchToExistingPanel(Class<T> panel) {
-//		ClassFieldGetter fieldGetter = new ClassFieldGetter(panel);		
-//		Optional<String> panelTitle = fieldGetter.getPanelTitle();
-//		
-//		panelTitle.ifPresent(title -> {
-//			Optional<ContextState> csCurr = manager.findContext(title);
-//			if(csCurr.isPresent()) {
-//				ContextState cs = csCurr.get();
-//				manager.switchToStateInContext(StateHeaderPanel.class, cs);		//should StateHeaderPanel have header bar obj???????? 		
-//				getHeaderBar().getToolBar().switchToPanel(cs.getContextId().getActualId());
-//				logger.debug("Switched to panel [" + cs.getContextId() + "]"); 	
-//			}else {
-//				logger.error("Could not switch to panel [" + panel + "]"); 	
-//			}
-//		});		
-//	}
-	
+		
 	private void setPanelId() {
 		panelId = JsPanelId.getPanelIdForTitle(driver, expectedTitle);		
 	}
@@ -148,10 +132,14 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 		return panelId;
 	}
 	
-	public JsPanelHeaderBar getHeaderBar() {
+	protected JsPanelHeaderBar getHeaderBar() {
 		return headerBar;
 	}
 			
+	public Optional<String> getHeaderBarTitle() {
+		return getHeaderBar().getTitle();
+	}
+	
 	public WebDriver getDriver() {
 		return driver;
 	}

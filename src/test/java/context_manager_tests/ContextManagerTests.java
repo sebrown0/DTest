@@ -8,17 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.time.Duration;
 import java.util.Optional;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextId;
 import context_manager.ContextManager;
@@ -39,7 +34,7 @@ import object_models.left_menu.parents.MonthlyReports;
 import object_models.left_menu.parents.PayrollStatistics;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
-import object_models.panels.JsPanel;
+import object_models.panels.PanelSwitcher;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import test_data.UserProvider;
@@ -89,7 +84,7 @@ class ContextManagerTests {
 	@Test
 	void checkContextId() {
 		menu.clickAndLoad(Documents.class);
-		ContextId id = manager.getCurrentContext().getContextId();
+		ContextId id = manager.getLastContext().getContextId();
 		manager.closeCurrentStateInCurrentContext();
 		assertEquals("Employee Document Management:jsPanel-1", id.getId());
 	}
@@ -150,7 +145,7 @@ class ContextManagerTests {
 	void loadDocument_and_checkState() {		
 		menu.clickAndLoad(Documents.class);
 		manager.closeCurrentStateInCurrentContext();
-		assertTrue(manager.getCurrentContext().getState() instanceof StateLeftMenu);				
+		assertTrue(manager.getLastContext().getState() instanceof StateLeftMenu);				
 	}
 
 	@Test
@@ -162,7 +157,7 @@ class ContextManagerTests {
 		assertEquals("Employee Details:jsPanel-2", manager.getContextId());
 		
 		manager.closeCurrentStateInCurrentContext();
-		assertTrue(manager.getCurrentContext().getState() instanceof StateHeaderPanel);
+		assertTrue(manager.getLastContext().getState() instanceof StateHeaderPanel);
 	}
 
 	@Test	
@@ -175,7 +170,7 @@ class ContextManagerTests {
 		
 		manager.closeCurrentStateInCurrentContext();
 		manager.closeCurrentStateInCurrentContext();
-		assertTrue(manager.getCurrentContext().getState() instanceof StateLeftMenu);
+		assertTrue(manager.getLastContext().getState() instanceof StateLeftMenu);
 		assertEquals("Employee Document Management:jsPanel-1", manager.getContextId());		
 	}
 
@@ -187,7 +182,7 @@ class ContextManagerTests {
 	
 	@Test
 	void loadPayroll_checkContext_and_state() {
-		Context c = (Context) manager.getCurrentContext();
+		Context c = (Context) manager.getLastContext();
 		assertTrue(c instanceof ContextPayroll);
 		State s = c.getState();
 		assertEquals("StateModule", s.getClass().getSimpleName());
@@ -196,12 +191,12 @@ class ContextManagerTests {
 	@Test
 	void findStateInContext_stateLeftMenu_notPresent() {
 		manager.printQueue();
-		assertFalse(manager.getCurrentContext().isStateInContext(StateLeftMenu.class));
+		assertFalse(manager.getLastContext().isStateInContext(StateLeftMenu.class));
 	}
 
 	@Test
 	void findStateInContext_stateLeftMenu_isPresent() {
-		assertTrue(manager.getCurrentContext().isStateInContext(StateTop.class));
+		assertTrue(manager.getLastContext().isStateInContext(StateTop.class));
 	}
 	
 	@Test
@@ -218,13 +213,13 @@ class ContextManagerTests {
 	
 	@Test
 	void currentStateIsRequiredState() {
-		State current = manager.getCurrentContext().getState();
+		State current = manager.getLastContext().getState();
 		assertEquals(current, manager.moveToStateInCurrentContext(StateModule.class).get()); 	
 	}
 	
 	@Test
 	void currentStateIsNotRequiredState_but_isInContext() {
-		State current = manager.getCurrentContext().getState();
+		State current = manager.getLastContext().getState();
 		assertFalse(current.getClass().getSimpleName() == StateLeftMenu.class.getSimpleName()); 			
 		
 		assertTrue(manager.isStateInCurrentContext(StateTop.class));
@@ -234,7 +229,7 @@ class ContextManagerTests {
 	
 	@Test
 	void currentStateIsNotRequiredState_and_isNotInContext() {
-		State current = manager.getCurrentContext().getState();
+		State current = manager.getLastContext().getState();
 		assertFalse(current.getClass().getSimpleName() == StateLeftMenu.class.getSimpleName()); 			
 		
 		assertFalse(manager.isStateInCurrentContext(StateLeftMenu.class));
@@ -245,11 +240,11 @@ class ContextManagerTests {
 	@Test
 	void loadDocuments_then_close_context_currentContext_shouldBe_ContextPayroll() {
 		menu.clickAndLoad(Documents.class);		
-		Context c = (Context) manager.closeCurrentContext().getCurrentContext();
+		Context c = (Context) manager.closeCurrentContext().getLastContext();
 		assertTrue(c instanceof ContextPayroll);		
 		// Try and close the current (Payroll) context.
 		// It should not be possible.		 
-		c = (Context) manager.closeCurrentContext().getCurrentContext();
+		c = (Context) manager.closeCurrentContext().getLastContext();
 		assertTrue(c instanceof ContextPayroll);			 
 	}
 	
@@ -327,42 +322,15 @@ class ContextManagerTests {
 		State hdr = manager.switchToStateInContext(StateHeaderPanel.class, cs).get();
 		assertTrue(hdr instanceof StateHeaderPanel);
 	}
-
-	@Test	
-	void checkExistingContextIsLoaded_fromContextManager_loadAnotherFromDropdownMenu() {
-		menu.clickAndLoad(MonthlyReports.class);
-		menu.clickAndLoad(Banks.class);		
-		
-		/*
-		 * this could be current state
-		 */
-		ContextState csBanks = manager.findContext(Banks.PANEL_TITLE + ":jsPanel-2").get();
-		manager.switchToStateInContext(StateHeaderPanel.class, csBanks).get();		
-		
-		Banks b = (Banks) csBanks.getContinerAction();
-		/*
-		 * will have to get the required context (id) and pass that. 
-		 */
-		b.getHeaderBar().getToolBar().switchToPanel("jsPanel-1");
-		/*
-		 * if the switch is successful have to set as current context.
-		 */
-		WebDriverWait wait = new WebDriverWait(homepagePayroll.getWebDriver(), Duration.ofSeconds(2));
-		WebElement hdr = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class='jsPanel-titlebar']")));
-		assertEquals("Monthly Payroll Reports", hdr.getText());
-		
-		ContextState csReports = manager.getCurrentContext();
-		assertEquals(MonthlyReports.PANEL_TITLE +  ":jsPanel-1", csReports.getContextId().getId());
-	}
 	
 	@Test	
-	void xxxxxxxxxxxxxxxxx() {
+	void loadTwoPanels_switchToFirstPanel_usingContext() {
 		menu.clickAndLoad(MonthlyReports.class);
 		menu.clickAndLoad(Banks.class);		
 		
-		ContextState csBanks = manager.getCurrentContext();
-		JsPanel panelBanks = (JsPanel) csBanks.getContinerAction();
-		panelBanks.switchToExistingPanel(MonthlyReports.class);
+		ContextState csBanks = manager.getLastContext();
+		PanelSwitcher panelSwitcher = (PanelSwitcher) csBanks.getContinerAction();
+		panelSwitcher.switchToExistingPanel(MonthlyReports.class);
 
 		ContextState csReports = manager.getCurrentContext();
 		assertEquals(MonthlyReports.PANEL_TITLE +  ":jsPanel-1", csReports.getContextId().getId());

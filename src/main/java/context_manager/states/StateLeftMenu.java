@@ -27,8 +27,8 @@ public class StateLeftMenu extends State {
 
 	@Override
 	public void switchToMe() {
-		WebDriver driver = context.getDriver();
-		context.switchToDefaultContent();
+		WebDriver driver = lastContext.getDriver();
+		lastContext.switchToDefaultContent();
 		driver.findElement(By.cssSelector("body > form > div.app-body > div"));		
 	}
 

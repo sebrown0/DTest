@@ -24,7 +24,7 @@ public final class ContextForm extends Context {
 		
 	@Override
 	public void closeContext() {	 	
-		super.getContextManager().getQueue().getAndRemoveCurrentContext();
+		super.getContextManager().getQueue().getAndRemoveLastContext();
 	}
 
 	@Override

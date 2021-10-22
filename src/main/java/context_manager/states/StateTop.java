@@ -36,7 +36,7 @@ public class StateTop extends State {
 	@Override
 	public void switchToMe() {
 		logger.debug("Switching to top state");
-		WebDriver driver = context.getDriver();
+		WebDriver driver = lastContext.getDriver();
 		/*
 		 * Not strictly necessary to 'goto' the form.
 		 * But for completeness we do.

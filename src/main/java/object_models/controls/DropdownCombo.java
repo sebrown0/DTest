@@ -53,7 +53,7 @@ public class DropdownCombo extends FormWithIFrame implements Control {
 	}	
 	@Override
 	public void setContextState() {
-		ContextState con = contextManager.getCurrentContext();		
+		ContextState con = contextManager.getLastContext();		
 		con.setState(new StateHeaderForm(con, container, By.className("modal-header")));
 	}
 	@Override
