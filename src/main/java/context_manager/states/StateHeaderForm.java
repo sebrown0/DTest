@@ -6,9 +6,10 @@ package context_manager.states;
 import java.util.Optional;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import context_manager.ContextState;
+import context_manager.CurrentContextGetter;
 
 /**
  * @author Steve Brown
@@ -18,8 +19,8 @@ public class StateHeaderForm extends State {
 	private WebElement myContainer;
 	private By byHeaderLocator;
 	
-	public StateHeaderForm(ContextState context, WebElement myContainer, By byHeaderLocator) {
-		super(context);
+	public StateHeaderForm(CurrentContextGetter getter, WebElement myContainer, By byHeaderLocator, WebDriver driver) {
+		super(getter, driver);
 		this.myContainer = myContainer;
 		this.byHeaderLocator = byHeaderLocator;
 	}
@@ -34,7 +35,7 @@ public class StateHeaderForm extends State {
 		logger.error("NOT IMPLEMENTED");
 	}
 	@Override
-	public void switchToMe() {
+	public State switchToMe() {
 		// TODO Auto-generated method stub
 //		context.getDriver().findElement(null);
 //		logger.error("switchToMe not implemented!");
@@ -42,9 +43,10 @@ public class StateHeaderForm extends State {
 		
 		
 		
-		System.out.println("T->" + lastContext.getDriver().getTitle()); // TODO - remove or log 	
+		System.out.println("T->" + driver.getTitle()); // TODO - remove or log 	
 
 		myContainer.findElement(byHeaderLocator);
+		return this;
 	}
 	@Override
 	public boolean isContextCloser() {

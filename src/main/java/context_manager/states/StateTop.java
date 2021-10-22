@@ -8,7 +8,7 @@ import java.util.Optional;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import context_manager.ContextState;
+import context_manager.CurrentContextGetter;
 
 /**
  * @author Steve Brown
@@ -18,14 +18,13 @@ import context_manager.ContextState;
  */
 public class StateTop extends State {
 	
-	public StateTop(ContextState context) {
-		super(context);
+	public StateTop(CurrentContextGetter getter, WebDriver driver) {
+		super(getter, driver);
 	}
 	
 	@Override
 	public Optional<State> getNext() {		
 		return super.next;
-//		return Optional.ofNullable(super.next);
 	}
 
 	@Override
@@ -34,18 +33,19 @@ public class StateTop extends State {
 	}
 
 	@Override
-	public void switchToMe() {
+	public State switchToMe() {
 		logger.debug("Switching to top state");
-		WebDriver driver = lastContext.getDriver();
+
 		/*
 		 * Not strictly necessary to 'goto' the form.
 		 * But for completeness we do.
 		 */
-
 		driver
 			.switchTo()
 			.defaultContent()
-			.findElement(By.cssSelector("form[name='tb']"));				
+			.findElement(By.cssSelector("form[name='tb']"));
+		
+		return this;
 	}
 
 	@Override

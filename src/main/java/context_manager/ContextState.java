@@ -5,8 +5,6 @@ package context_manager;
 
 import java.util.Optional;
 
-import org.openqa.selenium.WebDriver;
-
 import context_manager.states.State;
 import object_models.forms.ContainerAction;
 
@@ -33,7 +31,6 @@ public interface ContextState {
 
 	boolean isStateInContext(Class<?> clazz);	
 	Optional<State> getPreviousState();
-	WebDriver getDriver();
 	ContextId getContextId();
 	ContainerAction getContinerAction();	
 }

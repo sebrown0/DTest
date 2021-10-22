@@ -5,8 +5,11 @@ package context_manager.states;
 
 import java.util.Optional;
 
+import org.openqa.selenium.WebDriver;
+
 import context_manager.ContextManager;
 import context_manager.ContextState;
+import context_manager.CurrentContextGetter;
 import exceptions.PanelException;
 import object_models.helpers.ClassFieldGetter;
 import object_models.helpers.IFrame;
@@ -22,9 +25,9 @@ public class StateHeaderPanel extends State {
 	private IFrame iFrame;
 	private ContextManager manager;
 	
-	public StateHeaderPanel(ContextManager manager, JsPanelHeaderBar bar, IFrame iFrame) {
-		super(manager.getLastContext());
-		this.manager = manager;
+	public StateHeaderPanel(CurrentContextGetter getter, JsPanelHeaderBar bar, IFrame iFrame, WebDriver driver) {
+		super(getter, driver);
+		this.manager = (ContextManager) getter;
 		this.bar = bar;
 		this.iFrame = iFrame;
 	}
@@ -47,7 +50,7 @@ public class StateHeaderPanel extends State {
 	
 	@Override
 	public Optional<State> getNext() {		
-		return Optional.of(new StateIframe(super.lastContext, iFrame));
+		return Optional.of(new StateIframe(manager, iFrame, driver));
 	}
 	
 	@Override
@@ -55,12 +58,22 @@ public class StateHeaderPanel extends State {
 		logger.debug("Closing state [" + this + "]");
 		bar.getControlBar().clickClose();		
 	}
+	
+	/*
+	 * HAVE TO GO THRU EACH STATE AND CHECK THAT THEY 
+	 * PERFORM THE CORRECT ACTIONS FOR close & switchToMe.
+	 */
 
+	/*
+	 * in context -> with this state
+	 * has the context and state been set as current?
+	 * 
+	 */
 	@Override
-	public void switchToMe() {
-		lastContext.switchToDefaultContent();
+	public State switchToMe() {
+		currentContext.switchToDefaultContent();
 		System.out.println("StateHeaderPanel->switchToMe"); // TODO - remove or log 	
-//		logger.error("switchToMe not implemented!");
+		return this;
 	}
 
 	@Override

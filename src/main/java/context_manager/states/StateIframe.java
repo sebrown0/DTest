@@ -5,7 +5,9 @@ package context_manager.states;
 
 import java.util.Optional;
 
-import context_manager.ContextState;
+import org.openqa.selenium.WebDriver;
+
+import context_manager.CurrentContextGetter;
 import object_models.helpers.IFrame;
 
 /**
@@ -15,8 +17,8 @@ import object_models.helpers.IFrame;
 public class StateIframe extends State {
 	private IFrame iFrame;
 	
-	public StateIframe(ContextState context, IFrame iFrame) {
-		super(context);
+	public StateIframe(CurrentContextGetter getter, IFrame iFrame, WebDriver driver) {
+		super(getter, driver);
 		this.iFrame = iFrame;
 	}
 
@@ -28,12 +30,13 @@ public class StateIframe extends State {
 	@Override
 	public void close() {
 		logger.debug("Closing state [" + this + "]");
-		lastContext.switchToDefaultContent();		
+		currentContext.switchToDefaultContent();		
 	}
 	
 	@Override
-	public void switchToMe() {
-		iFrame.switchUsingLocator();		 	
+	public State switchToMe() {
+		iFrame.switchUsingLocator();
+		return this;
 	}
 
 	@Override

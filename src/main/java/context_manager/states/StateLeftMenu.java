@@ -8,7 +8,7 @@ import java.util.Optional;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import context_manager.ContextState;
+import context_manager.CurrentContextGetter;
 
 /**
  * @author Steve Brown
@@ -16,8 +16,8 @@ import context_manager.ContextState;
  */
 public class StateLeftMenu extends State {
 	
-	public StateLeftMenu(ContextState context) {
-		super(context);
+	public StateLeftMenu(CurrentContextGetter getter, WebDriver driver) {
+		super(getter, driver);
 	}
 
 	@Override
@@ -26,10 +26,10 @@ public class StateLeftMenu extends State {
 	}
 
 	@Override
-	public void switchToMe() {
-		WebDriver driver = lastContext.getDriver();
-		lastContext.switchToDefaultContent();
-		driver.findElement(By.cssSelector("body > form > div.app-body > div"));		
+	public State switchToMe() {
+		currentContext.switchToDefaultContent();
+		driver.findElement(By.cssSelector("body > form > div.app-body > div"));
+		return this;
 	}
 
 	@Override
@@ -40,5 +40,11 @@ public class StateLeftMenu extends State {
 	@Override
 	public boolean isDefaultState() {
 		return false;
+	}
+
+	@Override
+	public void close() {
+		// TODO Auto-generated method stub
+		logger.error("Not implemented");
 	}
 }

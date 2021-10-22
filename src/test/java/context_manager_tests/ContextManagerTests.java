@@ -330,6 +330,16 @@ class ContextManagerTests {
 		menu.clickAndLoad(Banks.class);		
 		
 		ContextState csBanks = manager.getLastContext();
+		/*
+		 * THIS HAS TO BE USED WHEN 
+		 * 	SWITCHING CONTEXTS
+		 * AND/OR
+		 * 	StateHeaderPanel.switchToMe()
+		 * 
+		 * StateHeaderPanel SHOULD BE THE DEFAULT STATE.
+		 * THEN WHEN THE CONTEXT IS LOADED THE PANEL
+		 * SHOULD AUTOMATICALLY BE SWITCHED.
+		 */
 		PanelSwitcher panelSwitcher = (PanelSwitcher) csBanks.getContinerAction();
 		panelSwitcher.switchToExistingPanel(MonthlyReports.class);
 

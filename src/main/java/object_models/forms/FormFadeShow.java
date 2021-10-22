@@ -57,7 +57,7 @@ public class FormFadeShow extends FormModal {
 	public void setContextState() {
 		ContextState con = contextManager.getLastContext();
 		//CHECK THIS IS CORRECT
-		con.setState(new StateHeaderForm(con, container, By.className("modal-header")));
+		con.setState(new StateHeaderForm(contextManager, container, By.className("modal-header"), driver));
 	}
 	
 	@Override

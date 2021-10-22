@@ -7,8 +7,10 @@ import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextState;
+import context_manager.CurrentContextGetter;
 
 /**
  * @author Steve Brown
@@ -16,7 +18,8 @@ import context_manager.ContextState;
  * The current state of a Context.
  */
 public abstract class State {	
-	protected ContextState lastContext;
+	protected WebDriver driver;
+	protected ContextState currentContext;
 	protected Optional<State> next;
 	protected Logger logger = LogManager.getLogger();
 	
@@ -27,15 +30,16 @@ public abstract class State {
 	 */
 	private Optional<State> prev;
 	
-	public State(ContextState lastContext) {
-		this.lastContext = lastContext;	
+	public State(CurrentContextGetter getter, WebDriver driver) {
+		this.currentContext = getter.getCurrentContextState();
+		this.driver = driver;
 	}
 	
 	public abstract Optional<State> getNext();
-//	public abstract Optional<State> close();
+	public abstract void close();
 	public abstract boolean isContextCloser();	
 	public abstract boolean isDefaultState();
-	public abstract void switchToMe();
+	public abstract State switchToMe();
 		
 	public void setPrev(Optional<State> prev) {
 		this.prev = prev;
@@ -49,7 +53,4 @@ public abstract class State {
 		this.next = next;
 	}
 	
-	public void close() {
-		logger.debug("Closing state [" + this + "]");
-	}
 }

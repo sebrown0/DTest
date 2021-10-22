@@ -34,6 +34,11 @@ public class ContextQueue {
 		for (ContextState contextState : queue) {
 			if(cs == contextState) {
 				current = cs;
+				/*
+				 * if switching context the default state has to be loaded.
+				 * if it's a panel load it.
+				 * set the state in the context. 
+				 */
 			}
 		}
 	}

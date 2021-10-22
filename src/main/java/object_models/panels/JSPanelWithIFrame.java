@@ -31,7 +31,7 @@ public abstract class JSPanelWithIFrame extends JsPanel implements JsPanelContex
 		iFrame = new IFrame(driver, byLocator);
 		
 		ContextState con = manager.getLastContext();			 	
-		State header = new StateHeaderPanel(manager, super.getHeaderBar(), iFrame);		
+		State header = new StateHeaderPanel(manager, super.getHeaderBar(), iFrame, driver);		
 		con.setState(header);
 	}
 	

@@ -6,8 +6,9 @@ package context_manager.states;
 import java.util.Optional;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
-import context_manager.ContextState;
+import context_manager.CurrentContextGetter;
 
 /**
  * @author Steve Brown
@@ -15,8 +16,8 @@ import context_manager.ContextState;
  */
 public class StateModule extends State {
 	
-	public StateModule(ContextState context) {
-		super(context);
+	public StateModule(CurrentContextGetter getter, WebDriver driver) {
+		super(getter, driver);
 	}
 
 	@Override
@@ -30,8 +31,9 @@ public class StateModule extends State {
 	}
 
 	@Override
-	public void switchToMe() {		
-		lastContext.getDriver().findElement(By.cssSelector("body > form > header > div > a"));		
+	public State switchToMe() {		
+		driver.findElement(By.cssSelector("body > form > header > div > a"));
+		return this;
 	}
 
 	@Override

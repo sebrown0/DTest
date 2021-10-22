@@ -7,7 +7,6 @@ import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextCloser;
 import context_manager.ContextId;
@@ -50,7 +49,7 @@ public abstract class Context implements ContextState, ContextCloser {
 	}
 
 	private void setFirstState() { 	
-		firstState = new StateTop(this); 	
+		firstState = new StateTop(contextManager, contextManager.getDriver()); 	
 		this.setState(firstState);
 	}
 	
@@ -185,10 +184,10 @@ public abstract class Context implements ContextState, ContextCloser {
 		contextManager.getDriver().switchTo().defaultContent();
 	}
 	
-	@Override
-	public WebDriver getDriver() {		
-		return contextManager.getDriver();
-	}
+//	@Override
+//	public WebDriver getDriver() {		
+//		return contextManager.getDriver();
+//	}
 
 	@Override
 	public void setNullState() {
