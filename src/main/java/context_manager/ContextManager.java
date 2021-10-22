@@ -199,6 +199,10 @@ public class ContextManager {
 		return false;
 	}
 
+	public void deleteContext(ContextState cs) {
+		queue.removeContextForContextId(cs);
+	}
+	
 	public ContextManager closeCurrentContext() {
 		ContextCloser contextCloser = (ContextCloser) getLastContext();
 		contextCloser.closeContext();
@@ -305,8 +309,9 @@ public class ContextManager {
 		logInvalidContextIfNull(cs);
 		return cs;
 	}
-	public void moveToExistingContext(ContextState cs) {
+	public ContextManager moveToExistingContext(ContextState cs) {
 		queue.moveToExistingContext(cs);
+		return this;
 	}
 	
 	// Queue

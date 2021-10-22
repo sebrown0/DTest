@@ -32,6 +32,7 @@ import object_models.left_menu.employees.EmployeeDetails;
 import object_models.left_menu.parents.Documents;
 import object_models.left_menu.parents.MonthlyReports;
 import object_models.left_menu.parents.PayrollStatistics;
+import object_models.left_menu.parents.YearlyReports;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import object_models.panels.PanelSwitcher;
@@ -334,5 +335,40 @@ class ContextManagerTests {
 
 		ContextState csReports = manager.getCurrentContext();
 		assertEquals(MonthlyReports.PANEL_TITLE +  ":jsPanel-1", csReports.getContextId().getId());
+	}
+
+	@Test	
+	void currentContext_afterDeleting_currentContext() {
+		menu.clickAndLoad(MonthlyReports.class);
+		menu.clickAndLoad(YearlyReports.class);
+		menu.clickAndLoad(Banks.class);		
+		
+		manager.deleteContext(manager.getLastContext());
+		assertEquals(YearlyReports.PANEL_TITLE, manager.getCurrentContext().getContextId().getExpectedName());
+	}
+	
+	@Test	
+	void currentContext_afterDeleting_currentContext_which_isFirstContext_shouldBePayroll() {
+		menu.clickAndLoad(MonthlyReports.class);				
+		
+		ContextState first = manager.findContext("Payroll Module").get();
+		manager
+			.moveToExistingContext(first)
+			.deleteContext(first);
+		
+		assertEquals("Payroll Module", manager.getCurrentContext().getContextId().getExpectedName());
+	}
+	
+	@Test	
+	void currentContext_afterDeleting_currentContext_which_isSecondContext() {
+		menu.clickAndLoad(MonthlyReports.class);
+		menu.clickAndLoad(YearlyReports.class);		
+		
+		ContextState first = manager.findContext(MonthlyReports.PANEL_TITLE).get();
+		manager
+			.moveToExistingContext(first)
+			.deleteContext(first);
+		
+		assertEquals(YearlyReports.PANEL_TITLE, manager.getCurrentContext().getContextId().getExpectedName());
 	}
 }

@@ -9,6 +9,7 @@ import java.util.Optional;
 import context_manager.ContextIdGetter;
 import context_manager.ContextManager;
 import context_manager.ContextState;
+import context_manager.FirstContext;
 import context_manager.states.State;
 import object_models.forms.ContainerAction;
 
@@ -16,7 +17,7 @@ import object_models.forms.ContainerAction;
  * @author Steve Brown
  *
  */
-public final class ContextPayroll extends Context {
+public final class ContextPayroll extends Context implements FirstContext {
 	
 	public ContextPayroll(ContextManager contextManager, ContextIdGetter idGetter, ContainerAction containerAction) {
 		super(contextManager, idGetter, containerAction);	

@@ -33,7 +33,6 @@ public class ContextQueue {
 	public void moveToExistingContext(ContextState cs) {
 		for (ContextState contextState : queue) {
 			if(cs == contextState) {
-				System.out.println("moveToExistingContext->" + cs.getContextId()); // TODO - remove or log
 				current = cs;
 			}
 		}
@@ -71,23 +70,48 @@ public class ContextQueue {
 			return false;
 		}		
 	}
-	
-	private ContextState removeContext(ContextState cs) {
-		logger.debug("Removing context [" + cs.getContextId() + "] from context queue");
-		queue.remove(cs);
-		return cs;
-	}
-	
-	
+		
 	public boolean removeContextForContextId(Object contextId) {
-		Optional<ContextState> cs = findContext(contextId);
-		if(cs.isPresent()) { 	
-			return removeContext(cs.get()) == null;
-//			return queue.remove(cs.get());
+		Optional<ContextState> csFind = findContext(contextId);
+		if(csFind.isPresent()) {
+			return removeContext(csFind.get()) == null;			
 		}else {
 			logger.debug("Could not remove context for object [" + contextId + "]");
 			return false;
 		}
+	}
+
+	private ContextState removeContext(ContextState cs) {
+		if(cs instanceof FirstContext) {
+			logger.debug("Cannot remove first context");
+		}else {
+			logger.debug("Removing context [" + cs.getContextId() + "] from context queue"); 	
+			if(cs == current) {
+				resetCurrent();
+			}
+			queue.remove(cs);	
+		}		
+		return cs;
+	}
+
+	private void resetCurrent() {
+		ContextState newCurr = null;
+		int idxOfContext = queue.indexOf(current);
+		
+		if(hasPrev(idxOfContext)) {
+			newCurr = queue.get(idxOfContext-1);
+		}else if(hasNext(idxOfContext)){
+			newCurr = queue.get(idxOfContext+1);
+		}
+		current = newCurr;
+	}
+
+	private boolean hasPrev(int idxOfContext) {
+		return (idxOfContext > 1); // Module is the first context, but we don't move to that.
+	}
+	
+	private boolean hasNext(int idxOfContext) {
+		return (idxOfContext <= 1 && idxOfContext < getSize());
 	}
 	
 	public Optional<ContextState> findContext(Object obj) {
