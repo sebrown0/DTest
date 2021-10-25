@@ -18,12 +18,16 @@ public interface ContextState {
 	void setCurrentState(State currentState);	
 	void setState(State state);
 	void moveNext();
-	void switchToDefaultContent();
+	void driverSwitchToDefaultContent();
+	void removeContextAndResetQueue();
+	void switchToDefaultState();
 	
 	State getState();
 	State getFirstState();
 	State getCallingState();
 	State getTopState();
+	State getLastStateCloser();
+	State getContextCloser();
 	
 	<T extends State> Optional<State> moveToState(Class<T> clazzState);
 	<T extends State> Optional<State> setLastState(Class<T> clazzState);
@@ -33,4 +37,5 @@ public interface ContextState {
 	Optional<State> getPreviousState();
 	ContextId getContextId();
 	ContainerAction getContinerAction();	
+	ContextManager getContextManager();
 }

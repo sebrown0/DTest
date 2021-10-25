@@ -69,11 +69,11 @@ public class StateManager {
 		}						
 	}
 	
-	public <T extends State> Optional<State> moveToStateInCurrentContext(Class<T> clazzRequiredState, CurrentContextGetter getter) {
+	public <T extends State> Optional<State> moveToStateInCurrentContext(Class<T> clazzRequiredState, CurrentContext getter) {
 		return moveToStateInContext(clazzRequiredState, getter.getCurrentContextState());			
 	}
 	
-	public void moveToStateInCurrentContext(State state, CurrentContextGetter getter) {
+	public void moveToStateInCurrentContext(State state, CurrentContext getter) {
 		getter.getCurrentContextState().setCurrentState(state);			
 	}
 	
@@ -92,9 +92,10 @@ public class StateManager {
 		State current = queue.getLastContextInQueue().getState();
 		current.setNext(Optional.ofNullable(state));
 	}
-	
+
 	public void setDefaultStateAfterClosingContext() {				
-		ContextState cs = queue.getLastContextInQueue(); 
+//		ContextState cs = queue.getLastContextInQueue();
+		ContextState cs = queue.getCurrentContextInQueue(); 
 		State defaultState = getDefaultState(cs);
 		if(defaultState != null) {
 //			System.out.println("Current context is now [" + cs.getContextId() + "]. State (default) is [" + defaultState + "]"); // TODO - remove or log 	
@@ -106,7 +107,22 @@ public class StateManager {
 		} 	
 	}
 	
-	public boolean isStateInCurrentContext(Class<?> clazz, CurrentContextGetter getter) {
+	public void switchToDefaultStateInCurrentContext() {				
+		ContextState cs = queue.getCurrentContextInQueue(); 
+		State defaultState = getDefaultState(cs);
+		if(defaultState != null) { 	
+			logger.debug("Switched to default state [" + defaultState + "]");
+			cs.setCurrentState(defaultState);
+			System.out.println("Switched to default state [" + defaultState + "]"); // TODO - remove or log 	
+			defaultState.switchToMe();
+		}else { 	
+			State curr = cs.getState();			
+			logger.debug("Default state not found so state is current [" + curr + "]");
+			cs.setCurrentState(curr);
+		} 	
+	}
+	
+	public boolean isStateInCurrentContext(Class<?> clazz, CurrentContext getter) {
 		return getter.getCurrentContextState().isStateInContext(clazz);
 	}
 	
@@ -116,6 +132,11 @@ public class StateManager {
 		return defaultState;
 	}
 
+//	public State getLastContextCloserForCurrentContext() {
+//		State closer =  manager.getCurrentContext().getContextCloser();		
+//		return closer;
+//	}
+	
 	private State goForwardThruStates(State s) {
 		boolean foundDefault = false;
 		
@@ -135,7 +156,7 @@ public class StateManager {
 		return prev;
 	}
 
-	public void closeCurrentStateInCurrentContext(CurrentContextGetter getter){
+	public void closeCurrentStateInCurrentContext(CurrentContext getter){
 		ContextState cs = getter.getCurrentContextState();
 		if(cs != null) {
 			closeStateAndUpdateContext(cs.getState());

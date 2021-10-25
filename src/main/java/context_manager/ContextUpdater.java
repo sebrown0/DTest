@@ -21,7 +21,7 @@ public class ContextUpdater {
 	public void updateContextAfterStateDeletion(State state) {
 		if(state.isContextCloser()) { 	
 			manager.getLogger().debug("State [" + state + "] is a context closer so will close current context");						
-			manager.getQueue().removeLastContext();
+			manager.getQueue().getAndRemoveCurrentContext();
 			manager.setDefaultStateAfterClosingContext();
 		}else { 	
 			Optional<State> prev = manager.closeCurrentStateAndGetPrevForCurrentContext(state);

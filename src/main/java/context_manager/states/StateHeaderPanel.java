@@ -7,14 +7,17 @@ import java.util.Optional;
 
 import org.openqa.selenium.WebDriver;
 
+import context_manager.ContextId;
 import context_manager.ContextManager;
 import context_manager.ContextState;
-import context_manager.CurrentContextGetter;
+import context_manager.CurrentContext;
 import exceptions.PanelException;
 import object_models.helpers.ClassFieldGetter;
 import object_models.helpers.IFrame;
+import object_models.left_menu.parents.MonthlyReports;
 import object_models.panels.JsPanel;
 import object_models.panels.JsPanelHeaderBar;
+import object_models.panels.PanelSwitcher;
 
 /**
  * @author Steve Brown
@@ -25,7 +28,7 @@ public class StateHeaderPanel extends State {
 	private IFrame iFrame;
 	private ContextManager manager;
 	
-	public StateHeaderPanel(CurrentContextGetter getter, JsPanelHeaderBar bar, IFrame iFrame, WebDriver driver) {
+	public StateHeaderPanel(CurrentContext getter, JsPanelHeaderBar bar, IFrame iFrame, WebDriver driver) {
 		super(getter, driver);
 		this.manager = (ContextManager) getter;
 		this.bar = bar;
@@ -47,6 +50,17 @@ public class StateHeaderPanel extends State {
 			new PanelException("Could not switch to panel [" + panel + "]"));			
 		});		
 	}
+
+	private void switchToExistingPanel() {
+		ContextId contextId = currentContext.getContextId();
+//		manager.moveToExistingContext(currentContext); // already done????????
+		manager.moveToStateInCurrentContext(this); 	// already done????????	
+		bar
+			.getToolBar()
+			.switchToPanel(contextId.getActualId());
+		System.out.println("Switched to panel [" + contextId+ "]"); // TODO - remove or log 	
+		logger.debug("Switched to panel [" + contextId+ "]");
+	}
 	
 	@Override
 	public Optional<State> getNext() {		
@@ -57,24 +71,29 @@ public class StateHeaderPanel extends State {
 	public void close() {
 		logger.debug("Closing state [" + this + "]");
 		bar.getControlBar().clickClose();		
+		closeMyContext();
 	}
 	
-	/*
-	 * HAVE TO GO THRU EACH STATE AND CHECK THAT THEY 
-	 * PERFORM THE CORRECT ACTIONS FOR close & switchToMe.
-	 */
-
-	/*
-	 * in context -> with this state
-	 * has the context and state been set as current?
-	 * 
-	 */
 	@Override
-	public State switchToMe() {
-		currentContext.switchToDefaultContent();
-		System.out.println("StateHeaderPanel->switchToMe"); // TODO - remove or log 	
+	public State switchToMe() {		
+		System.out.println("StateHeaderPanel->switchToMe"); // TODO - remove or log
+		switchToDefaultContent();
+		switchToExistingPanel();		 	
 		return this;
 	}
+	
+	
+	/*
+	 * THIS HAS TO BE USED WHEN 
+	 * 	SWITCHING CONTEXTS
+	 * AND/OR
+	 * 	StateHeaderPanel.switchToMe()
+	 * 
+	 * StateHeaderPanel SHOULD BE THE DEFAULT STATE.
+	 * THEN WHEN THE CONTEXT IS LOADED THE PANEL
+	 * SHOULD AUTOMATICALLY BE SWITCHED.
+	 */
+	
 
 	@Override
 	public boolean isContextCloser() {

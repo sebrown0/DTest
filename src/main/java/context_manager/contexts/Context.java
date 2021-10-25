@@ -57,7 +57,7 @@ public abstract class Context implements ContextState, ContextCloser {
 		callingState = contextManager.getCallingState().getState(this);
 		this.setState(callingState);
 	}
-			
+		
 	@Override
 	public ContainerAction getContinerAction() {
 		return containerAction;
@@ -103,7 +103,12 @@ public abstract class Context implements ContextState, ContextCloser {
 		currentState = state; 
 		currentState.setPrev(Optional.ofNullable(temp));	
 	}
-
+	
+	@Override
+	public void removeContextAndResetQueue() {
+		contextManager.removeContextFromQueueForContextId(this.contextId);
+	}
+	
 	@Override
 	public boolean isStateInContext(Class<?> clazz) {
 		String stateName = clazz.getSimpleName();		
@@ -123,6 +128,35 @@ public abstract class Context implements ContextState, ContextCloser {
 			}			
 		}
 		return false;
+	}
+	/*
+	 * aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+	 */
+
+	@Override
+	public State getContextCloser() {
+		return getLastStateCloser();
+//		return contextManager.getLastContextCloserForCurrentContext();
+	}
+	
+	@Override
+	public State getLastStateCloser() {
+		State top = getTopState();
+		State s = top;
+		State closer = null;
+
+		while (s != null) {
+			if(s.getNext().isPresent()) {
+				State next = s.getNext().get();
+				if(next.isContextCloser()) {
+					closer = next;					
+				}
+				s = next;
+			}else {
+				s = null;
+			}	
+		}	
+		return closer;
 	}
 	
 	@Override
@@ -178,9 +212,17 @@ public abstract class Context implements ContextState, ContextCloser {
 				}
 			});		 	
 	}
-	
+
 	@Override
-	public void switchToDefaultContent() {
+	public void switchToDefaultState() {
+		contextManager.switchToDefaultStateInCurrentContext();		
+	}
+
+	@Override
+	public void driverSwitchToDefaultContent() {
+		/*
+		 * HAVE TO SET THE CURRENT STATE TO WHAT EVER DEFAULT IS.
+		 */
 		contextManager.getDriver().switchTo().defaultContent();
 	}
 	
@@ -204,7 +246,9 @@ public abstract class Context implements ContextState, ContextCloser {
 		return contextId;
 	}
 	
-	protected ContextManager getContextManager() {
+
+	@Override
+	public ContextManager getContextManager() {
 		return contextManager;
 	}
 }

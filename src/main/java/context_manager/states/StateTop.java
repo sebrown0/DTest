@@ -8,7 +8,7 @@ import java.util.Optional;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import context_manager.CurrentContextGetter;
+import context_manager.CurrentContext;
 
 /**
  * @author Steve Brown
@@ -18,8 +18,8 @@ import context_manager.CurrentContextGetter;
  */
 public class StateTop extends State {
 	
-	public StateTop(CurrentContextGetter getter, WebDriver driver) {
-		super(getter, driver);
+	public StateTop(CurrentContext currContext, WebDriver driver) {
+		super(currContext, driver);
 	}
 	
 	@Override
@@ -35,18 +35,18 @@ public class StateTop extends State {
 	@Override
 	public State switchToMe() {
 		logger.debug("Switching to top state");
-
-		/*
-		 * Not strictly necessary to 'goto' the form.
-		 * But for completeness we do.
-		 */
-		driver
-			.switchTo()
-			.defaultContent()
-			.findElement(By.cssSelector("form[name='tb']"));
-		
+		switchToDefaultContentAndThenElement(By.cssSelector("form[name='tb']"));		
+		setCurrentContextToThisStatesContext();		
 		return this;
 	}
+		
+//	private void gotoMainForm() {
+//		/*
+//		 * Not strictly necessary to 'goto' the form.
+//		 * But for completeness we do.
+//		 */
+//		driver.findElement(By.cssSelector("form[name='tb']"));
+//	}
 
 	@Override
 	public boolean isContextCloser() {

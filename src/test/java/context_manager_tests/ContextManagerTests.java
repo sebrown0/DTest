@@ -340,8 +340,8 @@ class ContextManagerTests {
 		 * THEN WHEN THE CONTEXT IS LOADED THE PANEL
 		 * SHOULD AUTOMATICALLY BE SWITCHED.
 		 */
-		PanelSwitcher panelSwitcher = (PanelSwitcher) csBanks.getContinerAction();
-		panelSwitcher.switchToExistingPanel(MonthlyReports.class);
+		PanelSwitcher panelSwitcherBanks = (PanelSwitcher) csBanks.getContinerAction();
+		panelSwitcherBanks.switchToExistingPanel(MonthlyReports.class);
 
 		ContextState csReports = manager.getCurrentContext();
 		assertEquals(MonthlyReports.PANEL_TITLE +  ":jsPanel-1", csReports.getContextId().getId());
@@ -373,12 +373,39 @@ class ContextManagerTests {
 	void currentContext_afterDeleting_currentContext_which_isSecondContext() {
 		menu.clickAndLoad(MonthlyReports.class);
 		menu.clickAndLoad(YearlyReports.class);		
+//		menu.clickAndLoad(Banks.class);
 		
 		ContextState first = manager.findContext(MonthlyReports.PANEL_TITLE).get();
 		manager
 			.moveToExistingContext(first)
 			.deleteContext(first);
 		
-		assertEquals(YearlyReports.PANEL_TITLE, manager.getCurrentContext().getContextId().getExpectedName());
+		/*
+		 * DELETE CONTEXT FROM CM
+		 * ----------------------
+		 * CM -> deleteContext(cs) 
+		 * 			-> ContextQueue.removeContextForContextId(cs) 
+		 * 			-> ContextQueue.removeContext(cs)
+		 * 				-> cs.getContextCloser().close();
+		 */
+		
+		/*
+		 * IF DELETING CONTEXT HEADER HAVE TO GO TO THE CONTROL BAR AND CLICK CLOSE
+		 * THEN SWITCH TO THE PREV CONTEXT.
+		 * THAT CONTEXT SHOULD BE LOADED, I.E.
+		 *  Set as the current context and switch to default state in context.
+		 */
+//		assertEquals(YearlyReports.PANEL_TITLE, manager.getCurrentContext().getContextId().getExpectedName());
+	}
+	
+	// remove if not needed
+	@Test	
+	void findContext() {
+		menu.clickAndLoad(MonthlyReports.class);
+		menu.clickAndLoad(YearlyReports.class);		
+		
+		ContextState first = manager.findContext(MonthlyReports.PANEL_TITLE).get();
+		manager.moveToExistingContext(first);
+		assertEquals("jsPanel-1", manager.getCurrentContext().getContextId().getActualId());
 	}
 }

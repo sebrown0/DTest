@@ -38,7 +38,7 @@ import context_manager.states.State;
  * 
  * USE GIT BRANCH context_manager.
  */
-public class ContextManager implements CurrentContextGetter {
+public class ContextManager implements CurrentContext {
 	private ContextQueue queue = new ContextQueue();
 //	private Logger logger = LogManager.getLogger();
 	private WebDriver driver;
@@ -103,6 +103,10 @@ public class ContextManager implements CurrentContextGetter {
 	
 	public Optional<ContextState> getPenultimateContext() {
 		return queue.getPenultimate();
+	}
+	
+	public void switchToDefaultStateInCurrentContext() {
+		stateManager.switchToDefaultStateInCurrentContext();
 	}
 	
 	public <T extends State> Optional<State> switchToStateInCurrentContext(Class<T> clazzRequiredState) {
@@ -238,4 +242,14 @@ public class ContextManager implements CurrentContextGetter {
 	public ContextState getCurrentContextState() {
 		return queue.getCurrentContextInQueue();
 	}
+
+	@Override
+	public void setCurrentContextState(ContextState cs) {
+		queue.moveToExistingContext(cs);		
+	}
+	
+//	public State getLastContextCloserForCurrentContext() {
+//		//would be from the context!! 
+////		return stateManager.getLastContextCloserForCurrentContext();
+//	}
 }

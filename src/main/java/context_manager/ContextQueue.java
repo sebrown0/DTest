@@ -31,16 +31,29 @@ public class ContextQueue {
 	}
 	
 	public void moveToExistingContext(ContextState cs) {
-		for (ContextState contextState : queue) {
-			if(cs == contextState) {
-				current = cs;
-				/*
-				 * if switching context the default state has to be loaded.
-				 * if it's a panel load it.
-				 * set the state in the context. 
-				 */
+		if(cs != null) {
+			boolean foundContext = false;
+			for (ContextState contextState : queue) {
+				if(cs == contextState) {
+					current = cs;
+					/* TODO
+					 * if switching context the default state has to be loaded.
+					 * if it's a panel load it.
+					 * set the state in the context. 
+					 */
+					
+//					current.switchToDefaultState(); // addded
+					
+					foundContext = true;
+					break;
+				}
 			}
-		}
+			if(!foundContext) {
+				logger.error("Could not find existing context [" + cs.getContextId() + "]");
+			}
+		}else {
+			logger.error("Cannot find NULL context");
+		}		
 	}
 
 	public Optional<ContextState> getPenultimate() {
@@ -90,10 +103,13 @@ public class ContextQueue {
 		if(cs instanceof FirstContext) {
 			logger.debug("Cannot remove first context");
 		}else {
-			logger.debug("Removing context [" + cs.getContextId() + "] from context queue"); 	
+			logger.debug("Removing context [" + cs.getContextId() + "] from context queue");			
 			if(cs == current) {
 				resetCurrent();
-			}
+			}			
+			//close context
+			cs.getContextCloser().close();
+			//remove from queue
 			queue.remove(cs);	
 		}		
 		return cs;
@@ -109,6 +125,12 @@ public class ContextQueue {
 			newCurr = queue.get(idxOfContext+1);
 		}
 		current = newCurr;
+		
+		if(current != null) {
+			//mode to default
+//			System.out.println("resetCurrent -> Not switching for debug"); // TODO - remove or log 	
+			current.switchToDefaultState();
+		}
 	}
 
 	private boolean hasPrev(int idxOfContext) {

@@ -7,10 +7,11 @@ import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextState;
-import context_manager.CurrentContextGetter;
+import context_manager.CurrentContext;
 
 /**
  * @author Steve Brown
@@ -30,7 +31,7 @@ public abstract class State {
 	 */
 	private Optional<State> prev;
 	
-	public State(CurrentContextGetter getter, WebDriver driver) {
+	public State(CurrentContext getter, WebDriver driver) {
 		this.currentContext = getter.getCurrentContextState();
 		this.driver = driver;
 	}
@@ -53,4 +54,23 @@ public abstract class State {
 		this.next = next;
 	}
 	
+	protected WebDriver switchToDefaultContent() {		
+		driver.switchTo().defaultContent();
+		return driver;
+	}
+	
+	protected void switchToDefaultContentAndThenElement(By byLocator) {		
+		switchToDefaultContent().findElement(byLocator);
+	}
+	
+	protected void closeMyContext() {
+		currentContext.removeContextAndResetQueue();
+	}
+
+	protected void setCurrentContextToThisStatesContext() {
+		if(currentContext != null) {
+			CurrentContext contextSetter = (CurrentContext) currentContext.getContextManager();
+			contextSetter.setCurrentContextState(currentContext);	
+		}		
+	}
 }
