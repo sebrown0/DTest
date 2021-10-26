@@ -13,6 +13,7 @@ import context_manager.states.State;
 import context_manager.states.StateLeftMenu;
 import object_models.forms.ContainerAction;
 import object_models.panels.JsPanel;
+import object_models.panels.PanelSwitcher;
 
 /**
  * @author Steve Brown
@@ -131,6 +132,23 @@ public class ContextManager implements CurrentContext {
 				}
 		});
 	}
+	
+	public <T extends JsPanel> void switchToExistingPanel(Class<T> panel) {
+		PanelSwitcher<T> switcher = new PanelSwitcher<>(panel, this);
+		switcher.switchToExistingPanel();
+	}
+	
+//	public <T extends JsPanel> void switchToExistingPanel(Class<T> panel) {
+//		ClassFieldGetter fieldGetter = new ClassFieldGetter(panel);
+//		Optional<ContextState> cs = findContext(fieldGetter.getPanelTitle().get()); // TODO - OPTIONAL
+//		cs.ifPresent(c -> {
+//			moveToExistingContext(c);
+//			switchToStateInCurrentContext(StateHeaderPanel.class);
+//		});
+//		
+////		PanelSwitcher<T> switcher = new PanelSwitcher<>(panel, this);
+////		switcher.switchToExistingPanel();
+//	}
 	
 	public <T extends State> Optional<State> switchToStateInContext(Class<T> clazzRequiredState, ContextState findCs) {
 		/*

@@ -39,8 +39,6 @@ import object_models.left_menu.parents.YearlyReports;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import object_models.panels.JsPanel;
-import object_models.panels.PanelSwitcher;
-import object_models.panels.ZZZ_PanelSwitcher;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import test_data.UserProvider;
@@ -345,8 +343,8 @@ class ContextManagerTests {
 		 * THEN WHEN THE CONTEXT IS LOADED THE PANEL
 		 * SHOULD AUTOMATICALLY BE SWITCHED.
 		 */
-		ZZZ_PanelSwitcher panelSwitcherBanks = (ZZZ_PanelSwitcher) csBanks.getContinerAction();
-		panelSwitcherBanks.switchToExistingPanel(MonthlyReports.class);
+//		ZZZ_PanelSwitcher panelSwitcherBanks = (ZZZ_PanelSwitcher) csBanks.getContinerAction();
+//		panelSwitcherBanks.switchToExistingPanel(MonthlyReports.class);
 
 		ContextState csReports = manager.getCurrentContext();
 		assertEquals(MonthlyReports.PANEL_TITLE +  ":jsPanel-1", csReports.getContextId().getId());
@@ -368,39 +366,9 @@ class ContextManagerTests {
 		menu.clickAndLoad(MonthlyReports.class);
 		menu.clickAndLoad(Banks.class);		
 		
-		PanelSwitcher<MonthlyReports> switcher = new PanelSwitcher<>(MonthlyReports.class, manager);
-		switcher.switchToExistingPanel();
-		
-		// 1. HAVE TO GET CONTEXT THAT IS A PANEL.
-//		ZZZ_PanelSwitcher banks = manager.getContextThatIsPanel().get();
-//		assertTrue(banks instanceof JsPanel);
-		
-		//
-//		banks.switchToExistingPanel(MonthlyReports.class);
-		
-//		banks.getHeaderBar().getToolBar().showDropDownMenu();
-		
-//		ContextState csBanks = manager.getLastContext();
-//		JsPanel panelBanks = (JsPanel) csBanks.getContinerAction();
-//		PanelSwitcher panelSwitcher = (PanelSwitcher) panelBanks;
-//		
-//		
-//		ContextState csReps = manager.findContext(MonthlyReports.PANEL_TITLE + ":jsPanel-1").get();
-//
-//		ffff(panelSwitcher, csReps);
-//		ffff(panelSwitcher, (JsPanel) csReps.getContinerAction());
-
-//		ContextState csReports = manager.getCurrentContext();
-//		assertEquals(MonthlyReports.PANEL_TITLE +  ":jsPanel-1", csReports.getContextId().getId());
+		manager.switchToExistingPanel(MonthlyReports.class);
+		assertEquals("jsPanel-1", manager.getCurrentContext().getContextId().getActualId());
 	}
-
-	private <T extends JsPanel> void ffff(ZZZ_PanelSwitcher panelSwitcher, ContextState cs){
-		JsPanel panel = (JsPanel) cs.getContinerAction();
-		// use the panel (switcher) switch to panel with class -> panel.getClass()
-//		panelSwitcher.switchToExistingPanel(panel.getClass(), cs);
-		panelSwitcher.switchToExistingPanel(panel, cs);
-	}
-
 
 	@Test	
 	void currentContext_afterDeleting_currentContext() {

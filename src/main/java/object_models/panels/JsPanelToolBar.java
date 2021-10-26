@@ -28,11 +28,12 @@ public class JsPanelToolBar implements ContextSetter {
 		toolBar = headerBar.findElement(By.cssSelector("div[class='jsPanel-hdr-toolbar active']"));
 	}
 	
-	public void switchToPanelFromPanel(String toPanelId, JsPanel fromPanel) {
+	public boolean switchToPanelFromPanel(String toPanelId, JsPanel fromPanel) {
 		showDropDownMenu();
 		if(loadPanel(toPanelId)){
-			switchToPanelsContext();
+			return true;
 		}
+		return false;
 	}
 	
 	private void showDropDownMenu() {
@@ -45,31 +46,22 @@ public class JsPanelToolBar implements ContextSetter {
 	}
 	
 	private boolean loadPanel(String panelId) {
-//		try {
-			LogManager.getLogger().debug("Switching to panel [" + panelId + "]");
-			
-//			WebElement panel = wait.until(
-//				ExpectedConditions.elementToBeClickable(
-//						toolBar.findElement(By.cssSelector("span[data-panel='" + panelId + "']"))));
-			
-			WebElement panel = toolBar.findElement(By.cssSelector("span[data-panel='" + panelId + "']"));
-			System.out.println("->" +  panel.getText()); // TODO - remove or log 	
+		try {
+			LogManager.getLogger().debug("Switching to panel [" + panelId + "]");			
+			WebElement panel = wait.until(
+				ExpectedConditions.elementToBeClickable(
+						toolBar.findElement(By.cssSelector("span[data-panel='" + panelId + "']"))));
 			panel.click();
 			return true;
-//		} catch (NoSuchElementException e) {
-//			LogManager.getLogger().error("Could not find the panel [" + panelId + "]");
-//			System.out.println("loadPanel->" + toolBar.getAttribute("class") ); // TODO - remove or log
-//			return false;
-//		}
+		} catch (NoSuchElementException e) {
+			LogManager.getLogger().error("Could not find the panel [" + panelId + "]");
+			return false;
+		}
 	}
-	//<span class="dropdown-item jsPanel-switch-item" data-panel="jsPanel-1">Monthly Payroll Reports</span>
-	private void switchToPanelsContext() {
-		
-	}
-
+	
 	@Override
 	public void setContext() {
-		// TODO Auto-generated method stub
-		
+		// TODO - IMPLEMENT
+		LogManager.getLogger().error("*** NOT IMPLEMENTED ***");
 	}
 }

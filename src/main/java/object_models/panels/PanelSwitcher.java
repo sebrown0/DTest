@@ -48,10 +48,11 @@ public class PanelSwitcher <T extends JsPanel> {
 						// 4. we're done, panel is current
 					}else if(foundContext) {
 						JsPanel currPanel = (JsPanel) currentContext.getContinerAction();
-						currPanel
-							.getHeaderBar()
-							.getToolBar()
-							.switchToPanelFromPanel(panelId, currPanel);						
+						if(switchToPanelFrom(currPanel) == true) {
+							manager
+								.moveToExistingContext(c)
+								.switchToDefaultStateInCurrentContext();
+						}
 					}
 				}, 
 				new Runnable() {					
@@ -60,6 +61,14 @@ public class PanelSwitcher <T extends JsPanel> {
 						// TODO Auto-generated method stub						
 					}
 				});		
+	}
+	
+	private boolean switchToPanelFrom(JsPanel currPanel) {
+		return 
+		  currPanel
+				.getHeaderBar()
+				.getToolBar()
+				.switchToPanelFromPanel(panelId, currPanel);
 	}
 	
 	private void setContextForSwitchToPanel() {
