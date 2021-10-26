@@ -25,7 +25,10 @@ import context_manager.states.StateHeaderPanel;
 import context_manager.states.StateLeftMenu;
 import context_manager.states.StateModule;
 import context_manager.states.StateTop;
+import enums.control_names.EmployeeControlNames;
 import logging.TestResultLogger;
+import object_models.controls.EmployeeSelection;
+import object_models.forms.FormModal;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.employees.Banks;
 import object_models.left_menu.employees.EmployeeDetails;
@@ -35,6 +38,7 @@ import object_models.left_menu.parents.PayrollStatistics;
 import object_models.left_menu.parents.YearlyReports;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
+import object_models.panels.JsPanel;
 import object_models.panels.PanelSwitcher;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
@@ -346,6 +350,50 @@ class ContextManagerTests {
 		ContextState csReports = manager.getCurrentContext();
 		assertEquals(MonthlyReports.PANEL_TITLE +  ":jsPanel-1", csReports.getContextId().getId());
 	}
+	
+	/* TO SWITCH TO A PANEL
+	 * --------------------
+	 * 1. HAVE TO GET CONTEXT THAT IS A PANEL 									CM -> getContextThatIsPanel();
+	 * 2. USE THIS CURRENT CONTEXT TO GET THE DROPDOWN					Is PanelSwitcher;
+	 * 3. THEN USE THE REQUIRED CLASS TO FIND THE PANEL TITLE
+	 * 4. LOAD THE PANEL USING THE PANEL TITLE
+	 * 5. SET THAT PANEL'S CONTEXT AS THE CURRENT CONTEXT
+	 * 
+	 * -> HOW DO WE KNOW WHICH PANEL WE WANT
+	 * 
+	 */
+	@Test	
+	void loadTwoPanels_XXXXXXXXXXXXXXXX() {
+		menu.clickAndLoad(MonthlyReports.class);
+		menu.clickAndLoad(Banks.class);		
+		
+		// 1. HAVE TO GET CONTEXT THAT IS A PANEL.
+		JsPanel banks = manager.getContextThatIsPanel().get();
+		assertTrue(banks instanceof JsPanel);
+		
+		//
+		banks.getHeaderBar().getToolBar().showDropDownMenu();
+//		ContextState csBanks = manager.getLastContext();
+//		JsPanel panelBanks = (JsPanel) csBanks.getContinerAction();
+//		PanelSwitcher panelSwitcher = (PanelSwitcher) panelBanks;
+//		
+//		
+//		ContextState csReps = manager.findContext(MonthlyReports.PANEL_TITLE + ":jsPanel-1").get();
+//
+//		ffff(panelSwitcher, csReps);
+//		ffff(panelSwitcher, (JsPanel) csReps.getContinerAction());
+
+//		ContextState csReports = manager.getCurrentContext();
+//		assertEquals(MonthlyReports.PANEL_TITLE +  ":jsPanel-1", csReports.getContextId().getId());
+	}
+
+	private <T extends JsPanel> void ffff(PanelSwitcher panelSwitcher, ContextState cs){
+		JsPanel panel = (JsPanel) cs.getContinerAction();
+		// use the panel (switcher) switch to panel with class -> panel.getClass()
+//		panelSwitcher.switchToExistingPanel(panel.getClass(), cs);
+		panelSwitcher.switchToExistingPanel(panel, cs);
+	}
+
 
 	@Test	
 	void currentContext_afterDeleting_currentContext() {
@@ -355,6 +403,25 @@ class ContextManagerTests {
 		
 		manager.deleteContext(manager.getLastContext());
 		assertEquals(YearlyReports.PANEL_TITLE, manager.getCurrentContext().getContextId().getExpectedName());
+	}
+
+	@Test
+	void getContextThatIsPanel_shouldReturnCurrentContext_thatIs_YearlyReports() {
+		menu.clickAndLoad(MonthlyReports.class);
+		menu.clickAndLoad(YearlyReports.class);
+		
+		JsPanel reports = manager.getContextThatIsPanel().get();
+		assertTrue(reports instanceof JsPanel);
+	}
+	
+	@Test
+	void getContextThatIsPanel_shouldReturnEmployeeDetails_thatIs_YearlyReports() {
+		EmployeeDetails empDetails = (EmployeeDetails) menu.clickAndLoad(EmployeeDetails.class).get();
+		EmployeeSelection empSelection = (EmployeeSelection) empDetails.getEmployeeControl().getControl(EmployeeControlNames.SELECT_EMP).get();
+		assertTrue(empSelection instanceof FormModal);
+		//Should be one context that is a panel.
+		empDetails = (EmployeeDetails) manager.getContextThatIsPanel().get();
+		assertTrue(empDetails instanceof JsPanel);
 	}
 	
 	@Test	

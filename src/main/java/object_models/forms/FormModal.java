@@ -12,14 +12,17 @@ import context_manager.ContextIdGetter;
 import context_manager.ContextManager;
 import context_manager.ContextSetter;
 import context_manager.contexts.ContextForm;
+import context_manager.states.StateFactorySetter;
 import object_models.helpers.Header;
+import object_models.helpers.IFrame;
 import object_models.helpers.title.PageTitle;
+import object_models.panels.JsPanelHeaderBar;
 
 /**
  * @author Steve Brown
  *
  */
-public abstract class FormModal implements ContainerAction, ContextSetter, ContextIdGetter{
+public abstract class FormModal implements ContainerAction, ContextSetter, ContextIdGetter, StateFactorySetter{
 	protected WebDriver driver;
 	protected ContextManager contextManager;
 	protected PageTitle title;
@@ -38,6 +41,16 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 		
 		wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 		initialise();
+	}
+	
+	@Override	// ContainerAction
+	public StateFactorySetter getStateFactorySetter() {
+		return this;
+	}
+	
+	@Override	// ContainerAction
+	public PageTitle getTitle() {
+		return title;
 	}
 	
 	@Override
@@ -66,9 +79,24 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 		contextManager.setContext(new ContextForm(contextManager, this, this));
 	}	
 	
-	@Override
-	public PageTitle getTitle() {
-		return title;
+	
+
+	@Override 	// StateFactorySetter
+	public ContextManager getContextManager() {
+		return contextManager;
+	}
+	@Override 	// StateFactorySetter
+	public
+	WebDriver getWebDriver() {
+		return driver;
+	}	
+	@Override 	// StateFactorySetter
+	public JsPanelHeaderBar setJsPanelHeaderBar() {
+		return null;
+	}
+	@Override 	// StateFactorySetter
+	public IFrame getIFrame() {
+		return null; // from FormWithIFrame
 	}
 
 //	public Header getHeader() {

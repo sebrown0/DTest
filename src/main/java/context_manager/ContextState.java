@@ -6,6 +6,7 @@ package context_manager;
 import java.util.Optional;
 
 import context_manager.states.State;
+import context_manager.states.StateFactorySetter;
 import object_models.forms.ContainerAction;
 
 /**
@@ -30,8 +31,8 @@ public interface ContextState {
 	State getContextCloser();
 	
 	<T extends State> Optional<State> moveToState(Class<T> clazzState);
-	<T extends State> Optional<State> setLastState(Class<T> clazzState);
-	<T extends State> Optional<State> getNewInstanceOfState(Class<T> clazzState);
+	<T extends State> Optional<State> setLastState(Class<T> clazzState, StateFactorySetter factorySetter);
+//	<T extends State> Optional<State> getNewInstanceOfState(Class<T> clazzState, StateFactorySetter factorySetter);
 
 	boolean isStateInContext(Class<?> clazz);	
 	Optional<State> getPreviousState();

@@ -14,10 +14,8 @@ import context_manager.CurrentContext;
 import exceptions.PanelException;
 import object_models.helpers.ClassFieldGetter;
 import object_models.helpers.IFrame;
-import object_models.left_menu.parents.MonthlyReports;
 import object_models.panels.JsPanel;
 import object_models.panels.JsPanelHeaderBar;
-import object_models.panels.PanelSwitcher;
 
 /**
  * @author Steve Brown
@@ -39,6 +37,7 @@ public class StateHeaderPanel extends State {
 		ClassFieldGetter fieldGetter = new ClassFieldGetter(panel);		
 		Optional<String> panelTitle = fieldGetter.getPanelTitle();
 		
+		//Here
 		panelTitle.ifPresent(title -> {			
 			Optional<ContextState> csCurr = manager.findContext(title);
 			csCurr.ifPresentOrElse(cs -> {
@@ -49,6 +48,17 @@ public class StateHeaderPanel extends State {
 			}, 
 			new PanelException("Could not switch to panel [" + panel + "]"));			
 		});		
+	}
+	
+//	public <T extends JsPanel> void switchToExistingPanel(Class<T> panel, ContextState cs) {		
+	public void switchToExistingPanel(JsPanel panel, ContextState cs) {
+		manager.moveToExistingContext(cs);
+		manager.moveToStateInCurrentContext(this); 		
+		bar.getToolBar().switchToPanel(panel.getContextId().getActualId());
+//		bar.getToolBar().switchToPanel(cs.getContextId().getActualId());
+		
+		logger.debug("Switched to panel [" + cs.getContextId() + "]"); 	
+			
 	}
 
 	private void switchToExistingPanel() {
@@ -77,8 +87,9 @@ public class StateHeaderPanel extends State {
 	@Override
 	public State switchToMe() {		
 		System.out.println("StateHeaderPanel->switchToMe"); // TODO - remove or log
-		switchToDefaultContent();
-		switchToExistingPanel();		 	
+		driver.switchTo().defaultContent(); // TODO - REMOVE AND REINSTATE BELOW!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//		switchToDefaultContent();
+//		switchToExistingPanel();		 	
 		return this;
 	}
 	

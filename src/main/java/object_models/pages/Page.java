@@ -6,6 +6,7 @@ package object_models.pages;
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.WebDriver;
 
+import context_manager.states.StateFactorySetter;
 import object_models.forms.ContainerAction;
 import object_models.helpers.Closable;
 import object_models.helpers.title.PageTitle;
@@ -35,6 +36,12 @@ public class Page implements ContainerAction, Closable {
 			title = new TitlePage(expectedTitle, driver);
 		}
 		return title;
+	}
+
+	@Override
+	public StateFactorySetter getStateFactorySetter() {
+		LogManager.getLogger().error("*** NOT IMPLEMENTED ***");
+		return null;
 	}
 		
 }

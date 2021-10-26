@@ -35,4 +35,9 @@ public abstract class FormWithIFrame extends FormModal {
 	public WebElement getIFrameElement() {
 		return iFrame.getIFrameElement();
 	}
+	
+	@Override 	// StateFactorySetter
+	public IFrame getIFrame() {
+		return iFrame;
+	}
 }

@@ -10,6 +10,9 @@ import org.openqa.selenium.WebDriver;
 
 import context_manager.contexts.Context;
 import context_manager.states.State;
+import context_manager.states.StateLeftMenu;
+import object_models.forms.ContainerAction;
+import object_models.panels.JsPanel;
 
 /**
  * @author Steve Brown
@@ -36,6 +39,8 @@ import context_manager.states.State;
  *    This would eliminate the need to loop thru state to get to
  *    the top or bottom.
  * 
+ * 8. Have one of either getCurrentContext or getCurrentContextState
+ *  
  * USE GIT BRANCH context_manager.
  */
 public class ContextManager implements CurrentContext {
@@ -150,10 +155,6 @@ public class ContextManager implements CurrentContext {
 	public void closeCurrentStateInCurrentContext(){
 		stateManager.closeCurrentStateInCurrentContext(this);
 	}
-	
-//	public void closeStateInCurrentContext(State state){
-//		stateManager.closeStateInCurrentContext(state);
-//	}
 	/*
 	 * State - End
 	 */
@@ -169,6 +170,7 @@ public class ContextManager implements CurrentContext {
 	 * Getters / Setters
 	 */		
 	public void setContext(ContextState contextState) {		 	
+		System.out.println("CM->setContext"); // TODO - remove or log 	
 		queue.addContextToQueue(contextState);
 	}
 	
@@ -183,6 +185,48 @@ public class ContextManager implements CurrentContext {
 	}
 	
 	// Context
+	public void switchToLeftMenu() {
+		Optional<ContextState> first = getContextThatIsFirstContext();
+		first.ifPresentOrElse(f -> {			 		
+			switchToStateInContext(StateLeftMenu.class, f);				
+		},
+			new Runnable() {				
+				@Override
+				public void run() {					
+					System.out.println("CM -> switchToLeftMenu -> LOAD NEW CONTEXT *NOT IMPLENTED*"); // TODO - remove or log
+					LogManager.getLogger().error("CM -> switchToLeftMenu -> LOAD NEW CONTEXT *NOT IMPLENTED*");
+				}
+		});
+	}
+	
+	public Optional<ContextState> getContextThatIsFirstContext() {
+		ContextState curr = getCurrentContext();
+		if(curr != null && !(curr instanceof FirstContext)){
+			curr = null;
+			for (ContextState cs : queue.getQueue()) {
+				curr = cs;
+				if(curr instanceof FirstContext){
+					break;
+				}
+			}			
+		}
+		return Optional.ofNullable(curr);
+	}
+	
+	public Optional<JsPanel> getContextThatIsPanel() {
+		ContainerAction curr = getCurrentContext().getContinerAction();
+		if(!(curr instanceof JsPanel)){
+			curr = null;
+			for (ContextState cs : queue.getQueue()) {
+				curr = cs.getContinerAction();
+				if(curr instanceof JsPanel){
+					break;
+				}
+			}			
+		}
+		return Optional.ofNullable((JsPanel) curr);
+	}
+	
 	public String getContextId() {
 		ContextState cs = queue.getLastContextInQueue();
 		if(cs != null) {
@@ -201,6 +245,7 @@ public class ContextManager implements CurrentContext {
 		logInvalidContextIfNull(cs);
 		return cs;
 	}
+
 	public ContextManager moveToExistingContext(ContextState cs) {
 		queue.moveToExistingContext(cs);
 		return this;
@@ -239,15 +284,14 @@ public class ContextManager implements CurrentContext {
 	}
 
 	@Override
-	public ContextState getCurrentContextState() {
-		return queue.getCurrentContextInQueue();
-	}
-
-	@Override
 	public void setCurrentContextState(ContextState cs) {
 		queue.moveToExistingContext(cs);		
 	}
-	
+
+	@Override
+	public ContextState getCurrentContextState() {
+		return queue.getCurrentContextInQueue();
+	}
 //	public State getLastContextCloserForCurrentContext() {
 //		//would be from the context!! 
 ////		return stateManager.getLastContextCloserForCurrentContext();

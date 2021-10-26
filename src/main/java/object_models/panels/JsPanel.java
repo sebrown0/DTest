@@ -22,9 +22,11 @@ import context_manager.ContextSetter;
 import context_manager.ContextState;
 import context_manager.contexts.ContextPanel;
 import context_manager.states.State;
+import context_manager.states.StateFactorySetter;
 import context_manager.states.StateHeaderPanel;
 import exceptions.PanelException;
 import object_models.forms.ContainerAction;
+import object_models.helpers.IFrame;
 import object_models.helpers.closers.CloserPanel;
 import object_models.helpers.title.PageTitle;
 import object_models.helpers.title.TitlePanel;
@@ -33,7 +35,7 @@ import object_models.helpers.title.TitlePanel;
  * @author Steve Brown
  *
  */
-public abstract class JsPanel implements ContainerAction, ContextSetter, ContextIdGetter, PanelSwitcher { 
+public abstract class JsPanel implements ContainerAction, ContextSetter, ContextIdGetter, PanelSwitcher, StateFactorySetter { 
 	protected WebDriver driver;
 	protected ContextManager manager;
 	protected Logger logger = LogManager.getLogger();
@@ -73,16 +75,36 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 		}						
 	}
 
+//	@Override
+//	public <T extends JsPanel> void switchToExistingPanel(Class<T> panel) {
+//		ContextState cs = manager.getLastContext();
+//		Optional<State> stateHdrPanel = manager.switchToStateInContext(StateHeaderPanel.class, cs);
+//		stateHdrPanel.ifPresent(h -> {
+//			StateHeaderPanel hdrPanel = (StateHeaderPanel) h;
+//			hdrPanel.switchToExistingPanel(panel);
+//		});		
+//	}
+
 	@Override
 	public <T extends JsPanel> void switchToExistingPanel(Class<T> panel) {
-		ContextState cs = manager.getLastContext();
+		ContextState cs = manager.getCurrentContext();
 		Optional<State> stateHdrPanel = manager.switchToStateInContext(StateHeaderPanel.class, cs);
 		stateHdrPanel.ifPresent(h -> {
 			StateHeaderPanel hdrPanel = (StateHeaderPanel) h;
 			hdrPanel.switchToExistingPanel(panel);
 		});		
 	}
-		
+	
+	@Override
+	public void switchToExistingPanel(JsPanel panelToSwitchTo, ContextState cs) {
+//		ContextState cs = manager.getLastContext();
+		Optional<State> hdrPanelOfCurrentContext = manager.switchToStateInContext(StateHeaderPanel.class, manager.getCurrentContext());
+		hdrPanelOfCurrentContext.ifPresent(h -> {
+			StateHeaderPanel hdrPanel = (StateHeaderPanel) h;
+			hdrPanel.switchToExistingPanel(panelToSwitchTo, manager.getCurrentContext());
+		});		
+	}
+	
 	private void setPanelId() {
 		panelId = JsPanelId.getPanelIdForTitle(driver, expectedTitle);		
 	}
@@ -107,12 +129,18 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	
 	@Override
 	public void setContext() {		
+		System.out.println("setContext->ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"); // TODO - remove or log 	
 		manager.setContext(new ContextPanel(manager, this, headerBar, this));
 	}
 	
-	@Override
+	@Override	// ContainerAction
 	public PageTitle getTitle() {
 		return title;
+	}
+	
+	@Override	// ContainerAction
+	public StateFactorySetter getStateFactorySetter() {
+		return this;
 	}
 
 	@Override
@@ -132,7 +160,9 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 		return panelId;
 	}
 	
-	protected JsPanelHeaderBar getHeaderBar() {
+	public JsPanelHeaderBar getHeaderBar() {
+		driver.switchTo().defaultContent(); // TODO - REMOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		manager.switchToStateInCurrentContext(StateHeaderPanel.class);
 		return headerBar;
 	}
 			
@@ -149,13 +179,26 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 		return new ContextId(expectedTitle, panelId.get());
 	}
 
-	public ContextManager getContextManager() {
-		return manager;
-	}
-
 	@Override
 	public String getContextExpectedName() {
 		return expectedTitle;
 	}
-	
+
+	@Override 	// StateFactorySetter
+	public ContextManager getContextManager() {
+		return manager;
+	}
+	@Override 	// StateFactorySetter
+	public
+	WebDriver getWebDriver() {
+		return driver;
+	}	
+	@Override 	// StateFactorySetter
+	public JsPanelHeaderBar setJsPanelHeaderBar() {
+		return headerBar;
+	}	
+	@Override 	// StateFactorySetter
+	public IFrame getIFrame() {
+		return null; // from JsPanelWithIFrame
+	}	
 }

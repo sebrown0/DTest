@@ -3,6 +3,7 @@
  */
 package object_models.forms;
 
+import context_manager.states.StateFactorySetter;
 import object_models.helpers.Closable;
 import object_models.helpers.title.PageTitle;
 
@@ -12,4 +13,5 @@ import object_models.helpers.title.PageTitle;
  */
 public interface ContainerAction extends Closable{
 	PageTitle getTitle();	
+	StateFactorySetter getStateFactorySetter();
 }

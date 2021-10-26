@@ -41,9 +41,9 @@ public abstract class JSPanelWithIFrame extends JsPanel implements JsPanelContex
 			.switchToMe();		
 	}	
 	
-	public IFrame getIframe() {
-		return iFrame;
-	}
+//	public IFrame getIframe() {
+//		return iFrame;
+//	}
 	
 	public WebElement getIFrameAsElement() {
 		return iFrame.getIFrameElement();
@@ -52,6 +52,11 @@ public abstract class JSPanelWithIFrame extends JsPanel implements JsPanelContex
 	@Override
 	public JSPanelWithIFrame getPanelWithIFrame() {
 		return this;
+	}
+	
+	@Override 	// StateFactorySetter
+	public IFrame getIFrame() {
+		return iFrame;
 	}
 		
 }

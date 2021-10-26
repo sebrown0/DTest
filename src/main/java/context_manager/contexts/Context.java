@@ -14,6 +14,8 @@ import context_manager.ContextIdGetter;
 import context_manager.ContextManager;
 import context_manager.ContextState;
 import context_manager.states.State;
+import context_manager.states.StateFactory;
+import context_manager.states.StateFactorySetter;
 import context_manager.states.StateTop;
 import object_models.forms.ContainerAction;
 
@@ -68,9 +70,15 @@ public abstract class Context implements ContextState, ContextCloser {
 		this.currentState = currentState;
 	}
 	
+//	@Override
+	private <T extends State> Optional<State> getNewInstanceOfState(Class<T> clazzState, StateFactorySetter factorySetter) {
+		StateFactory factory = new StateFactory(factorySetter);
+		return factory.getNewInstanceOfState(clazzState);
+	}
+	
 	@Override
-	public <T extends State> Optional<State> setLastState(Class<T> clazz){				
-		this.getNewInstanceOfState(clazz).ifPresentOrElse(s -> 
+	public <T extends State> Optional<State> setLastState(Class<T> clazz, StateFactorySetter factorySetter){				
+		getNewInstanceOfState(clazz, factorySetter).ifPresentOrElse(s -> 
 				{ this.setState(s); 
 					logger.debug("Set last (and current state) to [" + s +"]");
 				}, 
@@ -246,10 +254,16 @@ public abstract class Context implements ContextState, ContextCloser {
 		return contextId;
 	}
 	
-
 	@Override
 	public ContextManager getContextManager() {
 		return contextManager;
 	}
+	
+//	@Override
+//	public <T extends State> Optional<State> getNewInstanceOfState(Class<T> clazzState) {
+//		StateFactory factory = new StateFactory(contextManager, contextManager.getDriver());
+//		return factory.getNewInstanceOfState(clazzState);
+//	}
+	
 }
 

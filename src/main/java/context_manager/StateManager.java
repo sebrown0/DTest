@@ -47,7 +47,7 @@ public class StateManager {
 	
 	public <T extends State> Optional<State> switchToStateInContext(Class<T> clazzRequiredState, ContextState findCs) {
 		Optional<State> state = Optional.empty();		
-		if(findCs == getLastContext()) {
+		if(findCs == getCurrentContext()) {//TODO - should be current state 
 			state = moveToStateInCurrentContext(clazzRequiredState, manager);			
 		}else {
 			state = moveToStateInContext(clazzRequiredState, findCs);
@@ -65,7 +65,17 @@ public class StateManager {
 			return state;			
 		}else {
 			logger.debug("State [" + requiredStateName + "] is not present in context. Adding as the last state in context");			
-			return getLastContext().setLastState(clazzRequiredState);
+//			return getLastContext().setLastState(clazzRequiredState);
+			
+			/*
+			 * 
+			 */
+			return getCurrentContext().setLastState(clazzRequiredState, cs.getContinerAction().getStateFactorySetter());
+			/*
+			 * 
+			 */
+			
+			
 		}						
 	}
 	
@@ -193,8 +203,11 @@ public class StateManager {
 		});
 	}
 
-	private ContextState getLastContext() {
-		return manager.getLastContext();
+//	private ContextState getLastContext() {
+//		return manager.getLastContext();
+//	}
+	private ContextState getCurrentContext() {
+		return manager.getCurrentContext();
 	}
 	
 	//Getters and Setters
