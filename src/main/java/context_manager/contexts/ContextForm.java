@@ -22,19 +22,4 @@ public final class ContextForm extends Context {
 		super.getContextManager().getQueue().getAndRemoveLastContext();
 	}
 
-//	@Override
-//	public <T extends State> Optional<State> getNewInstanceOfState(Class<T> clazzState, StateFactorySetter factorySetter) {
-//		State s = null;				
-//		Constructor<?> ctor;
-//		
-//		try {
-//			Class<?> newClazz = Class.forName(clazzState.getName());
-//			ctor = newClazz.getConstructor(ContextState.class);
-//			s = (State) ctor.newInstance(this);
-//		} catch (Exception e) {
-//			logger.error("Failed getting new instance of state [" + clazzState.getSimpleName() + "]");
-//		}
-//		return Optional.ofNullable(s);
-//	}
-
 }

@@ -26,6 +26,7 @@ import context_manager.states.StateFactorySetter;
 import context_manager.states.StateHeaderPanel;
 import exceptions.PanelException;
 import object_models.forms.ContainerAction;
+import object_models.helpers.ClassFieldGetter;
 import object_models.helpers.IFrame;
 import object_models.helpers.closers.CloserPanel;
 import object_models.helpers.title.PageTitle;
@@ -35,7 +36,7 @@ import object_models.helpers.title.TitlePanel;
  * @author Steve Brown
  *
  */
-public abstract class JsPanel implements ContainerAction, ContextSetter, ContextIdGetter, PanelSwitcher, StateFactorySetter { 
+public abstract class JsPanel implements ContainerAction, ContextSetter, ContextIdGetter, ZZZ_PanelSwitcher, StateFactorySetter { 
 	protected WebDriver driver;
 	protected ContextManager manager;
 	protected Logger logger = LogManager.getLogger();
@@ -45,6 +46,7 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	private Optional<String> panelId;	
 	private WebElement container;
 	private JsPanelHeaderBar headerBar;
+	private ContextState thisContext;
 		
 	private static final By TITLE_SELECTOR = By.cssSelector("span[class='jsPanel-title']");
 		
@@ -87,22 +89,41 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 
 	@Override
 	public <T extends JsPanel> void switchToExistingPanel(Class<T> panel) {
-		ContextState cs = manager.getCurrentContext();
-		Optional<State> stateHdrPanel = manager.switchToStateInContext(StateHeaderPanel.class, cs);
-		stateHdrPanel.ifPresent(h -> {
-			StateHeaderPanel hdrPanel = (StateHeaderPanel) h;
-			hdrPanel.switchToExistingPanel(panel);
-		});		
+//		driver.switchTo().defaultContent();
+//		headerBar.getToolBar().showDropDownMenu();
+		
+//		ClassFieldGetter fieldGetter = new ClassFieldGetter(panel);
+//		Optional<String> panelTitle = fieldGetter.getPanelTitle();
+		
+//		panelTitle.ifPresent(forTitle -> {
+			manager.switchToStateInContext(StateHeaderPanel.class, thisContext);				
+//		});
+		
+//		panelTitle.ifPresent(forTitle -> {
+//			Optional<ContextState> findCs = manager.findContext(forTitle);
+//			findCs.ifPresent(cs -> {
+//				manager.switchToStateInContext(StateHeaderPanel.class, cs);
+//			});	
+//		});
+		
+		
+//		Optional<State> stateHdrPanel = manager.switchToStateInContext(StateHeaderPanel.class, thisContext);
+		
+//		stateHdrPanel.ifPresent(h -> {
+//			StateHeaderPanel hdrPanel = (StateHeaderPanel) h;
+//			hdrPanel.switchToExistingPanel(panel);
+//		});		
 	}
 	
+	// REMOVE ?????????????
 	@Override
 	public void switchToExistingPanel(JsPanel panelToSwitchTo, ContextState cs) {
-//		ContextState cs = manager.getLastContext();
-		Optional<State> hdrPanelOfCurrentContext = manager.switchToStateInContext(StateHeaderPanel.class, manager.getCurrentContext());
-		hdrPanelOfCurrentContext.ifPresent(h -> {
-			StateHeaderPanel hdrPanel = (StateHeaderPanel) h;
-			hdrPanel.switchToExistingPanel(panelToSwitchTo, manager.getCurrentContext());
-		});		
+////		ContextState cs = manager.getLastContext();
+//		Optional<State> hdrPanelOfCurrentContext = manager.switchToStateInContext(StateHeaderPanel.class, manager.getCurrentContext());
+//		hdrPanelOfCurrentContext.ifPresent(h -> {
+//			StateHeaderPanel hdrPanel = (StateHeaderPanel) h;
+//			hdrPanel.switchToExistingPanel(panelToSwitchTo, manager.getCurrentContext());
+//		});		
 	}
 	
 	private void setPanelId() {
@@ -128,9 +149,9 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	}
 	
 	@Override
-	public void setContext() {		
-		System.out.println("setContext->ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"); // TODO - remove or log 	
-		manager.setContext(new ContextPanel(manager, this, headerBar, this));
+	public void setContext() {
+		thisContext = new ContextPanel(manager, this, headerBar, this);
+		manager.setContext(thisContext);
 	}
 	
 	@Override	// ContainerAction

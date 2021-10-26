@@ -118,6 +118,20 @@ public class ContextManager implements CurrentContext {
 		return stateManager.switchToStateInCurrentContext(clazzRequiredState);
 	}
 	
+	public void switchToLeftMenu() {
+		Optional<ContextState> first = getContextThatIsFirstContext();
+		first.ifPresentOrElse(f -> {			 		
+			switchToStateInContext(StateLeftMenu.class, f);				
+		},
+			new Runnable() {				
+				@Override
+				public void run() {					
+					System.out.println("CM -> switchToLeftMenu -> LOAD NEW CONTEXT *NOT IMPLENTED*"); // TODO - remove or log
+					LogManager.getLogger().error("CM -> switchToLeftMenu -> LOAD NEW CONTEXT *NOT IMPLENTED*");
+				}
+		});
+	}
+	
 	public <T extends State> Optional<State> switchToStateInContext(Class<T> clazzRequiredState, ContextState findCs) {
 		/*
 		 * load context if ness
@@ -148,6 +162,10 @@ public class ContextManager implements CurrentContext {
 		return stateManager.moveToNextStateInCurrentContext();
 	}
 		
+	public boolean isCurrentContext(ContextState cs) {
+		return cs.equals(getCurrentContext());
+	}
+	
 	public boolean isStateInCurrentContext(Class<?> clazz) {
 		return stateManager.isStateInCurrentContext(clazz, this);
 	}
@@ -169,8 +187,7 @@ public class ContextManager implements CurrentContext {
 	/*
 	 * Getters / Setters
 	 */		
-	public void setContext(ContextState contextState) {		 	
-		System.out.println("CM->setContext"); // TODO - remove or log 	
+	public void setContext(ContextState contextState) {		 	 	
 		queue.addContextToQueue(contextState);
 	}
 	
@@ -184,21 +201,7 @@ public class ContextManager implements CurrentContext {
 		return callingState;
 	}
 	
-	// Context
-	public void switchToLeftMenu() {
-		Optional<ContextState> first = getContextThatIsFirstContext();
-		first.ifPresentOrElse(f -> {			 		
-			switchToStateInContext(StateLeftMenu.class, f);				
-		},
-			new Runnable() {				
-				@Override
-				public void run() {					
-					System.out.println("CM -> switchToLeftMenu -> LOAD NEW CONTEXT *NOT IMPLENTED*"); // TODO - remove or log
-					LogManager.getLogger().error("CM -> switchToLeftMenu -> LOAD NEW CONTEXT *NOT IMPLENTED*");
-				}
-		});
-	}
-	
+	// Context	
 	public Optional<ContextState> getContextThatIsFirstContext() {
 		ContextState curr = getCurrentContext();
 		if(curr != null && !(curr instanceof FirstContext)){

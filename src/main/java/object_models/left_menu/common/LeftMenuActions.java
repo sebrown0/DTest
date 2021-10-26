@@ -44,14 +44,7 @@ public class LeftMenuActions {
 		Optional<String> prntName = fIeldGetter.getParentName();
 		Optional<String> menuItem = fIeldGetter.getMenuItemName();
 		
-		//how do we know the current context has state??????
-		//this should be switch To State In payroll context
-		contextManager.switchToLeftMenu();
-		
-		
-		
-//		contextManager.switchToStateInContext(null, contextManager.)
-//		contextManager.switchToStateInCurrentContext(StateLeftMenu.class);
+		contextManager.switchToLeftMenu();		
 		
 		if(isChildMenuItem(prntName, menuItem)) {		
 			item = clickParent(prntName.get()).loadElement(fIeldGetter);			

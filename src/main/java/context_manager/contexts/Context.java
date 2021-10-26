@@ -69,13 +69,7 @@ public abstract class Context implements ContextState, ContextCloser {
 	public void setCurrentState(State currentState) {
 		this.currentState = currentState;
 	}
-	
-//	@Override
-	private <T extends State> Optional<State> getNewInstanceOfState(Class<T> clazzState, StateFactorySetter factorySetter) {
-		StateFactory factory = new StateFactory(factorySetter);
-		return factory.getNewInstanceOfState(clazzState);
-	}
-	
+		
 	@Override
 	public <T extends State> Optional<State> setLastState(Class<T> clazz, StateFactorySetter factorySetter){				
 		getNewInstanceOfState(clazz, factorySetter).ifPresentOrElse(s -> 
@@ -90,6 +84,11 @@ public abstract class Context implements ContextState, ContextCloser {
 				});
 		
 		return Optional.ofNullable(currentState);
+	}
+
+	private <T extends State> Optional<State> getNewInstanceOfState(Class<T> clazzState, StateFactorySetter factorySetter) {
+		StateFactory factory = new StateFactory(factorySetter);
+		return factory.getNewInstanceOfState(clazzState);
 	}
 	
 	@Override

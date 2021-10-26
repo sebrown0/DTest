@@ -45,13 +45,15 @@ public class StateManager {
 		}				
 	}
 	
+	//here we are still using current context as the 
 	public <T extends State> Optional<State> switchToStateInContext(Class<T> clazzRequiredState, ContextState findCs) {
 		Optional<State> state = Optional.empty();		
-		if(findCs == getCurrentContext()) {//TODO - should be current state 
-			state = moveToStateInCurrentContext(clazzRequiredState, manager);			
-		}else {
-			state = moveToStateInContext(clazzRequiredState, findCs);
-		}				
+		state = moveToStateInContext(clazzRequiredState, findCs);		
+		/*
+		 * this will switch to findCs
+		 * we want findCs to be used to switch to clazzRequiredState!
+		 * HAVE TO DO IT IN THE PANEL!!
+		 */
 		state.ifPresent(s -> s.switchToMe());
 		return state;
 	}
@@ -65,17 +67,8 @@ public class StateManager {
 			return state;			
 		}else {
 			logger.debug("State [" + requiredStateName + "] is not present in context. Adding as the last state in context");			
-//			return getLastContext().setLastState(clazzRequiredState);
-			
-			/*
-			 * 
-			 */
-			return getCurrentContext().setLastState(clazzRequiredState, cs.getContinerAction().getStateFactorySetter());
-			/*
-			 * 
-			 */
-			
-			
+//			return getLastContext().setLastState(clazzRequiredState);			
+			return getCurrentContext().setLastState(clazzRequiredState, cs.getContinerAction().getStateFactorySetter());			
 		}						
 	}
 	
