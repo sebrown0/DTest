@@ -11,7 +11,7 @@ import object_models.helpers.title.PageTitle;
  * @author Steve Brown
  *
  */
-public interface ContainerAction extends Closable{
+public interface ContainerAction extends Closable {
 	PageTitle getTitle();	
 	StateFactorySetter getStateFactorySetter();
 }

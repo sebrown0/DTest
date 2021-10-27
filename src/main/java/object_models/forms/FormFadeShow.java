@@ -68,7 +68,7 @@ public class FormFadeShow extends FormModal {
 	@Override
 	public void close() {
 		ButtonClicker.clickUntilNotVisible(driver, By.className("close"), 25);
-		contextManager.closeCurrentContext();
+		//contextManager.closeCurrentContext();
 	}
 	
 	@Override

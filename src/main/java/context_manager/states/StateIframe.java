@@ -36,12 +36,12 @@ public class StateIframe extends State {
 	private void moveToPrevOrDefaultState() {
 		Optional<State> prev = this.getPrev();
 		prev.ifPresentOrElse( p -> {
-			currentContext.setCurrentState(p);	
+			myContext.setCurrentState(p);	
 		}, 
 			new Runnable() {				
 				@Override
 				public void run() {
-					currentContext.switchToDefaultState();
+					myContext.switchToDefaultState();
 				}			
 		});	
 	}

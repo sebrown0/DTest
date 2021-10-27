@@ -74,32 +74,6 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 			close();
 		}						
 	}
-
-//	@Override
-//	public <T extends JsPanel> void switchToExistingPanel(Class<T> panel) {
-//		ContextState cs = manager.getLastContext();
-//		Optional<State> stateHdrPanel = manager.switchToStateInContext(StateHeaderPanel.class, cs);
-//		stateHdrPanel.ifPresent(h -> {
-//			StateHeaderPanel hdrPanel = (StateHeaderPanel) h;
-//			hdrPanel.switchToExistingPanel(panel);
-//		});		
-//	}
-
-//	@Override
-//	public <T extends JsPanel> void switchToExistingPanel(Class<T> panel) {
-//		manager.switchToStateInContext(StateHeaderPanel.class, thisContext);
-//	}
-	
-//	// REMOVE ?????????????
-//	@Override
-//	public void switchToExistingPanel(JsPanel panelToSwitchTo, ContextState cs) {
-//////		ContextState cs = manager.getLastContext();
-////		Optional<State> hdrPanelOfCurrentContext = manager.switchToStateInContext(StateHeaderPanel.class, manager.getCurrentContext());
-////		hdrPanelOfCurrentContext.ifPresent(h -> {
-////			StateHeaderPanel hdrPanel = (StateHeaderPanel) h;
-////			hdrPanel.switchToExistingPanel(panelToSwitchTo, manager.getCurrentContext());
-////		});		
-//	}
 	
 	private void setPanelId() {
 		panelId = JsPanelId.getPanelIdForTitle(driver, expectedTitle);		

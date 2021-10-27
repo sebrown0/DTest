@@ -136,21 +136,11 @@ class ContextManagerTests {
 		assertEquals("Employee Document Management", cs.getContextId().getExpectedName());
 	}
 	
-	//removed removeContextFromQueueForContextId so test will not work
-//	@Test
-//	void removeContextFromQueue_usingContextId_actual() {
-//		menu.clickAndLoad(Documents.class);
-//		ContextState cs = manager.findContext("jsPanel-1").get();
-//		boolean isRemoved = manager.removeContextFromQueueForContextId(cs.getContextId());
-//		manager.closeCurrentStateInCurrentContext();
-//		assertTrue(isRemoved);
-//	}
-	
 	@Test
-	void loadDocument_and_checkState() {		
+	void loadDocument_and_checkState_revertFromIframe_to_headerPanel() {		
 		menu.clickAndLoad(Documents.class);
-		manager.closeCurrentStateInCurrentContext();
-		assertTrue(manager.getLastContext().getState() instanceof StateLeftMenu);				
+		manager.closeCurrentStateInCurrentContext(); 	
+		assertTrue(manager.getLastContext().getState() instanceof StateHeaderPanel);				
 	}
 
 	@Test
@@ -174,8 +164,8 @@ class ContextManagerTests {
 		assertEquals("Employee Details:jsPanel-2", manager.getContextId());
 		
 		manager.closeCurrentStateInCurrentContext();
-		manager.closeCurrentStateInCurrentContext();
-		assertTrue(manager.getLastContext().getState() instanceof StateLeftMenu);
+		manager.closeCurrentStateInCurrentContext();		
+		assertTrue(manager.getLastContext().getState() instanceof StateHeaderPanel);
 		assertEquals("Employee Document Management:jsPanel-1", manager.getContextId());		
 	}
 
@@ -244,15 +234,17 @@ class ContextManagerTests {
 	
 	@Test
 	void loadDocuments_then_close_context_currentContext_shouldBe_ContextPayroll() {
-		menu.clickAndLoad(Documents.class);		
-		Context c = (Context) manager.closeCurrentContext().getLastContext();
+		menu.clickAndLoad(Documents.class);
+		manager.removeCurrentContextFromQueue();
+		Context c = (Context) manager.getLastContext();
 		assertTrue(c instanceof ContextPayroll);		
 		// Try and close the current (Payroll) context.
-		// It should not be possible.		 
-		c = (Context) manager.closeCurrentContext().getLastContext();
+		// It should not be possible.
+		manager.removeCurrentContextFromQueue();
+		c = (Context) manager.getLastContext();		
 		assertTrue(c instanceof ContextPayroll);			 
 	}
-	
+		
 	@Test
 	void penultimateContext_exists() {
 		menu.clickAndLoad(Banks.class);

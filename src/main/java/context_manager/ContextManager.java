@@ -67,34 +67,16 @@ public class ContextManager implements CurrentContext {
 	}
 	
 	
-	public ContextManager closeCurrentContext() {
-		ContextCloser contextCloser = (ContextCloser) getCurrentContext();
-		contextCloser.closeContext();
-		// TODO - switch to default???????????????????????????????????????
-		return this;
-	}
-		
-//	public void updateContextAfterStateDeletion(State state) {
-//		ContextUpdater updater = new ContextUpdater(stateManager);
-//		updater.updateContextAfterStateDeletion(state);
-//		
-////		if(state.isContextCloser()) { 	
-////			logger.debug("State [" + state + "] is a context closer so will close current context");						
-////			queue.removeLastContext();
-////			stateManager.setDefaultStateAfterClosingContext();
-////		}else { 	
-////			Optional<State> prev = stateManager.closeCurrentStateAndGetPrevForCurrentContext(state);
-////			if(prev != null && prev.isPresent()) {
-////				stateManager.revertToPreviousStateInCurrentContext(prev);
-////			}else {
-////				queue.getAndRemoveLastContext();
-////			}			
-////		}
+//	public ContextManager closeCurrentContext() {
+//		ContextCloser contextCloser = (ContextCloser) getCurrentContext();
+//		contextCloser.closeContext();
+//		// TODO - switch to default???????????????????????????????????????
+//		return this;
 //	}
+		
 	/*
 	 * Context End
 	 */
-
 	 
 	/*
 	 * State - Start
@@ -134,19 +116,7 @@ public class ContextManager implements CurrentContext {
 		PanelSwitcher<T> switcher = new PanelSwitcher<>(panel, this);
 		switcher.switchToExistingPanel();
 	}
-	
-//	public <T extends JsPanel> void switchToExistingPanel(Class<T> panel) {
-//		ClassFieldGetter fieldGetter = new ClassFieldGetter(panel);
-//		Optional<ContextState> cs = findContext(fieldGetter.getPanelTitle().get()); // TODO - OPTIONAL
-//		cs.ifPresent(c -> {
-//			moveToExistingContext(c);
-//			switchToStateInCurrentContext(StateHeaderPanel.class);
-//		});
-//		
-////		PanelSwitcher<T> switcher = new PanelSwitcher<>(panel, this);
-////		switcher.switchToExistingPanel();
-//	}
-	
+		
 	public <T extends State> Optional<State> switchToStateInContext(Class<T> clazzRequiredState, ContextState findCs) {
 		/*
 		 * load context if ness
@@ -284,17 +254,17 @@ public class ContextManager implements CurrentContext {
 	}
 
 	public void deleteContext(ContextState cs) {
-//		queue.removeContextForContextId(cs);
-		queue.removeContext(cs);
-		
+		queue.removeAndCloseContext(cs);		
 	}
 	public boolean removeCurrentContextFromQueue() {
 		return queue.removeLastContext();
 	}
-//	public boolean removeContextFromQueueForContextId(Object contId) {
-//		return queue.removeContextForContextId(contId);
-//	}
-
+//	public ContextManager closeCurrentContext() {
+//	ContextCloser contextCloser = (ContextCloser) getCurrentContext();
+//	contextCloser.closeContext();
+//	// TODO - switch to default???????????????????????????????????????
+//	return this;
+//}
 	public void printContexts() {
 		ContextManagerPrinter printer = new ContextManagerPrinter(queue);
 		printer.printContexts();

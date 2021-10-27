@@ -20,7 +20,7 @@ import context_manager.CurrentContext;
  */
 public abstract class State {	
 	protected WebDriver driver;
-	protected ContextState currentContext;
+	protected ContextState myContext; // TODO - assuming we are in current context!
 	protected Optional<State> next;
 	protected Logger logger = LogManager.getLogger();
 	
@@ -32,7 +32,7 @@ public abstract class State {
 	private Optional<State> prev;
 	
 	public State(CurrentContext getter, WebDriver driver) {
-		this.currentContext = getter.getCurrentContextState();
+		this.myContext = getter.getCurrentContextState(); // TODO - assuming we are in current context!
 		this.driver = driver;
 	}
 	
@@ -63,14 +63,14 @@ public abstract class State {
 		switchToDefaultContent().findElement(byLocator);
 	}
 	
-//	protected void closeMyContext() {
-//		currentContext.removeContextAndResetQueue();
-//	}
-
 	protected void setCurrentContextToThisStatesContext() {
-		if(currentContext != null) {
-			CurrentContext contextSetter = (CurrentContext) currentContext.getContextManager();
-			contextSetter.setCurrentContextState(currentContext);	
+		if(myContext != null) {
+			CurrentContext contextSetter = (CurrentContext) myContext.getContextManager();
+			contextSetter.setCurrentContextState(myContext);	
 		}		
+	}
+	
+	public ContextState getMyContext() {
+		return myContext;
 	}
 }

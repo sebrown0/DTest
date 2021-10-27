@@ -79,8 +79,6 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 		contextManager.setContext(new ContextForm(contextManager, this, this));
 	}	
 	
-	
-
 	@Override 	// StateFactorySetter
 	public ContextManager getContextManager() {
 		return contextManager;

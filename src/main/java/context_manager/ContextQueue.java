@@ -73,50 +73,43 @@ public class ContextQueue {
 	}
 	
 	public ContextState getAndRemoveCurrentContext() {
-		return removeContext(current);
+		return removeAndCloseContext(current);
 	}
 	
 	public ContextState getAndRemoveLastContext() {		
-		return removeContext(getLastContextInQueue());
+		return removeAndCloseContext(getLastContextInQueue());
 	}
 
 	public boolean removeLastContext() {
 		if(queue.isEmpty() == false) {
-			removeContext(getLastContextInQueue());		
+			removeAndCloseContext(getLastContextInQueue());		
 			return true;
 		}else {
 			return false;
 		}		
 	}
-		//from state
-//	public boolean removeContextForContextId(Object contextId) {
-//		Optional<ContextState> csFind = findContext(contextId);
-//		if(csFind.isPresent()) {
-//			return removeContext(csFind.get()) == null;			
-//		}else {
-//			logger.debug("Could not remove context for object [" + contextId + "]");
-//			return false;
-//		}
-//	}
-
-//	public ContextState removeContext(ContextState cs) {
-//		if(cs instanceof FirstContext) {
-//			logger.debug("Cannot remove first context");
-//		}else {
-//			logger.debug("Removing context [" + cs.getContextId() + "] from context queue");			
-//			System.out.println("Removing context [" + cs.getContextId() + "] from context queue"); // TODO - remove or log 	
-//			if(cs == current) {
-//				resetCurrent();
-//			}			
-//			//close context
-////			cs.getContextCloser().close();
-//			//remove from queue
-//			queue.remove(cs);	
-//		}		
-//		return cs;
-//	}
 	
 	public ContextState removeContext(ContextState cs) {
+		if(cs instanceof FirstContext) {
+			logger.debug("Cannot remove first context");
+		}else {
+			logger.debug("Removing context [" + cs.getContextId() + "] from context queue"); 	
+			if(cs == current) {
+				resetCurrent();
+			}
+			//remove from queue
+			queue.remove(cs);	
+		}		
+		return cs;
+	}
+	
+	/*
+	 * This removes the context from the queue, and
+	 * gets the context's closer to close the context.
+	 * 
+	 * If the context has already been closed do not use this method.
+	 */
+	public ContextState removeAndCloseContext(ContextState cs) {
 		if(cs instanceof FirstContext) {
 			logger.debug("Cannot remove first context");
 		}else {
@@ -156,7 +149,7 @@ public class ContextQueue {
 	}
 	
 	private boolean hasNext(int idxOfContext) {
-		return (idxOfContext <= 1 && idxOfContext < getSize());
+		return (idxOfContext <= 1 && (idxOfContext+1) < getSize());
 	}
 	
 	public Optional<ContextState> findContext(Object obj) {

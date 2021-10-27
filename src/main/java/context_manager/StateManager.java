@@ -152,12 +152,12 @@ public class StateManager {
 		} 	
 		return s;
 	}
-		
-	public Optional<State> closeCurrentStateAndGetPrevForCurrentContext(State current){
-		Optional<State> prev = current.getPrev();
-		current.close();
-		return prev;
-	}
+	
+//	public Optional<State> closeCurrentStateAndGetPrev(State state){
+//		Optional<State> prev = state.getPrev();
+//		state.close();
+//		return prev;
+//	}
 
 	public void closeCurrentStateInCurrentContext(CurrentContext getter){
 		ContextState cs = getter.getCurrentContextState();
@@ -181,6 +181,19 @@ public class StateManager {
 	private void updateContextAfterStateClosure(State state) {
 		ContextUpdater updater = new ContextUpdater(this);
 		updater.updateContextAfterStateDeletion(state);
+	}
+	
+	public void revertToPreviousStateInContext(Optional<State> prev, ContextState cs) {
+		prev.ifPresentOrElse(
+				p -> { 
+					cs.setState(p);
+				}, 
+				new Runnable() {			
+					@Override
+					public void run() {
+						cs.setNullState();				
+					}
+		});
 	}
 	
 	public void revertToPreviousStateInCurrentContext(Optional<State> prev) {

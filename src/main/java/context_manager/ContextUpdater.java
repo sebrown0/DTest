@@ -8,7 +8,7 @@ import java.util.Optional;
 import context_manager.states.State;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 public class ContextUpdater {
@@ -19,16 +19,23 @@ public class ContextUpdater {
 	}
 
 	public void updateContextAfterStateDeletion(State state) {
+		ContextState statesContext = state.getMyContext();
 		if(state.isContextCloser()) { 	
-			manager.getLogger().debug("State [" + state + "] is a context closer so will close current context");						
-			manager.getQueue().getAndRemoveCurrentContext();
+			manager.getLogger().debug("State [" + state + "] is a context closer so will close current context");
+			/*
+			 * This does not call the state's close method.
+			 * That is done before in: StateManager.closeState(State closeState); 
+			 */
+			manager.getQueue().removeContext(statesContext);
 			manager.setDefaultStateAfterClosingContext();
 		}else { 	
-			Optional<State> prev = manager.closeCurrentStateAndGetPrevForCurrentContext(state);
-			if(prev != null && prev.isPresent()) {
-				manager.revertToPreviousStateInCurrentContext(prev);
+//			Optional<State> prev = manager.closeCurrentStateAndGetPrev(state);
+			Optional<State> prev = state.getPrev();
+			if(prev != null && prev.isPresent()) {				
+				manager.revertToPreviousStateInContext(prev, statesContext);
+//				manager.revertToPreviousStateInCurrentContext(prev); //
 			}else {
-				manager.getQueue().getAndRemoveLastContext();
+				manager.getQueue().removeContext(statesContext);
 			}			
 		}
 	}
