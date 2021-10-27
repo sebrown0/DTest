@@ -45,6 +45,6 @@ public class StateLeftMenu extends State {
 
 	@Override
 	public void close() {
-		closeMyContext();
+		//N/A
 	}
 }

@@ -36,8 +36,11 @@ public class StateHeaderPanel extends State {
 	@Override
 	public void close() {
 		logger.debug("Closing state [" + this + "]");
-		bar.getControlBar().clickClose();		
-		closeMyContext();
+		switchToDefaultContent();
+		bar.getControlBar().clickClose();
+		
+		//Use this
+//		closeMyContext();
 	}
 	
 	@Override

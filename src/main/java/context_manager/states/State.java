@@ -63,9 +63,9 @@ public abstract class State {
 		switchToDefaultContent().findElement(byLocator);
 	}
 	
-	protected void closeMyContext() {
-		currentContext.removeContextAndResetQueue();
-	}
+//	protected void closeMyContext() {
+//		currentContext.removeContextAndResetQueue();
+//	}
 
 	protected void setCurrentContextToThisStatesContext() {
 		if(currentContext != null) {

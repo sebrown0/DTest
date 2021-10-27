@@ -66,9 +66,6 @@ public class ContextManager implements CurrentContext {
 		queue.addContextToQueue(context);
 	}
 	
-	public void deleteContext(ContextState cs) {
-		queue.removeContextForContextId(cs);
-	}
 	
 	public ContextManager closeCurrentContext() {
 		ContextCloser contextCloser = (ContextCloser) getCurrentContext();
@@ -285,15 +282,18 @@ public class ContextManager implements CurrentContext {
 	public ContextState getEndOfQueue() {
 		return queue.getLastContextInQueue();
 	}
-//	public ContextState getAndRemoveEndOfQueue() {
-//		return queue.getAndRemoveLastContext();
-//	}	
+
+	public void deleteContext(ContextState cs) {
+//		queue.removeContextForContextId(cs);
+		queue.removeContext(cs);
+		
+	}
 	public boolean removeCurrentContextFromQueue() {
 		return queue.removeLastContext();
 	}
-	public boolean removeContextFromQueueForContextId(Object contId) {
-		return queue.removeContextForContextId(contId);
-	}
+//	public boolean removeContextFromQueueForContextId(Object contId) {
+//		return queue.removeContextForContextId(contId);
+//	}
 
 	public void printContexts() {
 		ContextManagerPrinter printer = new ContextManagerPrinter(queue);

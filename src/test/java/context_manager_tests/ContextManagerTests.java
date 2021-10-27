@@ -136,14 +136,15 @@ class ContextManagerTests {
 		assertEquals("Employee Document Management", cs.getContextId().getExpectedName());
 	}
 	
-	@Test
-	void removeContextFromQueue_usingContextId_actual() {
-		menu.clickAndLoad(Documents.class);
-		ContextState cs = manager.findContext("jsPanel-1").get();
-		boolean isRemoved = manager.removeContextFromQueueForContextId(cs.getContextId());
-		manager.closeCurrentStateInCurrentContext();
-		assertTrue(isRemoved);
-	}
+	//removed removeContextFromQueueForContextId so test will not work
+//	@Test
+//	void removeContextFromQueue_usingContextId_actual() {
+//		menu.clickAndLoad(Documents.class);
+//		ContextState cs = manager.findContext("jsPanel-1").get();
+//		boolean isRemoved = manager.removeContextFromQueueForContextId(cs.getContextId());
+//		manager.closeCurrentStateInCurrentContext();
+//		assertTrue(isRemoved);
+//	}
 	
 	@Test
 	void loadDocument_and_checkState() {		
@@ -362,22 +363,38 @@ class ContextManagerTests {
 	 * 
 	 */
 	@Test	
-	void loadTwoPanels_XXXXXXXXXXXXXXXX() {
+	void loadTwoPanels_switchToTheFirstPanel() {
 		menu.clickAndLoad(MonthlyReports.class);
 		menu.clickAndLoad(Banks.class);		
 		
 		manager.switchToExistingPanel(MonthlyReports.class);
 		assertEquals("jsPanel-1", manager.getCurrentContext().getContextId().getActualId());
-	}
+	}//all good
 
+	/*
+	 * if delete context
+	 * A. Use context.state.close();
+	 * 		 If it's a panel 	-> use cntrlBar.closeBtn
+	 * 		 If it's a form  	-> use modalHdr.button[class='close']
+	 * 	 	 If it's a module -> cannot close (maybe switch?) 
+	 * 
+	 * 1. Get the context.
+	 * 		 Either use the current or find context by con.class
+	 * 2. Con.close();
+	 * 3. Delete con.
+	 * 4. Revert to prev con, if not there goto next.
+	 * 5. Goto default state in reverted context.
+	 * 		   
+	 */
 	@Test	
 	void currentContext_afterDeleting_currentContext() {
 		menu.clickAndLoad(MonthlyReports.class);
 		menu.clickAndLoad(YearlyReports.class);
 		menu.clickAndLoad(Banks.class);		
 		
-		manager.deleteContext(manager.getLastContext());
+		manager.deleteContext(manager.getCurrentContext());
 		assertEquals(YearlyReports.PANEL_TITLE, manager.getCurrentContext().getContextId().getExpectedName());
+		assertTrue(manager.getCurrentContext().getState() instanceof StateHeaderPanel);
 	}
 
 	@Test

@@ -113,7 +113,8 @@ public abstract class Context implements ContextState, ContextCloser {
 	
 	@Override
 	public void removeContextAndResetQueue() {
-		contextManager.removeContextFromQueueForContextId(this.contextId);
+		contextManager.deleteContext(this);
+//		contextManager.removeContextFromQueueForContextId(this.contextId);
 	}
 	
 	@Override
@@ -136,14 +137,10 @@ public abstract class Context implements ContextState, ContextCloser {
 		}
 		return false;
 	}
-	/*
-	 * aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-	 */
-
+	
 	@Override
 	public State getContextCloser() {
 		return getLastStateCloser();
-//		return contextManager.getLastContextCloserForCurrentContext();
 	}
 	
 	@Override

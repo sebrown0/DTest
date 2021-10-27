@@ -36,7 +36,7 @@ public class StateHeaderForm extends State {
 		 */
 		logger.debug("Closing state [" + this + "]");
 		logger.error("NOT IMPLEMENTED");
-		closeMyContext();
+		
 	}
 	@Override
 	public State switchToMe() {

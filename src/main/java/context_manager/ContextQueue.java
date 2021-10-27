@@ -88,22 +88,40 @@ public class ContextQueue {
 			return false;
 		}		
 	}
-		
-	public boolean removeContextForContextId(Object contextId) {
-		Optional<ContextState> csFind = findContext(contextId);
-		if(csFind.isPresent()) {
-			return removeContext(csFind.get()) == null;			
-		}else {
-			logger.debug("Could not remove context for object [" + contextId + "]");
-			return false;
-		}
-	}
+		//from state
+//	public boolean removeContextForContextId(Object contextId) {
+//		Optional<ContextState> csFind = findContext(contextId);
+//		if(csFind.isPresent()) {
+//			return removeContext(csFind.get()) == null;			
+//		}else {
+//			logger.debug("Could not remove context for object [" + contextId + "]");
+//			return false;
+//		}
+//	}
 
-	private ContextState removeContext(ContextState cs) {
+//	public ContextState removeContext(ContextState cs) {
+//		if(cs instanceof FirstContext) {
+//			logger.debug("Cannot remove first context");
+//		}else {
+//			logger.debug("Removing context [" + cs.getContextId() + "] from context queue");			
+//			System.out.println("Removing context [" + cs.getContextId() + "] from context queue"); // TODO - remove or log 	
+//			if(cs == current) {
+//				resetCurrent();
+//			}			
+//			//close context
+////			cs.getContextCloser().close();
+//			//remove from queue
+//			queue.remove(cs);	
+//		}		
+//		return cs;
+//	}
+	
+	public ContextState removeContext(ContextState cs) {
 		if(cs instanceof FirstContext) {
 			logger.debug("Cannot remove first context");
 		}else {
 			logger.debug("Removing context [" + cs.getContextId() + "] from context queue");			
+			System.out.println("Removing context [" + cs.getContextId() + "] from context queue"); // TODO - remove or log 	
 			if(cs == current) {
 				resetCurrent();
 			}			
@@ -128,7 +146,7 @@ public class ContextQueue {
 		
 		if(current != null) {
 			//mode to default
-//			System.out.println("resetCurrent -> Not switching for debug"); // TODO - remove or log 	
+			System.out.println("resetCurrent -> Not switching for debug"); // TODO - remove or log 	
 			current.switchToDefaultState();
 		}
 	}
