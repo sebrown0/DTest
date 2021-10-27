@@ -8,7 +8,6 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import context_manager.ContextCloser;
 import context_manager.ContextId;
 import context_manager.ContextIdGetter;
 import context_manager.ContextManager;
@@ -26,7 +25,7 @@ import object_models.forms.ContainerAction;
  * Each context can have different states, i.e. header/container, iFrame etc.
  * 
  */
-public abstract class Context implements ContextState, ContextCloser {
+public abstract class Context implements ContextState { //, ZZZ_ContextCloser {
 	protected Logger logger = LogManager.getLogger();
 	
 	private ContextManager contextManager;
@@ -114,7 +113,6 @@ public abstract class Context implements ContextState, ContextCloser {
 	@Override
 	public void removeContextAndResetQueue() {
 		contextManager.deleteContext(this);
-//		contextManager.removeContextFromQueueForContextId(this.contextId);
 	}
 	
 	@Override
@@ -253,6 +251,11 @@ public abstract class Context implements ContextState, ContextCloser {
 	@Override
 	public ContextManager getContextManager() {
 		return contextManager;
+	}
+
+	@Override
+	public String toString() {
+		return "Context [contextId=" + contextId + "]";
 	}
 	
 //	@Override

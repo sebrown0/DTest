@@ -13,7 +13,7 @@ import context_manager.states.State;
  */
 public class ContextUpdater {
 	private StateManager manager;
-	
+
 	public ContextUpdater(StateManager manager) {
 		this.manager = manager;
 	}
@@ -28,12 +28,10 @@ public class ContextUpdater {
 			 */
 			manager.getQueue().removeContext(statesContext);
 			manager.setDefaultStateAfterClosingContext();
-		}else { 	
-//			Optional<State> prev = manager.closeCurrentStateAndGetPrev(state);
+		}else {
 			Optional<State> prev = state.getPrev();
-			if(prev != null && prev.isPresent()) {				
+			if(prev != null && prev.isPresent()) {
 				manager.revertToPreviousStateInContext(prev, statesContext);
-//				manager.revertToPreviousStateInCurrentContext(prev); //
 			}else {
 				manager.getQueue().removeContext(statesContext);
 			}			

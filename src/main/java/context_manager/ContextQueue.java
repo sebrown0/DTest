@@ -72,13 +72,21 @@ public class ContextQueue {
 		return queue.get(lastIdx());
 	}
 	
-	public ContextState getAndRemoveCurrentContext() {
-		return removeAndCloseContext(current);
-	}
+//	public void getAndRemoveCurrentContext() {
+//		removeAndCloseContext(current);
+//	}
 	
-	public ContextState getAndRemoveLastContext() {		
-		return removeAndCloseContext(getLastContextInQueue());
-	}
+//	public void getAndRemoveLastContext() {		
+//		removeAndCloseContext(getLastContextInQueue());
+//	}
+	
+//	public ContextState getAndRemoveCurrentContext() {
+//		return removeAndCloseContext(current);
+//	}
+//	
+//	public ContextState getAndRemoveLastContext() {		
+//		return removeAndCloseContext(getLastContextInQueue());
+//	}
 
 	public boolean removeLastContext() {
 		if(queue.isEmpty() == false) {
@@ -89,18 +97,18 @@ public class ContextQueue {
 		}		
 	}
 	
-	public ContextState removeContext(ContextState cs) {
+	public boolean removeContext(ContextState cs) {
 		if(cs instanceof FirstContext) {
 			logger.debug("Cannot remove first context");
+			return false;
 		}else {
 			logger.debug("Removing context [" + cs.getContextId() + "] from context queue"); 	
 			if(cs == current) {
 				resetCurrent();
 			}
-			//remove from queue
-			queue.remove(cs);	
-		}		
-		return cs;
+			queue.remove(cs);
+			return true;
+		}				
 	}
 	
 	/*
@@ -109,23 +117,30 @@ public class ContextQueue {
 	 * 
 	 * If the context has already been closed do not use this method.
 	 */
-	public ContextState removeAndCloseContext(ContextState cs) {
-		if(cs instanceof FirstContext) {
-			logger.debug("Cannot remove first context");
-		}else {
-			logger.debug("Removing context [" + cs.getContextId() + "] from context queue");			
-			System.out.println("Removing context [" + cs.getContextId() + "] from context queue"); // TODO - remove or log 	
-			if(cs == current) {
-				resetCurrent();
-			}			
+//	public ContextState removeAndCloseContext(ContextState cs) {
+//		if(cs instanceof FirstContext) {
+//			logger.debug("Cannot remove first context");
+//		}else {
+//			logger.debug("Removing context [" + cs.getContextId() + "] from context queue");
+//			if(cs == current) {
+//				resetCurrent();
+//			}			
+//			//close context
+//			cs.getContextCloser().close();
+//			//remove from queue
+//			queue.remove(cs);	
+//		}		
+//		return cs;
+//	}
+	
+	public void removeAndCloseContext(ContextState cs) {
+		if(removeContext(cs)) {
 			//close context
-			cs.getContextCloser().close();
-			//remove from queue
-			queue.remove(cs);	
+			cs.getContextCloser().close();			
 		}		
-		return cs;
+//		return cs;
 	}
-
+	
 	private void resetCurrent() {
 		ContextState newCurr = null;
 		int idxOfContext = queue.indexOf(current);

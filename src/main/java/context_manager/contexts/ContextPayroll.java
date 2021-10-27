@@ -25,14 +25,14 @@ public final class ContextPayroll extends Context implements FirstContext {
 //		System.out.println("ContextPayroll->addInitialStates"); // TODO - remove or log 	
 	}
 	
-	@Override
-	public void closeContext() {
-		/*
-		 * As this is the top context it cannot be closed
-		 * However, it could switch to a different module 
-		 * if one is passed to this method.
-		 */
-		super.logger.info("Cannot close module [Payroll]. This is the top context");
-	}
+//	@Override
+//	public void closeContext() {
+//		/*
+//		 * As this is the top context it cannot be closed
+//		 * However, it could switch to a different module 
+//		 * if one is passed to this method.
+//		 */
+//		super.logger.info("Cannot close module [Payroll]. This is the top context");
+//	}
 
 }

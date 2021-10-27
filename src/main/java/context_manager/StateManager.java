@@ -184,16 +184,22 @@ public class StateManager {
 	}
 	
 	public void revertToPreviousStateInContext(Optional<State> prev, ContextState cs) {
-		prev.ifPresentOrElse(
-				p -> { 
-					cs.setState(p);
+		if(cs != null) {
+			prev.ifPresentOrElse(
+				p -> {					
+						logger.debug("Trying to revert to prev state [" + p + "] in context [" + cs + "]");
+						cs.setState(p);					
 				}, 
 				new Runnable() {			
 					@Override
 					public void run() {
+						logger.debug("No prev state so setting current state of context [" + cs + "] to null");
 						cs.setNullState();				
 					}
-		});
+			});
+		}else {
+			logger.error("Cannot revert to prev state because context is null");
+		}					
 	}
 	
 	public void revertToPreviousStateInCurrentContext(Optional<State> prev) {
