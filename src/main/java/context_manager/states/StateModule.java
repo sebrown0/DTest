@@ -8,7 +8,7 @@ import java.util.Optional;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import context_manager.CurrentContext;
+import context_manager.ContextState;
 
 /**
  * @author Steve Brown
@@ -16,8 +16,8 @@ import context_manager.CurrentContext;
  */
 public class StateModule extends State {
 	
-	public StateModule(CurrentContext getter, WebDriver driver) {
-		super(getter, driver);
+	public StateModule(ContextState cs, WebDriver driver) {
+		super(cs, driver);
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class StateModule extends State {
 	public State switchToMe() {		
 		logger.debug("Switching to state [module]");
 		switchToDefaultContentAndThenElement(By.cssSelector("body > form > header > div > a"));
-		setCurrentContextToThisStatesContext();		
+		setCurrentContextToThisStatesContext();	//	
 		return this;
 	}
 

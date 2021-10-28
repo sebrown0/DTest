@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import context_manager.ContextState;
 import context_manager.CurrentContext;
 
 /**
@@ -19,12 +20,12 @@ public class StateHeaderForm extends State {
 	private WebElement myContainer;
 	private By byHeaderLocator;
 	
-	public StateHeaderForm(CurrentContext getter, WebElement myContainer, By byHeaderLocator, WebDriver driver) {
-		super(getter, driver);
+	public StateHeaderForm(ContextState cs, WebElement myContainer, By byHeaderLocator, WebDriver driver) {
+		super(cs, driver);
 		this.myContainer = myContainer;
 		this.byHeaderLocator = byHeaderLocator;
 	}
-	
+		
 	@Override
 	public Optional<State> getNext() {		
 		return super.next;

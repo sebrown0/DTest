@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import context_manager.ContextId;
 import context_manager.ContextIdGetter;
 import context_manager.ContextManager;
+import context_manager.ContextState;
 import context_manager.contexts.Context;
 import context_manager.contexts.ContextPayroll;
 import context_manager.states.StateFactorySetter;
@@ -84,6 +85,13 @@ public class PayrollModuleLoader implements ModuleElements {
 					@Override
 					public PageTitle getTitle() {
 						LogManager.getLogger().error("*** NOT IMPLEMENTED ***");
+						return null;
+					}
+
+					@Override
+					public ContextState getMyContext() {
+						LogManager.getLogger().error("*** NOT IMPLENTED ***");
+						System.out.println("PayrollModuleLoader.ContextPayroll.getMyContext() *** NOT IMPLENTED ***"); // TODO - remove or log 	
 						return null;
 					}					
 				});				

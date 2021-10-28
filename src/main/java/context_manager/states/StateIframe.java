@@ -6,7 +6,8 @@ package context_manager.states;
 import java.util.Optional;
 
 import org.openqa.selenium.WebDriver;
-import context_manager.CurrentContext;
+
+import context_manager.ContextState;
 import object_models.helpers.IFrame;
 
 /**
@@ -16,8 +17,8 @@ import object_models.helpers.IFrame;
 public class StateIframe extends State {
 	private IFrame iFrame;
 	
-	public StateIframe(CurrentContext getter, IFrame iFrame, WebDriver driver) {
-		super(getter, driver);
+	public StateIframe(ContextState cs, IFrame iFrame, WebDriver driver) {
+		super(cs, driver);
 		this.iFrame = iFrame;
 	}
 

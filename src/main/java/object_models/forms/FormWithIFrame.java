@@ -27,7 +27,7 @@ public abstract class FormWithIFrame extends FormModal {
 	private void switchToIFrame(WebDriver driver, String iFrameName) {
 		iFrame = new IFrame(driver, By.cssSelector("iframe[name='" + iFrameName + "']"));
 		super.contextManager
-			.setNextState(new StateIframe(contextManager, iFrame, driver))
+			.setNextState(new StateIframe(getMyContext(), iFrame, driver))
 			.moveToNextStateInCurrentContext()
 			.switchToMe();		
 	}

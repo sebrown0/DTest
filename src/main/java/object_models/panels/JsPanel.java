@@ -44,8 +44,8 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	private Optional<String> panelId;	
 	private WebElement container;
 	private JsPanelHeaderBar headerBar;
-	private ContextState thisContext;
-		
+	private ContextState myContext;
+			
 	private static final By TITLE_SELECTOR = By.cssSelector("span[class='jsPanel-title']");
 		
 	public JsPanel(WebDriver driver, String expectedTitle, ContextManager contextManager) {
@@ -99,8 +99,8 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	
 	@Override
 	public void setContext() {
-		thisContext = new ContextPanel(manager, this, headerBar, this);
-		manager.setContext(thisContext);
+		myContext = new ContextPanel(manager, this, headerBar, this);
+		manager.setContext(myContext);
 	}
 	
 	@Override	// ContainerAction
@@ -143,7 +143,12 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	public WebDriver getDriver() {
 		return driver;
 	}
-		
+	
+	@Override
+	public ContextState getMyContext() {
+		return myContext;
+	}
+	
 	@Override
 	public ContextId getContextId() {		
 		return new ContextId(expectedTitle, panelId.get());

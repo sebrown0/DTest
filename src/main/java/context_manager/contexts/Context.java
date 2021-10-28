@@ -50,7 +50,8 @@ public abstract class Context implements ContextState { //, ZZZ_ContextCloser {
 	}
 
 	private void setFirstState() { 	
-		firstState = new StateTop(contextManager, contextManager.getDriver()); 	
+//		firstState = new StateTop(contextManager, contextManager.getDriver());
+		firstState = new StateTop(this, contextManager.getDriver()); 	
 		this.setState(firstState);
 	}
 	
@@ -87,7 +88,7 @@ public abstract class Context implements ContextState { //, ZZZ_ContextCloser {
 
 	private <T extends State> Optional<State> getNewInstanceOfState(Class<T> clazzState, StateFactorySetter factorySetter) {
 		StateFactory factory = new StateFactory(factorySetter);
-		return factory.getNewInstanceOfState(clazzState);
+		return factory.getNewInstanceOfState(clazzState, this);
 	}
 	
 	@Override
@@ -160,22 +161,59 @@ public abstract class Context implements ContextState { //, ZZZ_ContextCloser {
 		}	
 		return closer;
 	}
-	
+
 	@Override
 	public State getTopState() {
-		State s = currentState;
-		State top = s;
-
-		while (s != null) {
-			if(s.getPrev() != null && s.getPrev().isPresent()) {
-				s = s.getPrev().get();
-				top = s;
-			}else {
-				s = null;
-			}
-		} 	
-		return top;
+		return firstState;
 	}
+//		State s = currentState;
+//		State top = s;
+//		
+//		while(s != null && !(s instanceof StateTop)) {
+//			if(s.getPrev().isPresent()) {
+//				
+//			}else {
+//				
+//			}
+//		}		
+//		return top;
+//	}
+//	
+//	@Override
+//	public State getTopState() {
+//		State s = currentState;
+////		State top = s;
+////		State temp = null;
+//		boolean found = false;
+//		
+//		if(currentState != null) {
+//			while(found == false) {
+//				if(s.getPrev() != null && s.getPrev().isPresent()) {
+//					s = s.getPrev().get();
+//				}else {
+//					found = true;
+//				}
+//			}
+//		}		
+//		return s;
+//	}
+	
+//	@Override
+//	public State getTopState() {
+//		State s = currentState;
+//		State top = s;
+//		State temp = null;
+//		
+//		while (s != null) {
+//			if(s.getPrev() != null && s.getPrev().isPresent()) {
+//				s = s.getPrev().get();
+//				top = s;
+//			}else {
+//				s = null;
+//			}
+//		} 	
+//		return top;
+//	}
 	
 	@Override
 	public State getState() {
@@ -215,9 +253,22 @@ public abstract class Context implements ContextState { //, ZZZ_ContextCloser {
 			});		 	
 	}
 
+	/*
+	 * GOING TO USE THIS INSTEAD OF SWITCH
+	 * 
+	 */
 	@Override
-	public void switchToDefaultState() {
-		contextManager.switchToDefaultStateInCurrentContext();		
+	public void moveToDefaultState() { //IN_CS
+		contextManager.moveToDefaultStateInContext(this);
+	}
+	
+	@Override
+	public void switchToDefaultState() { //IN_CS
+		/*
+		 * THIS IS THE CONTEXT SO HAVE TO GET IT'S DEFAULT STATE
+		 */
+		contextManager.switchToDefaultStateInContext(this);		
+//		contextManager.switchToDefaultStateInContext(cs);
 	}
 
 	@Override

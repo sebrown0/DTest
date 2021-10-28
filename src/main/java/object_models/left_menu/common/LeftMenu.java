@@ -77,6 +77,6 @@ public class LeftMenu implements CallingState {
 
 	@Override
 	public State getState(ContextState context) { 
-		return new StateLeftMenu(contextManager, driver);
+		return new StateLeftMenu(context, driver);
 	}	
 }

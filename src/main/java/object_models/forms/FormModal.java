@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import context_manager.ContextIdGetter;
 import context_manager.ContextManager;
 import context_manager.ContextSetter;
+import context_manager.ContextState;
 import context_manager.contexts.ContextForm;
 import context_manager.states.StateFactorySetter;
 import object_models.helpers.Header;
@@ -31,6 +32,7 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 	protected Header header;
 	protected WebElement container;
 		
+	private ContextState myContext;
 	private String expectedTitle;	
 	
 	public FormModal(WebDriver driver, String expectedTitle, ContextManager contextManager) {
@@ -75,8 +77,14 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 	public abstract void setTitle();
 	
 	@Override
+	public ContextState getMyContext() {
+		return myContext;
+	}
+	
+	@Override
 	public void setContext() {		
-		contextManager.setContext(new ContextForm(contextManager, this, this));
+		myContext = new ContextForm(contextManager, this, this);		
+		contextManager.setContext(myContext);
 	}	
 	
 	@Override 	// StateFactorySetter

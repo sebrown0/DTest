@@ -45,7 +45,6 @@ public class StateManager {
 		}				
 	}
 	
-	//here we are still using current context as the 
 	public <T extends State> Optional<State> switchToStateInContext(Class<T> clazzRequiredState, ContextState findCs) {
 		Optional<State> state = Optional.empty();		
 		state = moveToStateInContext(clazzRequiredState, findCs);		
@@ -62,12 +61,15 @@ public class StateManager {
 		String requiredStateName = clazzRequiredState.getSimpleName();
 		Optional<State> state = cs.moveToState(clazzRequiredState);
 
+		if(clazzRequiredState.getSimpleName().equals("StateModule")) {
+			System.out.println("moveToStateInContext->" + clazzRequiredState + " for cs ->" + cs.getContextId()); // TODO - remove or log
+		}
+		
 		if(state.isPresent()) {			
 			logger.debug("State [" + requiredStateName + "] is present in context. Will move to this state");				
 			return state;			
 		}else {
-			logger.debug("State [" + requiredStateName + "] is not present in context. Adding as the last state in context");			
-//			return getLastContext().setLastState(clazzRequiredState);			
+			logger.debug("State [" + requiredStateName + "] is not present in context. Adding as the last state in context");				
 			return getCurrentContext().setLastState(clazzRequiredState, cs.getContinerAction().getStateFactorySetter());			
 		}						
 	}
@@ -97,32 +99,55 @@ public class StateManager {
 	}
 
 	public void setDefaultStateAfterClosingContext() {				
-//		ContextState cs = queue.getLastContextInQueue();
+
 		ContextState cs = queue.getCurrentContextInQueue(); 
 		State defaultState = getDefaultState(cs);
-		if(defaultState != null) {
-//			System.out.println("Current context is now [" + cs.getContextId() + "]. State (default) is [" + defaultState + "]"); // TODO - remove or log 	
+		if(defaultState != null) { 	
 			logger.debug("Current context is now [" + cs.getContextId() + "]. State (default) is [" + defaultState + "]");
 			cs.setCurrentState(defaultState);
-		}else {
-//			System.out.println("Current context is now [" + cs.getContextId() + "]. Default state not found so state is current [" + cs.getState() + "]"); // TODO - remove or log 	
+		}else { 	
 			logger.debug("Current context is now [" + cs.getContextId() + "]. Default state not found so state is current [" + cs.getState() + "]");
 		} 	
 	}
 	
-	public void switchToDefaultStateInCurrentContext() {				
-		ContextState cs = queue.getCurrentContextInQueue(); 
+	public void moveToDefaultStateInContext(ContextState cs) {		
 		State defaultState = getDefaultState(cs);
 		if(defaultState != null) { 	
 			logger.debug("Switched to default state [" + defaultState + "]");
 			cs.setCurrentState(defaultState);
-			System.out.println("Switched to default state [" + defaultState + "]"); // TODO - remove or log 	
+		}else { 	
+			State curr = cs.getState();			
+			logger.debug("Default state not found so state is current [" + curr + "]");
+			cs.setCurrentState(curr);
+		} 	
+	}
+	
+	public void switchToDefaultStateInContext(ContextState cs) {		
+		State defaultState = getDefaultState(cs);
+		if(defaultState != null) { 	
+			logger.debug("Switched to default state [" + defaultState + "]");
+			cs.setCurrentState(defaultState);
 			defaultState.switchToMe();
 		}else { 	
 			State curr = cs.getState();			
 			logger.debug("Default state not found so state is current [" + curr + "]");
 			cs.setCurrentState(curr);
 		} 	
+	}
+	
+	public void switchToDefaultStateInCurrentContext() {				
+		ContextState cs = queue.getCurrentContextInQueue(); 
+		switchToDefaultStateInContext(cs);
+//		State defaultState = getDefaultState(cs);
+//		if(defaultState != null) { 	
+//			logger.debug("Switched to default state [" + defaultState + "]");
+//			cs.setCurrentState(defaultState);
+//			defaultState.switchToMe();
+//		}else { 	
+//			State curr = cs.getState();			
+//			logger.debug("Default state not found so state is current [" + curr + "]");
+//			cs.setCurrentState(curr);
+//		} 	
 	}
 	
 	public boolean isStateInCurrentContext(Class<?> clazz, CurrentContext getter) {
@@ -134,11 +159,6 @@ public class StateManager {
 		State defaultState = goForwardThruStates(start); 	
 		return defaultState;
 	}
-
-//	public State getLastContextCloserForCurrentContext() {
-//		State closer =  manager.getCurrentContext().getContextCloser();		
-//		return closer;
-//	}
 	
 	private State goForwardThruStates(State s) {
 		boolean foundDefault = false;
@@ -153,12 +173,6 @@ public class StateManager {
 		return s;
 	}
 	
-//	public Optional<State> closeCurrentStateAndGetPrev(State state){
-//		Optional<State> prev = state.getPrev();
-//		state.close();
-//		return prev;
-//	}
-
 	public void closeCurrentStateInCurrentContext(CurrentContext getter){
 		ContextState cs = getter.getCurrentContextState();
 		if(cs != null) {
@@ -175,7 +189,7 @@ public class StateManager {
 
 	private void closeState(State closeState) {
 		logger.debug("Closing state [" + closeState + "]"); 	
-		closeState.close();
+		closeState.close();//err
 	}
 	
 	private void updateContextAfterStateClosure(State state) {
@@ -215,9 +229,6 @@ public class StateManager {
 		});
 	}
 
-//	private ContextState getLastContext() {
-//		return manager.getLastContext();
-//	}
 	private ContextState getCurrentContext() {
 		return manager.getCurrentContext();
 	}

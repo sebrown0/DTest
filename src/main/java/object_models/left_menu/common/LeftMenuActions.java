@@ -38,21 +38,38 @@ public class LeftMenuActions {
 		this.menuMapper = menuMapper;
 	}
 
-	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {
-		ClassFieldGetter fIeldGetter = new ClassFieldGetter(clazz);		
+	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
 		Optional<ContainerAction> item = null;
+		
+		contextManager.switchToLeftMenu();	// Puts the context @ Module.StateLeftMenu
+		item = getMenuItemAsContainer(clazz);				
+		//put this in getMenuItemAsContainer as this knows if it's new or existing
+//		setItemAsCurrentContext(item);			// Here we have to set the context to that of the item. 
+		
+		return item; // stet is hdr panel for con docs - good
+	}
+
+	private Optional<ContainerAction> getMenuItemAsContainer(Class<?> clazz) {
+		ClassFieldGetter fIeldGetter = new ClassFieldGetter(clazz);
 		Optional<String> prntName = fIeldGetter.getParentName();
 		Optional<String> menuItem = fIeldGetter.getMenuItemName();
 		
-		contextManager.switchToLeftMenu();		
-		
 		if(isChildMenuItem(prntName, menuItem)) {		
-			item = clickParent(prntName.get()).loadElement(fIeldGetter);			
+			return clickParent(prntName.get()).loadElement(fIeldGetter);			
 		}else if (isParentMenuItem(prntName)) {
-			item = loadElement(fIeldGetter);
-		}		
-		return item;
+			return loadElement(fIeldGetter);
+		}
+		return Optional.empty();
 	}
+
+	private void setItemAsCurrentContext(Optional<ContainerAction> item) {
+		item.ifPresent(itm -> {
+			ContextState cs = itm.getMyContext();
+			if(cs != null) {
+				contextManager.moveToExistingContext(cs);	
+			}				
+		});
+	}	
 
 	private boolean isChildMenuItem(Optional<String> prntName, Optional<String> menuIem) {
 		boolean retVal = false;
@@ -77,7 +94,12 @@ public class LeftMenuActions {
 		return retVal;
 	}
 		
-	public Optional<ContainerAction> loadElement(ClassFieldGetter fieldGetter) {
+	/*
+	 * Returns either an exisitnf or new ContainerAction.
+	 * ContainerAction is a JsPanel, Form etc that has ContextState in the form of: myContext.
+	 * 
+	 */
+	private Optional<ContainerAction> loadElement(ClassFieldGetter fieldGetter) {
 		Optional<ContainerAction> element = Optional.empty();		
 		Optional<String> elementName = fieldGetter.getMenuItemName();
 		Optional<String> elementId = fieldGetter.getPanelTitle();
@@ -87,7 +109,7 @@ public class LeftMenuActions {
 			String id = elementId.get();
 			WebElement e =  anchors.get(name);
 			
-			contextManager.switchToFirstStateInCurrentContext();		
+//			contextManager.switchToFirstStateInCurrentContext(); //WHY ARE WE DOING THIS???		
 			logger.info("Loading [" + name + "]");
 			
 			try {
@@ -97,8 +119,11 @@ public class LeftMenuActions {
 					logger.debug("[" + name + "] already exists. Switching to that context and retrieving container");					
 					ContainerAction el = cs.get().getContinerAction();				
 					element = Optional.of(el);
+					
+					setItemAsCurrentContext(element);
+					
 				}else {
-					element = Optional.of(getElement(name));
+					element = Optional.of(getNewElementContainer(name));
 					logger.debug("[" + element.get().toString() + "] does not exist. Creating now");
 				}
 											
@@ -108,7 +133,7 @@ public class LeftMenuActions {
 		}else {
 			logger.error("Could not get menu element.");
 		}
-		return element;
+		return element; //when returning what do we do with it?
 	}
 	
 	public LeftMenuActions clickParent(String prntName) {
@@ -139,7 +164,7 @@ public class LeftMenuActions {
 		return activeMenuItem;
 	}
 	
-	private ContainerAction getElement(String elementName) {
+	private ContainerAction getNewElementContainer(String elementName) {
 		return ElementFactory.getElement(elementName, driver, contextManager);		
 	}
 }

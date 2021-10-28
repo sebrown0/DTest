@@ -47,7 +47,7 @@ public class ModuleLoader {
 		contextManager.setCallingState(new CallingState() {			
 			@Override
 			public State getState(ContextState context) {
-				return new StateModule(contextManager, driver);
+				return new StateModule(context, driver);
 			}
 		});
 		contextManager.setFirstContext(moduleElements.getContextForModule(contextManager));		

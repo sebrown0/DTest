@@ -8,7 +8,7 @@ import java.util.Optional;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import context_manager.CurrentContext;
+import context_manager.ContextState;
 
 /**
  * @author Steve Brown
@@ -18,8 +18,8 @@ import context_manager.CurrentContext;
  */
 public class StateTop extends State {
 	
-	public StateTop(CurrentContext currContext, WebDriver driver) {
-		super(currContext, driver);
+	public StateTop(ContextState cs, WebDriver driver) {
+		super(cs, driver);
 	}
 	
 	@Override

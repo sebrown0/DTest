@@ -7,8 +7,7 @@ import java.util.Optional;
 
 import org.openqa.selenium.WebDriver;
 
-import context_manager.ContextManager;
-import context_manager.CurrentContext;
+import context_manager.ContextState;
 import object_models.helpers.IFrame;
 import object_models.panels.JsPanelHeaderBar;
 
@@ -19,25 +18,26 @@ import object_models.panels.JsPanelHeaderBar;
 public class StateHeaderPanel extends State {
 	private JsPanelHeaderBar bar;
 	private IFrame iFrame;
-	private ContextManager manager;
+//	private ContextManager manager;
 	
-	public StateHeaderPanel(CurrentContext getter, JsPanelHeaderBar bar, IFrame iFrame, WebDriver driver) {
-		super(getter, driver);
-		this.manager = (ContextManager) getter;
+	public StateHeaderPanel(ContextState cs, JsPanelHeaderBar bar, IFrame iFrame, WebDriver driver) {
+		super(cs, driver);
+//		this.manager = cs.getContextManager();
 		this.bar = bar;
 		this.iFrame = iFrame;
 	}
 	
 	@Override
 	public Optional<State> getNext() {		
-		return Optional.of(new StateIframe(manager, iFrame, driver));
+		return Optional.of(new StateIframe(myContext, iFrame, driver));
 	}
 	
 	@Override
 	public void close() {
+		System.out.println("Closing state [" + this + "]"); // TODO - remove or log 	
 		logger.debug("Closing state [" + this + "]");
 		switchToDefaultContent();
-		bar.getControlBar().clickClose();
+		bar.getControlBar().clickClose();//error here - stale element
 		
 		//Use this
 //		closeMyContext();

@@ -57,7 +57,7 @@ public class FormFadeShow extends FormModal {
 	public void setContextState() {
 		ContextState con = contextManager.getLastContext();
 		//CHECK THIS IS CORRECT
-		con.setState(new StateHeaderForm(contextManager, container, By.className("modal-header"), driver));
+		con.setState(new StateHeaderForm(con, container, By.className("modal-header"), driver));
 	}
 	
 	@Override
@@ -68,6 +68,7 @@ public class FormFadeShow extends FormModal {
 	@Override
 	public void close() {
 		ButtonClicker.clickUntilNotVisible(driver, By.className("close"), 25);
+		System.out.println("FormFadeShow -> close() -> CHECK THIS IS WORKING CORRECTLY"); // TODO - remove or log 	
 		//contextManager.closeCurrentContext();
 	}
 	
@@ -86,8 +87,5 @@ public class FormFadeShow extends FormModal {
 		logger.error("NOT IMPLEMENTED");
 		return null;
 	}
-//	@Override
-//	public void setHeader() {
-//		logger.error("NOT IMPLEMENTED");
-//	}
+	
 }

@@ -90,6 +90,10 @@ public class ContextManager implements CurrentContext {
 		return queue.getPenultimate();
 	}
 	
+	public void switchToDefaultStateInContext(ContextState cs) {
+		stateManager.switchToDefaultStateInContext(cs);
+	}
+	
 	public void switchToDefaultStateInCurrentContext() {
 		stateManager.switchToDefaultStateInCurrentContext();
 	}
@@ -101,7 +105,8 @@ public class ContextManager implements CurrentContext {
 	public void switchToLeftMenu() {
 		Optional<ContextState> first = getContextThatIsFirstContext();
 		first.ifPresentOrElse(f -> {			 		
-			switchToStateInContext(StateLeftMenu.class, f);				
+			stateManager.switchToStateInContext(StateLeftMenu.class, f);
+//			switchToStateInContext(StateLeftMenu.class, f);				
 		},
 			new Runnable() {				
 				@Override
@@ -117,18 +122,22 @@ public class ContextManager implements CurrentContext {
 		switcher.switchToExistingPanel();
 	}
 		
-	public <T extends State> Optional<State> switchToStateInContext(Class<T> clazzRequiredState, ContextState findCs) {
-		/*
-		 * load context if ness
-		 */
-		return stateManager.switchToStateInContext(clazzRequiredState, findCs);
-	}
+//	public <T extends State> Optional<State> switchToStateInContext(Class<T> clazzRequiredState, ContextState findCs) {
+//		/*
+//		 * load context if ness
+//		 */
+//		return stateManager.switchToStateInContext(clazzRequiredState, findCs);
+//	}
 	
 	public <T extends State> Optional<State> moveToStateInContext(Class<T> clazzRequiredState, ContextState cs) {
 		/*
 		 * load context if ness
 		 */
 		return stateManager.moveToStateInContext(clazzRequiredState, cs);						
+	}
+	
+	public <T extends State> void moveToDefaultStateInContext(ContextState cs) {	
+		stateManager.moveToDefaultStateInContext(cs);
 	}
 	
 	public <T extends State> Optional<State> moveToStateInCurrentContext(Class<T> clazzRequiredState) {
@@ -259,12 +268,7 @@ public class ContextManager implements CurrentContext {
 	public boolean removeCurrentContextFromQueue() {
 		return queue.removeLastContext();
 	}
-//	public ContextManager closeCurrentContext() {
-//	ContextCloser contextCloser = (ContextCloser) getCurrentContext();
-//	contextCloser.closeContext();
-//	// TODO - switch to default???????????????????????????????????????
-//	return this;
-//}
+
 	public void printContexts() {
 		ContextManagerPrinter printer = new ContextManagerPrinter(queue);
 		printer.printContexts();
@@ -283,8 +287,5 @@ public class ContextManager implements CurrentContext {
 	public ContextState getCurrentContextState() {
 		return queue.getCurrentContextInQueue();
 	}
-//	public State getLastContextCloserForCurrentContext() {
-//		//would be from the context!! 
-////		return stateManager.getLastContextCloserForCurrentContext();
-//	}
+	
 }

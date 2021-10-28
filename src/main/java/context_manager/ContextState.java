@@ -22,6 +22,7 @@ public interface ContextState {
 	void driverSwitchToDefaultContent();
 	void removeContextAndResetQueue();
 	void switchToDefaultState();
+	void moveToDefaultState();
 	
 	State getState();
 	State getFirstState();
@@ -32,7 +33,6 @@ public interface ContextState {
 	
 	<T extends State> Optional<State> moveToState(Class<T> clazzState);
 	<T extends State> Optional<State> setLastState(Class<T> clazzState, StateFactorySetter factorySetter);
-//	<T extends State> Optional<State> getNewInstanceOfState(Class<T> clazzState, StateFactorySetter factorySetter);
 
 	boolean isStateInContext(Class<?> clazz);	
 	Optional<State> getPreviousState();

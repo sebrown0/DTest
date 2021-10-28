@@ -18,11 +18,6 @@ public final class ContextPanel extends Context {
 												JsPanelHeaderBar hdrBar, ContainerAction containerAction) {
 		super(contextManager, idGetter, containerAction);
 	
-	}
-		
-//	@Override
-//	public void closeContext() {	 	
-//		super.getContextManager().getQueue().getAndRemoveLastContext();
-//	}
+	}	
 
 }

@@ -31,10 +31,14 @@ public abstract class State {
 	 */
 	private Optional<State> prev;
 	
-	public State(CurrentContext getter, WebDriver driver) {
-		this.myContext = getter.getCurrentContextState(); // TODO - assuming we are in current context!
+	public State(ContextState cs, WebDriver driver) {
+		this.myContext = cs;
 		this.driver = driver;
 	}
+//	public State(CurrentContext getter, WebDriver driver) {
+//		this.myContext = getter.getCurrentContextState(); // TODO - assuming we are in current context!
+//		this.driver = driver;
+//	}
 	
 	public abstract Optional<State> getNext();
 	public abstract void close();
@@ -65,8 +69,10 @@ public abstract class State {
 	
 	protected void setCurrentContextToThisStatesContext() {
 		if(myContext != null) {
-			CurrentContext contextSetter = (CurrentContext) myContext.getContextManager();
-			contextSetter.setCurrentContextState(myContext);	
+//			CurrentContext contextSetter = (CurrentContext) myContext.getContextManager();
+//			contextSetter.setCurrentContextState(myContext);
+			//
+			myContext.getContextManager().setCurrentContextState(myContext);
 		}		
 	}
 	

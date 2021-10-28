@@ -8,7 +8,7 @@ import java.util.Optional;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import context_manager.CurrentContext;
+import context_manager.ContextState;
 
 /**
  * @author Steve Brown
@@ -16,8 +16,8 @@ import context_manager.CurrentContext;
  */
 public class StateLeftMenu extends State {
 	
-	public StateLeftMenu(CurrentContext getter, WebDriver driver) {
-		super(getter, driver);
+	public StateLeftMenu(ContextState cs, WebDriver driver) {
+		super(cs, driver);
 	}
 
 	@Override
@@ -29,6 +29,7 @@ public class StateLeftMenu extends State {
 	public State switchToMe() {
 		logger.debug("Switching to state [left menu]");
 		switchToDefaultContentAndThenElement(By.cssSelector("body > form > div.app-body > div"));
+		//CHANGE THUS
 		setCurrentContextToThisStatesContext();		
 		return this;
 	}
