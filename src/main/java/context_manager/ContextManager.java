@@ -64,16 +64,7 @@ public class ContextManager implements CurrentContext {
 	 */
 	public void setFirstContext(Context context) {
 		queue.addContextToQueue(context);
-	}
-	
-	
-//	public ContextManager closeCurrentContext() {
-//		ContextCloser contextCloser = (ContextCloser) getCurrentContext();
-//		contextCloser.closeContext();
-//		// TODO - switch to default???????????????????????????????????????
-//		return this;
-//	}
-		
+	}			
 	/*
 	 * Context End
 	 */
@@ -105,8 +96,7 @@ public class ContextManager implements CurrentContext {
 	public void switchToLeftMenu() {
 		Optional<ContextState> first = getContextThatIsFirstContext();
 		first.ifPresentOrElse(f -> {			 		
-			stateManager.switchToStateInContext(StateLeftMenu.class, f);
-//			switchToStateInContext(StateLeftMenu.class, f);				
+			stateManager.switchToStateInContext(StateLeftMenu.class, f);	
 		},
 			new Runnable() {				
 				@Override
@@ -121,18 +111,8 @@ public class ContextManager implements CurrentContext {
 		PanelSwitcher<T> switcher = new PanelSwitcher<>(panel, this);
 		switcher.switchToExistingPanel();
 	}
-		
-//	public <T extends State> Optional<State> switchToStateInContext(Class<T> clazzRequiredState, ContextState findCs) {
-//		/*
-//		 * load context if ness
-//		 */
-//		return stateManager.switchToStateInContext(clazzRequiredState, findCs);
-//	}
 	
-	public <T extends State> Optional<State> moveToStateInContext(Class<T> clazzRequiredState, ContextState cs) {
-		/*
-		 * load context if ness
-		 */
+	public <T extends State> Optional<State> moveToStateInContext(Class<T> clazzRequiredState, ContextState cs) {		
 		return stateManager.moveToStateInContext(clazzRequiredState, cs);						
 	}
 	
@@ -224,14 +204,22 @@ public class ContextManager implements CurrentContext {
 		return Optional.ofNullable((JsPanel) curr);
 	}
 	
-	public String getContextId() {
-		ContextState cs = queue.getLastContextInQueue();
+	public String getContextIdOfCurrentContext() {
+		ContextState cs = queue.getCurrentContextInQueue();
+		return getContextId(cs);
+	}	
+//	public String getContextIdOfLastContext() {
+//		ContextState cs = queue.getLastContextInQueue();
+//		return getContextId(cs);
+//	}	
+	private String getContextId(ContextState cs) {
 		if(cs != null) {
 			return cs.getContextId().getId();			
 		}else {
 			return null;
 		}
-	}	
+	}
+	
 	public ContextState getLastContext() {
 		ContextState cs = queue.getLastContextInQueue(); 
 		logInvalidContextIfNull(cs);

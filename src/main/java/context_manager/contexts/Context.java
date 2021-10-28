@@ -50,7 +50,6 @@ public abstract class Context implements ContextState { //, ZZZ_ContextCloser {
 	}
 
 	private void setFirstState() { 	
-//		firstState = new StateTop(contextManager, contextManager.getDriver());
 		firstState = new StateTop(this, contextManager.getDriver()); 	
 		this.setState(firstState);
 	}
@@ -166,54 +165,6 @@ public abstract class Context implements ContextState { //, ZZZ_ContextCloser {
 	public State getTopState() {
 		return firstState;
 	}
-//		State s = currentState;
-//		State top = s;
-//		
-//		while(s != null && !(s instanceof StateTop)) {
-//			if(s.getPrev().isPresent()) {
-//				
-//			}else {
-//				
-//			}
-//		}		
-//		return top;
-//	}
-//	
-//	@Override
-//	public State getTopState() {
-//		State s = currentState;
-////		State top = s;
-////		State temp = null;
-//		boolean found = false;
-//		
-//		if(currentState != null) {
-//			while(found == false) {
-//				if(s.getPrev() != null && s.getPrev().isPresent()) {
-//					s = s.getPrev().get();
-//				}else {
-//					found = true;
-//				}
-//			}
-//		}		
-//		return s;
-//	}
-	
-//	@Override
-//	public State getTopState() {
-//		State s = currentState;
-//		State top = s;
-//		State temp = null;
-//		
-//		while (s != null) {
-//			if(s.getPrev() != null && s.getPrev().isPresent()) {
-//				s = s.getPrev().get();
-//				top = s;
-//			}else {
-//				s = null;
-//			}
-//		} 	
-//		return top;
-//	}
 	
 	@Override
 	public State getState() {
@@ -253,36 +204,20 @@ public abstract class Context implements ContextState { //, ZZZ_ContextCloser {
 			});		 	
 	}
 
-	/*
-	 * GOING TO USE THIS INSTEAD OF SWITCH
-	 * 
-	 */
 	@Override
-	public void moveToDefaultState() { //IN_CS
+	public void moveToDefaultState() { 
 		contextManager.moveToDefaultStateInContext(this);
 	}
 	
 	@Override
-	public void switchToDefaultState() { //IN_CS
-		/*
-		 * THIS IS THE CONTEXT SO HAVE TO GET IT'S DEFAULT STATE
-		 */
-		contextManager.switchToDefaultStateInContext(this);		
-//		contextManager.switchToDefaultStateInContext(cs);
+	public void switchToDefaultState() { 		
+		contextManager.switchToDefaultStateInContext(this);
 	}
 
 	@Override
 	public void driverSwitchToDefaultContent() {
-		/*
-		 * HAVE TO SET THE CURRENT STATE TO WHAT EVER DEFAULT IS.
-		 */
 		contextManager.getDriver().switchTo().defaultContent();
 	}
-	
-//	@Override
-//	public WebDriver getDriver() {		
-//		return contextManager.getDriver();
-//	}
 
 	@Override
 	public void setNullState() {
@@ -308,12 +243,6 @@ public abstract class Context implements ContextState { //, ZZZ_ContextCloser {
 	public String toString() {
 		return "Context [contextId=" + contextId + "]";
 	}
-	
-//	@Override
-//	public <T extends State> Optional<State> getNewInstanceOfState(Class<T> clazzState) {
-//		StateFactory factory = new StateFactory(contextManager, contextManager.getDriver());
-//		return factory.getNewInstanceOfState(clazzState);
-//	}
-	
+		
 }
 

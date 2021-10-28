@@ -35,26 +35,9 @@ public class ContextQueue {
 			boolean foundContext = false;
 			for (ContextState contextState : queue) {
 				if(cs == contextState) {
-					current = cs;
-					/* TODO
-					 * if switching context the default state has to be loaded.
-					 * if it's a panel load it.
-					 * set the state in the context. 
-					 */
-					
-					/*
-					 * INSTEAD OF HAVING THIS SWITCH JUST MOVE????????
-					 */
+					current = cs;					
 //					current.switchToDefaultState(); // IN_CS
 					current.moveToDefaultState();
-					
-					//context.switchToDefaultState -> 
-					//contextManager.switchToDefaultStateInContext(this) -> 
-					//stateManager.switchToDefaultStateInContext(cs) ->
-					//defaultState.switchToMe(); -> setCurrentContextToThisStatesContext ->
-					
-					//State.setCurrentContextToThisStatesContext ->
-					//
 					foundContext = true;
 					break;
 				}

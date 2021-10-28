@@ -6,9 +6,6 @@ package context_manager_tests;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.util.Optional;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -21,27 +18,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import context_manager.ContextId;
 import context_manager.ContextManager;
 import context_manager.ContextState;
-import context_manager.contexts.Context;
-import context_manager.contexts.ContextPayroll;
-import context_manager.states.State;
 import context_manager.states.StateHeaderPanel;
-import context_manager.states.StateLeftMenu;
 import context_manager.states.StateModule;
-import context_manager.states.StateTop;
-import enums.control_names.EmployeeControlNames;
 import logging.TestResultLogger;
-import object_models.controls.EmployeeSelection;
-import object_models.forms.FormModal;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.employees.Banks;
 import object_models.left_menu.employees.EmployeeDetails;
 import object_models.left_menu.parents.Documents;
-import object_models.left_menu.parents.MonthlyReports;
-import object_models.left_menu.parents.PayrollStatistics;
-import object_models.left_menu.parents.YearlyReports;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
-import object_models.panels.JsPanel;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import test_data.UserProvider;
@@ -101,7 +86,6 @@ class ContextManagerTests {
 
 	@Test	@Order(1)
 	void checkContextId() {
-		System.out.println("->1"); // TODO - remove or log
 		menu.clickAndLoad(Documents.class);
 		ContextId id = manager.getLastContext().getContextId();
 		manager.closeCurrentStateInCurrentContext();
@@ -110,7 +94,6 @@ class ContextManagerTests {
 		
 	@Test	@Order(2)
 	void checkContextId_equalsValue() {
-		System.out.println("->2"); // TODO - remove or log
 		ContextId id = new ContextId("expected", "actual");
 		// Obj == Obj
 		assertTrue(id.equals(id));
@@ -130,7 +113,6 @@ class ContextManagerTests {
 	
 	@Test	@Order(3)
 	void checkContextIsInQueue() {
-		System.out.println("->3"); // TODO - remove or log
 		menu.clickAndLoad(Documents.class);
 		ContextState cs = manager.getEndOfQueue();
 		manager.closeCurrentStateInCurrentContext();
@@ -139,7 +121,7 @@ class ContextManagerTests {
 	
 
 	@Test	@Order(4)
-	void getContextFromQueue_usingContextId_actual() {
+	void getContextFromQueue_usingContextId_contextName() {
 		menu.clickAndLoad(Documents.class);
 		ContextState cs = manager.findContext(Documents.PANEL_TITLE).get(); 
 		manager.closeCurrentStateInCurrentContext();
@@ -148,52 +130,51 @@ class ContextManagerTests {
 	
 	@Test	@Order(5)
 	void getContextFromQueue_usingContextId_object() {
-		System.out.println("->5"); // TODO - remove or log
 		menu.clickAndLoad(Documents.class);
 		ContextState cs = manager.findContext(new ContextId("Employee Document Management", "jsPanel-1")).get();
 		manager.closeCurrentStateInCurrentContext();
 		assertEquals("Employee Document Management", cs.getContextId().getExpectedName());
 	}
-//	
-//	@Test	@Order(6)
-//	void loadDocument_and_checkState_revertFromIframe_to_headerPanel() {		
-//		menu.clickAndLoad(Documents.class);
-//		manager.closeCurrentStateInCurrentContext(); 	
-//		assertTrue(manager.getLastContext().getState() instanceof StateHeaderPanel);				
-//	}
-//
-//	@Test	@Order(7)
-//	void loadDocuments_then_employeeDetails_then_close_employeeDetailsState_newStateShouldBeHeaderPanel() {
-//		menu.clickAndLoad(Documents.class);
-//		assertEquals("Employee Document Management:jsPanel-1", manager.getContextId());
-//		
-//		menu.clickAndLoad(EmployeeDetails.class);
-//		assertEquals("Employee Details:jsPanel-2", manager.getContextId());
-//		
-//		manager.closeCurrentStateInCurrentContext();
-//		assertTrue(manager.getLastContext().getState() instanceof StateHeaderPanel);
-//	}
-//
-//	@Test	@Order(8)
-//	void loadDocuments_then_employeeDetails_then_close_employeeDetailsState_twice_newContextShouldBeDocuments() {
-//		menu.clickAndLoad(Documents.class);
-//		assertEquals("Employee Document Management:jsPanel-1", manager.getContextId());
-//		
-//		menu.clickAndLoad(EmployeeDetails.class);
-//		assertEquals("Employee Details:jsPanel-2", manager.getContextId());
-//		
-//		manager.closeCurrentStateInCurrentContext();
-//		manager.closeCurrentStateInCurrentContext();		
-//		assertTrue(manager.getLastContext().getState() instanceof StateHeaderPanel);
-//		assertEquals("Employee Document Management:jsPanel-1", manager.getContextId());		
-//	}
-//
-//	@Test	@Order(9)
-//	void loadEmployeeBanks_then_loadDocuments() {
-//		menu.clickAndLoad(Banks.class);
-//		menu.clickAndLoad(Documents.class);		
-//	}
-//
+	
+	@Test	@Order(6)
+	void loadDocument_and_checkState_revertFromIframe_to_headerPanel() {		
+		menu.clickAndLoad(Documents.class);
+		manager.closeCurrentStateInCurrentContext(); 	
+		assertTrue(manager.getLastContext().getState() instanceof StateHeaderPanel);				
+	}
+
+	@Test	@Order(7)
+	void loadDocuments_then_employeeDetails_then_close_employeeDetailsState_newStateShouldBeHeaderPanel() {
+		menu.clickAndLoad(Documents.class);
+		assertEquals("Employee Document Management:jsPanel-1", manager.getContextIdOfCurrentContext());
+		
+		menu.clickAndLoad(EmployeeDetails.class);
+		assertEquals("Employee Details:jsPanel-2", manager.getContextIdOfCurrentContext());
+		
+		manager.closeCurrentStateInCurrentContext();
+		assertTrue(manager.getLastContext().getState() instanceof StateHeaderPanel);
+	}
+
+	@Test	@Order(8)
+	void loadDocuments_then_employeeDetails_then_close_employeeDetailsState_twice_newContextShouldBeDocuments() {
+		menu.clickAndLoad(Documents.class);
+		assertEquals("Employee Document Management:jsPanel-1", manager.getContextIdOfCurrentContext());
+		
+		menu.clickAndLoad(EmployeeDetails.class);
+		assertEquals("Employee Details:jsPanel-2", manager.getContextIdOfCurrentContext());
+		
+		manager.closeCurrentStateInCurrentContext();
+		manager.closeCurrentStateInCurrentContext();		
+		assertTrue(manager.getLastContext().getState() instanceof StateModule);
+//		assertEquals("Employee Document Management:jsPanel-1", manager.getContextIdOfCurrentContext());		
+	}
+
+	@Test	@Order(9)
+	void loadEmployeeBanks_then_loadDocuments() {
+		menu.clickAndLoad(Banks.class);
+		menu.clickAndLoad(Documents.class);		
+	}
+
 //	@Test	@Order(10)
 //	void findStateInContext_stateLeftMenu_isPresent() {
 //		assertTrue(manager.getLastContext().isStateInContext(StateTop.class));

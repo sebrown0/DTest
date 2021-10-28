@@ -33,14 +33,10 @@ public class StateHeaderPanel extends State {
 	}
 	
 	@Override
-	public void close() {
-		System.out.println("Closing state [" + this + "]"); // TODO - remove or log 	
-		logger.debug("Closing state [" + this + "]");
-		switchToDefaultContent();
-		bar.getControlBar().clickClose();//error here - stale element
-		
-		//Use this
-//		closeMyContext();
+	public void close() { 	
+		logger.debug("Closing state [" + this + "]");		
+		switchToDefaultContent();		
+		bar.getControlBar().clickClose();		
 	}
 	
 	@Override

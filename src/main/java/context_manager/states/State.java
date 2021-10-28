@@ -11,7 +11,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextState;
-import context_manager.CurrentContext;
 
 /**
  * @author Steve Brown
@@ -20,7 +19,7 @@ import context_manager.CurrentContext;
  */
 public abstract class State {	
 	protected WebDriver driver;
-	protected ContextState myContext; // TODO - assuming we are in current context!
+	protected ContextState myContext; 
 	protected Optional<State> next;
 	protected Logger logger = LogManager.getLogger();
 	
@@ -35,10 +34,6 @@ public abstract class State {
 		this.myContext = cs;
 		this.driver = driver;
 	}
-//	public State(CurrentContext getter, WebDriver driver) {
-//		this.myContext = getter.getCurrentContextState(); // TODO - assuming we are in current context!
-//		this.driver = driver;
-//	}
 	
 	public abstract Optional<State> getNext();
 	public abstract void close();
@@ -68,10 +63,7 @@ public abstract class State {
 	}
 	
 	protected void setCurrentContextToThisStatesContext() {
-		if(myContext != null) {
-//			CurrentContext contextSetter = (CurrentContext) myContext.getContextManager();
-//			contextSetter.setCurrentContextState(myContext);
-			//
+		if(myContext != null) {//			
 			myContext.getContextManager().setCurrentContextState(myContext);
 		}		
 	}
