@@ -116,7 +116,7 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	@Override
 	public void close() {
 		logger.info("** Depreciated. Use ContextManager **");
-		System.out.println("** Depreciated. Use ContextManager **"); // TODO - remove or log 	
+//		System.out.println("** Depreciated. Use ContextManager **"); // TODO - remove or log 	
 		
 		CloserPanel closer = new CloserPanel(driver);
 		try {

@@ -81,9 +81,8 @@ public class LeftMenuActions {
 	}
 		
 	/*
-	 * Returns either an exisitnf or new ContainerAction.
-	 * ContainerAction is a JsPanel, Form etc that has ContextState in the form of: myContext.
-	 * 
+	 * Returns either an existing or new ContainerAction.
+	 * ContainerAction is a JsPanel, Form etc that has ContextState in the form of: myContext.	 * 
 	 */
 	private Optional<ContainerAction> loadElement(ClassFieldGetter fieldGetter) {
 		Optional<ContainerAction> elementContainer = Optional.empty();		
@@ -105,6 +104,7 @@ public class LeftMenuActions {
 					elementContainer = getExistingContainerFromContext(name, cs.get());
 					setExistingAsCurrent(elementContainer);					
 				}else {
+					System.out.println("New->" + name ); // TODO - remove or log 	
 					elementContainer = Optional.of(getNewElementContainer(name));
 					logger.debug("[" + elementContainer.get().toString() + "] does not exist. Creating now");
 				}

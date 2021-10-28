@@ -20,33 +20,9 @@ import object_models.panels.PanelSwitcher;
  *
  * Manages the contexts within the app.
  * 
- * TODO - ISSUES
- * -------------
- * 1. Get ContextManagerTests to run all tests.
- * 
- * 2. Do we revert to default context (of prev con)
- *    when closing current context?
- *    
- * 3. Clicking a left-menu element (that has children, i.e. Employees)
- *    does not close the element if it's already open. 
- *    
- * 4. Add more UTs for different scenarios.
- * 
- * 5. Split states and contexts correctly. Add new helper classes as necessary. DONE
- * 
- * 6. When looking for a state, should the context be checked?
- * 
- * 7. Add a DQueue for states as well as contexts.
- *    This would eliminate the need to loop thru state to get to
- *    the top or bottom.
- * 
- * 8. Have one of either getCurrentContext or getCurrentContextState
- *  
- * USE GIT BRANCH context_manager.
  */
 public class ContextManager implements CurrentContext {
 	private ContextQueue queue = new ContextQueue();
-//	private Logger logger = LogManager.getLogger();
 	private WebDriver driver;
 	private StateManager stateManager;
 	
