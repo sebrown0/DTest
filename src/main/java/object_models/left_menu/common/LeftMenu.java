@@ -37,7 +37,7 @@ public class LeftMenu implements CallingState {
 	public LeftMenu(WebDriver driver, ContextManager contextManager) {
 		this.driver = driver;
 		this.contextManager = contextManager;
-		this.contextManager.setCallingState(this);		
+		this.contextManager.setLatestCallingState(this);		
 		
 		mapAnchors();
 		menuActions = new LeftMenuActions(driver, contextManager, anchors, menuMapper);

@@ -29,7 +29,7 @@ public class StateLeftMenu extends State {
 	public State switchToMe() {
 		logger.debug("Switching to state [left menu]");
 		switchToDefaultContentAndThenElement(By.cssSelector("body > form > div.app-body > div"));
-		//CHANGE THUS
+		//CHANGE THIS
 		setCurrentContextToThisStatesContext();		
 		return this;
 	}

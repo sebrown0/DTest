@@ -11,4 +11,5 @@ import java.util.Optional;
  */
 public interface Header {
 	Optional<String> getTitle();
+	void closeForm();
 }

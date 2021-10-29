@@ -7,23 +7,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import controls.PageControl;
 import dto.Employee;
 import enums.control_names.EmployeeControlNames;
 import logging.TestResultLogger;
-import object_models.controls.DropdownCombo;
 import object_models.controls.EmployeeSelection;
-import object_models.dk_grid.DkGridEmployeeDetails;
-import object_models.element.TextInOut;
 import object_models.element.TextOut;
 import object_models.left_menu.common.LeftMenu;
-import object_models.left_menu.employees.ContactNumbers;
 import object_models.left_menu.employees.EmployeeDetails;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
@@ -39,6 +35,7 @@ import xml_reader.config_file.ConfigReader;
  *
  * Verify and employee loaded by EmployeeProvider.
  */
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({ 
 	ConfigParameterResolver.class, 
 	TestResultLogger.class, 
@@ -63,65 +60,66 @@ class EmployeeDetailsTests {
 	}
 		
 	// Controls - Start
-	@Test	
+	@Test @Order(1)
+	void selectEmployee() {
+		PageControl control = empDetails.getEmployeeControl();
+		EmployeeSelection empSelection = (EmployeeSelection) control.getControl(EmployeeControlNames.SELECT_EMP).get();
+		empSelection.clickRow("3");		
+		assertEquals("0134213A", empDetails.tab().basicDetails().iDCardNumber().getTextByValue());				
+	}	
+	@Test @Order(2)
 	void checkCode() {
 		PageControl control = empDetails.getEmployeeControl();
 		TextOut textOut = (TextOut) control.getControl(EmployeeControlNames.EMP_CODE).get();
 		assertEquals(emp.getEmpCode(), textOut.getTextByValue());		
 	}	
-	@Test
+	@Test @Order(3)
 	void checkEmployeeName() {
 		PageControl control = empDetails.getEmployeeControl();
 		TextOut textOut = (TextOut) control.getControl(EmployeeControlNames.EMP_NAME).get();
-		assertEquals(emp.getFullName(), textOut.getTextByValue());
+		assertEquals(emp.getFullName(), textOut.getTextByValue().trim());
 	}
-	@Test
-	void selectEmployee() {
-		PageControl control = empDetails.getEmployeeControl();
-		EmployeeSelection empSelection = (EmployeeSelection) control.getControl(EmployeeControlNames.SELECT_EMP).get();
-		empSelection.clickRow("3");		
-		assertEquals("475070M", empDetails.tab().basicDetails().iDCardNumber().getTextByValue());				
-	}	
-	@Test //
-	void openCombos() {
+
+//	@Test //
+//	void openCombos() {
+//		
+//		WebDriver driver = homepagePayroll.getWebDriver();
+//		driver.switchTo().defaultContent();
+////		System.out.println("c1->" + driver.findElements(By.tagName("iframe")).size());
+//		menu.clickParent("Employees").clickAndLoad(ContactNumbers.class).get();
+//		driver.switchTo().defaultContent();
+////		System.out.println("c2->" + driver.findElements(By.tagName("iframe")).size());
+//		WebElement p = driver.findElement(By.id("jsPanel-2"));
+//		WebElement h = p.findElement(By.cssSelector("div[class='jsPanel-titlebar']"));
+//		System.out.println("c3->");
+//		
+//		driver.findElement(By.id(empDetails.getPanelId().get()));
+//		PageControl control = empDetails.getEmployeeControl();
+//		DropdownCombo combos = (DropdownCombo) control.getControl(EmployeeControlNames.COMBOS).get();		
+////		combos.close(); // not a panel!!!
+//	}
+	
+//	@Test
+//	void openGrid() {
+//		PageControl control = empDetails.getEmployeeControl();		
+//		DkGridEmployeeDetails grid = (DkGridEmployeeDetails) control.getControl(EmployeeControlNames.GRID_VIEW).get();
+//		grid.close();
+//	}
+//	// Controls - End
+//	
+//	@Test
+//	void checkIdCardNo() {		
+//		assertEquals(emp.getIdCardNumber(), empDetails.tab().basicDetails().iDCardNumber().getTextByValue());
+//	}
+//	
+//	@Test
+//	void set_and_check_PartTimerHoursPerDay() {
+//		TextInOut partTimerHoursPerDay = empDetails.tab().settings().partTimerHoursPerDay();		
+//		partTimerHoursPerDay.clear();
+//		partTimerHoursPerDay.writeText("5");
+//		assertEquals("5", partTimerHoursPerDay.getTextByValue());
+//	}
 		
-		WebDriver driver = homepagePayroll.getWebDriver();
-		driver.switchTo().defaultContent();
-//		System.out.println("c1->" + driver.findElements(By.tagName("iframe")).size());
-		menu.clickParent("Employees").clickAndLoad(ContactNumbers.class).get();
-		driver.switchTo().defaultContent();
-//		System.out.println("c2->" + driver.findElements(By.tagName("iframe")).size());
-		WebElement p = driver.findElement(By.id("jsPanel-2"));
-		WebElement h = p.findElement(By.cssSelector("div[class='jsPanel-titlebar']"));
-		System.out.println("c3->");
-		
-		driver.findElement(By.id(empDetails.getPanelId().get()));
-		PageControl control = empDetails.getEmployeeControl();
-		DropdownCombo combos = (DropdownCombo) control.getControl(EmployeeControlNames.COMBOS).get();		
-//		combos.close(); // not a panel!!!
-	}
-	@Test
-	void openGrid() {
-		PageControl control = empDetails.getEmployeeControl();		
-		DkGridEmployeeDetails grid = (DkGridEmployeeDetails) control.getControl(EmployeeControlNames.GRID_VIEW).get();
-		grid.close();
-	}
-	// Controls - End
-	
-	@Test
-	void checkIdCardNo() {		
-		assertEquals(emp.getIdCardNumber(), empDetails.tab().basicDetails().iDCardNumber().getTextByValue());
-	}
-	
-	@Test
-	void set_and_check_PartTimerHoursPerDay() {
-		TextInOut partTimerHoursPerDay = empDetails.tab().settings().partTimerHoursPerDay();		
-		partTimerHoursPerDay.clear();
-		partTimerHoursPerDay.writeText("5");
-		assertEquals("5", partTimerHoursPerDay.getTextByValue());
-	}
-	
-	
 	@AfterAll
 	static void tearDown() {		
 //		homepagePayroll.close();

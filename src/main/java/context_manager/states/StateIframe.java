@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.openqa.selenium.WebDriver;
 
+import context_manager.CallingState;
 import context_manager.ContextState;
 import object_models.helpers.IFrame;
 
@@ -14,7 +15,7 @@ import object_models.helpers.IFrame;
  * @author Steve Brown
  *
  */
-public class StateIframe extends State {
+public class StateIframe extends State implements CallingState {
 	private IFrame iFrame;
 	
 	public StateIframe(ContextState cs, IFrame iFrame, WebDriver driver) {
@@ -61,5 +62,10 @@ public class StateIframe extends State {
 	@Override
 	public boolean isDefaultState() {
 		return false;
+	}
+
+	@Override
+	public State getState(ContextState context) {
+		return this;
 	}
 }

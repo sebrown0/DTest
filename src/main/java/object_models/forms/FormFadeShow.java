@@ -7,16 +7,12 @@ import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextId;
 import context_manager.ContextManager;
-import context_manager.ContextState;
-import context_manager.states.StateHeaderForm;
 import object_models.helpers.ButtonClicker;
-import object_models.helpers.Header;
 import object_models.helpers.title.PageTitle;
 import object_models.helpers.title.Title;
 import object_models.helpers.title.TitleModalFadeShow;
@@ -29,11 +25,9 @@ public class FormFadeShow extends FormModal {
 	public static final String MENU_TITLE = "None";
 	public static final String PANEL_TITLE = "None";
 	
-	@SuppressWarnings("unused")
-	private WebElement container;
-	
 	public FormFadeShow(WebDriver driver, ContextManager contextManager) {
-		super(driver, "None", contextManager);		
+		super(driver, "None", contextManager);
+		setMyContainers();
 	}
 	
 	public FormFadeShow(WebDriver driver, String expectedTitle, ContextManager contextManager) {
@@ -43,7 +37,7 @@ public class FormFadeShow extends FormModal {
 	@Override
 	public void waitForLoad() {		
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-		container = wait.until(
+		wait.until(
 				ExpectedConditions.visibilityOfElementLocated(
 						By.cssSelector("div[class='modal fade show']")));
 	}
@@ -51,13 +45,6 @@ public class FormFadeShow extends FormModal {
 	@Override
 	public void setTitle() {
 		super.title = new TitleModalFadeShow("None", driver);
-	}
-	
-	@Override
-	public void setContextState() {
-		ContextState con = contextManager.getLastContext();
-		//CHECK THIS IS CORRECT
-		con.setState(new StateHeaderForm(con, container, By.className("modal-header"), driver));
 	}
 	
 	@Override
@@ -78,14 +65,14 @@ public class FormFadeShow extends FormModal {
 	}
 
 	@Override
-	public void setContainer() {
-		super.container = driver.findElement(By.className("div[class='modal fade show']"));
+	public void setTopContainer() {
+		//check that this is correct and that this isn't a child of body[class='modal-open']
+		super.formContainerElement = driver.findElement(By.className("div[class='modal fade show']"));
 	}
+
 	@Override
-	public Header getHeader() {
-		// TODO Auto-generated method stub
-		logger.error("NOT IMPLEMENTED");
-		return null;
+	public void setMyContainers() {
+		// None		
 	}
 	
 }

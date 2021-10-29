@@ -26,14 +26,14 @@ public class ContextUpdater {
 			 * This does not call the state's close method.
 			 * That is done before in: StateManager.closeState(State closeState); 
 			 */
-			manager.getQueue().removeContext(statesContext);
+			manager.getQueue().removeContextAndReset(statesContext);
 			manager.setDefaultStateAfterClosingContext();
 		}else {
 			Optional<State> prev = state.getPrev();
 			if(prev != null && prev.isPresent()) {
 				manager.revertToPreviousStateInContext(prev, statesContext);
 			}else {
-				manager.getQueue().removeContext(statesContext);
+				manager.getQueue().removeContextAndReset(statesContext);
 			}			
 		}
 	}

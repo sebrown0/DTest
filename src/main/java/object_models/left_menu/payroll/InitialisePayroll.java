@@ -9,13 +9,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import context_manager.ContextId;
 import context_manager.ContextManager;
 import object_models.dialog.Dialog;
 import object_models.dialog.DialogOkCancel;
 import object_models.element.ComboSelect;
 import object_models.forms.FormWithIFrame;
-import object_models.helpers.Header;
 
 /**
  * @author Steve Brown
@@ -31,14 +29,12 @@ public class InitialisePayroll extends FormWithIFrame {
 	
 	public InitialisePayroll(WebDriver driver, ContextManager contextManager) {
 		super(driver, PANEL_TITLE, "_iframex-DEFAULT", contextManager);
-		container = driver.findElement(By.cssSelector("body > form > div"));
+		
+		setMyContainers();
+//		container = driver.findElement(By.cssSelector("body > form > div"));
 		waitForMsg = new WebDriverWait(driver, Duration.ofSeconds(20));
 	}
 		
-	public String getIframeTitle() {
-		WebElement e = driver.findElement(By.cssSelector("body > form > div > div:nth-child(1) > div"));
-		return e.getText();
-	}
 	
 	// Actions
 	public Dialog clickInitialisePayroll() {
@@ -58,7 +54,6 @@ public class InitialisePayroll extends FormWithIFrame {
 		return Optional.ofNullable(driver.findElement(By.cssSelector("body > form > div > div:nth-child(9) > div.col-md-12 > div")).getText());
 	}
 	
-
 	// Elements
 	public ComboSelect getSelectCompany() {
 		return new ComboSelect(container.findElement(By.cssSelector("div:nth-child(3) > div:nth-child(2) > select")));		
@@ -72,39 +67,10 @@ public class InitialisePayroll extends FormWithIFrame {
 //	public ElementButton getInitialisePayroll() {
 //		return new ElementButton(container.findElement(By.cssSelector("body > form > div > div:nth-child(9) > div:nth-child(4) > div.btn.btn-warning")));
 //	}
+		
 	@Override
-	public void close() {
-		logger.error("NOT IMPLEMENTED");
+	public void setMyContainers() {
+		container = driver.findElement(By.cssSelector("body > form > div"));
 	}
-	@Override
-	public void waitForLoad() {
-		logger.error("NOT IMPLEMENTED");
-	}
-	@Override
-	public void setContextState() {
-		logger.error("NOT IMPLEMENTED");
-	}
-	@Override
-	public void setContainer() {
-		logger.error("NOT IMPLEMENTED");		
-	}
-	@Override
-	public Header getHeader() {
-		// TODO Auto-generated method stub
-		logger.error("NOT IMPLEMENTED");
-		return null;
-	}
-//	@Override
-//	public void setHeader() {
-//		logger.error("NOT IMPLEMENTED");
-//	}
-	@Override
-	public void setTitle() {
-		logger.error("NOT IMPLEMENTED");
-	}
-	@Override
-	public ContextId getContextId() {
-		logger.error("NOT IMPLEMENTED");
-		return null;
-	}
+
 }

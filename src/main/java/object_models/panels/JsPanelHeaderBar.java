@@ -19,8 +19,11 @@ public class JsPanelHeaderBar implements Header{
 	private WebElement headerBar;
 	private JsPanelControlBar controlBar;
 	private JsPanelToolBar toolBar;
+	private WebDriver driver;
 	
-	public JsPanelHeaderBar(WebDriver driver, WebElement container) {		
+	public JsPanelHeaderBar(WebDriver driver, WebElement container) {
+		this.driver = driver;
+		
 		setHeaderBar(container);
 		setControlBar();
 		setToolBar(driver);		
@@ -41,6 +44,12 @@ public class JsPanelHeaderBar implements Header{
 		return Optional.ofNullable(headerBar.findElement(By.cssSelector("span[class='jsPanel-title']")).getText());
 	}
 
+	@Override
+	public void closeForm() {
+		driver.switchTo().defaultContent();
+		controlBar.clickClose();
+	}
+	
 	public JsPanelControlBar getControlBar() {
 		return controlBar;
 	}

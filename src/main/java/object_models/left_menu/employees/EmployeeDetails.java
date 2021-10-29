@@ -57,6 +57,7 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 		
 	public PageControl getEmployeeControl() {
 		manager.switchToStateInCurrentContext(StateIframe.class); 
+		manager.setLatestCallingStateToCurrent();
 		return empControl;
 	}
 			
@@ -90,7 +91,7 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 			private WebElement tab;
 			
 			public BasicDetails() {
-				tab = driver.findElement(By.xpath("//a[@href='#tab1']"));
+				tab = driver.findElement(By.id("tab-tab1"));
 				tab.click();
 			}
 

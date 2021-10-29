@@ -4,19 +4,25 @@ import java.time.Duration;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import context_manager.ContextId;
 import context_manager.ContextIdGetter;
 import context_manager.ContextManager;
 import context_manager.ContextSetter;
 import context_manager.ContextState;
 import context_manager.contexts.ContextForm;
+import context_manager.states.State;
 import context_manager.states.StateFactorySetter;
+import context_manager.states.StateHeaderForm;
 import object_models.helpers.Header;
 import object_models.helpers.IFrame;
 import object_models.helpers.title.PageTitle;
+import object_models.helpers.title.TitleModalForm;
 import object_models.panels.JsPanelHeaderBar;
 
 /**
@@ -30,10 +36,11 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 	protected Logger logger = LogManager.getLogger();
 	protected WebDriverWait wait;
 	protected Header header;
-	protected WebElement container;
-		
-	private ContextState myContext;
-	private String expectedTitle;	
+	protected WebElement formContainerElement;
+	protected String expectedTitle;
+	protected By byFormContainer = By.cssSelector("div[class='modal show']");
+	
+	private ContextState myContext;		
 	
 	public FormModal(WebDriver driver, String expectedTitle, ContextManager contextManager) {
 		this.driver = driver;
@@ -45,47 +52,86 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 		initialise();
 	}
 	
-	@Override	// ContainerAction
-	public StateFactorySetter getStateFactorySetter() {
-		return this;
-	}
-	
-	@Override	// ContainerAction
-	public PageTitle getTitle() {
-		return title;
-	}
-	
-	@Override
-	public String getContextExpectedName() {
-		return expectedTitle;
-	}
-	
 	private void initialise() {
 		waitForLoad();
-		setContainer();		
-//		setHeader();
+		setTopContainer();		
+		setHeader();
 		setTitle();
 		setContext();
 		setContextState();
 	}
+		
+	public abstract void setMyContainers();
+		
+	// Override if the form should wait for a different element. 
+	protected void waitForLoad() {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(byFormContainer));
+	}	
+	// Override this if the top element of the form is different from byFormContainer
+	protected void setTopContainer() {
+		formContainerElement = driver.findElement(byFormContainer);
+	}
+	// Override if title is different.		
+	protected void setTitle() {
+		title = new TitleModalForm(expectedTitle, driver);
+	}
+	// Override if header is different.
+	protected void setHeader() {
+		header = new ModalHeader(formContainerElement);
+	}
+	/*
+	 * If the header is different from ModalHeader 
+	 * it should be set by the child form -> setHeader().
+	 */
+	public Header getHeader() {
+		return header;
+	}
+	public void setContextState() {
+		// This was moved from FormWithIFrame. For a JsPanel it's in the iFrame implementation.
+		By byLocator = By.className("modal-header");	 	
+		State header = new StateHeaderForm(myContext, formContainerElement, byLocator, driver);		
+		myContext.setState(header);
+	}
 	
-	public abstract void waitForLoad();
-	public abstract void setContextState();
-	public abstract void setContainer();
-	public abstract Header getHeader();
-//	public abstract void setHeader();
-	public abstract void setTitle();
-	
-	@Override
+	@Override	// ContainerAction
+	public StateFactorySetter getStateFactorySetter() {
+		return this;
+	}	
+	@Override	// ContainerAction
+	public PageTitle getTitle() {
+		return title;
+	}
+	@Override	// ContainerAction
 	public ContextState getMyContext() {
 		return myContext;
 	}
 	
-	@Override
+	@Override // Closable
+	public void close() {
+		/*******************************************************************
+		 * 
+		 *  IF WE'RE CLOSING HERE UPDATE CONTEXT??????
+		 *  OR IS IT ALREADY DONE?????????????????????
+		 * 
+		 *******************************************************************/
+		driver.switchTo().defaultContent();
+		header.closeForm();
+	}
+			
+	@Override // ContextSetter
 	public void setContext() {		
 		myContext = new ContextForm(contextManager, this, this);		
 		contextManager.setContext(myContext);
 	}	
+	
+	@Override // ContextIdGetter
+	public ContextId getContextId() {		
+		return new ContextId(expectedTitle, "");
+	}
+	@Override // ContextIdGetter
+	public String getContextExpectedName() {
+		return expectedTitle;
+	}
 	
 	@Override 	// StateFactorySetter
 	public ContextManager getContextManager() {
@@ -105,12 +151,4 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 		return null; // from FormWithIFrame
 	}
 
-//	public Header getHeader() {
-//		return header;
-//	}
-//	@Override
-//	public ContextId getContextId() {
-//		logger.error("NOT IMPLEMENTED");
-//		return new ContextId("ERROR", "ERROR"); // TODO - IMPLEMENT 
-//	}
 }

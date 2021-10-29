@@ -25,7 +25,7 @@ import object_models.forms.ContainerAction;
  * Each context can have different states, i.e. header/container, iFrame etc.
  * 
  */
-public abstract class Context implements ContextState { //, ZZZ_ContextCloser {
+public abstract class Context implements ContextState { 
 	protected Logger logger = LogManager.getLogger();
 	
 	private ContextManager contextManager;
@@ -55,7 +55,7 @@ public abstract class Context implements ContextState { //, ZZZ_ContextCloser {
 	}
 	
 	private void setCallingState() {
-		callingState = contextManager.getCallingState().getState(this);
+		callingState = contextManager.getLatestCallingState().getState(this);
 		this.setState(callingState);
 	}
 		
@@ -112,7 +112,7 @@ public abstract class Context implements ContextState { //, ZZZ_ContextCloser {
 	
 	@Override
 	public void removeContextAndResetQueue() {
-		contextManager.deleteContext(this);
+		contextManager.removeAndCloseContext(this);
 	}
 	
 	@Override

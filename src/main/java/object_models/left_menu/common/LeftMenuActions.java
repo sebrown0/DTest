@@ -16,7 +16,6 @@ import org.openqa.selenium.WebElement;
 import context_manager.ContextLoader;
 import context_manager.ContextManager;
 import context_manager.ContextState;
-import context_manager.states.StateLeftMenu;
 import object_models.forms.ContainerAction;
 import object_models.helpers.ClassFieldGetter;
 
@@ -93,8 +92,7 @@ public class LeftMenuActions {
 			String name = elementName.get();
 			String id = elementId.get();
 			WebElement e =  anchors.get(name);
-			
-//			contextManager.switchToFirstStateInCurrentContext(); //WHY ARE WE DOING THIS???		
+					
 			logger.info("Loading [" + name + "]");
 			
 			try {
@@ -103,8 +101,7 @@ public class LeftMenuActions {
 				if(isExistingContext(cs)) {
 					elementContainer = getExistingContainerFromContext(name, cs.get());
 					setExistingAsCurrent(elementContainer);					
-				}else {
-					System.out.println("New->" + name ); // TODO - remove or log 	
+				}else { 	
 					elementContainer = Optional.of(getNewElementContainer(name));
 					logger.debug("[" + elementContainer.get().toString() + "] does not exist. Creating now");
 				}
@@ -135,7 +132,7 @@ public class LeftMenuActions {
 	}
 	
 	public LeftMenuActions clickParent(String prntName) {
-		contextManager.switchToStateInCurrentContext(StateLeftMenu.class);		
+		contextManager.switchToLeftMenu();		
 		WebElement activeMenuItem = getActiveMenuItem();
 		if(activeMenuItem != null) {
 			String currentlyActive = activeMenuItem.getText().trim();			

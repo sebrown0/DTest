@@ -17,10 +17,21 @@ import object_models.helpers.IFrame;
  */
 public abstract class FormWithIFrame extends FormModal {
 	private IFrame iFrame;
-		
+	private String iFrameName;
+	
 	public FormWithIFrame(WebDriver driver, String expectedTitle, String iFrameName, ContextManager contextManager) {
 		super(driver, expectedTitle, contextManager);	
-				
+	
+		this.iFrameName = iFrameName;
+//		switchToIFrame(driver, iFrameName);
+		System.out.println("->WOULD HAVE SWITCHED TO IFRAME NOW DO IT FROM CHILD" ); // TODO - remove or log 	
+	}
+	
+	/*
+	 * The child object decides when to switch to the iFrame.
+	 * This allows the child to load elements before the frame is loaded.
+	 */
+	protected void switchToIFrame() {
 		switchToIFrame(driver, iFrameName);
 	}
 	
@@ -35,6 +46,18 @@ public abstract class FormWithIFrame extends FormModal {
 	public WebElement getIFrameElement() {
 		return iFrame.getIFrameElement();
 	}
+
+	/*
+	 * THIS IS IN JsPanelWithIframe for JsPanel 
+	 */
+//	public void setContextState() {
+//		By byLocator = By.cssSelector("iframe[title='" + super.expectedTitle + "']");
+//		iFrame = new IFrame(driver, byLocator);
+//		System.out.println("->SETTING CONTEXT STATE IN FORM WITH I F" ); // TODO - remove or log 	
+//		ContextState con = contextManager.getCurrentContext();			 	
+//		State header = new StateHeaderForm(con, formContainerElement, byLocator, driver);		
+//		con.setState(header);
+//	}
 	
 	@Override 	// StateFactorySetter
 	public IFrame getIFrame() {

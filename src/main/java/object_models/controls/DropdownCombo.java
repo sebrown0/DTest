@@ -27,11 +27,10 @@ import object_models.helpers.Reload;
 public class DropdownCombo extends FormWithIFrame implements Control {
 	private IFrame iFrame;
 	private Reload reloadEmpDetails;
-	private WebElement container;
+//	private WebElement container;
 	private WebElement table;	
 	
-//	private static final By byContainer = By.cssSelector("body > form > div.container-fluid");
-	private static final By byContainer = By.cssSelector("body[class='modal-open']");
+//	private static final By byContainer = By.cssSelector("body[class='modal-open']");
 	private static final By byTable = By.id("myGrid1");
 	
 	public static final String MENU_TITLE = "Combos";
@@ -41,37 +40,22 @@ public class DropdownCombo extends FormWithIFrame implements Control {
 		super(driver, PANEL_TITLE, "_iframex-IPORTAL_POPUPS_MEDIUM4", contextManager);
 	
 		this.reloadEmpDetails = reloadEmpDetails;
+		setMyContainers();
 	}
 
 	@Override
-	public void waitForLoad() {
-		super.wait.until(ExpectedConditions.visibilityOfElementLocated(byContainer));
-	}
-	@Override
-	public void close() {
-		logger.error("NOT IMPLEMENTED");
-	}	
-	@Override
-	public void setContextState() {
-		ContextState con = contextManager.getLastContext();		
-		con.setState(new StateHeaderForm(con, container, By.className("modal-header"), driver));
-	}
-	@Override
-	public void setContainer() {
-		container = driver.findElement(byContainer);
-		table = container.findElement(byTable);
+	public void setMyContainers() {
+//		container = driver.findElement(byContainer);
+		table = super.formContainerElement.findElement(byTable);
 	}
 	@Override
 	public Header getHeader() {
 		contextManager.switchToStateInCurrentContext(StateHeaderForm.class);
-		return new FormHeader(container);
+		return new FormHeader(super.formContainerElement);
 //		super.header = new FormHeader(topLevelContainer);
 //		logger.error("NOT IMPLEMENTED");
 	}
-	@Override
-	public void setTitle() {
-		logger.error("NOT IMPLEMENTED");
-	}
+
 	@Override
 	public ContextId getContextId() {		
 		return new ContextId(PANEL_TITLE, "None");

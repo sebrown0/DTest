@@ -76,6 +76,14 @@ import xml_reader.config_file.ConfigReader;
  * This could either be expanding the menu to show a sub-menu,
  * i.e. Reports, or opening a new page, 
  * i.e. Reports -> Payroll Reports
+ * 
+ * TODO
+ * ----
+ * Some tests fail randomly.
+ * Probably because we're in the wrong state.
+ * 
+ * For the future if a test fails as part of the test suite
+ * add it to a list of tests to be run in isolation???
  */
 @ExtendWith({ 
 	ConfigParameterResolver.class, 
@@ -91,6 +99,9 @@ public class LeftMenuChildren_Payroll_Tests {
 		menu = homepagePayroll.getLeftMenu();
 	}
 				
+	/*
+	 * ALL FAIL
+	 */
 	@Test
 	void click_and_get_EmployeeList() {
 		ContainerAction empList = menu.clickAndLoad(EmployeeList.class).get();
@@ -387,7 +398,7 @@ public class LeftMenuChildren_Payroll_Tests {
 	
 	@AfterAll
 	static void tearDown() {
-		homepagePayroll.close();
+//		homepagePayroll.close();
 	}
 	
 	/* 

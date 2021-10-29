@@ -210,13 +210,13 @@ class ContextManagerTests {
 	void loadTwoPanels_then_close_currentContext_thrice_shouldBe_ContextPayroll() {
 		menu.clickAndLoad(Banks.class);
 		menu.clickAndLoad(Documents.class);
-		manager.removeCurrentContextFromQueue();
+		manager.removeLastContextFromQueue();
 		Context c = (Context) manager.getLastContext();
 		assertTrue(c instanceof ContextPanel);		
 		// Try and close the current (Payroll) context.
 		// It should not be possible.
-		manager.removeCurrentContextFromQueue();
-		manager.removeCurrentContextFromQueue();
+		manager.removeLastContextFromQueue();
+		manager.removeLastContextFromQueue();
 		c = (Context) manager.getLastContext();		
 		assertTrue(c instanceof ContextPayroll);			 
 	}
@@ -303,7 +303,7 @@ class ContextManagerTests {
 		menu.clickAndLoad(YearlyReports.class);
 		menu.clickAndLoad(Banks.class);	
 		
-		manager.deleteContext(manager.getCurrentContext());
+		manager.removeAndCloseContext(manager.getCurrentContext());
 		assertEquals("Payroll Module", manager.getCurrentContext().getContextId().getExpectedName());		
 	}
 
@@ -335,7 +335,7 @@ class ContextManagerTests {
 		ContextState first = manager.findContext("Payroll Module").get();
 		manager
 			.moveToExistingContext(first)
-			.deleteContext(first);
+			.removeAndCloseContext(first);
 		
 		assertEquals("Payroll Module", manager.getCurrentContext().getContextId().getExpectedName());
 	}

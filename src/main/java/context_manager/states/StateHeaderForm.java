@@ -10,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import context_manager.ContextState;
-import context_manager.CurrentContext;
 
 /**
  * @author Steve Brown
@@ -37,7 +36,7 @@ public class StateHeaderForm extends State {
 		 */
 		logger.debug("Closing state [" + this + "]");
 		logger.error("NOT IMPLEMENTED");
-		
+		System.out.println("StateHeaderForm->close"); // TODO - remove or log				
 	}
 	@Override
 	public State switchToMe() {

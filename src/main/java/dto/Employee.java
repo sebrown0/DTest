@@ -152,39 +152,39 @@ public class Employee {
 	}
 	
 	public Employee setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstName = firstName.trim();;
 		return this;
 	}
 	public Employee setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastName = lastName.trim();
 		return this;
 	}
 	public Employee setIdCardNumber(String idCardNumber) {
-		this.idCardNumber = idCardNumber;
+		this.idCardNumber = idCardNumber.trim();;
 		return this;
 	}
 	public Employee setEmpCode(String empCode) {
-		this.empCode = empCode;
+		this.empCode = empCode.trim();;
 		return this;
 	}
 	public Employee setAddressOne(String addressOne) {
-		this.addressOne = addressOne;
+		this.addressOne = addressOne.trim();;
 		return this;
 	}
 	public Employee setStreet(String street) {
-		this.street = street;
+		this.street = street.trim();;
 		return this;
 	}
 	public Employee setPostCode(String postCode) {
-		this.postCode = postCode;
+		this.postCode = postCode.trim();;
 		return this;
 	}
 	public Employee setTown(String town) {
-		this.town = town;
+		this.town = town.trim();;
 		return this;
 	}
 	public Employee setCountry(String country) {
-		this.country = country;
+		this.country = country.trim();;
 		return this;
 	}
 	public Employee setGender(Gender gender) {
@@ -192,35 +192,35 @@ public class Employee {
 		return this;
 	}
 	public Employee setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+		this.dateOfBirth = dateOfBirth.trim();;
 		return this;
 	}
 	public Employee setDateOfEmployement(String dateOfEmployement) {
-		this.dateOfEmployement = dateOfEmployement;
+		this.dateOfEmployement = dateOfEmployement.trim();;
 		return this;
 	}
 	public Employee setTaxNumber(String taxNumber) {
-		this.taxNumber = taxNumber;
+		this.taxNumber = taxNumber.trim();;
 		return this;
 	}
 	public Employee setNiNumber(String niNumber) {
-		this.niNumber = niNumber;
+		this.niNumber = niNumber.trim();;
 		return this;
 	}
 	public Employee setBank(String bank) {
-		this.bank = bank;
+		this.bank = bank.trim();;
 		return this;
 	}
 	public Employee setIbanNumber(String ibanNumber) {
-		this.ibanNumber = ibanNumber;
+		this.ibanNumber = ibanNumber.trim();;
 		return this;
 	}
 	public Employee setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
+		this.emailAddress = emailAddress.trim();;
 		return this;
 	}
 	public Employee setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
+		this.mobileNumber = mobileNumber.trim();;
 		return this;
 	}
 	public Employee setTaxStatus(TaxStatus taxStatus) {
@@ -232,19 +232,19 @@ public class Employee {
 		return this;
 	}
 	public Employee setCompany(String company) {
-		Company = company;
+		Company = company.trim();;
 		return this;
 	}
 	public Employee setPayGroup(String payGroup) {
-		this.payGroup = payGroup;
+		this.payGroup = payGroup.trim();;
 		return this;
 	}
 	public Employee setDepartment(String department) {
-		this.department = department;
+		this.department = department.trim();;
 		return this;
 	}
 	public Employee setSchedule(String schedule) {
-		this.schedule = schedule;
+		this.schedule = schedule.trim();;
 		return this;
 	}
 	public Employee setEmploymentType(EmploymentType employmentType) {
@@ -256,11 +256,11 @@ public class Employee {
 		return this;
 	}
 	public Employee setGrade(String grade) {
-		this.grade = grade;
+		this.grade = grade.trim();;
 		return this;
 	}
 	public Employee setCostCentre(String costCentre) {
-		this.costCentre = costCentre;
+		this.costCentre = costCentre.trim();;
 		return this;
 	}
 	public Employee setTaxablePermanentAllowances(List<Allowance> taxablePermanentAllowances) {

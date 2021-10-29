@@ -40,11 +40,7 @@ public abstract class JSPanelWithIFrame extends JsPanel implements JsPanelContex
 			.moveToNextStateInCurrentContext()
 			.switchToMe();		
 	}	
-	
-//	public IFrame getIframe() {
-//		return iFrame;
-//	}
-	
+		
 	public WebElement getIFrameAsElement() {
 		return iFrame.getIFrameElement();
 	}

@@ -10,6 +10,8 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import context_manager.states.State;
+
 /**
  * @author Steve Brown
  *
@@ -30,7 +32,27 @@ public class ContextQueue {
 		}		
 	}
 	
-	public void moveToExistingContext(ContextState cs) {
+	public void moveToExistingState(State state) {
+		ContextState cs = state.getMyContext();
+		if(cs != null) {
+			boolean foundContext = false;
+			for (ContextState contextState : queue) {
+				if(cs == contextState) {
+					current = cs;
+					current.setState(state);
+					foundContext = true;
+					break;
+				}
+			}
+			if(!foundContext) {
+				logger.error("Could not find existing context [" + cs.getContextId() + "]");
+			}
+		}else {
+			logger.error("Cannot find NULL context");
+		}		
+	}
+	
+	public void moveToExistingContextAndDefaultState(ContextState cs) {
 		if(cs != null) {
 			boolean foundContext = false;
 			for (ContextState contextState : queue) {
@@ -75,7 +97,19 @@ public class ContextQueue {
 		}		
 	}
 	
-	public boolean removeContext(ContextState cs) {
+	public Optional<State> removeContextAndGetCallingState(ContextState cs) {
+		Optional<State> callingState = Optional.empty();
+		if(cs instanceof FirstContext) {
+			logger.debug("Cannot remove first context");		
+		}else {
+			logger.debug("Removing context [" + cs.getContextId() + "] from context queue");
+			callingState = Optional.ofNullable(cs.getCallingState());
+			queue.remove(cs);
+		}				
+		return callingState;
+	}
+	
+	public boolean removeContextAndReset(ContextState cs) {
 		if(cs instanceof FirstContext) {
 			logger.debug("Cannot remove first context");
 			return false;
@@ -96,7 +130,7 @@ public class ContextQueue {
 	 * If the context has already been closed do not use this method.
 	 */	
 	public void removeAndCloseContext(ContextState cs) {
-		if(removeContext(cs)) {			
+		if(removeContextAndReset(cs)) {			
 			cs.getContextCloser().close();			
 		}		
 	}

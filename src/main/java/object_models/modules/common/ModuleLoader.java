@@ -44,7 +44,7 @@ public class ModuleLoader {
 
 	private void setInitialStateOfContextManager() {
 		logger.debug("Setting initial state of Context Manager");
-		contextManager.setCallingState(new CallingState() {			
+		contextManager.setLatestCallingState(new CallingState() {			
 			@Override
 			public State getState(ContextState context) {
 				return new StateModule(context, driver);

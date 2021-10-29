@@ -123,6 +123,13 @@ public class ContextManager implements CurrentContext {
 	public void closeCurrentStateInCurrentContext(){
 		stateManager.closeCurrentStateInCurrentContext(this);
 	}
+
+	public Optional<State> closeCurrentContext() {		
+		return queue.removeContextAndGetCallingState(getCurrentContext());
+	}
+	public void RevertToPrevCallingState(ContextState inContext) {
+		
+	}
 	/*
 	 * State - End
 	 */
@@ -144,10 +151,16 @@ public class ContextManager implements CurrentContext {
 	public WebDriver getDriver() {
 		return driver;
 	}
-	public void setCallingState(CallingState callingState) {
+	public void setLatestCallingStateToCurrent() {
+		State current = getCurrentContext().getState();
+		if(current instanceof CallingState) {
+			this.callingState = (CallingState) current;	
+		}		
+	}
+	public void setLatestCallingState(CallingState callingState) {
 		this.callingState = callingState;
 	}
-	public CallingState getCallingState() {
+	public CallingState getLatestCallingState() {
 		return callingState;
 	}
 	
@@ -208,7 +221,7 @@ public class ContextManager implements CurrentContext {
 	}
 
 	public ContextManager moveToExistingContext(ContextState cs) {
-		queue.moveToExistingContext(cs);
+		queue.moveToExistingContextAndDefaultState(cs);
 		return this;
 	}
 	
@@ -226,10 +239,15 @@ public class ContextManager implements CurrentContext {
 		return queue.getLastContextInQueue();
 	}
 
-	public void deleteContext(ContextState cs) {
+	// If the context has been closed in the DOM by other means
+	public void removeContext(ContextState cs) {
+		queue.removeContextAndGetCallingState(cs);		
+	}
+	// Removes the context from the queue and closes it in the DOM
+	public void removeAndCloseContext(ContextState cs) {
 		queue.removeAndCloseContext(cs);		
 	}
-	public boolean removeCurrentContextFromQueue() {
+	public boolean removeLastContextFromQueue() {
 		return queue.removeLastContext();
 	}
 
@@ -244,7 +262,7 @@ public class ContextManager implements CurrentContext {
 
 	@Override
 	public void setCurrentContextState(ContextState cs) {
-		queue.moveToExistingContext(cs);		
+		queue.moveToExistingContextAndDefaultState(cs);		
 	}
 
 	@Override
