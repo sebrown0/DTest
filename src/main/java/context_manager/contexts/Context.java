@@ -56,7 +56,7 @@ public abstract class Context implements ContextState {
 	
 	private void setCallingState() {
 		callingState = contextManager.getLatestCallingState().getState(this);
-		this.setState(callingState);
+//		this.setState(callingState);
 	}
 		
 	@Override
@@ -115,20 +115,6 @@ public abstract class Context implements ContextState {
 		}
 	}
 	
-//	private void setCurrentsNextToNewState(State state) {
-//		if(currentState != null && currentState.getNext() != null) {
-//			currentState.getNext().ifPresent(s -> {
-//				if(!s.equals(state)) {
-//					currentState.setNext(Optional.ofNullable(s));
-//				}
-//			});
-//			
-////			currentState.setNext(Optional.ofNullable(state));
-//		}else {
-//			currentState.setNext(Optional.ofNullable(state));
-//		}
-//	}
-
 	//TODO - HAVE TO CHECK THAT THIS DOES NOT MESS UP MOVING TO PRE-SET STATE, i.e. IFRAME.
 	private void setNewStatesPrevToCurrent(State state) {
 		State temp = currentState; 

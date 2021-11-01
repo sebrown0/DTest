@@ -64,10 +64,6 @@ public class StateManager {
 	public <T extends State> Optional<State> moveToStateInContext(Class<T> clazzRequiredState, ContextState cs) {
 		String requiredStateName = clazzRequiredState.getSimpleName();
 		Optional<State> state = cs.moveToState(clazzRequiredState);
-
-		if(clazzRequiredState.getSimpleName().equals("StateModule")) {
-			System.out.println("moveToStateInContext->" + clazzRequiredState + " for cs ->" + cs.getContextId()); // TODO - remove or log
-		}
 		
 		if(state.isPresent()) {			
 			logger.debug("State [" + requiredStateName + "] is present in context. Will move to this state");				
@@ -77,12 +73,7 @@ public class StateManager {
 			return getCurrentContext().setLastState(clazzRequiredState, cs.getContinerAction().getStateFactorySetter());			
 		}						
 	}
-	
-	
-//	public void moveToStateInCurrentContext(State state, CurrentContext getter) {
-//		getter.getCurrentContextState().setCurrentState(state);			
-//	}
-	
+		
 	private boolean isCurrentStateRequiredState(String requiredStateName) {
 		String currentStatesName = manager.getCurrentContextState().getState().getClass().getSimpleName(); 	
 		return currentStatesName.equals(requiredStateName);
@@ -139,16 +130,6 @@ public class StateManager {
 	public void switchToDefaultStateInCurrentContext() {				
 		ContextState cs = queue.getCurrentContextInQueue(); 
 		switchToDefaultStateInContext(cs);
-//		State defaultState = getDefaultState(cs);
-//		if(defaultState != null) { 	
-//			logger.debug("Switched to default state [" + defaultState + "]");
-//			cs.setCurrentState(defaultState);
-//			defaultState.switchToMe();
-//		}else { 	
-//			State curr = cs.getState();			
-//			logger.debug("Default state not found so state is current [" + curr + "]");
-//			cs.setCurrentState(curr);
-//		} 	
 	}
 	
 	public boolean isStateInCurrentContext(Class<?> clazz, CurrentContext getter) {

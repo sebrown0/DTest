@@ -26,8 +26,6 @@ import object_models.helpers.Reload;
  * 
  */
 public final class EmployeeSelection extends FormWithIFrame implements Control {
-//	private IFrame iFrame;
-//	private Reload reloadEmpDetails;
 	private WebElement topLevelContainer;
 	private WebElement table;	
 	
@@ -37,34 +35,32 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 	public EmployeeSelection(WebDriver driver, Reload reloadEmpDetails, ContextManager contextManager) {
 		super(driver, PANEL_TITLE, "_iframex-IPORTAL_HR_EMPLOYEEDETAILS_EXT", contextManager);
 
-//		this.reloadEmpDetails = reloadEmpDetails;
-		super.switchToIFrame();
-		
+		super.switchToIFrame();		
 		setMyContainers();		
 	}
 		
 	public void clickRow(String rowNum) {				
 		WebElement rw = table.findElement(By.id("RIZZ" + rowNum));
 		rw.click();
-		Optional<State> callingState = contextManager.closeCurrentContext();
-		callingState.ifPresent(s -> {
-			ContextState callingContext = s.getMyContext();
-			callingContext.moveToState(s.getClass());
-			s.switchToMe();
-			
-			System.out.println("Switched to state ->" + s + " in context ->" + callingContext.getContextId()); // TODO - remove or log
-//			System.out.println("prev->" + s.getPrev().get()); // TODO - remove or log 	
-//			System.out.println("next->" + s.getNext().get()); // TODO - remove or log
-		});
-		
-		// TODO
-		// This should be a context. 
-		// When clicked the context should disappear and be replaced by the previous.
-		/*
-		 * CHECK & Remove Reload!!!!!!!!!!!!!!!!!!!!!!!!! 
-		 */
-//		reloadEmpDetails.reloadDefault();
+		contextManager.closeCurrentContext();
+//		Optional<State> callingState = contextManager.closeCurrentContext();
+//		callingState.ifPresent(s -> {
+//			ContextState callingContext = s.getMyContext();
+//			callingContext.moveToState(s.getClass());
+//			s.switchToMe();
+//		});		
 	}
+	
+//	public void clickRow(String rowNum) {				
+//		WebElement rw = table.findElement(By.id("RIZZ" + rowNum));
+//		rw.click();
+//		Optional<State> callingState = contextManager.closeCurrentContext();
+//		callingState.ifPresent(s -> {
+//			ContextState callingContext = s.getMyContext();
+//			callingContext.moveToState(s.getClass());
+//			s.switchToMe();
+//		});		
+//	}
 	
 	// Elements
 	public ComboSelect companySelect() {

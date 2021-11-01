@@ -67,7 +67,7 @@ public abstract class State {
 	}
 	
 	protected void setCurrentContextToThisStatesContext() {
-		if(myContext != null) {//			
+		if(myContext != null) {	
 			myContext.getContextManager().setCurrentContextState(myContext);
 		}		
 	}

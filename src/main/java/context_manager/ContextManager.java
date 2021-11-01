@@ -87,23 +87,11 @@ public class ContextManager implements CurrentContext {
 		PanelSwitcher<T> switcher = new PanelSwitcher<>(panel, this);
 		switcher.switchToExistingPanel();
 	}
-	
-//	public <T extends State> Optional<State> moveToStateInContext(Class<T> clazzRequiredState, ContextState cs) {		
-//		return stateManager.moveToStateInContext(clazzRequiredState, cs);						
-//	}
-	
+		
 	public <T extends State> void moveToDefaultStateInContext(ContextState cs) {	
 		stateManager.moveToDefaultStateInContext(cs);
 	}
-	
-//	public <T extends State> Optional<State> moveToStateInCurrentContext(Class<T> clazzRequiredState) {
-//		return stateManager.moveToStateInContext(clazzRequiredState, getCurrentContext());			
-//	}
-	
-//	public void moveToStateInCurrentContext(State state) {
-//		stateManager.moveToStateInCurrentContext(state, this);	
-//	}
-	
+
 	public void switchToFirstStateInCurrentContext() {
 		stateManager.switchToFirstStateInCurrentContext();
 	}
@@ -124,8 +112,19 @@ public class ContextManager implements CurrentContext {
 		stateManager.closeCurrentStateInCurrentContext(this);
 	}
 
-	public Optional<State> closeCurrentContext() {		
-		return queue.removeContextAndGetCallingState(getCurrentContext());
+//	public Optional<State> closeCurrentContext() {		
+//		return queue.removeContextAndGetCallingState(getCurrentContext());
+//	}
+	
+	public void closeCurrentContext() {		
+		Optional<State> callingState = queue.removeContextAndGetCallingState(getCurrentContext());
+		callingState.ifPresent(s -> {
+			ContextState callingContext = s.getMyContext();
+			callingContext.moveToState(s.getClass());
+			s.switchToMe();
+		});
+		
+//		return queue.removeContextAndGetCallingState(getCurrentContext());
 	}
 	public void RevertToPrevCallingState(ContextState inContext) {
 		
@@ -197,10 +196,6 @@ public class ContextManager implements CurrentContext {
 		ContextState cs = queue.getCurrentContextInQueue();
 		return getContextId(cs);
 	}	
-//	public String getContextIdOfLastContext() {
-//		ContextState cs = queue.getLastContextInQueue();
-//		return getContextId(cs);
-//	}	
 	private String getContextId(ContextState cs) {
 		if(cs != null) {
 			return cs.getContextId().getId();			

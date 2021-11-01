@@ -18,18 +18,15 @@ import object_models.panels.JsPanelHeaderBar;
 public class StateHeaderPanel extends State {
 	private JsPanelHeaderBar bar;
 	private IFrame iFrame;
-//	private ContextManager manager;
 	
 	public StateHeaderPanel(ContextState cs, JsPanelHeaderBar bar, IFrame iFrame, WebDriver driver) {
 		super(cs, driver);
-//		this.manager = cs.getContextManager();
 		this.bar = bar;
 		this.iFrame = iFrame;
 	}
 	
 	@Override
-	public Optional<State> getNewNextState() {		
-//		return Optional.empty();
+	public Optional<State> getNewNextState() {
 		return Optional.of(new StateIframe(myContext, iFrame, driver));
 	}
 	

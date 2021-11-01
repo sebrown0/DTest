@@ -8,9 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import context_manager.ContextManager;
-import context_manager.ContextState;
-import context_manager.states.State;
-import context_manager.states.StateHeaderPanel;
 import object_models.helpers.IFrame;
 
 /**
@@ -29,17 +26,7 @@ public abstract class JSPanelWithIFrame extends JsPanel implements JsPanelContex
 	public void setContextState() {
 		By byLocator = By.cssSelector("iframe[title='" + super.expectedTitle + "']");
 		iFrame = new IFrame(driver, byLocator);		
-		super.getHeaderBar(); // CAUSES NEW STATE HEADER TO BE CREATED & ADDED TO THE QUEUE
-		
-//		ContextState con = manager.getCurrentContext();			 	
-		// super.getHeaderBar() CAUSES NEW STATE HEADER TO BE CREATED
-//		JsPanelHeaderBar hDRBar = super.getHeaderBar();
-//		State hdr = super.getMyContext().getState();
-		
-//		State header = new StateHeaderPanel(con, super.getHeaderBar(), iFrame, driver);		
-//		con.setState(header);
-				
-//		con.setState(hdr);
+		super.getHeaderBar(); // CAUSES NEW STATE HEADER TO BE CREATED & ADDED TO THE QUEUE. TODO - remove this side effect.		
 	}
 	
 	private void switchToIFrame() {
