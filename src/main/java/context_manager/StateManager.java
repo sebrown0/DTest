@@ -56,7 +56,11 @@ public class StateManager {
 		state.ifPresent(s -> s.switchToMe());
 		return state;
 	}
-		
+	
+	public <T extends State> Optional<State> moveToStateInCurrentContext(Class<T> clazzRequiredState, CurrentContext getter) {
+		return moveToStateInContext(clazzRequiredState, getter.getCurrentContextState());			
+	}
+	
 	public <T extends State> Optional<State> moveToStateInContext(Class<T> clazzRequiredState, ContextState cs) {
 		String requiredStateName = clazzRequiredState.getSimpleName();
 		Optional<State> state = cs.moveToState(clazzRequiredState);
@@ -74,13 +78,10 @@ public class StateManager {
 		}						
 	}
 	
-	public <T extends State> Optional<State> moveToStateInCurrentContext(Class<T> clazzRequiredState, CurrentContext getter) {
-		return moveToStateInContext(clazzRequiredState, getter.getCurrentContextState());			
-	}
 	
-	public void moveToStateInCurrentContext(State state, CurrentContext getter) {
-		getter.getCurrentContextState().setCurrentState(state);			
-	}
+//	public void moveToStateInCurrentContext(State state, CurrentContext getter) {
+//		getter.getCurrentContextState().setCurrentState(state);			
+//	}
 	
 	private boolean isCurrentStateRequiredState(String requiredStateName) {
 		String currentStatesName = manager.getCurrentContextState().getState().getClass().getSimpleName(); 	
@@ -163,9 +164,9 @@ public class StateManager {
 	private State goForwardThruStates(State s) {
 		boolean foundDefault = false;
 		
-		while (foundDefault == false && s != null && s.isDefaultState() == false) {
-			if(s.getNext().isPresent()) {				
-				s = s.getNext().get();
+		while (foundDefault == false && s != null && s.getCurrentNextState() != null && s.isDefaultState() == false) {
+			if(s.getCurrentNextState().isPresent()) {				
+				s = s.getCurrentNextState().get();
 			}else {
 				s = null;
 			}

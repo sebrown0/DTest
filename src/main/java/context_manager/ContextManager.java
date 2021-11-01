@@ -88,21 +88,21 @@ public class ContextManager implements CurrentContext {
 		switcher.switchToExistingPanel();
 	}
 	
-	public <T extends State> Optional<State> moveToStateInContext(Class<T> clazzRequiredState, ContextState cs) {		
-		return stateManager.moveToStateInContext(clazzRequiredState, cs);						
-	}
+//	public <T extends State> Optional<State> moveToStateInContext(Class<T> clazzRequiredState, ContextState cs) {		
+//		return stateManager.moveToStateInContext(clazzRequiredState, cs);						
+//	}
 	
 	public <T extends State> void moveToDefaultStateInContext(ContextState cs) {	
 		stateManager.moveToDefaultStateInContext(cs);
 	}
 	
-	public <T extends State> Optional<State> moveToStateInCurrentContext(Class<T> clazzRequiredState) {
-		return stateManager.moveToStateInContext(clazzRequiredState, getCurrentContext());			
-	}
+//	public <T extends State> Optional<State> moveToStateInCurrentContext(Class<T> clazzRequiredState) {
+//		return stateManager.moveToStateInContext(clazzRequiredState, getCurrentContext());			
+//	}
 	
-	public void moveToStateInCurrentContext(State state) {
-		stateManager.moveToStateInCurrentContext(state, this);	
-	}
+//	public void moveToStateInCurrentContext(State state) {
+//		stateManager.moveToStateInCurrentContext(state, this);	
+//	}
 	
 	public void switchToFirstStateInCurrentContext() {
 		stateManager.switchToFirstStateInCurrentContext();

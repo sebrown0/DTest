@@ -35,12 +35,16 @@ public abstract class State {
 		this.driver = driver;
 	}
 	
-	public abstract Optional<State> getNext();
+	public abstract Optional<State> getNewNextState();
 	public abstract void close();
 	public abstract boolean isContextCloser();	
 	public abstract boolean isDefaultState();
 	public abstract State switchToMe();
 		
+	public Optional<State> getCurrentNextState(){
+		return next;
+	}
+	
 	public void setPrev(Optional<State> prev) {
 		this.prev = prev;
 	}

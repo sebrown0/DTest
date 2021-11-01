@@ -28,7 +28,8 @@ public class StateHeaderPanel extends State {
 	}
 	
 	@Override
-	public Optional<State> getNext() {		
+	public Optional<State> getNewNextState() {		
+//		return Optional.empty();
 		return Optional.of(new StateIframe(myContext, iFrame, driver));
 	}
 	

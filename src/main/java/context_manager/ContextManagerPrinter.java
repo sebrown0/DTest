@@ -39,7 +39,7 @@ public class ContextManagerPrinter {
 			if(s.isPresent()) {
 				State temp = s.get(); 	
 				System.out.println("State: " + temp.getClass().getSimpleName()); 
-				s = temp.getNext();
+				s = temp.getCurrentNextState();
 			}else {
 				s = null;
 			}			

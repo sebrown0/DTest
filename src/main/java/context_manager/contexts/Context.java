@@ -96,12 +96,38 @@ public abstract class Context implements ContextState {
 		setNewStatesPrevToCurrent(newState);		
 		logger.debug("Setting new state [" + newState.toString() + "]"); 	
 	}	
-	
+
+	/*
+	 * setting the iframe from emp details prev to top of emp sel
+	 * 
+	 */
 	private void setCurrentsNextToNewState(State state) {
 		if(currentState != null) {
-			currentState.setNext(Optional.ofNullable(state));
+			if(currentState.getCurrentNextState() == null) {
+				currentState.setNext(Optional.ofNullable(state));
+			}else {
+				currentState.getCurrentNextState().ifPresent(s -> {
+					if(!s.equals(state)) {
+						currentState.setNext(Optional.ofNullable(state));
+					}
+				});	
+			}
 		}
 	}
+	
+//	private void setCurrentsNextToNewState(State state) {
+//		if(currentState != null && currentState.getNext() != null) {
+//			currentState.getNext().ifPresent(s -> {
+//				if(!s.equals(state)) {
+//					currentState.setNext(Optional.ofNullable(s));
+//				}
+//			});
+//			
+////			currentState.setNext(Optional.ofNullable(state));
+//		}else {
+//			currentState.setNext(Optional.ofNullable(state));
+//		}
+//	}
 
 	//TODO - HAVE TO CHECK THAT THIS DOES NOT MESS UP MOVING TO PRE-SET STATE, i.e. IFRAME.
 	private void setNewStatesPrevToCurrent(State state) {
@@ -128,7 +154,7 @@ public abstract class Context implements ContextState {
 					searchedState = temp;
 					return true;
 				}
-				s = temp.getNext();
+				s = temp.getCurrentNextState();
 			}else {
 				s = null;
 			}			
@@ -148,8 +174,8 @@ public abstract class Context implements ContextState {
 		State closer = null;
 
 		while (s != null) {
-			if(s.getNext().isPresent()) {
-				State next = s.getNext().get();
+			if(s.getCurrentNextState().isPresent()) {
+				State next = s.getCurrentNextState().get();
 				if(next.isContextCloser()) {
 					closer = next;					
 				}
@@ -192,7 +218,7 @@ public abstract class Context implements ContextState {
 
 	@Override
 	public void moveNext() {
-		Optional<State> next = currentState.getNext();
+		Optional<State> next = currentState.getNewNextState();
 		next.ifPresentOrElse(n -> {	
 			this.setState(n); 
 			}, 

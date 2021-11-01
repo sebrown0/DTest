@@ -23,7 +23,7 @@ public class StateTop extends State {
 	}
 	
 	@Override
-	public Optional<State> getNext() {		
+	public Optional<State> getNewNextState() {		
 		return super.next;
 	}
 

@@ -27,7 +27,7 @@ import object_models.helpers.Reload;
  */
 public final class EmployeeSelection extends FormWithIFrame implements Control {
 //	private IFrame iFrame;
-	private Reload reloadEmpDetails;
+//	private Reload reloadEmpDetails;
 	private WebElement topLevelContainer;
 	private WebElement table;	
 	
@@ -37,15 +37,13 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 	public EmployeeSelection(WebDriver driver, Reload reloadEmpDetails, ContextManager contextManager) {
 		super(driver, PANEL_TITLE, "_iframex-IPORTAL_HR_EMPLOYEEDETAILS_EXT", contextManager);
 
-		this.reloadEmpDetails = reloadEmpDetails;
+//		this.reloadEmpDetails = reloadEmpDetails;
 		super.switchToIFrame();
 		
 		setMyContainers();		
 	}
 		
-	public void clickRow(String rowNum) {
-		contextManager.printQueue();
-		
+	public void clickRow(String rowNum) {				
 		WebElement rw = table.findElement(By.id("RIZZ" + rowNum));
 		rw.click();
 		Optional<State> callingState = contextManager.closeCurrentContext();
@@ -91,8 +89,6 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 		// These are in the form's iFrame, so will have to have switched to iFrame.
 		topLevelContainer = driver.findElement(By.id("corners"));
 		table = driver.findElement(By.id("employeeListTable"));
-//		topLevelContainer = super.formContainerElement.findElement(By.id("corners"));
-//		table = topLevelContainer.findElement(By.id("employeeListTable"));
 	}
 }
 
