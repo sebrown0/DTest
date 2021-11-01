@@ -24,7 +24,7 @@ public abstract class FormWithIFrame extends FormModal {
 	
 		this.iFrameName = iFrameName;
 //		switchToIFrame(driver, iFrameName);
-		System.out.println("->WOULD HAVE SWITCHED TO IFRAME NOW DO IT FROM CHILD" ); // TODO - remove or log 	
+		System.out.println("->WOULD HAVE SWITCHED TO IFRAME NOW DO IT FROM CHILD. CHECK ALL CHILDREN ARE DOING IT!!" ); // TODO - remove or log 	
 	}
 	
 	/*

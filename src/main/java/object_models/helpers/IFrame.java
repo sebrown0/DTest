@@ -26,21 +26,15 @@ public class IFrame {
 	}
 		
 	public IFrame switchUsingLocator() {
-		
-		/*
-		 * 
-		 */
 		try {
-			WebElement e = driver.findElement(By.id("corners"));
-			System.out.println("B4 3->" + e.getText()); // TODO - remove or log	
+			driver.findElement(By.id("corners"));	
 		} catch (Exception e) {
-			// TODO: handle exception
+			/*
+			 * CANNOT GET THE iFRAME WITHOUT GETTING THIS ELEMENT FIRST.
+			 * EVEN THOUGH AN EXCEPITION IS THROWN.
+			 * DON'T KNOW WHY!
+			 */ 	
 		}
-		
-		/*
-		 * IN iFRAME OF EMP DETAILS.
-		 * THIS HAS MODAL HEADER OF EMPLOYEES
-		 */
 		
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		iFrame = wait.until(ExpectedConditions.visibilityOfElementLocated(byLocator));	

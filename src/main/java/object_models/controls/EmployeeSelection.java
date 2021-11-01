@@ -43,7 +43,9 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 		setMyContainers();		
 	}
 		
-	public void clickRow(String rowNum) {		
+	public void clickRow(String rowNum) {
+		contextManager.printQueue();
+		
 		WebElement rw = table.findElement(By.id("RIZZ" + rowNum));
 		rw.click();
 		Optional<State> callingState = contextManager.closeCurrentContext();
@@ -51,7 +53,10 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 			ContextState callingContext = s.getMyContext();
 			callingContext.moveToState(s.getClass());
 			s.switchToMe();
-			System.out.println("Switched to state ->" + s + " in context ->" + callingContext.getContextId()); // TODO - remove or log 	
+			
+			System.out.println("Switched to state ->" + s + " in context ->" + callingContext.getContextId()); // TODO - remove or log
+//			System.out.println("prev->" + s.getPrev().get()); // TODO - remove or log 	
+//			System.out.println("next->" + s.getNext().get()); // TODO - remove or log
 		});
 		
 		// TODO
