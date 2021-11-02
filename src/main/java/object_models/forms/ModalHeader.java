@@ -23,7 +23,7 @@ public class ModalHeader implements Header {
 		title = prntContainer.findElement(By.className("modal-title"));
 		btnClose = prntContainer.findElement(By.className("close"));
 	}
-	
+
 	@Override
 	public Optional<String> getTitle() {
 		try {

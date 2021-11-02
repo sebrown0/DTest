@@ -37,7 +37,7 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 	public void clickRow(String rowNum) {				
 		WebElement rw = table.findElement(By.id("RIZZ" + rowNum));
 		rw.click();
-		contextManager.closeCurrentContextAndRevertToCallingState();
+		contextManager.closeCurrentContextAndRevertToCallingContext();
 	}
 		
 	// Elements

@@ -23,6 +23,7 @@ public abstract class FormWithIFrame extends FormModal {
 		super(driver, expectedTitle, contextManager);	
 	
 		this.iFrameName = iFrameName;
+		
 //		switchToIFrame(driver, iFrameName);
 		System.out.println("->WOULD HAVE SWITCHED TO IFRAME NOW DO IT FROM CHILD. CHECK ALL CHILDREN ARE DOING IT!!" ); // TODO - remove or log 	
 	}
@@ -33,6 +34,7 @@ public abstract class FormWithIFrame extends FormModal {
 	 */
 	protected void switchToIFrame() {
 		switchToIFrame(driver, iFrameName);
+//		super.setIFrame(iFrame); // Not required unless we want to use it in FormModal 
 	}
 	
 	private void switchToIFrame(WebDriver driver, String iFrameName) {

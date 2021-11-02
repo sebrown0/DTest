@@ -38,10 +38,12 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 	protected Header header;
 	protected WebElement formContainerElement;
 	protected String expectedTitle;
-	protected By byFormContainer = By.cssSelector("div[class='modal show']");
+	protected By byFormContainer = By.cssSelector("div[class='modal show']");	
+	protected ContextState myContext;		
 	
-	private ContextState myContext;		
+//	private IFrame iFrame;
 	
+
 	public FormModal(WebDriver driver, String expectedTitle, ContextManager contextManager) {
 		this.driver = driver;
 		this.expectedTitle = expectedTitle;
@@ -51,6 +53,10 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 		wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 		initialise();
 	}
+	
+//	protected void setIFrame(IFrame iFrame) {
+//		this.iFrame = iFrame;
+//	}
 	
 	private void initialise() {
 		waitForLoad();
@@ -108,13 +114,15 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 	
 	@Override // Closable
 	public void close() {
-		/*******************************************************************
+		/*
+		 * Has been tested with DropdownCombo.
+		 * At this point we are in the iFrame of DDC^
 		 * 
-		 *  IF WE'RE CLOSING HERE UPDATE CONTEXT??????
-		 *  OR IS IT ALREADY DONE?????????????????????
-		 * 
-		 *******************************************************************/
+		 * Using driver.switchTo().defaultContent(); to go
+		 * back to prev iFrame
+		 */				
 		driver.switchTo().defaultContent();
+		contextManager.closeCurrentContextAndRevertToCallingContext();		
 		header.closeForm();
 	}
 			

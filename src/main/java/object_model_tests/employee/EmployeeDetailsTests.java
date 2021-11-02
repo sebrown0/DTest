@@ -17,6 +17,7 @@ import controls.PageControl;
 import dto.Employee;
 import enums.control_names.EmployeeControlNames;
 import logging.TestResultLogger;
+import object_models.controls.DropdownCombo;
 import object_models.controls.EmployeeSelection;
 import object_models.element.TextOut;
 import object_models.left_menu.common.LeftMenu;
@@ -80,6 +81,13 @@ class EmployeeDetailsTests {
 		assertEquals(emp.getFullName(), textOut.getTextByValue().trim());
 	}
 
+	@Test @Order(4)
+	void openCombos() {		
+		PageControl control = empDetails.getEmployeeControl();
+		DropdownCombo combos = (DropdownCombo) control.getControl(EmployeeControlNames.COMBOS).get();		
+		combos.close(); // not a panel!!!
+	}
+	
 //	@Test //
 //	void openCombos() {
 //		

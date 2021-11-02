@@ -8,13 +8,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import context_manager.ContextId;
 import context_manager.ContextManager;
+import context_manager.states.StateHeaderForm;
+import object_models.forms.FormHeader;
 import object_models.forms.FormWithIFrame;
 import object_models.helpers.Header;
 import object_models.helpers.title.TitlePanel;
 
 @SuppressWarnings("unused")
 public class FormWithIframeTemplate extends FormWithIFrame {	
+	// REMOVE IF NOT USING!!!!!!!
 	private WebElement container;	
 	private WebDriverWait waitForMsg;
 	
@@ -23,51 +27,30 @@ public class FormWithIframeTemplate extends FormWithIFrame {
 	public static final String MENU_PARENT_NAME = "TODO";	
 	
 	public FormWithIframeTemplate(WebDriver driver, ContextManager contextManager) {
-		super(driver, PANEL_TITLE, "TODO", contextManager);
+		super(driver, PANEL_TITLE, "TODO IfRAME NAME", contextManager);
 		setMyContainers();
 	}
 		
-	public String getIframeTitle() {
-		WebElement e = driver.findElement(By.cssSelector("TODO"));
-		return e.getText();
-	}
-
 	@Override
 	public void setMyContainers() {
-		// None		
+		super.switchToIFrame();
+		// ADD ELEMENT CONTAINERS
+	}
+	
+	@Override
+	public Header getHeader() {
+		contextManager.switchToStateInCurrentContext(StateHeaderForm.class);
+		//IF IT'S NOT A FormHeader CHANGE IT!
+		return new FormHeader(super.formContainerElement);
 	}
 
 	@Override
-	public Header getHeader() {
-		// TODO Auto-generated method stub
-		logger.error("NOT IMPLEMENTED");
-		return null;
+	public ContextId getContextId() {		
+		return new ContextId(PANEL_TITLE, "None");
 	}
-//	@Override
-//	public void close() {
-//		// TODO OVERRIDE IF NECESSARY
-//	}
-//	// Override if the form should wait for a different element.
-//	@Override
-//	protected void waitForLoad() {
-//		wait.until(ExpectedConditions.visibilityOfElementLocated(byFormContainer));
-//	}	
-//	// Override this if the top element of the form is different from byFormContainer
-//	@Override
-//	protected void setTopContainer() {
-//		formContainerElement = driver.findElement(byFormContainer);
-//	}
-//	// Override if title is different.
-//	@Override
-//	protected void setTitle() {
-//		title = new TitlePanel(expectedTitle, driver);
-//	}
 	
-	// Actions
-	
-	
+	// Actions	
 
 	// Elements
-
 	
 }

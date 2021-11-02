@@ -30,11 +30,11 @@ public class InitialisePayroll extends FormWithIFrame {
 	public InitialisePayroll(WebDriver driver, ContextManager contextManager) {
 		super(driver, PANEL_TITLE, "_iframex-DEFAULT", contextManager);
 		
+		super.switchToIFrame();		
 		setMyContainers();
 //		container = driver.findElement(By.cssSelector("body > form > div"));
 		waitForMsg = new WebDriverWait(driver, Duration.ofSeconds(20));
-	}
-		
+	}		
 	
 	// Actions
 	public Dialog clickInitialisePayroll() {

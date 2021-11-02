@@ -24,7 +24,6 @@ import context_manager.contexts.ContextPayroll;
 import context_manager.states.State;
 import context_manager.states.StateHeaderPanel;
 import context_manager.states.StateLeftMenu;
-import context_manager.states.StateModule;
 import context_manager.states.StateTop;
 import enums.control_names.EmployeeControlNames;
 import logging.TestResultLogger;
@@ -268,10 +267,7 @@ class ContextManagerTests {
 	@Test	@Order(21)
 	void getContextThatIsPanel_shouldReturnCurrentContext_thatIs_YearlyReports() {
 		menu.clickAndLoad(MonthlyReports.class);
-		menu.clickAndLoad(YearlyReports.class); //why is current con 'PayrollModule' and not this?
-		/*
-		 * myContext for states is getting set to payroll not the correct context
-		 */
+		menu.clickAndLoad(YearlyReports.class); 		
 		JsPanel reports = manager.getContextThatIsPanel().get();
 		assertTrue(reports instanceof YearlyReports);
 	}

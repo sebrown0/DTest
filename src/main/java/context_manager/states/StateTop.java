@@ -21,7 +21,7 @@ public class StateTop extends State {
 	}
 	
 	@Override
-	public State getNewNextState() {		
+	public State getNextNewState() {		
 		return super.next;
 	}
 
@@ -38,14 +38,6 @@ public class StateTop extends State {
 		return this;
 	}
 		
-//	private void gotoMainForm() {
-//		/*
-//		 * Not strictly necessary to 'goto' the form.
-//		 * But for completeness we do.
-//		 */
-//		driver.findElement(By.cssSelector("form[name='tb']"));
-//	}
-
 	@Override
 	public boolean isContextCloser() {
 		return true;

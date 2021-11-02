@@ -63,7 +63,7 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	}
 	
 	// StateHeaderPanel needs an IFrame.
-	public abstract void setContextState();
+	protected abstract void setContextState();
 	
 	private void waitForLoad(ExpectedCondition<?> expectedConditionFound) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));

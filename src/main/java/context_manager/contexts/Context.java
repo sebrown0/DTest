@@ -110,7 +110,6 @@ public abstract class Context implements ContextState {
 		}
 	}
 	
-	//TODO - HAVE TO CHECK THAT THIS DOES NOT MESS UP MOVING TO PRE-SET STATE, i.e. IFRAME.
 	private void setNewStatesPrevToCurrent(State state) {
 		State temp = currentState; 
 		currentState = state; 
@@ -168,26 +167,6 @@ public abstract class Context implements ContextState {
 		}	
 		return closer;
 	}
-//	@Override
-//	public State getLastStateCloser() {
-//		State top = getTopState();
-//		State s = top;
-//		State closer = null;
-//
-//		while (s != null) {
-//			
-//			if(s.getCurrentNextState().isPresent()) {
-//				State next = s.getCurrentNextState().get();
-//				if(next.isContextCloser()) {
-//					closer = next;					
-//				}
-//				s = next;
-//			}else {
-//				s = null;
-//			}	
-//		}	
-//		return closer;
-//	}
 
 	@Override
 	public State getTopState() {
@@ -220,7 +199,7 @@ public abstract class Context implements ContextState {
 
 	@Override
 	public void moveNext() {
-		Optional<State> next = Optional.ofNullable(currentState.getNewNextState());
+		Optional<State> next = Optional.ofNullable(currentState.getNextNewState());
 		next.ifPresentOrElse(n -> {	
 			this.setState(n); 
 			}, 

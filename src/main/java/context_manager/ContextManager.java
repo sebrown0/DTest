@@ -112,16 +112,17 @@ public class ContextManager implements CurrentContext {
 		stateManager.closeCurrentStateInCurrentContext(this);
 	}
 	
-	public void closeCurrentContextAndRevertToCallingState() {		
+	public void closeCurrentContextAndRevertToCallingContext() {		
 		Optional<State> callingState = queue.removeContextAndGetCallingState(getCurrentContext());
 		callingState.ifPresent(s -> {
 			ContextState callingContext = s.getMyContext();
 			callingContext.moveToState(s.getClass());
 			s.switchToMe();
+			revertToPrevCallingState(callingContext);
 		});		
 	}
-	public void RevertToPrevCallingState(ContextState inContext) {
-		
+	private void revertToPrevCallingState(ContextState inContext) {
+		queue.moveToExistingContext(inContext);
 	}
 	/*
 	 * State - End

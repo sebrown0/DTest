@@ -3,8 +3,6 @@
  */
 package context_manager.states;
 
-import java.util.Optional;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,30 +20,22 @@ public class StateHeaderForm extends State {
 	public StateHeaderForm(ContextState cs, WebElement myContainer, By byHeaderLocator, WebDriver driver) {
 		super(cs, driver);
 		this.myContainer = myContainer;
-		this.byHeaderLocator = byHeaderLocator;
+		this.byHeaderLocator = byHeaderLocator;		
 	}
 		
 	@Override
-	public State getNewNextState() {		
+	public State getNextNewState() {
 		return super.next;
 	}	
 	@Override
-	public void close() {
-		/*
-		 * HAVE TO ADD ADDITIONAL FUNCTIONALITY
-		 */
-		logger.debug("Closing state [" + this + "]");
-		logger.error("NOT IMPLEMENTED");
-		System.out.println("StateHeaderForm->close"); // TODO - remove or log				
+	public void close() {		
+//		logger.debug("Closing state [" + this + "]");
+		logger.error("*** NOT IMPLEMENTED ***");
+		System.out.println("StateHeaderForm->close->*** NOT IMPLEMENTED ***"); // TODO - remove or log				
 	}
 	@Override
 	public State switchToMe() {
-		// TODO Auto-generated method stub
-//		context.getDriver().findElement(null);
-//		logger.error("switchToMe not implemented!");
-		System.out.println("StateHeaderForm->switchToMe"); // TODO - remove or log				
-		System.out.println("T->" + driver.getTitle()); // TODO - remove or log 	
-
+		logger.debug("Switch to [StateHeaderForm]");
 		myContainer.findElement(byHeaderLocator);
 		return this;
 	}

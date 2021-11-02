@@ -19,10 +19,12 @@ public class IFrame {
 	private WebDriver driver;
 	private WebElement iFrame;
 	private By byLocator;
-		
+	private WebDriverWait wait;
+	
 	public IFrame(WebDriver driver, By byLocator) {
 		this.driver = driver;
 		this.byLocator = byLocator;
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	}
 		
 	public IFrame switchUsingLocator() {
@@ -33,17 +35,20 @@ public class IFrame {
 			 * CANNOT GET THE iFRAME WITHOUT GETTING THIS ELEMENT FIRST.
 			 * EVEN THOUGH AN EXCEPITION IS THROWN.
 			 * DON'T KNOW WHY!
-			 */ 	
+			 */
 		}
 		
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		iFrame = wait.until(ExpectedConditions.visibilityOfElementLocated(byLocator));	
-		driver.switchTo().frame(iFrame);
-		
+		driver.switchTo().frame(iFrame);		
 		return this;
 	}
 		
 	public WebElement getIFrameElement() {
 		return iFrame;
 	}
+	
+//	public WebElement getElementFromIframe(By byLocator) {
+//		switchUsingLocator();
+//		return iFrame.findElement(byLocator);
+//	}
 }

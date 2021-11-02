@@ -24,7 +24,7 @@ public class StateIframe extends State implements CallingState {
 	}
 
 	@Override
-	public State getNewNextState() {
+	public State getNextNewState() {
 		return null;
 	}
 

@@ -71,6 +71,24 @@ public class ContextQueue {
 		}		
 	}
 
+	public void moveToExistingContext(ContextState cs) {
+		if(cs != null) {
+			boolean foundContext = false;
+			for (ContextState contextState : queue) {
+				if(cs == contextState) {
+					current = cs;
+					foundContext = true;
+					break;
+				}
+			}
+			if(!foundContext) {
+				logger.error("Could not find existing context [" + cs.getContextId() + "]");
+			}
+		}else {
+			logger.error("Cannot find NULL context");
+		}		
+	}
+	
 	public Optional<ContextState> getPenultimate() {
 		if(getSize()>1) {
 			return Optional.of(queue.get(lastIdx()-1));	

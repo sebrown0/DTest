@@ -19,7 +19,7 @@ public class StateModule extends State {
 	}
 
 	@Override
-	public State getNewNextState() {
+	public State getNextNewState() {
 		return super.next;
 	}
 
@@ -32,7 +32,7 @@ public class StateModule extends State {
 	public State switchToMe() {		
 		logger.debug("Switching to state [module]");
 		switchToDefaultContentAndThenElement(By.cssSelector("body > form > header > div > a"));
-		setCurrentContextToThisStatesContext();	//	
+		setCurrentContextToThisStatesContext();		
 		return this;
 	}
 

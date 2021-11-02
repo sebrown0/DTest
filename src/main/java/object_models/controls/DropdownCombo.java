@@ -14,7 +14,6 @@ import controls.Control;
 import object_models.forms.FormHeader;
 import object_models.forms.FormWithIFrame;
 import object_models.helpers.Header;
-import object_models.helpers.IFrame;
 
 /**
  * @author Steve Brown
@@ -22,7 +21,6 @@ import object_models.helpers.IFrame;
  */
 @SuppressWarnings("unused")
 public class DropdownCombo extends FormWithIFrame implements Control {
-	private IFrame iFrame;
 	private WebElement table;	
 	
 	private static final By byTable = By.id("myGrid1");
@@ -38,25 +36,19 @@ public class DropdownCombo extends FormWithIFrame implements Control {
 
 	@Override
 	public void setMyContainers() {
-//		container = driver.findElement(byContainer);
-		table = super.formContainerElement.findElement(byTable);
+		super.switchToIFrame();
+		table = super.driver.findElement(byTable);
 	}
+	
 	@Override
 	public Header getHeader() {
 		contextManager.switchToStateInCurrentContext(StateHeaderForm.class);
 		return new FormHeader(super.formContainerElement);
-//		super.header = new FormHeader(topLevelContainer);
-//		logger.error("NOT IMPLEMENTED");
 	}
 
 	@Override
 	public ContextId getContextId() {		
 		return new ContextId(PANEL_TITLE, "None");
 	}
-	
-	/*
-	 * IF GETTING HEADER SWITCH TO IT
-	 * IF GETTING ITEM ON FORM SWITCH TO IFRAME
-	 */
 
 }

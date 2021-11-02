@@ -19,7 +19,7 @@ public class StateLeftMenu extends State {
 	}
 
 	@Override
-	public State getNewNextState() {
+	public State getNextNewState() {
 		return super.next;
 	}
 

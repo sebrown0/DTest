@@ -23,7 +23,8 @@ public abstract class JSPanelWithIFrame extends JsPanel implements JsPanelContex
 		switchToIFrame();
 	}
 	
-	public void setContextState() {
+	@Override //JsPanel
+	protected void setContextState() {
 		By byLocator = By.cssSelector("iframe[title='" + super.expectedTitle + "']");
 		iFrame = new IFrame(driver, byLocator);		
 		super.getHeaderBar(); // CAUSES NEW STATE HEADER TO BE CREATED & ADDED TO THE QUEUE. TODO - remove this side effect.		
