@@ -23,6 +23,7 @@ import context_manager.contexts.ContextPanel;
 import context_manager.contexts.ContextPayroll;
 import context_manager.states.State;
 import context_manager.states.StateHeaderPanel;
+import context_manager.states.StateLeftMenu;
 import context_manager.states.StateModule;
 import context_manager.states.StateTop;
 import enums.control_names.EmployeeControlNames;
@@ -187,7 +188,7 @@ class ContextManagerTests {
 	void currentStateIsRequiredState() {
 		ContextState conModule = manager.getContextThatIsFirstContext().get(); 
 		State state = conModule.getState();
-		assertTrue(state instanceof StateModule);		
+		assertTrue(state instanceof StateLeftMenu);		
 	}
 		
 	@Test	@Order(14)
@@ -272,7 +273,7 @@ class ContextManagerTests {
 		 * myContext for states is getting set to payroll not the correct context
 		 */
 		JsPanel reports = manager.getContextThatIsPanel().get();
-		assertTrue(reports instanceof JsPanel);
+		assertTrue(reports instanceof YearlyReports);
 	}
 	
 	@Test	@Order(22)
@@ -304,6 +305,6 @@ class ContextManagerTests {
 		
 		ContextState first = manager.findContext(MonthlyReports.PANEL_TITLE).get();
 		manager.moveToExistingContext(first);
-		assertEquals("Monthly Reports", manager.getCurrentContext().getContextId().getExpectedName());
+		assertEquals("Monthly Payroll Reports", manager.getCurrentContext().getContextId().getExpectedName());
 	}
 }

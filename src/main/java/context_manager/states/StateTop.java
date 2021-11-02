@@ -3,8 +3,6 @@
  */
 package context_manager.states;
 
-import java.util.Optional;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -23,7 +21,7 @@ public class StateTop extends State {
 	}
 	
 	@Override
-	public Optional<State> getNewNextState() {		
+	public State getNewNextState() {		
 		return super.next;
 	}
 

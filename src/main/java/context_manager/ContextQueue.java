@@ -130,7 +130,8 @@ public class ContextQueue {
 	 */	
 	public void removeAndCloseContext(ContextState cs) {
 		if(removeContextAndReset(cs)) {			
-			cs.getContextCloser().close();			
+			Optional<State> closer = Optional.ofNullable(cs.getContextCloser());
+			closer.ifPresent(c -> c.close());
 		}		
 	}
 	

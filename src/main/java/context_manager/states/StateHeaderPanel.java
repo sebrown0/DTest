@@ -3,8 +3,6 @@
  */
 package context_manager.states;
 
-import java.util.Optional;
-
 import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextState;
@@ -26,8 +24,9 @@ public class StateHeaderPanel extends State {
 	}
 	
 	@Override
-	public Optional<State> getNewNextState() {
-		return Optional.of(new StateIframe(myContext, iFrame, driver));
+	public State getNewNextState() {
+		return new StateIframe(myContext, iFrame, driver);
+//		return Optional.of(new StateIframe(myContext, iFrame, driver));
 	}
 	
 	@Override

@@ -26,7 +26,7 @@ public class StateHeaderForm extends State {
 	}
 		
 	@Override
-	public Optional<State> getNewNextState() {		
+	public State getNewNextState() {		
 		return super.next;
 	}	
 	@Override
