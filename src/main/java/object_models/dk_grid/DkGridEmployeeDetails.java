@@ -4,24 +4,20 @@ import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextManager;
 import controls.Control;
-import object_models.helpers.Reload;
 import object_models.panels.JSPanelWithIFrame;
 
 /**
  * @author Steve Brown
  *
  */
-@SuppressWarnings("unused")
 public final class DkGridEmployeeDetails extends JSPanelWithIFrame implements Control {	
 	private DkGrid<FindRowByEmpCode> grid;
-	private Reload reloadEmpDetails;
 	
 	public static final String PANEL_TITLE = "Employee Details";	
 
-	public DkGridEmployeeDetails(WebDriver driver, Reload reloadEmpDetails, ContextManager contextManager) {
+	public DkGridEmployeeDetails(WebDriver driver, ContextManager contextManager) {
 		super(driver, PANEL_TITLE, contextManager);
 		
-		this.reloadEmpDetails = reloadEmpDetails;
 		grid = new DkGrid<>(driver, new FindRowByEmpCode());
 		grid.loadToolBar();
 		grid.loadContent();

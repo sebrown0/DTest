@@ -56,7 +56,6 @@ public abstract class Context implements ContextState {
 	
 	private void setCallingState() {
 		callingState = contextManager.getLatestCallingState().getState(this);
-//		this.setState(callingState);
 	}
 		
 	@Override
@@ -97,10 +96,6 @@ public abstract class Context implements ContextState {
 		logger.debug("Setting new state [" + newState.toString() + "]"); 	
 	}	
 
-	/*
-	 * setting the iframe from emp details prev to top of emp sel
-	 * 
-	 */
 	private void setCurrentsNextToNewState(State state) {
 		if(currentState != null) {
 			if(currentState.getCurrentNextState() == null) {
@@ -152,7 +147,7 @@ public abstract class Context implements ContextState {
 	public State getContextCloser() {
 		return getLastStateCloser();
 	}
-	
+
 	@Override
 	public State getLastStateCloser() {
 		State top = getTopState();
@@ -160,18 +155,39 @@ public abstract class Context implements ContextState {
 		State closer = null;
 
 		while (s != null) {
-			if(s.getCurrentNextState().isPresent()) {
-				State next = s.getCurrentNextState().get();
-				if(next.isContextCloser()) {
-					closer = next;					
+			Optional<State> next = s.getCurrentNextState();
+			if(next.isPresent()) {
+				
+				if(next.get().isContextCloser()) {
+					closer = next.get();					
 				}
-				s = next;
+				s = next.get();
 			}else {
 				s = null;
 			}	
 		}	
 		return closer;
 	}
+//	@Override
+//	public State getLastStateCloser() {
+//		State top = getTopState();
+//		State s = top;
+//		State closer = null;
+//
+//		while (s != null) {
+//			
+//			if(s.getCurrentNextState().isPresent()) {
+//				State next = s.getCurrentNextState().get();
+//				if(next.isContextCloser()) {
+//					closer = next;					
+//				}
+//				s = next;
+//			}else {
+//				s = null;
+//			}	
+//		}	
+//		return closer;
+//	}
 
 	@Override
 	public State getTopState() {
@@ -204,7 +220,7 @@ public abstract class Context implements ContextState {
 
 	@Override
 	public void moveNext() {
-		Optional<State> next = currentState.getNewNextState();
+		Optional<State> next = Optional.ofNullable(currentState.getNewNextState());
 		next.ifPresentOrElse(n -> {	
 			this.setState(n); 
 			}, 

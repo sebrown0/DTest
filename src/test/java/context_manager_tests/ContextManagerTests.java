@@ -49,17 +49,8 @@ import xml_reader.config_file.ConfigReader;
  *
  * Test the elements of the home page for payroll.
  * 
- * 
- * 
- * Context Load Order (assuming all panels except first):
- * ------------------------------------------------------
- * 1. PayrollModule
- * 2. Documents
- * 3. EmployeeDetails
- * 4.	Banks
- * 5. MonthlyReports
- * 6. PayrollStatistics
- * 7. YearlyReports
+ * THE RESULTS WILL BE DIFFERENT DEPENDING ON IF THE
+ * TESTS ARE RUN AS A WHOLE OR INDIVIDUALLY.
  * 
  */
 @SuppressWarnings("unlikely-arg-type")
@@ -147,10 +138,10 @@ class ContextManagerTests {
 	@Test	@Order(7)
 	void loadDocuments_then_employeeDetails_then_close_employeeDetailsState_newStateShouldBeHeaderPanel() {
 		menu.clickAndLoad(Documents.class);
-		assertEquals("Employee Document Management:jsPanel-1", manager.getContextIdOfCurrentContext());
+		assertEquals("Employee Document Management", manager.getExpectedNameOfCurrentContext());
 		
 		menu.clickAndLoad(EmployeeDetails.class);
-		assertEquals("Employee Details:jsPanel-2", manager.getContextIdOfCurrentContext());
+		assertEquals("Employee Details", manager.getExpectedNameOfCurrentContext());
 		
 		manager.closeCurrentStateInCurrentContext();
 		assertTrue(manager.getLastContext().getState() instanceof StateHeaderPanel);
@@ -159,14 +150,14 @@ class ContextManagerTests {
 	@Test	@Order(8)
 	void loadDocuments_then_employeeDetails_then_close_employeeDetailsState_twice_newContextShouldBeDocuments() {
 		menu.clickAndLoad(Documents.class);
-		assertEquals("Employee Document Management:jsPanel-1", manager.getContextIdOfCurrentContext());
+		assertEquals("Employee Document Management", manager.getExpectedNameOfCurrentContext());
 		
 		menu.clickAndLoad(EmployeeDetails.class);
-		assertEquals("Employee Details:jsPanel-2", manager.getContextIdOfCurrentContext());
+		assertEquals("Employee Details", manager.getExpectedNameOfCurrentContext());
 		
 		manager.closeCurrentStateInCurrentContext();
 		manager.closeCurrentStateInCurrentContext();		
-		assertTrue(manager.getLastContext().getState() instanceof StateModule);		
+		assertTrue(manager.getLastContext() instanceof ContextPayroll);		
 	}
 
 	@Test	@Order(9)
@@ -188,8 +179,8 @@ class ContextManagerTests {
 
 	@Test	@Order(12)
 	void isStateInContext() {
-//		assertFalse(manager.isStateInCurrentContext(StateLeftMenu.class));
-//		assertTrue(manager.isStateInCurrentContext(StateTop.class));
+		ContextState conModule = manager.getContextThatIsFirstContext().get();
+		assertTrue(conModule instanceof ContextPayroll);
 	}
 
 	@Test	@Order(13)
@@ -198,12 +189,8 @@ class ContextManagerTests {
 		State state = conModule.getState();
 		assertTrue(state instanceof StateModule);		
 	}
-	
+		
 	@Test	@Order(14)
-	void todo() {		
-	}
-	
-	@Test	@Order(15)
 	void loadTwoPanels_then_close_currentContext_thrice_shouldBe_ContextPayroll() {
 		menu.clickAndLoad(Banks.class);
 		menu.clickAndLoad(Documents.class);
@@ -218,45 +205,18 @@ class ContextManagerTests {
 		assertTrue(c instanceof ContextPayroll);			 
 	}
 
-	@Test	@Order(16)
+	@Test	@Order(15)
 	void penultimateContext_exists() {
 		menu.clickAndLoad(Banks.class);
 		menu.clickAndLoad(MonthlyReports.class);
 		menu.clickAndLoad(Documents.class);
 		menu.clickAndLoad(PayrollStatistics.class);
 		ContextState doc = manager.getPenultimateContext().get();
-//		/*
-//		 * Setting the id to use later
-//		 */
-//		setMonthlyReportsId();
+
 		assertTrue(doc.getContextId().getExpectedName().length() > 0);		
 	}
-
-//	private void setMonthlyReportsId() {
-//		if(repId == null) {
-//			ContextState rep = manager.findContext(MonthlyReports.PANEL_TITLE).get();
-//			ContextId repId = rep.getContextId();
-//			System.out.println("->" + repId); // TODO - remove or log	
-//		}		
-//	}
 	
-	@Test	@Order(17)
-	void penultimateContext_doesNotExist() {
-//		Optional<ContextState> con = manager.getPenultimateContext();
-//		con.ifPresent(c -> { 
-//			fail("Should be no penultimate context [" + c.getContextId() + "]"); 
-//		});
-	}
-			
-	@Test	@Order(18)	
-	void findContextInQueue_usingFullId() {
-//		menu.clickAndLoad(Banks.class);
-//		menu.clickAndLoad(MonthlyReports.class);
-//		menu.clickAndLoad(Documents.class);
-//		assertEquals(repId,	manager.findContext(repId).get().getContextId());		
-	}
-		
-	@Test	@Order(19)
+	@Test	@Order(16)
 	void findContextInQueue_usingPanelTitle() {
 		menu.clickAndLoad(Banks.class);
 		menu.clickAndLoad(MonthlyReports.class);
@@ -265,7 +225,7 @@ class ContextManagerTests {
 				manager.findContext(MonthlyReports.PANEL_TITLE).get().getContextId().getExpectedName());		
 	}
 
-	@Test	@Order(20)
+	@Test	@Order(17)
 	void findPrevContextInQueue() {
 		menu.clickAndLoad(Banks.class);
 		menu.clickAndLoad(MonthlyReports.class);
@@ -275,7 +235,7 @@ class ContextManagerTests {
 		assertEquals(Banks.PANEL_TITLE, prevId.getExpectedName());
 	}
 
-	@Test	@Order(21)
+	@Test	@Order(18)
 	void checkExistingContextIsLoaded_fromMenu() {
 		menu.clickAndLoad(Banks.class);
 		menu.clickAndLoad(MonthlyReports.class);
@@ -283,7 +243,7 @@ class ContextManagerTests {
 		assertEquals(Banks.PANEL_TITLE, b.getContextId().getExpectedName());		
 	}
 
-	@Test	@Order(22)	
+	@Test	@Order(19)	
 	void loadTwoPanels_switchToFirstPanel_contextManager() {
 		menu.clickAndLoad(MonthlyReports.class);
 		menu.clickAndLoad(Banks.class);		
@@ -294,7 +254,7 @@ class ContextManagerTests {
 		assertEquals(MonthlyReports.PANEL_TITLE, csReports.getContextId().getExpectedName());
 	}
 
-	@Test	@Order(23)
+	@Test	@Order(20)
 	void currentContext_afterDeleting_currentContext() {
 		menu.clickAndLoad(MonthlyReports.class);
 		menu.clickAndLoad(YearlyReports.class);
@@ -304,7 +264,7 @@ class ContextManagerTests {
 		assertEquals("Payroll Module", manager.getCurrentContext().getContextId().getExpectedName());		
 	}
 
-	@Test	@Order(24)
+	@Test	@Order(21)
 	void getContextThatIsPanel_shouldReturnCurrentContext_thatIs_YearlyReports() {
 		menu.clickAndLoad(MonthlyReports.class);
 		menu.clickAndLoad(YearlyReports.class); //why is current con 'PayrollModule' and not this?
@@ -315,7 +275,7 @@ class ContextManagerTests {
 		assertTrue(reports instanceof JsPanel);
 	}
 	
-	@Test	@Order(25)
+	@Test	@Order(22)
 	void getContextThatIsPanel_shouldReturnEmployeeDetails_thatIs_YearlyReports() {
 		EmployeeDetails empDetails = (EmployeeDetails) menu.clickAndLoad(EmployeeDetails.class).get();
 		EmployeeSelection empSelection = (EmployeeSelection) empDetails.getEmployeeControl().getControl(EmployeeControlNames.SELECT_EMP).get();
@@ -325,7 +285,7 @@ class ContextManagerTests {
 		assertTrue(panel instanceof JsPanel);
 	}
 	
-	@Test	@Order(26)
+	@Test	@Order(23)
 	void currentContext_afterDeleting_currentContext_which_isFirstContext_shouldBePayroll() {
 		menu.clickAndLoad(MonthlyReports.class);				
 		
@@ -337,13 +297,13 @@ class ContextManagerTests {
 		assertEquals("Payroll Module", manager.getCurrentContext().getContextId().getExpectedName());
 	}
 		
-	@Test	@Order(27)
+	@Test	@Order(24)
 	void findContext() {
 		menu.clickAndLoad(MonthlyReports.class);
 		menu.clickAndLoad(YearlyReports.class);		
 		
 		ContextState first = manager.findContext(MonthlyReports.PANEL_TITLE).get();
 		manager.moveToExistingContext(first);
-		assertEquals("jsPanel-4", manager.getCurrentContext().getContextId().getActualId());
+		assertEquals("Monthly Reports", manager.getCurrentContext().getContextId().getExpectedName());
 	}
 }

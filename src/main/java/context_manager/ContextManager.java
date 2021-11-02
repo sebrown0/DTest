@@ -111,20 +111,14 @@ public class ContextManager implements CurrentContext {
 	public void closeCurrentStateInCurrentContext(){
 		stateManager.closeCurrentStateInCurrentContext(this);
 	}
-
-//	public Optional<State> closeCurrentContext() {		
-//		return queue.removeContextAndGetCallingState(getCurrentContext());
-//	}
 	
-	public void closeCurrentContext() {		
+	public void closeCurrentContextAndRevertToCallingState() {		
 		Optional<State> callingState = queue.removeContextAndGetCallingState(getCurrentContext());
 		callingState.ifPresent(s -> {
 			ContextState callingContext = s.getMyContext();
 			callingContext.moveToState(s.getClass());
 			s.switchToMe();
-		});
-		
-//		return queue.removeContextAndGetCallingState(getCurrentContext());
+		});		
 	}
 	public void RevertToPrevCallingState(ContextState inContext) {
 		
@@ -192,6 +186,17 @@ public class ContextManager implements CurrentContext {
 		return Optional.ofNullable((JsPanel) curr);
 	}
 	
+	public String getExpectedNameOfCurrentContext() {
+		ContextState cs = queue.getCurrentContextInQueue();
+		return getExpectedName(cs);
+	}
+	private String getExpectedName(ContextState cs) {
+		if(cs != null) {
+			return cs.getContextId().getExpectedName();			
+		}else {
+			return null;
+		}
+	}
 	public String getContextIdOfCurrentContext() {
 		ContextState cs = queue.getCurrentContextInQueue();
 		return getContextId(cs);

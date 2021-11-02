@@ -20,7 +20,8 @@ import context_manager.ContextState;
 public abstract class State {	
 	protected WebDriver driver;
 	protected ContextState myContext; 
-	protected Optional<State> next;
+//	protected Optional<State> next;
+	protected State next;
 	protected Logger logger = LogManager.getLogger();
 	
 	/*
@@ -35,14 +36,15 @@ public abstract class State {
 		this.driver = driver;
 	}
 	
-	public abstract Optional<State> getNewNextState();
+//	public abstract Optional<State> getNewNextState();
+	public abstract State getNewNextState();
 	public abstract void close();
 	public abstract boolean isContextCloser();	
 	public abstract boolean isDefaultState();
 	public abstract State switchToMe();
 		
 	public Optional<State> getCurrentNextState(){
-		return next;
+		return Optional.ofNullable(next);
 	}
 	
 	public void setPrev(Optional<State> prev) {
@@ -54,7 +56,8 @@ public abstract class State {
 	}
 
 	public void setNext(Optional<State> next) {
-		this.next = next;
+		next.ifPresent(n -> this.next = n);
+//		this.next = next;
 	}
 	
 	protected WebDriver switchToDefaultContent() {		

@@ -58,7 +58,6 @@ public class ContextQueue {
 			for (ContextState contextState : queue) {
 				if(cs == contextState) {
 					current = cs;					
-//					current.switchToDefaultState(); // IN_CS
 					current.moveToDefaultState();
 					foundContext = true;
 					break;
@@ -152,10 +151,7 @@ public class ContextQueue {
 	}
 
 	private boolean hasPrev(int idxOfContext) {
-		return (idxOfContext >= 1); // Module is the first context, but we don't move to that.
-		/*
-		 * CHANGE THIS WE WILL MOVE TO THE FIRST MODULE ^^^
-		 */
+		return (idxOfContext >= 1);
 	}
 	
 	private boolean hasNext(int idxOfContext) {

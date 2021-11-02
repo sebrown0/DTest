@@ -19,7 +19,6 @@ import enums.control_names.EmployeeControlNames;
 import object_models.element.ComboSelect;
 import object_models.element.TextInOut;
 import object_models.element.TextOut;
-import object_models.helpers.Reload;
 import object_models.panels.JSPanelWithIFrame;
 
 /**
@@ -27,7 +26,7 @@ import object_models.panels.JSPanelWithIFrame;
  *
  * Employee details page.
  */
-public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
+public class EmployeeDetails extends JSPanelWithIFrame {
 	private EmpDetailsTabs myTabs;
 	private PageControl empControl;
 
@@ -48,9 +47,9 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 		builder
 			.addControl(EmployeeControlNames.EMP_CODE, new ControlGetterTextOut(driver, By.id("FORM_ID")))
 			.addControl(EmployeeControlNames.EMP_NAME, new ControlGetterTextOut(driver, By.xpath("/html/body/form/div[3]/div[3]/div[2]/input")))
-			.addControl(EmployeeControlNames.SELECT_EMP, new ControlGetterEmployeeSelection(driver, By.cssSelector("i[class='fa fa-list']"), this, super.manager))
-			.addControl(EmployeeControlNames.COMBOS, new ControlGetterDropdownCombo(driver, By.cssSelector("i[class='fa fa-window-maximize']"), this, super.manager))
-			.addControl(EmployeeControlNames.GRID_VIEW, new ControlGetterDkGridEmployeeDetails(driver, By.cssSelector("i[class='fa fw fa-table']"), this, super.manager));
+			.addControl(EmployeeControlNames.SELECT_EMP, new ControlGetterEmployeeSelection(driver, By.cssSelector("i[class='fa fa-list']"), super.manager))
+			.addControl(EmployeeControlNames.COMBOS, new ControlGetterDropdownCombo(driver, By.cssSelector("i[class='fa fa-window-maximize']"), super.manager))
+			.addControl(EmployeeControlNames.GRID_VIEW, new ControlGetterDkGridEmployeeDetails(driver, By.cssSelector("i[class='fa fw fa-table']"), super.manager));
 		
 		empControl = new PageControl(builder);				
 	}
@@ -60,14 +59,7 @@ public class EmployeeDetails extends JSPanelWithIFrame implements Reload {
 		manager.setLatestCallingStateToCurrent();
 		return empControl;
 	}
-			
-	@Override
-	public void reloadDefault() {
-		super.logger.error("NOT IMPLEMENTED - SEE EmployeeSelection");
-		System.out.println("NOT IMPLEMENTED - SEE EmployeeSelection" ); // TODO - remove or log 	
-//		contextManager.switchToMe();
-	}
-		
+				
 	public EmpDetailsTabs tab() {
 		manager.switchToStateInCurrentContext(StateIframe.class);
 		return this.myTabs;

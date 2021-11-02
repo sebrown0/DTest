@@ -55,6 +55,6 @@ public class StateHeaderForm extends State {
 	}
 	@Override
 	public boolean isDefaultState() {
-		return false;
+		return true;
 	}
 }

@@ -3,19 +3,14 @@
  */
 package object_models.controls;
 
-import java.util.Optional;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import context_manager.ContextManager;
-import context_manager.ContextState;
-import context_manager.states.State;
 import controls.Control;
 import object_models.element.ComboSelect;
 import object_models.forms.FormWithIFrame;
-import object_models.helpers.Reload;
 
 /**
  * @author Steve Brown
@@ -32,7 +27,7 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 	public static final String MENU_TITLE = "Select from a list of employees within the chosen company";
 	public static final String PANEL_TITLE = "Employees";
 
-	public EmployeeSelection(WebDriver driver, Reload reloadEmpDetails, ContextManager contextManager) {
+	public EmployeeSelection(WebDriver driver, ContextManager contextManager) {
 		super(driver, PANEL_TITLE, "_iframex-IPORTAL_HR_EMPLOYEEDETAILS_EXT", contextManager);
 
 		super.switchToIFrame();		
@@ -42,26 +37,9 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 	public void clickRow(String rowNum) {				
 		WebElement rw = table.findElement(By.id("RIZZ" + rowNum));
 		rw.click();
-		contextManager.closeCurrentContext();
-//		Optional<State> callingState = contextManager.closeCurrentContext();
-//		callingState.ifPresent(s -> {
-//			ContextState callingContext = s.getMyContext();
-//			callingContext.moveToState(s.getClass());
-//			s.switchToMe();
-//		});		
+		contextManager.closeCurrentContextAndRevertToCallingState();
 	}
-	
-//	public void clickRow(String rowNum) {				
-//		WebElement rw = table.findElement(By.id("RIZZ" + rowNum));
-//		rw.click();
-//		Optional<State> callingState = contextManager.closeCurrentContext();
-//		callingState.ifPresent(s -> {
-//			ContextState callingContext = s.getMyContext();
-//			callingContext.moveToState(s.getClass());
-//			s.switchToMe();
-//		});		
-//	}
-	
+		
 	// Elements
 	public ComboSelect companySelect() {
 		return getSelectBox("SelectURLNC1");
