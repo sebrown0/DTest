@@ -11,6 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import context_manager.states.StateIframe;
+
 /**
  * @author Steve Brown
  *
@@ -27,23 +29,15 @@ public class IFrame {
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	}
 		
-	public IFrame switchUsingLocator() {
-//		try {
-//			driver.findElement(By.id("corners"));	
-//		} catch (Exception e) {
-//			/*
-//			 * CANNOT GET THE iFRAME WITHOUT GETTING THIS ELEMENT FIRST.
-//			 * EVEN THOUGH AN EXCEPITION IS THROWN.
-//			 * DON'T KNOW WHY!
-//			 */
-//		}
-		
+	public IFrame switchUsingLocator(StateIframe stateIframe) {		
 		/*
-		 * works for wizard
-		 */
-		driver.switchTo().defaultContent();//rem?
-		/*
-		 * not for getContextThatIsPanel_shouldReturnEmployeeDetails_thatIs_YearlyReports
+		 * Have to be careful that we're going to the correct IFrame.
+		 *  
+		 * WHEN DO WE WANT TO GO BACK TO DEFAULT.
+		 * 	-> WHEN UNLOADING/CLOSING FORM/PANEL.
+		 * 
+		 * WHEN DO WE not WANT TO GO BACK TO DEFAULT.
+		 * 	-> WHEN LOADING FORM/PANEL
 		 */
 		iFrame = wait.until(ExpectedConditions.visibilityOfElementLocated(byLocator));	
 		driver.switchTo().frame(iFrame);				

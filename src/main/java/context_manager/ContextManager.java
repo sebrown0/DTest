@@ -117,6 +117,8 @@ public class ContextManager implements CurrentContext {
 		callingState.ifPresent(s -> {
 			ContextState callingContext = s.getMyContext();
 			callingContext.moveToState(s.getClass());
+			//Closing current so need to go back to default state.			
+			driver.switchTo().defaultContent();			
 			s.switchToMe();
 			revertToPrevCallingState(callingContext);
 		});		

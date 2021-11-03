@@ -41,6 +41,7 @@ public abstract class State {
 	public abstract boolean isContextCloser();	
 	public abstract boolean isDefaultState();
 	public abstract State switchToMe();
+
 		
 	public Optional<State> getCurrentNextState(){
 		return Optional.ofNullable(next);

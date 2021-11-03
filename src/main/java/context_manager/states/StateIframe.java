@@ -17,6 +17,12 @@ import object_models.helpers.IFrame;
  */
 public class StateIframe extends State implements CallingState {
 	private IFrame iFrame;
+	/*
+	 *  Need to set this if closing the the context that this state is in.
+	 *  Then IFrame will switch back to the default content, 
+	 *  i.e. the iFrame or Panel/Form in the previous context.
+	 */
+	private boolean isAfterClose;
 	
 	public StateIframe(ContextState cs, IFrame iFrame, WebDriver driver) {
 		super(cs, driver);
@@ -50,7 +56,7 @@ public class StateIframe extends State implements CallingState {
 	
 	@Override
 	public State switchToMe() {
-		iFrame.switchUsingLocator();		
+		iFrame.switchUsingLocator(this);		
 		return this;
 	}
 
@@ -67,5 +73,12 @@ public class StateIframe extends State implements CallingState {
 	@Override
 	public State getState(ContextState context) {
 		return this;
+	}
+
+	public void setAfterClose(boolean isAfterClose) {
+		this.isAfterClose = isAfterClose;
+	}
+	public boolean isAfterClose() {
+		return isAfterClose;
 	}
 }
