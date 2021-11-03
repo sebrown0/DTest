@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import controls.PageMap;
 import dto.Employee;
@@ -23,6 +24,11 @@ public class WizardStepOne extends WizardStep {
 		
 		WebElement btnStep = driver.findElement(By.id("wizard-t-0"));
 		btnStep.click();
+		waitUntilStepVisible();
+	}
+	
+	private void waitUntilStepVisible() {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ST_1_LN_1_COL_1")));
 	}
 
 	@Override
@@ -41,8 +47,8 @@ public class WizardStepOne extends WizardStep {
 
 	@Override
 	public WizardStepExecutor getNext() {
-		WebElement nextBtn = driver.findElement(super.byNext);		
-		Jquery.goToElement(driver, nextBtn);
+//		WebElement nextBtn = driver.findElement(super.byNext);		
+//		Jquery.goToElement(driver, nextBtn);
 		return new WizardStepTwo(pageMap, driver, 2);	
 	}
 }

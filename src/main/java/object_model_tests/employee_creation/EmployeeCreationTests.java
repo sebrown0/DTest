@@ -62,8 +62,9 @@ class EmployeeCreationTests {
 		assertEquals("Data Error", frm.getTitle().getExpected());
 		frm.close();
 		wizard.close();
+		System.out.println("1111111111111111111111>"); // TODO - remove or log
 	}
-	
+
 	@Test @Order(2)
 	void dffddfff() {
 		//ARE IN CONTEXT PAYROLL.TOP
@@ -79,7 +80,26 @@ class EmployeeCreationTests {
 		FormFadeShow frm = wizard.createEmployee(emp);
 		assertEquals("Data Error", frm.getTitle().getExpected());
 		frm.close();
+//		wizard.close();
+		System.out.println("2222222222222222222222>"); // TODO - remove or log
 	}
+	
+//	@Test @Order(3)
+//	void dffddeefff() {
+//		//ARE IN CONTEXT PAYROLL.TOP
+//		System.out.println("3333333333333333333333>"); // TODO - remove or log
+//		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();
+//	// Get the employee we're going to use with required fields from the provider.
+//		EmployeeProvider empProvider = new EmployeeFromXml(); 
+//		emp = empProvider.getEmployeeRequired("1");
+//		emp.setFirstName("XXXXX");
+//		// Check that we're on the wizard.
+//		assertTrue(wizard.getContextExpectedName().equals("Employee Creation Wizard"));
+//		
+//		FormFadeShow frm = wizard.createEmployee(emp);
+//		assertEquals("Data Error", frm.getTitle().getExpected());
+//		frm.close();
+//	}
 	
 	
 //	@Test

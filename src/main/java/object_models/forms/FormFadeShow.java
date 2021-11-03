@@ -53,6 +53,8 @@ public class FormFadeShow extends FormModal {
 	@Override
 	public void close() {
 		ButtonClicker.clickUntilNotVisible(driver, By.className("close"), 25);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[class='modal fade show']")));
 		contextManager.deleteCurrentContextAndRevertToCallingContext();
 	}
 	

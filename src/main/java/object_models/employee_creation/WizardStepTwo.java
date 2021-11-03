@@ -3,8 +3,10 @@
  */
 package object_models.employee_creation;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import controls.PageMap;
 import dto.Employee;
@@ -19,8 +21,16 @@ public class WizardStepTwo extends WizardStep {
 	
 	public WizardStepTwo(PageMap pageMap, WebDriver driver, int stepNumber) {
 		super(pageMap, driver, stepNumber);
+		
+		WebElement btnStep = driver.findElement(By.id("wizard-t-1"));
+		btnStep.click();
+//		waitUntilStepVisible();
 	}
 
+	private void waitUntilStepVisible() {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("select2-ST_2_LN_1_COL_1x-container")));
+	}
+	
 	@Override
 	public WizardStepExecutor writeValues(Employee emp) {
 		DatePickerPage datePickerPage = new DatePickerPage(driver);
@@ -43,8 +53,8 @@ public class WizardStepTwo extends WizardStep {
 
 	@Override
 	public WizardStepExecutor getNext() {
-		WebElement nextBtn = driver.findElement(super.byNext);		
-		Jquery.goToElement(driver, nextBtn);
+//		WebElement nextBtn = driver.findElement(super.byNext);		
+//		Jquery.goToElement(driver, nextBtn);
 		return new WizardStepThree(pageMap, driver, 3);	
 	}
 }

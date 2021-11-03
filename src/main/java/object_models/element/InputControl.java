@@ -21,7 +21,7 @@ public abstract class InputControl implements InputWriter{
 	
 	public InputControl(WebDriver driver, WebElement element, String myIdentifier) {
 		this.driver = driver;
-		this.wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		this.element = element;
 		this.myIdentifier = myIdentifier;		
 	}

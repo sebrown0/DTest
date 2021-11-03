@@ -36,7 +36,7 @@ public class ControlCombo implements MapControl{
 			key = el.getAttribute(attributeKey);
 			input = new InputComboSelect(driver, el, key);
 			pageMap.addComboBox(key, input);
-			System.out.println("-" + key + "-");
+//			System.out.println("-" + key + "-");
 		}						
 	}
 

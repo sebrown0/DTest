@@ -21,14 +21,14 @@ import object_models.helpers.Closable;
  * 
  */
 public abstract class NavBarElement {
-	protected WebDriver driver;
 	private WebElement navBar;
+	private String originalName;
+	
+	protected WebDriver driver;	
 	protected ContextManager contextManager;
 	protected WebDriverWait wait;
-	
-	private String originalName;
-//	private static final By NAV_BAR_LOCATOR = By.cssSelector("ul[class='nav navbar-nav ml-auto'");
-	private static final By NAV_BAR_LOCATOR = By.cssSelector("body > form > header > ul.nav.navbar-nav.ml-auto");
+		
+	private static final By NAV_BAR_LOCATOR = By.cssSelector("ul[class='nav navbar-nav ml-auto'");
 	
 	public NavBarElement(WebDriver driver, String originalName, ContextManager contextManager) {
 		this.driver = driver;			

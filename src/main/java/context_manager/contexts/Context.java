@@ -99,19 +99,11 @@ public abstract class Context implements ContextState {
 	
 	@Override
 	public void setState(State newState) {
-//		updateFirstState(newState);
 		setCurrentsNextToNewState(newState);
 		setNewStatesPrevToCurrent(newState);		
 		logger.debug("Setting new state [" + newState.toString() + "]"); 	
 	}	
 	
-	private void updateFirstState(State newState) {
-//		Optional<State> s = firstState.getCurrentNextState();
-		if(firstState != null && firstState.getCurrentNextState().isPresent() == false) {
-			firstState.setNext(Optional.ofNullable(newState));
-		}
-	}
-
 	private void setCurrentsNextToNewState(State state) {
 		if(currentState != null) {
 			currentState.getCurrentNextState().ifPresentOrElse(
@@ -129,21 +121,7 @@ public abstract class Context implements ContextState {
 			);
 		}
 	}
-	
-//	private void setCurrentsNextToNewState(State state) {
-//		if(currentState != null) {
-//			if(currentState.getCurrentNextState() == null) {
-//				currentState.setNext(Optional.ofNullable(state));
-//			}else {
-//				currentState.getCurrentNextState().ifPresent(s -> {
-//					if(!s.equals(state)) {
-//						currentState.setNext(Optional.ofNullable(state));
-//					}
-//				});	
-//			}
-//		}
-//	}
-	
+		
 	private void setNewStatesPrevToCurrent(State state) {
 		State temp = currentState; 
 		currentState = state; 

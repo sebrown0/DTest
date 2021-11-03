@@ -36,6 +36,6 @@ public class ControlText implements MapControl{
 			key = el.getAttribute(attributeKey);
 			input = new InputText(driver, el, key);
 			pageMap.addTextBox(key, input);
-		}						
+		}				 	
 	}
 }

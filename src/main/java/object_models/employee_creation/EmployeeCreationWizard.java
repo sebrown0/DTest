@@ -3,18 +3,17 @@
  */
 package object_models.employee_creation;
 
+import java.time.Duration;
 import java.util.List;
-import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextManager;
-import context_manager.states.State;
-import context_manager.states.StateHeaderPanel;
 import controls.ControlCombo;
 import controls.ControlText;
 import controls.MapControl;
@@ -42,21 +41,6 @@ public class EmployeeCreationWizard extends JSPanelWithIFrame {
 		mapper = new PageMapper(new MappingStrategyWizard(driver));
 		pageMap = mapper.mapControls().getPageMap();			
 	}
-	
-//	public FormFadeShow createEmployee(Employee emp)  {
-//		logger.debug("Creating employee with wizard");
-//		
-//		System.out.println("Current state ->" + manager.getCurrentContext().getState()); // TODO - remove or log 	
-//		
-//		WizardStepExecutor step1 = new WizardStepOne(pageMap, driver, 1);
-//		WizardStepExecutor step2 = step1.writeValues(emp).getNext();
-//		WizardStepExecutor step3 = step2.writeValues(emp).getNext();		
-//		WizardStepExecutor step4 = step3.writeValues(emp).getNext();
-//		WizardStepExecutor step5 = step4.writeValues(emp).getNext();
-//		step5.writeValues(emp).getNext();
-//		
-//		return getConfirmationForm();
-//	}
 		
 	public FormFadeShow createEmployee(Employee emp)  {
 		logger.debug("Creating employee with wizard");		
@@ -97,6 +81,7 @@ public class EmployeeCreationWizard extends JSPanelWithIFrame {
 		public List<MapControl> getList() {
 			MapControl[] objs = {
 					new ControlText(driver, By.cssSelector("input[type='text']"), "placeholder"),
+//					new ControlCombo(driver, By.cssSelector("span[role='combobox']"), "textContent")};
 					new ControlCombo(driver, By.cssSelector("span[class='select2-selection__placeholder']"), "textContent")};
 
 			return List.of(objs);
@@ -109,6 +94,8 @@ public class EmployeeCreationWizard extends JSPanelWithIFrame {
 		System.out.println("Closing Wizard" ); // TODO - remove or log
 		
 		getContextManager().removeAndCloseContext(getMyContext());
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("a[href='#previous']")));
 		
 //		state.ifPresentOrElse(
 //				s -> { 

@@ -26,7 +26,8 @@ public class InputComboSelect extends InputControl {
 	public void writeInput(String txt) {		
 		try {
 			if(txt != null) {
-				wait.until(ExpectedConditions.visibilityOf(element));
+//				wait.until(ExpectedConditions.elementToBeClickable(element));
+//				wait.until(ExpectedConditions.visibilityOf(element));
 				element.click();
 				WebElement e = driver.findElement(By.className("select2-search__field"));
 				e.sendKeys(txt);
