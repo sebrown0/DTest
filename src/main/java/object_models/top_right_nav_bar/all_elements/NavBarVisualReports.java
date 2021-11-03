@@ -26,7 +26,7 @@ public class NavBarVisualReports extends NavBarElement {
 
 	@Override
 	public Closable clickElement() {
-		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-bar-chart')]"));
+		WebElement el = super.getNavBar().findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-bar-chart')]"));
 		ClickUsingJavaScript.performClick(driver, el);
 		return new VisualReports(driver, super.contextManager);
 	}

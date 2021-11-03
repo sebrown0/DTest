@@ -5,7 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import dto.Employee;
@@ -23,6 +26,7 @@ import providers.EmployeeProvider;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({ 
 	ConfigParameterResolver.class, 
 	TestResultLogger.class, 
@@ -31,23 +35,25 @@ class EmployeeCreationTests {
 	private static HomePage homepagePayroll;
 	private static EmployeeCreationWizard wizard; 
 	private static Employee emp;
-	private static EmployeeProvider empProvider; 
+	private static NavBarElement navEmpWizard;
 	
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
 		// Login to the homepage
 		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
 		// Get the employee creation wizard from the nav bar.
-		NavBarElement navEmpWizard = homepagePayroll.getTopRightNavBar().getNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
+		navEmpWizard = homepagePayroll.getTopRightNavBar().getNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
 		// Open the wizard.
-		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();
-		// Get the employee we're going to use with required fields from the provider.
-		empProvider = new EmployeeFromXml();
-//		emp = empProvider.getEmployeeRequired("1");
+//		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();		
 	}
+	
 
-	@Test
+	@Test @Order(1)
 	void createDuplicateEmployee_codeInUseFormShouldBeShown() {
+		System.out.println("1111111111111111111111>"); // TODO - remove or log
+		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();
+	// Get the employee we're going to use with required fields from the provider.
+		EmployeeProvider empProvider = new EmployeeFromXml(); 
 		emp = empProvider.getEmployeeRequired("1");
 		// Check that we're on the wizard.
 		assertTrue(wizard.getContextExpectedName().equals("Employee Creation Wizard"));
@@ -55,7 +61,26 @@ class EmployeeCreationTests {
 		FormFadeShow frm = wizard.createEmployee(emp);
 		assertEquals("Data Error", frm.getTitle().getExpected());
 		frm.close();
+		wizard.close();
 	}
+	
+	@Test @Order(2)
+	void dffddfff() {
+		//ARE IN CONTEXT PAYROLL.TOP
+		System.out.println("2222222222222222222222>"); // TODO - remove or log
+		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();
+	// Get the employee we're going to use with required fields from the provider.
+		EmployeeProvider empProvider = new EmployeeFromXml(); 
+		emp = empProvider.getEmployeeRequired("1");
+		emp.setFirstName("XXXXX");
+		// Check that we're on the wizard.
+		assertTrue(wizard.getContextExpectedName().equals("Employee Creation Wizard"));
+		
+		FormFadeShow frm = wizard.createEmployee(emp);
+		assertEquals("Data Error", frm.getTitle().getExpected());
+		frm.close();
+	}
+	
 	
 //	@Test
 //	void createDuplicateEmployee_codeInUseFormShouldBeShown() {

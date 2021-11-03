@@ -27,6 +27,7 @@ public class NavBarEmployeeCVPayroll extends NavBarElement {
 	@Override
 	public Closable clickElement() {
 		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-user')]"));
+//		WebElement el = super.getNavBar().findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-user')]"));
 		ClickUsingJavaScript.performClick(driver, el);
 		return new EmployeeCv(super.driver, super.contextManager);
 	}

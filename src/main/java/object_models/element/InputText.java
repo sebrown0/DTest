@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * @author Steve Brown
@@ -22,7 +23,10 @@ public class InputText extends InputControl {
 	@Override
 	public void writeInput(String txt) {		
 		try {
-			if(txt != null) {	element.sendKeys(txt); }			
+			if(txt != null) {
+				wait.until(ExpectedConditions.visibilityOf(element));
+				element.sendKeys(txt); 
+			}			
 		}catch (NoSuchElementException e) {
 			Logger logger = LogManager.getLogger(this.getClass().getSimpleName());	
 			logger.error("Could not write to [" + myIdentifier + "]");

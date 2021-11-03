@@ -25,7 +25,7 @@ public class NavBarTerminations extends NavBarElement {
 	
 	@Override
 	public Closable clickElement() {
-		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-user-times')]"));
+		WebElement el = super.getNavBar().findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-user-times')]"));
 		el.click();
 		return new Terminations(driver, ORIGINAL_NAME);
 	}

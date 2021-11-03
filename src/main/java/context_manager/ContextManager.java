@@ -112,7 +112,23 @@ public class ContextManager implements CurrentContext {
 		stateManager.closeCurrentStateInCurrentContext(this);
 	}
 	
-	public void closeCurrentContextAndRevertToCallingContext() {		
+//	public void closeCurrentContextAndRevertToCallingContext() {		
+//		ContextState cs = queue.getCurrentContextInQueue();
+//		State closer = cs.getLastStateCloser();
+//		closer.switchToMe();
+//		
+//		Optional<State> callingState = queue.removeContextAndGetCallingState(getCurrentContext());
+//		callingState.ifPresent(s -> {
+//			ContextState callingContext = s.getMyContext();
+//			callingContext.moveToState(s.getClass());
+//			//Closing current so need to go back to default state.			
+//			driver.switchTo().defaultContent();			
+//			s.switchToMe();
+//			revertToPrevCallingState(callingContext);
+//		});		
+//	}
+	
+	public void deleteCurrentContextAndRevertToCallingContext() {		
 		Optional<State> callingState = queue.removeContextAndGetCallingState(getCurrentContext());
 		callingState.ifPresent(s -> {
 			ContextState callingContext = s.getMyContext();

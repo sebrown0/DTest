@@ -3,6 +3,8 @@
  */
 package object_models.employee_creation;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -18,10 +20,13 @@ public class WizardStepOne extends WizardStep {
 	
 	public WizardStepOne(PageMap pageMap, WebDriver driver, int stepNumber) {
 		super(pageMap, driver, stepNumber);
+		
+		WebElement btnStep = driver.findElement(By.id("wizard-t-0"));
+		btnStep.click();
 	}
 
 	@Override
-	public WizardStepExecutor writeValues(Employee emp) {		
+	public WizardStepExecutor writeValues(Employee emp) throws StaleElementReferenceException {
 		pageMap.getTextBox("Name").writeInput(emp.getFirstName());		
 		pageMap.getTextBox("Surname").writeInput(emp.getLastName());
 		pageMap.getTextBox("Identity Card Number").writeInput(emp.getIdCardNumber());

@@ -25,7 +25,7 @@ public class NavBarMyCoLastViewed extends NavBarElement {
 
 	@Override
 	public Closable clickElement() {
-		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-building')]"));
+		WebElement el = super.getNavBar().findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-building')]"));
 		el.click();
 		return new MyCompanyLastViewed(driver, ORIGINAL_NAME);
 	}

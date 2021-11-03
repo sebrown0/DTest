@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextManager;
@@ -42,18 +43,42 @@ public class EmployeeCreationWizard extends JSPanelWithIFrame {
 		pageMap = mapper.mapControls().getPageMap();			
 	}
 	
+//	public FormFadeShow createEmployee(Employee emp)  {
+//		logger.debug("Creating employee with wizard");
+//		
+//		System.out.println("Current state ->" + manager.getCurrentContext().getState()); // TODO - remove or log 	
+//		
+//		WizardStepExecutor step1 = new WizardStepOne(pageMap, driver, 1);
+//		WizardStepExecutor step2 = step1.writeValues(emp).getNext();
+//		WizardStepExecutor step3 = step2.writeValues(emp).getNext();		
+//		WizardStepExecutor step4 = step3.writeValues(emp).getNext();
+//		WizardStepExecutor step5 = step4.writeValues(emp).getNext();
+//		step5.writeValues(emp).getNext();
+//		
+//		return getConfirmationForm();
+//	}
+		
 	public FormFadeShow createEmployee(Employee emp)  {
-		logger.debug("Creating employee with wizard");
+		logger.debug("Creating employee with wizard");		
 		WizardStepExecutor step1 = new WizardStepOne(pageMap, driver, 1);
-		WizardStepExecutor step2 = step1.writeValues(emp).getNext();
-		WizardStepExecutor step3 = step2.writeValues(emp).getNext();		
-		WizardStepExecutor step4 = step3.writeValues(emp).getNext();
-		WizardStepExecutor step5 = step4.writeValues(emp).getNext();
+		WizardStepExecutor step2 = writeValuesForStepAndMoveNext(step1, emp);
+		WizardStepExecutor step3 = writeValuesForStepAndMoveNext(step2, emp);		
+		WizardStepExecutor step4 = writeValuesForStepAndMoveNext(step3, emp);
+		WizardStepExecutor step5 = writeValuesForStepAndMoveNext(step4, emp);
 		step5.writeValues(emp).getNext();
 		
 		return getConfirmationForm();
 	}
-		
+	private WizardStepExecutor writeValuesForStepAndMoveNext(WizardStepExecutor step, Employee emp) {
+		step.writeValues(emp);	
+//		try {
+//			step.writeValues(emp);	
+//		} catch (StaleElementReferenceException e) {
+//			System.out.println("*************** IS STALE ***************" ); // TODO - remove or log 	
+//		}		
+		return step.getNext();
+	}
+	
 	private FormFadeShow getConfirmationForm() {		
 		return new FormFadeShow(driver, manager);
 	}
@@ -80,15 +105,35 @@ public class EmployeeCreationWizard extends JSPanelWithIFrame {
 	
 	@Override
 	public void close() {
-		Optional<State> state = getContextManager().switchToStateInCurrentContext(StateHeaderPanel.class);
-		System.out.println("Closing Wizard" ); // TODO - remove or log 	
-		state.ifPresentOrElse(
-				s -> { s.close(); }, 
-				new Runnable() {					
-					@Override
-					public void run() {
-						logger.error("Could not close panel [" + PANEL_TITLE + "]");
-					}
-				});
+//		Optional<State> state = Optional.ofNullable(getContextManager().getCurrentContext().getState());
+		System.out.println("Closing Wizard" ); // TODO - remove or log
+		
+		getContextManager().removeAndCloseContext(getMyContext());
+		
+//		state.ifPresentOrElse(
+//				s -> { 
+//					s.close(); 
+//				}, 
+//				new Runnable() {					
+//					@Override
+//					public void run() {
+//						logger.error("Could not close panel [" + PANEL_TITLE + "]");
+//					}
+//				});
 	}
+//	@Override
+//	public void close() {
+//		Optional<State> state = getContextManager().switchToStateInCurrentContext(StateHeaderPanel.class);
+//		System.out.println("Closing Wizard" ); // TODO - remove or log 	
+//		state.ifPresentOrElse(
+//				s -> { 
+//					s.close(); 
+//				}, 
+//				new Runnable() {					
+//					@Override
+//					public void run() {
+//						logger.error("Could not close panel [" + PANEL_TITLE + "]");
+//					}
+//				});
+//	}
 }

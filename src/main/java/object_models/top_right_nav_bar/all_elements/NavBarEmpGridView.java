@@ -26,7 +26,7 @@ public class NavBarEmpGridView extends NavBarElement{
 	
 	@Override
 	public Closable clickElement() {
-		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-th')]"));
+		WebElement el = super.getNavBar().findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-th')]"));
 		ClickUsingJavaScript.performClick(driver, el);
 		return new EmployeeGridView(driver, super.contextManager);
 	}

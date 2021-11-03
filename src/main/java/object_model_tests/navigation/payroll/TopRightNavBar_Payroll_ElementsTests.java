@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import logging.TestResultLogger;
@@ -41,6 +43,7 @@ import xml_reader.config_file.ConfigReader;
  * Each item in the nav-bar is clicked and its child element returned.
  * The child is then closed.
  */
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({ 
 	ConfigParameterResolver.class, 
 	TestResultLogger.class, 

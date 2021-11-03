@@ -49,17 +49,11 @@ public class FormFadeShow extends FormModal {
 	public void setTitle() {
 		super.title = new TitleModalFadeShow("None", driver);
 	}
-	
-//	@Override
-//	public PageTitle getTitle() {
-//		return new Title("", driver, By.className("modal-body"));
-//	}
 		
 	@Override
 	public void close() {
 		ButtonClicker.clickUntilNotVisible(driver, By.className("close"), 25);
-		System.out.println("FormFadeShow -> close() -> CHECK THIS IS WORKING CORRECTLY"); // TODO - remove or log 	
-		contextManager.closeCurrentContextAndRevertToCallingContext();
+		contextManager.deleteCurrentContextAndRevertToCallingContext();
 	}
 	
 	@Override

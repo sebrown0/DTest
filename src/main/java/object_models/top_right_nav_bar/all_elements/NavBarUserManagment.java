@@ -25,7 +25,7 @@ public class NavBarUserManagment extends NavBarElement {
 	
 	@Override
 	public Closable clickElement() {
-		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-user-circle-o')]"));
+		WebElement el = super.getNavBar().findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-user-circle-o')]"));
 		el.click();
 		return new UserManagment(driver, ORIGINAL_NAME);
 	}	

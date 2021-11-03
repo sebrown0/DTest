@@ -25,7 +25,7 @@ public class NavBarNotifications extends NavBarElement {
 	
 	@Override
 	public Closable clickElement() {
-		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-sticky-note')]"));
+		WebElement el = super.getNavBar().findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-sticky-note')]"));
 		el.click();	
 		return new AllNotifications(driver, ORIGINAL_NAME);
 	}

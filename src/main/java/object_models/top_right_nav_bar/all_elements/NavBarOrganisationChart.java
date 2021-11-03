@@ -26,7 +26,7 @@ public class NavBarOrganisationChart extends NavBarElement {
 			
 	@Override
 	public Closable clickElement() {
-		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-sitemap')]"));
+		WebElement el = super.getNavBar().findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-sitemap')]"));
 		ClickUsingJavaScript.performClick(driver, el);
 		return new NoElement(ORIGINAL_NAME);
 	}

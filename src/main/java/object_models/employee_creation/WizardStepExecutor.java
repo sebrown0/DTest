@@ -3,6 +3,8 @@
  */
 package object_models.employee_creation;
 
+import org.openqa.selenium.StaleElementReferenceException;
+
 import dto.Employee;
 
 /**
@@ -14,6 +16,6 @@ public interface WizardStepExecutor {
 //	void loadControls();
 //	void setTextBoxes(Map<String, InputWriter> textBoxes);	
 //	void setTextCombos(Map<String, InputWriter> combos);
-	WizardStepExecutor writeValues(Employee emp);
+	WizardStepExecutor writeValues(Employee emp) throws StaleElementReferenceException;
 	WizardStepExecutor getNext();
 }

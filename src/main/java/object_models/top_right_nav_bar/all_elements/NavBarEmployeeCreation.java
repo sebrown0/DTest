@@ -26,8 +26,8 @@ public class NavBarEmployeeCreation extends NavBarElement {
 	
 	@Override
 	public Closable clickElement() {
-		WebElement empCreation = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-plus')]"));
-		ClickUsingJavaScript.performClick(driver, empCreation);
+		WebElement el = super.getNavBar().findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-plus')]"));
+		ClickUsingJavaScript.performClick(driver, el);
 		return new EmployeeCreationWizard(driver, super.contextManager);
 	}
 }

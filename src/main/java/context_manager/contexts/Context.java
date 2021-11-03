@@ -48,11 +48,19 @@ public abstract class Context implements ContextState {
 	public void setContextId(ContextIdGetter idGetter) {
 		contextId = idGetter.getContextId();
 	}
-
+	
 	private void setFirstState() { 	
-		firstState = new StateTop(this, contextManager.getDriver()); 	
-		this.setState(firstState);
+//		firstState = new StateTop(this, contextManager.getDriver());
+		
+		this.setState(new StateTop(this, contextManager.getDriver()));
+		firstState = currentState;	
 	}
+	
+//	private void setFirstState() { 	
+//		firstState = new StateTop(this, contextManager.getDriver());		
+////		currentState = firstState;		
+//		this.setState(firstState);
+//	}
 	
 	private void setCallingState() {
 		callingState = contextManager.getLatestCallingState().getState(this);
@@ -90,25 +98,51 @@ public abstract class Context implements ContextState {
 	}
 	
 	@Override
-	public void setState(State newState) { 			
+	public void setState(State newState) {
+//		updateFirstState(newState);
 		setCurrentsNextToNewState(newState);
 		setNewStatesPrevToCurrent(newState);		
 		logger.debug("Setting new state [" + newState.toString() + "]"); 	
 	}	
+	
+	private void updateFirstState(State newState) {
+//		Optional<State> s = firstState.getCurrentNextState();
+		if(firstState != null && firstState.getCurrentNextState().isPresent() == false) {
+			firstState.setNext(Optional.ofNullable(newState));
+		}
+	}
 
 	private void setCurrentsNextToNewState(State state) {
 		if(currentState != null) {
-			if(currentState.getCurrentNextState() == null) {
-				currentState.setNext(Optional.ofNullable(state));
-			}else {
-				currentState.getCurrentNextState().ifPresent(s -> {
-					if(!s.equals(state)) {
-						currentState.setNext(Optional.ofNullable(state));
-					}
-				});	
-			}
+			currentState.getCurrentNextState().ifPresentOrElse(
+					nxt -> {
+						if(!nxt.equals(state)) {
+							currentState.setNext(Optional.ofNullable(state));
+						}	
+					}, 
+					new Runnable() {						
+						@Override
+						public void run() {
+							currentState.setNext(Optional.ofNullable(state));							
+						}
+					}					
+			);
 		}
 	}
+	
+//	private void setCurrentsNextToNewState(State state) {
+//		if(currentState != null) {
+//			if(currentState.getCurrentNextState() == null) {
+//				currentState.setNext(Optional.ofNullable(state));
+//			}else {
+//				currentState.getCurrentNextState().ifPresent(s -> {
+//					if(!s.equals(state)) {
+//						currentState.setNext(Optional.ofNullable(state));
+//					}
+//				});	
+//			}
+//		}
+//	}
 	
 	private void setNewStatesPrevToCurrent(State state) {
 		State temp = currentState; 

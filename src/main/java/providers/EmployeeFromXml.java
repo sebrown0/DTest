@@ -4,6 +4,7 @@
 package providers;
 
 import java.math.BigDecimal;
+import java.util.Random;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,18 +20,35 @@ import xml_file.XMLFile;
  * @author Steve Brown
  *
  */
-public class EmployeeFromXml implements EmployeeProvider {
+public class EmployeeFromXml implements EmployeeProvider, RandomEmployeeProvider {
 	private XMLFile xmlFile = new XMLFile(XMLFileProvider.EMPLOYEE_FILE_PATH);
 	private Employee emp;
 	private Logger logger = LogManager.getLogger();
 	
-	@Override
+	@Override // RandomEmployeeProvider
+	public Employee getAnyEmpWithRandomCode() {
+		Employee fromXml = getEmployeeRequired("1");
+		fromXml.setEmpCode(getRandomCode());
+		return fromXml;
+	}
+	
+	private String getRandomCode() {
+		String code = "";
+		
+		Random r = new Random();
+		for (int i = 0; i < 10; i++) {
+			code += (char)(r.nextInt(26) + 'a'); 
+		}
+		return code;
+	}
+	
+	@Override // EmployeeProvider
 	public Employee getEmployeeAll(String recordNum) {
-		// TODO Auto-generated method stub
+		logger.error("*** NOT IMPLEMENTED ***");
 		return null;
 	}
 	
-	@Override
+	@Override // EmployeeProvider
 	public Employee getEmployeeRequired(String recordNum) {
 		NodeList emps = getEmployees();
 	  for (int idx = 0; idx < emps.getLength(); idx++) {

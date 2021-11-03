@@ -25,7 +25,7 @@ public class NavBarNewEmployments extends NavBarElement {
 	
 	@Override
 	public Closable clickElement() {
-		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-user-plus')]"));
+		WebElement el = super.getNavBar().findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-user-plus')]"));
 		el.click();
 		return new NewEmployments(driver, ORIGINAL_NAME);
 	}

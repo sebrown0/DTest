@@ -26,7 +26,7 @@ public class NavBarDakarIntelligence extends NavBarElement {
 	
 	@Override
 	public Closable clickElement() {
-		WebElement el = super.navBar.findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-server')]"));
+		WebElement el = super.getNavBar().findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-server')]"));
 		ClickUsingJavaScript.performClick(driver, el);
 		return new DakarIntelligence(driver, super.contextManager);
 	}

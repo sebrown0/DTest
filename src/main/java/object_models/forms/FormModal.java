@@ -115,7 +115,7 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 		 * back to prev iFrame
 		 */				
 		driver.switchTo().defaultContent();
-		contextManager.closeCurrentContextAndRevertToCallingContext();		
+		contextManager.deleteCurrentContextAndRevertToCallingContext();		
 		header.closeForm();
 	}
 			
