@@ -54,17 +54,10 @@ public class EmployeeCreationWizard extends JSPanelWithIFrame {
 		return getConfirmationForm();
 	}
 		
-	private FormFadeShow getConfirmationForm() {
-//		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-//		WebElement frm = wait.until(
-//				ExpectedConditions.visibilityOfElementLocated(
-//						By.cssSelector("div[class='modal fade show']")));
-//		
-//		WebElement title = frm.findElement(By.className("modal-body"));
-//		WebElement btn = frm.findElement(By.className("close"));
-		
+	private FormFadeShow getConfirmationForm() {		
 		return new FormFadeShow(driver, manager);
 	}
+	
 	/*
 	 * This object's mapping strategy.
 	 */

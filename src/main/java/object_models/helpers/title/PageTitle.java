@@ -8,6 +8,7 @@ package object_models.helpers.title;
  *
  */
 public interface PageTitle {
+	void setExpected(String expectedTitle);
 	String getExpected();
 	String getActual();	
 }

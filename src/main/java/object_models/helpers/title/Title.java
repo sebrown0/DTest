@@ -30,6 +30,10 @@ public class Title implements PageTitle{
 	}
 
 	@Override
+	public void setExpected(String expectedTitle) {
+		this.expectedTitle = expectedTitle;		
+	}
+	@Override
 	public String getExpected() {
 		return expectedTitle;
 	}
@@ -54,4 +58,5 @@ public class Title implements PageTitle{
 			return e.getAttribute("textContent").trim();
 		}
 	}
+
 }

@@ -42,7 +42,11 @@ public class DkGridToolBarReader {
 	}
 
 	private void setToolbarElement() {		
-		toolbarElement = driver.findElement(By.id("dkrGrid-toolbar"));
+		//have to switch to the iFrame
+//		toolbarElement = driver.findElement(By.id("dkrGrid-toolbar"));
+		
+		toolbarElement = driver.findElement(By.xpath("/html/body/form/div[3]"));
+//		toolbarElement = driver.findElement(By.cssSelector("div[id='dkrGrid-toolbar']"));
 	}
 	
 	public void read() {

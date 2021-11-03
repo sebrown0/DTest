@@ -17,7 +17,7 @@ public class DkGrid <T extends KeyStrategyRow> {
 	private DkGridContentReader<?> contentReader;
 	private DkGridContent<T> gridContent = new DkGridContent<>();;
 	
-	public DkGrid(WebDriver driver, KeyStrategyRow keyStrategyRows) {		
+	public DkGrid(WebDriver driver, KeyStrategyRow keyStrategyRows) { 	
 		this.toolBarReader = new DkGridToolBarReader(driver, toolBar);
 		this.contentReader = new DkGridContentReader<>(driver, gridContent, keyStrategyRows);
 	}

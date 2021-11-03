@@ -30,10 +30,11 @@ public abstract class JSPanelWithIFrame extends JsPanel implements JsPanelContex
 		super.getHeaderBar(); // CAUSES NEW STATE HEADER TO BE CREATED & ADDED TO THE QUEUE. TODO - remove this side effect.		
 	}
 	
-	private void switchToIFrame() {
+	private void switchToIFrame() {		
 		super.manager
 			.moveToNextStateInCurrentContext()
-			.switchToMe();		
+			.switchToMe();	 	
+		super.manager.setLatestCallingStateToCurrent();
 	}	
 		
 	public WebElement getIFrameAsElement() {

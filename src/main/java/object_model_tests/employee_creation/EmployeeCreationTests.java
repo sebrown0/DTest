@@ -1,5 +1,8 @@
 package object_model_tests.employee_creation;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -46,9 +49,11 @@ class EmployeeCreationTests {
 	@Test
 	void createDuplicateEmployee_codeInUseFormShouldBeShown() {
 		emp = empProvider.getEmployeeRequired("1");
+		// Check that we're on the wizard.
+		assertTrue(wizard.getContextExpectedName().equals("Employee Creation Wizard"));
+		
 		FormFadeShow frm = wizard.createEmployee(emp);
-//		PageTitle frmTitle = frm.getTitle();
-//		System.out.println("t->" + frmTitle.getActual()); // TODO - remove or log 	
+		assertEquals("Data Error", frm.getTitle().getExpected());
 		frm.close();
 	}
 	

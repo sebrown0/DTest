@@ -34,6 +34,12 @@ public class DropdownCombo extends FormWithIFrame implements Control {
 		setMyContainers();
 	}
 
+	/*
+	 * 
+	 * TODO - Add elements and actions.
+	 * This is only the bare bones of the element.
+	 * 
+	 */
 	@Override
 	public void setMyContainers() {
 		super.switchToIFrame();
@@ -50,5 +56,6 @@ public class DropdownCombo extends FormWithIFrame implements Control {
 	public ContextId getContextId() {		
 		return new ContextId(PANEL_TITLE, "None");
 	}
-
+	// Elements
+	// Actions
 }

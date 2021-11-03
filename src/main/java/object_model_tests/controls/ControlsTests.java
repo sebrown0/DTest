@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_model_tests.employee;
+package object_model_tests.controls;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -42,11 +42,12 @@ import xml_reader.config_file.ConfigReader;
 	ConfigParameterResolver.class, 
 	TestResultLogger.class, 
 	LoginPageResolverPayroll.class })
-class EmployeeDetailsTests {
+class ControlsTests {
 	private static HomePage homepagePayroll;	
 	private static LeftMenu menu;
 	private static EmployeeDetails empDetails;
 	private static Employee emp;
+	private static PageControl empDetailsPageControl;
 	
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
@@ -59,83 +60,37 @@ class EmployeeDetailsTests {
 		// Get the employee we're going to use with required fields from the provider.
 		EmployeeProvider empProvider = new EmployeeFromXml();
 		emp = empProvider.getEmployeeRequired("1");
+		// Get PageControl for EmployeeDetails
+		empDetailsPageControl = empDetails.getEmployeeControl();
 	}
 		
-	/*
-	 * 
-	 * REMOVE CONTROLS AS IN OWN TEST
-	 * 
-	 * 
-	 */
 	// Controls - Start
 	@Test @Order(1)
-	void selectEmployee() {
-		PageControl control = empDetails.getEmployeeControl();
-		EmployeeSelection empSelection = (EmployeeSelection) control.getControl(EmployeeControlNames.SELECT_EMP).get();
+	void employeeSelection_selectEmployee() {
+		EmployeeSelection empSelection = (EmployeeSelection) empDetailsPageControl.getControl(EmployeeControlNames.SELECT_EMP).get();
 		empSelection.clickRow("3");		
 		assertEquals("0134213A", empDetails.tab().basicDetails().iDCardNumber().getTextByValue());				
 	}	
 	@Test @Order(2)
-	void checkCode() {
-		PageControl control = empDetails.getEmployeeControl();
-		TextOut textOut = (TextOut) control.getControl(EmployeeControlNames.EMP_CODE).get();
+	void textOut_checkCode() {
+		TextOut textOut = (TextOut) empDetailsPageControl.getControl(EmployeeControlNames.EMP_CODE).get();
 		assertEquals(emp.getEmpCode(), textOut.getTextByValue());		
 	}	
 	@Test @Order(3)
-	void checkEmployeeName() {
-		PageControl control = empDetails.getEmployeeControl();
-		TextOut textOut = (TextOut) control.getControl(EmployeeControlNames.EMP_NAME).get();
-		assertEquals(emp.getFullName(), textOut.getTextByValue().trim());
-	}
-	@Test @Order(4)
 	void openCombos() {		
-		PageControl control = empDetails.getEmployeeControl();
-		DropdownCombo combos = (DropdownCombo) control.getControl(EmployeeControlNames.COMBOS).get();		
+		DropdownCombo combos = (DropdownCombo) empDetailsPageControl.getControl(EmployeeControlNames.COMBOS).get();		
 		combos.close(); 
 		ContextManager cm = combos.getContextManager();
 		assertEquals(cm.getCurrentContext().getContextId().getExpectedName(), "Employee Details");
-	}
-	
-//	@Test //
-//	void openCombos() {
-//		
-//		WebDriver driver = homepagePayroll.getWebDriver();
-//		driver.switchTo().defaultContent();
-////		System.out.println("c1->" + driver.findElements(By.tagName("iframe")).size());
-//		menu.clickParent("Employees").clickAndLoad(ContactNumbers.class).get();
-//		driver.switchTo().defaultContent();
-////		System.out.println("c2->" + driver.findElements(By.tagName("iframe")).size());
-//		WebElement p = driver.findElement(By.id("jsPanel-2"));
-//		WebElement h = p.findElement(By.cssSelector("div[class='jsPanel-titlebar']"));
-//		System.out.println("c3->");
-//		
-//		driver.findElement(By.id(empDetails.getPanelId().get()));
-//		PageControl control = empDetails.getEmployeeControl();
-//		DropdownCombo combos = (DropdownCombo) control.getControl(EmployeeControlNames.COMBOS).get();		
-////		combos.close(); // not a panel!!!
-//	}
-	
-//	@Test
-//	void openGrid() {
+	}		
+	@Test @Order(4)
+	void openGrid() {
 //		PageControl control = empDetails.getEmployeeControl();		
 //		DkGridEmployeeDetails grid = (DkGridEmployeeDetails) control.getControl(EmployeeControlNames.GRID_VIEW).get();
 //		grid.close();
-//	}
-//	// Controls - End
-//	
-//	@Test
-//	void checkIdCardNo() {		
-//		assertEquals(emp.getIdCardNumber(), empDetails.tab().basicDetails().iDCardNumber().getTextByValue());
-//	}
-//	
-//	@Test
-//	void set_and_check_PartTimerHoursPerDay() {
-//		TextInOut partTimerHoursPerDay = empDetails.tab().settings().partTimerHoursPerDay();		
-//		partTimerHoursPerDay.clear();
-//		partTimerHoursPerDay.writeText("5");
-//		assertEquals("5", partTimerHoursPerDay.getTextByValue());
-//	}
-		
+	}
+
+
 	@AfterAll
 	static void tearDown() {		
 //		homepagePayroll.close();

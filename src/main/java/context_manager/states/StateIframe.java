@@ -50,7 +50,7 @@ public class StateIframe extends State implements CallingState {
 	
 	@Override
 	public State switchToMe() {
-		iFrame.switchUsingLocator();
+		iFrame.switchUsingLocator();		
 		return this;
 	}
 

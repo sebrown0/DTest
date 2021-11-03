@@ -4,7 +4,6 @@
 package object_models.helpers;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,17 +20,18 @@ public final class ButtonClicker {
 	 * Useful when closing a form. 
 	 */
 	public static void clickUntilNotVisible(WebDriver driver, By btnLocator, int maxTries) {
-		WebElement btn = driver.findElement(btnLocator);
-		while(ExpectedConditions.visibilityOfElementLocated(btnLocator) != null && --maxTries > 0) {
-			clickBtn(btn);
+		try {
+			WebElement btn = driver.findElement(btnLocator);
+			while(ExpectedConditions.visibilityOfElementLocated(btnLocator) != null && --maxTries > 0) {
+				clickBtn(btn);
+			}	
+		} catch (Exception e) {
+			// We have reached the required state or the button was never there, etc..
 		}
+		
 	}
 	
-	private static void clickBtn(WebElement btn) {
-		try {
-			btn.click();	
-		} catch (StaleElementReferenceException e) {
-			// We have reached the required state.
-		}		
+	private static void clickBtn(WebElement btn) throws Exception {
+		btn.click();	
 	}
 }

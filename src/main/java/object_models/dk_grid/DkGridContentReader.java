@@ -49,7 +49,10 @@ public class DkGridContentReader <T extends KeyStrategyRow>{
 	}
 	
 	private void setGridElement() {
-		gridElement = driver.findElement(By.id("dkrGrid"));
+		System.out.println("->setGridElement"); // TODO - remove or log 	
+		gridElement = driver.findElement(By.xpath("/html/body/form/div[4]"));
+		// Id & cssSelector not working
+//		gridElement = driver.findElement(By.id("dkrGrid"));
 	}
 	
 	private void setContentElement() {

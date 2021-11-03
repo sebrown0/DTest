@@ -65,28 +65,3 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 		table = driver.findElement(By.id("employeeListTable"));
 	}
 }
-
-//@Override
-//public void waitForLoad() {
-//WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-//wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("corners")));
-//}
-//public EmployeeSelection(WebDriver driver, Reload reloadEmpDetails, ContextManager contextManager) {
-//super(driver, PANEL_TITLE, contextManager);
-//
-//this.reloadEmpDetails = reloadEmpDetails;
-//setMyContainers();
-//switchToIframe();
-//}
-
-//private void switchToIframe() {
-//iFrame = new IFrame(driver, By.cssSelector("iframe[name='_iframex-IPORTAL_HR_EMPLOYEEDETAILS_EXT']"));
-//iFrame.switchUsingLocator();		
-//}
-
-//private void loadContainers() {
-//WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-//wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("corners")));
-//topLevelContainer = driver.findElement(By.id("corners"));
-//table = topLevelContainer.findElement(By.id("employeeListTable"));
-//}

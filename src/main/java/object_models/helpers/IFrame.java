@@ -28,18 +28,25 @@ public class IFrame {
 	}
 		
 	public IFrame switchUsingLocator() {
-		try {
-			driver.findElement(By.id("corners"));	
-		} catch (Exception e) {
-			/*
-			 * CANNOT GET THE iFRAME WITHOUT GETTING THIS ELEMENT FIRST.
-			 * EVEN THOUGH AN EXCEPITION IS THROWN.
-			 * DON'T KNOW WHY!
-			 */
-		}
+//		try {
+//			driver.findElement(By.id("corners"));	
+//		} catch (Exception e) {
+//			/*
+//			 * CANNOT GET THE iFRAME WITHOUT GETTING THIS ELEMENT FIRST.
+//			 * EVEN THOUGH AN EXCEPITION IS THROWN.
+//			 * DON'T KNOW WHY!
+//			 */
+//		}
 		
+		/*
+		 * works for wizard
+		 */
+		driver.switchTo().defaultContent();//rem?
+		/*
+		 * not for getContextThatIsPanel_shouldReturnEmployeeDetails_thatIs_YearlyReports
+		 */
 		iFrame = wait.until(ExpectedConditions.visibilityOfElementLocated(byLocator));	
-		driver.switchTo().frame(iFrame);		
+		driver.switchTo().frame(iFrame);				
 		return this;
 	}
 		
