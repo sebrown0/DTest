@@ -22,19 +22,19 @@ import object_models.helpers.Closable;
  */
 public abstract class NavBarElement {
 	protected WebDriver driver;
-	protected WebElement navBar;
+	private WebElement navBar;
 	protected ContextManager contextManager;
 	protected WebDriverWait wait;
 	
 	private String originalName;
-	private static final By NAV_BAR_LOCATOR = By.cssSelector("ul[class='nav navbar-nav ml-auto'");
-//	private static final By NAV_BAR_LOCATOR = By.cssSelector("body > form > header > ul.nav.navbar-nav.ml-auto");
+//	private static final By NAV_BAR_LOCATOR = By.cssSelector("ul[class='nav navbar-nav ml-auto'");
+	private static final By NAV_BAR_LOCATOR = By.cssSelector("body > form > header > ul.nav.navbar-nav.ml-auto");
 	
 	public NavBarElement(WebDriver driver, String originalName, ContextManager contextManager) {
 		this.driver = driver;			
 		this.originalName = originalName;
 		this.contextManager = contextManager;
-		this.wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		navBar = driver.findElement(NAV_BAR_LOCATOR);		
 	}
 	
@@ -43,8 +43,9 @@ public abstract class NavBarElement {
 	}
 	
 	protected WebElement getNavBar() {
-//		driver.switchTo().defaultContent();
-		return wait.until(ExpectedConditions.visibilityOfElementLocated(NAV_BAR_LOCATOR)).findElement(NAV_BAR_LOCATOR);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(NAV_BAR_LOCATOR));
+		navBar = driver.findElement(NAV_BAR_LOCATOR);
+		return navBar;
 	}
 	
 	/*
