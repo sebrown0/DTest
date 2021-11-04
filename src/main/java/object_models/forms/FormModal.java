@@ -43,8 +43,7 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 
 	public FormModal(WebDriver driver, String expectedTitle, ContextManager contextManager) {
 		this.driver = driver;
-		this.expectedTitle = expectedTitle;
-//		this.title = new TitleModalForm(expectedTitle, driver);		
+		this.expectedTitle = expectedTitle;		
 		this.contextManager = contextManager;
 		
 		wait = new WebDriverWait(driver, Duration.ofSeconds(2));

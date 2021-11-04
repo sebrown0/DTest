@@ -19,8 +19,7 @@ import context_manager.ContextState;
  */
 public abstract class State {	
 	protected WebDriver driver;
-	protected ContextState myContext; 
-//	protected Optional<State> next;
+	protected ContextState myContext;
 	protected State next;
 	protected Logger logger = LogManager.getLogger();
 	
@@ -57,7 +56,6 @@ public abstract class State {
 
 	public void setNext(Optional<State> next) {
 		next.ifPresent(n -> this.next = n);
-//		this.next = next;
 	}
 	
 	protected WebDriver switchToDefaultContent() {		

@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 public abstract class InputControl implements InputWriter{

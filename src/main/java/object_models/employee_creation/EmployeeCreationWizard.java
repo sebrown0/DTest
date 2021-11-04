@@ -54,12 +54,7 @@ public class EmployeeCreationWizard extends JSPanelWithIFrame {
 		return getConfirmationForm();
 	}
 	private WizardStepExecutor writeValuesForStepAndMoveNext(WizardStepExecutor step, Employee emp) {
-		step.writeValues(emp);	
-//		try {
-//			step.writeValues(emp);	
-//		} catch (StaleElementReferenceException e) {
-//			System.out.println("*************** IS STALE ***************" ); // TODO - remove or log 	
-//		}		
+		step.writeValues(emp);
 		return step.getNext();
 	}
 	
@@ -81,8 +76,8 @@ public class EmployeeCreationWizard extends JSPanelWithIFrame {
 		public List<MapControl> getList() {
 			MapControl[] objs = {
 					new ControlText(driver, By.cssSelector("input[type='text']"), "placeholder"),
-//					new ControlCombo(driver, By.cssSelector("span[role='combobox']"), "textContent")};
-					new ControlCombo(driver, By.cssSelector("span[class='select2-selection__placeholder']"), "textContent")};
+					new ControlCombo(driver, By.cssSelector("span[role='combobox']"), "textContent")};
+//					new ControlCombo(driver, By.cssSelector("span[class='select2-selection__placeholder']"), "textContent")};
 
 			return List.of(objs);
 		}		

@@ -13,7 +13,7 @@ import object_models.element.InputComboSelect;
 import object_models.element.InputWriter;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 public class ControlCombo implements MapControl{
@@ -36,7 +36,6 @@ public class ControlCombo implements MapControl{
 			key = el.getAttribute(attributeKey);
 			input = new InputComboSelect(driver, el, key);
 			pageMap.addComboBox(key, input);
-//			System.out.println("-" + key + "-");
 		}						
 	}
 
