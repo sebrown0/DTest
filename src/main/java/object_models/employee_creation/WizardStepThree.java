@@ -19,6 +19,8 @@ public class WizardStepThree extends WizardStep {
 	
 	public WizardStepThree(PageMap pageMap, WebDriver driver, int stepNumber) {
 		super(pageMap, driver, stepNumber);
+		
+		super.loadAndWaitForStep(3);				
 	}
 
 	@Override

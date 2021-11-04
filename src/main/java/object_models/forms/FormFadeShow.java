@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextId;
 import context_manager.ContextManager;
-import object_models.helpers.ButtonClicker;
+import object_models.helpers.ElementClicker;
 import object_models.helpers.title.TitleModalFadeShow;
 
 /**
@@ -52,7 +52,7 @@ public class FormFadeShow extends FormModal {
 		
 	@Override
 	public void close() {
-		ButtonClicker.clickUntilNotVisible(driver, By.className("close"), 25);
+		ElementClicker.clickUntilNotVisible(driver, By.className("close"), 25);
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[class='modal fade show']")));
 		contextManager.deleteCurrentContextAndRevertToCallingContext();

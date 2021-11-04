@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  *
  * Click a button for different scenarios
  */
-public final class ButtonClicker {
+public final class ElementClicker {
 	
 	/*
 	 * Click until the btn is not visible for a max number of tries.
@@ -34,4 +34,24 @@ public final class ButtonClicker {
 	private static void clickBtn(WebElement btn) throws Exception {
 		btn.click();	
 	}
+	
+	/*
+	 * Try clicking an element for maxAttempts.
+	 * This is good for when the driver would normally throw 
+	 * a stale element exception.
+	 */
+	public static boolean tryClickingElement(WebDriver driver, By elementLocator) {		
+		int maxAttempts = 50;
+		boolean clickedOk = false;
+		
+		while (--maxAttempts > 0) {
+			try {
+				driver.findElement(elementLocator).click();
+				clickedOk = true;
+				break;
+			} catch (Exception e) {		}
+		}			
+		return clickedOk;
+	}
+	
 }

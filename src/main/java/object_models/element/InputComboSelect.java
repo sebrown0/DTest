@@ -10,6 +10,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import object_models.helpers.ElementClicker;
 
 /**
  * @author Steve Brown
@@ -38,13 +41,17 @@ public class InputComboSelect extends InputControl {
 	}
 	
 	private void clickCombo() {
-		WebElement combo = driver.findElement(By.cssSelector("span[id='" + comboId + "']"));
-		combo.click();
+		ElementClicker.tryClickingElement(driver, By.cssSelector("span[id='" + comboId + "']"));
 	}
 	
-	private void enterTextIntoCombo(String txt) {
-		WebElement e = driver.findElement(By.className("select2-search__field"));
-		e.sendKeys(txt);
-		e.sendKeys(Keys.ENTER);
+	private void enterTextIntoCombo(String txt) {		
+		WebElement combo = driver.findElement(afterPopListIsVisible());
+		combo.sendKeys(txt);
+		combo.sendKeys(Keys.ENTER);
+	}	
+	private By afterPopListIsVisible() {
+		By listLocator = By.className("select2-search__field");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(listLocator));
+		return listLocator;
 	}
 }

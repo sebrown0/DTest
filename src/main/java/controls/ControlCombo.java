@@ -32,7 +32,7 @@ public class ControlCombo implements MapControl{
 		InputWriter input = null;
 		String key = null;
 		List<WebElement> elements = driver.findElements(byLocator);
-		for (WebElement el : elements) {
+		for (WebElement el : elements) {			
 			key = el.getAttribute(attributeKey);
 			input = new InputComboSelect(driver, el, key);
 			pageMap.addComboBox(key, input);

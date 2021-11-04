@@ -77,45 +77,16 @@ public class EmployeeCreationWizard extends JSPanelWithIFrame {
 			MapControl[] objs = {
 					new ControlText(driver, By.cssSelector("input[type='text']"), "placeholder"),
 					new ControlCombo(driver, By.cssSelector("span[role='combobox']"), "textContent")};
-//					new ControlCombo(driver, By.cssSelector("span[class='select2-selection__placeholder']"), "textContent")};
 
 			return List.of(objs);
 		}		
 	}
 	
 	@Override
-	public void close() {
-//		Optional<State> state = Optional.ofNullable(getContextManager().getCurrentContext().getState());
-		System.out.println("Closing Wizard" ); // TODO - remove or log
-		
+	public void close() {		
 		getContextManager().removeAndCloseContext(getMyContext());
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("a[href='#previous']")));
-		
-//		state.ifPresentOrElse(
-//				s -> { 
-//					s.close(); 
-//				}, 
-//				new Runnable() {					
-//					@Override
-//					public void run() {
-//						logger.error("Could not close panel [" + PANEL_TITLE + "]");
-//					}
-//				});
 	}
-//	@Override
-//	public void close() {
-//		Optional<State> state = getContextManager().switchToStateInCurrentContext(StateHeaderPanel.class);
-//		System.out.println("Closing Wizard" ); // TODO - remove or log 	
-//		state.ifPresentOrElse(
-//				s -> { 
-//					s.close(); 
-//				}, 
-//				new Runnable() {					
-//					@Override
-//					public void run() {
-//						logger.error("Could not close panel [" + PANEL_TITLE + "]");
-//					}
-//				});
-//	}
+
 }

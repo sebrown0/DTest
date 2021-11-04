@@ -5,6 +5,7 @@ package object_models.panels;
 
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,13 +23,19 @@ public class JsPanelHeaderBar implements Header{
 	private WebDriver driver;
 	
 	public JsPanelHeaderBar(WebDriver driver, WebElement container) {
-		this.driver = driver;
-		
-		setHeaderBar(container);
-		setControlBar();
-		setToolBar(driver);		
+		this.driver = driver;		
+		this.initialise(container);		
 	}
 	
+	private void initialise(WebElement container) {
+		try {
+			setHeaderBar(container);
+			setControlBar();
+			setToolBar(driver);	
+		} catch (Exception e) {
+			LogManager.getLogger().error("Error initialising JsPanelHeaderBar [" + e.getMessage() + "]");
+		}
+	}
 	private void setHeaderBar(WebElement container) {
 		headerBar = container.findElement(By.cssSelector("div[class='jsPanel-headerbar']"));
 	}

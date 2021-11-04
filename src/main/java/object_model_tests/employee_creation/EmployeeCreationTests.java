@@ -23,6 +23,7 @@ import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import providers.EmployeeFromXml;
 import providers.EmployeeProvider;
+import providers.RandomEmployeeProvider;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
@@ -43,61 +44,111 @@ class EmployeeCreationTests {
 		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
 		// Get the employee creation wizard from the nav bar.
 		navEmpWizard = homepagePayroll.getTopRightNavBar().getNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
-		// Open the wizard.
-//		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();		
-	}
-	
+	}	
 
 	@Test @Order(1)
 	void createDuplicateEmployee_codeInUseFormShouldBeShown() {
-		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();
-	
 		EmployeeProvider empProvider = new EmployeeFromXml(); 
 		emp = empProvider.getEmployeeRequired("1");
+		
+		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();	
 		// Check that we're on the wizard.
 		assertTrue(wizard.getContextExpectedName().equals("Employee Creation Wizard"));
 		
 		FormFadeShow frm = wizard.createEmployee(emp);
 		assertEquals("Data Error", frm.getTitle().getExpected());
 		frm.close();
-//		wizard.close();
+		wizard.close();
 	}
 
-	
-//	@Test
-//	void createDuplicateEmployee_codeInUseFormShouldBeShown() {
+	@Test @Order(2)
+	void createDupcateEmployee_codeInUseFormShouldBeShown() {
+		System.out.println("--------------------------------------------"); // TODO - remove or log 	
+		
+		EmployeeProvider empProvider = new EmployeeFromXml(); 
+		emp = empProvider.getEmployeeRequired("1");
+		
+		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();	
+		// Check that we're on the wizard.
+		assertTrue(wizard.getContextExpectedName().equals("Employee Creation Wizard"));
+		
+		FormFadeShow frm = wizard.createEmployee(emp);
+		assertEquals("Data Error", frm.getTitle().getExpected());
+		frm.close();
+		wizard.close();
+	}
+
+	@Test @Order(3)
+	void createDupEmployee_codeInUseFormShouldBeShown() {
+		EmployeeProvider empProvider = new EmployeeFromXml(); 
+		emp = empProvider.getEmployeeRequired("1");
+		
+		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();	
+		// Check that we're on the wizard.
+		assertTrue(wizard.getContextExpectedName().equals("Employee Creation Wizard"));
+		
+		FormFadeShow frm = wizard.createEmployee(emp);
+		assertEquals("Data Error", frm.getTitle().getExpected());
+		frm.close();
+		wizard.close();
+	}
+
+	@Test @Order(4)
+	void createDuployee_codeInUseFormShouldBeShown() {
+		EmployeeProvider empProvider = new EmployeeFromXml(); 
+		emp = empProvider.getEmployeeRequired("1");
+		
+		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();	
+		// Check that we're on the wizard.
+		assertTrue(wizard.getContextExpectedName().equals("Employee Creation Wizard"));
+		
+		FormFadeShow frm = wizard.createEmployee(emp);
+		assertEquals("Data Error", frm.getTitle().getExpected());
+		frm.close();
+		wizard.close();
+	}
+
+//	@Test @Order(5)
+//	void createDeEmployee_codeInUseFormShouldBeShown() {
+//		EmployeeProvider empProvider = new EmployeeFromXml(); 
 //		emp = empProvider.getEmployeeRequired("1");
-//		WebDriverWait wait = new WebDriverWait(homepagePayroll.getWebDriver(), Duration.ofSeconds(3));
-//		WebElement frm = null;
+//		
+//		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();	
+//		// Check that we're on the wizard.
+//		assertTrue(wizard.getContextExpectedName().equals("Employee Creation Wizard"));
+//		
+//		FormFadeShow frm = wizard.createEmployee(emp);
+//		assertEquals("Data Error", frm.getTitle().getExpected());
+//		frm.close();
+//		wizard.close();
+//	}
 //
-//		wizard.createEmployee(emp);		
-//		try {
-//			System.out.println("Loading emp 1"); // TODO - remove or log 	
-//			frm =	wait.until(
-//							ExpectedConditions.visibilityOfElementLocated(
-//									By.cssSelector("div[class='modal fade show']")));	
-//		} catch (TimeoutException e) {
-//			// Error form not there so load the emp again (duplicate)
-//			System.out.println("Loading emp 2"); // TODO - remove or log
-//			wizard.createEmployee(emp);
-//			frm =	wait.until(
-//					ExpectedConditions.visibilityOfElementLocated(
-//							By.cssSelector("div[class='modal fade show']")));
-//		}
-//				
-//		if(frm == null) {
-//			fail("Duplicate code form NOT displayed");
-//		}else {
-//			WebElement title = frm.findElement(By.className("modal-body"));
-//			WebElement btn = frm.findElement(By.className("close"));
-//			String formTitle = title.getText();
-//			System.out.println("Title ->" + formTitle); // TODO - remove or log
-//			System.out.println("->" + btn.getAttribute("class")); // TODO - remove or log 	
-//			btn.click(); // should be a form object
-////			wizard.close();
-//			
-//			assertEquals("Employee Code [" + emp.getEmpCode() + "] is already in use!", formTitle);
-//		}		 	
+//	@Test @Order(6)
+//	void cricateEmployee_codeInUseFormShouldBeShown() {
+//		EmployeeProvider empProvider = new EmployeeFromXml(); 
+//		emp = empProvider.getEmployeeRequired("1");
+//		
+//		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();	
+//		// Check that we're on the wizard.
+//		assertTrue(wizard.getContextExpectedName().equals("Employee Creation Wizard"));
+//		
+//		FormFadeShow frm = wizard.createEmployee(emp);
+//		assertEquals("Data Error", frm.getTitle().getExpected());
+//		frm.close();
+//		wizard.close();
+//	}
+	
+//	----------------------------------------
+	
+//	@Test @Order(2)
+//	void createRandomEmployee_withLowerCaseCode() {
+//		RandomEmployeeProvider empProvider = new EmployeeFromXml(); 
+//		emp = empProvider.getAnyEmpWithRandomCode();
+//		String empCode = emp.getEmpCode();
+//		System.out.println("->" + empCode); // TODO - remove or log 	
+//		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();
+//		
+//		FormFadeShow frm = wizard.createEmployee(emp);
 //	}
 	
 	@AfterAll

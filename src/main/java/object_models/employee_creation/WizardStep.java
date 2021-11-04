@@ -4,7 +4,10 @@ import java.time.Duration;
 import java.util.Map;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import controls.PageMap;
@@ -28,6 +31,17 @@ public abstract class WizardStep implements WizardStepExecutor, WizardMove{
 		this.byNext = By.xpath("/html/body/div/div/form/div[3]/ul/li[2]/a");
 	}
 
+	protected void loadAndWaitForStep(int stepNum) {
+		String strStepNum = String.valueOf(stepNum - 1);
+		WebElement btnStep = driver.findElement(By.id("wizard-t-" + strStepNum));
+		btnStep.click();
+	
+		By stepLocator = By.id("wizard-p-" + strStepNum);
+		new WebDriverWait(driver, Duration.ofSeconds(10))
+							.ignoring(StaleElementReferenceException.class)
+							.until(ExpectedConditions.visibilityOfElementLocated(stepLocator));
+	}
+	
 	@Override
 	public int getStepNumber() {
 		return stepNumber;
