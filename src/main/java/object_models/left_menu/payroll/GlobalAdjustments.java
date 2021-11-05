@@ -7,7 +7,8 @@ import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextManager;
 import control_builder.ControlData;
-import control_builder.ControlGetterComboSelect;
+import control_builder.ControlGetterComboSelectOnly;
+import control_builder.ControlGetterComboWriteAndSelect;
 import enums.control_names.CommonControlNames;
 import enums.control_names.EmployeeControlNames;
 import enums.control_names.PayrollControlNames;
@@ -37,25 +38,25 @@ public final class GlobalAdjustments extends JSPanelWithIFrame {
 				List.of(
 						new ControlData(
 							CommonControlNames.COMPANY,
-								new ControlGetterComboSelect(driver, By.cssSelector("span[aria-labelledby='select2-COMP_SELx-container']"))),
+								new ControlGetterComboWriteAndSelect(driver, By.cssSelector("span[aria-labelledby='select2-COMP_SELx-container']"))),
 						new ControlData(
 							PayrollControlNames.PAY_PERIODS,
-								new ControlGetterComboSelect(driver, By.cssSelector("span[aria-labelledby='select2-PAYS_SELx-container']"))),
+								new ControlGetterComboWriteAndSelect(driver, By.cssSelector("span[aria-labelledby='select2-PAYS_SELx-container']"))),
 						new ControlData(
 							CommonControlNames.DEPARTMENT,
-								new ControlGetterComboSelect(driver, By.cssSelector("body > form > div:nth-child(17) > div:nth-child(2) > span > span.selection > span"))),
+								new ControlGetterComboWriteAndSelect(driver, By.cssSelector("body > form > div:nth-child(17) > div:nth-child(2) > span > span.selection > span"))),
 						/*
 						 *  TODO - View Adjustment Type (what type of control is it?)
 						 */
 						new ControlData(
 								PayrollControlNames.PAY_GROUP,
-									new ControlGetterComboSelect(driver, By.id("select2-PAYGS_SELx-container"))),
+									new ControlGetterComboWriteAndSelect(driver, By.id("select2-PAYGS_SELx-container"))),
 						new ControlData(
 								EmployeeControlNames.FULL_OR_PART_TIME,
-									new ControlGetterComboSelect(driver, By.id("select2-EMPL_SELx-container"))), //#select2-EMPL_SELx-results
+									new ControlGetterComboSelectOnly(driver, By.id("select2-EMPL_SELx-container"), By.id("select2-EMPL_SELx-results"))), 
 						new ControlData(
 							EmployeeControlNames.EMPLOYEES,	
-								new ControlGetterComboSelect(driver, By.cssSelector("body > form > div:nth-child(17) > div:nth-child(4) > span > span.selection > span")))
+								new ControlGetterComboWriteAndSelect(driver, By.cssSelector("body > form > div:nth-child(17) > div:nth-child(4) > span > span.selection > span")))
 													
 		);			
 		super.buildPanelControls(myControls);				

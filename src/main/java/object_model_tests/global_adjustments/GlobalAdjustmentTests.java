@@ -10,7 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import controls.ComboSelect;
+import controls.ComboSelectOnly;
+import controls.ComboWriteAndSelect;
 import enums.control_names.CommonControlNames;
 import enums.control_names.EmployeeControlNames;
 import enums.control_names.PayrollControlNames;
@@ -48,13 +49,13 @@ class GlobalAdjustmentTests {
 	
 	@Test @Order(2)
 	void selectCompany_implicitPassIfNoErrors() {
-		ComboSelect cmbComp = (ComboSelect) globalAdjustments.getControl(CommonControlNames.COMPANY).get();
+		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(CommonControlNames.COMPANY).get();
 		cmbComp.click();		
 	}
 	
 	@Test @Order(3)
 	void selectPayPeriods() {
-		ComboSelect cmbComp = (ComboSelect) globalAdjustments.getControl(PayrollControlNames.PAY_PERIODS).get();
+		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(PayrollControlNames.PAY_PERIODS).get();
 		cmbComp.click();
 		String period = cmbComp.getText(new RemoveX());
 		assertEquals(33, period.length());		
@@ -62,21 +63,21 @@ class GlobalAdjustmentTests {
 
 	@Test @Order(4)
 	void selectDepartment_implicitPassIfNoErrors() {
-		ComboSelect cmbComp = (ComboSelect) globalAdjustments.getControl(CommonControlNames.DEPARTMENT).get();
+		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(CommonControlNames.DEPARTMENT).get();
 		cmbComp.click();		
 	}		
 
 	@Test @Order(5)
 	void selectPaygroup_implicitPassIfNoErrors() {
-		ComboSelect cmbComp = (ComboSelect) globalAdjustments.getControl(PayrollControlNames.PAY_GROUP).get();
+		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(PayrollControlNames.PAY_GROUP).get();
 		cmbComp.click();		
 	}		
 	
 	@Test @Order(6)
 	void selectFullOrPartTime_fullTime() {
-		ComboSelect cmbComp = (ComboSelect) globalAdjustments.getControl(EmployeeControlNames.FULL_OR_PART_TIME).get();
+		ComboSelectOnly cmbComp = (ComboSelectOnly) globalAdjustments.getControl(EmployeeControlNames.FULL_OR_PART_TIME).get();
 		cmbComp.click();		
-		cmbComp.writeText("Full Timer");		
+		cmbComp.selectText("Full Timer");		
 	}		
 	
 }

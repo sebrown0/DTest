@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import context_manager.ContextManager;
-import controls.ComboSelect;
+import controls.ComboWriteAndSelect;
 import controls.Control;
 import object_models.forms.FormWithIFrame;
 
@@ -41,21 +41,21 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 	}
 		
 	// Elements
-	public ComboSelect companySelect() {
+	public ComboWriteAndSelect companySelect() {
 		return getSelectBox("SelectURLNC1");
 	}
 	
-	public ComboSelect departmentSelect() {
+	public ComboWriteAndSelect departmentSelect() {
 		return getSelectBox("SelectURLNC2");
 	}
 	
-	public ComboSelect filterSelect() {
+	public ComboWriteAndSelect filterSelect() {
 		return getSelectBox("SelectURLNCA2");
 	}	
 	
-	private ComboSelect getSelectBox(String id) {
+	private ComboWriteAndSelect getSelectBox(String id) {
 		WebElement select = topLevelContainer.findElement(By.cssSelector("select[name='" + id + "']")); 
-		return new ComboSelect(driver, select); 
+		return new ComboWriteAndSelect(driver, select); 
 	}
 
 	@Override

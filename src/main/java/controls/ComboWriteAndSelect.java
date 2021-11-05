@@ -6,8 +6,6 @@ package controls;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,13 +18,13 @@ import object_models.helpers.text_utils.TextSanitiser;
  * @author Steve Brown
  *
  */
-public class ComboSelect extends Combo {
+public class ComboWriteAndSelect extends Combo {
 		
-	public ComboSelect(WebDriver driver, By findBy) {
+	public ComboWriteAndSelect(WebDriver driver, By findBy) {
 		super(driver, findBy);
 	}
 		
-	public ComboSelect(WebDriver driver, WebElement combo) {
+	public ComboWriteAndSelect(WebDriver driver, WebElement combo) {
 		super(driver, combo);	
 	}
 
@@ -38,15 +36,7 @@ public class ComboSelect extends Combo {
 	public void writeText(String txt) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		wait.until(ExpectedConditions.elementToBeClickable(combo));
-//		combo.clear();
-		
-		try {
-			combo.sendKeys(txt);	
-		} catch (ElementNotInteractableException e) {
-		  JavascriptExecutor executor = (JavascriptExecutor) driver;
-	    executor.executeScript("arguments[0].scrollIntoView(true);", combo);
-	    combo.sendKeys(txt);	
-		}
-		
-	}
+		combo.clear();
+		combo.sendKeys(txt);
+	}		
 }

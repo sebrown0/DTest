@@ -16,7 +16,7 @@ import control_builder.ControlGetterDkGridEmployeeDetails;
 import control_builder.ControlGetterDropdownCombo;
 import control_builder.ControlGetterEmployeeSelection;
 import control_builder.ControlGetterTextOut;
-import controls.ComboSelect;
+import controls.ComboWriteAndSelect;
 import controls.TextOut;
 import enums.control_names.EmployeeControlNames;
 import enums.control_names.GroupControlNames;
@@ -87,8 +87,8 @@ public class EmployeeDetails extends JSPanelWithIFrame {
 			public TextInOut iDCardNumber() {
 				return new TextInOut(driver, By.id("IDENTITY_CARD_NO"));
 			}	
-			public ComboSelect title() {
-				return new ComboSelect(driver, By.cssSelector("#tab1 > div:nth-child(5) > div:nth-child(2) > span > span.selection > span"));		
+			public ComboWriteAndSelect title() {
+				return new ComboWriteAndSelect(driver, By.cssSelector("#tab1 > div:nth-child(5) > div:nth-child(2) > span > span.selection > span"));		
 			}	
 			public TextInOut name() {
 				return new TextInOut(driver, By.id("NAME"));
