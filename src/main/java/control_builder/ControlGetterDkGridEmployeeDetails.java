@@ -1,22 +1,23 @@
 /**
  * 
  */
-package controls;
+package control_builder;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextManager;
-import object_models.controls.DropdownCombo;
+import controls.Control;
+import object_models.dk_grid.DkGridEmployeeDetails;
 
 /**
  * @author Steve Brown
  *
  */
-public final class ControlGetterDropdownCombo extends ControlGetter {	
+public final class ControlGetterDkGridEmployeeDetails extends ControlGetter {
 	private ContextManager contextManager;
 	
-	public ControlGetterDropdownCombo(WebDriver driver, By findBy, ContextManager contextManager) {
+	public ControlGetterDkGridEmployeeDetails(WebDriver driver, By findBy, ContextManager contextManager) {
 		super(driver, findBy);
 		this.contextManager = contextManager;
 	}
@@ -24,7 +25,7 @@ public final class ControlGetterDropdownCombo extends ControlGetter {
 	@Override
 	public Control getControl() {
 		driver.findElement(findBy).click();
-		return new DropdownCombo(driver, contextManager);
+		return new DkGridEmployeeDetails(driver, contextManager);
 	}
 
 }

@@ -6,7 +6,7 @@ package object_models.employee_creation;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 
-import controls.PageMap;
+import control_mapping.PageMap;
 import dto.Employee;
 
 /**

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controls;
+package control_builder;
 
 import java.util.Map;
 

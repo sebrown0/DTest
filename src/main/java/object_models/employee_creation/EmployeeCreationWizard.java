@@ -14,12 +14,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextManager;
-import controls.ControlCombo;
-import controls.ControlText;
-import controls.MapControl;
-import controls.MappingStrategy;
-import controls.PageMap;
-import controls.PageMapper;
+import control_mapping.MapControl;
+import control_mapping.MapControlCombo;
+import control_mapping.MapControlText;
+import control_mapping.MappingStrategy;
+import control_mapping.PageMap;
+import control_mapping.PageMapper;
 import dto.Employee;
 import object_models.forms.FormFadeShow;
 import object_models.panels.JSPanelWithIFrame;
@@ -75,8 +75,8 @@ public class EmployeeCreationWizard extends JSPanelWithIFrame {
 		@Override
 		public List<MapControl> getList() {
 			MapControl[] objs = {
-					new ControlText(driver, By.cssSelector("input[type='text']"), "placeholder"),
-					new ControlCombo(driver, By.cssSelector("span[role='combobox']"), "textContent")};
+					new MapControlText(driver, By.cssSelector("input[type='text']"), "placeholder"),
+					new MapControlCombo(driver, By.cssSelector("span[role='combobox']"), "textContent")};
 
 			return List.of(objs);
 		}		

@@ -1,22 +1,23 @@
 /**
  * 
  */
-package controls;
+package control_builder;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextManager;
-import object_models.controls.EmployeeSelection;
+import controls.Control;
+import object_models.controls.DropdownCombo;
 
 /**
  * @author Steve Brown
  *
  */
-public final class ControlGetterEmployeeSelection extends ControlGetter {	
+public final class ControlGetterDropdownCombo extends ControlGetter {	
 	private ContextManager contextManager;
 	
-	public ControlGetterEmployeeSelection(WebDriver driver, By findBy, ContextManager contextManager) {
+	public ControlGetterDropdownCombo(WebDriver driver, By findBy, ContextManager contextManager) {
 		super(driver, findBy);
 		this.contextManager = contextManager;
 	}
@@ -24,7 +25,7 @@ public final class ControlGetterEmployeeSelection extends ControlGetter {
 	@Override
 	public Control getControl() {
 		driver.findElement(findBy).click();
-		return new EmployeeSelection(driver, contextManager);
+		return new DropdownCombo(driver, contextManager);
 	}
 
 }

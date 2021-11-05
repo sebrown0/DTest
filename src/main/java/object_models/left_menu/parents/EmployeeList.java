@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextManager;
-import object_models.element.ComboSelect;
+import controls.ComboSelect;
 import object_models.panels.JSPanelWithIFrame;
 
 /**

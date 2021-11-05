@@ -1,14 +1,12 @@
 /**
  * 
  */
-package object_models.element;
+package controls;
 
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import controls.Control;
 
 /**
  * @author Steve Brown

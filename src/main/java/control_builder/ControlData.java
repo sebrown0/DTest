@@ -1,7 +1,9 @@
 /**
  * 
  */
-package controls;
+package control_builder;
+
+import controls.ControlName;
 
 /**
  * @author Steve Brown

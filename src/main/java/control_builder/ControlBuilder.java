@@ -1,11 +1,13 @@
 /**
  * 
  */
-package controls;
+package control_builder;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import controls.ControlName;
 
 /**
  * @author Steve Brown

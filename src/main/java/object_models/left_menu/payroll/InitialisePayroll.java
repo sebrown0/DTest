@@ -10,9 +10,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextManager;
+import controls.ComboSelect;
 import object_models.dialog.Dialog;
 import object_models.dialog.DialogOkCancel;
-import object_models.element.ComboSelect;
 import object_models.forms.FormWithIFrame;
 
 /**
@@ -56,13 +56,13 @@ public class InitialisePayroll extends FormWithIFrame {
 	
 	// Elements
 	public ComboSelect getSelectCompany() {
-		return new ComboSelect(container.findElement(By.cssSelector("div:nth-child(3) > div:nth-child(2) > select")));		
+		return new ComboSelect(driver, container.findElement(By.cssSelector("div:nth-child(3) > div:nth-child(2) > select")));		
 	}
 	public ComboSelect getSelectPayGroup() {
-		return new ComboSelect(container.findElement(By.cssSelector("div:nth-child(4) > div:nth-child(2) > select")));		
+		return new ComboSelect(driver, container.findElement(By.cssSelector("div:nth-child(4) > div:nth-child(2) > select")));		
 	}	
 	public ComboSelect getSelectPayPeriod() {
-		return new ComboSelect(container.findElement(By.cssSelector("div:nth-child(5) > div:nth-child(2) > select")));		
+		return new ComboSelect(driver, container.findElement(By.cssSelector("div:nth-child(5) > div:nth-child(2) > select")));		
 	}
 //	public ElementButton getInitialisePayroll() {
 //		return new ElementButton(container.findElement(By.cssSelector("body > form > div > div:nth-child(9) > div:nth-child(4) > div.btn.btn-warning")));

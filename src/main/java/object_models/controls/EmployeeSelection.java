@@ -8,8 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import context_manager.ContextManager;
+import controls.ComboSelect;
 import controls.Control;
-import object_models.element.ComboSelect;
 import object_models.forms.FormWithIFrame;
 
 /**
@@ -55,7 +55,7 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 	
 	private ComboSelect getSelectBox(String id) {
 		WebElement select = topLevelContainer.findElement(By.cssSelector("select[name='" + id + "']")); 
-		return new ComboSelect(select); 
+		return new ComboSelect(driver, select); 
 	}
 
 	@Override

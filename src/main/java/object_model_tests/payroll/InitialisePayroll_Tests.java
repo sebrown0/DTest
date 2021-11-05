@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import controls.ComboSelect;
 import logging.TestResultLogger;
 import object_models.dialog.DialogOkCancel;
-import object_models.element.ComboSelect;
 import object_models.forms.ContainerAction;
 import object_models.helpers.text_utils.RemoveX;
 import object_models.left_menu.common.LeftMenu;

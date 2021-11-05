@@ -1,5 +1,6 @@
 package object_model_tests.global_adjustments;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -9,10 +10,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import controls.ComboSelect;
 import enums.control_names.CommonControlNames;
+import enums.control_names.EmployeeControlNames;
 import enums.control_names.PayrollControlNames;
 import logging.TestResultLogger;
-import object_models.element.ComboSelect;
 import object_models.helpers.text_utils.RemoveX;
 import object_models.left_menu.payroll.GlobalAdjustments;
 import object_models.pages.HomePage;
@@ -47,24 +49,34 @@ class GlobalAdjustmentTests {
 	@Test @Order(2)
 	void selectCompany_implicitPassIfNoErrors() {
 		ComboSelect cmbComp = (ComboSelect) globalAdjustments.getControl(CommonControlNames.COMPANY).get();
-		cmbComp.click();
-		System.out.println("->" + cmbComp.getText(new RemoveX())); // TODO - remove or log 	
-		
+		cmbComp.click();		
 	}
 	
 	@Test @Order(3)
-	void selectPayPeriods_implicitPassIfNoErrors() {
+	void selectPayPeriods() {
 		ComboSelect cmbComp = (ComboSelect) globalAdjustments.getControl(PayrollControlNames.PAY_PERIODS).get();
 		cmbComp.click();
-		System.out.println("->" + cmbComp.getText(new RemoveX())); // TODO - remove or log 	
-		
+		String period = cmbComp.getText(new RemoveX());
+		assertEquals(33, period.length());		
+	}		
+
+	@Test @Order(4)
+	void selectDepartment_implicitPassIfNoErrors() {
+		ComboSelect cmbComp = (ComboSelect) globalAdjustments.getControl(CommonControlNames.DEPARTMENT).get();
+		cmbComp.click();		
+	}		
+
+	@Test @Order(5)
+	void selectPaygroup_implicitPassIfNoErrors() {
+		ComboSelect cmbComp = (ComboSelect) globalAdjustments.getControl(PayrollControlNames.PAY_GROUP).get();
+		cmbComp.click();		
 	}		
 	
-//	@Test @Order(3)
-//	void selectEmployee_implicitPassIfNoErrors() {
-//		ComboSelect cmbEmps = (ComboSelect) globalAdjustments.getControl(EmployeeControlNames.EMPLOYEES).get();
-//		cmbEmps.click(); //open
-//		cmbEmps.click(); //close
-//		assertEquals("bbb", cmbEmps.getText());
-//	}		
+	@Test @Order(6)
+	void selectFullOrPartTime_fullTime() {
+		ComboSelect cmbComp = (ComboSelect) globalAdjustments.getControl(EmployeeControlNames.FULL_OR_PART_TIME).get();
+		cmbComp.click();		
+		cmbComp.writeText("Full Timer");		
+	}		
+	
 }

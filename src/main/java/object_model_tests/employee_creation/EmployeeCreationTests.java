@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import controls.TextOut;
 import dto.Employee;
 import enums.control_names.EmployeeControlNames;
 import logging.TestResultLogger;
-import object_models.element.TextOut;
 import object_models.employee_creation.EmployeeCreationWizard;
 import object_models.forms.FormFadeShow;
 import object_models.left_menu.employees.EmployeeDetails;

@@ -18,7 +18,7 @@ import context_manager.ContextManager;
 import context_manager.ContextState;
 import context_manager.states.State;
 import context_manager.states.StateLeftMenu;
-import controls.MenuMap;
+import control_mapping.MenuMap;
 import object_models.forms.ContainerAction;
 
 /**

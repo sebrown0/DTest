@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controls;
+package control_mapping;
 
 import java.util.List;
 
@@ -16,12 +16,12 @@ import object_models.element.InputWriter;
  * @author SteveBrown
  *
  */
-public class ControlText implements MapControl{
+public class MapControlText implements MapControl{
 	private WebDriver driver;
 	private By byLocator;	
 	private String attributeKey;
 	
-	public ControlText(WebDriver driver, By byLocator, String attributeKey) {
+	public MapControlText(WebDriver driver, By byLocator, String attributeKey) {
 		this.driver = driver;
 		this.byLocator = byLocator;
 		this.attributeKey = attributeKey;

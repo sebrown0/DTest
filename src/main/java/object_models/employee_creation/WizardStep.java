@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import controls.PageMap;
+import control_mapping.PageMap;
 import object_models.element.InputWriter;
 
 public abstract class WizardStep implements WizardStepExecutor, WizardMove{

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controls;
+package control_mapping;
 
 import java.util.List;
 

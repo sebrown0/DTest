@@ -1,22 +1,23 @@
 /**
  * 
  */
-package controls;
+package control_builder;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextManager;
-import object_models.dk_grid.DkGridEmployeeDetails;
+import controls.Control;
+import object_models.controls.EmployeeSelection;
 
 /**
  * @author Steve Brown
  *
  */
-public final class ControlGetterDkGridEmployeeDetails extends ControlGetter {
+public final class ControlGetterEmployeeSelection extends ControlGetter {	
 	private ContextManager contextManager;
 	
-	public ControlGetterDkGridEmployeeDetails(WebDriver driver, By findBy, ContextManager contextManager) {
+	public ControlGetterEmployeeSelection(WebDriver driver, By findBy, ContextManager contextManager) {
 		super(driver, findBy);
 		this.contextManager = contextManager;
 	}
@@ -24,7 +25,7 @@ public final class ControlGetterDkGridEmployeeDetails extends ControlGetter {
 	@Override
 	public Control getControl() {
 		driver.findElement(findBy).click();
-		return new DkGridEmployeeDetails(driver, contextManager);
+		return new EmployeeSelection(driver, contextManager);
 	}
 
 }

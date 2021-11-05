@@ -1,10 +1,12 @@
 /**
  * 
  */
-package controls;
+package control_builder;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import controls.Control;
 
 /**
  * @author Steve Brown

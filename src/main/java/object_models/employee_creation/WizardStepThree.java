@@ -6,7 +6,7 @@ package object_models.employee_creation;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import controls.PageMap;
+import control_mapping.PageMap;
 import dto.Employee;
 import enums.EnumNameGetter;
 import object_models.helpers.Jquery;

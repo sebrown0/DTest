@@ -1,12 +1,13 @@
 /**
  * 
  */
-package controls;
+package control_builder;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import object_models.element.ComboSelect;
+import controls.ComboSelect;
+import controls.Control;
 
 /**
  * @author SteveBrown

@@ -1,13 +1,12 @@
 /**
  * 
  */
-package object_models.element;
+package controls;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import controls.Control;
 import object_models.helpers.text_utils.TextExtractor;
 import object_models.helpers.text_utils.TextSanitiser;
 
@@ -15,14 +14,17 @@ import object_models.helpers.text_utils.TextSanitiser;
  * @author Steve Brown
  *
  */
-public class ComboSelect implements Control {
-	private WebElement combo;
+public abstract class Combo implements Control {
+	protected WebElement combo;
+	protected WebDriver driver;
 	
-	public ComboSelect(WebElement element) {
-		this.combo = element;
+	public Combo(WebDriver driver, WebElement combo) {
+		this.combo = combo;
+		this.driver = driver;
 	}
 	
-	public ComboSelect(WebDriver driver, By findBy) {
+	public Combo(WebDriver driver, By findBy) {
+		this.driver = driver;
 		this.combo = driver.findElement(findBy);
 	}
 	
@@ -30,14 +32,9 @@ public class ComboSelect implements Control {
 		combo.click();
 	}
 	
-	
 	public String getText(TextSanitiser sanitiser) {
 		TextExtractor txtExt = new TextExtractor(combo, sanitiser);
 		return txtExt.getFirstOccurenceOfTextFromElement();
 	}
 	
-	public void writeText(String txt) {
-		combo.clear();
-		combo.sendKeys(txt);
-	}
 }
