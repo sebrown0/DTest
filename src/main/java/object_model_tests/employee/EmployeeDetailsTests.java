@@ -17,6 +17,7 @@ import context_manager.ContextManager;
 import controls.PageControl;
 import dto.Employee;
 import enums.control_names.EmployeeControlNames;
+import enums.control_names.GroupControlNames;
 import logging.TestResultLogger;
 import object_models.controls.DropdownCombo;
 import object_models.controls.EmployeeSelection;
@@ -70,27 +71,27 @@ class EmployeeDetailsTests {
 	// Controls - Start
 	@Test @Order(1)
 	void selectEmployee() {
-		PageControl control = empDetails.getEmployeeControl();
-		EmployeeSelection empSelection = (EmployeeSelection) control.getControl(EmployeeControlNames.SELECT_EMP).get();
+		PageControl control = empDetails.getPanelControl();
+		EmployeeSelection empSelection = (EmployeeSelection) control.getControl(GroupControlNames.SELECT_EMP).get();
 		empSelection.clickRow("3");		
 		assertEquals("0134213A", empDetails.tab().basicDetails().iDCardNumber().getTextByValue());				
 	}	
 	@Test @Order(2)
 	void checkCode() {
-		PageControl control = empDetails.getEmployeeControl();
+		PageControl control = empDetails.getPanelControl();
 		TextOut textOut = (TextOut) control.getControl(EmployeeControlNames.EMP_CODE).get();
 		assertEquals(emp.getEmpCode(), textOut.getTextByValue());		
 	}	
 	@Test @Order(3)
 	void checkEmployeeName() {
-		PageControl control = empDetails.getEmployeeControl();
+		PageControl control = empDetails.getPanelControl();
 		TextOut textOut = (TextOut) control.getControl(EmployeeControlNames.EMP_NAME).get();
 		assertEquals(emp.getFullName(), textOut.getTextByValue().trim());
 	}
 	@Test @Order(4)
 	void openCombos() {		
-		PageControl control = empDetails.getEmployeeControl();
-		DropdownCombo combos = (DropdownCombo) control.getControl(EmployeeControlNames.COMBOS).get();		
+		PageControl control = empDetails.getPanelControl();
+		DropdownCombo combos = (DropdownCombo) control.getControl(GroupControlNames.COMBOS).get();		
 		combos.close(); 
 		ContextManager cm = combos.getContextManager();
 		assertEquals(cm.getCurrentContext().getContextId().getExpectedName(), "Employee Details");

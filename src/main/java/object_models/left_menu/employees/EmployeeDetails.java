@@ -3,19 +3,21 @@
  */
 package object_models.left_menu.employees;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import context_manager.ContextManager;
 import context_manager.states.StateIframe;
-import controls.ControlBuilder;
+import controls.ControlData;
 import controls.ControlGetterDkGridEmployeeDetails;
 import controls.ControlGetterDropdownCombo;
 import controls.ControlGetterEmployeeSelection;
 import controls.ControlGetterTextOut;
-import controls.PageControl;
 import enums.control_names.EmployeeControlNames;
+import enums.control_names.GroupControlNames;
 import object_models.element.ComboSelect;
 import object_models.element.TextInOut;
 import object_models.element.TextOut;
@@ -28,7 +30,7 @@ import object_models.panels.JSPanelWithIFrame;
  */
 public class EmployeeDetails extends JSPanelWithIFrame {
 	private EmpDetailsTabs myTabs;
-	private PageControl empControl;
+//	private PageControl empControl;
 
 	public static final String PANEL_TITLE = "Employee Details";
 	public static final String MENU_TITLE = PANEL_TITLE;
@@ -38,28 +40,22 @@ public class EmployeeDetails extends JSPanelWithIFrame {
 		super(driver, PANEL_TITLE, contextManager);
 		
 		this.myTabs = new EmpDetailsTabs();
-		buildControl();
+		buildMyControls();
 	}
 	
-	// Controls
-	private void buildControl() {
-		ControlBuilder builder = new ControlBuilder();
-		builder
-			.addControl(EmployeeControlNames.EMP_CODE, new ControlGetterTextOut(driver, By.id("FORM_ID")))
-			.addControl(EmployeeControlNames.EMP_NAME, new ControlGetterTextOut(driver, By.xpath("/html/body/form/div[3]/div[3]/div[2]/input")))
-			.addControl(EmployeeControlNames.SELECT_EMP, new ControlGetterEmployeeSelection(driver, By.cssSelector("i[class='fa fa-list']"), super.manager))
-			.addControl(EmployeeControlNames.COMBOS, new ControlGetterDropdownCombo(driver, By.cssSelector("i[class='fa fa-window-maximize']"), super.manager))
-			.addControl(EmployeeControlNames.GRID_VIEW, new ControlGetterDkGridEmployeeDetails(driver, By.cssSelector("i[class='fa fw fa-table']"), super.manager));
+	private void buildMyControls() {
 		
-		empControl = new PageControl(builder);				
+		var myControls = 
+				List.of(
+						new ControlData(EmployeeControlNames.EMP_CODE, new ControlGetterTextOut(driver, By.id("FORM_ID"))),
+						new ControlData(EmployeeControlNames.EMP_NAME, new ControlGetterTextOut(driver, By.xpath("/html/body/form/div[3]/div[3]/div[2]/input"))),
+						new ControlData(GroupControlNames.SELECT_EMP, new ControlGetterEmployeeSelection(driver, By.cssSelector("i[class='fa fa-list']"), manager)),
+						new ControlData(GroupControlNames.COMBOS, new ControlGetterDropdownCombo(driver, By.cssSelector("i[class='fa fa-window-maximize']"), manager)),
+						new ControlData(GroupControlNames.GRID_VIEW, new ControlGetterDkGridEmployeeDetails(driver, By.cssSelector("i[class='fa fw fa-table']"), manager))
+				);
+		super.buildPanelControls(myControls);				
 	}
-		
-	public PageControl getEmployeeControl() {
-		manager.switchToStateInCurrentContext(StateIframe.class); 
-		manager.setLatestCallingStateToCurrent();
-		return empControl;
-	}
-				
+						
 	public EmpDetailsTabs tab() {
 		manager.switchToStateInCurrentContext(StateIframe.class);
 		return this.myTabs;

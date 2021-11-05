@@ -6,16 +6,15 @@ package enums.control_names;
 import controls.ControlName;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 public enum EmployeeControlNames implements ControlName {
 	EMP_CODE("code"), 
-	EMP_NAME("name"), 
-	SELECT_EMP("select"), 
-	COMBOS("combos"), 
-	GRID_VIEW("grid"), 
-	DOCUMENTS("docs");
+	EMP_NAME("name"),
+	FULL_OR_PART_TIME("full or part time"),
+	EMPLOYEES("employees"),	
+	EMPLOYEE_VIEW("employee view");
 
 	private final String key;
 	

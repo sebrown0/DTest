@@ -16,6 +16,7 @@ import logging.TestResultLogger;
 import object_models.dialog.DialogOkCancel;
 import object_models.element.ComboSelect;
 import object_models.forms.ContainerAction;
+import object_models.helpers.text_utils.RemoveX;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.payroll.InitialisePayroll;
 import object_models.pages.HomePage;
@@ -69,21 +70,21 @@ public final class InitialisePayroll_Tests {
 	@Order(2)
 	void checkCompany() {
 		ComboSelect selectComp = initPay.getSelectCompany(); 
-		assertEquals("Mars Incorporated Ltd", selectComp.getText());
+		assertEquals("Mars Incorporated Ltd", selectComp.getText(new RemoveX()));
 	}
 	
 	@Test
 	@Order(3)
 	void checkPayGroup() {
 		ComboSelect selectPayGroup = initPay.getSelectPayGroup(); 
-		assertEquals("Monthly Paygroup", selectPayGroup.getText());
+		assertEquals("Monthly Paygroup", selectPayGroup.getText(new RemoveX()));
 	}
 
 	@Test
 	@Order(4)
 	void checkPayPeriod() {
 		ComboSelect selectPayPeriod = initPay.getSelectPayPeriod(); 
-		assertTrue(selectPayPeriod.getText().length() > 0);
+		assertTrue(selectPayPeriod.getText(new RemoveX()).length() > 0);
 	}
 	
 	@Test

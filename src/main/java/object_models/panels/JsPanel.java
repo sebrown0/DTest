@@ -4,6 +4,7 @@
 package object_models.panels;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
@@ -23,6 +24,12 @@ import context_manager.ContextState;
 import context_manager.contexts.ContextPanel;
 import context_manager.states.StateFactorySetter;
 import context_manager.states.StateHeaderPanel;
+import context_manager.states.StateIframe;
+import controls.Control;
+import controls.ControlBuilder;
+import controls.ControlData;
+import controls.ControlName;
+import controls.PageControl;
 import exceptions.PanelException;
 import object_models.forms.ContainerAction;
 import object_models.helpers.IFrame;
@@ -36,22 +43,26 @@ import object_models.helpers.title.TitlePanel;
  */
 public abstract class JsPanel implements ContainerAction, ContextSetter, ContextIdGetter, StateFactorySetter { 
 	protected WebDriver driver;
-	protected ContextManager manager;
-	protected Logger logger = LogManager.getLogger();
+	protected Logger logger;
+	protected ContextManager manager;	
 	protected String expectedTitle;
+	protected ControlBuilder builder;
+	protected PageControl panelControl;
 	
-	private PageTitle title = null;	
-	private Optional<String> panelId;	
-	private WebElement container;
-	private JsPanelHeaderBar headerBar;
 	private ContextState myContext;
+	private PageTitle title = null;	
+	private WebElement container;
+	private Optional<String> panelId;	
+	private JsPanelHeaderBar headerBar;	
 			
 	private static final By TITLE_SELECTOR = By.cssSelector("span[class='jsPanel-title']");
 		
 	public JsPanel(WebDriver driver, String expectedTitle, ContextManager contextManager) {
+		this.logger = LogManager.getLogger();
 		this.driver = driver;
 		this.expectedTitle = expectedTitle;
 		this.manager = contextManager;		
+		this.builder = new ControlBuilder();		
 		
 		waitForLoad(ExpectedConditions.attributeContains(TITLE_SELECTOR, "innerHTML", expectedTitle));		
 		setPanelId();
@@ -64,6 +75,11 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	
 	// StateHeaderPanel needs an IFrame.
 	protected abstract void setContextState();
+	
+	protected void buildPanelControls(List<ControlData> panelControls) {
+		builder.addControls(panelControls);
+		panelControl = new PageControl(builder);		
+	}
 	
 	private void waitForLoad(ExpectedCondition<?> expectedConditionFound) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -95,6 +111,16 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 
 	protected JsPanelControlBar getControlBar() {
 		return headerBar.getControlBar();
+	}
+	
+	public PageControl getPanelControl() {
+		manager.switchToStateInCurrentContext(StateIframe.class); 
+		manager.setLatestCallingStateToCurrent();
+		return panelControl;
+	}
+	
+	public Optional<Control> getControl(ControlName cntrlName){
+		return panelControl.getControl(cntrlName);
 	}
 	
 	@Override

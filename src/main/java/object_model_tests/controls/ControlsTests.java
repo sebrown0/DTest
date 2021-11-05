@@ -17,6 +17,7 @@ import context_manager.ContextManager;
 import controls.PageControl;
 import dto.Employee;
 import enums.control_names.EmployeeControlNames;
+import enums.control_names.GroupControlNames;
 import logging.TestResultLogger;
 import object_models.controls.DropdownCombo;
 import object_models.controls.EmployeeSelection;
@@ -61,13 +62,13 @@ class ControlsTests {
 		EmployeeProvider empProvider = new EmployeeFromXml();
 		emp = empProvider.getEmployeeRequired("1");
 		// Get PageControl for EmployeeDetails
-		empDetailsPageControl = empDetails.getEmployeeControl();
+		empDetailsPageControl = empDetails.getPanelControl();
 	}
 		
 	// Controls - Start
 	@Test @Order(1)
 	void employeeSelection_selectEmployee() {
-		EmployeeSelection empSelection = (EmployeeSelection) empDetailsPageControl.getControl(EmployeeControlNames.SELECT_EMP).get();
+		EmployeeSelection empSelection = (EmployeeSelection) empDetailsPageControl.getControl(GroupControlNames.SELECT_EMP).get();
 		empSelection.clickRow("3");		
 		assertEquals("0134213A", empDetails.tab().basicDetails().iDCardNumber().getTextByValue());				
 	}	
@@ -78,7 +79,7 @@ class ControlsTests {
 	}	
 	@Test @Order(3)
 	void openCombos() {		
-		DropdownCombo combos = (DropdownCombo) empDetailsPageControl.getControl(EmployeeControlNames.COMBOS).get();		
+		DropdownCombo combos = (DropdownCombo) empDetailsPageControl.getControl(GroupControlNames.COMBOS).get();		
 		combos.close(); 
 		ContextManager cm = combos.getContextManager();
 		assertEquals(cm.getCurrentContext().getContextId().getExpectedName(), "Employee Details");

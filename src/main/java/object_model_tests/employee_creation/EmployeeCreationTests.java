@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -62,7 +61,7 @@ class EmployeeCreationTests {
 		FormFadeShow frm = wizard.createEmployee(emp);
 		assertEquals("Data Error", frm.getTitle().getExpected());
 		frm.close();
-		wizard.close();
+		wizard.close();		
 	}
 
 	@Test @Order(2)
@@ -77,9 +76,10 @@ class EmployeeCreationTests {
 		wizard.close();
 		// Open employee details and check the code.
 		EmployeeDetails empDetails = (EmployeeDetails) homepagePayroll.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
-		TextOut empDetailsCode = (TextOut) empDetails.getEmployeeControl().getControl(EmployeeControlNames.EMP_CODE).get();
+		TextOut empDetailsCode = (TextOut) empDetails.getPanelControl().getControl(EmployeeControlNames.EMP_CODE).get();		
 		assertFalse(empDetailsCode.getTextByValue().equals(randomEmpCode));
 		assertTrue(empDetailsCode.getTextByValue().equalsIgnoreCase(randomEmpCode));
+		empDetails.close();
 	}
 
 	@Test @Order(3)
@@ -96,9 +96,10 @@ class EmployeeCreationTests {
 		wizard.close();
 		// Open employee details and check the code.
 		EmployeeDetails empDetails = (EmployeeDetails) homepagePayroll.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
-		TextOut empDetailsCode = (TextOut) empDetails.getEmployeeControl().getControl(EmployeeControlNames.EMP_CODE).get();
+		TextOut empDetailsCode = (TextOut) empDetails.getPanelControl().getControl(EmployeeControlNames.EMP_CODE).get();
 		assertFalse(empDetailsCode.getTextByValue().equals(randomEmpCode));
 		assertTrue(empDetailsCode.getTextByValue().equalsIgnoreCase(randomEmpCode + "_space"));
+		empDetails.close();
 	}
 	
 	@Test @Order(4)
@@ -115,14 +116,14 @@ class EmployeeCreationTests {
 		wizard.close();
 		// Open employee details and check the code.
 		EmployeeDetails empDetails = (EmployeeDetails) homepagePayroll.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
-		TextOut empDetailsCode = (TextOut) empDetails.getEmployeeControl().getControl(EmployeeControlNames.EMP_CODE).get();
+		TextOut empDetailsCode = (TextOut) empDetails.getPanelControl().getControl(EmployeeControlNames.EMP_CODE).get();
 		assertFalse(empDetailsCode.getTextByValue().equals(randomEmpCode));
 		assertTrue(empDetailsCode.getTextByValue().equalsIgnoreCase(randomEmpCode + "_M"));
+		empDetails.close();
+		/*
+		 * LAST TEST CLOSE APP
+		 */
+		homepagePayroll.close();
 	}
-	
-	@AfterAll
-	static void teardown() {
-//		homepagePayroll.close();
-	}
-	
+		
 }

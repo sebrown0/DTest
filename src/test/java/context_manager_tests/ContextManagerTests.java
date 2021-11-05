@@ -25,7 +25,7 @@ import context_manager.states.State;
 import context_manager.states.StateHeaderPanel;
 import context_manager.states.StateLeftMenu;
 import context_manager.states.StateTop;
-import enums.control_names.EmployeeControlNames;
+import enums.control_names.GroupControlNames;
 import logging.TestResultLogger;
 import object_models.controls.EmployeeSelection;
 import object_models.forms.FormModal;
@@ -275,7 +275,7 @@ class ContextManagerTests {
 	@Test	@Order(22)
 	void getContextThatIsPanel_shouldReturnEmployeeDetails_thatIs_YearlyReports() {
 		EmployeeDetails empDetails = (EmployeeDetails) menu.clickAndLoad(EmployeeDetails.class).get();
-		EmployeeSelection empSelection = (EmployeeSelection) empDetails.getEmployeeControl().getControl(EmployeeControlNames.SELECT_EMP).get();
+		EmployeeSelection empSelection = (EmployeeSelection) empDetails.getPanelControl().getControl(GroupControlNames.SELECT_EMP).get();
 		assertTrue(empSelection instanceof FormModal);
 		//Should be one context that is a panel.
 		JsPanel panel = manager.getContextThatIsPanel().get();

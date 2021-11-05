@@ -13,14 +13,11 @@ import object_models.dk_grid.DkGridEmployeeDetails;
  * @author Steve Brown
  *
  */
-public final class ControlGetterDkGridEmployeeDetails implements ControlGetter {
-	private WebDriver driver;
-	private By findBy;
+public final class ControlGetterDkGridEmployeeDetails extends ControlGetter {
 	private ContextManager contextManager;
 	
 	public ControlGetterDkGridEmployeeDetails(WebDriver driver, By findBy, ContextManager contextManager) {
-		this.driver = driver;
-		this.findBy = findBy;
+		super(driver, findBy);
 		this.contextManager = contextManager;
 	}
 

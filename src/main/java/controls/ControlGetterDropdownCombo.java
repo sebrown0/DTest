@@ -13,14 +13,11 @@ import object_models.controls.DropdownCombo;
  * @author Steve Brown
  *
  */
-public final class ControlGetterDropdownCombo implements ControlGetter {
-	private WebDriver driver;
-	private By findBy;
+public final class ControlGetterDropdownCombo extends ControlGetter {	
 	private ContextManager contextManager;
 	
 	public ControlGetterDropdownCombo(WebDriver driver, By findBy, ContextManager contextManager) {
-		this.driver = driver;
-		this.findBy = findBy;
+		super(driver, findBy);
 		this.contextManager = contextManager;
 	}
 

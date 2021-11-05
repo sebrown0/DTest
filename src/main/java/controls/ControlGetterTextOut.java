@@ -12,13 +12,12 @@ import object_models.element.TextOut;
  * @author Steve Brown
  *
  */
-public final class ControlGetterTextOut implements ControlGetter {
+public final class ControlGetterTextOut extends ControlGetter {
 	private WebDriver driver;
 	private By findBy;
 	
 	public ControlGetterTextOut(WebDriver driver, By findBy) {
-		this.driver = driver;
-		this.findBy = findBy;
+		super(driver, findBy);
 	}
 
 	@Override

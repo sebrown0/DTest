@@ -4,6 +4,7 @@
 package controls;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,7 +16,14 @@ import java.util.Map;
  */
 public class ControlBuilder implements BuildControls {
 	private Map<String, ControlGetter> controls = new HashMap<>();
-		
+	
+	public ControlBuilder addControls(List<ControlData> controlDataList) {
+		for (ControlData cntrl : controlDataList) {
+			addControl(cntrl.getCntrlName(), cntrl.getControlGetter());
+		}
+		return this;
+	}
+
 	public ControlBuilder addControl(ControlName cntrlName, ControlGetter controlGetter) {
 		controls.put(cntrlName.getName(), controlGetter);
 		return this;

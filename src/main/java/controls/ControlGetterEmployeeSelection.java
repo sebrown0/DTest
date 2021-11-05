@@ -13,14 +13,11 @@ import object_models.controls.EmployeeSelection;
  * @author Steve Brown
  *
  */
-public final class ControlGetterEmployeeSelection implements ControlGetter {
-	private WebDriver driver;
-	private By findBy;
+public final class ControlGetterEmployeeSelection extends ControlGetter {	
 	private ContextManager contextManager;
 	
 	public ControlGetterEmployeeSelection(WebDriver driver, By findBy, ContextManager contextManager) {
-		this.driver = driver;
-		this.findBy = findBy;
+		super(driver, findBy);
 		this.contextManager = contextManager;
 	}
 

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import enums.control_names.EmployeeControlNames;
+import enums.control_names.GroupControlNames;
 import logging.TestResultLogger;
 import object_models.date_picker.DateSetter;
 import object_models.dk_grid.Cell;
@@ -61,7 +61,7 @@ public class DkGridTests {
 		
 		EmployeeDetails empDetails = (EmployeeDetails) obj.get();
 		
-		empDetailsGrid = (DkGridEmployeeDetails) empDetails.getEmployeeControl().getControl(EmployeeControlNames.GRID_VIEW).get();
+		empDetailsGrid = (DkGridEmployeeDetails) empDetails.getPanelControl().getControl(GroupControlNames.GRID_VIEW).get();
 		grid = empDetailsGrid.getGrid();
 		toolbar = grid.getToolBar();
 		content = grid.getContent();
