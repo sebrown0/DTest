@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- 
+  Configure the App
+	  1. AUT details
+	  2. Browser/Webdriver
+	  3. Reporting  
+ -->
 <Config>
 	<ApplicationUnderTest>
 		<Name>Dakar 2021</Name>

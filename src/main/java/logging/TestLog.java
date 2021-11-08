@@ -61,7 +61,7 @@ public class TestLog {
 		logger.log(resultGetter.getLogLevel(), constructLogMsg(resultGetter));
 	}
 	
-	private String constructLogMsg(TestResultGetter resultGetter) {		
+	private String constructLogMsg(TestResultGetter resultGetter) { 	
 		return 	
 				"[TEST: " + 
 				resultGetter.getTestName() + "], [ID: " + 

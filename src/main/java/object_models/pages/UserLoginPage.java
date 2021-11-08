@@ -44,7 +44,7 @@ public class UserLoginPage extends LoadablePage {
 		return getHomePageIfModuleSupplied();
 	}
 	
-	public HomePage getHomePageIfModuleSupplied() {
+	private HomePage getHomePageIfModuleSupplied() {
 		if(moduleLoader == null) {
 			return null;
 		}else {

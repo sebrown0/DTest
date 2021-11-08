@@ -38,7 +38,7 @@ public class TestResult implements TestResultGetter {
 	private void setName() {		
 		data			
 			.setClassName(context.getTestClass().get().getName())
-			.setMethodName(context.getDisplayName());
+			.setMethodName(context.getTestMethod().get().getName());
 	}
 	
 	@Override

@@ -14,10 +14,6 @@ import org.openqa.selenium.WebElement;
  */
 public class TextOut implements Control {
 	private WebElement text;
-	
-	public TextOut(WebElement text) {
-		this.text = text;
-	}
 
 	public TextOut(WebDriver driver, By findBy) {
 		setTextOut(driver, findBy);		

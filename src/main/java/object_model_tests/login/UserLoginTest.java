@@ -1,5 +1,7 @@
 package object_model_tests.login;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
@@ -11,6 +13,8 @@ import org.openqa.selenium.WebDriver;
 
 import entities.User;
 import logging.TestResultLogger;
+import object_models.modules.payroll.PayrollModuleLoader;
+import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import parameter_resolvers.ConfigParameterResolver;
 import xml_reader.config_file.ConfigReader;
@@ -57,8 +61,9 @@ class UserLoginTest {
 	@Tag("T3834")	
 	void validUserLogin(User user) {		
 		// Supply valid user, login and check home page is loaded.
-		UserLoginPage userLogin = new UserLoginPage(driver);		
-		userLogin.loginValidUser(user);
+		UserLoginPage userLogin = new UserLoginPage(driver, new PayrollModuleLoader(driver));		
+		HomePage hp = userLogin.loginValidUser(user); 
+		assertTrue(hp != null);
 	}
 		
 	@ParameterizedTest
@@ -68,7 +73,7 @@ class UserLoginTest {
 	void invalidUserLogin(User user) {
 		// Supply invalid user, login (fail) and home page is NOT loaded.
 		UserLoginPage userLogin = new UserLoginPage(driver);
-		userLogin.loginValidUser(user);
+		HomePage hp = userLogin.loginValidUser(user); 
+		assertTrue(hp == null);
 	}
-		
 }
