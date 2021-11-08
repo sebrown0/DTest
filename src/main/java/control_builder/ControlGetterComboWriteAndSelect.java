@@ -14,15 +14,16 @@ import controls.Control;
  *
  */
 public class ControlGetterComboWriteAndSelect extends ControlGetter {
-
-	public ControlGetterComboWriteAndSelect(WebDriver driver, By findBy) {
+	private By resultsBy;
+	
+	public ControlGetterComboWriteAndSelect(WebDriver driver, By findBy, By resultsBy) {
 		super(driver, findBy);
-
+		this.resultsBy = resultsBy;
 	}
 
 	@Override
 	public Control getControl() {
-		return new ComboWriteAndSelect(driver, findBy);
+		return new ComboWriteAndSelect(driver, findBy, resultsBy);
 	}
 
 }

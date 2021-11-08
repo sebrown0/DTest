@@ -17,22 +17,26 @@ import object_models.element.ListBox;
  * Can only select an item from an existing list.
  * 
  */
-public class ComboSelectOnly extends Combo {
+public class ComboSelectFromList extends Combo {
 	private By resultsBy;
+	private ListBox listBox;
 	
-	public ComboSelectOnly(WebDriver driver, By findBy, By resultsBy) {
+	public ComboSelectFromList(WebDriver driver, By findBy, By resultsBy) {
 		super(driver, findBy);
 		
 		this.resultsBy = resultsBy;
 	}
 		
-	public ComboSelectOnly(WebDriver driver, WebElement combo) {
-		super(driver, combo);	
-	}
-
-	public void selectText(String txt) {
-		ListBox listBox = new ListBox(driver, resultsBy);
+	public void selectFullText(String txt) {
+		listBox = new ListBox(driver, resultsBy);
 		Optional<WebElement> item = Optional.ofNullable(listBox.getListItem(txt));
 		item.ifPresent(i -> i.click());
+	}
+	
+	public Optional<String> getAlert(){
+		if(listBox == null) {
+			listBox = new ListBox(driver, resultsBy);
+		}
+		return listBox.getAlert();
 	}
 }

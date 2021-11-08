@@ -6,7 +6,7 @@ package control_builder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import controls.ComboSelectOnly;
+import controls.ComboSelectFromList;
 import controls.Control;
 
 /**
@@ -23,7 +23,7 @@ public class ControlGetterComboSelectOnly extends ControlGetter {
 
 	@Override
 	public Control getControl() {
-		return new ComboSelectOnly(driver, findBy, resultsBy);
+		return new ComboSelectFromList(driver, findBy, resultsBy);
 	}
 
 }

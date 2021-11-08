@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import controls.ComboWriteAndSelect;
+import controls.ComboSelectFromOptions;
 import logging.TestResultLogger;
 import object_models.dialog.DialogOkCancel;
 import object_models.forms.ContainerAction;
@@ -69,21 +69,21 @@ public final class InitialisePayroll_Tests {
 	@Test
 	@Order(2)
 	void checkCompany() {
-		ComboWriteAndSelect selectComp = initPay.getSelectCompany(); 
+		ComboSelectFromOptions selectComp = initPay.getSelectCompany(); 
 		assertEquals("Mars Incorporated Ltd", selectComp.getText(new RemoveX()));
 	}
 	
 	@Test
 	@Order(3)
 	void checkPayGroup() {
-		ComboWriteAndSelect selectPayGroup = initPay.getSelectPayGroup(); 
+		ComboSelectFromOptions selectPayGroup = initPay.getSelectPayGroup(); 
 		assertEquals("Monthly Paygroup", selectPayGroup.getText(new RemoveX()));
 	}
 
 	@Test
 	@Order(4)
 	void checkPayPeriod() {
-		ComboWriteAndSelect selectPayPeriod = initPay.getSelectPayPeriod(); 
+		ComboSelectFromOptions selectPayPeriod = initPay.getSelectPayPeriod(); 
 		assertTrue(selectPayPeriod.getText(new RemoveX()).length() > 0);
 	}
 	

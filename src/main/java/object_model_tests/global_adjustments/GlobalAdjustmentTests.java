@@ -2,6 +2,7 @@ package object_model_tests.global_adjustments;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
@@ -10,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import controls.ComboSelectOnly;
+import controls.ComboSelectFromList;
 import controls.ComboWriteAndSelect;
 import enums.control_names.CommonControlNames;
 import enums.control_names.EmployeeControlNames;
@@ -48,36 +49,57 @@ class GlobalAdjustmentTests {
 	}		
 	
 	@Test @Order(2)
-	void selectCompany_implicitPassIfNoErrors() {
+	void selectCompany_companyIsGood_noAlertShouldBePresent() {
 		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(CommonControlNames.COMPANY).get();
 		cmbComp.click();		
+		cmbComp.writeText("Mars Northe"); // Write part of the company name.
+		cmbComp.getAlert().ifPresent(a -> {	fail("Alert should not be present"); });
 	}
 	
 	@Test @Order(3)
+	void selectCompany_companyIsBad_alertShouldBePresent() {
+		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(CommonControlNames.COMPANY).get();
+		cmbComp.click();		
+		cmbComp.writeText("xxxxMars Northe"); // Write invalid company name.
+		String alert = cmbComp.getAlert().get(); 
+		assertEquals("No results found", alert);
+	}
+	
+	@Test @Order(4)
 	void selectPayPeriods() {
 		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(PayrollControlNames.PAY_PERIODS).get();
 		cmbComp.click();
 		String period = cmbComp.getText(new RemoveX());
-		assertEquals(33, period.length());		
-	}		
-
-	@Test @Order(4)
-	void selectDepartment_implicitPassIfNoErrors() {
-		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(CommonControlNames.DEPARTMENT).get();
-		cmbComp.click();		
+		assertEquals(33, period.length());
+		cmbComp.click(); // close
 	}		
 
 	@Test @Order(5)
+	void selectDepartment_implicitPassIfNoErrors() {
+		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(CommonControlNames.DEPARTMENT).get();
+		cmbComp.click();
+		cmbComp.click(); // close
+	}		
+
+	@Test @Order(6)
 	void selectPaygroup_implicitPassIfNoErrors() {
 		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(PayrollControlNames.PAY_GROUP).get();
 		cmbComp.click();		
+		cmbComp.click(); // close
 	}		
 	
-	@Test @Order(6)
+	@Test @Order(7)
 	void selectFullOrPartTime_fullTime() {
-		ComboSelectOnly cmbComp = (ComboSelectOnly) globalAdjustments.getControl(EmployeeControlNames.FULL_OR_PART_TIME).get();
+		ComboSelectFromList cmbComp = (ComboSelectFromList) globalAdjustments.getControl(EmployeeControlNames.FULL_OR_PART_TIME).get();
 		cmbComp.click();		
-		cmbComp.selectText("Full Timer");		
+		cmbComp.selectFullText("Full Timer");		
+	}		
+	
+	@Test @Order(8)
+	void selectEmployee() {
+		ComboSelectFromList cmbComp = (ComboSelectFromList) globalAdjustments.getControl(EmployeeControlNames.EMPLOYEES).get();
+		cmbComp.click();		
+		cmbComp.selectFullText("3 E");		
 	}		
 	
 }

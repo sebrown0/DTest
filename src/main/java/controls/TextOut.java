@@ -28,6 +28,11 @@ public class TextOut implements Control {
 	}
 	
 	public String getTextByValue() {
-		return text.getAttribute("value");
+		try {
+			return text.getAttribute("value");
+		} catch (Exception e) {
+			LogManager.getLogger().error("Could not get text by value");
+		}
+		return "";
 	}	
 }

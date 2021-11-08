@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextManager;
-import controls.ComboWriteAndSelect;
+import controls.ComboSelectFromOptions;
 import object_models.dialog.Dialog;
 import object_models.dialog.DialogOkCancel;
 import object_models.forms.FormWithIFrame;
@@ -55,14 +55,14 @@ public class InitialisePayroll extends FormWithIFrame {
 	}
 	
 	// Elements
-	public ComboWriteAndSelect getSelectCompany() {
-		return new ComboWriteAndSelect(driver, container.findElement(By.cssSelector("div:nth-child(3) > div:nth-child(2) > select")));		
+	public ComboSelectFromOptions getSelectCompany() {
+		return new ComboSelectFromOptions(driver, container.findElement(By.cssSelector("div:nth-child(3) > div:nth-child(2) > select")));		
 	}
-	public ComboWriteAndSelect getSelectPayGroup() {
-		return new ComboWriteAndSelect(driver, container.findElement(By.cssSelector("div:nth-child(4) > div:nth-child(2) > select")));		
+	public ComboSelectFromOptions getSelectPayGroup() {
+		return new ComboSelectFromOptions(driver, container.findElement(By.cssSelector("div:nth-child(4) > div:nth-child(2) > select")));		
 	}	
-	public ComboWriteAndSelect getSelectPayPeriod() {
-		return new ComboWriteAndSelect(driver, container.findElement(By.cssSelector("div:nth-child(5) > div:nth-child(2) > select")));		
+	public ComboSelectFromOptions getSelectPayPeriod() {
+		return new ComboSelectFromOptions(driver, container.findElement(By.cssSelector("div:nth-child(5) > div:nth-child(2) > select")));		
 	}
 //	public ElementButton getInitialisePayroll() {
 //		return new ElementButton(container.findElement(By.cssSelector("body > form > div > div:nth-child(9) > div:nth-child(4) > div.btn.btn-warning")));

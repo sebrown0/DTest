@@ -38,25 +38,25 @@ public final class GlobalAdjustments extends JSPanelWithIFrame {
 				List.of(
 						new ControlData(
 							CommonControlNames.COMPANY,
-								new ControlGetterComboWriteAndSelect(driver, By.cssSelector("span[aria-labelledby='select2-COMP_SELx-container']"))),
+								new ControlGetterComboWriteAndSelect(driver, By.cssSelector("span[aria-labelledby='select2-COMP_SELx-container']"), By.id("select2-COMP_SELx-results"))),
 						new ControlData(
 							PayrollControlNames.PAY_PERIODS,
-								new ControlGetterComboWriteAndSelect(driver, By.cssSelector("span[aria-labelledby='select2-PAYS_SELx-container']"))),
+								new ControlGetterComboWriteAndSelect(driver, By.cssSelector("span[aria-labelledby='select2-PAYS_SELx-container']"), By.id("select2-PAYS_SELx-results"))),
 						new ControlData(
 							CommonControlNames.DEPARTMENT,
-								new ControlGetterComboWriteAndSelect(driver, By.cssSelector("body > form > div:nth-child(17) > div:nth-child(2) > span > span.selection > span"))),
+								new ControlGetterComboWriteAndSelect(driver, By.cssSelector("body > form > div:nth-child(17) > div:nth-child(2) > span > span.selection > span"), By.id("select2-DEPS_SELx-results"))),
 						/*
 						 *  TODO - View Adjustment Type (what type of control is it?)
 						 */
 						new ControlData(
 								PayrollControlNames.PAY_GROUP,
-									new ControlGetterComboWriteAndSelect(driver, By.id("select2-PAYGS_SELx-container"))),
+									new ControlGetterComboWriteAndSelect(driver, By.id("select2-PAYGS_SELx-container"), By.id("select2-PAYGS_SELx-results"))),
 						new ControlData(
 								EmployeeControlNames.FULL_OR_PART_TIME,
 									new ControlGetterComboSelectOnly(driver, By.id("select2-EMPL_SELx-container"), By.id("select2-EMPL_SELx-results"))), 
 						new ControlData(
 							EmployeeControlNames.EMPLOYEES,	
-								new ControlGetterComboWriteAndSelect(driver, By.cssSelector("body > form > div:nth-child(17) > div:nth-child(4) > span > span.selection > span")))
+								new ControlGetterComboWriteAndSelect(driver, By.cssSelector("body > form > div:nth-child(17) > div:nth-child(4) > span > span.selection > span"), By.id("select2-EMPS_SELx-results")))
 													
 		);			
 		super.buildPanelControls(myControls);				

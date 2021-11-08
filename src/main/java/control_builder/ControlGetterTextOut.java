@@ -14,9 +14,6 @@ import controls.TextOut;
  *
  */
 public final class ControlGetterTextOut extends ControlGetter {
-//	private WebDriver driver;
-//	private By findBy;
-	
 	public ControlGetterTextOut(WebDriver driver, By findBy) {
 		super(driver, findBy);		
 	}

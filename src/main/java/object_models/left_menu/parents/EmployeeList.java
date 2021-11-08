@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextManager;
-import controls.ComboWriteAndSelect;
+import controls.ComboSelectFromOptions;
 import object_models.panels.JSPanelWithIFrame;
 
 /**
@@ -24,8 +24,10 @@ public final class EmployeeList extends JSPanelWithIFrame {
 	}
 		
 	// Elements
-	public ComboWriteAndSelect company() {
-		return new ComboWriteAndSelect(driver, By.cssSelector("#corners > div:nth-child(3) > div.col-5 > select"));		
+	public ComboSelectFromOptions company() {
+		return new ComboSelectFromOptions(
+				driver, 
+				driver.findElement(By.cssSelector("#corners > div:nth-child(3) > div.col-5 > select")));		
 	}	
 			
 	// Tabs
