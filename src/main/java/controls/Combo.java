@@ -19,12 +19,13 @@ import object_models.helpers.text_utils.TextSanitiser;
 public abstract class Combo implements Control {
 	protected boolean isOpen = false;	
 	protected WebElement combo;
+	protected WebElement comboDropdown;
 	protected WebDriver driver;
-	protected By comboLocator;
+	protected By comboLocator;	
 	
 	public Combo(WebDriver driver, WebElement combo) {
 		this.combo = combo;
-		this.driver = driver;
+		this.driver = driver;		
 	}
 	
 	public Combo(WebDriver driver, By findBy) {
@@ -34,8 +35,16 @@ public abstract class Combo implements Control {
 	}
 	
 	public void click() {
-		isOpen = !isOpen;
-		combo.click();
+		try {
+			combo.click();
+			isOpen = !isOpen;
+		} catch (Exception e) {
+			LogManager.getLogger().debug("Unable to click combo [" + e.getMessage() + "]");
+		}				
+	}
+		
+	public void clearAll() {
+		combo.findElement(By.cssSelector("span[class='select2-selection__clear']")).click();
 	}
 	
 	public String getText(TextSanitiser sanitiser) {

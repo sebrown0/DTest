@@ -15,6 +15,7 @@ import controls.ComboSelectFromList;
 import controls.ComboWriteAndSelect;
 import enums.control_names.CommonControlNames;
 import enums.control_names.EmployeeControlNames;
+import enums.control_names.GlobalAdjustmentControlNames;
 import enums.control_names.PayrollControlNames;
 import logging.TestResultLogger;
 import object_models.helpers.text_utils.RemoveX;
@@ -49,7 +50,7 @@ class GlobalAdjustmentTests {
 	}		
 	
 	@Test @Order(2)
-	void selectCompany_companyIsGood_noAlertShouldBePresent() {
+	void selectCompany_companyIsGood_noAlertShouldBePresent() {	
 		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(CommonControlNames.COMPANY).get();
 		cmbComp.click();		
 		cmbComp.writeText("Mars Northe"); // Write part of the company name.
@@ -57,21 +58,23 @@ class GlobalAdjustmentTests {
 	}
 	
 	@Test @Order(3)
-	void selectCompany_companyIsBad_alertShouldBePresent() {
+	void selectCompany_companyIsBad_alertShouldBePresent() {		
 		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(CommonControlNames.COMPANY).get();
 		cmbComp.click();		
+		
 		cmbComp.writeText("xxxxMars Northe"); // Write invalid company name.
-		String alert = cmbComp.getAlert().get(); 
-		assertEquals("No results found", alert);
+		String alert = cmbComp.getAlert().get();
+		cmbComp.click(); // close
+		assertEquals("No results found", alert);		
 	}
 	
 	@Test @Order(4)
-	void selectPayPeriods() {
+	void selectPayPeriods() {		
 		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(PayrollControlNames.PAY_PERIODS).get();
 		cmbComp.click();
 		String period = cmbComp.getText(new RemoveX());
-		assertEquals(33, period.length());
 		cmbComp.click(); // close
+		assertEquals(33, period.length());		
 	}		
 
 	@Test @Order(5)
@@ -81,25 +84,37 @@ class GlobalAdjustmentTests {
 		cmbComp.click(); // close
 	}		
 
+	
 	@Test @Order(6)
-	void selectPaygroup_implicitPassIfNoErrors() {
-		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(PayrollControlNames.PAY_GROUP).get();
-		cmbComp.click();		
-		cmbComp.click(); // close
+	void selectDepartment_adjustmentType() {
+		ComboWriteAndSelect cmb = (ComboWriteAndSelect) globalAdjustments.getControl(GlobalAdjustmentControlNames.VIEW_ADJUSTMENT_TYPE).get();
+		cmb.clearAll();;
+		cmb.writeText("Allowances");
+		assertEquals("Allowances", cmb.getDefaultText());
+	}		
+
+	@Test @Order(7)
+	void selectPaygroup_implicitPassIfNoErrors() {		
+		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(PayrollControlNames.PAY_GROUP).get(); 	
+		cmbComp.clearAll();		
+		cmbComp.writeText("Fourw");
+		assertEquals("Fourweekly", cmbComp.getDefaultText());
 	}		
 	
-	@Test @Order(7)
+	@Test @Order(8)
 	void selectFullOrPartTime_fullTime() {
 		ComboSelectFromList cmbComp = (ComboSelectFromList) globalAdjustments.getControl(EmployeeControlNames.FULL_OR_PART_TIME).get();
 		cmbComp.click();		
 		cmbComp.selectFullText("Full Timer");		
 	}		
-	
-	@Test @Order(8)
-	void selectEmployee() {
-		ComboSelectFromList cmbComp = (ComboSelectFromList) globalAdjustments.getControl(EmployeeControlNames.EMPLOYEES).get();
+
+	@Test @Order(9)
+	void selectEmployee() {		
+		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(EmployeeControlNames.EMPLOYEES).get();
 		cmbComp.click();		
-		cmbComp.selectFullText("3 E");		
+		cmbComp.selectFullText("3 E");
+		cmbComp.click();		
+		cmbComp.writeText("Bor");
 	}		
 	
 }
