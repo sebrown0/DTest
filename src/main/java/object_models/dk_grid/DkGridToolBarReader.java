@@ -97,7 +97,7 @@ public class DkGridToolBarReader {
 	}
 	
 	private Optional<WebElement> checkForOverallFilter() {
-		return checkForElement(By.xpath("//div/input[@type='text' and @placeholder='Overall Filter...']"));		
+		return checkForElement(By.xpath("//div/input[@type='text' and ( @placeholder='Overall Filter...' or @placeholder='Filter...' ) ]"));		
 	}	
 	
 	private Optional<WebElement> checkForEmployeeView() {

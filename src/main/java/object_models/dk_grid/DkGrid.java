@@ -17,6 +17,8 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 	private DkGridToolBar toolBar;
 	private DkGridContentReader<?> contentReader;
 	private DkGridContent<T> gridContent;
+	
+	private boolean gridLoaded;
 	private boolean toolBarLoaded;
 	private boolean contentLoaded;
 	
@@ -27,9 +29,12 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 		this.contentReader = new DkGridContentReader<>(driver, gridContent, keyStrategyRows);
 	}
 
-	public void loadGrid() {
-		loadToolBar();
-		loadContent();
+	public DkGrid<T> loadGridIfNecessary() {
+		if(!gridLoaded) {
+			loadToolBar();
+			loadContent();	
+		}		
+		return this;
 	}
 	
 	public DkGridToolBar getToolBar() {

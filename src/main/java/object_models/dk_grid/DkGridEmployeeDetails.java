@@ -11,24 +11,19 @@ import object_models.panels.JSPanelWithIFrame;
  *
  */
 public final class DkGridEmployeeDetails extends JSPanelWithIFrame implements Control {	
-	private DkGrid<FindRowByEmpCode> grid;
+	private DkGrid<FindRowByEmpId> grid;
 	
 	public static final String PANEL_TITLE = "Employee Details";	
 
 	public DkGridEmployeeDetails(WebDriver driver, ContextManager contextManager) {
 		super(driver, PANEL_TITLE, contextManager);
 		
-		/*
-		 * HAVE TO SWITCH TO THE GID AND IFRAME
-		 */
-		grid = new DkGrid<>(driver, new FindRowByEmpCode());
-//		grid.loadToolBar();
-//		grid.loadContent();
+		grid = new DkGrid<>(driver, new FindRowByEmpId());
 	}
 	
 	// Grid
-	public DkGrid<FindRowByEmpCode> getGrid() {
-		return grid;
+	public DkGrid<FindRowByEmpId> getGrid() {
+		return grid.loadGridIfNecessary();
 	}
 	
 	/*

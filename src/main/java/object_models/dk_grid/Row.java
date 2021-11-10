@@ -59,7 +59,7 @@ public class Row <T extends KeyStrategyRow> {
 	public void setKeyColumnName(List<WebElement> cellElements) {
 		String id = null;
 		String idCol = rowKeyStrategy.getStrategyName();
-		
+		//employee_code
 		for (WebElement e : cellElements) {
 			id = e.getAttribute("col-id");		
 			if(id.equalsIgnoreCase(idCol)) {

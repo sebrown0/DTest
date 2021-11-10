@@ -3,20 +3,13 @@ package object_model_tests.dk_grid;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.Duration;
 import java.util.Optional;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import enums.control_names.CommonControlNames;
 import enums.control_names.GroupControlNames;
 import logging.TestResultLogger;
 import object_models.date_picker.DateSetter;
@@ -27,7 +20,6 @@ import object_models.dk_grid.DkGridContent;
 import object_models.dk_grid.DkGridEmployeeDetails;
 import object_models.dk_grid.DkGridToolBar;
 import object_models.dk_grid.Row;
-import object_models.dk_grid.Row.KeyStrategyRow;
 import object_models.element.ElementButton;
 import object_models.element.ElementInput;
 import object_models.element.ElementPointInTime;
@@ -35,7 +27,6 @@ import object_models.forms.ContainerAction;
 import object_models.helpers.TestFail;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.employees.EmployeeDetails;
-import object_models.left_menu.payroll.GlobalAdjustments;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import parameter_resolvers.ConfigParameterResolver;
@@ -48,7 +39,7 @@ import xml_reader.config_file.ConfigReader;
 	ConfigParameterResolver.class, 
 	TestResultLogger.class, 
 	LoginPageResolverPayroll.class })
-public class DkGridTests {	
+public class DkGridEmployeeDetailsTests {	
 	private static HomePage homepagePayroll;
 	private static LeftMenu menuPayroll;
 	private static DkGridEmployeeDetails empDetailsGrid;
@@ -60,7 +51,7 @@ public class DkGridTests {
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
 		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
 		menuPayroll = homepagePayroll.getLeftMenu();
-//		loadGrid();
+		loadGrid();
 	}		
 	
 	private static void loadGrid() {
@@ -71,102 +62,91 @@ public class DkGridTests {
 		EmployeeDetails empDetails = (EmployeeDetails) obj.get();
 		
 		empDetailsGrid = (DkGridEmployeeDetails) empDetails.getPanelControl().getControl(GroupControlNames.GRID_VIEW).get();
-//		grid = empDetailsGrid.getGrid();
-//		toolbar = grid.getToolBar();
-//		content = grid.getContent();
-	}
-	
-	@Test
-	void ioioioiioioio() {
-		GlobalAdjustments globalAdjustments = 
-				(GlobalAdjustments) homepagePayroll.getLeftMenu().clickAndLoad(GlobalAdjustments.class).get();
-		
-		@SuppressWarnings("unchecked")
-		DkGrid<KeyStrategyRow> grid = (DkGrid<KeyStrategyRow>) globalAdjustments.getControl(CommonControlNames.DK_GRID).get();
-		grid.loadGrid();
-		
-	}
-	
-	@Test
-	void checkSaveIsPresent() {		
-		Optional<ElementButton> save = toolbar.getButton(DkGridToolBar.BTN_SAVE);
-		save.ifPresentOrElse(
-				b ->  assertTrue(true), 
-				new TestFail("Save is not present")
-		);		
-	}
-	
-	@Test
-	void checkDownloadToExcelIsPresent() {		
-		Optional<ElementButton> downloadToExcel = toolbar.getButton(DkGridToolBar.BTN_DOWNLOAD_TO_EXCEL);
-		downloadToExcel.ifPresentOrElse(				
-				b ->  assertTrue(true), 
-				new TestFail("Download To Excel is not present")
-		);		
-	}
-	
-	@Test
-	void checkDownloadToCsvIsPresent() {		
-		Optional<ElementButton> downloadToCsv = toolbar.getButton(DkGridToolBar.BTN_DOWNLOAD_TO_CSV);
-		downloadToCsv.ifPresentOrElse(
-				b ->  assertTrue(true), 
-				new TestFail("Download To CSV is not present")
-		);		
-	}
-	
-	@Test
-	void checkUploadIsPresent() {		
-		Optional<ElementButton> upload = toolbar.getButton(DkGridToolBar.BTN_UPLOAD);
-		upload.ifPresentOrElse(
-				b ->  assertTrue(true), 
-				new TestFail("Upload is not present")
-		);		
+		grid = empDetailsGrid.getGrid();
+		toolbar = grid.getToolBar();
+		content = grid.getContent();
 	}
 
-	@Test
-	void checkSaveGridStateIsPresent() {		
-		Optional<ElementButton> saveGridState = toolbar.getButton(DkGridToolBar.BTN_SAVE_GRID_STATE);
-		saveGridState.ifPresentOrElse(
-				b ->  assertTrue(true), 
-				new TestFail("Save grid state is not present")
-		);		
-	}
-
-	@Test
-	void checkRefreshGridStateIsPresent() {		
-		Optional<ElementButton> refreshGridState = toolbar.getButton(DkGridToolBar.BTN_REFRESH_GRID_STATE);
-		refreshGridState.ifPresentOrElse(
-				b ->  assertTrue(true), 
-				new TestFail("Refresh grid state is not present")
-		);		
-	}
-	
-	@Test
-	void checkResetGridStateIsPresent() {		
-		Optional<ElementButton> resetGridState = toolbar.getButton(DkGridToolBar.BTN_RESET_GRID_STATE);
-		resetGridState.ifPresentOrElse(
-				b ->  assertTrue(true), 
-				new TestFail("Reset grid state is not present")
-		);		
-	}
-
-	@Test
-	void checkEmployeeViewIsPresent() {		
-		Optional<ElementButton> empView = toolbar.getButton(DkGridToolBar.BTN_EMPLOYEE_VIEW);
-		empView.ifPresentOrElse(
-				b ->  assertTrue(true),  
-				new TestFail("Employee view is not present")
-		);		
-	}
-
-	@Test
-	void checkCreateHitlistIsPresent() {
-		Optional<ElementButton> hitlist = toolbar.getButton(DkGridToolBar.BTN_CREATE_HITLIST);
-		hitlist.ifPresentOrElse(
-				b ->  assertTrue(true), 
-				new TestFail("Create hitlist is not present")
-		);		
-	}
+//	@Test
+//	void checkSaveIsPresent() {		
+//		Optional<ElementButton> save = toolbar.getButton(DkGridToolBar.BTN_SAVE);
+//		save.ifPresentOrElse(
+//				b ->  assertTrue(true), 
+//				new TestFail("Save is not present")
+//		);		
+//	}
+//	
+//	@Test
+//	void checkDownloadToExcelIsPresent() {		
+//		Optional<ElementButton> downloadToExcel = toolbar.getButton(DkGridToolBar.BTN_DOWNLOAD_TO_EXCEL);
+//		downloadToExcel.ifPresentOrElse(				
+//				b ->  assertTrue(true), 
+//				new TestFail("Download To Excel is not present")
+//		);		
+//	}
+//	
+//	@Test
+//	void checkDownloadToCsvIsPresent() {		
+//		Optional<ElementButton> downloadToCsv = toolbar.getButton(DkGridToolBar.BTN_DOWNLOAD_TO_CSV);
+//		downloadToCsv.ifPresentOrElse(
+//				b ->  assertTrue(true), 
+//				new TestFail("Download To CSV is not present")
+//		);		
+//	}
+//	
+//	@Test
+//	void checkUploadIsPresent() {		
+//		Optional<ElementButton> upload = toolbar.getButton(DkGridToolBar.BTN_UPLOAD);
+//		upload.ifPresentOrElse(
+//				b ->  assertTrue(true), 
+//				new TestFail("Upload is not present")
+//		);		
+//	}
+//
+//	@Test
+//	void checkSaveGridStateIsPresent() {		
+//		Optional<ElementButton> saveGridState = toolbar.getButton(DkGridToolBar.BTN_SAVE_GRID_STATE);
+//		saveGridState.ifPresentOrElse(
+//				b ->  assertTrue(true), 
+//				new TestFail("Save grid state is not present")
+//		);		
+//	}
+//
+//	@Test
+//	void checkRefreshGridStateIsPresent() {		
+//		Optional<ElementButton> refreshGridState = toolbar.getButton(DkGridToolBar.BTN_REFRESH_GRID_STATE);
+//		refreshGridState.ifPresentOrElse(
+//				b ->  assertTrue(true), 
+//				new TestFail("Refresh grid state is not present")
+//		);		
+//	}
+//	
+//	@Test
+//	void checkResetGridStateIsPresent() {		
+//		Optional<ElementButton> resetGridState = toolbar.getButton(DkGridToolBar.BTN_RESET_GRID_STATE);
+//		resetGridState.ifPresentOrElse(
+//				b ->  assertTrue(true), 
+//				new TestFail("Reset grid state is not present")
+//		);		
+//	}
+//
+//	@Test
+//	void checkEmployeeViewIsPresent() {		
+//		Optional<ElementButton> empView = toolbar.getButton(DkGridToolBar.BTN_EMPLOYEE_VIEW);
+//		empView.ifPresentOrElse(
+//				b ->  assertTrue(true),  
+//				new TestFail("Employee view is not present")
+//		);		
+//	}
+//
+//	@Test
+//	void checkCreateHitlistIsPresent() {
+//		Optional<ElementButton> hitlist = toolbar.getButton(DkGridToolBar.BTN_CREATE_HITLIST);
+//		hitlist.ifPresentOrElse(
+//				b ->  assertTrue(true), 
+//				new TestFail("Create hitlist is not present")
+//		);		
+//	}
 	
 	@Test
 	void checkOverallFilterIsPresent() {

@@ -9,7 +9,8 @@ package object_models.dk_grid;
  */
 public enum ColumnName {	
 	COL_ID("COL_ID"),
-	EMP_CODE("@id"),
+	EMP_ID("@id"),
+	EMP_CODE("employee_code"),
 	ALL_NAME("all_name"),
 	IDENTITY_CARD_NO("identity_card_no"),
 	TITLE("title"),

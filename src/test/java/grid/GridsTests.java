@@ -9,13 +9,13 @@ import org.junit.jupiter.api.Test;
 
 import object_models.dk_grid.Cell;
 import object_models.dk_grid.ColumnName;
-import object_models.dk_grid.FindRowByEmpCode;
+import object_models.dk_grid.FindRowByEmpId;
 import object_models.dk_grid.GridData;
 import object_models.dk_grid.Row;
 import object_models.helpers.TestFail;
 
 class GridsTests {
-	private static GridData<FindRowByEmpCode> gridData = new GridData<>();;
+	private static GridData<FindRowByEmpId> gridData = new GridData<>();;
 	
 	@BeforeAll
 	public static void setup() {
@@ -25,12 +25,12 @@ class GridsTests {
 		Cell cell4 = new Cell("col_id_4", "Malta", "", "", null);		
 		Cell cell5 = new Cell("col_id_5", "EMP_CODE_DMS2", "", "", null);
 		
-		Row<FindRowByEmpCode> row1 =new Row<>(new FindRowByEmpCode());
-		row1.addCell(ColumnName.EMP_CODE.value, cell1);
+		Row<FindRowByEmpId> row1 =new Row<>(new FindRowByEmpId());
+		row1.addCell(ColumnName.EMP_ID.value, cell1);
 		row1.addCell(ColumnName.ALL_NAME.value, cell2);		
 		
-		Row<FindRowByEmpCode> row2 =new Row<>(new FindRowByEmpCode());
-		row2.addCell(ColumnName.EMP_CODE.value, cell5);
+		Row<FindRowByEmpId> row2 =new Row<>(new FindRowByEmpId());
+		row2.addCell(ColumnName.EMP_ID.value, cell5);
 		row2.addCell(ColumnName.DOB.value, cell3);
 		row2.addCell(ColumnName.COUNTRY.value, cell4);
 		

@@ -46,7 +46,8 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 	}
 	private void setContainerNames() {
 		containerNames[0] = "ag-pinned-left-cols-container";
-		containerNames[1] = "ag-center-cols-container";
+//		containerNames[1] = "ag-center-cols-container";
+		containerNames[1] = "ag-center-cols";
 		containerNames[2] = "ag-pinned-right-cols-container ag-hidden"; 
 	}
 	
@@ -79,7 +80,8 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 	}
 	
 	private void mapCentre() {
-		WebElement container = contentElement.findElement(By.cssSelector("div[class='" + containerNames[1] + "']"));
+		WebElement container = contentElement.findElement(By.cssSelector("div[class^='" + containerNames[1] + "']"));
+//		WebElement container = contentElement.findElement(By.cssSelector("div[class='" + containerNames[1] + "']"));
 		currentContainerName = containerNames[1];
 		getRowsInContainer(container);
 	}
@@ -100,8 +102,7 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 				});	
 		}else {
 			logger.info("No rows in container [" + currentContainerName + "]");
-		}
-		
+		}		
 	}
 	
 	private void mapRowToContainer(WebElement rowElement, String containerName) {				
@@ -120,9 +121,7 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 
 		for (WebElement cellElement : cellElements) {
 			colId = cellElement.getAttribute("col-id");			
-			value = cellElement.getText();
-			System.out.println("col id ->" + colId + " val ->" + value); // TODO - remove or log
- 	
+			value = cellElement.getText(); 	
 			Cell newCell = new Cell(
 					colId, 
 					value, 

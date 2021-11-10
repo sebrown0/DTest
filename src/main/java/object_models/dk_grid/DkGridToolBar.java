@@ -4,11 +4,15 @@
 package object_models.dk_grid;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import dto.ButtonData;
+import enums.GridButtonNames;
 import object_models.element.ElementButton;
 import object_models.element.ElementInput;
+import object_models.element.ElementKey;
 import object_models.element.ElementPointInTime;
 
 /**
@@ -19,22 +23,45 @@ public class DkGridToolBar {
 	private Map<String, ElementButton> buttons = new HashMap<>();
 	private Optional<ElementInput> overallFilter;
 	private Optional<ElementPointInTime> pointInTime;
+	private static List<ButtonData> buttonData;
 	
-	public static final String BTN_SAVE = "Save Changes";
-	public static final String BTN_DOWNLOAD_TO_EXCEL = "Download to Excel";
-	public static final String BTN_DOWNLOAD_TO_CSV = "Download to CSV";
-	public static final String BTN_UPLOAD = "Upload";
-	public static final String BTN_SAVE_GRID_STATE = "Save Grid State";
-	public static final String BTN_REFRESH_GRID_STATE = "Refresh Grid State";
-	public static final String BTN_RESET_GRID_STATE = "Reset Grid State";
-	public static final String BTN_EMPLOYEE_VIEW = "Employee View";
-	public static final String BTN_CREATE_HITLIST = "Create HitList";
+	static {
+		buttonData = 
+				List.of(
+						new ButtonData(GridButtonNames.BTN_ADD, "fa fa-fw fa-plus"),
+						new ButtonData(GridButtonNames.BTN_DELETE, "fa fa-fw fa-remove"),
+						new ButtonData(GridButtonNames.BTN_SAVE, "fa fa-fw fa-save"),
+						new ButtonData(GridButtonNames.BTN_DOWNLOAD_TO_CSV, "fa fa-fw fa-download"),
+						new ButtonData(GridButtonNames.BTN_UPLOAD, "fa fa-fw fa-upload"),
+						new ButtonData(GridButtonNames.BTN_SAVE_GRID_STATE, "fa fa-fw fa-table"),
+						new ButtonData(GridButtonNames.BTN_REFRESH_GRID_STATE, "fa fa-fw fa-refresh"),
+						new ButtonData(GridButtonNames.BTN_RESET_GRID_STATE, "fa fa-fw fa-rotate-left")
+				);
+	}
+		
+//	private String getKey(ElementButton btn) {
+//		final String elmtKey = btn.getElementKey();
+//		String key = elmtKey;
+//		
+//		if(elmtKey.contains("fa")) {
+//			ButtonData bd = buttonData.stream()
+//				.filter(b ->  b.getBtnFaFa().equalsIgnoreCase(elmtKey))
+//				.findAny()
+//				.orElse(null);
+//			
+//			if(bd != null) {
+//				key = bd.getBtnName();
+//			}
+//			
+//		}
+//		return key;
+//	}
 	
 	/*
 	 * Buttons
 	 */
-	public void addButton(ElementButton btn) {
-		buttons.putIfAbsent(btn.getElementKey(), btn);	
+	public void addButton(ElementKey btn) {
+		buttons.putIfAbsent(btn.getKey(buttonData), (ElementButton) btn);	
 	}	
 	public Optional<ElementButton> getButton(String key){
 		Optional<ElementButton>  btn = Optional.ofNullable(buttons.get(key));
