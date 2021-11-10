@@ -30,7 +30,6 @@ import object_models.panels.JSPanelWithIFrame;
  */
 public class EmployeeDetails extends JSPanelWithIFrame {
 	private EmpDetailsTabs myTabs;
-//	private PageControl empControl;
 
 	public static final String PANEL_TITLE = "Employee Details";
 	public static final String MENU_TITLE = PANEL_TITLE;
@@ -43,8 +42,7 @@ public class EmployeeDetails extends JSPanelWithIFrame {
 		buildMyControls();
 	}
 	
-	private void buildMyControls() {
-		
+	private void buildMyControls() {		
 		var myControls = 
 				List.of(
 						new ControlData(EmployeeControlNames.EMP_CODE, new ControlGetterTextOut(driver, By.id("FORM_ID"))),

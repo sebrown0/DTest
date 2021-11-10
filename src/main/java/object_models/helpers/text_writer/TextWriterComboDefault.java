@@ -3,6 +3,7 @@
  */
 package object_models.helpers.text_writer;
 
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -27,10 +28,14 @@ public class TextWriterComboDefault implements TextWriter {
 
 	@Override
 	public void writeText(String txt) {
-		WebElement cont = driver.findElement(By.cssSelector("span[class='select2-container select2-container--default select2-container--open']"));
-		WebElement ip = cont.findElement(By.cssSelector("input[class='select2-search__field']"));
-		ip.sendKeys(txt);	
-		ip.sendKeys(Keys.ENTER);
+		try {
+			WebElement cont = driver.findElement(By.cssSelector("span[class='select2-container select2-container--default select2-container--open']"));
+			WebElement ip = cont.findElement(By.cssSelector("input[class='select2-search__field']"));
+			ip.sendKeys(txt);	
+			ip.sendKeys(Keys.ENTER);	
+		} catch (Exception e) {
+			LogManager.getLogger().error("Unable to write text to combo [" + e.getMessage() + "]");
+		}		
 	}
 
 }

@@ -3,16 +3,18 @@
  */
 package object_models.dk_grid;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import object_models.dk_grid.Row.KeyStrategyRow;
 
@@ -20,12 +22,11 @@ import object_models.dk_grid.Row.KeyStrategyRow;
  * @author Steve Brown
  *
  */
-public class DkGridContentReader <T extends KeyStrategyRow>{
+public class DkGridContentReader <T extends KeyStrategyRow> {
 	private WebDriver driver;
 	private WebElement gridElement;
 	private WebElement contentElement;	
 	private Logger logger = LogManager.getLogger();
-//	private Logger logger = LogManager.getLogger();	
 	private DkGridContent<?> gridContent;	
 	private String[] containerNames = new String[3];
 	private KeyStrategyRow keyStrategyRows;
@@ -35,13 +36,14 @@ public class DkGridContentReader <T extends KeyStrategyRow>{
 	public DkGridContentReader(WebDriver driver, DkGridContent<?> gridContent, KeyStrategyRow keyStrategyRows) {
 		this.driver = driver;
 		this.gridContent = gridContent;
-		this.keyStrategyRows = keyStrategyRows;
-
+		this.keyStrategyRows = keyStrategyRows;		
+	}
+		
+	private void intialise() {
 		setContainerNames();
 		setGridElement();
 		setContentElement();
 	}
-		
 	private void setContainerNames() {
 		containerNames[0] = "ag-pinned-left-cols-container";
 		containerNames[1] = "ag-center-cols-container";
@@ -49,10 +51,10 @@ public class DkGridContentReader <T extends KeyStrategyRow>{
 	}
 	
 	private void setGridElement() {
-		System.out.println("->setGridElement"); // TODO - remove or log 	
-		gridElement = driver.findElement(By.xpath("/html/body/form/div[4]"));
-		// Id & cssSelector not working
-//		gridElement = driver.findElement(By.id("dkrGrid"));
+		By contentLocator = By.id("dkrGrid");
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));		 
+		wait.until(ExpectedConditions.visibilityOfElementLocated(contentLocator)); 	
+		gridElement = driver.findElement(contentLocator);		
 	}
 	
 	private void setContentElement() {
@@ -60,6 +62,7 @@ public class DkGridContentReader <T extends KeyStrategyRow>{
 	}
 	
 	public void read() {
+		intialise();
 		loopContainers();
 	}
 	
@@ -114,15 +117,12 @@ public class DkGridContentReader <T extends KeyStrategyRow>{
 		Row<T> newRow  = getNewRowWithKey(cellElements, rowIdx);
 		String colId = null;
 		String value = null;
-		
-//		System.out.println("->" + cellElements.size());
+
 		for (WebElement cellElement : cellElements) {
-			colId = cellElement.getAttribute("col-id");
-			
-//			System.out.println(colId);//
-			
-			
+			colId = cellElement.getAttribute("col-id");			
 			value = cellElement.getText();
+			System.out.println("col id ->" + colId + " val ->" + value); // TODO - remove or log
+ 	
 			Cell newCell = new Cell(
 					colId, 
 					value, 

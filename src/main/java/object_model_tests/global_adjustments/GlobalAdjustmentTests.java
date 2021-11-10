@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import controls.Button;
 import controls.ComboSelectFromList;
 import controls.ComboWriteAndSelect;
 import enums.control_names.CommonControlNames;
@@ -61,7 +62,6 @@ class GlobalAdjustmentTests {
 	void selectCompany_companyIsBad_alertShouldBePresent() {		
 		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(CommonControlNames.COMPANY).get();
 		cmbComp.click();		
-		
 		cmbComp.writeText("xxxxMars Northe"); // Write invalid company name.
 		String alert = cmbComp.getAlert().get();
 		cmbComp.click(); // close
@@ -116,5 +116,14 @@ class GlobalAdjustmentTests {
 		cmbComp.click();		
 		cmbComp.writeText("Bor");
 	}		
+	
+	@Test @Order(10)
+	void acceptCriteria_changeToPartTimer_implicitPassIfNoErrors() {
+		ComboSelectFromList cmbComp = (ComboSelectFromList) globalAdjustments.getControl(EmployeeControlNames.FULL_OR_PART_TIME).get();
+		cmbComp.click();		
+		cmbComp.selectFullText("Part Timer");		
+		Button btn = (Button) globalAdjustments.getControl(GlobalAdjustmentControlNames.ACCEPT_CRITERIA).get();
+		btn.click();
+	}
 	
 }

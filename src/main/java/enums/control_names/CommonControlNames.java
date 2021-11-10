@@ -11,7 +11,8 @@ import controls.ControlName;
  */
 public enum CommonControlNames implements ControlName {	
 	COMPANY("company"),
-	DEPARTMENT("department");
+	DEPARTMENT("department"),
+	DK_GRID("grid");
 
 	private final String key;
 	

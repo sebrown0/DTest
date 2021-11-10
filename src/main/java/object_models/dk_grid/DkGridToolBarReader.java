@@ -3,6 +3,7 @@
  */
 package object_models.dk_grid;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import object_models.element.ElementButton;
 import object_models.element.ElementInput;
@@ -38,18 +41,17 @@ public class DkGridToolBarReader {
 	public DkGridToolBarReader(WebDriver driver, DkGridToolBar toolBar) {
 		this.driver = driver;
 		this.toolBar = toolBar;
-		setToolbarElement();
 	}
 
 	private void setToolbarElement() {		
-		//have to switch to the iFrame
-//		toolbarElement = driver.findElement(By.id("dkrGrid-toolbar"));
-		
-		toolbarElement = driver.findElement(By.xpath("/html/body/form/div[3]"));
-//		toolbarElement = driver.findElement(By.cssSelector("div[id='dkrGrid-toolbar']"));
+		By tlbrLocator = By.id("dkrGrid-toolbar");
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));		 
+		wait.until(ExpectedConditions.visibilityOfElementLocated(tlbrLocator));		
+		toolbarElement = driver.findElement(tlbrLocator);
 	}
 	
 	public void read() {
+		setToolbarElement();
 		checkForAndMapCommonButtons();
 		checkForAndMapExtraButtons();
 		checkForAndMapInputs();
@@ -58,7 +60,7 @@ public class DkGridToolBarReader {
 	private void checkForAndMapCommonButtons() {
 		List<WebElement> btnGroups = toolbarElement.findElements(By.cssSelector("div[class='btn-group']"));
 		for (WebElement btnGroup : btnGroups) {
-			mapButtonsInGroup(btnGroup);
+			mapButtonsInGroup(btnGroup); 	
 		}
 	}
 	

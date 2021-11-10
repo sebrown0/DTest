@@ -3,13 +3,20 @@ package object_model_tests.dk_grid;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.Duration;
 import java.util.Optional;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import enums.control_names.CommonControlNames;
 import enums.control_names.GroupControlNames;
 import logging.TestResultLogger;
 import object_models.date_picker.DateSetter;
@@ -20,6 +27,7 @@ import object_models.dk_grid.DkGridContent;
 import object_models.dk_grid.DkGridEmployeeDetails;
 import object_models.dk_grid.DkGridToolBar;
 import object_models.dk_grid.Row;
+import object_models.dk_grid.Row.KeyStrategyRow;
 import object_models.element.ElementButton;
 import object_models.element.ElementInput;
 import object_models.element.ElementPointInTime;
@@ -27,6 +35,7 @@ import object_models.forms.ContainerAction;
 import object_models.helpers.TestFail;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.employees.EmployeeDetails;
+import object_models.left_menu.payroll.GlobalAdjustments;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import parameter_resolvers.ConfigParameterResolver;
@@ -51,7 +60,7 @@ public class DkGridTests {
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
 		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
 		menuPayroll = homepagePayroll.getLeftMenu();
-		loadGrid();
+//		loadGrid();
 	}		
 	
 	private static void loadGrid() {
@@ -62,9 +71,20 @@ public class DkGridTests {
 		EmployeeDetails empDetails = (EmployeeDetails) obj.get();
 		
 		empDetailsGrid = (DkGridEmployeeDetails) empDetails.getPanelControl().getControl(GroupControlNames.GRID_VIEW).get();
-		grid = empDetailsGrid.getGrid();
-		toolbar = grid.getToolBar();
-		content = grid.getContent();
+//		grid = empDetailsGrid.getGrid();
+//		toolbar = grid.getToolBar();
+//		content = grid.getContent();
+	}
+	
+	@Test
+	void ioioioiioioio() {
+		GlobalAdjustments globalAdjustments = 
+				(GlobalAdjustments) homepagePayroll.getLeftMenu().clickAndLoad(GlobalAdjustments.class).get();
+		
+		@SuppressWarnings("unchecked")
+		DkGrid<KeyStrategyRow> grid = (DkGrid<KeyStrategyRow>) globalAdjustments.getControl(CommonControlNames.DK_GRID).get();
+		grid.loadGrid();
+		
 	}
 	
 	@Test
@@ -187,7 +207,7 @@ public class DkGridTests {
 	
 	@AfterAll
 	public static void tearDown() {			
-		homepagePayroll.close();
+//		homepagePayroll.close();
 	}
 	
 }

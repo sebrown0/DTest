@@ -19,7 +19,6 @@ import object_models.helpers.text_utils.TextSanitiser;
 public abstract class Combo implements Control {
 	protected boolean isOpen = false;	
 	protected WebElement combo;
-	protected WebElement comboDropdown;
 	protected WebDriver driver;
 	protected By comboLocator;	
 	

@@ -17,6 +17,10 @@ public abstract class ControlGetter {
 	protected WebDriver driver;
 	protected By findBy;
 	
+	public ControlGetter(WebDriver driver) {
+		this.driver = driver;
+	}
+	
 	public ControlGetter(WebDriver driver, By findBy) {
 		this.driver = driver;
 		this.findBy = findBy;

@@ -18,9 +18,12 @@ public final class DkGridEmployeeDetails extends JSPanelWithIFrame implements Co
 	public DkGridEmployeeDetails(WebDriver driver, ContextManager contextManager) {
 		super(driver, PANEL_TITLE, contextManager);
 		
+		/*
+		 * HAVE TO SWITCH TO THE GID AND IFRAME
+		 */
 		grid = new DkGrid<>(driver, new FindRowByEmpCode());
-		grid.loadToolBar();
-		grid.loadContent();
+//		grid.loadToolBar();
+//		grid.loadContent();
 	}
 	
 	// Grid

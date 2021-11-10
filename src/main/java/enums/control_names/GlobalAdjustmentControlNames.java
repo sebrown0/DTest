@@ -10,7 +10,8 @@ import controls.ControlName;
  *
  */
 public enum GlobalAdjustmentControlNames implements ControlName {
-	VIEW_ADJUSTMENT_TYPE("view adjustment type");
+	VIEW_ADJUSTMENT_TYPE("view adjustment type"),
+	ACCEPT_CRITERIA("accept criteria");
 
 	private final String key;
 	
