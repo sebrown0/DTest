@@ -4,12 +4,13 @@
 package dto;
 
 import enums.GridButtonNames;
+import object_models.element.DataKey;
 
 /**
  * @author Steve Brown
  *
  */
-public class ButtonData {
+public class ButtonData implements DataKey {
 	private GridButtonNames name;
 	private String faFa;
 	
@@ -33,6 +34,12 @@ public class ButtonData {
 	}
 	public void setBtnFaFa(String faFa) {
 		this.faFa = faFa;
+	}
+
+	
+	@Override // DataKey
+	public String getDataKey() {
+		return getBtnFaFa();
 	}	
 	
 }

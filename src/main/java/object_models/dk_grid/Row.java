@@ -1,6 +1,5 @@
 package object_models.dk_grid;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -32,15 +31,13 @@ public class Row <T extends KeyStrategyRow> {
 	}
 	
 	private KeyStrategyRow rowKeyStrategy;
-	private Map<String, Cell> cells = new HashMap<>();
+//	private Map<String, Cell> cells = new HashMap<>();
+	private List<Cell> cells;
 	private String keyColumnName;
-	private String keyRow;
-	private String rowIdx;
+	private Cell keyCell;	
+//	private String keyRow;
+	private int rowIdx;
 		
-	public Map<String, Cell> getCells() {
-		return cells;
-	}
-
 	/*
 	 * Instantiate with the strategy for 
 	 */
@@ -48,11 +45,11 @@ public class Row <T extends KeyStrategyRow> {
 		this.rowKeyStrategy = rowKeyStrategy;
 	}
 	
-	public void setRowIdx(String rowIdx) {
+	public void setRowIdx(int rowIdx) {
 		this.rowIdx = rowIdx;
 	}
 	
-	public String getRowIdx() {
+	public Integer getRowIdx() {
 		return rowIdx;
 	}
 	
@@ -69,35 +66,56 @@ public class Row <T extends KeyStrategyRow> {
 		}
 	}	
 	
-	public void addCell(String key, Cell cell) {
-//		System.out.println("addCell -> key =" + key + " " + cell.toString() );
-		cells.putIfAbsent(key, cell);
-	}
+//	public void addCell(String key, Cell cell) {
+////		System.out.println("addCell -> key =" + key + " " + cell.toString() );
+//		cells.putIfAbsent(key, cell);
+//	}
 	
 	public String getKeyColumnName() {
 		return keyColumnName;
 	}
 	
-	public void setKeyForRow(String keyRow) {
-		this.keyRow = keyRow;
+//	public void setKeyForRow(String keyRow) {
+//		this.keyRow = keyRow;
+//	}
+	public void setKeyForRow(Cell keyCell) {
+		this.keyCell = keyCell;
 	}
 	
-	public String getKeyForRow() {
-		return keyRow;
-	}
+//	public String getKeyForRow() {
+//		return keyRow;
+//	}
 	
-	public void addCells(Map<String, Cell> cells) {
+	public void addCells(List<Cell> cells) {
 		this.cells = cells;
+	}
+	public List<Cell> getCells() {
+		return cells;
 	}
 	
 	public Cell getCell(String key){
-		return cells.get(key);
+		Cell cell = null;
+		for (Cell c : cells) {
+			if(c.getColumnId().equalsIgnoreCase(key)) {
+				cell = c;
+				break;
+			}
+		}
+		return cell;
 	}
+		
+//	public Cell getCell(String key){
+//		return cells.get(key);
+//	}
 	
 //	public Optional<String> getKey() {
 //		return rowKeyStrategy.getKey(cells);
 //	}
-	
+
+	public Cell getKeyCell() {
+		return keyCell;
+	}
+
 	public KeyStrategyRow getKeyStrategy() {
 		return rowKeyStrategy;
 	}

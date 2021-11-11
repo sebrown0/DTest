@@ -16,22 +16,29 @@ public final class ElementButton extends Element implements ElementKey{
 	}
 
 	@Override // ElementKey
-	public String getKey(List<ButtonData> elements) {
-		final String elmtKey = super.getElementKey();
-		String key = elmtKey;
-		
-		if(elmtKey.contains("fa")) {
-			ButtonData bd = (ButtonData) elements.stream()
-				.filter(b ->  b.getBtnFaFa().equalsIgnoreCase(elmtKey))
+	public <T extends DataKey> String getKey(List<T> elements) {
+		String elmtKey = super.getElementKey();		
+		if(isKeyFaFa(elmtKey)) {
+			return alternativeKey(elements, elmtKey);
+		}
+		return elmtKey;
+	}
+	
+	private boolean isKeyFaFa(String elmtKey) {
+		return elmtKey.contains("fa") ? true : false;
+	}
+	
+	private <T extends DataKey> String alternativeKey(List<T> elements, String elmtKey) {
+		String key = "";		
+		ButtonData bd = (ButtonData) elements.stream()
+				.filter(b ->  b.getDataKey().equalsIgnoreCase(elmtKey))
 				.findAny()
 				.orElse(null);
 			
 			if(bd != null) {
 				key = bd.getBtnName();
 			}
-			
-		}
-		return key;
+			return key;			
 	}
 		
 }

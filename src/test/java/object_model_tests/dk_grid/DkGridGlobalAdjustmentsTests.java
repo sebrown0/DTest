@@ -13,8 +13,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import controls.Button;
+import controls.ComboWriteAndSelect;
 import enums.GridButtonNames;
 import enums.control_names.CommonControlNames;
+import enums.control_names.EmployeeControlNames;
+import enums.control_names.GlobalAdjustmentControlNames;
 import logging.TestResultLogger;
 import object_models.dk_grid.DkGrid;
 import object_models.dk_grid.DkGridContent;
@@ -48,7 +52,8 @@ public class DkGridGlobalAdjustmentsTests {
 	private static DkGrid<?> grid;
 	private static DkGridToolBar toolbar;
 	private static DkGridContent<?> content;
-		
+	private static GlobalAdjustments globalAdjustments;
+	
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
 		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
@@ -56,9 +61,7 @@ public class DkGridGlobalAdjustmentsTests {
 	}		
 	
 	private static void loadGrid() {
-		GlobalAdjustments globalAdjustments = 
-				(GlobalAdjustments) homepagePayroll.getLeftMenu().clickAndLoad(GlobalAdjustments.class).get();
-
+		globalAdjustments =	(GlobalAdjustments) homepagePayroll.getLeftMenu().clickAndLoad(GlobalAdjustments.class).get();
 		grid = (DkGrid<?>) globalAdjustments.getControl(CommonControlNames.DK_GRID).get();
 	}
 	
@@ -131,16 +134,34 @@ public class DkGridGlobalAdjustmentsTests {
 	}
 
 	@Test @Order(12)
+	void getContent_implictPass_ifCompletes() {
+		content = grid.getContent();
+		assertTrue(content != null);
+	}
+	
+	@Test @Order(13)
 	void checkContentForRow1() {
-		Optional<Row<?>> row1 = content.getRowForRowIndex("1");		
+		Optional<Row<?>> row1 = content.getRowForRowIndex(1);		
 		assertEquals("1", row1.get().getRowIdx());		
 	}
-//		
-//	@Test
-//	void checkRowNumber_WithKey() {
-//		Optional<String> rowIdx = content.getRowNumForKey("F");		
-//		assertTrue(Integer.parseInt(rowIdx.get()) >= 0);		
-//	}
+	
+	@Test @Order(14)
+	void loadEmployee() {
+		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(EmployeeControlNames.EMPLOYEES).get();
+		cmbComp.click();		
+		cmbComp.selectFullText("Simpson Homer");
+		cmbComp.click();		
+		
+		Button acceptCrit = (Button) globalAdjustments.getControl(GlobalAdjustmentControlNames.ACCEPT_CRITERIA).get();
+		acceptCrit.click();
+	}
+		
+	@Test @Order(15)
+	void checkRowNumber_WithKey() {
+		Optional<Integer> rowIdx = content.getRowNumForKey("Simpson Homer - (0134213A)");		
+		assertTrue(rowIdx.get() >= 0);		
+	}
+	
 //	
 //	@Test
 //	void checkContentForRow_WithKey() {

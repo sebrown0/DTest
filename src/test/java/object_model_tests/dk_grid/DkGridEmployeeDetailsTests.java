@@ -20,7 +20,6 @@ import object_models.dk_grid.DkGridContent;
 import object_models.dk_grid.DkGridEmployeeDetails;
 import object_models.dk_grid.DkGridToolBar;
 import object_models.dk_grid.Row;
-import object_models.element.ElementButton;
 import object_models.element.ElementInput;
 import object_models.element.ElementPointInTime;
 import object_models.forms.ContainerAction;
@@ -67,6 +66,11 @@ public class DkGridEmployeeDetailsTests {
 		content = grid.getContent();
 	}
 
+	/*
+	 * 
+	 * SEE DkGridGlobalAdjustmentsTests FOR HOW TO IMPLEMENT BELOW
+	 * 
+	 */
 //	@Test
 //	void checkSaveIsPresent() {		
 //		Optional<ElementButton> save = toolbar.getButton(DkGridToolBar.BTN_SAVE);
@@ -168,14 +172,14 @@ public class DkGridEmployeeDetailsTests {
 	
 	@Test
 	void checkContentForRow1() {
-		Optional<Row<?>> row1 = content.getRowForRowIndex("1");		
+		Optional<Row<?>> row1 = content.getRowForRowIndex(1);		
 		assertEquals("1", row1.get().getRowIdx());		
 	}
 		
 	@Test
 	void checkRowNumber_WithKey() {
-		Optional<String> rowIdx = content.getRowNumForKey("F");		
-		assertTrue(Integer.parseInt(rowIdx.get()) >= 0);		
+		Optional<Integer> rowIdx = content.getRowNumForKey("F");		
+		assertTrue(rowIdx.get() >= 0);		
 	}
 	
 	@Test

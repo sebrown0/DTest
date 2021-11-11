@@ -7,9 +7,11 @@ public class Cell {
 	private String compId;
 	private String unselectable;
 	private String value;
-	private String rowNum;
+	private Integer rowNum;
+	private String containerName;
 		
-	public Cell(String id, String value, String compId, String unselectable, String rowNum) {
+	public Cell(String containerName, String id, String value, String compId, String unselectable, Integer rowNum) {
+		this.containerName = containerName;
 		this.id = id;
 		this.value = value;
 		this.compId = compId;

@@ -38,25 +38,7 @@ public class DkGridToolBar {
 						new ButtonData(GridButtonNames.BTN_RESET_GRID_STATE, "fa fa-fw fa-rotate-left")
 				);
 	}
-		
-//	private String getKey(ElementButton btn) {
-//		final String elmtKey = btn.getElementKey();
-//		String key = elmtKey;
-//		
-//		if(elmtKey.contains("fa")) {
-//			ButtonData bd = buttonData.stream()
-//				.filter(b ->  b.getBtnFaFa().equalsIgnoreCase(elmtKey))
-//				.findAny()
-//				.orElse(null);
-//			
-//			if(bd != null) {
-//				key = bd.getBtnName();
-//			}
-//			
-//		}
-//		return key;
-//	}
-	
+			
 	/*
 	 * Buttons
 	 */
