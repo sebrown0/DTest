@@ -53,7 +53,7 @@ public class LeftNavBarTests {
 	
 	@AfterAll
 	public static void tearDown() {			
-		homepagePayroll.close();
+//		homepagePayroll.close();
 	}
 
 }

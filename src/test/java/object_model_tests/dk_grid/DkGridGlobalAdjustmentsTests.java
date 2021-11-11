@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -142,7 +143,7 @@ public class DkGridGlobalAdjustmentsTests {
 	@Test @Order(13)
 	void checkContentForRow1() {
 		Optional<Row<?>> row1 = content.getRowForRowIndex(1);		
-		assertEquals("1", row1.get().getRowIdx());		
+		assertEquals(1, row1.get().getRowIdx().intValue());		
 	}
 	
 	@Test @Order(14)
@@ -158,21 +159,13 @@ public class DkGridGlobalAdjustmentsTests {
 		
 	@Test @Order(15)
 	void checkRowNumber_WithKey() {
-		Optional<Integer> rowIdx = content.getRowNumForKey("Simpson Homer - (0134213A)");		
-		assertTrue(rowIdx.get() >= 0);		
+		Optional<Integer> rowIdx = content.getRowNumForValue("Simpson Homer - (0134213A)");		
+		assertTrue(rowIdx.get().intValue() >= 0);		
 	}
 	
-//	
-//	@Test
-//	void checkContentForRow_WithKey() {
-//		Optional<Row<?>> rowIdx = content.getRowForKeyValue("F");		
-//		Cell c = rowIdx.get().getCell(ColumnName.TOWN.name());		
-//		assertEquals("Birkirkara", c.getValue().get());
-//	}
-//	
-//	@AfterAll
-//	public static void tearDown() {			
-////		homepagePayroll.close();
-//	}
+	@AfterAll
+	public static void tearDown() {			
+//		homepagePayroll.close();
+	}
 	
 }

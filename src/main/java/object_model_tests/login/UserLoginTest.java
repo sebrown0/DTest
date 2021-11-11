@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -42,19 +41,6 @@ class UserLoginTest {
 		driver.quit();
 	}
 	
-	@Test
-	@Tag("R20")
-	@Tag("T3833")
-	void createUserLoginModel() {
-		// Check that a user login page is created.
-		/*
-		 * removed when updating Title.
-		 * Loadable page may itself be removed in the future
-		 */
-//		LoadablePage userLogin = new UserLoginPage(driver);		
-//		assertTrue(userLogin.isPageTitleCorrect());		
-	}
-
 	@ParameterizedTest
 	@MethodSource("test_data.UserProvider#validPortalUser")
 	@Tag("R20")

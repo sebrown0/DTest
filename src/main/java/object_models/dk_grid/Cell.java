@@ -18,6 +18,10 @@ public class Cell {
 		this.unselectable = unselectable;
 		this.rowNum = rowNum;
 	}
+
+	public String getContainerName() {
+		return containerName;
+	}
 	
 	public String getColumnId() {
 		return id;

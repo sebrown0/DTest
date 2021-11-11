@@ -118,7 +118,8 @@ class EmployeeCreationTests {
 		EmployeeDetails empDetails = (EmployeeDetails) homepagePayroll.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
 		TextOut empDetailsCode = (TextOut) empDetails.getPanelControl().getControl(EmployeeControlNames.EMP_CODE).get();
 		assertFalse(empDetailsCode.getTextByValue().equals(randomEmpCode));
-		assertTrue(empDetailsCode.getTextByValue().equalsIgnoreCase(randomEmpCode + "_M"));
+		assertEquals(randomEmpCode + "_M", empDetailsCode.getTextByValue());
+//		assertTrue(empDetailsCode.getTextByValue().equalsIgnoreCase(randomEmpCode + "_M"));
 		empDetails.close();
 		/*
 		 * LAST TEST CLOSE APP

@@ -5,9 +5,7 @@ package object_models.dk_grid;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,9 +30,7 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 	private String[] containerNames = new String[3];
 	private KeyStrategyRow keyStrategyRows;
 	private String currentContainerName;
-	private int currentLastRow = -1;
-	
-//	private Map<Integer, List<Cell>> rows = new HashMap<>();
+	private int currentLastRow = -1;	
 	private List<Cell> currentCellList; 
 	private Row<T> currentRow;
 	
@@ -70,7 +66,6 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 	public void read() {
 		intialise();
 		loopContainers();
-		System.out.println("->"); // TODO - remove or log 	
 	}
 	
 	private void loopContainers(){
@@ -87,7 +82,6 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 	
 	private void mapCentre() {
 		WebElement container = contentElement.findElement(By.cssSelector("div[class^='" + containerNames[1] + "']"));
-//		WebElement container = contentElement.findElement(By.cssSelector("div[class='" + containerNames[1] + "']"));
 		currentContainerName = containerNames[1];
 		getRowsInContainer(container);
 	}
@@ -114,41 +108,31 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 		
 	private void mapRowFromContainer(WebElement rowElement, String containerName) {				
 		Integer rowIdx = Integer.valueOf(rowElement.getAttribute("row-index"));
-		mapCellsInContainersRow(rowElement, rowIdx, containerName);
-		
-//		gridContent.getGridData().addRow(
-//				containerName,
-//				mapCellsInContainersRow(rowElement.findElements(By.cssSelector("div[role='gridcell']")), rowIdx, containerName));
+		mapCellsInContainersRow(rowElement, rowIdx, containerName);		
 	}
 
+	@SuppressWarnings("unchecked")
 	private void mapCellsInContainersRow(WebElement rowElement, Integer rowIdx, String containerName) {
 		List<WebElement> cells = rowElement.findElements(By.cssSelector("div[role='gridcell']"));
-		currentRow  = getNewRowWithKey(cells, rowIdx);
+		
 		String colId = null;
 		String value = null;
 	
 		// check if row exists in map
 		gridContent.getRowForRowIndex(rowIdx).ifPresentOrElse(
-				r -> currentCellList = r.getCells(), 
+				r -> {
+					currentRow = (Row<T>) r; 
+					currentRow.setKeyColumnName(cells);
+					currentCellList = r.getCells(); 
+				}, 
 				new Runnable() {					
 					@Override
 					public void run() {
+						currentRow = getNewRowWithKey(cells, rowIdx);
 						currentCellList = new ArrayList<>();	
 					}
 				});
-		
-//		if(rows.containsKey(rowIdx)) {
-//			currentCellList = rows.get(rowIdx);
-//		}else {
-//			currentCellList = new ArrayList<>();
-//		}
-		
-//		if(rows.containsKey(rowIdx)) {
-//			currentCellList = rows.get(rowIdx);
-//		}else {
-//			currentCellList = new ArrayList<>();
-//		}
-	
+			
 		for (WebElement c : cells) {
 			colId = c.getAttribute("col-id");			
 			value = c.getText(); 	
@@ -161,7 +145,7 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 					rowIdx);		
 				
 			addCellToCurrentCellList(newCell);
-			setAsRowKeyIfTheCellIsUsedAsKey(currentRow, colId, newCell);
+			setAsRowKeyIfTheCellIsUsedAsKey(colId, newCell);
 			updateLastRowIfNecessary(rowIdx);
 		}	
 		
@@ -180,11 +164,16 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 		currentCellList.add(newCell);
 	}
 	
-	private void setAsRowKeyIfTheCellIsUsedAsKey(Row<T> newRow, String colId, Cell keyCell) {
-		if(colId.equalsIgnoreCase(newRow.getKeyColumnName())) {
-			newRow.setKeyForRow(keyCell);
+	private void setAsRowKeyIfTheCellIsUsedAsKey(String colId, Cell keyCell) {
+		if(colId.equalsIgnoreCase(currentRow.getKeyColumnName())) {
+			currentRow.setKeyForRow(keyCell);
 		}
 	}
+//	private void setAsRowKeyIfTheCellIsUsedAsKey(Row<T> newRow, String colId, Cell keyCell) {
+//		if(colId.equalsIgnoreCase(newRow.getKeyColumnName())) {
+//			newRow.setKeyForRow(keyCell);
+//		}
+//	}
 					
 	private void updateLastRowIfNecessary(int rowIdx) {
 		if(rowIdx > currentLastRow) {
@@ -193,55 +182,5 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 		}
 	}
 
-
-//private void addCellsToRow(Row<T> newRow, Map<String, Cell> cells) {
-//	newRow.addCells(cells);
-//}
-//private void addCellToList(Map<String, Cell> cells, Cell newCell) {
-//	currentCellList.add(newCell);
-////	cells.putIfAbsent(newCell.getColumnId(), newCell);
-//}
-//private void setAsRowKeyIfTheCellIsUsedAsKey(Row<T> newRow, String colId, String value) {
-//	if(colId.equalsIgnoreCase(newRow.getKeyColumnName())) {
-//		newRow.setKeyForRow(value);
-//	}
-//}
-
-	
-//private Row<T> mapCellsInContainersRow(List<WebElement> cellElements, Integer rowIdx, String containerName) {		
-////	Map<String, Cell> cells = new HashMap<>();
-//	Row<T> newRow  = getNewRowWithKey(cellElements, rowIdx);
-//	String colId = null;
-//	String value = null;
-//
-//
-//	// check if row exists in map
-//	if(rows.containsKey(rowIdx)) {
-//		currentCellList = rows.get(rowIdx);
-////		List<Cell> cellsInRow = rows.get(rowIdx);
-////		cellsInRow.addAll(currentCellList);
-//	}else {
-//		currentCellList = new ArrayList<>();
-//	}
-//	
-//	for (WebElement cellElement : cellElements) {
-//		colId = cellElement.getAttribute("col-id");			
-//		value = cellElement.getText(); 	
-//		Cell newCell = new Cell(
-//				containerName,
-//				colId, 
-//				value, 
-//				cellElement.getAttribute("comp-id"), 
-//				cellElement.getAttribute("unselectable"), 
-//				rowIdx);		
-//		
-//		addCellToCurrentCellList(newCell);
-//		setAsRowKeyIfTheCellIsUsedAsKey(newRow, colId, newCell);
-//		updateLastRowIfNecessary(rowIdx);
-//	}		
-//	
-////	addCellsToRow(newRow, cells);
-//	return newRow;
-//}	
 }
 

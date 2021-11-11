@@ -31,11 +31,9 @@ public class Row <T extends KeyStrategyRow> {
 	}
 	
 	private KeyStrategyRow rowKeyStrategy;
-//	private Map<String, Cell> cells = new HashMap<>();
 	private List<Cell> cells;
 	private String keyColumnName;
 	private Cell keyCell;	
-//	private String keyRow;
 	private int rowIdx;
 		
 	/*
@@ -54,37 +52,23 @@ public class Row <T extends KeyStrategyRow> {
 	}
 	
 	public void setKeyColumnName(List<WebElement> cellElements) {
-		String id = null;
-		String idCol = rowKeyStrategy.getStrategyName();
-		//employee_code
-		for (WebElement e : cellElements) {
-			id = e.getAttribute("col-id");		
-			if(id.equalsIgnoreCase(idCol)) {
-				keyColumnName = id;				
-				break;
-			}
-		}
+		if(keyColumnName == null || keyColumnName.length() <=0 || keyColumnName.equals("")) {
+			String id = null;
+			String idCol = rowKeyStrategy.getStrategyName();
+			//employee_code
+			for (WebElement e : cellElements) {
+				id = e.getAttribute("col-id");		
+				if(id.equalsIgnoreCase(idCol)) {
+					keyColumnName = id;				
+					break;
+				}
+			}	
+		}		
 	}	
-	
-//	public void addCell(String key, Cell cell) {
-////		System.out.println("addCell -> key =" + key + " " + cell.toString() );
-//		cells.putIfAbsent(key, cell);
-//	}
-	
+		
 	public String getKeyColumnName() {
 		return keyColumnName;
 	}
-	
-//	public void setKeyForRow(String keyRow) {
-//		this.keyRow = keyRow;
-//	}
-	public void setKeyForRow(Cell keyCell) {
-		this.keyCell = keyCell;
-	}
-	
-//	public String getKeyForRow() {
-//		return keyRow;
-//	}
 	
 	public void addCells(List<Cell> cells) {
 		this.cells = cells;
@@ -104,14 +88,9 @@ public class Row <T extends KeyStrategyRow> {
 		return cell;
 	}
 		
-//	public Cell getCell(String key){
-//		return cells.get(key);
-//	}
-	
-//	public Optional<String> getKey() {
-//		return rowKeyStrategy.getKey(cells);
-//	}
-
+	public void setKeyForRow(Cell keyCell) {
+		this.keyCell = keyCell;
+	}
 	public Cell getKeyCell() {
 		return keyCell;
 	}
@@ -121,6 +100,3 @@ public class Row <T extends KeyStrategyRow> {
 	}
 }
 
-
-
-//

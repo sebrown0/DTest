@@ -3,6 +3,7 @@
  */
 package object_models.dk_grid;
 
+import java.util.Map.Entry;
 import java.util.Optional;
 
 import object_models.dk_grid.Row.KeyStrategyRow;
@@ -22,24 +23,24 @@ public class DkGridContent <T extends KeyStrategyRow> {
 	public void addRow(Row<?> row) {
 		gridData.addRow(row);
 	}
-	
-//	public GridData<T> getGridData() {
-//		return gridData;
-//	}
 
-	public Optional<Integer> getRowNumForKey(String key) {
-		Optional<Integer> rowIdx = Optional.empty();
-//		gridData.getRows();
-//		Optional<Map<String, Row<?>>> leftContainer = gridData.getLeftContainer();
-//		
-//	 	if(leftContainer.isPresent()) {
-//	 		rowIdx = leftContainer.get()
-//	 				.values()
-//	 				.stream()	 				
-//	 				.filter(r -> r.getKeyForRow().equals(key))	 				
-//	 				.map(m -> m.getRowIdx())
-//	 				.findFirst();	 		
-//	 	}
+	/*
+	 * If the cell that acts as the key for the row is present.
+	 * Compare it's value to that of the required key.
+	 * If match return the row number.
+	 */
+	public Optional<Integer> getRowNumForValue(String key) {
+		Optional<Integer> rowIdx = Optional.empty();		
+		for(Entry<Integer, Row<?>> e : gridData.getRows().entrySet()) {
+			Cell keyCell = e.getValue().getKeyCell(); 
+			if(keyCell != null && keyCell.getValue().isPresent()) {
+				String keyVal = keyCell.getValue().get();
+				if(keyVal.equalsIgnoreCase(key)){
+					rowIdx = Optional.ofNullable(e.getKey());
+					break;
+				}
+			}
+		}
 		return rowIdx;
 	}
 	
@@ -48,7 +49,7 @@ public class DkGridContent <T extends KeyStrategyRow> {
 	}
 
 	public Optional<Row<?>> getRowForKeyValue(String keyVal){		
-		Optional<Integer> rowIdx = getRowNumForKey(keyVal);
+		Optional<Integer> rowIdx = getRowNumForValue(keyVal);
 		if(rowIdx.isPresent()) {
 			return getRow(rowIdx.get());			
 		}		
@@ -58,19 +59,6 @@ public class DkGridContent <T extends KeyStrategyRow> {
 	private Optional<Row<?>> getRow(Integer rowIdx) {
 		return gridData.getRow(rowIdx);
 	}
-//	private Optional<Row<?>> getRow(String rowIdx) {
-//		
-//		Optional<Row<?>> row = gridData
-//				.getContainers()								// Map<String, Map<String, Row<?>>>
-//				.values()												// Map<String, Row<?>>
-//				.stream()																
-//				.map(Map::values)								
-//				.flatMap(Collection::stream)
-//				.filter(k -> k.getRowIdx().equals(rowIdx))
-//				.findFirst();		
-//		
-//		return row;
-//	}	
 	
 	public int getLastRowNum() {
 		return lastRowNum;
