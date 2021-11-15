@@ -3,17 +3,13 @@
  */
 package object_models.dk_grid;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 /**
@@ -21,52 +17,31 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  *
  */
 public class DkGridContentReader <T extends KeyStrategyRow> {
-	private WebDriver driver;
-	private WebElement gridElement;
+	private WebElement gridContainer;
 	private WebElement contentElement;	
 	private Logger logger = LogManager.getLogger();
-	private DkGridContent<?> gridContent;	
-	private String[] containerNames = new String[3];
+	private DkGridContent<?> gridContent;
 	private KeyStrategyRow keyStrategyRows;
 	private String currentContainerName;
 	private int currentLastRow = -1;	
 	private List<Cell> currentCellList; 
 	private Row<T> currentRow;
 	
-	public DkGridContentReader(WebDriver driver, DkGridContent<?> gridContent, KeyStrategyRow keyStrategyRows) {
-		this.driver = driver;
+	public DkGridContentReader(WebElement gridContainer, DkGridContent<?> gridContent, KeyStrategyRow keyStrategyRows) {
+		this.gridContainer = gridContainer;
 		this.gridContent = gridContent;
 		this.keyStrategyRows = keyStrategyRows;		
 	}
-		
-	private void intialise() {
-		setContainerNames();
-		setGridElement();
-		setContentElement();
-	}
-	
-	private void setContainerNames() {
-		containerNames[0] = "ag-pinned-left-cols-container";
-		containerNames[1] = "ag-center-cols";
-		containerNames[2] = "ag-pinned-right-cols-container ag-hidden"; 
-	}
-	
-	private void setGridElement() {
-		By contentLocator = By.id("dkrGrid");
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));		 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(contentLocator)); 	
-		gridElement = driver.findElement(contentLocator);		
-	}
-	
-	private void setContentElement() {
-		contentElement = gridElement.findElement(By.cssSelector("div[class='ag-body-viewport ag-layout-normal ag-row-animation']"));
-	}
 	
 	public void read() {
-		intialise();
+		setContentElement();
 		loopContainers();
 	}
 	
+	private void setContentElement() {
+		contentElement = gridContainer.findElement(By.cssSelector("div[class='ag-body-viewport ag-layout-normal ag-row-animation']"));
+	}
+		
 	private void loopContainers(){
 		mapLeftPinned();
 		mapCentre();
@@ -74,20 +49,22 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 	}
 	
 	private void mapLeftPinned() {
-		mapContainer(By.cssSelector("div[class='" + containerNames[0] + "']"), containerNames[0]);
+		currentContainerName = "ag-pinned-left-cols-container";
+		mapContainer(By.cssSelector("div[class='" + currentContainerName + "']"));
 	}
 	
 	private void mapCentre() {
-		mapContainer(By.cssSelector("div[class^='" + containerNames[1] + "']"), containerNames[1]);
+		currentContainerName = "ag-center-cols";
+		mapContainer(By.cssSelector("div[class^='" + currentContainerName + "']"));
 	}
 	
 //	private void mapRightPinned() {
-//		TODO
+		// currentContainerName = "ag-pinned-right-cols-container ag-hidden";
+		// TODO
 //	}
 	
-	private void mapContainer(By containerLocator, String containerName) {
-		WebElement container = contentElement.findElement(containerLocator);
-		currentContainerName = containerName;
+	private void mapContainer(By containerLocator) {
+		WebElement container = contentElement.findElement(containerLocator);		
 		getRowsInContainer(container);
 	}
 	
@@ -112,8 +89,7 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 
 	@SuppressWarnings("unchecked")
 	private void mapCellsInContainersRow(WebElement rowElement, Integer rowIdx, String containerName) {
-		List<WebElement> cells = rowElement.findElements(By.cssSelector("div[role='gridcell']"));
-		
+		List<WebElement> cells = rowElement.findElements(By.cssSelector("div[role='gridcell']"));		
 		String colId = null;
 		String value = null;
 	
@@ -168,11 +144,6 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 			currentRow.setKeyForRow(keyCell);
 		}
 	}
-//	private void setAsRowKeyIfTheCellIsUsedAsKey(Row<T> newRow, String colId, Cell keyCell) {
-//		if(colId.equalsIgnoreCase(newRow.getKeyColumnName())) {
-//			newRow.setKeyForRow(keyCell);
-//		}
-//	}
 					
 	private void updateLastRowIfNecessary(int rowIdx) {
 		if(rowIdx > currentLastRow) {

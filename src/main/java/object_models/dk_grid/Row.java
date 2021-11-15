@@ -14,19 +14,9 @@ import org.openqa.selenium.WebElement;
  * using the key strategy.
  * 
  * @param
- * 	T = the cell that is used as the key for the row.
- */
+ * 	T = the strategy that is used to find the row.
+ */	
 public class Row <T extends KeyStrategyRow> {
-	
-	/*
-	 * Get the column that is being used as the key for this row.	 * 
-	 */	
-//	public interface XX_KeyStrategyRow {
-//		Optional<String> getKey(Map<String, Cell> columns);
-//		String getStrategyName();
-//		public <T extends XX_KeyStrategyRow> Row<T> getNewRow();
-//	}
-	
 	private KeyStrategyRow rowKeyStrategy;
 	private List<Cell> cells;
 	private String keyColumnName;
@@ -47,12 +37,11 @@ public class Row <T extends KeyStrategyRow> {
 	public Integer getRowIdx() {
 		return rowIdx;
 	}
-	
+
 	public void setKeyColumnName(List<WebElement> cellElements) {
 		if(keyColumnName == null || keyColumnName.length() <=0 || keyColumnName.equals("")) {
 			String id = null;
 			String idCol = rowKeyStrategy.getStrategyName();
-			//employee_code
 			for (WebElement e : cellElements) {
 				id = e.getAttribute("col-id");		
 				if(id.equalsIgnoreCase(idCol)) {

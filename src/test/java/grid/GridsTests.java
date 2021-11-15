@@ -1,11 +1,11 @@
 package grid;
 
 import object_models.dk_grid.FindRowByEmpId;
-import object_models.dk_grid.GridData;
+import object_models.dk_grid.GridDataRows;
 
 class GridsTests {
 	@SuppressWarnings("unused")
-	private static GridData<FindRowByEmpId> gridData = new GridData<>();;
+	private static GridDataRows<FindRowByEmpId> gridData = new GridDataRows<>();;
 	
 //	@BeforeAll
 //	public static void setup() {

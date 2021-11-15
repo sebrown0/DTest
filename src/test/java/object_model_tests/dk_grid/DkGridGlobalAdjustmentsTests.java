@@ -146,21 +146,29 @@ public class DkGridGlobalAdjustmentsTests {
 		assertEquals(1, row1.get().getRowIdx().intValue());		
 	}
 	
-	@Test @Order(14)
-	void loadEmployee() {
-		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(EmployeeControlNames.EMPLOYEES).get();
-		cmbComp.click();		
-		cmbComp.selectFullText("Simpson Homer");
-		cmbComp.click();		
-		
-		Button acceptCrit = (Button) globalAdjustments.getControl(GlobalAdjustmentControlNames.ACCEPT_CRITERIA).get();
-		acceptCrit.click();
-	}
+	/*
+	 * HAVE TO RELOAD THE GRID AS IT WILL HAVE CHANGED!!!!!!
+	 */
+//	@Test @Order(14)
+//	void loadEmployee() {
+//		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(EmployeeControlNames.EMPLOYEES).get();
+//		cmbComp.click();		
+//		cmbComp.selectFullText("Simpson Homer");
+//		cmbComp.click();		
+//		
+//		Button acceptCrit = (Button) globalAdjustments.getControl(GlobalAdjustmentControlNames.ACCEPT_CRITERIA).get();
+//		acceptCrit.click();
+//	}
 		
 	@Test @Order(15)
 	void checkRowNumber_WithKey() {
 		Optional<Integer> rowIdx = content.getRowNumForValue("Simpson Homer - (0134213A)");		
 		assertTrue(rowIdx.get().intValue() >= 0);		
+	}
+
+	@Test @Order(16)
+	void filterEmployeeColumn() {
+		grid.getGridHeader().filterColumn("Employee", "helloooooooooo");		
 	}
 	
 	@AfterAll

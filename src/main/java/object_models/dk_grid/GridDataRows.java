@@ -8,9 +8,9 @@ import java.util.Optional;
 /**
  * @author Steve Brown
  * 
- * 
+ * The rows in a grid.
  */
-public class GridData <T extends KeyStrategyRow> {
+public class GridDataRows <T extends KeyStrategyRow> {
 	private Map<Integer, Row<?>> rows = new HashMap<>();
 	
 	public void addRow(Row<?> row) {

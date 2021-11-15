@@ -11,11 +11,11 @@ import java.util.Optional;
  *
  */
 public class DkGridContent <T extends KeyStrategyRow> {	
-	private GridData<T> gridData;
+	private GridDataRows<T> gridData;
 	private int lastRowNum;
 
 	public DkGridContent() {
-		gridData = new GridData<>();
+		gridData = new GridDataRows<>();
 	}
 
 	public void addRow(Row<?> row) {
