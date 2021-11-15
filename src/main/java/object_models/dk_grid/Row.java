@@ -1,12 +1,9 @@
 package object_models.dk_grid;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 import org.openqa.selenium.WebElement;
 
-import object_models.dk_grid.Row.KeyStrategyRow;
 
 /**
  * @author Steve Brown
@@ -24,11 +21,11 @@ public class Row <T extends KeyStrategyRow> {
 	/*
 	 * Get the column that is being used as the key for this row.	 * 
 	 */	
-	public interface KeyStrategyRow {
-		Optional<String> getKey(Map<String, Cell> columns);
-		String getStrategyName();
-		public <T extends KeyStrategyRow> Row<T> getNewRow();
-	}
+//	public interface XX_KeyStrategyRow {
+//		Optional<String> getKey(Map<String, Cell> columns);
+//		String getStrategyName();
+//		public <T extends XX_KeyStrategyRow> Row<T> getNewRow();
+//	}
 	
 	private KeyStrategyRow rowKeyStrategy;
 	private List<Cell> cells;

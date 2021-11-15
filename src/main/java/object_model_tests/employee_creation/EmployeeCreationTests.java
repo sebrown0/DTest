@@ -36,7 +36,7 @@ import xml_reader.config_file.ConfigReader;
 	TestResultLogger.class, 
 	LoginPageResolverPayroll.class })
 class EmployeeCreationTests {
-	private static HomePage homepagePayroll;
+	private static HomePage homepage;
 	private static EmployeeCreationWizard wizard; 
 	private static Employee emp;
 	private static NavBarElement navEmpWizard;
@@ -44,22 +44,28 @@ class EmployeeCreationTests {
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
 		// Login to the homepage
-		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
+		homepage = userLogin.loginValidUser(UserProvider.userPortal());
 		// Get the employee creation wizard from the nav bar.
-		navEmpWizard = homepagePayroll.getTopRightNavBar().getNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
+		navEmpWizard = homepage.getTopRightNavBar().getNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
 	}	
 
 	@Test @Order(1)
 	void createDuplicateEmployee_codeInUseFormShouldBeShown() {
+		// GET AN EMPLOYEE FROM XML
 		EmployeeProvider empProvider = new EmployeeFromXml(); 
 		emp = empProvider.getEmployeeRequired("1");
 		
-		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();	
-		// Check that we're on the wizard.
+		// GET THE EMPLOYEE WIZARD
+		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();
+		
+		// CHECK THAT THE WIZARD IS LOADED.
 		assertTrue(wizard.getContextExpectedName().equals("Employee Creation Wizard"));
 		
+		// THE EMP EXISTS SO THE RESULT SHOULD BE AN ERROR FORM.
 		FormFadeShow frm = wizard.createEmployee(emp);
 		assertEquals("Data Error", frm.getTitle().getExpected());
+		
+		//CLOSE THE ERROR FORM AND WIZARD
 		frm.close();
 		wizard.close();		
 	}
@@ -75,7 +81,7 @@ class EmployeeCreationTests {
 		wizard.createEmployee(emp);
 		wizard.close();
 		// Open employee details and check the code.
-		EmployeeDetails empDetails = (EmployeeDetails) homepagePayroll.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
+		EmployeeDetails empDetails = (EmployeeDetails) homepage.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
 		TextOut empDetailsCode = (TextOut) empDetails.getPanelControl().getControl(EmployeeControlNames.EMP_CODE).get();		
 		assertFalse(empDetailsCode.getTextByValue().equals(randomEmpCode));
 		assertTrue(empDetailsCode.getTextByValue().equalsIgnoreCase(randomEmpCode));
@@ -95,7 +101,7 @@ class EmployeeCreationTests {
 		wizard.createEmployee(emp);
 		wizard.close();
 		// Open employee details and check the code.
-		EmployeeDetails empDetails = (EmployeeDetails) homepagePayroll.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
+		EmployeeDetails empDetails = (EmployeeDetails) homepage.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
 		TextOut empDetailsCode = (TextOut) empDetails.getPanelControl().getControl(EmployeeControlNames.EMP_CODE).get();
 		assertFalse(empDetailsCode.getTextByValue().equals(randomEmpCode));
 		assertTrue(empDetailsCode.getTextByValue().equalsIgnoreCase(randomEmpCode + "_space"));
@@ -115,16 +121,15 @@ class EmployeeCreationTests {
 		wizard.createEmployee(emp);
 		wizard.close();
 		// Open employee details and check the code.
-		EmployeeDetails empDetails = (EmployeeDetails) homepagePayroll.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
+		EmployeeDetails empDetails = (EmployeeDetails) homepage.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
 		TextOut empDetailsCode = (TextOut) empDetails.getPanelControl().getControl(EmployeeControlNames.EMP_CODE).get();
 		assertFalse(empDetailsCode.getTextByValue().equals(randomEmpCode));
 		assertEquals(randomEmpCode + "_M", empDetailsCode.getTextByValue());
-//		assertTrue(empDetailsCode.getTextByValue().equalsIgnoreCase(randomEmpCode + "_M"));
 		empDetails.close();
 		/*
 		 * LAST TEST CLOSE APP
 		 */
-		homepagePayroll.close();
+		homepage.close();
 	}
 		
 }

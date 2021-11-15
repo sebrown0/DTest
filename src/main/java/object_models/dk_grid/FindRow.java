@@ -3,13 +3,12 @@ package object_models.dk_grid;
 import java.util.Map;
 import java.util.Optional;
 
-import object_models.dk_grid.Row.KeyStrategyRow;
 
 /**
  * @author Steve Brown
  * 
  */
-public class FindRow implements KeyStrategyRow {
+public abstract class FindRow implements KeyStrategyRow {
 	private String key = ColumnName.EMP_CODE.value;
 	
 	protected FindRow(String key) {

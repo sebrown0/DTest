@@ -15,7 +15,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import object_models.dk_grid.Row.KeyStrategyRow;
 
 /**
  * @author Steve Brown
@@ -75,22 +74,22 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 	}
 	
 	private void mapLeftPinned() {
-		WebElement container = contentElement.findElement(By.cssSelector("div[class='" + containerNames[0] + "']"));
-		currentContainerName = containerNames[0];		
-		getRowsInContainer(container);
+		mapContainer(By.cssSelector("div[class='" + containerNames[0] + "']"), containerNames[0]);
 	}
 	
 	private void mapCentre() {
-		WebElement container = contentElement.findElement(By.cssSelector("div[class^='" + containerNames[1] + "']"));
-		currentContainerName = containerNames[1];
-		getRowsInContainer(container);
+		mapContainer(By.cssSelector("div[class^='" + containerNames[1] + "']"), containerNames[1]);
 	}
 	
 //	private void mapRightPinned() {
-//		WebElement container = contentElement.findElement(By.cssSelector("div[class='" + containerNames[2] + "']"));
-//		currentContainerName = containerNames[2];
-//		getRowsInContainer(container);
+//		TODO
 //	}
+	
+	private void mapContainer(By containerLocator, String containerName) {
+		WebElement container = contentElement.findElement(containerLocator);
+		currentContainerName = containerName;
+		getRowsInContainer(container);
+	}
 	
 	private void getRowsInContainer(WebElement container) {
 		if(container != null) {			

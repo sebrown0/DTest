@@ -27,29 +27,24 @@ import xml_reader.config_file.ConfigReader;
 	ConfigParameterResolver.class, 
 	TestResultLogger.class 
 })
-class UserLoginTest {
+class UserLoginTest { // <- TEST SUITE
 	private static WebDriver driver;
 
 	@BeforeAll
 	static void setUpBeforeClass(ConfigReader configReader) throws Exception {
 		// Get a web driver as specified in the config.xml		
-		driver = configReader.getDriver();
-	}
-
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-		driver.quit();
+		driver = configReader.getDriver(); // <- APP CONFIG
 	}
 	
 	@ParameterizedTest
-	@MethodSource("test_data.UserProvider#validPortalUser")
+	@MethodSource("test_data.UserProvider#validPortalUser") // <- TEST DATA
 	@Tag("R20")
 	@Tag("T3834")	
 	void validUserLogin(User user) {		
 		// Supply valid user, login and check home page is loaded.
-		UserLoginPage userLogin = new UserLoginPage(driver, new PayrollModuleLoader(driver));		
-		HomePage hp = userLogin.loginValidUser(user); 
-		assertTrue(hp != null);
+		UserLoginPage userLogin = new UserLoginPage(driver, new PayrollModuleLoader(driver)); // <- POM		
+		HomePage hp = userLogin.loginValidUser(user); // <- FLUENT API
+		assertTrue(hp != null); // <- TEST VERIFICATION & TEST LOGGING
 	}
 		
 	@ParameterizedTest
@@ -61,5 +56,10 @@ class UserLoginTest {
 		UserLoginPage userLogin = new UserLoginPage(driver);
 		HomePage hp = userLogin.loginValidUser(user); 
 		assertTrue(hp == null);
+	}
+
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
+//		driver.quit();
 	}
 }

@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 import controls.Control;
 import object_models.dk_grid.DkGrid;
-import object_models.dk_grid.Row.KeyStrategyRow;
+import object_models.dk_grid.KeyStrategyRow;
 
 /**
  * @author Steve Brown

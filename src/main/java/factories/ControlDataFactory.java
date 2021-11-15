@@ -12,7 +12,7 @@ import control_builder.ControlGetterComboWriteAndSelect;
 import control_builder.ControlGetterGrid;
 import controls.ControlName;
 import enums.control_names.CommonControlNames;
-import object_models.dk_grid.Row.KeyStrategyRow;
+import object_models.dk_grid.KeyStrategyRow;
 import object_models.helpers.text_writer.TextWriter;
 
 /**

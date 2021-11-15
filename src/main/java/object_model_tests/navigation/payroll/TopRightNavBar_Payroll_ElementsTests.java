@@ -60,7 +60,7 @@ class TopRightNavBar_Payroll_ElementsTests {
 	
 	@AfterAll
 	static void teardown() {
-//		homepagePayroll.close();
+		homepagePayroll.close();
 	}
 	
 	@Test
