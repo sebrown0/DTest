@@ -4,13 +4,13 @@ import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextManager;
 import controls.Control;
-import object_models.panels.JSPanelWithIFrame;
+import object_models.panels.JsPanelWithIFrame;
 
 /**
  * @author Steve Brown
  *
  */
-public final class DkGridEmployeeDetails extends JSPanelWithIFrame implements Control {	
+public final class DkGridEmployeeDetails extends JsPanelWithIFrame implements Control {	
 	private DkGrid<FindRowByEmpId> grid;
 	
 	public static final String PANEL_TITLE = "Employee Details";	

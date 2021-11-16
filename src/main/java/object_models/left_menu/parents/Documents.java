@@ -8,13 +8,13 @@ import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextManager;
 import object_models.element.TextInOut;
-import object_models.panels.JSPanelWithIFrame;
+import object_models.panels.JsPanelWithIFrame;
 
 /**
  * @author Steve Brown
  *
  */
-public class Documents extends JSPanelWithIFrame {	
+public class Documents extends JsPanelWithIFrame {	
 	public static final String MENU_PARENT_NAME = "";
 	public static final String PANEL_TITLE = "Employee Document Management";
 	public static final String MENU_TITLE = "Documents";

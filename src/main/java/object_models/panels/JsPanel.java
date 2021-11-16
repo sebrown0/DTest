@@ -27,6 +27,7 @@ import context_manager.states.StateHeaderPanel;
 import context_manager.states.StateIframe;
 import control_builder.ControlBuilder;
 import control_builder.ControlData;
+import control_builder.ControlGetter;
 import control_builder.PageControl;
 import controls.Control;
 import controls.ControlName;
@@ -121,6 +122,10 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	
 	public Optional<Control> getControl(ControlName cntrlName){
 		return panelControl.getControl(cntrlName);
+	}
+	
+	public void updateControl(ControlName cntrlName, ControlGetter updatedCntrl) {
+		panelControl.updateControl(cntrlName, updatedCntrl);
 	}
 	
 	@Override

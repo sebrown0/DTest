@@ -3,10 +3,17 @@
  */
 package object_models.helpers;
 
+import java.util.Optional;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import controls.Button;
+import controls.Control;
+import controls.ControlName;
+import object_models.panels.JsPanelControl;
 
 /**
  * @author Steve Brown
@@ -31,6 +38,20 @@ public final class ElementClicker {
 		
 	}
 	
+	public static Optional<Control> clickButton(ControlName cntrlName, JsPanelControl panelControl){
+		Optional<Control> pgCntrl = panelControl.getControl(cntrlName);
+		
+		pgCntrl.ifPresent(cntrl -> {
+			Button btn = (Button) cntrl;
+			btn.click();			
+		});
+		
+		return pgCntrl;
+	}
+	
+	/*
+	 * Vanilla click.
+	 */
 	private static void clickBtn(WebElement btn) throws Exception {
 		btn.click();	
 	}

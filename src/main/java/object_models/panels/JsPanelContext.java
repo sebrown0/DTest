@@ -9,5 +9,5 @@ package object_models.panels;
  * The panel 
  */
 public interface JsPanelContext {
-	JSPanelWithIFrame getPanelWithIFrame();
+	JsPanelWithIFrame getPanelWithIFrame();
 }

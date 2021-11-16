@@ -7,13 +7,13 @@ import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextManager;
 import object_models.helpers.Closable;
-import object_models.panels.JSPanelWithIFrame;
+import object_models.panels.JsPanelWithIFrame;
 
 /**
  * @author Steve Brown
  *
  */
-public class EmployeeGridView extends JSPanelWithIFrame implements Closable {
+public class EmployeeGridView extends JsPanelWithIFrame implements Closable {
 	public static final String PANEL_TITLE = "Employee Details";
 	
 	public EmployeeGridView(WebDriver driver, ContextManager contextManager) {

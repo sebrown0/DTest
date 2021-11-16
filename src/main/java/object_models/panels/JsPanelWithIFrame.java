@@ -14,10 +14,10 @@ import object_models.helpers.IFrame;
  * @author Steve Brown
  *
  */
-public abstract class JSPanelWithIFrame extends JsPanel implements JsPanelContext {
+public abstract class JsPanelWithIFrame extends JsPanel implements JsPanelContext {
 	private IFrame iFrame;
 		
-	public JSPanelWithIFrame(WebDriver driver, String expectedTitle, ContextManager contextManager) {
+	public JsPanelWithIFrame(WebDriver driver, String expectedTitle, ContextManager contextManager) {
 		super(driver, expectedTitle, contextManager);
 	
 		switchToIFrame();
@@ -42,7 +42,7 @@ public abstract class JSPanelWithIFrame extends JsPanel implements JsPanelContex
 	}
 
 	@Override
-	public JSPanelWithIFrame getPanelWithIFrame() {
+	public JsPanelWithIFrame getPanelWithIFrame() {
 		return this;
 	}
 	

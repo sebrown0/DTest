@@ -21,14 +21,14 @@ import controls.TextOut;
 import enums.control_names.EmployeeControlNames;
 import enums.control_names.GroupControlNames;
 import object_models.element.TextInOut;
-import object_models.panels.JSPanelWithIFrame;
+import object_models.panels.JsPanelWithIFrame;
 
 /**
  * @author Steve Brown
  *
  * Employee details page.
  */
-public class EmployeeDetails extends JSPanelWithIFrame {
+public class EmployeeDetails extends JsPanelWithIFrame {
 	private EmpDetailsTabs myTabs;
 
 	public static final String PANEL_TITLE = "Employee Details";

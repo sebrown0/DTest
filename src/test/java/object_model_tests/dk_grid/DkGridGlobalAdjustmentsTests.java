@@ -14,14 +14,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import controls.Button;
 import controls.ComboWriteAndSelect;
 import enums.GridButtonNames;
-import enums.control_names.CommonControlNames;
 import enums.control_names.EmployeeControlNames;
 import enums.control_names.GlobalAdjustmentControlNames;
 import logging.TestResultLogger;
-import object_models.dk_grid.DkGrid;
 import object_models.dk_grid.DkGridContent;
 import object_models.dk_grid.DkGridToolBar;
 import object_models.dk_grid.Row;
@@ -50,7 +47,7 @@ import xml_reader.config_file.ConfigReader;
 	LoginPageResolverPayroll.class })
 public class DkGridGlobalAdjustmentsTests {	
 	private static HomePage homepagePayroll;
-	private static DkGrid<?> grid;
+//	private static DkGrid<?> grid;
 	private static DkGridToolBar toolbar;
 	private static DkGridContent<?> content;
 	private static GlobalAdjustments globalAdjustments;
@@ -58,33 +55,20 @@ public class DkGridGlobalAdjustmentsTests {
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
 		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
-		loadGrid();
-	}		
-	
-	private static void loadGrid() {
 		globalAdjustments =	(GlobalAdjustments) homepagePayroll.getLeftMenu().clickAndLoad(GlobalAdjustments.class).get();
-		grid = (DkGrid<?>) globalAdjustments.getControl(CommonControlNames.DK_GRID).get();
-	}
-	
+	}		
+		
 	@Test @Order(1)
 	void loadGrid_implicitPass_ifCompletes() {		
-		grid.loadGridIfNecessary();		
+		globalAdjustments.getGrid().loadGridIfNecessary();		
 	}
 	
 	@Test @Order(2)
 	void checkToolBar() {
-		toolbar = grid.getToolBar();
+		toolbar = globalAdjustments.getGrid().getToolBar();
 		assertFalse(toolbar == null);
 	}
-	
-	private void checkButtonIsPresent(GridButtonNames btnName) {
-		Optional<ElementButton> btn = toolbar.getButton(btnName.getName());
-		btn.ifPresentOrElse(
-				b ->  assertTrue(true), 
-				new TestFail(btnName.getName() + " is not present")
-		);
-	}
-	
+		
 	@Test @Order(3)
 	void checkAddRecordIsPresent() {
 		checkButtonIsPresent(GridButtonNames.BTN_ADD);		
@@ -125,6 +109,14 @@ public class DkGridGlobalAdjustmentsTests {
 		checkButtonIsPresent(GridButtonNames.BTN_RESET_GRID_STATE);
 	}
 	
+	private void checkButtonIsPresent(GridButtonNames btnName) {
+		Optional<ElementButton> btn = toolbar.getButton(btnName.getName());
+		btn.ifPresentOrElse(
+				b ->  assertTrue(true), 
+				new TestFail(btnName.getName() + " is not present")
+		);
+	}
+	
 	@Test @Order(11)
 	void checkOverallFilterIsPresent() {
 		Optional<ElementInput> filter = toolbar.getOverallFilter();
@@ -136,7 +128,7 @@ public class DkGridGlobalAdjustmentsTests {
 
 	@Test @Order(12)
 	void getContent_implictPass_ifCompletes() {
-		content = grid.getContent();
+		content = globalAdjustments.getGrid().getContent();
 		assertTrue(content != null);
 	}
 	
@@ -146,19 +138,15 @@ public class DkGridGlobalAdjustmentsTests {
 		assertEquals(1, row1.get().getRowIdx().intValue());		
 	}
 	
-	/*
-	 * HAVE TO RELOAD THE GRID AS IT WILL HAVE CHANGED!!!!!!
-	 */
-//	@Test @Order(14)
-//	void loadEmployee() {
-//		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(EmployeeControlNames.EMPLOYEES).get();
-//		cmbComp.click();		
-//		cmbComp.selectFullText("Simpson Homer");
-//		cmbComp.click();		
-//		
-//		Button acceptCrit = (Button) globalAdjustments.getControl(GlobalAdjustmentControlNames.ACCEPT_CRITERIA).get();
-//		acceptCrit.click();
-//	}
+	@Test @Order(14)
+	void loadEmployee() {
+		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(EmployeeControlNames.EMPLOYEES).get();
+		cmbComp.click();		
+		cmbComp.selectFullText("Simpson Homer");
+		cmbComp.click();		
+		
+		globalAdjustments.clickButton(GlobalAdjustmentControlNames.ACCEPT_CRITERIA);		
+	}
 		
 	@Test @Order(15)
 	void checkRowNumber_WithKey() {
@@ -167,8 +155,8 @@ public class DkGridGlobalAdjustmentsTests {
 	}
 
 	@Test @Order(16)
-	void filterEmployeeColumn() {
-		grid.getGridHeader().filterColumn("Employee", "helloooooooooo");		
+	void filterEmployeeColumn_implictPass_ifCompletes() {
+		globalAdjustments.filterGridColumn("Employee", "helloooooooooo");		
 	}
 	
 	@AfterAll

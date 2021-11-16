@@ -8,13 +8,13 @@ import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextManager;
 import object_models.element.Label;
-import object_models.panels.JSPanelWithIFrame;
+import object_models.panels.JsPanelWithIFrame;
 
 /**
  * @author Steve Brown
  *
  */
-public final class EmployeeCvHr extends JSPanelWithIFrame{	
+public final class EmployeeCvHr extends JsPanelWithIFrame{	
 	private static final String PANEL_TITLE = "Employee HR CV";
 		
 	public EmployeeCvHr(WebDriver driver, ContextManager contextManager) {

@@ -36,4 +36,12 @@ public class PageControl {
 		}
 	}
 	
+	public void updateControl(ControlName cntrlName, ControlGetter updatedCntrl) {
+		String key = cntrlName.getName();
+		if(controls.containsKey(key)) {
+			controls.remove(key);
+			controls.put(key, updatedCntrl);	
+		}
+	}
+	
 }

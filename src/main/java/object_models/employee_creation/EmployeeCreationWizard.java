@@ -22,13 +22,13 @@ import control_mapping.PageMap;
 import control_mapping.PageMapper;
 import dto.Employee;
 import object_models.forms.FormFadeShow;
-import object_models.panels.JSPanelWithIFrame;
+import object_models.panels.JsPanelWithIFrame;
 
 /**
  * @author Steve Brown
  *
  */
-public class EmployeeCreationWizard extends JSPanelWithIFrame {	
+public class EmployeeCreationWizard extends JsPanelWithIFrame {	
 	private Logger logger = LogManager.getLogger();
 	private PageMapper mapper;
 	private PageMap pageMap;

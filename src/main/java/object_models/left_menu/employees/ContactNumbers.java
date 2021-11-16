@@ -8,13 +8,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import context_manager.ContextManager;
-import object_models.panels.JSPanelWithIFrame;
+import object_models.panels.JsPanelWithIFrame;
 
 /**
  * @author Steve Brown
  *
  */
-public class ContactNumbers extends JSPanelWithIFrame {	
+public class ContactNumbers extends JsPanelWithIFrame {	
 	private Tab myTabs;
 	
 	public static final String PANEL_TITLE ="Employee Contact Details";

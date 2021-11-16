@@ -34,7 +34,7 @@ public class DkGridHeader {
 		headerContainer = gridContainer.findElement(By.cssSelector("div[class='ag-header-container']"));
 		headerRow = headerContainer.findElement(By.cssSelector("div[class='ag-header-row ag-header-row-column']"));
 		setHeaders();		
-		setCellHeaders();
+		setCellHeaders(); 	
 	}
 
 	private void setHeaders() {
