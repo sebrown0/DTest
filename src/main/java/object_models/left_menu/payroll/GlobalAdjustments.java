@@ -17,6 +17,7 @@ import enums.control_names.PayrollControlNames;
 import factories.ControlDataFactory;
 import object_models.dk_grid.DkGrid;
 import object_models.dk_grid.FindRowByEmpCode;
+import object_models.dk_grid.Row;
 import object_models.helpers.ElementClicker;
 import object_models.helpers.text_writer.TextWriterComboDefault;
 import object_models.helpers.text_writer.TextWriterComboMulti;
@@ -119,8 +120,16 @@ public final class GlobalAdjustments extends JsPanelWithIFrame implements JsPane
 		return btn;		
 	}
 	
+	public Optional<Integer> getRowNumForKeyValue(String key) {
+		return loadGridIfNull().getContent().getRowNumForKeyValue(key);
+	}
+	public Optional<Row<?>> getRowForRowIndex(Integer rowIdx){		
+		return loadGridIfNull().getContent().getRowForRowIndex(rowIdx);
+	}
+	
 	public void filterGridColumn(String filterCol, String filterTxt) {
 		loadGridIfNull().getGridHeader().filterColumn(filterCol, filterTxt);
+		grid.reloadContent();
 	}
 	
 	// Helpers

@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 
@@ -26,6 +27,9 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 	private int currentLastRow = -1;	
 	private List<Cell> currentCellList; 
 	private Row<T> currentRow;
+	private int readAttempt;
+	
+	private final int MAX_READ_ATTEMPTS = 5;
 	
 	public DkGridContentReader(WebElement gridContainer, DkGridContent<?> gridContent, KeyStrategyRow keyStrategyRows) {
 		this.gridContainer = gridContainer;
@@ -33,18 +37,21 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 		this.keyStrategyRows = keyStrategyRows;		
 	}
 	
-	public void read() {
-		setContentElement();
-		loopContainers();
+	public void read() {		
+		if(++readAttempt < MAX_READ_ATTEMPTS) { 	
+			setContentElement();
+			loopContainers();
+		}
 	}
 	
 	private void setContentElement() {
-		contentElement = gridContainer.findElement(By.cssSelector("div[class='ag-body-viewport ag-layout-normal ag-row-animation']"));
+		By contentLocator = By.cssSelector("div[class='ag-body-viewport ag-layout-normal ag-row-animation']");		
+		contentElement = gridContainer.findElement(contentLocator);
 	}
 		
-	private void loopContainers(){
+	private void loopContainers(){ 	
 		mapLeftPinned();
-		mapCentre();
+		mapCentre();		
 //		mapRightPinned();		
 	}
 	
@@ -64,32 +71,42 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 //	}
 	
 	private void mapContainer(By containerLocator) {
-		WebElement container = contentElement.findElement(containerLocator);		
+		WebElement container = contentElement.findElement(containerLocator);
 		getRowsInContainer(container);
 	}
 	
 	private void getRowsInContainer(WebElement container) {
 		if(container != null) {			
-			String containerName = container.getAttribute("ref");						
-			container
-				.findElements(By.cssSelector("div[role='row']"))
-				.forEach(row -> { 
-					mapRowFromContainer(row, containerName); 
-
-				});	
+			String containerName = container.getAttribute("ref");								 	
+			List<WebElement> rows = container.findElements(By.cssSelector("div[role='row']"));			
+			rows.forEach(row -> { 
+					mapRowFromContainer(row, containerName);
+			});	
 		}else {
 			logger.info("No rows in container [" + currentContainerName + "]");
 		}		
 	}
 		
-	private void mapRowFromContainer(WebElement rowElement, String containerName) {				
-		Integer rowIdx = Integer.valueOf(rowElement.getAttribute("row-index"));
-		mapCellsInContainersRow(rowElement, rowIdx, containerName);		
+	private void mapRowFromContainer(WebElement rowElement, String containerName) {
+		try {
+			Integer rowIdx = Integer.valueOf(rowElement.getAttribute("row-index"));		
+			mapCellsInContainersRow(rowElement, rowIdx, containerName);
+		} catch (StaleElementReferenceException e) {
+			/*
+			 * The grid could be changing because of a filter event.
+			 * If a StaleElementReferenceException is thrown this could be the cause.
+			 * Therefore, try to read the content again, up to MAX_READ_ATTEMPTS.
+			 */
+			gridContent.clearAll();
+			this.read();
+		} catch (Exception e) {
+			logger.error("Error mapping row for container [" + containerName + "]");
+		}
 	}
 
 	@SuppressWarnings("unchecked")
-	private void mapCellsInContainersRow(WebElement rowElement, Integer rowIdx, String containerName) {
-		List<WebElement> cells = rowElement.findElements(By.cssSelector("div[role='gridcell']"));		
+	private void mapCellsInContainersRow(WebElement rowElement, Integer rowIdx, String containerName) {		
+		List<WebElement> cells = rowElement.findElements(By.cssSelector("div[role='gridcell']"));
 		String colId = null;
 		String value = null;
 	

@@ -21,13 +21,17 @@ public class DkGridContent <T extends KeyStrategyRow> {
 	public void addRow(Row<?> row) {
 		gridData.addRow(row);
 	}
+	
+	public void clearAll() {
+		gridData.clearRows();
+	}
 
 	/*
 	 * If the cell that acts as the key for the row is present.
 	 * Compare it's value to that of the required key.
 	 * If match return the row number.
 	 */
-	public Optional<Integer> getRowNumForValue(String key) {
+	public Optional<Integer> getRowNumForKeyValue(String key) {
 		Optional<Integer> rowIdx = Optional.empty();		
 		for(Entry<Integer, Row<?>> e : gridData.getRows().entrySet()) {
 			Cell keyCell = e.getValue().getKeyCell(); 
@@ -47,7 +51,7 @@ public class DkGridContent <T extends KeyStrategyRow> {
 	}
 
 	public Optional<Row<?>> getRowForKeyValue(String keyVal){		
-		Optional<Integer> rowIdx = getRowNumForValue(keyVal);
+		Optional<Integer> rowIdx = getRowNumForKeyValue(keyVal);
 		if(rowIdx.isPresent()) {
 			return getRow(rowIdx.get());			
 		}		

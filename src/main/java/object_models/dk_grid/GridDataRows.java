@@ -17,6 +17,10 @@ public class GridDataRows <T extends KeyStrategyRow> {
 		rows.putIfAbsent(row.getRowIdx(), row);			
 	}
 
+	public void clearRows() {
+		rows.clear();		
+	}
+	
 	public Optional<Row<?>> getRow(Integer rowIdx) {
 		return Optional.ofNullable(rows.get(rowIdx));
 	}

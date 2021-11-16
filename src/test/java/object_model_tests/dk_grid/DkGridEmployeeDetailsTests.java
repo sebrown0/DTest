@@ -178,7 +178,7 @@ public class DkGridEmployeeDetailsTests {
 		
 	@Test
 	void checkRowNumber_WithKey() {
-		Optional<Integer> rowIdx = content.getRowNumForValue("F");		
+		Optional<Integer> rowIdx = content.getRowNumForKeyValue("F");		
 		assertTrue(rowIdx.get() >= 0);		
 	}
 	

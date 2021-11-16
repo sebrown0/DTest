@@ -49,7 +49,7 @@ public class DkGridGlobalAdjustmentsTests {
 	private static HomePage homepagePayroll;
 //	private static DkGrid<?> grid;
 	private static DkGridToolBar toolbar;
-	private static DkGridContent<?> content;
+//	private static DkGridContent<?> content;
 	private static GlobalAdjustments globalAdjustments;
 	
 	@BeforeAll	
@@ -60,7 +60,7 @@ public class DkGridGlobalAdjustmentsTests {
 		
 	@Test @Order(1)
 	void loadGrid_implicitPass_ifCompletes() {		
-		globalAdjustments.getGrid().loadGridIfNecessary();		
+		globalAdjustments.getGrid();//.loadGridIfNecessary();		
 	}
 	
 	@Test @Order(2)
@@ -128,18 +128,18 @@ public class DkGridGlobalAdjustmentsTests {
 
 	@Test @Order(12)
 	void getContent_implictPass_ifCompletes() {
-		content = globalAdjustments.getGrid().getContent();
+		DkGridContent<?> content = globalAdjustments.getGrid().getContent();
 		assertTrue(content != null);
 	}
 	
 	@Test @Order(13)
 	void checkContentForRow1() {
-		Optional<Row<?>> row1 = content.getRowForRowIndex(1);		
+		Optional<Row<?>> row1 = globalAdjustments.getRowForRowIndex(1);		
 		assertEquals(1, row1.get().getRowIdx().intValue());		
 	}
 	
 	@Test @Order(14)
-	void loadEmployee() {
+	void loadEmployee_implictPass_ifCompletes() {
 		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(EmployeeControlNames.EMPLOYEES).get();
 		cmbComp.click();		
 		cmbComp.selectFullText("Simpson Homer");
@@ -150,13 +150,15 @@ public class DkGridGlobalAdjustmentsTests {
 		
 	@Test @Order(15)
 	void checkRowNumber_WithKey() {
-		Optional<Integer> rowIdx = content.getRowNumForValue("Simpson Homer - (0134213A)");		
+		Optional<Integer> rowIdx = globalAdjustments.getRowNumForKeyValue("Simpson Homer - (0134213A)");		
 		assertTrue(rowIdx.get().intValue() >= 0);		
 	}
 
 	@Test @Order(16)
-	void filterEmployeeColumn_implictPass_ifCompletes() {
-		globalAdjustments.filterGridColumn("Employee", "helloooooooooo");		
+	void filterEmployeeColumn_shouldNotReturn_rowIdx() {		
+		globalAdjustments.filterGridColumn("Employee", "Z_7Z)3K");
+		Optional<Integer> rowIdx = globalAdjustments.getRowNumForKeyValue("Simpson Homer - (0134213A)");		
+		assertEquals(Optional.empty(), rowIdx);
 	}
 	
 	@AfterAll

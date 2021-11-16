@@ -26,20 +26,22 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 	private DkGridContent<T> gridContent;
 
 	private WebElement myContainer;
+	private KeyStrategyRow keyStrategyRows;
 	
 	private boolean gridLoaded;
 	private boolean toolBarLoaded;
 	private boolean contentLoaded;
 	
-	public DkGrid(WebDriver driver, KeyStrategyRow keyStrategyRows) {
+	public DkGrid(WebDriver driver, KeyStrategyRow keyStrategyRows) {		
 		this.setGridElement(driver);
 		this.setColumnHeaders();
+		this.keyStrategyRows = keyStrategyRows;
 		this.toolBar = new DkGridToolBar();
 		this.gridContent = new DkGridContent<>();
 		this.toolBarReader = new DkGridToolBarReader(driver, toolBar);
 		this.contentReader = new DkGridContentReader<>(myContainer, gridContent, keyStrategyRows);
 	}
-
+	
 	private void setGridElement(WebDriver driver) {
 		By contentLocator = By.id("dkrGrid");
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));		 
@@ -84,6 +86,10 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 	private void loadContent() {
 		contentReader.read();
 		contentLoaded = true;
-	}	
-		
+	}
+	public void reloadContent() {
+		this.gridContent = new DkGridContent<>();
+		this.contentReader = new DkGridContentReader<>(myContainer, gridContent, keyStrategyRows);
+		loadContent();
+	}
 }
