@@ -22,6 +22,7 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 	private WebElement contentElement;	
 	private Logger logger = LogManager.getLogger();
 	private DkGridContent<?> gridContent;
+	private DkGridHeader dkGridHeader;
 	private KeyStrategyRow keyStrategyRows;
 	private String currentContainerName;
 	private int currentLastRow = -1;	
@@ -31,10 +32,11 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 	
 	private final int MAX_READ_ATTEMPTS = 5;
 	
-	public DkGridContentReader(WebElement gridContainer, DkGridContent<?> gridContent, KeyStrategyRow keyStrategyRows) {
+	public DkGridContentReader(WebElement gridContainer, DkGridContent<?> gridContent, KeyStrategyRow keyStrategyRows, DkGridHeader dkGridHeader) {
 		this.gridContainer = gridContainer;
 		this.gridContent = gridContent;
-		this.keyStrategyRows = keyStrategyRows;		
+		this.keyStrategyRows = keyStrategyRows;
+		this.dkGridHeader = dkGridHeader;
 	}
 	
 	public void read() {		
@@ -109,6 +111,7 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 		List<WebElement> cells = rowElement.findElements(By.cssSelector("div[role='gridcell']"));
 		String colId = null;
 		String value = null;
+		Integer colIdx;
 	
 		// check if row exists in map
 		gridContent.getRowForRowIndex(rowIdx).ifPresentOrElse(
@@ -128,14 +131,19 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 		for (WebElement c : cells) {
 			colId = c.getAttribute("col-id");			
 			value = c.getText(); 	
-			Cell newCell = new Cell(
-					containerName,
-					colId, 
-					value, 
-					c.getAttribute("comp-id"), 
-					c.getAttribute("unselectable"), 
-					rowIdx);		
-				
+			colIdx = Integer.valueOf(c.getAttribute("aria-colindex"));
+
+			Cell newCell = new Cell();
+			newCell
+				.setColName(dkGridHeader.getColNameForColIdx(colIdx))
+				.setColNum(colIdx)
+				.setCompId(c.getAttribute("comp-id"))
+				.setContainerName(containerName)
+				.setId(colId)
+				.setRowNum(rowIdx)
+				.setUnselectable(c.getAttribute("unselectable"))
+				.setValue(value);
+	
 			addCellToCurrentCellList(newCell);
 			setAsRowKeyIfTheCellIsUsedAsKey(colId, newCell);
 			updateLastRowIfNecessary(rowIdx);

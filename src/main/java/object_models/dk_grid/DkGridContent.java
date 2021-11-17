@@ -65,7 +65,9 @@ public class DkGridContent <T extends KeyStrategyRow> {
 	public int getLastRowNum() {
 		return lastRowNum;
 	}
-
+	public Cell getCell(Integer rowIdx,String colName) {
+		return gridData.getCell(rowIdx, colName);
+	}
 	public void setLastRowNum(int lastRowNum) {
 		this.lastRowNum = lastRowNum;
 	}

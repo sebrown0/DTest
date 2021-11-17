@@ -7,42 +7,76 @@ public class Cell {
 	private String compId;
 	private String unselectable;
 	private String value;
-	private Integer rowNum;
 	private String containerName;
-		
-	public Cell(String containerName, String id, String value, String compId, String unselectable, Integer rowNum) {
-		this.containerName = containerName;
-		this.id = id;
-		this.value = value;
-		this.compId = compId;
-		this.unselectable = unselectable;
-		this.rowNum = rowNum;
-	}
-
+	private String colName;
+	private Integer rowNum;
+	private Integer colNum;
+			
 	public String getContainerName() {
 		return containerName;
-	}
-	
+	}	
 	public String getColumnId() {
 		return id;
 	}
-	
 	public Optional<String> getValue() {
 		return Optional.ofNullable(value);
 	}
-
 	public String getCompId() {
 		return compId;
 	}
-
+		public String getColName() {		
+		return colName;
+	}
 	public String getUnselectable() {
 		return unselectable;
 	}
 
+	public Cell setId(String id) {
+		this.id = id;
+		return this;
+	}
+
+	public Cell setCompId(String compId) {
+		this.compId = compId;
+		return this;
+	}
+
+	public Cell setUnselectable(String unselectable) {
+		this.unselectable = unselectable;
+		return this;
+	}
+
+	public Cell setValue(String value) {
+		this.value = value;
+		return this;
+	}
+
+	public Cell setContainerName(String containerName) {
+		this.containerName = containerName;
+		return this;
+	}
+
+	public Cell setColName(String colName) {
+		this.colName = colName;
+		return this;
+	}
+
+	public Cell setRowNum(Integer rowNum) {
+		this.rowNum = rowNum;
+		return this;
+	}
+
+	public Cell setColNum(Integer colNum) {
+		this.colNum = colNum;
+		return this;
+	}
+
 	@Override
 	public String toString() {
-		return "Cell [id=" + id + ", compId=" + compId + ", unselectable=" + unselectable + ", value=" + value + ", rowNum="
-				+ rowNum + "]";
+		return "Cell [id=" + id + ", compId=" + compId + ", unselectable=" + unselectable + ", value=" + value
+				+ ", containerName=" + containerName + ", colName=" + colName + ", rowNum=" + rowNum + ", colNum=" + colNum
+				+ "]";
 	}
+
 	
 }

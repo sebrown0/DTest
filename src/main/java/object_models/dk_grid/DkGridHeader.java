@@ -72,6 +72,17 @@ public class DkGridHeader {
 		return columnHeaders;
 	}
 	
+	public String getColNameForColIdx(int colIdx) {
+		String colName = null;
+		for (Entry<String, ColumnHeader> e : columnHeaders.entrySet()) {
+			if(e.getValue().getColNum() == colIdx) {
+				colName = e.getKey();
+				break;
+			}
+		}
+		return colName;
+	}
+	
 	public void filterColumn(String filterCol, String filterTxt) {
 		ColumnHeader header = columnHeaders.get(filterCol);
 		header.filterColumn(filterTxt);		

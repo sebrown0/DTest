@@ -66,13 +66,25 @@ public class Row <T extends KeyStrategyRow> {
 	public Cell getCell(String key){
 		Cell cell = null;
 		for (Cell c : cells) {
-			if(c.getColumnId().equalsIgnoreCase(key)) {
+			String colName = c.getColName();
+			if(colName != null && colName.equalsIgnoreCase(key)) {
 				cell = c;
 				break;
 			}
 		}
 		return cell;
 	}
+	
+//	public Cell getCell(String key){
+//		Cell cell = null;
+//		for (Cell c : cells) {
+//			if(c.getColumnId().equalsIgnoreCase(key)) {
+//				cell = c;
+//				break;
+//			}
+//		}
+//		return cell;
+//	}
 		
 	public void setKeyForRow(Cell keyCell) {
 		this.keyCell = keyCell;

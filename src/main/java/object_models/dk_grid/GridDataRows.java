@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+
 
 /**
  * @author Steve Brown
@@ -27,5 +29,16 @@ public class GridDataRows <T extends KeyStrategyRow> {
 
 	public Map<Integer, Row<?>> getRows() {
 		return rows;
+	}
+	
+	public Cell getCell(Integer rowIdx, String colName) {
+		Cell cell = null;
+		if(rows.containsKey(rowIdx)) {
+			Row<?> row = rows.get(rowIdx);
+			cell = row.getCell(colName);
+		}else {
+			LogManager.getLogger().error("Row does not exist");
+		}
+		return cell;
 	}
 }

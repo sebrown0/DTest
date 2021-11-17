@@ -33,7 +33,7 @@ import xml_reader.config_file.ConfigReader;
 	ConfigParameterResolver.class, 
 	TestResultLogger.class, 
 	LoginPageResolverPayroll.class })
-class GlobalAdjustmentTests {
+class GlobalAdjustmentFunctionalityTests {
 	private static HomePage homepagePayroll;	
 	private static GlobalAdjustments globalAdjustments; 
 	

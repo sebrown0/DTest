@@ -39,7 +39,7 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 		this.toolBar = new DkGridToolBar();
 		this.gridContent = new DkGridContent<>();
 		this.toolBarReader = new DkGridToolBarReader(driver, toolBar);
-		this.contentReader = new DkGridContentReader<>(myContainer, gridContent, keyStrategyRows);
+		this.contentReader = new DkGridContentReader<>(myContainer, gridContent, keyStrategyRows, gridHeader);
 	}
 	
 	private void setGridElement(WebDriver driver) {
@@ -89,7 +89,14 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 	}
 	public void reloadContent() {
 		this.gridContent = new DkGridContent<>();
-		this.contentReader = new DkGridContentReader<>(myContainer, gridContent, keyStrategyRows);
+		this.contentReader = new DkGridContentReader<>(myContainer, gridContent, keyStrategyRows, gridHeader);
 		loadContent();
+	}
+	
+	public Cell getCell(Row<?> row, String colName) {
+		return gridContent.getCell(row.getRowIdx(), colName);
+	}
+	public Cell getCell(Integer rowIdx, String colName) {
+		return gridContent.getCell(rowIdx, colName);
 	}
 }

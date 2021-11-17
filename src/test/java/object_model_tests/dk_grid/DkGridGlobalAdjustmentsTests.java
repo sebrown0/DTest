@@ -47,9 +47,7 @@ import xml_reader.config_file.ConfigReader;
 	LoginPageResolverPayroll.class })
 public class DkGridGlobalAdjustmentsTests {	
 	private static HomePage homepagePayroll;
-//	private static DkGrid<?> grid;
 	private static DkGridToolBar toolbar;
-//	private static DkGridContent<?> content;
 	private static GlobalAdjustments globalAdjustments;
 	
 	@BeforeAll	
@@ -60,7 +58,7 @@ public class DkGridGlobalAdjustmentsTests {
 		
 	@Test @Order(1)
 	void loadGrid_implicitPass_ifCompletes() {		
-		globalAdjustments.getGrid();//.loadGridIfNecessary();		
+		globalAdjustments.getGrid();		
 	}
 	
 	@Test @Order(2)
