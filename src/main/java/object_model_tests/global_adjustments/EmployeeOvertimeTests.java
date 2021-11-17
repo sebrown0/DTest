@@ -9,12 +9,16 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import controls.ComboWriteAndSelect;
 import enums.control_names.EmployeeControlNames;
 import enums.control_names.GlobalAdjustmentControlNames;
 import logging.TestResultLogger;
+import object_models.date_picker.DatePickerPage;
 import object_models.dk_grid.Cell;
+import object_models.dk_grid.CellChecker;
 import object_models.dk_grid.Row;
 import object_models.left_menu.payroll.GlobalAdjustments;
 import object_models.pages.HomePage;
@@ -46,24 +50,36 @@ public class EmployeeOvertimeTests {
 		globalAdjustments =	(GlobalAdjustments) homepagePayroll.getLeftMenu().clickAndLoad(GlobalAdjustments.class).get();
 	}		
 				
-	@Test @Order(1)
-	void loadEmployee_implictPass_ifCompletes() {
-		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(EmployeeControlNames.EMPLOYEES).get();
-		cmbComp.click();		
-		cmbComp.selectFullText("F F");
-		cmbComp.click();		
-		
-		globalAdjustments.clickButton(GlobalAdjustmentControlNames.ACCEPT_CRITERIA);		
-	}
+//	@Test @Order(1)
+//	void loadEmployee_implictPass_ifCompletes() {
+//		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(EmployeeControlNames.EMPLOYEES).get();
+//		cmbComp.click();		
+//		cmbComp.selectFullText("F F");
+//		cmbComp.click();		
+//		
+//		globalAdjustments.clickButton(GlobalAdjustmentControlNames.ACCEPT_CRITERIA);		
+//	}
 
 	@Test @Order(2)
 	void enterExtraHoursCode() {
 		Optional<Integer> rowIdx = globalAdjustments.getRowNumForKeyValue("F F - (F)");		
 		Row<?> row = globalAdjustments.getRowForRowIndex(rowIdx.get()).get();
-//		Cell extraHours = row.getCell("Extra Hours");
-		Cell extraHours = globalAdjustments.getGrid().getCell(row, "Extra Hours");
-		extraHours.getValue();
-		System.out.println("extraHours->" + extraHours.getColumnId()); // TODO - remove or log 	
+		
+//		Cell extraHours = globalAdjustments.getGrid().getCell(row, "Hours / Amount");
+//		Cell extraHours = globalAdjustments.getGrid().getCell(row, "Extra Hours");
+		Cell cell = globalAdjustments.getGrid().getCell(row, "Date To");
+		cell.getValue();
+		
+		WebDriver driver = homepagePayroll.getWebDriver();
+		WebElement e = cell.getMyElement();
+		
+		CellChecker checker = new CellChecker(driver, e);
+		if(checker.hasPopup()) {
+			DatePickerPage picker = (DatePickerPage) checker.getPopupType();
+			System.out.println("->" + picker.getSelectedDate()); // TODO - remove or log 	
+		}
+		 	
+
 	}
 	
 	@AfterAll

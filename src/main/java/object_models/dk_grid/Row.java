@@ -22,14 +22,11 @@ public class Row <T extends KeyStrategyRow> {
 	private String keyColumnName;
 	private Cell keyCell;	
 	private int rowIdx;
-		
-	/*
-	 * Instantiate with the strategy for 
-	 */
-	public Row(KeyStrategyRow rowKeyStrategy) {		
-		this.rowKeyStrategy = rowKeyStrategy;
-	}
 	
+	public Row(KeyStrategyRow rowKeyStrategy) {		
+		this.rowKeyStrategy = rowKeyStrategy;	
+	}
+		
 	public void setRowIdx(int rowIdx) {
 		this.rowIdx = rowIdx;
 	}
@@ -74,18 +71,7 @@ public class Row <T extends KeyStrategyRow> {
 		}
 		return cell;
 	}
-	
-//	public Cell getCell(String key){
-//		Cell cell = null;
-//		for (Cell c : cells) {
-//			if(c.getColumnId().equalsIgnoreCase(key)) {
-//				cell = c;
-//				break;
-//			}
-//		}
-//		return cell;
-//	}
-		
+			
 	public void setKeyForRow(Cell keyCell) {
 		this.keyCell = keyCell;
 	}

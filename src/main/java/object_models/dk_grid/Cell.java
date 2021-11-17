@@ -2,6 +2,9 @@ package object_models.dk_grid;
 
 import java.util.Optional;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
 public class Cell {
 	private String id;
 	private String compId;
@@ -11,7 +14,25 @@ public class Cell {
 	private String colName;
 	private Integer rowNum;
 	private Integer colNum;
-			
+	private WebElement gridContainer;
+		
+	public Cell(WebElement gridContainer) {
+		this.gridContainer = gridContainer;
+	}
+	/*
+	 * HOW DO WE KNOW IF WE CAN DBL CLICK EL??
+	 */
+	
+	public WebElement getMyElement() {
+		/*
+		 * TODO - ERR CHECK
+		 */
+		WebElement row = gridContainer.findElement(By.xpath("//div[@role='row' and @row-index='" + rowNum + "']"));
+		WebElement cell = row.findElement(By.xpath("//div[@role='gridcell' and @col-id='" + id + "']"));
+ 	
+		return cell;
+	}
+	
 	public String getContainerName() {
 		return containerName;
 	}	

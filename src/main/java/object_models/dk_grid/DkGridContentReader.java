@@ -20,6 +20,7 @@ import org.openqa.selenium.WebElement;
 public class DkGridContentReader <T extends KeyStrategyRow> {
 	private WebElement gridContainer;
 	private WebElement contentElement;	
+	private WebElement currentContainerElement;
 	private Logger logger = LogManager.getLogger();
 	private DkGridContent<?> gridContent;
 	private DkGridHeader dkGridHeader;
@@ -73,8 +74,8 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 //	}
 	
 	private void mapContainer(By containerLocator) {
-		WebElement container = contentElement.findElement(containerLocator);
-		getRowsInContainer(container);
+		currentContainerElement = contentElement.findElement(containerLocator);
+		getRowsInContainer(currentContainerElement);
 	}
 	
 	private void getRowsInContainer(WebElement container) {
@@ -133,7 +134,7 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 			value = c.getText(); 	
 			colIdx = Integer.valueOf(c.getAttribute("aria-colindex"));
 
-			Cell newCell = new Cell();
+			Cell newCell = new Cell(currentContainerElement);
 			newCell
 				.setColName(dkGridHeader.getColNameForColIdx(colIdx))
 				.setColNum(colIdx)
