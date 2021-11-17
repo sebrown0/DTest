@@ -35,8 +35,8 @@ public class DkGridContent <T extends KeyStrategyRow> {
 		Optional<Integer> rowIdx = Optional.empty();		
 		for(Entry<Integer, Row<?>> e : gridData.getRows().entrySet()) {
 			Cell keyCell = e.getValue().getKeyCell(); 
-			if(keyCell != null && keyCell.getValue().isPresent()) {
-				String keyVal = keyCell.getValue().get();
+			if(keyCell != null && keyCell.getOriginalValue().isPresent()) {
+				String keyVal = keyCell.getOriginalValue().get();
 				if(keyVal.equalsIgnoreCase(key)){
 					rowIdx = Optional.ofNullable(e.getKey());
 					break;

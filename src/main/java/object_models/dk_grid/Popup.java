@@ -8,5 +8,5 @@ package object_models.dk_grid;
  *
  */
 public interface Popup {
-
+	// MARKER FOR POPUP ELEMENTS.
 }

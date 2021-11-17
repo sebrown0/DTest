@@ -14,7 +14,7 @@ import org.openqa.selenium.WebElement;
 import object_models.element.InputWriter;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 public abstract class DatePicker {
@@ -30,14 +30,6 @@ public abstract class DatePicker {
 	}
 
 	protected abstract void mapSelectors();
-//	private void mapSelectors() {
-//		String datePickerName;
-//		for (WebElement webElement : dateSelectorsList) {
-//			datePickerName = webElement.getAttribute("placeholder");
-//			logger.debug("Found date picker [ " + datePickerName + "]");
-//			dateSelectorsMap.put(datePickerName, webElement);
-//		}
-//	}
 	
 	public DatePickerDay getDatePicker(String pickerName) {
 		date = dateSelectorsMap.get(pickerName);
@@ -53,7 +45,4 @@ public abstract class DatePicker {
 		datePickerDay.setDate(dateStr);
 	}
 	
-  public String getSelectedDate() {
-    return this.date.getAttribute("value");
-  }
 }

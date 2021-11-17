@@ -13,12 +13,16 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.WebElement;
 
 import controls.ComboWriteAndSelect;
 import enums.GridButtonNames;
 import enums.control_names.EmployeeControlNames;
 import enums.control_names.GlobalAdjustmentControlNames;
 import logging.TestResultLogger;
+import object_models.date_picker.DatePickerPopup;
+import object_models.dk_grid.Cell;
+import object_models.dk_grid.CellChecker;
 import object_models.dk_grid.DkGridContent;
 import object_models.dk_grid.DkGridToolBar;
 import object_models.dk_grid.Row;
@@ -153,11 +157,23 @@ public class DkGridGlobalAdjustmentsTests {
 	}
 
 	@Test @Order(16)
+	void setDateTo() {				
+		Row<?> row = globalAdjustments.getRowForRowIndex(0).get();
+		Cell cell = globalAdjustments.getGrid().getCell(row, "Date To");
+		WebElement e = cell.getMyElement();		
+		CellChecker checker = new CellChecker(homepagePayroll.getWebDriver(), e);
+		DatePickerPopup picker = (DatePickerPopup) checker.getPopupType();		
+		picker.getDatePicker("inline").setDate("01/01/2021");
+		assertEquals("01/01/2021", cell.getCurrentValue().get());
+	}
+	
+	@Test @Order(17)
 	void filterEmployeeColumn_shouldNotReturn_rowIdx() {		
 		globalAdjustments.filterGridColumn("Employee", "Z_7Z)3K");
 		Optional<Integer> rowIdx = globalAdjustments.getRowNumForKeyValue("Simpson Homer - (0134213A)");		
 		assertEquals(Optional.empty(), rowIdx);
 	}
+	
 	
 	@AfterAll
 	public static void tearDown() {			

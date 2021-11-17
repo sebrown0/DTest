@@ -14,7 +14,7 @@ public class CellVerifier {
 	public static Optional<String> getValueForKey(String key, Map<String, Cell> columns) {
 		Optional<String> value = Optional.empty();
 		if(columns.containsKey(key)) {
-			value = columns.get(key).getValue();
+			value = columns.get(key).getOriginalValue();
 		}
 		return value;
 	}

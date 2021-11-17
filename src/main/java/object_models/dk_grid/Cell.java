@@ -39,8 +39,11 @@ public class Cell {
 	public String getColumnId() {
 		return id;
 	}
-	public Optional<String> getValue() {
+	public Optional<String> getOriginalValue() {
 		return Optional.ofNullable(value);
+	}
+	public Optional<String> getCurrentValue() {
+		return Optional.ofNullable(getMyElement().getText());
 	}
 	public String getCompId() {
 		return compId;

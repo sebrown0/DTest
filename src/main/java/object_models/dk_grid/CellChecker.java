@@ -12,17 +12,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import object_models.date_picker.DatePickerPage;
+import object_models.date_picker.DatePickerPopup;
 
 /**
- * @author SteveBrown
+ * @author Steve Brown
  *
  */
 public class CellChecker {
 	private WebDriver driver;	
 	private WebElement cellElement;
 	private Actions actions;		
-	private Optional<WebElement> popupTopLevel = null;
+	private Optional<WebElement> popupTopLevel = Optional.empty();
 	private Popup popupType = null;
 	
 	public CellChecker(WebDriver driver, WebElement cellElement) {
@@ -41,22 +41,31 @@ public class CellChecker {
 		}
 	}
 	
-	public Popup getPopupType() {	
-		popupTopLevel.ifPresent(p -> {
-			Optional<WebElement> popupChild = Optional.ofNullable(getChildElement(By.cssSelector("div[class='ag-popup-editor ag-ltr ag-popup-child']"), p));
-			popupChild.ifPresent(c -> {
-				if(!isSelect(c)) {
-					tryDatePicker(c);
-				}
-			});
-		});
+	public Popup getPopupType() {
+		popupTopLevel.ifPresentOrElse(
+				p -> {
+					Optional<WebElement> popupChild = Optional.ofNullable(getChildElement(By.cssSelector("div[class='ag-popup-editor ag-ltr ag-popup-child']"), p));
+					popupChild.ifPresent(c -> {
+						if(!isSelect(c)) {
+							tryDatePicker(c);
+						}
+					});		
+				}, 
+				new Runnable() {					
+					@Override
+					public void run() {
+						if(hasPopup()) {
+							getPopupType();
+						}
+					}
+				});		
+		
 		return popupType;
 	}
-	
+		
 	private boolean isSelect(WebElement chld) {
 		Optional<WebElement> select = Optional.ofNullable(getChildElement(By.cssSelector("body > div.ag-theme-balham.ag-popup > div > span"), chld));
 		if(select.isPresent()) {
-//			popupType = "Select";
 			return true;
 		}else {
 			return false;
@@ -64,10 +73,9 @@ public class CellChecker {
 	}
 	
 	private boolean tryDatePicker(WebElement chld) {
-		System.out.println("tryDatePicker"); // TODO - remove or log
 		Optional<WebElement> picker = Optional.ofNullable(getChildElement(By.cssSelector("div[class='datepicker datepicker-inline']"), chld));
 		if(picker.isPresent()) {
-//			popupType = new DatePickerPage(driver);
+			popupType = new DatePickerPopup(driver);
 			return true;
 		}else {
 			return false;

@@ -186,7 +186,7 @@ public class DkGridEmployeeDetailsTests {
 	void checkContentForRow_WithKey() {
 		Optional<Row<?>> rowIdx = content.getRowForKeyValue("F");		
 		Cell c = rowIdx.get().getCell(ColumnName.TOWN.name());		
-		assertEquals("Birkirkara", c.getValue().get());
+		assertEquals("Birkirkara", c.getOriginalValue().get());
 	}
 	
 	@AfterAll
