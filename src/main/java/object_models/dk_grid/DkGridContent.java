@@ -8,14 +8,17 @@ import java.util.Optional;
 
 /**
  * @author Steve Brown
- *
+ * @since 1.0
+ * @version 1.0
  */
 public class DkGridContent <T extends KeyStrategyRow> {	
 	private GridDataRows<T> gridData;
 	private int lastRowNum;
+	private int lastColNum;
 
 	public DkGridContent() {
 		gridData = new GridDataRows<>();
+		lastRowNum = -1; // Rows are zero based, so to begin with we have no rows.
 	}
 
 	public void addRow(Row<?> row) {
@@ -65,10 +68,16 @@ public class DkGridContent <T extends KeyStrategyRow> {
 	public int getLastRowNum() {
 		return lastRowNum;
 	}
+	public int getLastColNum() {
+		return lastColNum;
+	}
 	public Cell getCell(Integer rowIdx,String colName) {
 		return gridData.getCell(rowIdx, colName);
 	}
 	public void setLastRowNum(int lastRowNum) {
 		this.lastRowNum = lastRowNum;
+	}
+	public void setLastColNum(int lastColNum) {
+		this.lastColNum = lastColNum;
 	}
 }

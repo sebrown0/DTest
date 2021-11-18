@@ -4,6 +4,7 @@
 package object_models.dk_grid;
 
 import java.time.Duration;
+import java.util.Optional;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,10 +13,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import controls.Control;
+import object_models.element.ElementButton;
 
 /**
  * @author Steve Brown
- *
+ * @since 1.0
+ * @version 1.0 *
  */
 public class DkGrid <T extends KeyStrategyRow> implements Control {
 	private DkGridToolBarReader toolBarReader;
@@ -26,13 +29,18 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 	private DkGridContent<T> gridContent;
 
 	private WebElement myContainer;
+	@SuppressWarnings("unused")
+	private WebDriver driver;
 	private KeyStrategyRow keyStrategyRows;
+	private WebDriverWait wait;		 
 	
 	private boolean gridLoaded;
 	private boolean toolBarLoaded;
 	private boolean contentLoaded;
 	
-	public DkGrid(WebDriver driver, KeyStrategyRow keyStrategyRows) {		
+	public DkGrid(WebDriver driver, KeyStrategyRow keyStrategyRows) {
+		this.driver = driver;
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		this.setGridElement(driver);
 		this.setColumnHeaders();
 		this.keyStrategyRows = keyStrategyRows;
@@ -43,8 +51,7 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 	}
 	
 	private void setGridElement(WebDriver driver) {
-		By contentLocator = By.id("dkrGrid");
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));		 
+		By contentLocator = By.id("dkrGrid");		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(contentLocator)); 	
 		myContainer = driver.findElement(contentLocator);			
 	}
@@ -99,4 +106,25 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 	public Cell getCell(Integer rowIdx, String colName) {
 		return gridContent.getCell(rowIdx, colName);
 	}
+	
+	public void addRecord() {
+		Optional<ElementButton> addRec = getToolBar().getButton("Add Record");
+		addRec.ifPresent(a -> { 
+			a.click(); 
+//			waitForContent();
+			reloadContent();
+		});		
+	}
+	
+	/*
+	 * Was having problems with reloading content.
+	 * Changing the selector for the content seems 
+	 * to have solved it.
+	 * However, if problems continue reinstate this.
+	 */
+//	private void waitForContent() {
+//		int findRowNum = gridContent.getLastRowNum() + 1;
+//		By contentLocator = By.xpath("//div[@role='row' and @row-index='" + findRowNum + "']");		
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(contentLocator));
+//	}
 }

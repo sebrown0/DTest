@@ -7,10 +7,12 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 
 
-/**
- * @author Steve Brown
- * 
+/** 
  * The rows in a grid.
+ * 
+ * @author SteveBrown
+ * @since 1.0
+ * @version 1.0
  */
 public class GridDataRows <T extends KeyStrategyRow> {
 	private Map<Integer, Row<?>> rows = new HashMap<>();

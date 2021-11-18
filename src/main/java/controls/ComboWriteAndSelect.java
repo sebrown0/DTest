@@ -17,7 +17,7 @@ import object_models.helpers.text_writer.TextWriter;
  * @version 1.0	
  */
 public class ComboWriteAndSelect extends ComboSelectFromList {
-	private TextWriter writer;
+	protected TextWriter writer;
 	
 	public ComboWriteAndSelect(WebDriver driver, By findBy, By resultsBy, TextWriter writer) {
 		super(driver, findBy, resultsBy);

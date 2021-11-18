@@ -1,6 +1,7 @@
 package object_model_tests.global_adjustments;
 
-import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -9,14 +10,16 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
+import controls.ComboWriteAndSelect;
+import controls.PopupComboSelect;
+import enums.control_names.EmployeeControlNames;
+import enums.control_names.GlobalAdjustmentControlNames;
 import logging.TestResultLogger;
 import object_models.dk_grid.Cell;
 import object_models.dk_grid.CellChecker;
+import object_models.dk_grid.DkGrid;
 import object_models.dk_grid.Row;
-import object_models.element.PopupComboSelect;
 import object_models.left_menu.payroll.GlobalAdjustments;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
@@ -53,32 +56,33 @@ public class EmployeeOvertimeTests {
 	
 	@Test @Order(2)
 	void loadEmployee_implictPass_ifCompletes() {
-//		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(EmployeeControlNames.EMPLOYEES).get();
-//		cmbComp.click();		
-//		cmbComp.selectFullText("F F");
-//		cmbComp.click();		
-//		
-//		globalAdjustments.clickButton(GlobalAdjustmentControlNames.ACCEPT_CRITERIA);		
+		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(EmployeeControlNames.EMPLOYEES).get();
+		cmbComp.click();		
+		cmbComp.selectFullText("Borg Joey");
+		cmbComp.click();		
+		
+		globalAdjustments.clickButton(GlobalAdjustmentControlNames.ACCEPT_CRITERIA);		
 	}
 
 	@Test @Order(3)
 	void createNewRecord() {
-		
+		DkGrid<?> grid = globalAdjustments.getGrid();
+		assertEquals(-1, grid.getContent().getLastRowNum()); // Should be nothing in the grid
+		grid.addRecord();
+		assertEquals(0, grid.getContent().getLastRowNum()); // Should be 1 record in the grid
 	}
 	
 	@Test @Order(4)
-	void enterExtraHoursCode() {
-		Optional<Integer> rowIdx = globalAdjustments.getRowNumForKeyValue("F F - (F)");		
-		Row<?> row = globalAdjustments.getRowForRowIndex(rowIdx.get()).get();		
-		Cell cell = globalAdjustments.getGrid().getCell(row, "Absences");
-		
-		WebDriver driver = homepagePayroll.getWebDriver();
-		WebElement e = cell.getMyElement();
-		
-		CellChecker checker = new CellChecker(driver, e);
-
+	void enterExtraHoursCode() {		
+		Row<?> row = globalAdjustments.getRowForRowIndex(0).get();		
+		Cell cell = globalAdjustments.getGrid().getCell(row, "Extra Hours");
+				
+		CellChecker checker = new CellChecker(homepagePayroll.getWebDriver(), cell);
 		PopupComboSelect combo = (PopupComboSelect) checker.getPopupType();		
-		combo.writeText("Arm");
+		combo.writeText("Overtime @ 1.5");
+		
+		String cellTxt = cell.getCurrentValue().get();
+		assertTrue(cellTxt.contains("Overtime @ 1.5"));
 	}
 	
 	@Test @Order(5)

@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.WebElement;
 
 import controls.ComboWriteAndSelect;
 import enums.GridButtonNames;
@@ -167,8 +166,7 @@ public class DkGridGlobalAdjustmentsTests {
 	void setDateTo() {				
 		Row<?> row = globalAdjustments.getRowForRowIndex(0).get();
 		Cell cell = globalAdjustments.getGrid().getCell(row, "Date To");
-		WebElement e = cell.getMyElement();		
-		CellChecker checker = new CellChecker(homepagePayroll.getWebDriver(), e);
+		CellChecker checker = new CellChecker(homepagePayroll.getWebDriver(), cell);
 		DatePickerPopup picker = (DatePickerPopup) checker.getPopupType();		
 		picker.getDatePicker("inline").setDate("01/01/2021");
 		assertEquals("01/01/2021", cell.getCurrentValue().get());

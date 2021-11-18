@@ -6,6 +6,11 @@ import org.openqa.selenium.WebElement;
 
 import dto.ButtonData;
 
+/** 
+ * @author Steve Brown
+ * @since 1.0
+ * @version 1.0
+ */
 public final class ElementButton extends Element implements ElementKey{
 	public ElementButton(WebElement e) {
 		super(e);

@@ -14,8 +14,11 @@ import org.openqa.selenium.WebElement;
 
 
 /**
+ * Read the content of a DKGrid.
+ * 
  * @author Steve Brown
- *
+ * @since 1.0
+ * @version 1.0 *
  */
 public class DkGridContentReader <T extends KeyStrategyRow> {
 	private WebElement gridContainer;
@@ -26,10 +29,12 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 	private DkGridHeader dkGridHeader;
 	private KeyStrategyRow keyStrategyRows;
 	private String currentContainerName;
-	private int currentLastRow = -1;	
+	private int currentLastRow = -1;
+	private int currentLastCol = -1;	
 	private List<Cell> currentCellList; 
 	private Row<T> currentRow;
 	private int readAttempt;
+	private By contentLocator;
 	
 	private final int MAX_READ_ATTEMPTS = 5;
 	
@@ -38,6 +43,9 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 		this.gridContent = gridContent;
 		this.keyStrategyRows = keyStrategyRows;
 		this.dkGridHeader = dkGridHeader;
+		this.contentLocator = By.cssSelector(
+				"#dkrGrid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > " +
+				"div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-animation");
 	}
 	
 	public void read() {		
@@ -47,9 +55,8 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 		}
 	}
 	
-	private void setContentElement() {
-		By contentLocator = By.cssSelector("div[class='ag-body-viewport ag-layout-normal ag-row-animation']");		
-		contentElement = gridContainer.findElement(contentLocator);
+	private void setContentElement() { 	
+		contentElement = gridContainer.findElement(contentLocator); 	
 	}
 		
 	private void loopContainers(){ 	
@@ -148,6 +155,7 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 			addCellToCurrentCellList(newCell);
 			setAsRowKeyIfTheCellIsUsedAsKey(colId, newCell);
 			updateLastRowIfNecessary(rowIdx);
+			updateLastColfNecessary(colIdx);
 		}	
 		
 		currentRow.addCells(currentCellList);
@@ -174,6 +182,13 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 	private void updateLastRowIfNecessary(int rowIdx) {
 		if(rowIdx > currentLastRow) {
 			currentLastRow = rowIdx;
+			gridContent.setLastRowNum(currentLastRow);
+		}
+	}
+	
+	private void updateLastColfNecessary(int colIdx) {
+		if(colIdx > currentLastCol) {
+			currentLastCol = colIdx;
 			gridContent.setLastRowNum(currentLastRow);
 		}
 	}

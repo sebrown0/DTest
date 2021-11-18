@@ -12,15 +12,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import controls.PopupComboSelect;
 import object_models.date_picker.DatePickerPopup;
-import object_models.element.PopupComboSelect;
 
 /**
  * <p>
  * Given a cell element, check if it has a pop-up element.
  * If it does, return the pop-up control.
- * </p>
- * 
+ * </p> 
  * <p>
  * For v1.0 the available controls are:
  *  1. DatePickerPopup
@@ -37,13 +36,15 @@ public class CellChecker {
 	private Actions actions;		
 	private Optional<WebElement> popupTopLevel = Optional.empty();
 	private Popup popupType = null;
+	private Cell cell;
 	
-	public CellChecker(WebDriver driver, WebElement cellElement) {
+	public CellChecker(WebDriver driver, Cell cell) {
 		this.driver = driver;
-		this.cellElement = cellElement;
+		this.cell = cell;
+		this.cellElement = cell.getMyElement();
 		this.actions = new Actions(driver);
 	}
-
+	
 	public boolean hasPopup() {		
 		actions.doubleClick(cellElement).perform();
 		popupTopLevel = Optional.ofNullable(getElement(By.cssSelector("div[class='ag-theme-balham ag-popup']")));
@@ -87,7 +88,7 @@ public class CellChecker {
 	}
 	
 	private void setPopupToCombo(WebElement select) {
-		popupType = new PopupComboSelect(driver, select);
+		popupType = new PopupComboSelect(driver, select, cell);
 	}
 	
 	private boolean tryDatePicker(WebElement chld) {
