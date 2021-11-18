@@ -12,7 +12,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import controls.ComboWriteAndSelect;
 import object_models.date_picker.DatePickerPopup;
+import object_models.helpers.text_writer.TextWriterComboDefault;
 
 /**
  * @author Steve Brown
@@ -65,11 +67,31 @@ public class CellChecker {
 		
 	private boolean isSelect(WebElement chld) {
 		Optional<WebElement> select = Optional.ofNullable(getChildElement(By.cssSelector("body > div.ag-theme-balham.ag-popup > div > span"), chld));
-		if(select.isPresent()) {
+		if(select.isPresent()) {			
+			openSelectionContainer(select.get());
+			setPopupToCombo();			
 			return true;
 		}else {
 			return false;
 		}		
+	}
+	
+	/*
+	 * When a cell is double clicked it provides a selection box that
+	 * must be clicked again to show the 'dropdown' selection, thus
+	 * open the 'select2-container'.
+	 */
+	private void openSelectionContainer(WebElement select) {
+		WebElement arrow = select.findElement(By.className("select2-selection__arrow"));
+		arrow.click();
+	}
+	
+	private void setPopupToCombo() {
+		popupType = new ComboWriteAndSelect(
+				driver, 
+				By.cssSelector("span[class='select2-container select2-container--default select2-container--open']"), 
+				By.className("select2-results"),
+				new TextWriterComboDefault(driver));
 	}
 	
 	private boolean tryDatePicker(WebElement chld) {
@@ -107,26 +129,3 @@ public class CellChecker {
 		return el;
 	}
 }
-
-//public String getPopupType() {
-//WebElement popupChild = null;
-//String popupType = "none";
-//try {
-//// ADD WAIT IF PROBLEMS WITH LOCATING POPUP
-//popupChild = popupTopLevel.findElement(By.cssSelector("div[class='ag-popup-editor ag-ltr ag-popup-child']"));
-//
-//WebElement select = popupChild.findElement(By.cssSelector("body > div.ag-theme-balham.ag-popup > div > span"));
-////WebElement type = popupChild.findElement(By.cssSelector("span[class='select2 select2-container select2-container--default select2-container--focus']"));
-//if(select != null && select.getAttribute("class").length() > 0) {
-//	popupType = "select";
-//}
-//} catch (NoSuchElementException e) {
-//System.out.println("->NOOOOOOOOOOOOooooo"); // TODO - remove or log 	
-//// Nothing - popup doesn't exist. 	
-//}	catch (Exception e) {
-//LogManager.getLogger().error("Error checking if cell has popup [" + e + "]");
-//System.out.println("->" + e); // TODO - remove or log 	
-//}				
-//return popupType;
-//}
-

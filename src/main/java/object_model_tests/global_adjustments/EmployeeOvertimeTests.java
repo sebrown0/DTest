@@ -12,12 +12,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import controls.ComboWriteAndSelect;
 import logging.TestResultLogger;
-import object_models.date_picker.DatePickerPage;
-import object_models.date_picker.DatePickerPopup;
 import object_models.dk_grid.Cell;
 import object_models.dk_grid.CellChecker;
-import object_models.dk_grid.Popup;
 import object_models.dk_grid.Row;
 import object_models.left_menu.payroll.GlobalAdjustments;
 import object_models.pages.HomePage;
@@ -64,22 +62,19 @@ public class EmployeeOvertimeTests {
 		Optional<Integer> rowIdx = globalAdjustments.getRowNumForKeyValue("F F - (F)");		
 		Row<?> row = globalAdjustments.getRowForRowIndex(rowIdx.get()).get();
 		
-//		Cell extraHours = globalAdjustments.getGrid().getCell(row, "Hours / Amount");
-//		Cell extraHours = globalAdjustments.getGrid().getCell(row, "Extra Hours");
-		Cell cell = globalAdjustments.getGrid().getCell(row, "Date To");
-		cell.getOriginalValue();
+//		Cell cell = globalAdjustments.getGrid().getCell(row, "Hours / Amount");
+//		Cell cell = globalAdjustments.getGrid().getCell(row, "Extra Hours");
+//		Cell cell = globalAdjustments.getGrid().getCell(row, "Date To");
+		Cell cell = globalAdjustments.getGrid().getCell(row, "Absences");
 		
 		WebDriver driver = homepagePayroll.getWebDriver();
 		WebElement e = cell.getMyElement();
 		
 		CellChecker checker = new CellChecker(driver, e);
-		if(checker.hasPopup()) {
-//			Popup picker = (DatePickerPage) checker.getPopupType();
-			Popup picker = checker.getPopupType();
-			DatePickerPopup popPick = (DatePickerPopup) picker;
-			popPick.getDatePicker("inline").setDate("01/01/2021");
-//			System.out.println("->" + popPick.getSelectedDate()); // TODO - remove or log 	
-		}
+
+		ComboWriteAndSelect combo = (ComboWriteAndSelect) checker.getPopupType();		
+		combo.writeText("Arm");
+
 		 	
 
 	}

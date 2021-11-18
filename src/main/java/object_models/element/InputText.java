@@ -24,8 +24,8 @@ public class InputText extends InputControl {
 	public void writeInput(String txt) {		
 		try {
 			if(txt != null) {
-				wait.until(ExpectedConditions.visibilityOf(element));
-				element.sendKeys(txt); 
+				wait.until(ExpectedConditions.visibilityOf(myContainer));
+				myContainer.sendKeys(txt); 
 			}			
 		}catch (NoSuchElementException e) {
 			Logger logger = LogManager.getLogger(this.getClass().getSimpleName());	

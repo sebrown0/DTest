@@ -12,21 +12,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import object_models.dk_grid.Popup;
 import object_models.helpers.ElementClicker;
 
 /**
  * @author Steve Brown
  *
  */
-public class InputComboSelect extends InputControl {
+public class InputComboSelect extends InputControl implements Popup {
 	private String comboId;
 	
-	public InputComboSelect(WebDriver driver, WebElement element, String myIdentifier) {
-		super(driver, element, myIdentifier);
+	public InputComboSelect(WebDriver driver, WebElement myContainer, String myIdentifier) {
+		super(driver, myContainer, myIdentifier);
 		
-		comboId = element.findElement(By.className("select2-selection__rendered")).getAttribute("id"); 
+		comboId = myContainer.findElement(By.className("select2-selection__rendered")).getAttribute("id"); 
 	}
-
+	
 	@Override
 	public void writeInput(String txt) {		
 		try {

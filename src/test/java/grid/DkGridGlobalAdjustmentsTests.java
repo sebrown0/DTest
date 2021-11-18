@@ -1,4 +1,4 @@
-package object_model_tests.dk_grid;
+package grid;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -38,7 +38,7 @@ import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
 /*
- * Test the grid in Global Payroll Adjustments.
+ * Test DKGrid using the grid in Global Payroll Adjustments.
  * 
  * The tests should be run in order as they go
  * thru the process of creating the grid to getting
@@ -167,7 +167,7 @@ public class DkGridGlobalAdjustmentsTests {
 		assertEquals("01/01/2021", cell.getCurrentValue().get());
 	}
 	
-	@Test @Order(17)
+	@Test @Order(18)
 	void filterEmployeeColumn_shouldNotReturn_rowIdx() {		
 		globalAdjustments.filterGridColumn("Employee", "Z_7Z)3K");
 		Optional<Integer> rowIdx = globalAdjustments.getRowNumForKeyValue("Simpson Homer - (0134213A)");		

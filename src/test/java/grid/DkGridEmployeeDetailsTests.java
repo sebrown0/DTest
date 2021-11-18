@@ -1,4 +1,4 @@
-package object_model_tests.dk_grid;
+package grid;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
