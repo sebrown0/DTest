@@ -16,8 +16,9 @@ import object_models.element.ElementKey;
 import object_models.element.ElementPointInTime;
 
 /**
- * @author SteveBrown
- *
+ * @author Steve Brown
+ * @since 1.0
+ * @version 1.0 
  */
 public class DkGridToolBar {	
 	private Map<String, ElementButton> buttons = new HashMap<>();
@@ -45,8 +46,8 @@ public class DkGridToolBar {
 	public void addButton(ElementKey btn) {
 		buttons.putIfAbsent(btn.getKey(buttonData), (ElementButton) btn);	
 	}	
-	public Optional<ElementButton> getButton(String key){
-		Optional<ElementButton>  btn = Optional.ofNullable(buttons.get(key));
+	public Optional<ElementButton> getButton(GridButtonNames key){
+		Optional<ElementButton>  btn = Optional.ofNullable(buttons.get(key.getName()));
 		return btn;
 	}
 	public Map<String, ElementButton> getButtons() {

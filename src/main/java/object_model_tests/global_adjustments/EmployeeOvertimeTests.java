@@ -87,12 +87,18 @@ public class EmployeeOvertimeTests {
 	
 	@Test @Order(5)
 	void enterAmount() {
+		Row<?> row = globalAdjustments.getRowForRowIndex(0).get();		
+		Cell cell = globalAdjustments.getGrid().getCell(row, "Hours / Amount");
+		cell.writeText("2");
 		
+		String cellTxt = cell.getCurrentValue().get();
+		assertEquals("2", cellTxt.substring(0, 1));
 	}
 	
 	@Test @Order(6)
 	void saveRecord() {
-		
+		DkGrid<?> grid = globalAdjustments.getGrid();
+		grid.saveRecord();
 	}
 	
 	@Test @Order(6)

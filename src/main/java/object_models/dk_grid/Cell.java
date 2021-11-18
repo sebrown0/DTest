@@ -3,6 +3,7 @@ package object_models.dk_grid;
 import java.util.Optional;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import exceptions.ElementDoesNotExistException;
@@ -38,6 +39,12 @@ public class Cell {
 			new ElementDoesNotExistException("Could not get cell as element").run();
 		} 	
 		return cell;
+	}
+	
+	public void writeText(String txt) {
+		WebElement myElement = getMyElement();
+		myElement.sendKeys(txt);
+		myElement.sendKeys(Keys.ENTER);
 	}
 	
 	public String getContainerName() {

@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import controls.Control;
+import enums.GridButtonNames;
 import object_models.element.ElementButton;
 
 /**
@@ -107,8 +108,15 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 		return gridContent.getCell(rowIdx, colName);
 	}
 	
+	public void saveRecord() {
+		Optional<ElementButton> addRec = getToolBar().getButton(GridButtonNames.BTN_SAVE);
+		addRec.ifPresent(a -> { 
+			a.click();
+		});		
+	}
+	
 	public void addRecord() {
-		Optional<ElementButton> addRec = getToolBar().getButton("Add Record");
+		Optional<ElementButton> addRec = getToolBar().getButton(GridButtonNames.BTN_ADD);
 		addRec.ifPresent(a -> { 
 			a.click(); 
 //			waitForContent();

@@ -46,6 +46,10 @@ public final class PopupComboSelect extends ComboWriteAndSelect implements Popup
 		}		
 	}
 	
+	/*
+	 * Write text as normal but close the
+	 * selection afterwards.
+	 */
 	@Override
 	public void writeText(String txt) {
 		writer.writeText(txt);

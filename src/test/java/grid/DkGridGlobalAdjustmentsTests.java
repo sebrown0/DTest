@@ -118,7 +118,7 @@ public class DkGridGlobalAdjustmentsTests {
 	}
 	
 	private void checkButtonIsPresent(GridButtonNames btnName) {
-		Optional<ElementButton> btn = toolbar.getButton(btnName.getName());
+		Optional<ElementButton> btn = toolbar.getButton(btnName);
 		btn.ifPresentOrElse(
 				b ->  assertTrue(true), 
 				new TestFail(btnName.getName() + " is not present")
