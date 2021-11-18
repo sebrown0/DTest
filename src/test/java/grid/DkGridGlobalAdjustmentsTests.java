@@ -25,7 +25,7 @@ import object_models.dk_grid.CellChecker;
 import object_models.dk_grid.DkGridContent;
 import object_models.dk_grid.DkGridToolBar;
 import object_models.dk_grid.Row;
-import object_models.element.ElementButton;
+import object_models.dk_grid.buttons.GridButton;
 import object_models.element.ElementInput;
 import object_models.helpers.TestFail;
 import object_models.left_menu.payroll.GlobalAdjustments;
@@ -118,7 +118,7 @@ public class DkGridGlobalAdjustmentsTests {
 	}
 	
 	private void checkButtonIsPresent(GridButtonNames btnName) {
-		Optional<ElementButton> btn = toolbar.getButton(btnName);
+		Optional<GridButton> btn = toolbar.getButton(btnName);
 		btn.ifPresentOrElse(
 				b ->  assertTrue(true), 
 				new TestFail(btnName.getName() + " is not present")

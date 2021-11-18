@@ -16,6 +16,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import factories.GridButtonFactory;
 import object_models.element.ElementButton;
 import object_models.element.ElementInput;
 import object_models.element.ElementPointInTime;
@@ -71,11 +72,12 @@ public class DkGridToolBarReader {
 	}
 	
 	private void mapButton(WebElement b) {
-		ElementButton btn = new ElementButton(b);
+		ElementButton btn = new ElementButton(b);		
 		String key = btn.getElementKey();		
 		if(key != null && key.length() > 0 && !key.equalsIgnoreCase("none")) {
 			logger.info("Button [" + key + "] found in DK Grid toolbal");
-			toolBar.addButton(btn);	
+			toolBar.addButton(GridButtonFactory.getButton(btn));
+//			toolBar.addButton(btn);	
 		}
 	}
 	

@@ -1,6 +1,7 @@
 package object_model_tests.global_adjustments;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
@@ -20,6 +21,7 @@ import object_models.dk_grid.Cell;
 import object_models.dk_grid.CellChecker;
 import object_models.dk_grid.DkGrid;
 import object_models.dk_grid.Row;
+import object_models.forms.FormFadeShow;
 import object_models.left_menu.payroll.GlobalAdjustments;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
@@ -98,13 +100,14 @@ public class EmployeeOvertimeTests {
 	@Test @Order(6)
 	void saveRecord() {
 		DkGrid<?> grid = globalAdjustments.getGrid();
-		grid.saveRecord();
+		FormFadeShow frm = grid.saveRecord();
+		assertFalse(frm == null);
 	}
-	
-	@Test @Order(6)
-	void check_dateFrom() {
-		
-	}
+//	
+//	@Test @Order(6)
+//	void check_dateFrom() {
+//		
+//	}
 	
 	@AfterAll
 	public static void tearDown() {			

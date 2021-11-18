@@ -100,7 +100,7 @@ public final class GlobalAdjustments extends JsPanelWithIFrame implements JsPane
 						 *  TODO - Other btns
 						 */
 							
-						controlFactory.buildGrid(new FindRowByEmpCode()).getControlData()
+						controlFactory.buildGrid(new FindRowByEmpCode(), manager).getControlData()
 															
 		);			
 		super.buildPanelControls(myControls);				
@@ -113,7 +113,7 @@ public final class GlobalAdjustments extends JsPanelWithIFrame implements JsPane
 		btn.ifPresent(b -> {			
 			if(cntrlName.getName().equalsIgnoreCase(GlobalAdjustmentControlNames.ACCEPT_CRITERIA.getName())) {
 				super.logger.debug("Reloading grid after updating criteria");
-				super.updateControl(CommonControlNames.DK_GRID, new ControlGetterGrid<FindRowByEmpCode>(driver, new FindRowByEmpCode()));
+				super.updateControl(CommonControlNames.DK_GRID, new ControlGetterGrid<FindRowByEmpCode>(driver, new FindRowByEmpCode(), manager));
 				loadGrid();
 			}
 		});

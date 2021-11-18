@@ -6,6 +6,7 @@ package factories;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import context_manager.ContextManager;
 import control_builder.ControlData;
 import control_builder.ControlGetterButton;
 import control_builder.ControlGetterComboWriteAndSelect;
@@ -29,11 +30,11 @@ public class ControlDataFactory {
 		this.driver = driver;
 	}
 	
-	public <T extends KeyStrategyRow> ControlDataFactory buildGrid(T keyStrategy) {
+	public <T extends KeyStrategyRow> ControlDataFactory buildGrid(T keyStrategy, ContextManager cm) {
 		controlData = 
 				new ControlData(
 						CommonControlNames.DK_GRID, 
-						new ControlGetterGrid<T>(driver, keyStrategy));		
+						new ControlGetterGrid<T>(driver, keyStrategy, cm));		
 		
 		return this;
 	}

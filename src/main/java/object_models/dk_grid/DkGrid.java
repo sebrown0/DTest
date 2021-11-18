@@ -12,14 +12,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import context_manager.ContextManager;
 import controls.Control;
 import enums.GridButtonNames;
-import object_models.element.ElementButton;
+import object_models.dk_grid.buttons.GridButton;
+import object_models.dk_grid.buttons.SaveChanges;
+import object_models.forms.FormFadeShow;
 
 /**
  * @author Steve Brown
  * @since 1.0
- * @version 1.0 *
+ * @version 1.0 
  */
 public class DkGrid <T extends KeyStrategyRow> implements Control {
 	private DkGridToolBarReader toolBarReader;
@@ -30,7 +33,6 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 	private DkGridContent<T> gridContent;
 
 	private WebElement myContainer;
-	@SuppressWarnings("unused")
 	private WebDriver driver;
 	private KeyStrategyRow keyStrategyRows;
 	private WebDriverWait wait;		 
@@ -39,7 +41,7 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 	private boolean toolBarLoaded;
 	private boolean contentLoaded;
 	
-	public DkGrid(WebDriver driver, KeyStrategyRow keyStrategyRows) {
+	public DkGrid(WebDriver driver, KeyStrategyRow keyStrategyRows, ContextManager cm) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		this.setGridElement(driver);
@@ -108,17 +110,24 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 		return gridContent.getCell(rowIdx, colName);
 	}
 	
-	public void saveRecord() {
-		Optional<ElementButton> addRec = getToolBar().getButton(GridButtonNames.BTN_SAVE);
-		addRec.ifPresent(a -> { 
-			a.click();
-		});		
+	public FormFadeShow saveRecord() {
+		Optional<GridButton> addRec = getToolBar().getButton(GridButtonNames.BTN_SAVE);
+		FormFadeShow frm = null;
+		
+		if(addRec.isPresent()) {
+			SaveChanges save = (SaveChanges) addRec.get(); 
+			frm = save.clickButton(driver, null); //GET CONTEXT MANAGER TO HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		}
+		return frm;
+//		addRec.ifPresent(a -> { 
+//			a.clickButton();
+//		});		
 	}
 	
 	public void addRecord() {
-		Optional<ElementButton> addRec = getToolBar().getButton(GridButtonNames.BTN_ADD);
+		Optional<GridButton> addRec = getToolBar().getButton(GridButtonNames.BTN_ADD);
 		addRec.ifPresent(a -> { 
-			a.click(); 
+			a.clickButton();
 //			waitForContent();
 			reloadContent();
 		});		

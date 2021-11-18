@@ -15,10 +15,10 @@ public final class DkGridEmployeeDetails extends JsPanelWithIFrame implements Co
 	
 	public static final String PANEL_TITLE = "Employee Details";	
 
-	public DkGridEmployeeDetails(WebDriver driver, ContextManager contextManager) {
-		super(driver, PANEL_TITLE, contextManager);
+	public DkGridEmployeeDetails(WebDriver driver, ContextManager cm) {
+		super(driver, PANEL_TITLE, cm);
 		
-		grid = new DkGrid<>(driver, new FindRowByEmpId());
+		grid = new DkGrid<>(driver, new FindRowByEmpId(), cm);
 	}
 	
 	// Grid

@@ -20,10 +20,21 @@ public class ModalHeader implements Header {
 	private WebElement btnClose;
 	
 	public ModalHeader(WebElement prntContainer) {		
-		title = prntContainer.findElement(By.className("modal-title"));
-		btnClose = prntContainer.findElement(By.className("close"));
+		setTitleAndCloser(prntContainer);
 	}
 
+	private void setTitleAndCloser(WebElement prntContainer) {
+		title = prntContainer.findElement(By.className("modal-title"));
+		try {			
+			btnClose = prntContainer.findElement(By.className("close"));	
+		} catch (Exception e) {
+			/*
+			 * NOT ALL MODAL HEADERS HAVE A CLOSE BUTTON.
+			 */
+			LogManager.getLogger().debug("Could not set close button");
+		}
+	}
+	
 	@Override
 	public Optional<String> getTitle() {
 		try {
