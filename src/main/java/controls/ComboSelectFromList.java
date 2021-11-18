@@ -12,10 +12,12 @@ import org.openqa.selenium.WebElement;
 import object_models.element.ListBox;
 
 /**
- * @author Steve Brown
  *
  * Can only select an item from an existing list.
  * 
+ * @author Steve Brown
+ * @since 1.0
+ * @version 1.0
  */
 public class ComboSelectFromList extends Combo {
 	private By resultsBy;

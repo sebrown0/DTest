@@ -12,13 +12,24 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import controls.ComboWriteAndSelect;
 import object_models.date_picker.DatePickerPopup;
-import object_models.helpers.text_writer.TextWriterComboDefault;
+import object_models.element.PopupComboSelect;
 
 /**
+ * <p>
+ * Given a cell element, check if it has a pop-up element.
+ * If it does, return the pop-up control.
+ * </p>
+ * 
+ * <p>
+ * For v1.0 the available controls are:
+ *  1. DatePickerPopup
+ *  2. PopupComboSelect
+ * </p>
+ * 
  * @author Steve Brown
- *
+ * @since 1.0
+ * @version 1.0
  */
 public class CellChecker {
 	private WebDriver driver;	
@@ -68,30 +79,15 @@ public class CellChecker {
 	private boolean isSelect(WebElement chld) {
 		Optional<WebElement> select = Optional.ofNullable(getChildElement(By.cssSelector("body > div.ag-theme-balham.ag-popup > div > span"), chld));
 		if(select.isPresent()) {			
-			openSelectionContainer(select.get());
-			setPopupToCombo();			
+			setPopupToCombo(select.get());			
 			return true;
 		}else {
 			return false;
 		}		
 	}
 	
-	/*
-	 * When a cell is double clicked it provides a selection box that
-	 * must be clicked again to show the 'dropdown' selection, thus
-	 * open the 'select2-container'.
-	 */
-	private void openSelectionContainer(WebElement select) {
-		WebElement arrow = select.findElement(By.className("select2-selection__arrow"));
-		arrow.click();
-	}
-	
-	private void setPopupToCombo() {
-		popupType = new ComboWriteAndSelect(
-				driver, 
-				By.cssSelector("span[class='select2-container select2-container--default select2-container--open']"), 
-				By.className("select2-results"),
-				new TextWriterComboDefault(driver));
+	private void setPopupToCombo(WebElement select) {
+		popupType = new PopupComboSelect(driver, select);
 	}
 	
 	private boolean tryDatePicker(WebElement chld) {

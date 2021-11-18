@@ -37,12 +37,19 @@ import parameter_resolvers.LoginPageResolverPayroll;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
-/*
+/**
+ * <p>
  * Test DKGrid using the grid in Global Payroll Adjustments.
- * 
+ * </p>
+ * <p>
  * The tests should be run in order as they go
- * thru the process of creating the grid to getting
+ * through the process of creating the grid to getting
  * and using grid elements.
+ * </p>
+ * 
+ * @since 1.0
+ * @author SteveBrown
+ * @version 1.0
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({ 

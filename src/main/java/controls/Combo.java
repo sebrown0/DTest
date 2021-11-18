@@ -14,13 +14,16 @@ import object_models.helpers.text_utils.TextSanitiser;
 
 /**
  * @author Steve Brown
+ * @since 1.0
+ * @version 1.0
  *
  */
 public abstract class Combo implements Control {
+	private WebElement combo;
+	private By comboLocator;
+	
 	protected boolean isOpen = false;	
-	protected WebElement combo;
 	protected WebDriver driver;
-	protected By comboLocator;	
 	
 	public Combo(WebDriver driver, WebElement combo) {
 		this.combo = combo;
@@ -29,13 +32,28 @@ public abstract class Combo implements Control {
 	
 	public Combo(WebDriver driver, By findBy) {
 		this.driver = driver;
-		this.combo = driver.findElement(findBy);
 		this.comboLocator = findBy;
+	}
+	
+	public void setComboLocator(By comboLocator) {
+		this.comboLocator = comboLocator;
+	}
+
+	public WebElement getComboElement() {
+		if(combo == null) {
+			try {
+				combo = driver.findElement(comboLocator);	
+			}catch(Exception e) {
+				System.out.println("->" + e); // TODO - remove or log 	
+				LogManager.getLogger().error("Could not get combo element [" + e + "]");
+			}			
+		}
+		return combo;
 	}
 	
 	public void click() {
 		try {
-			combo.click();
+			getComboElement().click();
 			isOpen = !isOpen;
 		} catch (Exception e) {
 			LogManager.getLogger().debug("Unable to click combo [" + e.getMessage() + "]");
@@ -43,11 +61,11 @@ public abstract class Combo implements Control {
 	}
 		
 	public void clearAll() {
-		combo.findElement(By.cssSelector("span[class='select2-selection__clear']")).click();
+		getComboElement().findElement(By.cssSelector("span[class='select2-selection__clear']")).click();
 	}
 	
 	public String getText(TextSanitiser sanitiser) {
-		TextExtractor txtExt = new TextExtractor(combo, sanitiser);
+		TextExtractor txtExt = new TextExtractor(getComboElement(), sanitiser);
 		return txtExt.getFirstOccurenceOfTextFromElement();
 	}
 	

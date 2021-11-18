@@ -5,6 +5,15 @@ import java.util.Optional;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import exceptions.ElementDoesNotExistException;
+
+/**
+ * Cell in a DKGrid.
+ * 
+ * @author Steve Brown
+ * @since 1.0
+ * @version 1.0
+ */
 public class Cell {
 	private String id;
 	private String compId;
@@ -19,17 +28,15 @@ public class Cell {
 	public Cell(WebElement gridContainer) {
 		this.gridContainer = gridContainer;
 	}
-	/*
-	 * HOW DO WE KNOW IF WE CAN DBL CLICK EL??
-	 */
 	
 	public WebElement getMyElement() {
-		/*
-		 * TODO - ERR CHECK
-		 */
-		WebElement row = gridContainer.findElement(By.xpath("//div[@role='row' and @row-index='" + rowNum + "']"));
-		WebElement cell = row.findElement(By.xpath("//div[@role='gridcell' and @col-id='" + id + "']"));
- 	
+		WebElement cell = null;
+		try {
+			WebElement row = gridContainer.findElement(By.xpath("//div[@role='row' and @row-index='" + rowNum + "']"));
+			cell = row.findElement(By.xpath("//div[@role='gridcell' and @col-id='" + id + "']"));	
+		} catch (Exception e) {
+			new ElementDoesNotExistException("Could not get cell as element").run();
+		} 	
 		return cell;
 	}
 	

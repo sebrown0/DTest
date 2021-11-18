@@ -12,11 +12,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import controls.ComboWriteAndSelect;
 import logging.TestResultLogger;
 import object_models.dk_grid.Cell;
 import object_models.dk_grid.CellChecker;
 import object_models.dk_grid.Row;
+import object_models.element.PopupComboSelect;
 import object_models.left_menu.payroll.GlobalAdjustments;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
@@ -47,24 +47,29 @@ public class EmployeeOvertimeTests {
 		globalAdjustments =	(GlobalAdjustments) homepagePayroll.getLeftMenu().clickAndLoad(GlobalAdjustments.class).get();
 	}		
 				
-//	@Test @Order(1)
-//	void loadEmployee_implictPass_ifCompletes() {
+	@Test @Order(1)
+	void createEmployee() {
+	}
+	
+	@Test @Order(2)
+	void loadEmployee_implictPass_ifCompletes() {
 //		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(EmployeeControlNames.EMPLOYEES).get();
 //		cmbComp.click();		
 //		cmbComp.selectFullText("F F");
 //		cmbComp.click();		
 //		
 //		globalAdjustments.clickButton(GlobalAdjustmentControlNames.ACCEPT_CRITERIA);		
-//	}
+	}
 
-	@Test @Order(2)
+	@Test @Order(3)
+	void createNewRecord() {
+		
+	}
+	
+	@Test @Order(4)
 	void enterExtraHoursCode() {
 		Optional<Integer> rowIdx = globalAdjustments.getRowNumForKeyValue("F F - (F)");		
-		Row<?> row = globalAdjustments.getRowForRowIndex(rowIdx.get()).get();
-		
-//		Cell cell = globalAdjustments.getGrid().getCell(row, "Hours / Amount");
-//		Cell cell = globalAdjustments.getGrid().getCell(row, "Extra Hours");
-//		Cell cell = globalAdjustments.getGrid().getCell(row, "Date To");
+		Row<?> row = globalAdjustments.getRowForRowIndex(rowIdx.get()).get();		
 		Cell cell = globalAdjustments.getGrid().getCell(row, "Absences");
 		
 		WebDriver driver = homepagePayroll.getWebDriver();
@@ -72,11 +77,23 @@ public class EmployeeOvertimeTests {
 		
 		CellChecker checker = new CellChecker(driver, e);
 
-		ComboWriteAndSelect combo = (ComboWriteAndSelect) checker.getPopupType();		
+		PopupComboSelect combo = (PopupComboSelect) checker.getPopupType();		
 		combo.writeText("Arm");
-
-		 	
-
+	}
+	
+	@Test @Order(5)
+	void enterAmount() {
+		
+	}
+	
+	@Test @Order(6)
+	void saveRecord() {
+		
+	}
+	
+	@Test @Order(6)
+	void check_dateFrom() {
+		
 	}
 	
 	@AfterAll
