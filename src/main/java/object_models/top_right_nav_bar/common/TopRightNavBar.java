@@ -57,7 +57,7 @@ public class TopRightNavBar implements ElementChecker, NavBarElementGetter, Call
 	}		
 	
 	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
-		TopRightNavBarActions actions = new TopRightNavBarActions(driver, contextManager, navBarElements);
+		TopRightNavBarActions actions = new TopRightNavBarActions(contextManager, navBarElements);
 		return actions.clickAndLoad(clazz);
 	}
 

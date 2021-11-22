@@ -13,7 +13,6 @@ import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import context_manager.ContextLoader;
 import context_manager.ContextManager;
 import context_manager.ContextState;
 import factories.MenuElementFactory;
@@ -34,21 +33,23 @@ public class LeftMenuActions {
 	private ContextManager contextManager;	
 	private Map<String, WebElement> anchors;
 	private LeftMenuMapper menuMapper;	
+	private MenuContextChecker menuContextChecker;
 	
 	public LeftMenuActions(WebDriver driver, ContextManager contextManager, Map<String, WebElement> anchors, LeftMenuMapper menuMapper) {
 		this.driver = driver;
 		this.contextManager = contextManager;
 		this.anchors = anchors;
 		this.menuMapper = menuMapper;
+		this.menuContextChecker = new MenuContextChecker(contextManager);
 	}
 
 	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
 		contextManager.switchToLeftMenu();		// Puts the context @ Module.StateLeftMenu
-		return getMenuItemAsContainer(clazz);
+		ClassFieldGetter fieldGetter = new ClassFieldGetter(clazz);
+		return getMenuItemAsContainer(fieldGetter);
 	}
 
-	private Optional<ContainerAction> getMenuItemAsContainer(Class<?> clazz) {
-		ClassFieldGetter fieldGetter = new ClassFieldGetter(clazz);
+	private Optional<ContainerAction> getMenuItemAsContainer(ClassFieldGetter fieldGetter) {
 		Optional<String> prntName = fieldGetter.getParentName();
 		Optional<String> menuItem = fieldGetter.getMenuItemName();
 		
@@ -102,10 +103,11 @@ public class LeftMenuActions {
 			try {
 				e.click();				
 				Optional<ContextState> cs = contextManager.findContext(id);				
-				if(isExistingContext(cs)) {
-					elementContainer = getExistingContainerFromContext(name, cs.get());
-					setExistingAsCurrent(elementContainer);					
+				if(menuContextChecker.isExistingContext(cs)) {
+					elementContainer = menuContextChecker.getExistingContainerFromContext(name, cs.get());
+					menuContextChecker.setExistingAsCurrent(elementContainer);					
 				}else { 	
+//					e.click();
 					elementContainer = Optional.of(getNewElementContainer(name));
 					logger.debug("[" + elementContainer.get().toString() + "] does not exist. Creating now");
 				}
@@ -118,23 +120,7 @@ public class LeftMenuActions {
 		}
 		return elementContainer; 
 	}
-	
-	private boolean isExistingContext(Optional<ContextState> cs) {
-		return cs.isPresent();
-	}
-	private Optional<ContainerAction> getExistingContainerFromContext(String name, ContextState cs) {
-		logger.debug("[" + name + "] already exists. Switching to that context and retrieving container");					
-		ContainerAction el = cs.getContinerAction();				
-		return Optional.of(el);
-	}
-	private void setExistingAsCurrent(Optional<ContainerAction> elementContainer) {
-		elementContainer.ifPresent(e -> {
-			ContextLoader loader = new ContextLoader(contextManager);
-			loader.setContainerItemAsCurrentContext(elementContainer);	
-		});
 		
-	}
-	
 	public LeftMenuActions clickParent(String prntName) {
 		contextManager.switchToLeftMenu();		
 		WebElement activeMenuItem = getActiveMenuItem();

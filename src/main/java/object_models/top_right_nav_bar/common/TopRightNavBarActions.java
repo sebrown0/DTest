@@ -7,13 +7,12 @@ import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.WebDriver;
 
-import context_manager.ContextLoader;
 import context_manager.ContextManager;
 import context_manager.ContextState;
 import object_models.forms.ContainerAction;
 import object_models.helpers.ClassFieldGetter;
+import object_models.left_menu.common.MenuContextChecker;
 
 /**
  * @author SteveBrown
@@ -24,14 +23,14 @@ import object_models.helpers.ClassFieldGetter;
  */
 public class TopRightNavBarActions {
 	private Logger logger = LogManager.getLogger();
-	private WebDriver driver;
 	private ContextManager contextManager;	
 	private TopRightNavBarElements navBarElements;
+	private MenuContextChecker menuContextChecker;
 	
-	public TopRightNavBarActions(WebDriver driver, ContextManager contextManager, TopRightNavBarElements navBarElements) {		
-		this.driver = driver;
+	public TopRightNavBarActions(ContextManager contextManager, TopRightNavBarElements navBarElements) {
 		this.contextManager = contextManager;
 		this.navBarElements = navBarElements;
+		this.menuContextChecker = new MenuContextChecker(contextManager);
 	}
 	
 	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
@@ -56,9 +55,9 @@ public class TopRightNavBarActions {
 			
 			try {								
 				Optional<ContextState> cs = contextManager.findContext(e);				
-				if(isExistingContext(cs)) {
-					elementContainer = getExistingContainerFromContext(name, cs.get());
-					setExistingAsCurrent(elementContainer);					
+				if(menuContextChecker.isExistingContext(cs)) {
+					elementContainer = menuContextChecker.getExistingContainerFromContext(name, cs.get());
+					menuContextChecker.setExistingAsCurrent(elementContainer);					
 				}else {					
 					elementContainer = Optional.of((ContainerAction) e.clickElement());
 					logger.debug("[" + elementContainer.get().toString() + "] does not exist. Creating now");
@@ -71,29 +70,5 @@ public class TopRightNavBarActions {
 		}
 		return elementContainer; 
 	}
-	
-	private boolean isExistingContext(Optional<ContextState> cs) {
-		if(cs != null) {
-			return cs.isPresent();	
-		}else {
-			return false;
-		}		
-	}
-	private Optional<ContainerAction> getExistingContainerFromContext(String name, ContextState cs) {
-		logger.debug("[" + name + "] already exists. Switching to that context and retrieving container");					
-		ContainerAction el = cs.getContinerAction();				
-		return Optional.of(el);
-	}
-	private void setExistingAsCurrent(Optional<ContainerAction> elementContainer) {
-		elementContainer.ifPresent(e -> {
-			ContextLoader loader = new ContextLoader(contextManager);
-			loader.setContainerItemAsCurrentContext(elementContainer);	
-		});
-		
-	}
-		
-//	private ContainerAction getNewElementContainer(String elementName) {
-//		PayrollTopRightNavBarElementFactory elementFactory = new PayrollTopRightNavBarElementFactory(driver, contextManager);
-//		return elementFactory.getElementForName(elementName);		
-//	}
+
 }
