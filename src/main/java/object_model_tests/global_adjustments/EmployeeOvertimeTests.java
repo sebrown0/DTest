@@ -14,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import controls.ComboWriteAndSelect;
 import controls.PopupComboSelect;
+import dto.Employee;
 import enums.control_names.EmployeeControlNames;
 import enums.control_names.GlobalAdjustmentControlNames;
 import logging.TestResultLogger;
@@ -21,12 +22,18 @@ import object_models.dk_grid.Cell;
 import object_models.dk_grid.CellChecker;
 import object_models.dk_grid.DkGrid;
 import object_models.dk_grid.Row;
+import object_models.employee_creation.EmployeeCreationWizard;
 import object_models.forms.FormFadeShow;
 import object_models.left_menu.payroll.GlobalAdjustments;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
+import object_models.top_right_nav_bar.all_elements.NavBarEmployeeCreation;
+import object_models.top_right_nav_bar.common.NavBarElement;
+import object_models.top_right_nav_bar.common.TopRightNavBar;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
+import providers.EmployeeFromXml;
+import providers.RandomEmployeeProvider;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
@@ -54,6 +61,23 @@ public class EmployeeOvertimeTests {
 				
 	@Test @Order(1)
 	void createEmployee() {
+		// Get an employee with random code
+		RandomEmployeeProvider empProvider = new EmployeeFromXml(); 
+		Employee emp = empProvider.getAnyEmpWithRandomCode();		
+		String randomEmpCode = emp.getEmpCode();
+		emp.setIdCardNumber(randomEmpCode);
+		emp.setFirstName("Clint");
+		emp.setLastName("Eastwood");
+		// Open the wizard and create the emp
+		TopRightNavBar navBar = homepagePayroll.getTopRightNavBar();
+		NavBarElement empCr = navBar.getNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
+		EmployeeCreationWizard wizard = (EmployeeCreationWizard) empCr.clickElement();
+		
+//		NavBarElement  navEmpWizard = homepagePayroll.getTopRightNavBar().getNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
+//		EmployeeCreationWizard wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();
+		
+//		wizard.createEmployee(emp);
+//		wizard.close();
 	}
 	
 	@Test @Order(2)
@@ -75,6 +99,15 @@ public class EmployeeOvertimeTests {
 	}
 	
 	@Test @Order(4)
+	void enterEmployee() {
+		Row<?> row = globalAdjustments.getRowForRowIndex(0).get();		
+		Cell cell = globalAdjustments.getGrid().getCell(row, "Extra Hours");
+		
+		CellChecker checker = new CellChecker(homepagePayroll.getWebDriver(), cell);
+		PopupComboSelect combo = (PopupComboSelect) checker.getPopupType();		
+	}
+	
+	@Test @Order(5)
 	void enterExtraHoursCode() {		
 		Row<?> row = globalAdjustments.getRowForRowIndex(0).get();		
 		Cell cell = globalAdjustments.getGrid().getCell(row, "Extra Hours");
@@ -87,7 +120,7 @@ public class EmployeeOvertimeTests {
 		assertTrue(cellTxt.contains("Overtime @ 1.5"));
 	}
 	
-	@Test @Order(5)
+	@Test @Order(6)
 	void enterAmount() {
 		Row<?> row = globalAdjustments.getRowForRowIndex(0).get();		
 		Cell cell = globalAdjustments.getGrid().getCell(row, "Hours / Amount");

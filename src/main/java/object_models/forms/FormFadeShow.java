@@ -17,7 +17,9 @@ import object_models.helpers.ElementClicker;
 import object_models.helpers.title.TitleModalFadeShow;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public class FormFadeShow extends FormModal {

@@ -44,7 +44,9 @@ public class StateManager {
 			return state;
 		}				
 	}
-	
+	/*
+	 * asked for StateTopRightNavBar got StateHeaderPanel!!
+	 */
 	public <T extends State> Optional<State> switchToStateInContext(Class<T> clazzRequiredState, ContextState findCs) {
 		Optional<State> state = Optional.empty();		
 		state = moveToStateInContext(clazzRequiredState, findCs);		
@@ -60,19 +62,35 @@ public class StateManager {
 	public <T extends State> Optional<State> moveToStateInCurrentContext(Class<T> clazzRequiredState, CurrentContext getter) {
 		return moveToStateInContext(clazzRequiredState, getter.getCurrentContextState());			
 	}
-	
 	public <T extends State> Optional<State> moveToStateInContext(Class<T> clazzRequiredState, ContextState cs) {
-		String requiredStateName = clazzRequiredState.getSimpleName();
-		Optional<State> state = cs.moveToState(clazzRequiredState);
-		
-		if(state.isPresent()) {			
-			logger.debug("State [" + requiredStateName + "] is present in context. Will move to this state");				
-			return state;			
+		if(cs != null) {
+			String requiredStateName = clazzRequiredState.getSimpleName();
+			Optional<State> state = cs.moveToState(clazzRequiredState);
+			
+			if(state.isPresent()) {			
+				logger.debug("State [" + requiredStateName + "] is present in context. Will move to this state");				
+				return state;			
+			}else {
+				logger.debug("State [" + requiredStateName + "] is not present in context. Adding as the last state in context");				
+				return cs.setLastState(clazzRequiredState, cs.getContinerAction().getStateFactorySetter());			
+			}		
 		}else {
-			logger.debug("State [" + requiredStateName + "] is not present in context. Adding as the last state in context");				
-			return getCurrentContext().setLastState(clazzRequiredState, cs.getContinerAction().getStateFactorySetter());			
-		}						
+			logger.error("Cannot move to a state in a null context");
+			return Optional.empty();
+		}							
 	}
+//	public <T extends State> Optional<State> moveToStateInContext(Class<T> clazzRequiredState, ContextState cs) {
+//		String requiredStateName = clazzRequiredState.getSimpleName();
+//		Optional<State> state = cs.moveToState(clazzRequiredState);
+//		
+//		if(state.isPresent()) {			
+//			logger.debug("State [" + requiredStateName + "] is present in context. Will move to this state");				
+//			return state;			
+//		}else {
+//			logger.debug("State [" + requiredStateName + "] is not present in context. Adding as the last state in context");				
+//			return getCurrentContext().setLastState(clazzRequiredState, cs.getContinerAction().getStateFactorySetter());			
+//		}						
+//	}
 		
 	private boolean isCurrentStateRequiredState(String requiredStateName) {
 		String currentStatesName = manager.getCurrentContextState().getState().getClass().getSimpleName(); 	

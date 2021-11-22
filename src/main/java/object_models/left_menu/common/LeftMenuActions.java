@@ -16,11 +16,15 @@ import org.openqa.selenium.WebElement;
 import context_manager.ContextLoader;
 import context_manager.ContextManager;
 import context_manager.ContextState;
+import factories.MenuElementFactory;
+import factories.PayrollLeftMenuElementFactory;
 import object_models.forms.ContainerAction;
 import object_models.helpers.ClassFieldGetter;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  * Actions that can be performed on a LeftMenu object.
  */
@@ -160,6 +164,7 @@ public class LeftMenuActions {
 	}
 	
 	private ContainerAction getNewElementContainer(String elementName) {
-		return ElementFactory.getElement(elementName, driver, contextManager);		
+		MenuElementFactory elementFactory = new PayrollLeftMenuElementFactory(driver, contextManager); 
+		return elementFactory.getElementForName(elementName);		
 	}
 }

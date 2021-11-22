@@ -36,7 +36,7 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 	private WebDriver driver;
 	private KeyStrategyRow keyStrategyRows;
 	private WebDriverWait wait;		 
-	
+	private ContextManager contextManager;
 	private boolean gridLoaded;
 	private boolean toolBarLoaded;
 	private boolean contentLoaded;
@@ -51,6 +51,7 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 		this.gridContent = new DkGridContent<>();
 		this.toolBarReader = new DkGridToolBarReader(driver, toolBar);
 		this.contentReader = new DkGridContentReader<>(myContainer, gridContent, keyStrategyRows, gridHeader);
+		this.contextManager = cm;
 	}
 	
 	private void setGridElement(WebDriver driver) {
@@ -116,12 +117,9 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 		
 		if(addRec.isPresent()) {
 			SaveChanges save = (SaveChanges) addRec.get(); 
-			frm = save.clickButton(driver, null); //GET CONTEXT MANAGER TO HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			frm = save.clickButton(driver, contextManager);
 		}
 		return frm;
-//		addRec.ifPresent(a -> { 
-//			a.clickButton();
-//		});		
 	}
 	
 	public void addRecord() {

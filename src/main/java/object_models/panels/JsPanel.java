@@ -3,7 +3,6 @@
  */
 package object_models.panels;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,9 +11,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextId;
 import context_manager.ContextIdGetter;
@@ -56,7 +52,7 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	private Optional<String> panelId;	
 	private JsPanelHeaderBar headerBar;	
 			
-	private static final By TITLE_SELECTOR = By.cssSelector("span[class='jsPanel-title']");
+//	private static final By TITLE_SELECTOR = By.cssSelector("span[class='jsPanel-title']");
 		
 	public JsPanel(WebDriver driver, String expectedTitle, ContextManager contextManager) {
 		this.logger = LogManager.getLogger();
@@ -65,7 +61,7 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 		this.manager = contextManager;		
 		this.builder = new ControlBuilder();		
 		
-		waitForLoad(ExpectedConditions.attributeContains(TITLE_SELECTOR, "innerHTML", expectedTitle));		
+//		waitForLoad(ExpectedConditions.attributeContains(TITLE_SELECTOR, "innerHTML", expectedTitle));		
 		setPanelId();
 		setContainer();
 		setTitle(); //SHOULD THIS BE PART OF THE HEADER BAR???
@@ -82,15 +78,18 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 		panelControl = new PageControl(builder);		
 	}
 	
-	private void waitForLoad(ExpectedCondition<?> expectedConditionFound) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-		try {
-			wait.until(expectedConditionFound);
-		} catch (Exception e) {
-			logger.error("Could not load panel [" + expectedTitle + "]");
-			close();
-		}						
-	}
+	/*
+	 * Causing errors, if the panel fails to load this could be the cause.
+	 */
+//	private void waitForLoad(ExpectedCondition<?> expectedConditionFound) {
+//		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//		try {
+//			wait.until(expectedConditionFound);
+//		} catch (Exception e) {
+//			logger.error("Could not load panel [" + expectedTitle + "]");
+//			close();
+//		}						
+//	}
 	
 	private void setPanelId() {
 		panelId = JsPanelId.getPanelIdForTitle(driver, expectedTitle);		
@@ -103,7 +102,7 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	}
 	
 	private void setTitle() {
-		title = new TitlePanel(expectedTitle, driver);
+		title = new TitlePanel(expectedTitle, driver, container);
 	}
 	
 	private void setHeaderBar() {

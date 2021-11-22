@@ -18,6 +18,7 @@ public class ClassFieldGetter {
 	private Optional<String> parentName = Optional.empty();
 	private Optional<String> menuItemName = Optional.empty();
 	private Optional<String> elementId = Optional.empty();
+	private Optional<String> originalName = Optional.empty();
 	
 	public ClassFieldGetter(Class<?> clazz) {
 		this.clazz = clazz;
@@ -28,9 +29,10 @@ public class ClassFieldGetter {
 		setParentName();
 		setMenuItemName();
 		setPanelTitle();
+		setOriginalName();
 	}
 	
-	public void setParentName() {		
+	private void setParentName() {		
 		try {
 			parentName = Optional.ofNullable((String) clazz.getField("MENU_PARENT_NAME").get(null));
 		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
@@ -38,7 +40,7 @@ public class ClassFieldGetter {
 		}
 	}
 	
-	public void setMenuItemName() {		
+	private void setMenuItemName() {		
 		try {
 			menuItemName = Optional.ofNullable((String) clazz.getField("MENU_TITLE").get(null));
 		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
@@ -46,11 +48,19 @@ public class ClassFieldGetter {
 		}
 	}
 	
-	public void setPanelTitle() {		
+	private void setPanelTitle() {		
 		try {
 			elementId = Optional.ofNullable((String) clazz.getField("PANEL_TITLE").get(null));
 		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
 			logger.error("Failed to get element id using reflection");
+		}
+	}
+	
+	private void setOriginalName() {		
+		try {
+			originalName = Optional.ofNullable((String) clazz.getField("ORIGINAL_NAME").get(null));
+		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+			logger.error("Failed to get element original using reflection");
 		}
 	}
 		
@@ -62,5 +72,8 @@ public class ClassFieldGetter {
 	}
 	public Optional<String> getPanelTitle() {
 		return elementId;
+	}
+	public Optional<String> getOriginalName() {
+		return originalName;
 	}
 }

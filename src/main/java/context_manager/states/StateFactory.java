@@ -51,6 +51,8 @@ public class StateFactory {
 			state = new StateModule(cs, driver);
 		}else if (clazzName.equals("StateTop")) {
 			state = new StateTop(cs, driver);
+		}else if (clazzName.equals("StateTopRightNavBar")) {
+			state = new StateTopRightNavBar(cs, driver);
 		}						
 		
 		return Optional.ofNullable(state);

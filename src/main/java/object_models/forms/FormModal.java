@@ -26,7 +26,9 @@ import object_models.helpers.title.TitleModalForm;
 import object_models.panels.JsPanelHeaderBar;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public abstract class FormModal implements ContainerAction, ContextSetter, ContextIdGetter, StateFactorySetter{

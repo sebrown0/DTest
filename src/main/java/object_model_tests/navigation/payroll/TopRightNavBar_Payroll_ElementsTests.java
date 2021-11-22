@@ -37,7 +37,9 @@ import parameter_resolvers.LoginPageResolverPayroll;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  * Test the elements of the Top-Right Nav-Bar for payroll module.
  * Each item in the nav-bar is clicked and its child element returned.

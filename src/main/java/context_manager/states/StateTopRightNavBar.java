@@ -12,12 +12,11 @@ import context_manager.ContextState;
  * @author SteveBrown
  * @version 1.0
  * @since 1.0
- *
  */
-public class StateLeftMenu extends State {
-	
-	public StateLeftMenu(ContextState cs, WebDriver driver) {
-		super(cs, driver);
+public class StateTopRightNavBar extends State {
+
+	public StateTopRightNavBar(ContextState cs, WebDriver driver) {
+		super(cs, driver);		
 	}
 
 	@Override
@@ -27,15 +26,15 @@ public class StateLeftMenu extends State {
 
 	@Override
 	public State switchToMe() {
-		logger.debug("Switching to state [left menu]");
-		switchToDefaultContentAndThenElement(By.cssSelector("body > form > div.app-body > div"));
+		logger.debug("Switching to state [top-right nav-bar]");
+		switchToDefaultContentAndThenElement(By.cssSelector("body > form > header > ul.nav.navbar-nav.ml-auto"));
 		setCurrentContextToThisStatesContext();		
 		return this;
 	}
 
 	@Override
 	public boolean isContextCloser() {
-		return true;
+		return false;
 	}
 
 	@Override
@@ -47,4 +46,5 @@ public class StateLeftMenu extends State {
 	public void close() {
 		//N/A
 	}
+
 }

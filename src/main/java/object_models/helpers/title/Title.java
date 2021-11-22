@@ -13,12 +13,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.1
  *
  */
 public class Title implements PageTitle{
 	private String expectedTitle;	
 	private WebDriver driver;
+	@SuppressWarnings("unused")
+	private WebElement myContainer;
 	private By titleSelector;
 	private String actualTitle;
 	
@@ -27,6 +31,14 @@ public class Title implements PageTitle{
 		this.driver = driver;
 		this.titleSelector = titleSelector;
 		this.setActualTitle();
+	}
+	
+	public Title(String expectedTitle, WebDriver driver, By titleSelector, WebElement myContainer) {
+		this.expectedTitle = expectedTitle;
+		this.driver = driver;
+		this.titleSelector = titleSelector;
+		this.myContainer = myContainer;
+		this.setActualTitle(myContainer);
 	}
 
 	@Override
@@ -47,6 +59,13 @@ public class Title implements PageTitle{
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(titleSelector));
 		WebElement e = driver.findElement(titleSelector);		
+		actualTitle = checkElement(e);
+	}
+	
+	private void setActualTitle(WebElement myContainer) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+		wait.until(ExpectedConditions.visibilityOf(myContainer));
+		WebElement e = myContainer.findElement(titleSelector);		
 		actualTitle = checkElement(e);
 	}
 	

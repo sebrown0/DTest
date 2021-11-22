@@ -8,7 +8,6 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextManager;
@@ -16,6 +15,9 @@ import object_models.helpers.Closable;
 
 /**
  * @author SteveBrown
+ * @author Steve Brown
+ * @since 1.0
+ * @version 1.1 
  * 
  * Represents an element on the nav bar.
  * 
@@ -43,11 +45,12 @@ public abstract class NavBarElement {
 	}
 	
 	protected WebElement getNavBar() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(NAV_BAR_LOCATOR));
-		navBar = driver.findElement(NAV_BAR_LOCATOR);
+		driver.switchTo().defaultContent();
+		WebElement frm = driver.findElement(By.cssSelector("body > form"));		
+		navBar = frm.findElement(NAV_BAR_LOCATOR);
 		return navBar;
 	}
-	
+
 	/*
 	 * Click the element and return its child.
 	 */	

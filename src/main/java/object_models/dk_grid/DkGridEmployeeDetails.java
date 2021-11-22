@@ -7,7 +7,9 @@ import controls.Control;
 import object_models.panels.JsPanelWithIFrame;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public final class DkGridEmployeeDetails extends JsPanelWithIFrame implements Control {	

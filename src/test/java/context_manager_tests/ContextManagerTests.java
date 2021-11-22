@@ -28,6 +28,7 @@ import context_manager.states.StateTop;
 import enums.control_names.GroupControlNames;
 import logging.TestResultLogger;
 import object_models.controls.EmployeeSelection;
+import object_models.employee_creation.EmployeeCreationWizard;
 import object_models.forms.FormModal;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.employees.Banks;
@@ -39,13 +40,17 @@ import object_models.left_menu.parents.YearlyReports;
 import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
 import object_models.panels.JsPanel;
+import object_models.top_right_nav_bar.all_elements.NavBarEmployeeCreation;
+import object_models.top_right_nav_bar.common.TopRightNavBar;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  * Test the elements of the home page for payroll.
  * 
@@ -303,4 +308,15 @@ class ContextManagerTests {
 		manager.moveToExistingContext(first);
 		assertEquals("Monthly Payroll Reports", manager.getCurrentContext().getContextId().getExpectedName());
 	}
+
+	@Test	@Order(25)
+	void findContext_navBar_using_clickAndLoad() {
+		TopRightNavBar navBar = homepagePayroll.getTopRightNavBar();
+		navBar.clickAndLoad(NavBarEmployeeCreation.class).get();
+		
+		ContextState first = manager.findContext(EmployeeCreationWizard.PANEL_TITLE).get();
+		manager.moveToExistingContext(first);
+		assertEquals("Employee Creation Wizard", manager.getCurrentContext().getContextId().getExpectedName());
+	}
+	
 }

@@ -97,6 +97,9 @@ public abstract class Context implements ContextState {
 		return factory.getNewInstanceOfState(clazzState, this);
 	}
 	
+	/*
+	 * is setting to left menu
+	 */
 	@Override
 	public void setState(State newState) {
 		setCurrentsNextToNewState(newState);

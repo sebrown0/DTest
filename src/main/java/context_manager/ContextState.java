@@ -10,7 +10,9 @@ import context_manager.states.StateFactorySetter;
 import object_models.forms.ContainerAction;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  * Manipulate states within a Context.
  */

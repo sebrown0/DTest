@@ -22,7 +22,9 @@ import control_mapping.MenuMap;
 import object_models.forms.ContainerAction;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public class LeftMenu implements CallingState {

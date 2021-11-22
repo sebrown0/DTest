@@ -10,11 +10,12 @@ import org.openqa.selenium.WebElement;
 import context_manager.ContextManager;
 import object_models.employee_creation.EmployeeCreationWizard;
 import object_models.helpers.Closable;
-import object_models.strategies.click.ClickUsingJavaScript;
 import object_models.top_right_nav_bar.common.NavBarElement;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public class NavBarEmployeeCreation extends NavBarElement {
@@ -27,7 +28,7 @@ public class NavBarEmployeeCreation extends NavBarElement {
 	@Override
 	public Closable clickElement() {
 		WebElement el = super.getNavBar().findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-plus')]"));
-		ClickUsingJavaScript.performClick(driver, el);
+		el.click(); 	
 		return new EmployeeCreationWizard(driver, super.contextManager);
 	}
 }

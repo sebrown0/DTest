@@ -36,7 +36,7 @@ public class EmployeeCreationWizard extends JsPanelWithIFrame {
 	public static final String PANEL_TITLE = "Employee Creation Wizard";		
 	
 	public EmployeeCreationWizard(WebDriver driver, ContextManager contextManager) {
-		super(driver, PANEL_TITLE, contextManager);
+		super(driver, PANEL_TITLE, contextManager);//here
 		
 		mapper = new PageMapper(new MappingStrategyWizard(driver));
 		pageMap = mapper.mapControls().getPageMap();			

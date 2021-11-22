@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_models.left_menu.common;
+package factories;
 
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.WebDriver;
@@ -61,10 +61,19 @@ import object_models.left_menu.reports.Payslips;
  * @author Steve Brown
  *
  */
-public class ElementFactory {
-	public static ContainerAction getElement(String elementName, WebDriver driver, ContextManager contextManager) {			
+public class PayrollLeftMenuElementFactory implements MenuElementFactory {	
+	private WebDriver driver;
+	private ContextManager contextManager;
+		
+	public PayrollLeftMenuElementFactory(WebDriver driver, ContextManager contextManager) {		
+		this.driver = driver;
+		this.contextManager = contextManager;
+	}
+
+	@Override // MenuElementFactory
+	public ContainerAction getElementForName(String elementName) {			
 		ContainerAction element = null;
-		switch (elementName) {
+		switch (elementName) {		
 		case Documents.MENU_TITLE:				
 			element = new Documents(driver, contextManager);
 			break;			
@@ -241,4 +250,5 @@ public class ElementFactory {
 		
 		return element;
 	}
+
 }
