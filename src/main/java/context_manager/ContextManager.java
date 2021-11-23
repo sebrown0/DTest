@@ -3,6 +3,7 @@
  */
 package context_manager;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
@@ -12,13 +13,14 @@ import context_manager.contexts.Context;
 import context_manager.states.State;
 import context_manager.states.StateLeftMenu;
 import context_manager.states.StateTopRightNavBar;
-import object_models.forms.ContainerAction;
 import object_models.panels.JsPanel;
 import object_models.panels.PanelSwitcher;
 
-/**
- * @author Steve Brown
- *
+/**  
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
+ * *
  * Manages the contexts within the app.
  * 
  */
@@ -126,23 +128,7 @@ public class ContextManager implements CurrentContext {
 	public void closeCurrentStateInCurrentContext(){
 		stateManager.closeCurrentStateInCurrentContext(this);
 	}
-	
-//	public void closeCurrentContextAndRevertToCallingContext() {		
-//		ContextState cs = queue.getCurrentContextInQueue();
-//		State closer = cs.getLastStateCloser();
-//		closer.switchToMe();
-//		
-//		Optional<State> callingState = queue.removeContextAndGetCallingState(getCurrentContext());
-//		callingState.ifPresent(s -> {
-//			ContextState callingContext = s.getMyContext();
-//			callingContext.moveToState(s.getClass());
-//			//Closing current so need to go back to default state.			
-//			driver.switchTo().defaultContent();			
-//			s.switchToMe();
-//			revertToPrevCallingState(callingContext);
-//		});		
-//	}
-	
+		
 	public void deleteCurrentContextAndRevertToCallingContext() {		
 		Optional<State> callingState = queue.removeContextAndGetCallingState(getCurrentContext());
 		callingState.ifPresent(s -> {
@@ -207,17 +193,7 @@ public class ContextManager implements CurrentContext {
 	}
 	
 	public Optional<JsPanel> getContextThatIsPanel() {
-		ContainerAction curr = getCurrentContext().getContinerAction();
-		if(!(curr instanceof JsPanel)){
-			curr = null;
-			for (ContextState cs : queue.getQueue()) {
-				curr = cs.getContinerAction();
-				if(curr instanceof JsPanel){
-					break;
-				}
-			}			
-		}
-		return Optional.ofNullable((JsPanel) curr);
+		return queue.getNextContextThatIsJsPanel();
 	}
 	
 	public String getExpectedNameOfCurrentContext() {
@@ -280,6 +256,17 @@ public class ContextManager implements CurrentContext {
 	// Removes the context from the queue and closes it in the DOM
 	public void removeAndCloseContext(ContextState cs) {
 		queue.removeAndCloseContext(cs);		
+		Optional<JsPanel> panel = queue.getNextContextThatIsJsPanel();
+		panel.ifPresentOrElse(p -> {
+			this.switchToExistingPanel(p.getClass());
+		}, 
+			new Runnable() {						
+				@Override
+				public void run() {
+					// SET TO FIRST STATE
+				}
+			});
+//		queue.getCurrentContextInQueue().switchToDefaultState();
 	}
 	public boolean removeLastContextFromQueue() {
 		return queue.removeLastContext();
@@ -302,6 +289,11 @@ public class ContextManager implements CurrentContext {
 	@Override
 	public ContextState getCurrentContextState() {
 		return queue.getCurrentContextInQueue();
+	}
+
+	@Override
+	public List<ContextState> getContextQueue() {
+		return queue.getQueue();
 	}
 	
 }

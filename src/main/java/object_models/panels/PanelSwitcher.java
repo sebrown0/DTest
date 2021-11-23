@@ -7,10 +7,13 @@ import java.util.Optional;
 
 import context_manager.ContextManager;
 import context_manager.ContextState;
+import object_models.forms.ContainerAction;
 import object_models.helpers.ClassFieldGetter;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public class PanelSwitcher <T extends JsPanel> {
@@ -44,11 +47,11 @@ public class PanelSwitcher <T extends JsPanel> {
 		setContextForSwitchToPanel();
 		switchToPanelContext.ifPresentOrElse(
 				c -> {
+					ContainerAction container = currentContext.getContinerAction();
 					if(currentContext.equals(c)) {
 						// 4. we're done, panel is current
-					}else if(foundContext) {
-						JsPanel currPanel = (JsPanel) currentContext.getContinerAction();
-						if(switchToPanelFrom(currPanel) == true) {
+					}else if(foundContext && container instanceof JsPanel) {
+						if(switchToPanelFrom((JsPanel) container) == true) {
 							manager
 								.moveToExistingContext(c)
 								.switchToDefaultStateInCurrentContext();
@@ -58,19 +61,12 @@ public class PanelSwitcher <T extends JsPanel> {
 				new Runnable() {					
 					@Override
 					public void run() {
-						// TODO Auto-generated method stub						
+						// TODO Auto-generated method stub					
+						System.out.println("PanelSwitcher.switchToExistingPanel: could not switch to panel."); // TODO - remove or log
+						// Go to first context????
 					}
 				});		
 	}
-	
-	private boolean switchToPanelFrom(JsPanel currPanel) {
-		return 
-		  currPanel
-				.getHeaderBar()
-				.getToolBar()
-				.switchToPanelFromPanel(panelId, currPanel);
-	}
-	
 	private void setContextForSwitchToPanel() {
 		ClassFieldGetter fieldGetter = new ClassFieldGetter(panelToSwitchTo);
 		foundContext = false;
@@ -84,4 +80,12 @@ public class PanelSwitcher <T extends JsPanel> {
 		});	
 	}
 	
+	private boolean switchToPanelFrom(JsPanel currPanel) {
+		return 
+		  currPanel
+				.getHeaderBar()
+				.getToolBar()
+				.switchToPanelFromPanel(panelId, currPanel);
+	}
+		
 }

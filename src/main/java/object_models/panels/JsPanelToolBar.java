@@ -12,6 +12,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextSetter;
 
+/**
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
+ *
+ */
 public class JsPanelToolBar implements ContextSetter {
 	private WebDriver driver;
 	private WebElement toolBar;	

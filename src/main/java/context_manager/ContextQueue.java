@@ -11,13 +11,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import context_manager.states.State;
+import object_models.panels.JsPanel;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  * A queue of context (states).
  */
-public class ContextQueue {
+public class ContextQueue implements CurrentContext {
 	private List<ContextState> queue = new ArrayList<>();
 	private ContextState current = null;
 	private Logger logger = LogManager.getLogger();
@@ -133,20 +136,13 @@ public class ContextQueue {
 	 * If the context has already been closed do not use this method.
 	 * TODO - What to use instead?
 	 */
-	public void removeAndCloseContext(ContextState cs) {
+	public void removeAndCloseContext(ContextState cs) {		
 		Optional<State> closer = Optional.ofNullable(cs.getContextCloser());
 		closer.ifPresent(
 				c -> c.close());
+		
 		removeContextAndReset(cs);
 	}
-//	public void removeAndCloseContext(ContextState cs) {
-//		if(removeContextAndReset(cs)) {			
-//			Optional<State> closer = Optional.ofNullable(cs.getContextCloser());
-//			closer.ifPresent(
-//					c -> c.close()
-//			);
-//		}		
-//	}
 	
 	public boolean removeContextAndReset(ContextState cs) {
 		if(cs instanceof FirstContext) {
@@ -156,12 +152,12 @@ public class ContextQueue {
 			logger.debug("Removing context [" + cs.getContextId() + "] from context queue"); 	
 			if(cs == current) {
 				resetCurrent();
-			}
+			}			
 			queue.remove(cs);
 			return true;
 		}				
 	}
-		
+
 	private void resetCurrent() {
 		ContextState newCurr = null;
 		int idxOfContext = queue.indexOf(current);
@@ -170,18 +166,18 @@ public class ContextQueue {
 			newCurr = queue.get(idxOfContext-1);
 		}else if(hasNext(idxOfContext)){
 			newCurr = queue.get(idxOfContext+1);
-		}
-		
-		current = newCurr;		
-		if(current != null) {
-			current.switchToDefaultState();
-		}
-	}
-
-	private boolean hasPrev(int idxOfContext) {
-		return (idxOfContext >= 1);
+		}		
+		current = newCurr;
 	}
 	
+	public Optional<JsPanel> getNextContextThatIsJsPanel(){
+		ContextFinder contextFinder = new ContextFinder(this);
+		return contextFinder.getContextThatIsPanel();
+	}
+	
+	private boolean hasPrev(int idxOfContext) {
+		return (idxOfContext >= 1);
+	}	
 	private boolean hasNext(int idxOfContext) {
 		return (idxOfContext <= 1 && (idxOfContext+1) < getSize());
 	}
@@ -227,6 +223,21 @@ public class ContextQueue {
 	}
 	public int getSize() {		
 		return queue.size();
+	}
+
+	@Override // CurrentContext
+	public ContextState getCurrentContextState() {
+		return current;
+	}
+
+	@Override // CurrentContext
+	public List<ContextState> getContextQueue() {
+		return queue;
+	}
+
+	@Override // CurrentContext
+	public void setCurrentContextState(ContextState cs) {
+		this.current = cs;
 	}
 		
 }

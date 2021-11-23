@@ -315,39 +315,11 @@ class ContextManagerTests {
 		TopRightNavBar navBar = homepagePayroll.getTopRightNavBar();
 		ContainerAction empCr = navBar.clickAndLoad(NavBarEmployeeCreation.class).get();
 		
-		// THIS IS NOT FIRST!!!!!!!!!!!!!!!!!
-		ContextState first = manager.findContext(EmployeeCreationWizard.PANEL_TITLE).get();
-		manager.moveToExistingContext(first);
+		ContextState cs = manager.findContext(EmployeeCreationWizard.PANEL_TITLE).get();
+		manager.moveToExistingContext(cs);
 		assertEquals("Employee Creation Wizard", manager.getCurrentContext().getContextId().getExpectedName());
 		
-		empCr.close(); // <------------------------------------------------------------
+		empCr.close(); 
 	}
-//	@Test	@Order(25)
-//	void findContext_navBar_using_clickAndLoad() {
-//		menu.clickAndLoad(MonthlyReports.class);
-//		menu.clickAndLoad(YearlyReports.class);
-//		
-//		TopRightNavBar navBar = homepagePayroll.getTopRightNavBar();
-//		ContainerAction empCr = navBar.clickAndLoad(NavBarEmployeeCreation.class).get();
-//		
-//		System.out.println("->" + manager.findContext(EmployeeCreationWizard.PANEL_TITLE).get().getContextId()); // TODO - remove or log 	
-//		System.out.println("->" + manager.getPenultimateContext().get().getContextId()); // TODO - remove or log
-//		
-//		ContextState qq = manager.findContext(MonthlyReports.PANEL_TITLE).get();
-//		ContainerAction a = qq.getContinerAction(); 
-//		System.out.println("->" + a.getTitle().getActual());
-//		if(a instanceof JsPanel) {
-//			System.out.println("->Yeahhhhhhhhhhhhh"); // TODO - remove or log 	
-//			JsPanel p = (JsPanel) a;
-//			manager.switchToExistingPanel(p.getClass());
-//		}
-//		
-//		// THIS IS NOT FIRST!!!!!!!!!!!!!!!!!
-////		ContextState first = manager.findContext(EmployeeCreationWizard.PANEL_TITLE).get();
-////		manager.moveToExistingContext(first);
-////		assertEquals("Employee Creation Wizard", manager.getCurrentContext().getContextId().getExpectedName());
-////		
-//		empCr.close(); // <------------------------------------------------------------
-//	}
 	
 }

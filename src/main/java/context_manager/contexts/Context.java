@@ -17,10 +17,11 @@ import context_manager.states.StateFactory;
 import context_manager.states.StateFactorySetter;
 import context_manager.states.StateTop;
 import object_models.forms.ContainerAction;
-import object_models.panels.JsPanel;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  * Represents a context in the app, i.e. a panel, form etc.
  * Each context can have different states, i.e. header/container, iFrame etc.
@@ -226,27 +227,7 @@ public abstract class Context implements ContextState {
 	
 	@Override
 	public void switchToDefaultState() {
-		JsPanel p = null;
-		
-		if(this.containerAction instanceof JsPanel) {
-			System.out.println("->Yeahhhhhhhhhhhhh"); // TODO - remove or log 	
-			p = (JsPanel) this.containerAction;
-			
-		}else {
-			System.out.println("->Nooooooooooooooo"); // TODO - remove or log 	
-			Optional<JsPanel> a = contextManager.getContextThatIsPanel();
-			if(a.isPresent()){
-				p = (JsPanel) a.get();
-			}
-			
-		}
-		
-		if(p != null) {
-			contextManager.switchToExistingPanel(p.getClass());	
-		}
-		
-		contextManager.switchToDefaultStateInContext(this);
-		
+		contextManager.switchToDefaultStateInContext(this);		
 	}
 
 	@Override

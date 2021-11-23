@@ -8,7 +8,9 @@ import java.util.Optional;
 import context_manager.states.State;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public class ContextUpdater {

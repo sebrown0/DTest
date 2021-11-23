@@ -3,7 +3,6 @@
  */
 package object_models.panels;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,8 +11,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextId;
 import context_manager.ContextIdGetter;
@@ -33,7 +30,6 @@ import controls.ControlName;
 import exceptions.PanelException;
 import object_models.forms.ContainerAction;
 import object_models.helpers.IFrame;
-import object_models.helpers.closers.CloserPanel;
 import object_models.helpers.title.PageTitle;
 import object_models.helpers.title.TitlePanel;
 
@@ -147,35 +143,16 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 
 	@Override
 	public void close() {
-//		headerBar.closeForm();
-//		CloserPanel closer = new CloserPanel(driver);
-//		try {
-//			closer.close();
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		headerBar.closeForm();
-//		headerBar.getToolBar().switchToPanelFromPanel(expectedTitle, null)
+		/*
+		 * The actual closing of the panel is done in the CM.
+		 * If this proves to be unreliable may have to move 
+		 * it to here.
+		 * 
+		 *   headerBar.closeForm();  
+		 */
 		getContextManager().removeAndCloseContext(getMyContext());
-		
-//		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("a[href='#previous']")));
 	}
 	
-//	@Override
-//	public void close() {
-//		logger.info("** Depreciated. Use ContextManager **");
-////		System.out.println("** Depreciated. Use ContextManager **"); // TODO - remove or log 	
-//		
-//		CloserPanel closer = new CloserPanel(driver);
-//		try {
-//			closer.close();
-//		} catch (Exception e) {
-//			logger.error("Could not close panel [" + expectedTitle + "]");
-//		}
-//	}
-
 	public Optional<String> getPanelId() {
 		return panelId;
 	}
