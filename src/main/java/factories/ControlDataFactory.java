@@ -14,10 +14,13 @@ import control_builder.ControlGetterGrid;
 import controls.ControlName;
 import enums.control_names.CommonControlNames;
 import object_models.dk_grid.KeyStrategyRow;
-import object_models.helpers.text_writer.TextWriter;
+import object_models.helpers.text_writer.TextWriterComboDefault;
+import object_models.helpers.text_writer.TextWriterComboMulti;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  * Build and get a ControlData obj that can be 
  * used to build a panel's (or similar) controls.
@@ -48,7 +51,22 @@ public class ControlDataFactory {
 		return this;
 	}
 	
-	public ControlDataFactory buildComboWriteAndSelect(ControlName cntrlName, By containerLoc, By resultLoc, TextWriter writer) {
+	public ControlDataFactory buildDefaultComboWriteAndSelect(ControlName cntrlName, By containerLoc, By resultLoc) {
+		TextWriterComboDefault writer = new TextWriterComboDefault(driver);
+		controlData = 
+				new ControlData(
+						cntrlName, 
+						new ControlGetterComboWriteAndSelect(driver,	containerLoc,	resultLoc, writer));
+		
+		return this;
+	}
+	
+	public ControlDataFactory buildMultiComboWriteAndSelect(ControlName cntrlName, By containerLoc, By resultLoc) {		
+		TextWriterComboMulti writer = 
+				new TextWriterComboMulti(driver
+							.findElement(containerLoc)
+							.findElement(By.cssSelector("input[class='select2-search__field']")));
+		
 		controlData = 
 				new ControlData(
 						cntrlName, 

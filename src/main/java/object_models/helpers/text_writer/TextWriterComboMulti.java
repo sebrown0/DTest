@@ -9,7 +9,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  * 
  * Write text to a multi-entry combo, where
  * the input element is part of the container

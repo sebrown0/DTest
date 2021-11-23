@@ -10,8 +10,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
- * @author Steve Brown
- *
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
+ * 
  * Write text to a combo that has been 'OPENED'.
  * And therefore, found in the DOM not from the 
  * combo's top level container.

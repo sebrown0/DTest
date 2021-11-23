@@ -6,7 +6,9 @@ package context_manager;
 import java.util.List;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public interface CurrentContext {

@@ -19,8 +19,6 @@ import object_models.dk_grid.DkGrid;
 import object_models.dk_grid.FindRowByEmpCode;
 import object_models.dk_grid.Row;
 import object_models.helpers.ElementClicker;
-import object_models.helpers.text_writer.TextWriterComboDefault;
-import object_models.helpers.text_writer.TextWriterComboMulti;
 import object_models.panels.JsPanelControl;
 import object_models.panels.JsPanelWithIFrame;
 
@@ -47,48 +45,41 @@ public final class GlobalAdjustments extends JsPanelWithIFrame implements JsPane
 	private void buildMyControls() {
 		var myControls = 
 				List.of(
-						controlFactory.buildComboWriteAndSelect(
+						controlFactory.buildDefaultComboWriteAndSelect(
 								CommonControlNames.COMPANY, 
 								By.cssSelector("span[aria-labelledby='select2-COMP_SELx-container']"), 
-								By.id("select2-COMP_SELx-results"), 
-								new TextWriterComboDefault(driver)).getControlData(),
+								By.id("select2-COMP_SELx-results")).getControlData(),
 						
-						controlFactory.buildComboWriteAndSelect(
+						controlFactory.buildDefaultComboWriteAndSelect(
 								PayrollControlNames.PAY_PERIODS,
 								By.cssSelector("span[aria-labelledby='select2-PAYS_SELx-container']"), 
-								By.id("select2-PAYS_SELx-results"), 
-								new TextWriterComboDefault(driver)).getControlData(),
+								By.id("select2-PAYS_SELx-results")).getControlData(),
 						
-						controlFactory.buildComboWriteAndSelect(
-								CommonControlNames.DEPARTMENT,
-								By.cssSelector("body > form > div:nth-child(17) > div:nth-child(2) > span > span.selection > span"), 
-								By.id("select2-DEPS_SELx-results"),
-								new TextWriterComboMulti(driver.findElement(By.cssSelector("body > form > div:nth-child(17) > div:nth-child(2) > span > span.selection > span")))).getControlData(),
+						controlFactory.buildDefaultComboWriteAndSelect(
+								CommonControlNames.DEPARTMENT,								
+								By.cssSelector("span[data-select2-id='13']"), 
+								By.id("select2-DEPS_SELx-results")).getControlData(),
+
 						
-						controlFactory.buildComboWriteAndSelect(
+						controlFactory.buildDefaultComboWriteAndSelect(
 								GlobalAdjustmentControlNames.VIEW_ADJUSTMENT_TYPE,
 								By.id("select2-VIEW2_SELx-container"), 
-								By.id("select2-VIEW2_SELx-results"), 
-								new TextWriterComboDefault(driver)).getControlData(),
+								By.id("select2-VIEW2_SELx-results")).getControlData(),
 						
-						controlFactory.buildComboWriteAndSelect(
+						controlFactory.buildDefaultComboWriteAndSelect(
 								PayrollControlNames.PAY_GROUP,
 								By.id("select2-PAYGS_SELx-container"), 
-								By.id("select2-PAYGS_SELx-results"),
-								new TextWriterComboDefault(driver)).getControlData(),
+								By.id("select2-PAYGS_SELx-results")).getControlData(),
 						
-						controlFactory.buildComboWriteAndSelect(
+						controlFactory.buildDefaultComboWriteAndSelect(
 								EmployeeControlNames.FULL_OR_PART_TIME,
 								By.id("select2-EMPL_SELx-container"), 
-								By.id("select2-EMPL_SELx-results"), 
-								new TextWriterComboDefault(driver)).getControlData(),
+								By.id("select2-EMPL_SELx-results")).getControlData(),
 						
-						controlFactory.buildComboWriteAndSelect(
+						controlFactory.buildDefaultComboWriteAndSelect(
 								EmployeeControlNames.EMPLOYEES,
-								By.cssSelector("body > form > div:nth-child(17) > div:nth-child(4) > span > span.selection > span"), 
-								By.id("select2-EMPS_SELx-results"), 
-								new TextWriterComboMulti(driver.findElement(By.cssSelector("body > form > div:nth-child(17) > div:nth-child(4) > span > span.selection > span"))))
-						.getControlData(),
+								By.cssSelector("span[data-select2-id='16']"), 
+								By.id("select2-EMPS_SELx-results")).getControlData(),
 						
 						controlFactory
 							.buildButton(
@@ -105,7 +96,7 @@ public final class GlobalAdjustments extends JsPanelWithIFrame implements JsPane
 		);			
 		super.buildPanelControls(myControls);				
 	}
-		
+	
 	// Actions
 	public Optional<Control> clickButton(ControlName cntrlName){
 		Optional<Control> btn = ElementClicker.clickButton(cntrlName, this);
