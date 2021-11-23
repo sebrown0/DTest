@@ -13,7 +13,9 @@ import org.openqa.selenium.WebElement;
 import object_models.helpers.Header;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public class JsPanelHeaderBar implements Header{	

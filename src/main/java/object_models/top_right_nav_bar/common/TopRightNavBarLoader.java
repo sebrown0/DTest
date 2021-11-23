@@ -21,13 +21,13 @@ import object_models.left_menu.common.MenuContextChecker;
  *
  * Actions that can be performed on a TopRightNavBar object.
  */
-public class TopRightNavBarActions {
+public class TopRightNavBarLoader {
 	private Logger logger = LogManager.getLogger();
 	private ContextManager contextManager;	
 	private TopRightNavBarElements navBarElements;
 	private MenuContextChecker menuContextChecker;
 	
-	public TopRightNavBarActions(ContextManager contextManager, TopRightNavBarElements navBarElements) {
+	public TopRightNavBarLoader(ContextManager contextManager, TopRightNavBarElements navBarElements) {
 		this.contextManager = contextManager;
 		this.navBarElements = navBarElements;
 		this.menuContextChecker = new MenuContextChecker(contextManager);

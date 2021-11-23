@@ -3,6 +3,7 @@
  */
 package object_models.panels;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,8 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextId;
 import context_manager.ContextIdGetter;
@@ -35,7 +38,9 @@ import object_models.helpers.title.PageTitle;
 import object_models.helpers.title.TitlePanel;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public abstract class JsPanel implements ContainerAction, ContextSetter, ContextIdGetter, StateFactorySetter { 
@@ -51,17 +56,14 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	private WebElement container;
 	private Optional<String> panelId;	
 	private JsPanelHeaderBar headerBar;	
-			
-//	private static final By TITLE_SELECTOR = By.cssSelector("span[class='jsPanel-title']");
-		
+					
 	public JsPanel(WebDriver driver, String expectedTitle, ContextManager contextManager) {
 		this.logger = LogManager.getLogger();
 		this.driver = driver;
 		this.expectedTitle = expectedTitle;
 		this.manager = contextManager;		
 		this.builder = new ControlBuilder();		
-		
-//		waitForLoad(ExpectedConditions.attributeContains(TITLE_SELECTOR, "innerHTML", expectedTitle));		
+				
 		setPanelId();
 		setContainer();
 		setTitle(); //SHOULD THIS BE PART OF THE HEADER BAR???
@@ -145,16 +147,34 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 
 	@Override
 	public void close() {
-		logger.info("** Depreciated. Use ContextManager **");
-//		System.out.println("** Depreciated. Use ContextManager **"); // TODO - remove or log 	
+//		headerBar.closeForm();
+//		CloserPanel closer = new CloserPanel(driver);
+//		try {
+//			closer.close();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		headerBar.closeForm();
+//		headerBar.getToolBar().switchToPanelFromPanel(expectedTitle, null)
+		getContextManager().removeAndCloseContext(getMyContext());
 		
-		CloserPanel closer = new CloserPanel(driver);
-		try {
-			closer.close();
-		} catch (Exception e) {
-			logger.error("Could not close panel [" + expectedTitle + "]");
-		}
+//		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("a[href='#previous']")));
 	}
+	
+//	@Override
+//	public void close() {
+//		logger.info("** Depreciated. Use ContextManager **");
+////		System.out.println("** Depreciated. Use ContextManager **"); // TODO - remove or log 	
+//		
+//		CloserPanel closer = new CloserPanel(driver);
+//		try {
+//			closer.close();
+//		} catch (Exception e) {
+//			logger.error("Could not close panel [" + expectedTitle + "]");
+//		}
+//	}
 
 	public Optional<String> getPanelId() {
 		return panelId;

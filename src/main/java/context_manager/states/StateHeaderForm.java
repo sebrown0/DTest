@@ -10,7 +10,9 @@ import org.openqa.selenium.WebElement;
 import context_manager.ContextState;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public class StateHeaderForm extends State {
@@ -29,7 +31,6 @@ public class StateHeaderForm extends State {
 	}	
 	@Override
 	public void close() {		
-//		logger.debug("Closing state [" + this + "]");
 		logger.error("*** NOT IMPLEMENTED ***");
 		System.out.println("StateHeaderForm->close->*** NOT IMPLEMENTED ***"); // TODO - remove or log				
 	}

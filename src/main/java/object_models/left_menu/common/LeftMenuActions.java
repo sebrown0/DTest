@@ -107,7 +107,7 @@ public class LeftMenuActions {
 					elementContainer = menuContextChecker.getExistingContainerFromContext(name, cs.get());
 					menuContextChecker.setExistingAsCurrent(elementContainer);					
 				}else { 	
-//					e.click();
+//					e.click(); // didn;t work here
 					elementContainer = Optional.of(getNewElementContainer(name));
 					logger.debug("[" + elementContainer.get().toString() + "] does not exist. Creating now");
 				}

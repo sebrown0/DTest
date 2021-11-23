@@ -3,15 +3,12 @@
  */
 package object_models.employee_creation;
 
-import java.time.Duration;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextManager;
 import control_mapping.MapControl;
@@ -25,7 +22,9 @@ import object_models.forms.FormFadeShow;
 import object_models.panels.JsPanelWithIFrame;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public class EmployeeCreationWizard extends JsPanelWithIFrame {	
@@ -82,11 +81,11 @@ public class EmployeeCreationWizard extends JsPanelWithIFrame {
 		}		
 	}
 	
-	@Override
-	public void close() {		
-		getContextManager().removeAndCloseContext(getMyContext());
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("a[href='#previous']")));
-	}
+//	@Override
+//	public void close() {		
+//		getContextManager().removeAndCloseContext(getMyContext());
+//		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("a[href='#previous']")));
+//	}
 
 }

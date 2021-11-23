@@ -15,7 +15,6 @@ import object_models.helpers.Closable;
 
 /**
  * @author SteveBrown
- * @author Steve Brown
  * @since 1.0
  * @version 1.1 
  * 

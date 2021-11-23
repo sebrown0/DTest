@@ -56,12 +56,13 @@ public class TopRightNavBar implements ElementChecker, NavBarElementGetter, Call
 		return quickLinks;
 	}		
 	
+	@Override // NavBarElementGetter
 	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
-		TopRightNavBarActions actions = new TopRightNavBarActions(contextManager, navBarElements);
+		TopRightNavBarLoader actions = new TopRightNavBarLoader(contextManager, navBarElements);
 		return actions.clickAndLoad(clazz);
 	}
 
-	@Override
+	@Override // NavBarElementGetter
 	public Optional<NavBarElement> getNavBarElement(String elementName) {		
 		return Optional.ofNullable(navBarElements.getElement(elementName));
 	}

@@ -29,6 +29,7 @@ import enums.control_names.GroupControlNames;
 import logging.TestResultLogger;
 import object_models.controls.EmployeeSelection;
 import object_models.employee_creation.EmployeeCreationWizard;
+import object_models.forms.ContainerAction;
 import object_models.forms.FormModal;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.employees.Banks;
@@ -308,15 +309,45 @@ class ContextManagerTests {
 		manager.moveToExistingContext(first);
 		assertEquals("Monthly Payroll Reports", manager.getCurrentContext().getContextId().getExpectedName());
 	}
-
+	
 	@Test	@Order(25)
-	void findContext_navBar_using_clickAndLoad() {
+	void findContext_navBar_using_clickAndLoad() {		
 		TopRightNavBar navBar = homepagePayroll.getTopRightNavBar();
-		navBar.clickAndLoad(NavBarEmployeeCreation.class).get();
+		ContainerAction empCr = navBar.clickAndLoad(NavBarEmployeeCreation.class).get();
 		
+		// THIS IS NOT FIRST!!!!!!!!!!!!!!!!!
 		ContextState first = manager.findContext(EmployeeCreationWizard.PANEL_TITLE).get();
 		manager.moveToExistingContext(first);
 		assertEquals("Employee Creation Wizard", manager.getCurrentContext().getContextId().getExpectedName());
+		
+		empCr.close(); // <------------------------------------------------------------
 	}
+//	@Test	@Order(25)
+//	void findContext_navBar_using_clickAndLoad() {
+//		menu.clickAndLoad(MonthlyReports.class);
+//		menu.clickAndLoad(YearlyReports.class);
+//		
+//		TopRightNavBar navBar = homepagePayroll.getTopRightNavBar();
+//		ContainerAction empCr = navBar.clickAndLoad(NavBarEmployeeCreation.class).get();
+//		
+//		System.out.println("->" + manager.findContext(EmployeeCreationWizard.PANEL_TITLE).get().getContextId()); // TODO - remove or log 	
+//		System.out.println("->" + manager.getPenultimateContext().get().getContextId()); // TODO - remove or log
+//		
+//		ContextState qq = manager.findContext(MonthlyReports.PANEL_TITLE).get();
+//		ContainerAction a = qq.getContinerAction(); 
+//		System.out.println("->" + a.getTitle().getActual());
+//		if(a instanceof JsPanel) {
+//			System.out.println("->Yeahhhhhhhhhhhhh"); // TODO - remove or log 	
+//			JsPanel p = (JsPanel) a;
+//			manager.switchToExistingPanel(p.getClass());
+//		}
+//		
+//		// THIS IS NOT FIRST!!!!!!!!!!!!!!!!!
+////		ContextState first = manager.findContext(EmployeeCreationWizard.PANEL_TITLE).get();
+////		manager.moveToExistingContext(first);
+////		assertEquals("Employee Creation Wizard", manager.getCurrentContext().getContextId().getExpectedName());
+////		
+//		empCr.close(); // <------------------------------------------------------------
+//	}
 	
 }

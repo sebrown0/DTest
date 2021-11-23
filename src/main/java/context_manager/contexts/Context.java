@@ -17,6 +17,7 @@ import context_manager.states.StateFactory;
 import context_manager.states.StateFactorySetter;
 import context_manager.states.StateTop;
 import object_models.forms.ContainerAction;
+import object_models.panels.JsPanel;
 
 /**
  * @author Steve Brown
@@ -49,19 +50,11 @@ public abstract class Context implements ContextState {
 		contextId = idGetter.getContextId();
 	}
 	
-	private void setFirstState() { 	
-//		firstState = new StateTop(this, contextManager.getDriver());
-		
+	private void setFirstState() { 		
 		this.setState(new StateTop(this, contextManager.getDriver()));
 		firstState = currentState;	
 	}
-	
-//	private void setFirstState() { 	
-//		firstState = new StateTop(this, contextManager.getDriver());		
-////		currentState = firstState;		
-//		this.setState(firstState);
-//	}
-	
+		
 	private void setCallingState() {
 		callingState = contextManager.getLatestCallingState().getState(this);
 	}
@@ -232,8 +225,28 @@ public abstract class Context implements ContextState {
 	}
 	
 	@Override
-	public void switchToDefaultState() { 		
+	public void switchToDefaultState() {
+		JsPanel p = null;
+		
+		if(this.containerAction instanceof JsPanel) {
+			System.out.println("->Yeahhhhhhhhhhhhh"); // TODO - remove or log 	
+			p = (JsPanel) this.containerAction;
+			
+		}else {
+			System.out.println("->Nooooooooooooooo"); // TODO - remove or log 	
+			Optional<JsPanel> a = contextManager.getContextThatIsPanel();
+			if(a.isPresent()){
+				p = (JsPanel) a.get();
+			}
+			
+		}
+		
+		if(p != null) {
+			contextManager.switchToExistingPanel(p.getClass());	
+		}
+		
 		contextManager.switchToDefaultStateInContext(this);
+		
 	}
 
 	@Override

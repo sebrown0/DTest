@@ -125,6 +125,28 @@ public class ContextQueue {
 		}				
 		return callingState;
 	}
+
+	/*
+	 * This removes the context from the queue, and
+	 * gets the context's closer to close the context.
+	 * 
+	 * If the context has already been closed do not use this method.
+	 * TODO - What to use instead?
+	 */
+	public void removeAndCloseContext(ContextState cs) {
+		Optional<State> closer = Optional.ofNullable(cs.getContextCloser());
+		closer.ifPresent(
+				c -> c.close());
+		removeContextAndReset(cs);
+	}
+//	public void removeAndCloseContext(ContextState cs) {
+//		if(removeContextAndReset(cs)) {			
+//			Optional<State> closer = Optional.ofNullable(cs.getContextCloser());
+//			closer.ifPresent(
+//					c -> c.close()
+//			);
+//		}		
+//	}
 	
 	public boolean removeContextAndReset(ContextState cs) {
 		if(cs instanceof FirstContext) {
@@ -139,22 +161,7 @@ public class ContextQueue {
 			return true;
 		}				
 	}
-	
-	/*
-	 * This removes the context from the queue, and
-	 * gets the context's closer to close the context.
-	 * 
-	 * If the context has already been closed do not use this method.
-	 */	
-	public void removeAndCloseContext(ContextState cs) {
-		if(removeContextAndReset(cs)) {			
-			Optional<State> closer = Optional.ofNullable(cs.getContextCloser());
-			closer.ifPresent(
-					c -> c.close()
-			);
-		}		
-	}
-	
+		
 	private void resetCurrent() {
 		ContextState newCurr = null;
 		int idxOfContext = queue.indexOf(current);

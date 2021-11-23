@@ -12,6 +12,8 @@ import context_manager.states.State;
 
 /**
  * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public class StateManager {
@@ -79,18 +81,6 @@ public class StateManager {
 			return Optional.empty();
 		}							
 	}
-//	public <T extends State> Optional<State> moveToStateInContext(Class<T> clazzRequiredState, ContextState cs) {
-//		String requiredStateName = clazzRequiredState.getSimpleName();
-//		Optional<State> state = cs.moveToState(clazzRequiredState);
-//		
-//		if(state.isPresent()) {			
-//			logger.debug("State [" + requiredStateName + "] is present in context. Will move to this state");				
-//			return state;			
-//		}else {
-//			logger.debug("State [" + requiredStateName + "] is not present in context. Adding as the last state in context");				
-//			return getCurrentContext().setLastState(clazzRequiredState, cs.getContinerAction().getStateFactorySetter());			
-//		}						
-//	}
 		
 	private boolean isCurrentStateRequiredState(String requiredStateName) {
 		String currentStatesName = manager.getCurrentContextState().getState().getClass().getSimpleName(); 	
@@ -229,9 +219,9 @@ public class StateManager {
 		});
 	}
 
-	private ContextState getCurrentContext() {
-		return manager.getCurrentContext();
-	}
+//	private ContextState getCurrentContext() {
+//		return manager.getCurrentContext();
+//	}
 	
 	//Getters and Setters
 	public Logger getLogger() {
