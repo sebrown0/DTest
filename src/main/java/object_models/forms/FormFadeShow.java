@@ -20,7 +20,16 @@ import object_models.helpers.title.TitleModalFadeShow;
  * @author SteveBrown
  * @version 1.0
  * @since 1.0
- *
+ * <p>
+ * TODO - If this is added to the context queue
+ * it can cause problems if it is the penultimate
+ * context in the queue and the last object is removed.
+ * The current context will switch back to this and
+ * it's likely that it won't exist in the DOM anymore.
+ * 
+ * Therefore, we need some sort of 'garabage collector'
+ * in the CM to tidy up missing elements/contexts. * 
+ * </p> 
  */
 public class FormFadeShow extends FormModal {
 	private WebElement topLevelContainer;

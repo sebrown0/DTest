@@ -62,7 +62,7 @@ class EmployeeCreationTests {
 		assertTrue(wizard.getContextExpectedName().equals("Employee Creation Wizard"));
 		
 		// THE EMP EXISTS SO THE RESULT SHOULD BE AN ERROR FORM.
-		FormFadeShow frm = wizard.createEmployee(emp);
+		FormFadeShow frm = wizard.createEmployeeAndGetConfirmation(emp);
 		assertEquals("Data Error", frm.getTitle().getExpected());
 		
 		//CLOSE THE ERROR FORM AND WIZARD
@@ -78,7 +78,7 @@ class EmployeeCreationTests {
 		String randomEmpCode = emp.getEmpCode();
 		// Open the wizard and create the emp
 		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();		
-		wizard.createEmployee(emp);
+		wizard.createEmployeeAndGetConfirmation(emp);
 		wizard.close();
 		// Open employee details and check the code.
 		EmployeeDetails empDetails = (EmployeeDetails) homepage.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
@@ -98,7 +98,7 @@ class EmployeeCreationTests {
 		emp.setEmpCode(randomEmpCodeWithSpace);
 		// Open the wizard and create the emp
 		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();		
-		wizard.createEmployee(emp);
+		wizard.createEmployeeAndGetConfirmation(emp);
 		wizard.close();
 		// Open employee details and check the code.
 		EmployeeDetails empDetails = (EmployeeDetails) homepage.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
@@ -118,7 +118,7 @@ class EmployeeCreationTests {
 		emp.setEmpCode(randomEmpCodeWithSymbol);
 		// Open the wizard and create the emp
 		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();		
-		wizard.createEmployee(emp);
+		wizard.createEmployeeAndGetConfirmation(emp);
 		wizard.close();
 		// Open employee details and check the code.
 		EmployeeDetails empDetails = (EmployeeDetails) homepage.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();

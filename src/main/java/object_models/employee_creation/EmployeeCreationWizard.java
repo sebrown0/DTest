@@ -35,28 +35,35 @@ public class EmployeeCreationWizard extends JsPanelWithIFrame {
 	public static final String PANEL_TITLE = "Employee Creation Wizard";		
 	
 	public EmployeeCreationWizard(WebDriver driver, ContextManager contextManager) {
-		super(driver, PANEL_TITLE, contextManager);//here
+		super(driver, PANEL_TITLE, contextManager);
 		
 		mapper = new PageMapper(new MappingStrategyWizard(driver));
 		pageMap = mapper.mapControls().getPageMap();			
 	}
-		
-	public FormFadeShow createEmployee(Employee emp)  {
+	
+	// Use this if were not interested in the confirmation form.
+	public void createEmployee(Employee emp)  {
 		logger.debug("Creating employee with wizard");		
+		executeSteps(emp);		
+	}
+	// Use this if we want the confirmation form.
+	public FormFadeShow createEmployeeAndGetConfirmation(Employee emp)  {
+		logger.debug("Creating employee with wizard. Returning confirmation form");		
+		executeSteps(emp);		
+		return getConfirmationForm();
+	}
+	private void executeSteps(Employee emp) {
 		WizardStepExecutor step1 = new WizardStepOne(pageMap, driver, 1);
 		WizardStepExecutor step2 = writeValuesForStepAndMoveNext(step1, emp);
 		WizardStepExecutor step3 = writeValuesForStepAndMoveNext(step2, emp);		
 		WizardStepExecutor step4 = writeValuesForStepAndMoveNext(step3, emp);
 		WizardStepExecutor step5 = writeValuesForStepAndMoveNext(step4, emp);
 		step5.writeValues(emp).getNext();
-		
-		return getConfirmationForm();
 	}
 	private WizardStepExecutor writeValuesForStepAndMoveNext(WizardStepExecutor step, Employee emp) {
 		step.writeValues(emp);
 		return step.getNext();
-	}
-	
+	}	
 	private FormFadeShow getConfirmationForm() {		
 		return new FormFadeShow(driver, manager);
 	}

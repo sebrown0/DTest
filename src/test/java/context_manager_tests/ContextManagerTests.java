@@ -181,6 +181,7 @@ class ContextManagerTests {
 	void addNewStateToContext() {
 //		Optional<State> s = manager.moveToStateInCurrentContext(StateLeftMenu.class);		
 //		assertTrue(s.get() instanceof StateLeftMenu);
+//		TODO
 	}
 
 	@Test	@Order(12)

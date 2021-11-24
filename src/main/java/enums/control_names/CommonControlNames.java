@@ -6,7 +6,9 @@ package enums.control_names;
 import controls.ControlName;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public enum CommonControlNames implements ControlName {	

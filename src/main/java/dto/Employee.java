@@ -13,7 +13,9 @@ import enums.Gender;
 import enums.TaxStatus;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public class Employee {
@@ -59,6 +61,9 @@ public class Employee {
 	}
 	public String getFullName() {
 		return firstName + " " + lastName;
+	}
+	public String getFormalName() {
+		return lastName + " " + firstName;
 	}
 	public String getIdCardNumber() {
 		return idCardNumber;

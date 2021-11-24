@@ -17,6 +17,7 @@ import controls.PopupComboSelect;
 import dto.Employee;
 import enums.control_names.EmployeeControlNames;
 import enums.control_names.GlobalAdjustmentControlNames;
+import enums.control_names.PayrollControlNames;
 import logging.TestResultLogger;
 import object_models.dk_grid.Cell;
 import object_models.dk_grid.CellChecker;
@@ -51,60 +52,65 @@ import xml_reader.config_file.ConfigReader;
 	LoginPageResolverPayroll.class })
 public class EmployeeOvertimeTests {	
 	private static HomePage homepagePayroll;	
-	private static GlobalAdjustments globalAdjustments;
+	private static GlobalAdjustments globalAdjustments;	
+	private static Employee emp;
 	
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
 		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
 		globalAdjustments =	(GlobalAdjustments) homepagePayroll.getLeftMenu().clickAndLoad(GlobalAdjustments.class).get();
+		
+		// Get an employee with random code
+		RandomEmployeeProvider empProvider = new EmployeeFromXml(); 
+		emp = empProvider.getAnyEmpWithRandomCode();
+		
+//		String randomEmpCode = emp.getEmpCode();
+		String randomEmpCode = "QJGRXOBCEK";
+		
+		emp.setIdCardNumber(randomEmpCode);
+		emp.setFirstName("Clint");
+//		emp.setLastName("Eastwood" + "_" + randomEmpCode.substring(0,4));
+		emp.setLastName("Eastwood");
 	}		
 				
 	@Test @Order(1)
-	void createEmployee() {
-		// Get an employee with random code
-		RandomEmployeeProvider empProvider = new EmployeeFromXml(); 
-		Employee emp = empProvider.getAnyEmpWithRandomCode();		
-		String randomEmpCode = emp.getEmpCode();
-		emp.setIdCardNumber(randomEmpCode);
-		emp.setFirstName("Clint");
-		emp.setLastName("Eastwood");
+	void createEmployee() {		
 		// Open the wizard and create the emp
 		TopRightNavBar navBar = homepagePayroll.getTopRightNavBar();
 		NavBarElement empCr = navBar.getNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
-		EmployeeCreationWizard wizard = (EmployeeCreationWizard) empCr.clickElement();
-		
-//		NavBarElement  navEmpWizard = homepagePayroll.getTopRightNavBar().getNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
-//		EmployeeCreationWizard wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();
-		
-//		wizard.createEmployee(emp);
-//		wizard.close();
+		EmployeeCreationWizard wizard = (EmployeeCreationWizard) empCr.clickElement();		
+		wizard.createEmployeeAndGetConfirmation(emp);
+		wizard.close();
 	}
 	
 	@Test @Order(2)
-	void loadEmployee_implictPass_ifCompletes() {
-		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(EmployeeControlNames.EMPLOYEES).get();
-		cmbComp.click();		
-		cmbComp.selectFullText("Borg Joey");
-		cmbComp.click();		
+	void setCriteriaForEmployee_implictPass_ifCompletes() {
+		ComboWriteAndSelect cmbPayGroup = (ComboWriteAndSelect) globalAdjustments.getControl(PayrollControlNames.PAY_GROUP).get();
+		cmbPayGroup.click();		
+		cmbPayGroup.selectFullText(emp.getPayGroup());
+		
+		ComboWriteAndSelect cmbFullPartTime = (ComboWriteAndSelect) globalAdjustments.getControl(EmployeeControlNames.FULL_OR_PART_TIME).get();
+		cmbFullPartTime.click();		
+		cmbFullPartTime.selectFullText("Both");
 		
 		globalAdjustments.clickButton(GlobalAdjustmentControlNames.ACCEPT_CRITERIA);		
 	}
 
 	@Test @Order(3)
-	void createNewRecord() {
+	void createNewRecord_implictPass_ifCompletes() {
 		DkGrid<?> grid = globalAdjustments.getGrid();
-		assertEquals(-1, grid.getContent().getLastRowNum()); // Should be nothing in the grid
 		grid.addRecord();
-		assertEquals(0, grid.getContent().getLastRowNum()); // Should be 1 record in the grid
 	}
 	
 	@Test @Order(4)
 	void enterEmployee() {
 		Row<?> row = globalAdjustments.getRowForRowIndex(0).get();		
-		Cell cell = globalAdjustments.getGrid().getCell(row, "Extra Hours");
+		Cell cell = globalAdjustments.getGrid().getCell(row, "Employee");
 		
 		CellChecker checker = new CellChecker(homepagePayroll.getWebDriver(), cell);
-		PopupComboSelect combo = (PopupComboSelect) checker.getPopupType();		
+		PopupComboSelect combo = (PopupComboSelect) checker.getPopupType();
+//		combo.writeText(emp.getFormalName() + " - " + emp.getEmpCode());
+		combo.writeText(emp.getFormalName());
 	}
 	
 	@Test @Order(5)
@@ -130,12 +136,12 @@ public class EmployeeOvertimeTests {
 		assertEquals("2", cellTxt.substring(0, 1));
 	}
 	
-	@Test @Order(6)
-	void saveRecord() {
-		DkGrid<?> grid = globalAdjustments.getGrid();
-		FormFadeShow frm = grid.saveRecord();
-		assertFalse(frm == null);
-	}
+//	@Test @Order(6)
+//	void saveRecord() {
+//		DkGrid<?> grid = globalAdjustments.getGrid();
+//		FormFadeShow frm = grid.saveRecord();
+//		assertFalse(frm == null);
+//	}
 //	
 //	@Test @Order(6)
 //	void check_dateFrom() {

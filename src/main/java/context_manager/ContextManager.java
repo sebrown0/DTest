@@ -20,9 +20,11 @@ import object_models.panels.PanelSwitcher;
  * @author SteveBrown
  * @version 1.0
  * @since 1.0
- * *
+ * 
  * Manages the contexts within the app.
  * 
+ * TODO - Add garbage collector to remove 
+ * missing elements, i.e. FormFadeShow.
  */
 public class ContextManager implements CurrentContext {
 	private ContextQueue queue = new ContextQueue();
