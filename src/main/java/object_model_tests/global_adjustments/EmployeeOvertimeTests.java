@@ -34,6 +34,7 @@ import object_models.top_right_nav_bar.common.TopRightNavBar;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import providers.EmployeeFromXml;
+import providers.EmployeeProvider;
 import providers.RandomEmployeeProvider;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
@@ -61,8 +62,11 @@ public class EmployeeOvertimeTests {
 		globalAdjustments =	(GlobalAdjustments) homepagePayroll.getLeftMenu().clickAndLoad(GlobalAdjustments.class).get();
 		
 		// Get an employee with random code
-		RandomEmployeeProvider empProvider = new EmployeeFromXml(); 
-		emp = empProvider.getAnyEmpWithRandomCode();
+//		RandomEmployeeProvider empProvider = new EmployeeFromXml(); 
+//		emp = empProvider.getAnyEmpWithRandomCode();
+		
+		EmployeeProvider empProvider = new EmployeeFromXml(); 
+		emp = empProvider.getEmployeeRequired("1");
 		
 //		String randomEmpCode = emp.getEmpCode();
 		String randomEmpCode = "QJGRXOBCEK";
@@ -79,7 +83,7 @@ public class EmployeeOvertimeTests {
 		TopRightNavBar navBar = homepagePayroll.getTopRightNavBar();
 		NavBarElement empCr = navBar.getNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
 		EmployeeCreationWizard wizard = (EmployeeCreationWizard) empCr.clickElement();		
-		wizard.createEmployeeAndGetConfirmation(emp);
+		wizard.createEmployeeIgnoreConfirmation(emp);
 		wizard.close();
 	}
 	

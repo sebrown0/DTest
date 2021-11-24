@@ -28,6 +28,14 @@ import parameter_resolvers.LoginPageResolverPayroll;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
+/**
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
+ *
+ * Test the functionality & objects models 
+ * of the Global Adjustments page.
+ */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({ 
 	ConfigParameterResolver.class, 

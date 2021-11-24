@@ -42,9 +42,12 @@ public class EmployeeCreationWizard extends JsPanelWithIFrame {
 	}
 	
 	// Use this if were not interested in the confirmation form.
-	public void createEmployee(Employee emp)  {
+	public void createEmployeeIgnoreConfirmation(Employee emp)  {
 		logger.debug("Creating employee with wizard");		
-		executeSteps(emp);		
+		executeSteps(emp);
+		
+		FormFadeShow frm = new FormFadeShow(driver, manager);
+		frm.close();
 	}
 	// Use this if we want the confirmation form.
 	public FormFadeShow createEmployeeAndGetConfirmation(Employee emp)  {
