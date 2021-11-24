@@ -8,12 +8,15 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import object_models.element.ElementButton;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  * Given a modal dialog element the elements of
  * the dialog can be retrieved.
@@ -23,16 +26,27 @@ import object_models.element.ElementButton;
  * 	IF THE FORM USES DIFFERENT LOCATORS IT WILL NOT WORK!!
  */
 public class DialogOkCancel implements Dialog {
-	private WebElement modalDialog;
+	private WebDriver driver;
+	private WebElement myContainer;
 	private Logger logger = LogManager.getLogger();
 	private Optional<String> title;
 	private Optional<String> msg;
 	private Optional<ElementButton> btnOk;
 	private Optional<ElementButton> btnCancel;
 	
-	public DialogOkCancel(WebElement modalDialog) {
-		this.modalDialog = modalDialog;
+	public DialogOkCancel(WebDriver driver) {
+		this.driver = driver;
+		setMyContainer();
 		loadElements();
+	}
+	
+	public DialogOkCancel(WebElement modalDialog) {
+		this.myContainer = modalDialog;
+		loadElements();
+	}
+	
+	private void setMyContainer() {
+		myContainer = driver.findElement(By.cssSelector("div[class='modal-dialog']"));
 	}
 
 	private void loadElements() {
@@ -44,7 +58,7 @@ public class DialogOkCancel implements Dialog {
 	
 	private void setTitle() {		
 		try {
-			WebElement e = modalDialog.findElement(By.cssSelector("h5[class='modal-title']"));
+			WebElement e = myContainer.findElement(By.cssSelector("h5[class='modal-title']"));
 			title = Optional.ofNullable(e.getText());
 		} catch (Exception e) {
 			logger.error("Could not get title [" + e + "]");
@@ -53,7 +67,7 @@ public class DialogOkCancel implements Dialog {
 	
 	private void setMsg() {
 		try {
-			WebElement e = modalDialog.findElement(By.cssSelector("div[class='modal-body']"));
+			WebElement e = myContainer.findElement(By.cssSelector("div[class='modal-body']"));
 			msg = Optional.ofNullable(e.getText());
 		} catch (Exception e) {
 			logger.error("Could not get message [" + e + "]");
@@ -62,7 +76,7 @@ public class DialogOkCancel implements Dialog {
 	
 	private void setOk() {
 		try {
-			WebElement e = modalDialog.findElement(By.cssSelector("button[class='btn btn-primary']"));
+			WebElement e = myContainer.findElement(By.cssSelector("button[class='btn btn-primary']"));
 			btnOk = Optional.ofNullable(new ElementButton(e));
 		} catch (Exception e) {
 			logger.error("Could not get Ok button [" + e + "]");
@@ -71,7 +85,7 @@ public class DialogOkCancel implements Dialog {
 	
 	private void setCancel() {
 		try {
-			WebElement e = modalDialog.findElement(By.cssSelector("button[class='btn btn-secondary']"));
+			WebElement e = myContainer.findElement(By.cssSelector("button[class='btn btn-secondary']"));
 			btnCancel = Optional.ofNullable(new ElementButton(e));
 		} catch (Exception e) {
 			logger.error("Could not get Cancel button [" + e + "]");

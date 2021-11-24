@@ -27,8 +27,8 @@ import object_models.helpers.title.TitleModalFadeShow;
  * The current context will switch back to this and
  * it's likely that it won't exist in the DOM anymore.
  * 
- * Therefore, we need some sort of 'garabage collector'
- * in the CM to tidy up missing elements/contexts. * 
+ * Therefore, we need some sort of 'garbage collector'
+ * in the CM to tidy up missing elements/contexts. 
  * </p> 
  */
 public class FormFadeShow extends FormModal {

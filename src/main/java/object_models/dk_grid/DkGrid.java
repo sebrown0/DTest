@@ -15,9 +15,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import context_manager.ContextManager;
 import controls.Control;
 import enums.GridButtonNames;
+import object_models.dialog.DialogOkCancel;
 import object_models.dk_grid.buttons.GridButton;
 import object_models.dk_grid.buttons.SaveChanges;
-import object_models.forms.FormFadeShow;
 
 /**
  * @author Steve Brown
@@ -111,9 +111,9 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 		return gridContent.getCell(rowIdx, colName);
 	}
 	
-	public FormFadeShow saveRecord() {
+	public DialogOkCancel saveRecord() {
 		Optional<GridButton> addRec = getToolBar().getButton(GridButtonNames.BTN_SAVE);
-		FormFadeShow frm = null;
+		DialogOkCancel frm = null;
 		
 		if(addRec.isPresent()) {
 			SaveChanges save = (SaveChanges) addRec.get(); 
