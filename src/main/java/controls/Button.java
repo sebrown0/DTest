@@ -13,7 +13,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public class Button implements Control {

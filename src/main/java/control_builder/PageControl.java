@@ -12,7 +12,9 @@ import controls.Control;
 import controls.ControlName;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  * All the controls that may be on a page.
  * Each page object knows the controls required

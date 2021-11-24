@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import object_models.helpers.DriverWait;
 import object_models.helpers.text_utils.TextExtractor;
 import object_models.helpers.text_utils.TextSanitiser;
 
@@ -21,6 +22,7 @@ import object_models.helpers.text_utils.TextSanitiser;
 public abstract class Combo implements Control {
 	private WebElement combo;
 	private By comboLocator;
+	
 	
 	protected boolean isOpen = false;	
 	protected WebDriver driver;
@@ -41,12 +43,7 @@ public abstract class Combo implements Control {
 
 	public WebElement getComboElement() {
 		if(combo == null) {
-			try {
-				combo = driver.findElement(comboLocator);	
-			}catch(Exception e) {
-				System.out.println("->" + e); // TODO - remove or log 	
-				LogManager.getLogger().error("Could not get combo element [" + e + "]");
-			}			
+			combo = DriverWait.getElementAfterWait(driver, comboLocator);
 		}
 		return combo;
 	}

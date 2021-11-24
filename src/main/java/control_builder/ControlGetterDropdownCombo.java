@@ -11,7 +11,9 @@ import controls.Control;
 import object_models.controls.DropdownCombo;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public final class ControlGetterDropdownCombo extends ControlGetter {	

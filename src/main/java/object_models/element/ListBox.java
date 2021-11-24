@@ -15,7 +15,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @since 1.0
+ * @version 1.0 
  *
  */
 public class ListBox {

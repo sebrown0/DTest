@@ -11,16 +11,18 @@ import context_manager.ContextManager;
 import object_models.helpers.IFrame;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
-public abstract class JsPanelWithIFrame extends JsPanel implements JsPanelContext {
+public abstract class JsPanelWithIFrame extends JsPanel implements JsPanelContext { //, IframeSwitcher {
 	private IFrame iFrame;
 		
 	public JsPanelWithIFrame(WebDriver driver, String expectedTitle, ContextManager contextManager) {
 		super(driver, expectedTitle, contextManager);
 	
-		switchToIFrame();
+		loadIframe();
 	}
 	
 	@Override //JsPanel
@@ -30,7 +32,7 @@ public abstract class JsPanelWithIFrame extends JsPanel implements JsPanelContex
 		super.getHeaderBar(); // CAUSES NEW STATE HEADER TO BE CREATED & ADDED TO THE QUEUE. TODO - remove this side effect.		
 	}
 	
-	private void switchToIFrame() {		
+	private void loadIframe() {		
 		super.manager
 			.moveToNextStateInCurrentContext()
 			.switchToMe();	 	

@@ -262,8 +262,12 @@ public class ContextManager implements CurrentContext {
 	 *  i.e. modal form, close this as well.
 	 */
 	public void removeAndCloseContext(ContextState cs) {
-		queue.removeAndCloseContext(cs);		
-		revertToNextAvailablePanel();
+		queue.removeAndCloseContext(cs);
+	/*
+	 *  WE ARE ALREADY SWITCHED TO PREV CONTEXT
+	 *  IF GOING TO ANOTHER PANEL WILL HAVE TO LOAD ITS CONTEXT AS WELL
+	 */
+		revertToNextAvailablePanel(); 
 	}
 	public boolean removeLastContextFromQueue() {
 		return queue.removeLastContext();
@@ -271,6 +275,7 @@ public class ContextManager implements CurrentContext {
 	private void revertToNextAvailablePanel() {
 		Optional<JsPanel> panel = queue.getNextContextThatIsJsPanel();
 		panel.ifPresentOrElse(p -> {
+			//THIS SHOULD BE SETTING THE CURRENT CONTEXT AND STATE
 			this.switchToExistingPanel(p.getClass());
 		}, 
 			new Runnable() {						
@@ -279,7 +284,9 @@ public class ContextManager implements CurrentContext {
 					// SET TO FIRST STATE
 				}
 			});
+		queue.getCurrentContextInQueue().switchToDefaultState();
 	}
+	
 	public void printContexts() {
 		ContextManagerPrinter printer = new ContextManagerPrinter(queue);
 		printer.printContexts();

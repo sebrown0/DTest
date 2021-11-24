@@ -10,7 +10,9 @@ import java.util.Map;
 import controls.ControlName;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  * Add a control to the map with the control name as the key.
  * This is then passed to page control as [BuildControls].

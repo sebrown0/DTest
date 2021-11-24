@@ -5,6 +5,7 @@ package object_models.helpers;
 
 import java.time.Duration;
 
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +15,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import context_manager.states.StateIframe;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public class IFrame {
@@ -30,17 +33,12 @@ public class IFrame {
 	}
 		
 	public IFrame switchUsingLocator(StateIframe stateIframe) {		
-		/*
-		 * Have to be careful that we're going to the correct IFrame.
-		 *  
-		 * WHEN DO WE WANT TO GO BACK TO DEFAULT.
-		 * 	-> WHEN UNLOADING/CLOSING FORM/PANEL.
-		 * 
-		 * WHEN DO WE not WANT TO GO BACK TO DEFAULT.
-		 * 	-> WHEN LOADING FORM/PANEL
-		 */
-		iFrame = wait.until(ExpectedConditions.visibilityOfElementLocated(byLocator));	
-		driver.switchTo().frame(iFrame);				
+		try {			 	
+			iFrame = wait.until(ExpectedConditions.visibilityOfElementLocated(byLocator));
+			driver.switchTo().frame(iFrame); 	
+		} catch (Exception e) {
+			LogManager.getLogger().error("Could not switch to iFrame");
+		}		 	
 		return this;
 	}
 		
@@ -48,8 +46,4 @@ public class IFrame {
 		return iFrame;
 	}
 	
-//	public WebElement getElementFromIframe(By byLocator) {
-//		switchUsingLocator();
-//		return iFrame.findElement(byLocator);
-//	}
 }

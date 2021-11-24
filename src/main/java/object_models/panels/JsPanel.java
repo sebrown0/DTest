@@ -52,7 +52,7 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	private WebElement container;
 	private Optional<String> panelId;	
 	private JsPanelHeaderBar headerBar;	
-					
+			
 	public JsPanel(WebDriver driver, String expectedTitle, ContextManager contextManager) {
 		this.logger = LogManager.getLogger();
 		this.driver = driver;
@@ -95,7 +95,7 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	
 	private void setContainer() {
 		panelId.ifPresentOrElse(
-				id -> {	container = driver.findElement(By.id(id)); }, 
+				id -> {	 container = driver.findElement(By.id(id)); }, 
 				new PanelException("Could not set container for [" + expectedTitle + "]. No Panel ID present"));		
 	}
 	
@@ -117,7 +117,8 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 		return panelControl;
 	}
 	
-	public Optional<Control> getControl(ControlName cntrlName){
+	public Optional<Control> getControl(ControlName cntrlName){		
+		manager.switchToStateInCurrentContext(StateIframe.class);
 		return panelControl.getControl(cntrlName);
 	}
 	
@@ -158,7 +159,7 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	}
 	
 	public JsPanelHeaderBar getHeaderBar() {
-		driver.switchTo().defaultContent(); // TODO - REMOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		driver.switchTo().defaultContent(); 
 		manager.switchToStateInCurrentContext(StateHeaderPanel.class);
 		return headerBar;
 	}
@@ -171,6 +172,11 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 		return driver;
 	}
 	
+	public WebElement getContainer() {
+		return container;
+	}
+	
+
 	@Override
 	public ContextState getMyContext() {
 		return myContext;

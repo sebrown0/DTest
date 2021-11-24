@@ -11,7 +11,9 @@ import object_models.dk_grid.DkGrid;
 import object_models.dk_grid.KeyStrategyRow;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public class ControlGetterGrid <T extends KeyStrategyRow> extends ControlGetter {

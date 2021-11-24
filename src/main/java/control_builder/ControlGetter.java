@@ -9,7 +9,9 @@ import org.openqa.selenium.WebDriver;
 import controls.Control;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  * Return a new instance of a control, i.e. TextOut.
  */

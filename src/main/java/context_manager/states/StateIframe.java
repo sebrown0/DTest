@@ -12,7 +12,9 @@ import context_manager.ContextState;
 import object_models.helpers.IFrame;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public class StateIframe extends State implements CallingState {

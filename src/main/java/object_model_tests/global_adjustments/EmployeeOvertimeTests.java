@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalTime;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
@@ -12,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import context_manager.ContextManager;
 import controls.ComboWriteAndSelect;
 import controls.PopupComboSelect;
 import dto.Employee;
@@ -58,6 +61,7 @@ public class EmployeeOvertimeTests {
 	
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
+		System.out.println("START ->" + LocalTime.now()); // TODO - remove or log 	
 		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
 		globalAdjustments =	(GlobalAdjustments) homepagePayroll.getLeftMenu().clickAndLoad(GlobalAdjustments.class).get();
 		
@@ -69,12 +73,12 @@ public class EmployeeOvertimeTests {
 		emp = empProvider.getEmployeeRequired("1");
 		
 //		String randomEmpCode = emp.getEmpCode();
-		String randomEmpCode = "QJGRXOBCEK";
+//		String randomEmpCode = "QJGRXOBCEK";
 		
-		emp.setIdCardNumber(randomEmpCode);
-		emp.setFirstName("Clint");
+//		emp.setIdCardNumber(randomEmpCode);
+//		emp.setFirstName("Clint");
 //		emp.setLastName("Eastwood" + "_" + randomEmpCode.substring(0,4));
-		emp.setLastName("Eastwood");
+//		emp.setLastName("Eastwood");
 	}		
 				
 	@Test @Order(1)
@@ -83,7 +87,7 @@ public class EmployeeOvertimeTests {
 		TopRightNavBar navBar = homepagePayroll.getTopRightNavBar();
 		NavBarElement empCr = navBar.getNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
 		EmployeeCreationWizard wizard = (EmployeeCreationWizard) empCr.clickElement();		
-		wizard.createEmployeeIgnoreConfirmation(emp);
+		wizard.createEmployeeIgnoreConfirmation(emp);	
 		wizard.close();
 	}
 	
@@ -97,7 +101,7 @@ public class EmployeeOvertimeTests {
 		cmbFullPartTime.click();		
 		cmbFullPartTime.selectFullText("Both");
 		
-		globalAdjustments.clickButton(GlobalAdjustmentControlNames.ACCEPT_CRITERIA);		
+		globalAdjustments.clickButton(GlobalAdjustmentControlNames.ACCEPT_CRITERIA);		 	
 	}
 
 	@Test @Order(3)
@@ -138,6 +142,8 @@ public class EmployeeOvertimeTests {
 		
 		String cellTxt = cell.getCurrentValue().get();
 		assertEquals("2", cellTxt.substring(0, 1));
+		
+		System.out.println("END ->" + LocalTime.now()); // TODO - remove or log
 	}
 	
 //	@Test @Order(6)
