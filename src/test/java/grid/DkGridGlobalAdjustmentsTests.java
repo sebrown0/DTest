@@ -22,6 +22,7 @@ import logging.TestResultLogger;
 import object_models.date_picker.DatePickerPopup;
 import object_models.dk_grid.Cell;
 import object_models.dk_grid.CellChecker;
+import object_models.dk_grid.DkGrid;
 import object_models.dk_grid.DkGridContent;
 import object_models.dk_grid.DkGridToolBar;
 import object_models.dk_grid.Row;
@@ -135,17 +136,21 @@ public class DkGridGlobalAdjustmentsTests {
 	}
 
 	@Test @Order(12)
-	void getContent_implictPass_ifCompletes() {
-		DkGridContent<?> content = globalAdjustments.getGrid().getContent();
-		assertTrue(content != null);
+	void checkContentForRow1() { 	
+		/*
+		 * TODO - this does not always work.
+		 * The content is probably still loading.
+		 */
+		Optional<Row<?>> row1 = globalAdjustments.getRowForRowIndex(1);		
+		assertEquals(1, row1.get().getRowIdx().intValue()); 	
 	}
 	
 	@Test @Order(13)
-	void checkContentForRow1() {
-		Optional<Row<?>> row1 = globalAdjustments.getRowForRowIndex(1);		
-		assertEquals(1, row1.get().getRowIdx().intValue());		
+	void getContent_implictPass_ifCompletes() {
+		DkGridContent<?> content = globalAdjustments.getGrid().getLoadedContent();
+		assertTrue(content != null);
 	}
-	
+		
 	@Test @Order(14)
 	void loadEmployee_implictPass_ifCompletes() {
 		ComboWriteAndSelect cmbComp = (ComboWriteAndSelect) globalAdjustments.getControl(EmployeeControlNames.EMPLOYEES).get();
@@ -173,11 +178,22 @@ public class DkGridGlobalAdjustmentsTests {
 	}
 	
 	@Test @Order(18)
+	void addRow() {		
+		DkGrid<?> grid = globalAdjustments.getGrid();
+		grid.addRecord();
+		
+		Row<?> row = globalAdjustments.getRowForRowIndex(0).get();
+		Cell cell = globalAdjustments.getGrid().getCell(row, "Employee");
+		assertEquals("undefined", cell.getCurrentValue().get());
+	}
+	
+	@Test @Order(19)
 	void filterEmployeeColumn_shouldNotReturn_rowIdx() {		
 		globalAdjustments.filterGridColumn("Employee", "Z_7Z)3K");
 		Optional<Integer> rowIdx = globalAdjustments.getRowNumForKeyValue("Simpson Homer - (0134213A)");		
 		assertEquals(Optional.empty(), rowIdx);
 	}
+	
 	
 	
 	@AfterAll

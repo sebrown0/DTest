@@ -3,11 +3,12 @@
  */
 package object_models.dk_grid;
 
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
  * @since 1.0
  * @version 1.0
  */
@@ -65,6 +66,14 @@ public class DkGridContent <T extends KeyStrategyRow> {
 		return gridData.getRow(rowIdx);
 	}
 	
+	public void setRows(Map<Integer, Row<?>> rows) {
+		gridData.setRows(rows);
+	}
+	
+	public Map<Integer, Row<?>> getRows() {
+		return gridData.getRows();
+	}
+		
 	public int getLastRowNum() {
 		return lastRowNum;
 	}
@@ -79,5 +88,8 @@ public class DkGridContent <T extends KeyStrategyRow> {
 	}
 	public void setLastColNum(int lastColNum) {
 		this.lastColNum = lastColNum;
+	}
+	public boolean hasData() {		
+		return gridData.hasData();
 	}
 }

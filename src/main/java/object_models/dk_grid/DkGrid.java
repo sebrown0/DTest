@@ -88,20 +88,38 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 		toolBarLoaded = true;
 	}	
 		
-	public DkGridContent<T> getContent() {
+	public DkGridContent<T> getLoadedContent() {
 		if(!contentLoaded) {
 			loadContent();
 		}
 		return gridContent;
 	}
 	private void loadContent() {
-		contentReader.read();
+		contentReader.readContent();
 		contentLoaded = true;
 	}
-	public void reloadContent() {
-		this.gridContent = new DkGridContent<>();
-		this.contentReader = new DkGridContentReader<>(myContainer, gridContent, keyStrategyRows, gridHeader);
+	public void reloadAllContent() {
+		gridContent = new DkGridContent<>();
+		contentReader = new DkGridContentReader<>(myContainer, gridContent, keyStrategyRows, gridHeader);
 		loadContent();
+	}
+	
+	private void reloadWithNewRow() {		
+		getReader().readFirstRow();		
+	}
+	
+	private DkGridContentReader<?> getReader(){
+		if(contentReader == null) {
+			contentReader = new DkGridContentReader<>(myContainer, getContent(), keyStrategyRows, gridHeader);
+		}
+		return contentReader;
+	}
+	
+	private DkGridContent<T> getContent() {
+		if(gridContent == null) {
+			gridContent = new DkGridContent<>();
+		}
+		return gridContent;
 	}
 	
 	public Cell getCell(Row<?> row, String colName) {
@@ -126,11 +144,18 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 		Optional<GridButton> addRec = getToolBar().getButton(GridButtonNames.BTN_ADD);
 		addRec.ifPresent(a -> { 
 			a.clickButton();
-//			waitForContent();
-			reloadContent();
+			reloadWithNewRow();
 		});		
 	}
 	
+	public void printContent() {
+		gridContent.getRows().entrySet().forEach(e -> {
+			System.out.println("Row Num: " + e.getKey()); 
+			e.getValue().getCells().forEach(c -> {
+				System.out.println("  " + c.getColName() + ":" + c.getOriginalValue().get()); 	
+			});
+		});
+	}
 	/*
 	 * Was having problems with reloading content.
 	 * Changing the selector for the content seems 

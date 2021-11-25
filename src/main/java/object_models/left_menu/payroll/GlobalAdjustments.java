@@ -113,15 +113,15 @@ public final class GlobalAdjustments extends JsPanelWithIFrame implements JsPane
 	}
 	
 	public Optional<Integer> getRowNumForKeyValue(String key) {
-		return loadGridIfNull().getContent().getRowNumForKeyValue(key);
+		return loadGridIfNull().getLoadedContent().getRowNumForKeyValue(key);
 	}
 	public Optional<Row<?>> getRowForRowIndex(Integer rowIdx){		
-		return loadGridIfNull().getContent().getRowForRowIndex(rowIdx);
+		return loadGridIfNull().getLoadedContent().getRowForRowIndex(rowIdx);
 	}
 	
 	public void filterGridColumn(String filterCol, String filterTxt) {
 		loadGridIfNull().getGridHeader().filterColumn(filterCol, filterTxt);
-		grid.reloadContent();
+		grid.reloadAllContent();
 	}
 	
 	// Helpers

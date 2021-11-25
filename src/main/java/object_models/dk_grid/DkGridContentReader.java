@@ -12,13 +12,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
+import utils.KeyIncrementer;
 
-/**
- * Read the content of a DKGrid.
- * 
- * @author Steve Brown
+
+/**  
+ * @author SteveBrown
  * @since 1.0
- * @version 1.0 *
+ * @version 1.0
+ * 
+ * Read the content of a DKGrid.
+ *  
  */
 public class DkGridContentReader <T extends KeyStrategyRow> {
 	private WebElement gridContainer;
@@ -48,10 +51,29 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 				"div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-animation");
 	}
 	
-	public void read() {		
+
+	/*
+	 *  If a new row has been added we can use this to get it.
+	 *  Any exisiting content has their row index incremented.	
+	 */
+	public void readFirstRow() {		
+		incrementKeysOfExistingContent();
+		read(By.cssSelector("div[row-index='0']"));		
+	}	
+	private void incrementKeysOfExistingContent() {
+		if(gridContent != null && gridContent.hasData()) {
+			gridContent.setRows(KeyIncrementer.incrementKeyValues(gridContent.getRows()));			
+		}					
+	}
+	
+	public void readContent() {		
+		read(By.cssSelector("div[role='row']"));
+	}
+	
+	private void read(By byRowSelector) {		
 		if(++readAttempt < MAX_READ_ATTEMPTS) { 	
 			setContentElement();
-			loopContainers();
+			loopContainers(byRowSelector);
 		}
 	}
 	
@@ -59,20 +81,20 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 		contentElement = gridContainer.findElement(contentLocator); 	
 	}
 		
-	private void loopContainers(){ 	
-		mapLeftPinned();
-		mapCentre();		
+	private void loopContainers(By byRowLocator){ 	
+		mapLeftPinned(byRowLocator);
+		mapCentre(byRowLocator);		
 //		mapRightPinned();		
 	}
 	
-	private void mapLeftPinned() {
+	private void mapLeftPinned(By byRowLocator) {
 		currentContainerName = "ag-pinned-left-cols-container";
-		mapContainer(By.cssSelector("div[class='" + currentContainerName + "']"));
+		mapContainer(By.cssSelector("div[class='" + currentContainerName + "']"), byRowLocator);
 	}
 	
-	private void mapCentre() {
+	private void mapCentre(By byRowLocator) {
 		currentContainerName = "ag-center-cols";
-		mapContainer(By.cssSelector("div[class^='" + currentContainerName + "']"));
+		mapContainer(By.cssSelector("div[class^='" + currentContainerName + "']"), byRowLocator);
 	}
 	
 //	private void mapRightPinned() {
@@ -80,15 +102,15 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 		// TODO
 //	}
 	
-	private void mapContainer(By containerLocator) {
+	private void mapContainer(By containerLocator, By byRowLocator) {
 		currentContainerElement = contentElement.findElement(containerLocator);
-		getRowsInContainer(currentContainerElement);
+		getRowsInContainer(currentContainerElement, byRowLocator);
 	}
 	
-	private void getRowsInContainer(WebElement container) {
+	private void getRowsInContainer(WebElement container, By byRowLocator) {
 		if(container != null) {			
 			String containerName = container.getAttribute("ref");								 	
-			List<WebElement> rows = container.findElements(By.cssSelector("div[role='row']"));			
+			List<WebElement> rows = container.findElements(byRowLocator);			
 			rows.forEach(row -> { 
 					mapRowFromContainer(row, containerName);
 			});	
@@ -108,7 +130,7 @@ public class DkGridContentReader <T extends KeyStrategyRow> {
 			 * Therefore, try to read the content again, up to MAX_READ_ATTEMPTS.
 			 */
 			gridContent.clearAll();
-			this.read();
+			this.readContent();
 		} catch (Exception e) {
 			logger.error("Error mapping row for container [" + containerName + "]");
 		}

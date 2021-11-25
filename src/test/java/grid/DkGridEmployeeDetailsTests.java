@@ -63,7 +63,7 @@ public class DkGridEmployeeDetailsTests {
 		empDetailsGrid = (DkGridEmployeeDetails) empDetails.getPanelControl().getControl(GroupControlNames.GRID_VIEW).get();
 		grid = empDetailsGrid.getGrid();
 		toolbar = grid.getToolBar();
-		content = grid.getContent();
+		content = grid.getLoadedContent();
 	}
 
 	/*

@@ -21,9 +21,6 @@ import object_models.element.ElementButton;
  * Given a modal dialog element the elements of
  * the dialog can be retrieved.
  * 
- * NOTE: 
- * 	EACH ELEMENT IS FOUND USING A SPECIFIC LOCATOR.
- * 	IF THE FORM USES DIFFERENT LOCATORS IT WILL NOT WORK!!
  */
 public class DialogOkCancel implements Dialog {
 	private WebDriver driver;

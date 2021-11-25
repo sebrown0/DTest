@@ -29,6 +29,10 @@ public class GridDataRows <T extends KeyStrategyRow> {
 		return Optional.ofNullable(rows.get(rowIdx));
 	}
 
+	public void setRows(Map<Integer, Row<?>> rows) {
+		this.rows = rows;
+	}
+	
 	public Map<Integer, Row<?>> getRows() {
 		return rows;
 	}
@@ -42,5 +46,9 @@ public class GridDataRows <T extends KeyStrategyRow> {
 			LogManager.getLogger().error("Row does not exist");
 		}
 		return cell;
+	}
+	
+	public boolean hasData() {
+		return rows.isEmpty() == true ? false : true;
 	}
 }

@@ -6,7 +6,9 @@ import org.openqa.selenium.WebElement;
 
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  * 
  * A row in a DK Grid. 
  * The row can have any number of Cells.
