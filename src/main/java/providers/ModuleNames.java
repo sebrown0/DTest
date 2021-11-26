@@ -7,8 +7,9 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Steve Brown
- *
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  */
 public class ModuleNames {	
 	public static final String PAYROLL_NAME = "Payroll";
@@ -16,6 +17,7 @@ public class ModuleNames {
 	public static final String TIME_AND_ATT_NAME = "T&A";
 	public static final String ABSENCE_NAME = "Absence";
 	public static final String APPRAISAL_NAME = "Appraisal";
+	
 	
 	public static final List<String> ALL_MODULE_NAMES = 
 			Arrays.asList(

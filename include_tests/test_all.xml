@@ -11,9 +11,5 @@
   ** The priority of the test class is represented 
   ** by the enum { HIGH, MED, LOW }  
  -->
-<TestPackage name="navigation.payroll" applicable="Payroll">	
-	<Tests>
-		<Test priority="high">LeftMenuVailidation_Payroll_Tests</Test>
-		<Test priority="high">TopRightNavBar_Payroll_ElementsTests</Test>  
-	</Tests>		
+<TestPackage name="All" applicable="Payroll">	
 </TestPackage>

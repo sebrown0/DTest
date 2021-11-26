@@ -7,6 +7,8 @@ import controls.ControlName;
 
 /**
  * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public enum GridButtonNames implements ControlName {

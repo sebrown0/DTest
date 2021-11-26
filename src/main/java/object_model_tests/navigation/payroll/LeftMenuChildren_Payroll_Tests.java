@@ -68,7 +68,9 @@ import parameter_resolvers.LoginPageResolverPayroll;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0 
  * 
  * Check that clicking an element of the 
  * left menu takes the user to the correct place.
@@ -98,10 +100,7 @@ public class LeftMenuChildren_Payroll_Tests {
 		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
 		menu = homepagePayroll.getLeftMenu();
 	}
-				
-	/*
-	 * ALL FAIL
-	 */
+		
 	@Test
 	void click_and_get_EmployeeList() {
 		ContainerAction empList = menu.clickAndLoad(EmployeeList.class).get();
@@ -398,7 +397,7 @@ public class LeftMenuChildren_Payroll_Tests {
 	
 	@AfterAll
 	static void tearDown() {
-//		homepagePayroll.close();
+		homepagePayroll.close();
 	}
 	
 	/* 

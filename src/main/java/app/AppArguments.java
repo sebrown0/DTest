@@ -3,7 +3,7 @@
  */
 package app;
 
-import xml_reader.test_file.TestPackage;
+import app.test_reader.TestPackage;
 
 /**
  * @author Steve Brown
@@ -14,6 +14,12 @@ public class AppArguments {
 	private String moduleName;
 	private String testFileName;
 	private TestPackage testPackage;
+	
+//	public AppArguments(String moduleName, String testFileName, TestPackage testPackage) {
+//		this.moduleName = moduleName;
+//		this.testFileName = testFileName;
+//		this.testPackage = testPackage;
+//	}
 	
 	public AppArguments(String moduleName, String testFileName, TestPackage testPackage) {
 		this.moduleName = moduleName;

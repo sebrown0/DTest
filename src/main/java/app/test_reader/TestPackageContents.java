@@ -1,12 +1,14 @@
 /**
  * 
  */
-package xml_reader.test_file;
+package app.test_reader;
 
 import java.util.List;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public interface TestPackageContents {

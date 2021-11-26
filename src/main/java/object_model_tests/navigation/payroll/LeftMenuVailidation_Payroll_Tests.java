@@ -18,6 +18,13 @@ import parameter_resolvers.LoginPageResolverPayroll;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
+/**
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0 
+ * 
+ * Check the left menu in the context of Payroll.
+ */
 @ExtendWith({ 
 	ConfigParameterResolver.class, 
 	TestResultLogger.class, 

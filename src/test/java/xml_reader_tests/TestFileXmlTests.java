@@ -7,11 +7,11 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import app.test_reader.IncludedTestsReader;
+import app.test_reader.TestClass;
+import app.test_reader.TestPackage;
+import app.test_reader.TestClass.TestPriority;
 import providers.XMLFileProvider;
-import xml_reader.test_file.IncludedTestsReader;
-import xml_reader.test_file.TestClass;
-import xml_reader.test_file.TestPackage;
-import xml_reader.test_file.TestClass.TestPriority;
 
 /**
  * @author Steve Brown

@@ -13,7 +13,6 @@
  -->
 <TestPackage name="navigation.payroll" applicable="Payroll">	
 	<Tests>
-		<Test priority="high">LeftMenuVailidation_Payroll_Tests</Test>
-		<Test priority="high">TopRightNavBar_Payroll_ElementsTests</Test>  
+		<Test priority="high">All</Test>
 	</Tests>		
 </TestPackage>

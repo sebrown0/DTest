@@ -13,12 +13,14 @@ import java.util.concurrent.FutureTask;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import app.test_runner.TestRunner;
+import app.test_runner.TestsRunner;
 import exceptions.InvalidArgumentException;
 import providers.XMLFileProvider;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  * Starts the application.
  * 	1. Writes welcome msg.
@@ -67,7 +69,7 @@ public class StartUp {
 			Optional<AppArguments> appArgs = checker.withArgs(args).getCheckedArgs();
 			appArgs.ifPresentOrElse(
 					a -> {
-						TestRunner runner = new TestRunner(a);
+						TestsRunner runner = new TestsRunner(a);
 						runner.runTests();
 					},						
 					new Runnable() {				

@@ -1,16 +1,18 @@
 /**
  * 
  */
-package xml_reader.test_file;
+package app.test_reader;
 
 import java.util.List;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  * Represents a test package that contains TestClass(es).
  */
-public class TestPackage implements TestPackageContents{
+public class TestPackage implements TestPackageContents {
 	private String packageName;
 	private String applicable;
 	private List<TestClass> testClasses;

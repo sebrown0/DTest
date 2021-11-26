@@ -4,8 +4,9 @@
 package providers;
 
 /**
- * @author Steve Brown
- *
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0 *
  */
 public class XMLFileProvider {
 	public static final String EMPLOYEE_FILE_PATH = "./src/test/resources/employee.xml";

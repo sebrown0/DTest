@@ -18,21 +18,24 @@ import org.junit.platform.launcher.core.LauncherFactory;
 import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
 
 import app.AppArguments;
-import xml_reader.test_file.TestClass;
-import xml_reader.test_file.TestPackage;
+import app.test_reader.TestClass;
+import app.test_reader.TestPackage;
+import providers.Tests;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  * Discover and run tests.
  */
-public class TestRunner {
+public class TestsRunner {
 	private TestPackage testPackage;
 	private Logger logger = LogManager.getLogger();
 	private String fileName;
 	private String packageName;
-	
-	public TestRunner(AppArguments args) {
+			
+	public TestsRunner(AppArguments args) {
 		this.testPackage = args.getTestPackage();
 		this.fileName = args.getTestFileName();
 		this.packageName = args.getTestPackage().getPackageName();
@@ -69,12 +72,13 @@ public class TestRunner {
 		createSelectorsFromTestClasses(selectors, classes);
 		return selectors.toArray(new DiscoverySelector[0]);
 	}
-
+		
 	private void createSelectorsFromTestClasses(List<DiscoverySelector> selectors, List<TestClass> classes) {
-		final String packagePath = "object_model_tests."  + testPackage.getPackageName() + ".";		
 		for (TestClass testClass : classes) {
-			final String clazzUnderTest = testClass.getName();
-			final String clazzPath = packagePath + clazzUnderTest;
+			String clazzUnderTest = testClass.getName();
+			String clazzPackage = testClass.getPackageName();
+			String clazzPath = Tests.TEST_PACKAGE + "."  + clazzPackage + "." + clazzUnderTest;
+						
 			logger.info("Starting process for [" + clazzUnderTest + "]");
 			try {				
 				ClassSelector selector = selectClass(Class.forName(clazzPath));
@@ -87,7 +91,8 @@ public class TestRunner {
 				logger.error("Could not get class for name [" + clazzPath + "]. This test suite will be ignored");
 			}			
 		}
-	}	
+	}
+	
 }
 
 

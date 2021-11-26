@@ -7,7 +7,9 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public final class Modules {
