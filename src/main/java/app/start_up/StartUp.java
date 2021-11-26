@@ -1,7 +1,7 @@
 /**
  * 
  */
-package app;
+package app.start_up;
 
 import java.nio.file.Paths;
 import java.util.Optional;
@@ -13,6 +13,9 @@ import java.util.concurrent.FutureTask;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import app.arguments.AppArguments;
+import app.arguments.ArgumentChecker;
+import app.stats.TestRunStats;
 import app.test_runner.TestsRunner;
 import exceptions.InvalidArgumentException;
 import providers.XMLFileProvider;
@@ -32,12 +35,14 @@ public class StartUp {
 	private String[] args;	
 	private Logger logger = LogManager.getLogger();
 	private ExecutorService executor = Executors.newFixedThreadPool(2);
+	TestRunStats runStats = new TestRunStats();
 	
 	public StartUp(String[] args) {
-		this.args = args;
+		this.args = args;		
 	}
 
 	public StartUp welcome() {		
+		runStats.setStartTime();
 		logWelcomeMessage();		
 		return this;
 	}	
@@ -103,6 +108,11 @@ public class StartUp {
 
 		public void quit() {
 			executor.shutdown();
+			
+			runStats.setEndTime();			
+			System.out.println("Started: " + runStats.getStartTime()); // TODO - remove or log 	
+			System.out.println("Finished: " + runStats.getEndTime()); // TODO - remove or log
+			
 			System.exit(0);	
 		}
 	}

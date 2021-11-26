@@ -11,9 +11,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import app.AppArguments;
-import app.ArgumentChecker;
-import app.StartUp;
+import app.arguments.AppArguments;
+import app.arguments.ArgumentChecker;
+import app.start_up.StartUp;
 import app.test_reader.IncludedTestsReader;
 import app.test_reader.TestClass;
 import app.test_reader.TestPackage;

@@ -17,7 +17,7 @@ import providers.Tests;
  */
 public class TestUtils {
 
-	public static String getTestName(Path p) {
+	public static String getTestNameFromPath(Path p) {
 		String result="";
 		try {
 			String[] fileNameParts = p.getFileName().toString().split(Pattern.quote("."));	

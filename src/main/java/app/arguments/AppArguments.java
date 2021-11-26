@@ -1,7 +1,7 @@
 /**
  * 
  */
-package app;
+package app.arguments;
 
 import app.test_reader.TestPackage;
 

@@ -8,8 +8,8 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import app.AppArguments;
-import app.ArgumentChecker;
+import app.arguments.AppArguments;
+import app.arguments.ArgumentChecker;
 import exceptions.InvalidArgumentException;
 
 /**

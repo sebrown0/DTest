@@ -42,7 +42,7 @@ public class AllTests implements TestFileReader {
 	}
 
 	private TestClass createTestClass(Path p) {		
-		String fileName = TestUtils.getTestName(p);		
+		String fileName = TestUtils.getTestNameFromPath(p);		
 		String testPackageName = TestUtils.getTestClassesPackage(p);			
 		return new TestClass(fileName, testPackageName);
 	}	

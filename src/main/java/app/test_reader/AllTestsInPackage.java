@@ -58,7 +58,7 @@ public class AllTestsInPackage implements TestFileReader {
 	}
 
 	private TestClass createTestClass(Path p) {
-		String fileName = TestUtils.getTestName(p);		
+		String fileName = TestUtils.getTestNameFromPath(p);		
 		String packageName = testPackage.getPackageName();		
 		return new TestClass(fileName, packageName);
 	}

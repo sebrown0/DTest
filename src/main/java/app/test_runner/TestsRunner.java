@@ -17,7 +17,7 @@ import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder;
 import org.junit.platform.launcher.core.LauncherFactory;
 import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
 
-import app.AppArguments;
+import app.arguments.AppArguments;
 import app.test_reader.TestClass;
 import app.test_reader.TestPackage;
 import providers.Tests;
