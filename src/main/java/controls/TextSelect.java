@@ -12,11 +12,15 @@ import org.openqa.selenium.WebElement;
  * @author SteveBrown
  * @version 1.0
  * @since 1.0
+ * 
+ * This was added for InitialisePayroll.
+ * Where there are select boxes that cannot select,
+ * or don't have a list to select from.
  */
-public class TextOut implements Control {
+public class TextSelect implements Control {
 	private WebElement text;
 
-	public TextOut(WebDriver driver, By findBy) {
+	public TextSelect(WebDriver driver, By findBy) {
 		setTextOut(driver, findBy);		
 	}
 	
@@ -27,19 +31,11 @@ public class TextOut implements Control {
 			LogManager.getLogger().error("Could not find [TextOut] using [" + findBy + "]");
 		}
 	}
-	
-	public String getTextByValue() {
-		try {
-			return text.getAttribute("value");
-		} catch (Exception e) {
-			LogManager.getLogger().error("Could not get text by value");
-		}
-		return "";
-	}	
-	
+		
 	public String getText() {
 		try {
-			return text.getAttribute("innerHTML");
+			WebElement option = text.findElement(By.cssSelector("option[value*='java']"));			
+			return option.getText();
 		} catch (Exception e) {
 			LogManager.getLogger().error("Could not get text by value");
 		}

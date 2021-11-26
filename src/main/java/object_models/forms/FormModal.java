@@ -1,6 +1,8 @@
 package object_models.forms;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +21,12 @@ import context_manager.contexts.ContextForm;
 import context_manager.states.State;
 import context_manager.states.StateFactorySetter;
 import context_manager.states.StateHeaderForm;
+import context_manager.states.StateIframe;
+import control_builder.ControlBuilder;
+import control_builder.ControlData;
+import control_builder.PageControl;
+import controls.Control;
+import controls.ControlName;
 import object_models.helpers.Header;
 import object_models.helpers.IFrame;
 import object_models.helpers.title.PageTitle;
@@ -42,7 +50,9 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 	protected String expectedTitle;
 	protected By byFormContainer = By.cssSelector("div[class='modal show']");	
 	protected ContextState myContext;	
-
+	
+	private PageControl panelControl;
+	
 	public FormModal(WebDriver driver, String expectedTitle, ContextManager contextManager) {
 		this.driver = driver;
 		this.expectedTitle = expectedTitle;		
@@ -50,6 +60,12 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 		
 		wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 		initialise();
+	}
+	
+	protected void buildFormControls(List<ControlData> panelControls) {
+		ControlBuilder builder = new ControlBuilder();
+		builder.addControls(panelControls);
+		panelControl = new PageControl(builder);		
 	}
 	
 	private void initialise() {
@@ -63,6 +79,18 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 		
 	public abstract void setMyContainers();
 		
+	
+	private PageControl getPanelControl() {
+		contextManager.switchToStateInCurrentContext(StateIframe.class); 
+		contextManager.setLatestCallingStateToCurrent();
+		return panelControl;
+	}
+	
+	public Optional<Control> getControl(ControlName cntrlName){		
+		contextManager.switchToStateInCurrentContext(StateIframe.class);
+		return panelControl.getControl(cntrlName);
+	}
+	
 	// Override if the form should wait for a different element. 
 	protected void waitForLoad() {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(byFormContainer));

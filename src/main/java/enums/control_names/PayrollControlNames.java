@@ -13,7 +13,8 @@ import controls.ControlName;
  */
 public enum PayrollControlNames implements ControlName {
 	PAY_GROUP("pay group"),
-	PAY_PERIODS("pay periods");
+	PAY_PERIODS("pay periods"),
+	INIT_PAYROLL("initialise payroll");
 
 	private final String key;
 	

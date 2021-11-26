@@ -9,8 +9,11 @@ import org.openqa.selenium.WebDriver;
 import context_manager.ContextManager;
 import control_builder.ControlData;
 import control_builder.ControlGetterButton;
+import control_builder.ControlGetterComboSelectOnly;
 import control_builder.ControlGetterComboWriteAndSelect;
 import control_builder.ControlGetterGrid;
+import control_builder.ControlGetterSelect;
+import control_builder.ControlGetterTextOut;
 import controls.ControlName;
 import enums.control_names.CommonControlNames;
 import object_models.dk_grid.KeyStrategyRow;
@@ -51,6 +54,15 @@ public class ControlDataFactory {
 		return this;
 	}
 	
+	public ControlDataFactory buildComboSelectOnly(ControlName cntrlName, By containerLoc, By resultLoc) {		
+		controlData = 
+				new ControlData(
+						cntrlName, 
+						new ControlGetterComboSelectOnly(driver, containerLoc, resultLoc));
+		
+		return this;
+	}
+	
 	public ControlDataFactory buildDefaultComboWriteAndSelect(ControlName cntrlName, By containerLoc, By resultLoc) {
 		TextWriterComboDefault writer = new TextWriterComboDefault(driver);
 		controlData = 
@@ -70,7 +82,25 @@ public class ControlDataFactory {
 		controlData = 
 				new ControlData(
 						cntrlName, 
-						new ControlGetterComboWriteAndSelect(driver,	containerLoc,	resultLoc, writer));
+						new ControlGetterComboWriteAndSelect(driver, containerLoc,	resultLoc, writer));
+		
+		return this;
+	}
+	
+	public ControlDataFactory buildTextOut(ControlName cntrlName, By containerLoc) {
+		controlData = 
+				new ControlData(
+						cntrlName, 
+						new ControlGetterTextOut(driver, containerLoc));
+		
+		return this;
+	}
+	
+	public ControlDataFactory buildTextSelect(ControlName cntrlName, By containerLoc) {
+		controlData = 
+				new ControlData(
+						cntrlName, 
+						new ControlGetterSelect(driver, containerLoc));
 		
 		return this;
 	}

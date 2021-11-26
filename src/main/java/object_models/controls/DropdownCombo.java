@@ -33,6 +33,7 @@ public class DropdownCombo extends FormWithIFrame implements Control {
 	public DropdownCombo(WebDriver driver, ContextManager contextManager) {
 		super(driver, PANEL_TITLE, "_iframex-IPORTAL_POPUPS_MEDIUM4", contextManager);
 	
+		super.switchToIFrame();
 		setMyContainers();
 	}
 
@@ -43,8 +44,7 @@ public class DropdownCombo extends FormWithIFrame implements Control {
 	 * 
 	 */
 	@Override
-	public void setMyContainers() {
-		super.switchToIFrame();
+	public void setMyContainers() {		
 		table = super.driver.findElement(byTable);
 	}
 	

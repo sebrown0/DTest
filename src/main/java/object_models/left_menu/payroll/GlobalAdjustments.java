@@ -23,7 +23,7 @@ import object_models.panels.JsPanelControl;
 import object_models.panels.JsPanelWithIFrame;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
  * @since 1.0
  * @version 1.0
  */

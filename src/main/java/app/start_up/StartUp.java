@@ -107,9 +107,9 @@ public class StartUp {
 		}		
 
 		public void quit() {
-			executor.shutdown();
+			executor.shutdown();			
+			runStats.setEndTime();
 			
-			runStats.setEndTime();			
 			System.out.println("Started: " + runStats.getStartTime()); // TODO - remove or log 	
 			System.out.println("Finished: " + runStats.getEndTime()); // TODO - remove or log
 			

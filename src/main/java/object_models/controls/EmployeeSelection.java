@@ -13,7 +13,9 @@ import controls.Control;
 import object_models.forms.FormWithIFrame;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  * Employee selection form. Usually part of page control.
  * When the control button is clicked this form appears
@@ -30,7 +32,7 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 	public EmployeeSelection(WebDriver driver, ContextManager contextManager) {
 		super(driver, PANEL_TITLE, "_iframex-IPORTAL_HR_EMPLOYEEDETAILS_EXT", contextManager);
 
-		super.switchToIFrame();		
+//		super.switchToIFrame();		
 		setMyContainers();		
 	}
 		

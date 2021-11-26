@@ -10,8 +10,9 @@ import controls.Control;
 import controls.TextOut;
 
 /**
- * @author Steve Brown
- *
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  */
 public final class ControlGetterTextOut extends ControlGetter {
 	public ControlGetterTextOut(WebDriver driver, By findBy) {

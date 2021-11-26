@@ -12,8 +12,9 @@ import context_manager.states.StateIframe;
 import object_models.helpers.IFrame;
 
 /**
- * @author Steve Brown
- *
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  */
 public abstract class FormWithIFrame extends FormModal {
 	private IFrame iFrame;
@@ -24,8 +25,8 @@ public abstract class FormWithIFrame extends FormModal {
 	
 		this.iFrameName = iFrameName;
 		
-//		switchToIFrame(driver, iFrameName);
-		System.out.println("->WOULD HAVE SWITCHED TO IFRAME NOW DO IT FROM CHILD. CHECK ALL CHILDREN ARE DOING IT!!" ); // TODO - remove or log 	
+		switchToIFrame(driver, iFrameName);
+//		System.out.println("->WOULD HAVE SWITCHED TO IFRAME NOW DO IT FROM CHILD. CHECK ALL CHILDREN ARE DOING IT!!" ); // TODO - remove or log 	
 	}
 	
 	/*
