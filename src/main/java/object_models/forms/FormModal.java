@@ -78,13 +78,15 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 	}
 		
 	public abstract void setMyContainers();
-		
-	
-	private PageControl getPanelControl() {
-		contextManager.switchToStateInCurrentContext(StateIframe.class); 
-		contextManager.setLatestCallingStateToCurrent();
-		return panelControl;
-	}
+			
+	/*
+	 * Do not remove until sure why it's no longer used 26/11/2021.
+	 */
+//	private PageControl getPanelControl() {
+//		contextManager.switchToStateInCurrentContext(StateIframe.class); 
+//		contextManager.setLatestCallingStateToCurrent();
+//		return panelControl;
+//	}
 	
 	public Optional<Control> getControl(ControlName cntrlName){		
 		contextManager.switchToStateInCurrentContext(StateIframe.class);
@@ -143,11 +145,21 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 		 * Using driver.switchTo().defaultContent(); to go
 		 * back to prev iFrame
 		 */				
-		driver.switchTo().defaultContent();
-		contextManager.deleteCurrentContextAndRevertToCallingContext();		
+		switchToDefaultContent();
+		deleteMyContextAndRevertToCallingContext();
 		header.closeForm();
 	}
 			
+	protected FormModal switchToDefaultContent() {
+		driver.switchTo().defaultContent();
+		return this;
+	}
+	
+	public FormModal deleteMyContextAndRevertToCallingContext() {
+		contextManager.deleteCurrentContextAndRevertToCallingContext();		
+		return this;
+	}
+	
 	@Override // ContextSetter
 	public void setContext() {		
 		myContext = new ContextForm(contextManager, this, this);		

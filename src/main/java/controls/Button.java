@@ -27,11 +27,7 @@ public class Button implements Control {
 		this.btnLocator = btnLocator;
 	}
 
-	public void click() {
-		
-//		WebElement btn = driver.findElement(btnLocator);
-//		btn.click();	
-		
+	public void click() {		
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		try {
 			WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(btnLocator));

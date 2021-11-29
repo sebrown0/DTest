@@ -32,3 +32,6 @@
 ######
 *.doc
 *.docx
+
+#Unwanted
+ZZZ_*

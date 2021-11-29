@@ -53,7 +53,7 @@ public class ControlDataFactory {
 		
 		return this;
 	}
-	
+		
 	public ControlDataFactory buildComboSelectOnly(ControlName cntrlName, By containerLoc, By resultLoc) {		
 		controlData = 
 				new ControlData(

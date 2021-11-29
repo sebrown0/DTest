@@ -14,7 +14,8 @@ import controls.ControlName;
 public enum CommonControlNames implements ControlName {	
 	COMPANY("company"),
 	DEPARTMENT("department"),
-	DK_GRID("grid");
+	DK_GRID("grid"),
+	CLOSE("close");
 
 	private final String key;
 	
