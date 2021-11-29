@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +19,7 @@ import context_manager.states.State;
 import context_manager.states.StateLeftMenu;
 import control_mapping.MenuMap;
 import object_models.forms.ContainerAction;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -30,19 +30,20 @@ import object_models.forms.ContainerAction;
 public class LeftMenu implements CallingState {
 	private Map<String, WebElement> anchors;	
 	private WebDriver driver;
-	private Logger logger = LogManager.getLogger();
+	private Logger logger;
 	private LeftMenuElements elements;	
 	private LeftMenuMapper menuMapper;	
 	private ContextManager contextManager;
 	private LeftMenuActions menuActions;
 	
-	public LeftMenu(WebDriver driver, ContextManager contextManager) {
-		this.driver = driver;
-		this.contextManager = contextManager;
+	public LeftMenu(CoreData hp) {
+		this.driver = hp.getWebDriver();
+		this.contextManager = hp.getContextManager();
+		this.logger = hp.getLogger();
 		this.contextManager.setLatestCallingState(this);		
 		
 		mapAnchors();
-		menuActions = new LeftMenuActions(driver, contextManager, anchors, menuMapper);
+		menuActions = new LeftMenuActions(hp, anchors, menuMapper);
 	}
 
 	private void mapAnchors() {

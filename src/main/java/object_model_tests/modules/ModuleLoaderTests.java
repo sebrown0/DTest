@@ -5,8 +5,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 
 import object_models.modules.payroll.PayrollModuleLoader;
-import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
+import object_models.pages.homepage.HomePage;
 import providers.XMLFileProvider;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;

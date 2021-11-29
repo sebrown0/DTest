@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import logging.TestResultLogger;
-import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
+import object_models.pages.homepage.HomePage;
 import object_models.top_right_nav_bar.common.ElementChecker;
 import object_models.top_right_nav_bar.common.TopRightNavBar;
 import object_models.top_right_nav_bar.quick_links.QuickLinksPayroll;

@@ -13,8 +13,8 @@ import org.openqa.selenium.WebDriver;
 import entities.User;
 import logging.TestResultLogger;
 import object_models.modules.payroll.PayrollModuleLoader;
-import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
+import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import xml_reader.config_file.ConfigReader;
 

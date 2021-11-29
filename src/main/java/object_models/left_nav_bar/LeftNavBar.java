@@ -15,7 +15,9 @@ import context_manager.ContextManager;
 import entities.Company;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 
@@ -33,20 +35,9 @@ public class LeftNavBar {
 		setHeader();
 	}
 	
-//	public LeftNavBar(WebDriver driver, String forCompanyName, ContextManager contextManager) {
-//		this.driver = driver;
-//		this.contextManager = contextManager;
-//		setHeader();
-//		setCompany(forCompanyName);
-//	}
-	
 	private void setHeader() {
 		appHeader = driver.findElement(By.cssSelector("header[class='app-header navbar']"));
 	}
-
-//	private void setCompany(String forCompanyName) {
-//		currentCompany = new Company(forCompanyName);
-//	}
 	
 	public Company getCompany() {
 		if(currentCompany == null) {

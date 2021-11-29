@@ -6,11 +6,9 @@ package object_models.left_menu.common;
 import java.util.Map;
 import java.util.Optional;
 
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchSessionException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import context_manager.ContextManager;
@@ -19,6 +17,7 @@ import factories.MenuElementFactory;
 import factories.PayrollLeftMenuElementFactory;
 import object_models.forms.ContainerAction;
 import object_models.helpers.ClassFieldGetter;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -28,21 +27,22 @@ import object_models.helpers.ClassFieldGetter;
  * Actions that can be performed on a LeftMenu object.
  */
 public class LeftMenuActions {
-	private Logger logger = LogManager.getLogger();
-	private WebDriver driver;
+	private Logger logger;
 	private ContextManager contextManager;	
 	private Map<String, WebElement> anchors;
 	private LeftMenuMapper menuMapper;	
 	private MenuContextChecker menuContextChecker;
+	private CoreData hp;
 	
-	public LeftMenuActions(WebDriver driver, ContextManager contextManager, Map<String, WebElement> anchors, LeftMenuMapper menuMapper) {
-		this.driver = driver;
-		this.contextManager = contextManager;
+	public LeftMenuActions(CoreData hp, Map<String, WebElement> anchors, LeftMenuMapper menuMapper) {
+		this.hp = hp;
+		this.logger = hp.getLogger();
+		this.contextManager = hp.getContextManager();
 		this.anchors = anchors;
 		this.menuMapper = menuMapper;
 		this.menuContextChecker = new MenuContextChecker(contextManager);
 	}
-
+	
 	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
 		contextManager.switchToLeftMenu();		// Puts the context @ Module.StateLeftMenu
 		ClassFieldGetter fieldGetter = new ClassFieldGetter(clazz);
@@ -150,7 +150,7 @@ public class LeftMenuActions {
 	}
 	
 	private ContainerAction getNewElementContainer(String elementName) {
-		MenuElementFactory elementFactory = new PayrollLeftMenuElementFactory(driver, contextManager); 
+		MenuElementFactory elementFactory = new PayrollLeftMenuElementFactory(hp); 
 		return elementFactory.getElementForName(elementName);		
 	}
 }

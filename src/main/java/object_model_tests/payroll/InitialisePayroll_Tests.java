@@ -12,14 +12,15 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import controls.TextSelect;
+import entities.Company;
 import enums.control_names.CommonControlNames;
 import enums.control_names.PayrollControlNames;
 import logging.TestResultLogger;
 import object_models.dialog.DialogOkCancel;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.payroll.initialise.InitialisePayroll;
-import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
+import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import test_data.UserProvider;
@@ -81,6 +82,12 @@ public final class InitialisePayroll_Tests {
 	void initPayroll() {
 		DialogOkCancel okCancel = initPay.clickInitialisePayroll();
 		okCancel.getBtnCancel().ifPresent(b -> b.click());
+	}
+	
+	@Test	@Order(6)
+	void cooooooooooooooomp() {
+		initPay.closeForm();
+		initPay.initialisePayroll(new Company("Mars Northern Products Ltd"), null, null);
 	}
 	
 	@Test	@Order(15) //TODO - update test num!!!

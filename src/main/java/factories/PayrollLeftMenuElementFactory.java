@@ -56,18 +56,23 @@ import object_models.left_menu.reports.GlobalPayrollAnalysis;
 import object_models.left_menu.reports.HrRelatedReports;
 import object_models.left_menu.reports.PayrollReports;
 import object_models.left_menu.reports.Payslips;
+import object_models.pages.homepage.CoreData;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public class PayrollLeftMenuElementFactory implements MenuElementFactory {	
+	private CoreData hp;
 	private WebDriver driver;
 	private ContextManager contextManager;
 		
-	public PayrollLeftMenuElementFactory(WebDriver driver, ContextManager contextManager) {		
-		this.driver = driver;
-		this.contextManager = contextManager;
+	public PayrollLeftMenuElementFactory(CoreData hp) {
+		this.hp = hp;
+		this.driver = hp.getWebDriver();
+		this.contextManager = hp.getContextManager();
 	}
 
 	@Override // MenuElementFactory
@@ -140,7 +145,7 @@ public class PayrollLeftMenuElementFactory implements MenuElementFactory {
 
 		// Payroll
 		case InitialisePayroll.MENU_TITLE:
-			element = new InitialisePayroll(driver, contextManager);
+			element = new InitialisePayroll(hp);
 			break;
 		case PayrollDetailsDrillDown.MENU_TITLE:
 			element = new PayrollDetailsDrillDown(driver, contextManager);

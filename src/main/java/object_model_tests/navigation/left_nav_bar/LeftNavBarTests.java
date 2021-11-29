@@ -13,8 +13,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import entities.Company;
 import logging.TestResultLogger;
 import object_models.left_nav_bar.LeftNavBar;
-import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
+import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import test_data.CompanyProvider;
@@ -23,7 +23,8 @@ import xml_reader.config_file.ConfigReader;
 
 /**
  * @author SteveBrown
- *
+ * @version 1.0
+ * @since 1.0
  */
 @ExtendWith({ 
 	ConfigParameterResolver.class, 

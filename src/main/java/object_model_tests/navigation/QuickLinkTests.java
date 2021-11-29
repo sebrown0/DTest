@@ -7,8 +7,8 @@ import org.openqa.selenium.WebDriver;
 
 import exceptions.NullDriverException;
 import object_models.modules.payroll.PayrollModuleLoader;
-import object_models.pages.HomePage;
 import object_models.pages.UserLoginPage;
+import object_models.pages.homepage.HomePage;
 import object_models.top_right_nav_bar.common.TopRightNavBar;
 import providers.XMLFileProvider;
 import test_data.UserProvider;

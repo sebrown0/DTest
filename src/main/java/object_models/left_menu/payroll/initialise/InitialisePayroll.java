@@ -3,16 +3,17 @@ package object_models.left_menu.payroll.initialise;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import context_manager.ContextManager;
 import control_builder.ControlData;
 import controls.Button;
+import entities.Company;
 import enums.control_names.PayrollControlNames;
 import factories.ControlDataFactory;
 import object_models.dialog.DialogOkCancel;
 import object_models.forms.FormWithIFrame;
+import object_models.pages.homepage.CompanyLoader;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -21,27 +22,66 @@ import object_models.forms.FormWithIFrame;
  */
 public class InitialisePayroll extends FormWithIFrame {	
 	private ControlDataFactory controlFactory;
-	private By byMyLocator;
+	private By byMyLocator;	
+	private CoreData hp;	
+	private Company currentCompany;
 	
 	public static final String MENU_TITLE = "Initialise Payroll";
 	public static final String PANEL_TITLE = MENU_TITLE;
 	public static final String MENU_PARENT_NAME = "Payroll";	
-	
-	public InitialisePayroll(WebDriver driver, ContextManager contextManager) {
-		super(driver, PANEL_TITLE, "_iframex-DEFAULT", contextManager);
 
-		setMyContainers();
+	public InitialisePayroll(CoreData hp) {
+		super(hp.getWebDriver(), PANEL_TITLE, "_iframex-DEFAULT", hp.getContextManager());
+
 		controlFactory = new ControlDataFactory(driver);
-		buildMyControls();
+		this.hp = hp;
+		initialise();
 	}		
+//	public InitialisePayroll(WebDriver driver, ContextManager contextManager, CompanyLoader hp) {
+//		super(driver, PANEL_TITLE, "_iframex-DEFAULT", contextManager);
+//
+//		controlFactory = new ControlDataFactory(driver);
+//		this.hp = hp;
+//		initialise();
+//	}		
+	
+	// Initialise
+	private void initialise() {
+		setMyContainers();	
+		buildMyControls();
+		setCurrentCompany();
+	}
+	
+	@Override
+	public void setMyContainers() {
+		byMyLocator = By.cssSelector("div[class='modal show']");
+	}
 	
 	private void buildMyControls() {		
 		InitialisePayrollControls payrollControls = new InitialisePayrollControls(controlFactory);
 		List<ControlData> myControls = payrollControls.getControls();		
 		super.buildFormControls(myControls);				
 	}
+	
+	private void setCurrentCompany() {
+		currentCompany = getCompanyLoader().getCurrentCompany();
+	}
 		
 	// Actions
+	public void initialisePayroll(Company comp, String payGroupName, String payPeriod) {
+		if(!(currentCompany.equals(comp))) {			
+			System.out.println("NOT EQUAL" ); // TODO - remove or log
+			currentCompany = getCompanyLoader().loadCompany(comp.getName());
+			System.out.println("->" + currentCompany.getName()); // TODO - remove or log 	
+		}
+		/*
+		 * 1. close form, and
+		 * 2. check we're on the correct company.
+		 * 3. if not load company.
+		 */
+//		clickInitialisePayroll();
+	}
+	
 	public DialogOkCancel clickInitialisePayroll() {
 		Button init = (Button) getControl(PayrollControlNames.INIT_PAYROLL).get();
 		init.click();
@@ -54,20 +94,19 @@ public class InitialisePayroll extends FormWithIFrame {
 			getCloseButton().click();	
 		} catch (Exception e) {
 			super.logger.error("Failed to close form [" + e.getMessage() + "]");
-			System.out.println("->" + e.getMessage()); // TODO - remove or log 	
 		}		
 	}
 	
 	private WebElement getCloseButton() {
 		WebElement form = driver.findElement(byMyLocator);
-		WebElement close = form.findElement(By.cssSelector("button[class='btn btn-primary']"));
-		
+		WebElement close = form.findElement(By.cssSelector("button[class='btn btn-primary']"));		
 		return close;
 	}
 	
-	@Override
-	public void setMyContainers() {
-		byMyLocator = By.cssSelector("div[class='modal show']");
+	// Helpers
+	private CompanyLoader getCompanyLoader() {
+		return (CompanyLoader) hp;
 	}
+	
 
 }

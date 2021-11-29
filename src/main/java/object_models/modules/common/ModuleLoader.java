@@ -3,7 +3,6 @@
  */
 package object_models.modules.common;
 
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
@@ -14,27 +13,33 @@ import context_manager.states.State;
 import context_manager.states.StateModule;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_nav_bar.LeftNavBar;
+import object_models.pages.homepage.CoreData;
 import object_models.top_right_nav_bar.common.TopRightNavBar;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  * Loads a module using the supplied ModuleElements.
  */
 public class ModuleLoader {
 	private WebDriver driver;
-	private Logger logger = LogManager.getLogger();
+	private Logger logger;
 	private ModuleElements moduleElements;
+	private CoreData hp;
 	private String moduleName;
 	private LeftNavBar leftNavBar;
 	private TopRightNavBar topRightNavBar;
 	private LeftMenu leftMenu;	
 	private ContextManager contextManager;
 		
-	public ModuleLoader(WebDriver driver, ModuleElements moduleElements, ContextManager contextManager) {		
+	public ModuleLoader(CoreData hp, ModuleElements moduleElements) {
+		this.hp = hp;
+		this.logger = hp.getLogger();
 		this.moduleElements = moduleElements;
-		this.driver = driver;
-		this.contextManager = contextManager;
+		this.driver = hp.getWebDriver();
+		this.contextManager = hp.getContextManager();
 		
 		setInitialStateOfContextManager();
 		setModuleName();
@@ -85,7 +90,7 @@ public class ModuleLoader {
 	
 	public LeftMenu setLeftMenu(ContextManager contextManager) {
 		logger.info("Creating left menu for " + moduleName + " module");
-		leftMenu =  new LeftMenu(driver, contextManager);
+		leftMenu =  new LeftMenu(hp);
 		moduleElements.setLeftMenuElements(leftMenu);
 		return leftMenu;
 	}
