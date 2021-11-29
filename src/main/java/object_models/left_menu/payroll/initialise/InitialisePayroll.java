@@ -24,7 +24,7 @@ public class InitialisePayroll extends FormWithIFrame {
 	private ControlDataFactory controlFactory;
 	private By byMyLocator;	
 	private CoreData hp;	
-	private Company currentCompany;
+//	private Company currentCompany;
 	
 	public static final String MENU_TITLE = "Initialise Payroll";
 	public static final String PANEL_TITLE = MENU_TITLE;
@@ -36,20 +36,13 @@ public class InitialisePayroll extends FormWithIFrame {
 		controlFactory = new ControlDataFactory(driver);
 		this.hp = hp;
 		initialise();
-	}		
-//	public InitialisePayroll(WebDriver driver, ContextManager contextManager, CompanyLoader hp) {
-//		super(driver, PANEL_TITLE, "_iframex-DEFAULT", contextManager);
-//
-//		controlFactory = new ControlDataFactory(driver);
-//		this.hp = hp;
-//		initialise();
-//	}		
+	}
 	
 	// Initialise
 	private void initialise() {
 		setMyContainers();	
 		buildMyControls();
-		setCurrentCompany();
+//		setCurrentCompany();
 	}
 	
 	@Override
@@ -63,24 +56,14 @@ public class InitialisePayroll extends FormWithIFrame {
 		super.buildFormControls(myControls);				
 	}
 	
-	private void setCurrentCompany() {
-		currentCompany = getCompanyLoader().getCurrentCompany();
-	}
+//	private void setCurrentCompany() {
+//		currentCompany = getCompanyLoader().getCurrentCompany();
+//	}
 		
 	// Actions
-	public void initialisePayroll(Company comp, String payGroupName, String payPeriod) {
-		if(!(currentCompany.equals(comp))) {			
-			System.out.println("NOT EQUAL" ); // TODO - remove or log
-			currentCompany = getCompanyLoader().loadCompany(comp.getName());
-			System.out.println("->" + currentCompany.getName()); // TODO - remove or log 	
-		}
-		/*
-		 * 1. close form, and
-		 * 2. check we're on the correct company.
-		 * 3. if not load company.
-		 */
-//		clickInitialisePayroll();
-	}
+	
+	
+	
 	
 	public DialogOkCancel clickInitialisePayroll() {
 		Button init = (Button) getControl(PayrollControlNames.INIT_PAYROLL).get();
@@ -89,14 +72,21 @@ public class InitialisePayroll extends FormWithIFrame {
 	}
 	
 	public void closeForm() {
+		super.switchToDefaultContent();
+		closeMe();
+		// KEEP THIS CONTEXT BUT SWITCH CONTEXT
+	}	
+	public void closeFormAndContext() {
 		super.switchToDefaultContent().deleteMyContextAndRevertToCallingContext();
+		closeMe();		
+	}	
+	private void closeMe() {
 		try {
 			getCloseButton().click();	
 		} catch (Exception e) {
 			super.logger.error("Failed to close form [" + e.getMessage() + "]");
-		}		
+		}
 	}
-	
 	private WebElement getCloseButton() {
 		WebElement form = driver.findElement(byMyLocator);
 		WebElement close = form.findElement(By.cssSelector("button[class='btn btn-primary']"));		
@@ -104,9 +94,9 @@ public class InitialisePayroll extends FormWithIFrame {
 	}
 	
 	// Helpers
-	private CompanyLoader getCompanyLoader() {
-		return (CompanyLoader) hp;
-	}
+//	private CompanyLoader getCompanyLoader() {
+//		return (CompanyLoader) hp;
+//	}
 	
 
 }

@@ -61,7 +61,7 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 		wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 		initialise();
 	}
-	
+		
 	protected void buildFormControls(List<ControlData> panelControls) {
 		ControlBuilder builder = new ControlBuilder();
 		builder.addControls(panelControls);
