@@ -12,14 +12,16 @@ import org.openqa.selenium.WebDriver;
 
 import entities.User;
 import logging.TestResultLogger;
-import object_models.modules.payroll.PayrollModuleLoader;
+import object_models.modules.payroll.PayrollModuleElements;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import xml_reader.config_file.ConfigReader;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.1
+ * @since 1.0
  *
  * Login for a given user from resources.test_data.UserProvider
  */
@@ -42,7 +44,7 @@ class UserLoginTest { // <- TEST SUITE
 	@Tag("T3834")	
 	void validUserLogin(User user) {		
 		// Supply valid user, login and check home page is loaded.
-		UserLoginPage userLogin = new UserLoginPage(driver, new PayrollModuleLoader(driver)); // <- POM		
+		UserLoginPage userLogin = new UserLoginPage(driver, new PayrollModuleElements()); // <- POM		
 		HomePage hp = userLogin.loginValidUser(user); // <- FLUENT API
 		assertTrue(hp != null); // <- TEST VERIFICATION & TEST LOGGING
 	}
@@ -60,6 +62,6 @@ class UserLoginTest { // <- TEST SUITE
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-//		driver.quit();
+		driver.quit();
 	}
 }

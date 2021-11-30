@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
 import exceptions.NullDriverException;
-import object_models.modules.payroll.PayrollModuleLoader;
+import object_models.modules.payroll.PayrollModuleElements;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import object_models.top_right_nav_bar.common.TopRightNavBar;
@@ -30,7 +30,7 @@ class QuickLinkTests {
 		/*
 		 * ADD CONTEXT MANAGER
 		 */
-		UserLoginPage userLogin = new UserLoginPage(driver, new PayrollModuleLoader(driver));
+		UserLoginPage userLogin = new UserLoginPage(driver, new PayrollModuleElements());
 		/*
 		 * ADD CONTEXT MANAGER
 		 */

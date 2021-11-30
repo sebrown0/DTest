@@ -9,12 +9,14 @@ import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.openqa.selenium.WebDriver;
 
-import object_models.modules.payroll.PayrollModuleLoader;
+import object_models.modules.payroll.PayrollModuleElements;
 import object_models.pages.UserLoginPage;
 import xml_reader.config_file.ConfigReader;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.1
+ * @since 1.0
  *
  */
 public class LoginPageResolverPayroll extends LoginPageResolver {
@@ -23,7 +25,7 @@ public class LoginPageResolverPayroll extends LoginPageResolver {
 	public Object resolveParameter(ParameterContext pc, ExtensionContext ec) throws ParameterResolutionException {
 		ConfigReader reader = (ConfigReader) ec.getStore(Namespace.GLOBAL).get(ConfigParameterResolver.CONFIG_PARAM_ID);
 		WebDriver driver = reader.getDriver();
-		return new UserLoginPage(driver, new PayrollModuleLoader(driver));
+		return new UserLoginPage(driver, new PayrollModuleElements());
 	}
 
 }

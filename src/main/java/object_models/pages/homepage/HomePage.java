@@ -5,7 +5,6 @@ package object_models.pages.homepage;
 
 import static providers.PageTitleProvider.HOME_PAGE_TITLE;
 
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -23,50 +22,54 @@ import object_models.top_right_nav_bar.common.TopRightNavBar;;
 
 /**
  * @author SteveBrown
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  *
  */
-public class HomePage extends Page implements CoreData, CompanyLoader {
+public abstract class HomePage extends Page implements CoreData, CompanyLoader {
 	private LeftNavBar leftNavBar;
 	private TopRightNavBar topRightNavBar;
-	private LeftMenu leftMenu;	
+	private LeftMenu leftMenu;
+	
+	//CoreData
 	private ContextManager contextManager;
-	private Logger logger = LogManager.getLogger();
+	private Logger logger;
 	private WebDriver driver;
-	private Company currentCompany;
 	
 	private static By byXpathActualModuleName = By.xpath("html/body/form/header/div/div");
 	
 	public static final String PAGE_TITLE = HOME_PAGE_TITLE;
 	
-	public HomePage(WebDriver driver, ModuleElements moduleElements, ContextManager contextManager) {		
-		super(driver, PAGE_TITLE);		
+	public HomePage(CoreData coreData) {		
+		super(coreData.getWebDriver(), PAGE_TITLE);		
 		
-		this.driver = driver;
-		this.contextManager = contextManager;
+		this.driver = coreData.getWebDriver();
+		this.contextManager = coreData.getContextManager();
+		this.logger = coreData.getLogger();
 		
-		loadModule(moduleElements);
-		setCurrentCompany();
+		/*
+		 * HAVE TO DO SOMEWHERE ELSE!!!!!!!!!!!!!!!!
+		 */
+//		setCurrentCompany();
 	}
-		
+	
+/*
+ * DON;T SEEM TO BE USING!?
+ */
+//	private void setCurrentCompany() {
+//		currentCompany = leftNavBar.getCompany();
+//		System.out.println("hp->setCurrentCompany" + currentCompany.getName()); // TODO - remove or log 	
+//	}
+
+	public abstract String getModuleName();
+	
 	// Actions
-	public void loadModule(ModuleElements moduleElements) {
-		if(moduleElements == null) {			
-			logger.error("No module supplied");			
-		}else {			
-			ModuleLoader moduleLoader = new ModuleLoader(this, moduleElements);
-			leftNavBar = moduleLoader.setLeftNavBar(contextManager);
-			topRightNavBar = moduleLoader.setNavBar(contextManager);
-			leftMenu = moduleLoader.setLeftMenu(contextManager);
-		}		
+	public HomePage loadModule(ModuleElements moduleElements) {
+		moduleElements.setCoreData(this);
+		ModuleLoader loader = new ModuleLoader(this, moduleElements);
+		return loader.loadModule();
 	}
-
-	private void setCurrentCompany() {
-		currentCompany = leftNavBar.getCompany();
-		System.out.println("hp->setCurrentCompany" + currentCompany.getName()); // TODO - remove or log 	
-	}
-
+	
 	@Override //CompanyLoader
 	public Company loadCompany(Company co) {
 		LoadCompany loader = new LoadCompany(co, this, leftNavBar);
@@ -80,6 +83,16 @@ public class HomePage extends Page implements CoreData, CompanyLoader {
 	@Override //Page
 	public void close() {
 		driver.quit();
+	}
+	
+	public void setLeftNavBar(LeftNavBar leftNavBar) {
+		this.leftNavBar = leftNavBar;
+	}
+	public void setTopRightNavBar(TopRightNavBar topRightNavBar) {
+		this.topRightNavBar = topRightNavBar;
+	}
+	public void setLeftMenu(LeftMenu leftMenu) {
+		this.leftMenu = leftMenu;
 	}
 	
 	/*

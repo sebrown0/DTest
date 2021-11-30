@@ -14,7 +14,7 @@ import entities.Company;
 import logging.TestResultLogger;
 import object_models.left_nav_bar.LeftNavBar;
 import object_models.pages.UserLoginPage;
-import object_models.pages.homepage.HomePage;
+import object_models.pages.homepage.HomePagePayroll;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import test_data.CompanyProvider;
@@ -31,12 +31,12 @@ import xml_reader.config_file.ConfigReader;
 	TestResultLogger.class, 
 	LoginPageResolverPayroll.class })
 public class LeftNavBarTests {
-	private static HomePage homepagePayroll; 
+	private static HomePagePayroll homepagePayroll; 
 	private static LeftNavBar leftNavBar;
 	
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
-		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
+		homepagePayroll = (HomePagePayroll) userLogin.loginValidUser(UserProvider.userPortal());
 		leftNavBar = homepagePayroll.getLeftNavBar();
 	}		
 	
@@ -54,7 +54,7 @@ public class LeftNavBarTests {
 	
 	@AfterAll
 	public static void tearDown() {			
-//		homepagePayroll.close();
+		homepagePayroll.close();
 	}
 
 }

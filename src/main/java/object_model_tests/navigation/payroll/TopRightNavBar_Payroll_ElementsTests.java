@@ -16,7 +16,7 @@ import object_models.employee.EmployeeGridView;
 import object_models.employee_creation.EmployeeCreationWizard;
 import object_models.helpers.Closable;
 import object_models.pages.UserLoginPage;
-import object_models.pages.homepage.HomePage;
+import object_models.pages.homepage.HomePagePayroll;
 import object_models.reports.DakarIntelligence;
 import object_models.reports.VisualReports;
 import object_models.top_right_nav_bar.all_elements.NavBarDakarIntelligence;
@@ -51,12 +51,12 @@ import xml_reader.config_file.ConfigReader;
 	TestResultLogger.class, 
 	LoginPageResolverPayroll.class })
 class TopRightNavBar_Payroll_ElementsTests {	
-	private static HomePage homepagePayroll;
+	private static HomePagePayroll homepagePayroll;
 	private static TopRightNavBar navBar;
 	
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
-		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
+		homepagePayroll = (HomePagePayroll) userLogin.loginValidUser(UserProvider.userPortal());
 		navBar = homepagePayroll.getTopRightNavBar();
 	}
 	

@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
  * @author Steve Brown
  *
  */
-public class ModuleChecker {
+public class ZZZ_ModuleChecker {
 	private static final By MOD_NAME_LOCATOR = By.cssSelector("body>form>header>div>div");
 
 	public static String getCurrentModule(WebDriver driver) {

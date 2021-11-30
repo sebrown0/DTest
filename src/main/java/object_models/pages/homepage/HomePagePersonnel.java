@@ -8,9 +8,9 @@ package object_models.pages.homepage;
  * @version 1.0
  * @since 1.0
  */
-public final class HomePagePayroll extends HomePage {
+public final class HomePagePersonnel extends HomePage {
 
-	public HomePagePayroll(CoreData coreData) {
+	public HomePagePersonnel(CoreData coreData) {
 		super(coreData);
 		// TODO Auto-generated constructor stub
 	}
@@ -19,5 +19,4 @@ public final class HomePagePayroll extends HomePage {
 	public String getModuleName() {
 		return "Payroll";
 	}
-
 }

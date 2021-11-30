@@ -62,7 +62,7 @@ import object_models.left_menu.reports.HrRelatedReports;
 import object_models.left_menu.reports.PayrollReports;
 import object_models.left_menu.reports.Payslips;
 import object_models.pages.UserLoginPage;
-import object_models.pages.homepage.HomePage;
+import object_models.pages.homepage.HomePagePayroll;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import test_data.UserProvider;
@@ -93,11 +93,11 @@ import xml_reader.config_file.ConfigReader;
 	LoginPageResolverPayroll.class })
 public class LeftMenuChildren_Payroll_Tests {
 	private static LeftMenu menu;
-	private static HomePage homepagePayroll;
+	private static HomePagePayroll homepagePayroll;
 	
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
-		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
+		homepagePayroll = (HomePagePayroll) userLogin.loginValidUser(UserProvider.userPortal());
 		menu = homepagePayroll.getLeftMenu();
 	}
 		

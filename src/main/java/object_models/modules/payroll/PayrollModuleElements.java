@@ -19,6 +19,9 @@ import object_models.helpers.title.PageTitle;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.payroll_only.LeftMenuPayroll;
 import object_models.modules.common.ModuleElements;
+import object_models.pages.homepage.CoreData;
+import object_models.pages.homepage.HomePage;
+import object_models.pages.homepage.HomePagePayroll;
 import object_models.panels.JsPanelHeaderBar;
 import object_models.top_right_nav_bar.all_elements.NavBarElementStrategy;
 import object_models.top_right_nav_bar.payroll.NavBarPayrollElements;
@@ -27,16 +30,24 @@ import object_models.top_right_nav_bar.quick_links.QuickLinkPayroll;
 import providers.ModuleNames;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * 	Initial
+ * @version 1.1
+ * 	Get the HomePage from ModuleElements.
+ * @since 1.0
  *
  * The required elements of the payroll module.
  * 
  */
-public class PayrollModuleLoader implements ModuleElements {
+public class PayrollModuleElements implements ModuleElements {
 	private WebDriver driver;
-
-	public PayrollModuleLoader(WebDriver driver) {
-		this.driver = driver;		
+	private CoreData coreData;
+	
+	@Override
+	public void setCoreData(CoreData coreData) {
+		this.coreData = coreData;
+		this.driver = coreData.getWebDriver();
 	}
 
 	@Override
@@ -96,24 +107,7 @@ public class PayrollModuleLoader implements ModuleElements {
 					}					
 				});				
 	}
-	
-//	@Override
-//	public Context getContextForModule(ContextManager contextManager) { 	
-//		return new ContextPayroll(
-//				contextManager, 
-//				new ContextIdGetter() {			
-//						@Override
-//						public ContextId getContextId() {							
-//							return new ContextId("Payroll Module", "Payroll Module");
-//						}
-//
-//						@Override
-//						public String getContextExpectedName() {
-//							return "Payroll Module";
-//						}
-//					}, null); // setting a NULL container action!				
-//	}
-	
+		
 	@Override
 	public NavBarElementStrategy getElementStrategy(ContextManager contextManager) {
 		return new NavBarPayrollElements(driver, contextManager);
@@ -132,6 +126,11 @@ public class PayrollModuleLoader implements ModuleElements {
 	@Override
 	public void setLeftMenuElements(LeftMenu menu) {
 		menu.setElements(new LeftMenuPayroll());
+	}
+
+	@Override
+	public HomePage getHomePage() {
+		return new HomePagePayroll(coreData);
 	}
 		
 }

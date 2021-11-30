@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 
 import exceptions.NullDriverException;
 import logging.TestResultLogger;
-import object_models.modules.payroll.PayrollModuleLoader;
+import object_models.modules.payroll.PayrollModuleElements;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import object_models.top_right_nav_bar.all_elements.NavBarDakarIntelligence;
@@ -43,7 +43,7 @@ class TopRightNavBar_Personnel_ElementsTests {
 		// Get a web driver as specified in the config.xml		
 		driver = configReader.getDriver();
 		// Get a login page, with the required module loaded.
-		userLogin = new UserLoginPage(driver, new PayrollModuleLoader(driver));
+		userLogin = new UserLoginPage(driver, new PayrollModuleElements());
 		// Get a home page after successful login
 		hp = userLogin.loginValidUser(UserProvider.userPortal());		
 	}
