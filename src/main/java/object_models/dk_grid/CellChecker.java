@@ -14,6 +14,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import controls.PopupComboSelect;
 import object_models.date_picker.DatePickerPopup;
+import object_models.pages.homepage.CoreData;
 
 /**
  * <p>
@@ -37,9 +38,11 @@ public class CellChecker {
 	private Optional<WebElement> popupTopLevel = Optional.empty();
 	private Popup popupType = null;
 	private Cell cell;
+	private CoreData coreData;
 	
-	public CellChecker(WebDriver driver, Cell cell) {
-		this.driver = driver;
+	public CellChecker(CoreData coreData, Cell cell) {
+		this.coreData = coreData;
+		this.driver = coreData.getWebDriver();
 		this.cell = cell;
 		this.cellElement = cell.getMyElement();
 		this.actions = new Actions(driver);
@@ -88,7 +91,7 @@ public class CellChecker {
 	}
 	
 	private void setPopupToCombo(WebElement select) {
-		popupType = new PopupComboSelect(driver, select, cell);
+		popupType = new PopupComboSelect(coreData, select, cell);
 	}
 	
 	private boolean tryDatePicker(WebElement chld) {

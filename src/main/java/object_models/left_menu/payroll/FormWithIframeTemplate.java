@@ -1,20 +1,14 @@
 package object_models.left_menu.payroll;
 
-import java.time.Duration;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextId;
-import context_manager.ContextManager;
 import context_manager.states.StateHeaderForm;
 import object_models.forms.FormHeader;
 import object_models.forms.FormWithIFrame;
 import object_models.helpers.Header;
-import object_models.helpers.title.TitlePanel;
+import object_models.pages.homepage.CoreData;
 
 @SuppressWarnings("unused")
 public class FormWithIframeTemplate extends FormWithIFrame {	
@@ -26,8 +20,8 @@ public class FormWithIframeTemplate extends FormWithIFrame {
 	public static final String PANEL_TITLE = MENU_TITLE;
 	public static final String MENU_PARENT_NAME = "TODO";	
 	
-	public FormWithIframeTemplate(WebDriver driver, ContextManager contextManager) {
-		super(driver, PANEL_TITLE, "TODO IfRAME NAME", contextManager);
+	public FormWithIframeTemplate(CoreData coreData) {
+		super(coreData, PANEL_TITLE, "TODO IfRAME NAME");
 		setMyContainers();
 	}
 		

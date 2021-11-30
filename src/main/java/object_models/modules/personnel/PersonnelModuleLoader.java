@@ -48,7 +48,7 @@ public class PersonnelModuleLoader implements ModuleElements {
 	
 	@Override
 	public NavBarElementStrategy getElementStrategy(ContextManager contextManager) {
-		return new NavBarPersonnelElements(driver, contextManager);
+		return new NavBarPersonnelElements(coreData);
 	}
 
 	@Override
@@ -68,9 +68,9 @@ public class PersonnelModuleLoader implements ModuleElements {
 	}
 
 	@Override
-	public Context getContextForModule(ContextManager contextManager) {		
+	public Context getContextForModule() {		
 		return new ContextPayroll(
-				contextManager, 
+				coreData, 
 				new ContextIdGetter() {			
 						@Override
 						public ContextId getContextId() {							
@@ -88,7 +88,7 @@ public class PersonnelModuleLoader implements ModuleElements {
 							return new StateFactorySetter() {							
 								@Override
 								public ContextManager getContextManager() {
-									return contextManager;
+									return coreData.getContextManager();
 								}
 								@Override
 								public WebDriver getWebDriver() {

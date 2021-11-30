@@ -4,10 +4,9 @@
 package object_models.employee;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-import context_manager.ContextManager;
 import object_models.element.Label;
+import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
 
 /**
@@ -17,8 +16,8 @@ import object_models.panels.JsPanelWithIFrame;
 public class EmployeeCv extends JsPanelWithIFrame {		
 	public static final String PANEL_TITLE = "Employee Payroll CV";
 	
-	public EmployeeCv(WebDriver driver, ContextManager contextManager) {
-		super(driver, PANEL_TITLE, contextManager);
+	public EmployeeCv(CoreData coreData) {
+		super(coreData, PANEL_TITLE);
 	}
 
 	public Label getCompanyLabel() {

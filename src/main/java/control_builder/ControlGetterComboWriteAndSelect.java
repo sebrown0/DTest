@@ -4,11 +4,11 @@
 package control_builder;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import controls.ComboWriteAndSelect;
 import controls.Control;
 import object_models.helpers.text_writer.TextWriter;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -19,10 +19,10 @@ import object_models.helpers.text_writer.TextWriter;
 public class ControlGetterComboWriteAndSelect extends ControlGetter {
 	private Control combo;
 	
-	public ControlGetterComboWriteAndSelect(WebDriver driver, By findBy, By resultsBy, TextWriter writer) {
-		super(driver, findBy);
+	public ControlGetterComboWriteAndSelect(CoreData coreData, By findBy, By resultsBy, TextWriter writer) {
+		super(coreData, findBy);
 		
-		this.combo = new ComboWriteAndSelect(driver, findBy, resultsBy, writer);
+		this.combo = new ComboWriteAndSelect(coreData, findBy, resultsBy, writer);
 	}
 
 	@Override

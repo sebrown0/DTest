@@ -4,10 +4,9 @@
 package object_models.left_menu.parents;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-import context_manager.ContextManager;
 import controls.ComboSelectFromOptions;
+import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
 
 /**
@@ -19,14 +18,14 @@ public final class EmployeeList extends JsPanelWithIFrame {
 	public static final String PANEL_TITLE = "Employee List";
 	public static final String MENU_TITLE = PANEL_TITLE;
 	
-	public EmployeeList(WebDriver driver, ContextManager contextManager) {
-		super(driver, PANEL_TITLE, contextManager);
+	public EmployeeList(CoreData coreData) {
+		super(coreData, PANEL_TITLE);
 	}
 		
 	// Elements
 	public ComboSelectFromOptions company() {
 		return new ComboSelectFromOptions(
-				driver, 
+				coreData, 
 				driver.findElement(By.cssSelector("#corners > div:nth-child(3) > div.col-5 > select")));		
 	}	
 			

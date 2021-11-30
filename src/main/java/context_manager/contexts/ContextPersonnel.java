@@ -4,9 +4,9 @@
 package context_manager.contexts;
 
 import context_manager.ContextIdGetter;
-import context_manager.ContextManager;
 import context_manager.FirstContext;
 import object_models.forms.ContainerAction;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -16,8 +16,8 @@ import object_models.forms.ContainerAction;
  */
 public final class ContextPersonnel extends Context implements FirstContext {
 	
-	public ContextPersonnel(ContextManager contextManager, ContextIdGetter idGetter, ContainerAction containerAction) {
-		super(contextManager, idGetter, containerAction);
+	public ContextPersonnel(CoreData coreData, ContextIdGetter idGetter, ContainerAction containerAction) {
+		super(coreData, idGetter, containerAction);
 		
 	}
 }

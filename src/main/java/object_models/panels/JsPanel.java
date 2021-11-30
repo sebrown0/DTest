@@ -32,6 +32,7 @@ import object_models.forms.ContainerAction;
 import object_models.helpers.IFrame;
 import object_models.helpers.title.PageTitle;
 import object_models.helpers.title.TitlePanel;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -46,18 +47,21 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	protected String expectedTitle;
 	protected ControlBuilder builder;
 	protected PageControl panelControl;
+	protected CoreData coreData;
 	
 	private ContextState myContext;
 	private PageTitle title = null;	
 	private WebElement container;
 	private Optional<String> panelId;	
 	private JsPanelHeaderBar headerBar;	
+	
 			
-	public JsPanel(WebDriver driver, String expectedTitle, ContextManager contextManager) {
+	public JsPanel(CoreData coreData, String expectedTitle) {
+		this.coreData = coreData;
 		this.logger = LogManager.getLogger();
-		this.driver = driver;
+		this.driver = coreData.getWebDriver();
 		this.expectedTitle = expectedTitle;
-		this.manager = contextManager;		
+		this.manager = coreData.getContextManager();		
 		this.builder = new ControlBuilder();		
 				
 		setPanelId();
@@ -128,7 +132,7 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	
 	@Override
 	public void setContext() {
-		myContext = new ContextPanel(manager, this, headerBar, this);
+		myContext = new ContextPanel(coreData, this, headerBar, this);
 		manager.setContext(myContext);
 	}
 	

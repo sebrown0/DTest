@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import object_models.helpers.DriverWait;
 import object_models.helpers.text_utils.TextExtractor;
 import object_models.helpers.text_utils.TextSanitiser;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author Steve Brown
@@ -27,13 +28,13 @@ public abstract class Combo implements Control {
 	protected boolean isOpen = false;	
 	protected WebDriver driver;
 	
-	public Combo(WebDriver driver, WebElement combo) {
+	public Combo(CoreData coreData, WebElement combo) {
 		this.combo = combo;
-		this.driver = driver;		
+		this.driver = coreData.getWebDriver();		
 	}
 	
-	public Combo(WebDriver driver, By findBy) {
-		this.driver = driver;
+	public Combo(CoreData coreData, By findBy) {
+		this.driver = coreData.getWebDriver();
 		this.comboLocator = findBy;
 	}
 	

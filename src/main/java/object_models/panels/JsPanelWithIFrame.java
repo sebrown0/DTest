@@ -4,11 +4,10 @@
 package object_models.panels;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import context_manager.ContextManager;
 import object_models.helpers.IFrame;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -19,8 +18,8 @@ import object_models.helpers.IFrame;
 public abstract class JsPanelWithIFrame extends JsPanel implements JsPanelContext { //, IframeSwitcher {
 	private IFrame iFrame;
 		
-	public JsPanelWithIFrame(WebDriver driver, String expectedTitle, ContextManager contextManager) {
-		super(driver, expectedTitle, contextManager);
+	public JsPanelWithIFrame(CoreData coreData, String expectedTitle) {
+		super(coreData, expectedTitle);
 	
 		loadIframe();
 	}

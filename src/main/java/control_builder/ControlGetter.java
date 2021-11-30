@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import controls.Control;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -16,15 +17,18 @@ import controls.Control;
  * Return a new instance of a control, i.e. TextOut.
  */
 public abstract class ControlGetter {
+	protected CoreData coreData;
 	protected WebDriver driver;
 	protected By findBy;
 	
-	public ControlGetter(WebDriver driver) {
-		this.driver = driver;
+	public ControlGetter(CoreData coreData) {
+		this.coreData = coreData;
+		this.driver = coreData.getWebDriver();
 	}
 	
-	public ControlGetter(WebDriver driver, By findBy) {
-		this.driver = driver;
+	public ControlGetter(CoreData coreData, By findBy) {
+		this.coreData = coreData;
+		this.driver = coreData.getWebDriver();
 		this.findBy = findBy;
 	}
 

@@ -3,12 +3,10 @@
  */
 package control_builder;
 
-import org.openqa.selenium.WebDriver;
-
-import context_manager.ContextManager;
 import controls.Control;
 import object_models.dk_grid.DkGrid;
 import object_models.dk_grid.KeyStrategyRow;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -19,10 +17,10 @@ import object_models.dk_grid.KeyStrategyRow;
 public class ControlGetterGrid <T extends KeyStrategyRow> extends ControlGetter {
 	private DkGrid<T> grid;
 	
-	public ControlGetterGrid(WebDriver driver, T keyStrategy, ContextManager cm) {
-		super(driver);
+	public ControlGetterGrid(CoreData coreData, T keyStrategy) {
+		super(coreData);
 	
-		grid = new DkGrid<>(driver, keyStrategy, cm);
+		grid = new DkGrid<>(super.driver, keyStrategy, coreData.getContextManager());
 	}
 
 	@Override

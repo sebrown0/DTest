@@ -28,7 +28,7 @@ public interface ModuleElements {
 	void setLeftMenuElements(LeftMenu menu);
 	
 	HomePage getHomePage();
-	Context getContextForModule(ContextManager contextManager);
+	Context getContextForModule();
 	NavBarElementStrategy getElementStrategy(ContextManager contextManager);
 	QuickLink getQuickLinkToLoadModule();	
 	String getModuleName();	

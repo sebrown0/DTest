@@ -4,28 +4,25 @@
 package control_builder;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-import context_manager.ContextManager;
 import controls.Control;
 import object_models.controls.EmployeeSelection;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author Steve Brown
  *
  */
 public final class ControlGetterEmployeeSelection extends ControlGetter {	
-	private ContextManager contextManager;
 	
-	public ControlGetterEmployeeSelection(WebDriver driver, By findBy, ContextManager contextManager) {
-		super(driver, findBy);
-		this.contextManager = contextManager;
+	public ControlGetterEmployeeSelection(CoreData coreData, By findBy) {
+		super(coreData, findBy);
 	}
 
 	@Override
 	public Control getControl() {
-		driver.findElement(findBy).click();
-		return new EmployeeSelection(driver, contextManager);
+		super.driver.findElement(findBy).click();
+		return new EmployeeSelection(super.coreData);
 	}
 
 }

@@ -3,8 +3,9 @@
  */
 package controls;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author Steve Brown
@@ -14,8 +15,8 @@ import org.openqa.selenium.WebElement;
  */
 public class ComboSelectFromOptions extends Combo {
 
-	public ComboSelectFromOptions(WebDriver driver, WebElement combo) {
-		super(driver, combo);	
+	public ComboSelectFromOptions(CoreData coreData, WebElement combo) {
+		super(coreData, combo);	
 	}
 
 }

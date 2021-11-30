@@ -1,8 +1,6 @@
 package object_models.left_menu.additional_hours;
 
-import org.openqa.selenium.WebDriver;
-
-import context_manager.ContextManager;
+import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
 
 /**
@@ -14,8 +12,8 @@ public class Authorisation extends JsPanelWithIFrame {
 	public static final String PANEL_TITLE = "Extra Hours Authoriser";
 	public static final String MENU_PARENT_NAME = "Additional Hours";
 
-	public Authorisation(WebDriver driver, ContextManager contextManager) {
-		super(driver, PANEL_TITLE, contextManager);
+	public Authorisation(CoreData coreData) {
+		super(coreData, PANEL_TITLE);
 	}
 	
 	// Elements

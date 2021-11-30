@@ -4,10 +4,9 @@
 package object_models.left_menu.parents;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-import context_manager.ContextManager;
 import object_models.element.TextInOut;
+import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
 
 /**
@@ -19,8 +18,8 @@ public class Documents extends JsPanelWithIFrame {
 	public static final String PANEL_TITLE = "Employee Document Management";
 	public static final String MENU_TITLE = "Documents";
 	
-	public Documents(WebDriver driver, ContextManager contextManager) {
-		super(driver, PANEL_TITLE, contextManager);
+	public Documents(CoreData coreData) {
+		super(coreData, PANEL_TITLE);
 	}
 	
 	// Elements

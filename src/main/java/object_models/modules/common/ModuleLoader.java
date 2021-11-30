@@ -53,7 +53,7 @@ public class ModuleLoader {
 				return new StateModule(context, driver);
 			}
 		});
-		contextManager.setFirstContext(moduleElements.getContextForModule(contextManager));		
+		contextManager.setFirstContext(moduleElements.getContextForModule());		
 	}
 
 	private void setModuleName() {

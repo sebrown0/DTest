@@ -3,10 +3,8 @@
  */
 package object_models.employee;
 
-import org.openqa.selenium.WebDriver;
-
-import context_manager.ContextManager;
 import object_models.helpers.Closable;
+import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
 
 /**
@@ -16,8 +14,8 @@ import object_models.panels.JsPanelWithIFrame;
 public class EmployeeGridView extends JsPanelWithIFrame implements Closable {
 	public static final String PANEL_TITLE = "Employee Details";
 	
-	public EmployeeGridView(WebDriver driver, ContextManager contextManager) {
-		super(driver, PANEL_TITLE, contextManager);
+	public EmployeeGridView(CoreData coreData) {
+		super(coreData, PANEL_TITLE);
 	}
 
 //	private By byClickLogin = By.cssSelector("[data-original-title='Employee Grid View']");	

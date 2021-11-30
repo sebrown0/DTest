@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextManager;
 import object_models.helpers.Closable;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -25,16 +26,18 @@ public abstract class NavBarElement {
 	private WebElement navBar;
 	private String originalName;
 	
+	protected CoreData coreData;
 	protected WebDriver driver;	
 	protected ContextManager contextManager;
 	protected WebDriverWait wait;
 		
 	private static final By NAV_BAR_LOCATOR = By.cssSelector("ul[class='nav navbar-nav ml-auto'");
 	
-	public NavBarElement(WebDriver driver, String originalName, ContextManager contextManager) {
-		this.driver = driver;			
+	public NavBarElement(CoreData coreData, String originalName) {
+		this.coreData = coreData;
+		this.driver = coreData.getWebDriver();			
 		this.originalName = originalName;
-		this.contextManager = contextManager;
+		this.contextManager = coreData.getContextManager();
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		navBar = driver.findElement(NAV_BAR_LOCATOR);		
 	}

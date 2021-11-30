@@ -4,10 +4,10 @@
 package control_builder;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import controls.ComboSelectFromList;
 import controls.Control;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -18,14 +18,14 @@ import controls.Control;
 public class ControlGetterComboSelectOnly extends ControlGetter {
 	private By resultsBy;
 	
-	public ControlGetterComboSelectOnly(WebDriver driver, By findBy, By resultsBy) {
-		super(driver, findBy);
+	public ControlGetterComboSelectOnly(CoreData coreData, By findBy, By resultsBy) {
+		super(coreData, findBy);
 		this.resultsBy = resultsBy;
 	}
 
 	@Override
 	public Control getControl() {
-		return new ComboSelectFromList(driver, findBy, resultsBy);
+		return new ComboSelectFromList(coreData, findBy, resultsBy);
 	}
 
 }

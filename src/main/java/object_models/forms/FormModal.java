@@ -4,7 +4,6 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -31,6 +30,7 @@ import object_models.helpers.Header;
 import object_models.helpers.IFrame;
 import object_models.helpers.title.PageTitle;
 import object_models.helpers.title.TitleModalForm;
+import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelHeaderBar;
 
 /**
@@ -43,20 +43,23 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 	protected WebDriver driver;
 	protected ContextManager contextManager;
 	protected PageTitle title;
-	protected Logger logger = LogManager.getLogger();
+	protected Logger logger;
 	protected WebDriverWait wait;
 	protected Header header;
 	protected WebElement formContainerElement;
 	protected String expectedTitle;
 	protected By byFormContainer = By.cssSelector("div[class='modal show']");	
 	protected ContextState myContext;	
+	protected CoreData coreData;
 	
 	private PageControl panelControl;
-	
-	public FormModal(WebDriver driver, String expectedTitle, ContextManager contextManager) {
-		this.driver = driver;
+		
+	public FormModal(CoreData coreData, String expectedTitle) {
+		this.coreData = coreData;
+		this.logger = coreData.getLogger();
+		this.driver = coreData.getWebDriver();
 		this.expectedTitle = expectedTitle;		
-		this.contextManager = contextManager;
+		this.contextManager = coreData.getContextManager();
 		
 		wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 		initialise();
@@ -162,7 +165,7 @@ public abstract class FormModal implements ContainerAction, ContextSetter, Conte
 	
 	@Override // ContextSetter
 	public void setContext() {		
-		myContext = new ContextForm(contextManager, this, this);		
+		myContext = new ContextForm(coreData, this, this);		
 		contextManager.setContext(myContext);
 	}	
 	

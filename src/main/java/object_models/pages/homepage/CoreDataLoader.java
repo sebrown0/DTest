@@ -18,9 +18,13 @@ import context_manager.ContextManager;
  */
 public class CoreDataLoader implements CoreData {
 	private WebDriver driver;
+	private ContextManager cm;
+	private Logger logger;
 	
 	public CoreDataLoader(WebDriver driver) {
 		this.driver = driver;
+		this.cm = new ContextManager(driver);
+		this.logger = LogManager.getLogger();
 	}
 
 	@Override
@@ -29,11 +33,11 @@ public class CoreDataLoader implements CoreData {
 	}
 	@Override
 	public ContextManager getContextManager() {
-		return new ContextManager(driver);
+		return cm;
 	}
 	@Override
 	public Logger getLogger() {
-		return LogManager.getLogger();
+		return logger;
 	}
 
 }

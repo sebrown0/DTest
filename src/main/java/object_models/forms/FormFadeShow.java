@@ -6,15 +6,14 @@ package object_models.forms;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextId;
-import context_manager.ContextManager;
 import object_models.helpers.ElementClicker;
 import object_models.helpers.title.TitleModalFadeShow;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -39,14 +38,21 @@ public class FormFadeShow extends FormModal {
 	public static final String MENU_TITLE = "None";
 	public static final String PANEL_TITLE = "None";
 	
-	public FormFadeShow(WebDriver driver, ContextManager contextManager) {
-		super(driver, "None", contextManager);
-		setMyContainers();
+	public FormFadeShow(CoreData coreData) {
+		super(coreData, "None");		
+	}
+	public FormFadeShow(CoreData coreData, String expectedTitle) {
+		super(coreData, expectedTitle);		
 	}
 	
-	public FormFadeShow(WebDriver driver, String expectedTitle, ContextManager contextManager) {
-		super(driver, expectedTitle, contextManager);		
-	}
+//	public FormFadeShow(WebDriver driver, ContextManager contextManager) {
+//		super(driver, "None", contextManager);
+//		setMyContainers();
+//	}
+	
+//	public FormFadeShow(WebDriver driver, String expectedTitle, ContextManager contextManager) {
+//		super(driver, expectedTitle, contextManager);		
+//	}
 	
 	@Override
 	public void waitForLoad() {		

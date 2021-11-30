@@ -3,10 +3,11 @@
  */
 package object_models.helpers.text_writer;
 
-import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -21,8 +22,10 @@ import org.openqa.selenium.WebElement;
  */
 public class TextWriterComboMulti implements TextWriter {
 	private WebElement container;
+	private CoreData coreData;
 	
-	public TextWriterComboMulti(WebElement container) {
+	public TextWriterComboMulti(CoreData coreData, WebElement container) {
+		this.coreData = coreData;
 		this.container = container;
 	}
 
@@ -33,7 +36,7 @@ public class TextWriterComboMulti implements TextWriter {
 			ip.sendKeys(txt);
 			ip.sendKeys(Keys.ENTER);	
 		} catch (Exception e) {
-			LogManager.getLogger().error("Unable to write text to combo [" + e.getMessage() + "]");
+			coreData.getLogger().error("Unable to write text to combo [" + e.getMessage() + "]");
 		}		
 	}
 

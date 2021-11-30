@@ -171,7 +171,7 @@ public class DkGridGlobalAdjustmentsTests {
 	void setDateTo() {				
 		Row<?> row = globalAdjustments.getRowForRowIndex(0).get();
 		Cell cell = globalAdjustments.getGrid().getCell(row, "Date To");
-		CellChecker checker = new CellChecker(homepagePayroll.getWebDriver(), cell);
+		CellChecker checker = new CellChecker(homepagePayroll, cell);
 		DatePickerPopup picker = (DatePickerPopup) checker.getPopupType();		
 		picker.getDatePicker("inline").setDate("01/01/2021");
 		assertEquals("01/01/2021", cell.getCurrentValue().get());

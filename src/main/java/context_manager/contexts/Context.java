@@ -17,6 +17,7 @@ import context_manager.states.StateFactory;
 import context_manager.states.StateFactorySetter;
 import context_manager.states.StateTop;
 import object_models.forms.ContainerAction;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -38,8 +39,8 @@ public abstract class Context implements ContextState {
 	private State currentState;
 	private State searchedState;
 		
-	public Context(ContextManager contextManager, ContextIdGetter idGetter, ContainerAction containerAction) {
-		this.contextManager = contextManager;		
+	public Context(CoreData coreDate, ContextIdGetter idGetter, ContainerAction containerAction) {
+		this.contextManager = coreDate.getContextManager();		
 		this.containerAction = containerAction;
 		
 		setContextId(idGetter);

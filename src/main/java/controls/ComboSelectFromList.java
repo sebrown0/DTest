@@ -6,10 +6,10 @@ package controls;
 import java.util.Optional;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import object_models.element.ListBox;
+import object_models.pages.homepage.CoreData;
 
 /**
  *
@@ -23,8 +23,8 @@ public class ComboSelectFromList extends Combo {
 	private By resultsBy;
 	private ListBox listBox;
 	
-	public ComboSelectFromList(WebDriver driver, By findBy, By resultsBy) {
-		super(driver, findBy);
+	public ComboSelectFromList(CoreData coreData, By findBy, By resultsBy) {
+		super(coreData, findBy);
 		
 		this.resultsBy = resultsBy;
 	}

@@ -106,7 +106,7 @@ public class EmployeeOvertimeTests {
 		Row<?> row = globalAdjustments.getRowForRowIndex(0).get();		
 		Cell cell = globalAdjustments.getGrid().getCell(row, "Employee");
 		
-		CellChecker checker = new CellChecker(homepagePayroll.getWebDriver(), cell);
+		CellChecker checker = new CellChecker(homepagePayroll, cell);
 		PopupComboSelect combo = (PopupComboSelect) checker.getPopupType();
 //		combo.writeText("F F - (F)");
 //		combo.writeText(emp.getFormalName() + " - " + emp.getEmpCode());
@@ -119,7 +119,7 @@ public class EmployeeOvertimeTests {
 		Row<?> row = globalAdjustments.getRowForRowIndex(0).get();		
 		Cell cell = globalAdjustments.getGrid().getCell(row, "Extra Hours");
 				
-		CellChecker checker = new CellChecker(homepagePayroll.getWebDriver(), cell);
+		CellChecker checker = new CellChecker(homepagePayroll, cell);
 		PopupComboSelect combo = (PopupComboSelect) checker.getPopupType();		
 		combo.writeText("Overtime @ 1.5");
 		

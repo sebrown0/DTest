@@ -4,12 +4,12 @@
 package controls;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import object_models.helpers.text_utils.RemoveX;
 import object_models.helpers.text_utils.TextExtractor;
 import object_models.helpers.text_utils.TextSanitiser;
 import object_models.helpers.text_writer.TextWriter;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author Steve Brown
@@ -19,8 +19,8 @@ import object_models.helpers.text_writer.TextWriter;
 public class ComboWriteAndSelect extends ComboSelectFromList {
 	protected TextWriter writer;
 	
-	public ComboWriteAndSelect(WebDriver driver, By findBy, By resultsBy, TextWriter writer) {
-		super(driver, findBy, resultsBy);
+	public ComboWriteAndSelect(CoreData coreData, By findBy, By resultsBy, TextWriter writer) {
+		super(coreData, findBy, resultsBy);
 		
 		this.writer = writer;
 	}

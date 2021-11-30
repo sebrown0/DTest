@@ -1,8 +1,6 @@
 package object_models.left_menu.bulk_updates;
 
-import org.openqa.selenium.WebDriver;
-
-import context_manager.ContextManager;
+import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
 
 /**
@@ -14,8 +12,8 @@ public final class ColaSalaryUpdates extends JsPanelWithIFrame {
 	public static final String PANEL_TITLE = "COLA Updates Grid";
 	public static final String MENU_PARENT_NAME = "Bulk Updates";
 
-	public ColaSalaryUpdates(WebDriver driver, ContextManager contextManager) {
-		super(driver, PANEL_TITLE, contextManager);
+	public ColaSalaryUpdates(CoreData coreData) {
+		super(coreData, PANEL_TITLE);
 	}
 
 	// Elements

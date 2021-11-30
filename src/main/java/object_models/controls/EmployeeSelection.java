@@ -4,13 +4,12 @@
 package object_models.controls;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import context_manager.ContextManager;
 import controls.ComboSelectFromOptions;
 import controls.Control;
 import object_models.forms.FormWithIFrame;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -29,8 +28,8 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 	public static final String MENU_TITLE = "Select from a list of employees within the chosen company";
 	public static final String PANEL_TITLE = "Employees";
 
-	public EmployeeSelection(WebDriver driver, ContextManager contextManager) {
-		super(driver, PANEL_TITLE, "_iframex-IPORTAL_HR_EMPLOYEEDETAILS_EXT", contextManager);
+	public EmployeeSelection(CoreData coreData) {
+		super(coreData, PANEL_TITLE, "_iframex-IPORTAL_HR_EMPLOYEEDETAILS_EXT");
 
 //		super.switchToIFrame();		
 		setMyContainers();		
@@ -53,7 +52,7 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 	
 	private ComboSelectFromOptions getSelectBox(String id) {
 		WebElement select = topLevelContainer.findElement(By.cssSelector("select[name='" + id + "']")); 
-		return new ComboSelectFromOptions(driver, select); 
+		return new ComboSelectFromOptions(super.coreData, select); 
 	}
 
 	@Override

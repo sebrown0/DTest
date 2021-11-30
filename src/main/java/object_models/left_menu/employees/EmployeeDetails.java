@@ -6,10 +6,8 @@ package object_models.left_menu.employees;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import context_manager.ContextManager;
 import context_manager.states.StateIframe;
 import control_builder.ControlData;
 import control_builder.ControlGetterDkGridEmployeeDetails;
@@ -21,6 +19,7 @@ import controls.TextOut;
 import enums.control_names.EmployeeControlNames;
 import enums.control_names.GroupControlNames;
 import object_models.element.TextInOut;
+import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
 
 /**
@@ -35,8 +34,8 @@ public class EmployeeDetails extends JsPanelWithIFrame {
 	public static final String MENU_TITLE = PANEL_TITLE;
 	public static final String MENU_PARENT_NAME = "Employees";
 	
-	public EmployeeDetails(WebDriver driver, ContextManager contextManager) {
-		super(driver, PANEL_TITLE, contextManager);
+	public EmployeeDetails(CoreData coreData) {
+		super(coreData, PANEL_TITLE);
 		
 		this.myTabs = new EmpDetailsTabs();
 		buildMyControls();
@@ -45,11 +44,11 @@ public class EmployeeDetails extends JsPanelWithIFrame {
 	private void buildMyControls() {		
 		var myControls = 
 				List.of(
-						new ControlData(EmployeeControlNames.EMP_CODE, new ControlGetterTextOut(driver, By.id("FORM_ID"))),
-						new ControlData(EmployeeControlNames.EMP_NAME, new ControlGetterTextOut(driver, By.xpath("/html/body/form/div[3]/div[3]/div[2]/input"))),
-						new ControlData(GroupControlNames.SELECT_EMP, new ControlGetterEmployeeSelection(driver, By.cssSelector("i[class='fa fa-list']"), manager)),
-						new ControlData(GroupControlNames.COMBOS, new ControlGetterDropdownCombo(driver, By.cssSelector("i[class='fa fa-window-maximize']"), manager)),
-						new ControlData(GroupControlNames.GRID_VIEW, new ControlGetterDkGridEmployeeDetails(driver, By.cssSelector("i[class='fa fw fa-table']"), manager))
+						new ControlData(EmployeeControlNames.EMP_CODE, new ControlGetterTextOut(coreData, By.id("FORM_ID"))),
+						new ControlData(EmployeeControlNames.EMP_NAME, new ControlGetterTextOut(coreData, By.xpath("/html/body/form/div[3]/div[3]/div[2]/input"))),
+						new ControlData(GroupControlNames.SELECT_EMP, new ControlGetterEmployeeSelection(coreData, By.cssSelector("i[class='fa fa-list']"))),
+						new ControlData(GroupControlNames.COMBOS, new ControlGetterDropdownCombo(coreData, By.cssSelector("i[class='fa fa-window-maximize']"))),
+						new ControlData(GroupControlNames.GRID_VIEW, new ControlGetterDkGridEmployeeDetails(coreData, By.cssSelector("i[class='fa fw fa-table']")))
 				);
 		super.buildPanelControls(myControls);				
 	}
@@ -86,7 +85,7 @@ public class EmployeeDetails extends JsPanelWithIFrame {
 				return new TextInOut(driver, By.id("IDENTITY_CARD_NO"));
 			}	
 			public ComboSelectFromList title() {
-				return new ComboSelectFromList(driver, By.cssSelector("#tab1 > div:nth-child(5) > div:nth-child(2) > span > span.selection > span"), By.id("select2-TITLE-results"));		
+				return new ComboSelectFromList(coreData, By.cssSelector("#tab1 > div:nth-child(5) > div:nth-child(2) > span > span.selection > span"), By.id("select2-TITLE-results"));		
 			}	
 			public TextInOut name() {
 				return new TextInOut(driver, By.id("NAME"));

@@ -7,9 +7,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import context_manager.ContextManager;
 import context_manager.states.StateIframe;
 import object_models.helpers.IFrame;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -20,8 +20,8 @@ public abstract class FormWithIFrame extends FormModal {
 	private IFrame iFrame;
 	private String iFrameName;
 	
-	public FormWithIFrame(WebDriver driver, String expectedTitle, String iFrameName, ContextManager contextManager) {
-		super(driver, expectedTitle, contextManager);	
+	public FormWithIFrame(CoreData coreData, String expectedTitle, String iFrameName) {
+		super(coreData, expectedTitle);	
 	
 		this.iFrameName = iFrameName;
 		

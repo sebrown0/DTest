@@ -4,7 +4,6 @@
 package factories;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextManager;
 import control_builder.ControlData;
@@ -19,6 +18,7 @@ import enums.control_names.CommonControlNames;
 import object_models.dk_grid.KeyStrategyRow;
 import object_models.helpers.text_writer.TextWriterComboDefault;
 import object_models.helpers.text_writer.TextWriterComboMulti;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -29,18 +29,18 @@ import object_models.helpers.text_writer.TextWriterComboMulti;
  * used to build a panel's (or similar) controls.
  */
 public class ControlDataFactory {
-	private WebDriver driver;
+	private CoreData coreData;
 	private ControlData controlData;
 	
-	public ControlDataFactory(WebDriver driver) {
-		this.driver = driver;
+	public ControlDataFactory(CoreData coreData) {
+		this.coreData = coreData;
 	}
 	
 	public <T extends KeyStrategyRow> ControlDataFactory buildGrid(T keyStrategy, ContextManager cm) {
 		controlData = 
 				new ControlData(
 						CommonControlNames.DK_GRID, 
-						new ControlGetterGrid<T>(driver, keyStrategy, cm));		
+						new ControlGetterGrid<T>(coreData, keyStrategy));		
 		
 		return this;
 	}
@@ -49,7 +49,7 @@ public class ControlDataFactory {
 		controlData = 
 				new ControlData(
 						cntrlName, 
-						new ControlGetterButton(driver, containerLoc));
+						new ControlGetterButton(coreData, containerLoc));
 		
 		return this;
 	}
@@ -58,31 +58,33 @@ public class ControlDataFactory {
 		controlData = 
 				new ControlData(
 						cntrlName, 
-						new ControlGetterComboSelectOnly(driver, containerLoc, resultLoc));
+						new ControlGetterComboSelectOnly(coreData, containerLoc, resultLoc));
 		
 		return this;
 	}
 	
 	public ControlDataFactory buildDefaultComboWriteAndSelect(ControlName cntrlName, By containerLoc, By resultLoc) {
-		TextWriterComboDefault writer = new TextWriterComboDefault(driver);
+		TextWriterComboDefault writer = new TextWriterComboDefault(coreData);
 		controlData = 
 				new ControlData(
 						cntrlName, 
-						new ControlGetterComboWriteAndSelect(driver,	containerLoc,	resultLoc, writer));
+						new ControlGetterComboWriteAndSelect(coreData,containerLoc,	resultLoc, writer));
 		
 		return this;
 	}
 	
-	public ControlDataFactory buildMultiComboWriteAndSelect(ControlName cntrlName, By containerLoc, By resultLoc) {		
+	public ControlDataFactory buildMultiComboWriteAndSelect(ControlName cntrlName, By containerLoc, By resultLoc) {
 		TextWriterComboMulti writer = 
-				new TextWriterComboMulti(driver
-							.findElement(containerLoc)
-							.findElement(By.cssSelector("input[class='select2-search__field']")));
+				new TextWriterComboMulti(
+							coreData,
+							coreData.getWebDriver()
+								.findElement(containerLoc)
+								.findElement(By.cssSelector("input[class='select2-search__field']")));
 		
 		controlData = 
 				new ControlData(
 						cntrlName, 
-						new ControlGetterComboWriteAndSelect(driver, containerLoc,	resultLoc, writer));
+						new ControlGetterComboWriteAndSelect(coreData, containerLoc,	resultLoc, writer));
 		
 		return this;
 	}
@@ -91,7 +93,7 @@ public class ControlDataFactory {
 		controlData = 
 				new ControlData(
 						cntrlName, 
-						new ControlGetterTextOut(driver, containerLoc));
+						new ControlGetterTextOut(coreData, containerLoc));
 		
 		return this;
 	}
@@ -100,7 +102,7 @@ public class ControlDataFactory {
 		controlData = 
 				new ControlData(
 						cntrlName, 
-						new ControlGetterSelect(driver, containerLoc));
+						new ControlGetterSelect(coreData, containerLoc));
 		
 		return this;
 	}

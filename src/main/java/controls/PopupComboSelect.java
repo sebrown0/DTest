@@ -12,6 +12,7 @@ import exceptions.ElementDoesNotExistException;
 import object_models.dk_grid.Cell;
 import object_models.dk_grid.Popup;
 import object_models.helpers.text_writer.TextWriterComboDefault;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author Steve Brown
@@ -21,12 +22,12 @@ import object_models.helpers.text_writer.TextWriterComboDefault;
 public final class PopupComboSelect extends ComboWriteAndSelect implements Popup {
 	private Cell cell;
 	
-	public PopupComboSelect(WebDriver driver, WebElement select, Cell cell) {
+	public PopupComboSelect(CoreData coreData, WebElement select, Cell cell) {
 		super(
-				driver, 
+				coreData, 
 				By.cssSelector("span[class='select2-container select2-container--default select2-container--open']"), 
 				By.className("select2-results"), 
-				new TextWriterComboDefault(driver));
+				new TextWriterComboDefault(coreData));
 	
 		this.cell = cell;
 		openSelectionContainer(driver, select);

@@ -1,8 +1,6 @@
 package object_models.left_menu.employees;
 
-import org.openqa.selenium.WebDriver;
-
-import context_manager.ContextManager;
+import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
 
 /**
@@ -14,8 +12,8 @@ public class Banks extends JsPanelWithIFrame {
 	public static final String MENU_TITLE =  "Banks";
 	public static final String MENU_PARENT_NAME = "Employees";
 	
-	public Banks(WebDriver driver, ContextManager contextManager) {
-		super(driver, PANEL_TITLE, contextManager);		
+	public Banks(CoreData coreData) {
+		super(coreData, PANEL_TITLE);
 	}
 
 	// Elements

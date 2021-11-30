@@ -4,19 +4,21 @@
 package context_manager.contexts;
 
 import context_manager.ContextIdGetter;
-import context_manager.ContextManager;
 import object_models.forms.ContainerAction;
+import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelHeaderBar;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public final class ContextPanel extends Context {
 
-	public ContextPanel(ContextManager contextManager, ContextIdGetter idGetter, 
+	public ContextPanel(CoreData coreData, ContextIdGetter idGetter, 
 												JsPanelHeaderBar hdrBar, ContainerAction containerAction) {
-		super(contextManager, idGetter, containerAction);
+		super(coreData, idGetter, containerAction);
 	
 	}	
 

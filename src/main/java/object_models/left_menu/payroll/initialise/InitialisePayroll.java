@@ -6,14 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import control_builder.ControlData;
-import controls.Button;
-import entities.Company;
-import enums.control_names.PayrollControlNames;
 import factories.ControlDataFactory;
 import object_models.dialog.DialogOkCancel;
 import object_models.forms.FormWithIFrame;
-import object_models.helpers.company.LoadCompany;
-import object_models.pages.homepage.CompanyLoader;
 import object_models.pages.homepage.CoreData;
 
 /**
@@ -23,19 +18,16 @@ import object_models.pages.homepage.CoreData;
  */
 public class InitialisePayroll extends FormWithIFrame {	
 	private ControlDataFactory controlFactory;
-	private By byMyLocator;	
-	private CoreData hp;	
-//	private Company currentCompany;
+	private By byMyLocator;
 	
 	public static final String MENU_TITLE = "Initialise Payroll";
 	public static final String PANEL_TITLE = MENU_TITLE;
 	public static final String MENU_PARENT_NAME = "Payroll";	
 
-	public InitialisePayroll(CoreData hp) {
-		super(hp.getWebDriver(), PANEL_TITLE, "_iframex-DEFAULT", hp.getContextManager());
+	public InitialisePayroll(CoreData coreData) {
+		super(coreData, PANEL_TITLE, "_iframex-DEFAULT");
 
-		controlFactory = new ControlDataFactory(driver);
-		this.hp = hp;
+		controlFactory = new ControlDataFactory(coreData);
 		initialise();
 	}
 	

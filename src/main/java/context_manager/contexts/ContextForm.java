@@ -4,17 +4,19 @@
 package context_manager.contexts;
 
 import context_manager.ContextIdGetter;
-import context_manager.ContextManager;
 import object_models.forms.ContainerAction;
+import object_models.pages.homepage.CoreData;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
  */
 public final class ContextForm extends Context {	
 	
-	public ContextForm(ContextManager contextManager, ContextIdGetter idGetter, ContainerAction containerAction) {
-		super(contextManager, idGetter, containerAction); 	
+	public ContextForm(CoreData coreData, ContextIdGetter idGetter, ContainerAction containerAction) {
+		super(coreData, idGetter, containerAction); 	
 	}
 		
 }

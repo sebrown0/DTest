@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import context_manager.ContextManager;
 import control_mapping.MapControl;
 import control_mapping.MapControlCombo;
 import control_mapping.MapControlText;
@@ -19,6 +18,7 @@ import control_mapping.PageMap;
 import control_mapping.PageMapper;
 import dto.Employee;
 import object_models.forms.FormFadeShow;
+import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
 
 /**
@@ -34,8 +34,8 @@ public class EmployeeCreationWizard extends JsPanelWithIFrame {
 	
 	public static final String PANEL_TITLE = "Employee Creation Wizard";		
 	
-	public EmployeeCreationWizard(WebDriver driver, ContextManager contextManager) {
-		super(driver, PANEL_TITLE, contextManager);
+	public EmployeeCreationWizard(CoreData coreData) {
+		super(coreData, PANEL_TITLE);
 		
 		mapper = new PageMapper(new MappingStrategyWizard(driver));
 		pageMap = mapper.mapControls().getPageMap();			
@@ -46,7 +46,7 @@ public class EmployeeCreationWizard extends JsPanelWithIFrame {
 		logger.debug("Creating employee with wizard");		
 		executeSteps(emp);
 		
-		FormFadeShow frm = new FormFadeShow(driver, manager);
+		FormFadeShow frm = new FormFadeShow(super.coreData);
 		frm.close();
 	}
 	// Use this if we want the confirmation form.
@@ -68,7 +68,7 @@ public class EmployeeCreationWizard extends JsPanelWithIFrame {
 		return step.getNext();
 	}	
 	private FormFadeShow getConfirmationForm() {		
-		return new FormFadeShow(driver, manager);
+		return new FormFadeShow(super.coreData);
 	}
 	
 	/*

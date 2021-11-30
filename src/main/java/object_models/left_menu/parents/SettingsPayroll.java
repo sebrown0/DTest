@@ -1,8 +1,6 @@
 package object_models.left_menu.parents;
 
-import org.openqa.selenium.WebDriver;
-
-import context_manager.ContextManager;
+import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
 
 /**
@@ -14,8 +12,8 @@ public final class SettingsPayroll extends JsPanelWithIFrame {
 	public static final String MENU_TITLE = "Settings";
 	public static final String PANEL_TITLE = "Payroll Related Settings";
 
-	public SettingsPayroll(WebDriver driver, ContextManager contextManager) {
-		super(driver, PANEL_TITLE, contextManager);
+	public SettingsPayroll(CoreData coreData) {
+		super(coreData, PANEL_TITLE);
 	}
 
 	// Elements

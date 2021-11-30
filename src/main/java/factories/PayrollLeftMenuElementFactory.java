@@ -4,9 +4,7 @@
 package factories;
 
 import org.apache.logging.log4j.LogManager;
-import org.openqa.selenium.WebDriver;
 
-import context_manager.ContextManager;
 import object_models.forms.ContainerAction;
 import object_models.left_menu.absence_statistics.EmployeeAccruals;
 import object_models.left_menu.absence_statistics.OtherAbsenceStatistics;
@@ -65,14 +63,10 @@ import object_models.pages.homepage.CoreData;
  *
  */
 public class PayrollLeftMenuElementFactory implements MenuElementFactory {	
-	private CoreData hp;
-	private WebDriver driver;
-	private ContextManager contextManager;
+	private CoreData coreData;
 		
-	public PayrollLeftMenuElementFactory(CoreData hp) {
-		this.hp = hp;
-		this.driver = hp.getWebDriver();
-		this.contextManager = hp.getContextManager();
+	public PayrollLeftMenuElementFactory(CoreData coreData) {
+		this.coreData = coreData;
 	}
 
 	@Override // MenuElementFactory
@@ -80,172 +74,172 @@ public class PayrollLeftMenuElementFactory implements MenuElementFactory {
 		ContainerAction element = null;
 		switch (elementName) {		
 		case Documents.MENU_TITLE:				
-			element = new Documents(driver, contextManager);
+			element = new Documents(coreData);
 			break;			
 		case EmployeeList.MENU_TITLE:
-			element = new EmployeeList(driver, contextManager);
+			element = new EmployeeList(coreData);
 			break;
 			
 		// Employees
 		case EmployeeDetails.MENU_TITLE:
-			element = new EmployeeDetails(driver, contextManager);
+			element = new EmployeeDetails(coreData);
 			break;			
 		case ContactNumbers.MENU_TITLE:
-			element = new ContactNumbers(driver, contextManager);
+			element = new ContactNumbers(coreData);
 			break;
 		case Banks.MENU_TITLE:
-			element = new Banks(driver, contextManager);
+			element = new Banks(coreData);
 			break;
 		case SalaryDetails.MENU_TITLE:
-			element = new SalaryDetails(driver, contextManager);
+			element = new SalaryDetails(coreData);
 			break;
 		case CareerProgression.MENU_TITLE:
-			element = new CareerProgression(driver, contextManager);
+			element = new CareerProgression(coreData);
 			break;	
 		case Schedule.MENU_TITLE:
-			element = new Schedule(driver, contextManager);
+			element = new Schedule(coreData);
 			break;	
 		case PermanentAllowances.MENU_TITLE:
-			element = new PermanentAllowances(driver, contextManager);
+			element = new PermanentAllowances(coreData);
 			break;		
 		case PreviousEmployement.MENU_TITLE:
-			element = new PreviousEmployement(driver, contextManager);
+			element = new PreviousEmployement(coreData);
 			break;		
 		case Unions.MENU_TITLE:
-			element = new Unions(driver, contextManager);
+			element = new Unions(coreData);
 			break;
 			
 		// Employee Others
 		case AbsenceEntitlements.MENU_TITLE:
-			element = new AbsenceEntitlements(driver, contextManager);
+			element = new AbsenceEntitlements(coreData);
 			break;
 		case AdvancesAndPayments.MENU_TITLE:
-			element = new AdvancesAndPayments(driver, contextManager);
+			element = new AdvancesAndPayments(coreData);
 			break;	
 		case TaxArrears.MENU_TITLE:
-			element = new TaxArrears(driver, contextManager);
+			element = new TaxArrears(coreData);
 			break;		
 		case Loans.MENU_TITLE:
-			element = new Loans(driver, contextManager);
+			element = new Loans(coreData);
 			break;	
 		case Pensions.MENU_TITLE:
-			element = new Pensions(driver, contextManager);
+			element = new Pensions(coreData);
 			break;	
 		case Covid19Supplement.MENU_TITLE:
-			element = new Covid19Supplement(driver, contextManager);
+			element = new Covid19Supplement(coreData);
 			break;
 			
 		// Additional Hours
 		case ApplyAdditionalHours.MENU_TITLE:
-			element = new ApplyAdditionalHours(driver, contextManager);
+			element = new ApplyAdditionalHours(coreData);
 			break;
 		case Authorisation.MENU_TITLE:
-			element = new Authorisation(driver, contextManager);
+			element = new Authorisation(coreData);
 			break;
 
 		// Payroll
 		case InitialisePayroll.MENU_TITLE:
-			element = new InitialisePayroll(hp);
+			element = new InitialisePayroll(coreData);
 			break;
 		case PayrollDetailsDrillDown.MENU_TITLE:
-			element = new PayrollDetailsDrillDown(driver, contextManager);
+			element = new PayrollDetailsDrillDown(coreData);
 			break;
 		case DetailedAdjustments.MENU_TITLE:
-			element = new DetailedAdjustments(driver, contextManager);
+			element = new DetailedAdjustments(coreData);
 			break;
 		case GlobalAdjustments.MENU_TITLE:
-			element = new GlobalAdjustments(driver, contextManager);
+			element = new GlobalAdjustments(coreData);
 			break;
 		case GlobalAbsences.MENU_TITLE:
-			element = new GlobalAbsences(driver, contextManager);
+			element = new GlobalAbsences(coreData);
 			break;
 		case GlobalExtras.MENU_TITLE:
-			element = new GlobalExtras(driver, contextManager);
+			element = new GlobalExtras(coreData);
 			break;		
 		case CalculatePayroll.MENU_TITLE:
-			element = new CalculatePayroll(driver, contextManager);
+			element = new CalculatePayroll(coreData);
 			break;		
 		case CloseAndLockPayroll.MENU_TITLE:
-			element = new CloseAndLockPayroll(driver, contextManager);
+			element = new CloseAndLockPayroll(coreData);
 			break;		
 		case PayrollDetails.MENU_TITLE:
-			element = new PayrollDetails(driver, contextManager);
+			element = new PayrollDetails(coreData);
 			break;		
 		case ExcelPayrollUploads.MENU_TITLE:
-			element = new ExcelPayrollUploads(driver, contextManager);
+			element = new ExcelPayrollUploads(coreData);
 			break;		
 		case CalculationStatistics.MENU_TITLE:
-			element = new CalculationStatistics(driver, contextManager);
+			element = new CalculationStatistics(coreData);
 			break;						
 			
 		// Employee Statistics
 		case PayslipQuickView.MENU_TITLE:
-			element = new PayslipQuickView(driver, contextManager);
+			element = new PayslipQuickView(coreData);
 			break;
 		case Fs3QuickView.MENU_TITLE:
-			element = new Fs3QuickView(driver, contextManager);
+			element = new Fs3QuickView(coreData);
 			break;
 			
 		// Payroll Statistics
 		case PayrollStatistics.MENU_TITLE:
-			element = new PayrollStatistics(driver, contextManager);
+			element = new PayrollStatistics(coreData);
 			break;
 			
 		// Absence Statistics
 		case EmployeeAccruals.MENU_TITLE:
-			element = new EmployeeAccruals(driver, contextManager);
+			element = new EmployeeAccruals(coreData);
 			break;
 		case OtherAbsenceStatistics.MENU_TITLE:
-			element = new OtherAbsenceStatistics(driver, contextManager);
+			element = new OtherAbsenceStatistics(coreData);
 			break;	
 			
 		// Reports
 		case PayrollReports.MENU_TITLE:
-			element = new PayrollReports(driver, contextManager);
+			element = new PayrollReports(coreData);
 			break;
 		case Payslips.MENU_TITLE:
-			element = new Payslips(driver, contextManager);
+			element = new Payslips(coreData);
 			break;
 		case DirectCredits.MENU_TITLE:
-			element = new DirectCredits(driver, contextManager);
+			element = new DirectCredits(coreData);
 			break;
 		case GlobalPayrollAnalysis.MENU_TITLE:
-			element = new GlobalPayrollAnalysis(driver, contextManager);
+			element = new GlobalPayrollAnalysis(coreData);
 			break;
 		case ChequePrinting.MENU_TITLE:
-			element = new ChequePrinting(driver, contextManager);
+			element = new ChequePrinting(coreData);
 			break;
 		case AdjustmentsReports.MENU_TITLE:
-			element = new AdjustmentsReports(driver, contextManager);
+			element = new AdjustmentsReports(coreData);
 			break;
 		case HrRelatedReports.MENU_TITLE:
-			element = new HrRelatedReports(driver, contextManager);
+			element = new HrRelatedReports(coreData);
 			break;
 		case AbsenceRelatedReports.MENU_TITLE:
-			element = new AbsenceRelatedReports(driver, contextManager);
+			element = new AbsenceRelatedReports(coreData);
 			break;	
 			
 		// Monthly Reports
 		case MonthlyReports.MENU_TITLE:
-			element = new MonthlyReports(driver, contextManager);
+			element = new MonthlyReports(coreData);
 			break;
 			
 		// Yearly Reports
 		case YearlyReports.MENU_TITLE:
-			element = new YearlyReports(driver, contextManager);
+			element = new YearlyReports(coreData);
 			break;
 
 		// Bulk Updates
 		case ColaSalaryUpdates.MENU_TITLE:
-			element = new ColaSalaryUpdates(driver, contextManager);
+			element = new ColaSalaryUpdates(coreData);
 			break;
 		case EmployeeCreation.MENU_TITLE:
-			element = new EmployeeCreation(driver, contextManager);
+			element = new EmployeeCreation(coreData);
 			break;
 
 		// Payroll Settings
 		case SettingsPayroll.MENU_TITLE:
-			element = new SettingsPayroll(driver, contextManager);
+			element = new SettingsPayroll(coreData);
 			break;
 			
 		default:

@@ -4,10 +4,10 @@
 package control_builder;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import controls.Button;
 import controls.Control;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -18,8 +18,8 @@ import controls.Control;
 public class ControlGetterButton extends ControlGetter {
 	private Control btn;
 	
-	public ControlGetterButton(WebDriver driver, By findBy) {
-		super(driver, findBy);
+	public ControlGetterButton(CoreData coreData, By findBy) {
+		super(coreData, findBy);
 		
 		this.btn = new Button(driver, findBy);
 	}

@@ -4,10 +4,10 @@
 package control_builder;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import controls.Control;
 import controls.TextSelect;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -20,13 +20,13 @@ import controls.TextSelect;
  * 
  */
 public final class ControlGetterSelect extends ControlGetter {
-	public ControlGetterSelect(WebDriver driver, By findBy) {
-		super(driver, findBy);		
+	public ControlGetterSelect(CoreData coreData, By findBy) {
+		super(coreData, findBy);		
 	}
 
 	@Override
 	public Control getControl() {
-		return new TextSelect(driver, findBy);
+		return new TextSelect(super.driver, super.findBy);
 	}
 
 }

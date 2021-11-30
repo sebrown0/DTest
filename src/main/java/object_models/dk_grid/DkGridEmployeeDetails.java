@@ -1,9 +1,7 @@
 package object_models.dk_grid;
 
-import org.openqa.selenium.WebDriver;
-
-import context_manager.ContextManager;
 import controls.Control;
+import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
 
 /**
@@ -17,10 +15,10 @@ public final class DkGridEmployeeDetails extends JsPanelWithIFrame implements Co
 	
 	public static final String PANEL_TITLE = "Employee Details";	
 
-	public DkGridEmployeeDetails(WebDriver driver, ContextManager cm) {
-		super(driver, PANEL_TITLE, cm);
+	public DkGridEmployeeDetails(CoreData coreData) {
+		super(coreData, PANEL_TITLE);
 		
-		grid = new DkGrid<>(driver, new FindRowByEmpId(), cm);
+		grid = new DkGrid<>(driver, new FindRowByEmpId(), super.manager);
 	}
 	
 	// Grid

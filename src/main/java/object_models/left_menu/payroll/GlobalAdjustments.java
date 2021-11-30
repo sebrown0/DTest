@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-import context_manager.ContextManager;
 import control_builder.ControlGetterGrid;
 import controls.Control;
 import controls.ControlName;
@@ -19,6 +17,7 @@ import object_models.dk_grid.DkGrid;
 import object_models.dk_grid.FindRowByEmpCode;
 import object_models.dk_grid.Row;
 import object_models.helpers.ElementClicker;
+import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelControl;
 import object_models.panels.JsPanelWithIFrame;
 
@@ -35,10 +34,10 @@ public final class GlobalAdjustments extends JsPanelWithIFrame implements JsPane
 	public static final String PANEL_TITLE = "Global Payroll Adjustments";
 	public static final String MENU_PARENT_NAME = "Payroll";
 	
-	public GlobalAdjustments(WebDriver driver, ContextManager contextManager) {
-		super(driver, PANEL_TITLE, contextManager);
+	public GlobalAdjustments(CoreData coreData) {
+		super(coreData, PANEL_TITLE);
 		
-		controlFactory = new factories.ControlDataFactory(driver);		
+		controlFactory = new factories.ControlDataFactory(coreData);		
 		buildMyControls();
 	}
 	
@@ -104,7 +103,7 @@ public final class GlobalAdjustments extends JsPanelWithIFrame implements JsPane
 		btn.ifPresent(b -> {			
 			if(cntrlName.getName().equalsIgnoreCase(GlobalAdjustmentControlNames.ACCEPT_CRITERIA.getName())) {
 				super.logger.debug("Reloading grid after updating criteria");
-				super.updateControl(CommonControlNames.DK_GRID, new ControlGetterGrid<FindRowByEmpCode>(driver, new FindRowByEmpCode(), manager));
+				super.updateControl(CommonControlNames.DK_GRID, new ControlGetterGrid<FindRowByEmpCode>(coreData, new FindRowByEmpCode()));
 				loadGrid();
 			}
 		});
