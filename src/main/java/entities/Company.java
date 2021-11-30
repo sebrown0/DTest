@@ -16,24 +16,24 @@ import utils.ListTest;
  */
 public class Company {
 	private String name;
-	private ListSetter<PayGroup> ls = new ListSetter<>();
+	private ListSetter<PayGroup> payGroups = new ListSetter<>();
 
 	public Company(String name) {
 		this.name = name;
 	}
 	
 	public void addPayGroup(PayGroup pg) {
-		ls.addValue(pg);		
+		payGroups.addValue(pg);		
 	}
 	public PayGroup getPayGroup(String groupName) {
 		ListTest<PayGroup, String> test = (t,v) -> { return t.getPayGroupName().equals(v); };
-		return ls.getValue(test, groupName);
+		return payGroups.getValue(test, groupName);
 	}	
 	public void setPayGroups(List<PayGroup> payPeriods) {
-		ls.setValues(payPeriods);
+		payGroups.setValues(payPeriods);
 	}
 	public List<PayGroup> getPayGroups() {
-		return ((ListSetter<PayGroup>) ls).getValues();
+		return ((ListSetter<PayGroup>) payGroups).getValues();
 	}
 	public String getName() {
 		return name;
@@ -41,15 +41,11 @@ public class Company {
 	
 	@Override
 	public boolean equals(Object other) {
-    if (other == null) {
-      return false;
-    }
-
-	  if (other.getClass() != this.getClass()) {
+    if (other == null || other.getClass() != this.getClass()) {
 	      return false;
 	  }
   
-	  final Company otherCo = (Company) other;	  
+	  Company otherCo = (Company) other;	  
 		return otherCo.getName().equals(name);
 	}
 	

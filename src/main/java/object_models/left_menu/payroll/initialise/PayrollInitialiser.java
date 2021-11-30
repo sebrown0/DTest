@@ -16,8 +16,10 @@ public class PayrollInitialiser {
 	private Company currentCompany;
 	private Company forCompany;
 		
-	public PayrollInitialiser(CompanyLoader companyLoader) {
+	public PayrollInitialiser(CompanyLoader companyLoader, Company forCompany) {
 		this.companyLoader = companyLoader;
+		this.forCompany = forCompany;
+		
 		setCurrentCompany();
 	}
 
@@ -41,7 +43,7 @@ public class PayrollInitialiser {
 	}
 	
 	private void switchCompanies(Company comp) {
-		currentCompany = companyLoader.loadCompany(comp.getName());
+//		currentCompany = companyLoader.loadCompany(comp.getName());
 	}
 	
 	private void setCurrentCompany() {

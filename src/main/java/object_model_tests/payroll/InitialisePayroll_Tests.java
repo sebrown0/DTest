@@ -3,6 +3,9 @@ package object_model_tests.payroll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
@@ -13,6 +16,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import controls.TextSelect;
 import entities.Company;
+import entities.PayGroup;
+import entities.PayPeriod;
 import enums.control_names.CommonControlNames;
 import enums.control_names.PayrollControlNames;
 import logging.TestResultLogger;
@@ -21,6 +26,7 @@ import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.payroll.initialise.InitialisePayroll;
 import object_models.left_menu.payroll.initialise.PayrollInitialiser;
 import object_models.pages.UserLoginPage;
+import object_models.pages.homepage.CompanyLoader;
 import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
@@ -87,6 +93,14 @@ public final class InitialisePayroll_Tests {
 	
 	@Test	@Order(6)
 	void cooooooooooooooomp() {
+		PayPeriod pp = new PayPeriod(10, LocalDate.of(2021, Month.OCTOBER, 1), LocalDate.of(2021, Month.OCTOBER, 31));
+		PayGroup pg = new PayGroup("Monthly Paygroup", pp);
+		Company co = new Company("Mars Northern Products Ltd");
+//		Company co = new Company("Mars Incorporated Ltd");
+		co.addPayGroup(pg);
+		
+		CompanyLoader loader = hp;
+		loader.loadCompany(co);
 //		PayrollInitialiser init = new PayrollInitialiser();
 //		initPay.closeFormAndContext();
 //		initPay.initialisePayroll(new Company("Mars Northern Products Ltd"), null, null);

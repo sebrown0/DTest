@@ -12,5 +12,5 @@ import entities.Company;
  */
 public interface CompanyLoader {
 	Company getCurrentCompany();
-	Company loadCompany(String compName);
+	Company loadCompany(Company co);
 }

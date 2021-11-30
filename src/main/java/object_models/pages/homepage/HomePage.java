@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextManager;
 import entities.Company;
+import object_models.helpers.company.LoadCompany;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_nav_bar.LeftNavBar;
 import object_models.modules.common.ModuleElements;
@@ -65,20 +66,18 @@ public class HomePage extends Page implements CoreData, CompanyLoader {
 		currentCompany = leftNavBar.getCompany();
 		System.out.println("hp->setCurrentCompany" + currentCompany.getName()); // TODO - remove or log 	
 	}
-//	public void setCurrentCompany(Company currentCompany) {
-//		this.currentCompany = currentCompany;
-//	}
-	
+
 	@Override //CompanyLoader
-	public Company loadCompany(String compName) {
-		 return leftNavBar.loadCompany(compName);
+	public Company loadCompany(Company co) {
+		LoadCompany loader = new LoadCompany(co, this, leftNavBar);
+		return loader.loadCompany();
 	}
 	@Override //CompanyLoader
 	public Company getCurrentCompany() {
 		return leftNavBar.getCompany();
 	}
 	
-	@Override
+	@Override //Page
 	public void close() {
 		driver.quit();
 	}

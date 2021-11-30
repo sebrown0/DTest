@@ -12,6 +12,7 @@ import enums.control_names.PayrollControlNames;
 import factories.ControlDataFactory;
 import object_models.dialog.DialogOkCancel;
 import object_models.forms.FormWithIFrame;
+import object_models.helpers.company.LoadCompany;
 import object_models.pages.homepage.CompanyLoader;
 import object_models.pages.homepage.CoreData;
 
@@ -61,13 +62,11 @@ public class InitialisePayroll extends FormWithIFrame {
 //	}
 		
 	// Actions
-	
-	
-	
-	
+		
 	public DialogOkCancel clickInitialisePayroll() {
-		Button init = (Button) getControl(PayrollControlNames.INIT_PAYROLL).get();
-		init.click();
+//		LoadCompany loader = new LoadCompany(null, hp);
+//		Button init = (Button) getControl(PayrollControlNames.INIT_PAYROLL).get();
+//		init.click();
 		return new DialogOkCancel(driver.findElement(By.cssSelector("div[class='modal-dialog']")));
 	}
 	
