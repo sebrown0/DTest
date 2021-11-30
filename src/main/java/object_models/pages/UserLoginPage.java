@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 
 import entities.User;
 import object_models.modules.common.ModuleElements;
-import object_models.modules.common.ModuleLoaderAtLogin;
+import object_models.modules.common.ModuleLoader;
 import object_models.pages.homepage.CoreData;
 import object_models.pages.homepage.CoreDataLoader;
 import object_models.pages.homepage.HomePage;
@@ -79,8 +79,8 @@ public class UserLoginPage extends LoadablePage {
 	}
 	
 	private HomePage loadModule() {		
-		ModuleLoaderAtLogin moduleLoader = new ModuleLoaderAtLogin(coreData, moduleElements);
-		HomePage hp = moduleLoader.loadModule();			
+		ModuleLoader moduleLoader = new ModuleLoader(coreData, moduleElements);
+		HomePage hp = moduleLoader.loadModule(moduleElements.getModuleName());			
 		return hp;
 	}
 	

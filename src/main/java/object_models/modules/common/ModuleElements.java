@@ -13,7 +13,10 @@ import object_models.top_right_nav_bar.quick_links.QuickLink;
 
 /**
  * @author SteveBrown
+ * @version 1.0
+ * 	Initial
  * @version 1.1
+ * 	Add setCoreData(...)
  * @since 1.0
  *
  * This is passed to ModuleLoader so it can load the 

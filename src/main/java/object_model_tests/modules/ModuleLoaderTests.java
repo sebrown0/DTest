@@ -35,7 +35,7 @@ class ModuleLoaderTests {
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-		driver.quit();
+//		driver.quit();
 	}
 	
 	@Test @Order(1)

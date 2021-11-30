@@ -67,7 +67,7 @@ public abstract class HomePage extends Page implements CoreData, CompanyLoader {
 	public HomePage loadModule(ModuleElements moduleElements) {
 		moduleElements.setCoreData(this);
 		ModuleLoader loader = new ModuleLoader(this, moduleElements);
-		return loader.loadModule();
+		return loader.loadModule(this, moduleElements.getModuleName());
 	}
 	
 	@Override //CompanyLoader
