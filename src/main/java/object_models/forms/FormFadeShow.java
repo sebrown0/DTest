@@ -45,15 +45,6 @@ public class FormFadeShow extends FormModal {
 		super(coreData, expectedTitle);		
 	}
 	
-//	public FormFadeShow(WebDriver driver, ContextManager contextManager) {
-//		super(driver, "None", contextManager);
-//		setMyContainers();
-//	}
-	
-//	public FormFadeShow(WebDriver driver, String expectedTitle, ContextManager contextManager) {
-//		super(driver, expectedTitle, contextManager);		
-//	}
-	
 	@Override
 	public void waitForLoad() {		
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));

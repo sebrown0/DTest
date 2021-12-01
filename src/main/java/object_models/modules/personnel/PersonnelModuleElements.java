@@ -11,7 +11,7 @@ import context_manager.ContextIdGetter;
 import context_manager.ContextManager;
 import context_manager.ContextState;
 import context_manager.contexts.Context;
-import context_manager.contexts.ContextPayroll;
+import context_manager.contexts.ContextPersonnel;
 import context_manager.states.StateFactorySetter;
 import object_models.forms.ContainerAction;
 import object_models.helpers.IFrame;
@@ -36,7 +36,7 @@ import providers.ModuleNames;
  * @since 1.0
  *
  */
-public class PersonnelModuleLoader implements ModuleElements {
+public class PersonnelModuleElements implements ModuleElements {
 	private WebDriver driver;
 	private CoreData coreData;
 	
@@ -69,7 +69,7 @@ public class PersonnelModuleLoader implements ModuleElements {
 
 	@Override
 	public Context getContextForModule() {		
-		return new ContextPayroll(
+		return new ContextPersonnel(
 				coreData, 
 				new ContextIdGetter() {			
 						@Override
@@ -118,7 +118,7 @@ public class PersonnelModuleLoader implements ModuleElements {
 					@Override
 					public ContextState getMyContext() {
 						LogManager.getLogger().error("*** NOT IMPLENTED ***");
-						System.out.println("PersonnelModuleLoader.ContextPayroll.getMyContext() *** NOT IMPLENTED ***"); // TODO - remove or log 	
+						System.out.println("PersonnelModuleElements.ContextPayroll.getMyContext() *** NOT IMPLENTED ***"); // TODO - remove or log 	
 						return null;
 					}					
 				});	

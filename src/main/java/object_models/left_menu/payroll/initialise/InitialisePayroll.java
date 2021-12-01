@@ -6,6 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import control_builder.ControlData;
+import controls.Button;
+import controls.TextSelect;
+import enums.control_names.PayrollControlNames;
 import factories.ControlDataFactory;
 import object_models.dialog.DialogOkCancel;
 import object_models.forms.FormWithIFrame;
@@ -48,18 +51,17 @@ public class InitialisePayroll extends FormWithIFrame {
 		List<ControlData> myControls = payrollControls.getControls();		
 		super.buildFormControls(myControls);				
 	}
-	
-//	private void setCurrentCompany() {
-//		currentCompany = getCompanyLoader().getCurrentCompany();
-//	}
-		
-	// Actions
-		
+			
+	// Actions		
 	public DialogOkCancel clickInitialisePayroll() {
-//		LoadCompany loader = new LoadCompany(null, hp);
-//		Button init = (Button) getControl(PayrollControlNames.INIT_PAYROLL).get();
-//		init.click();
+		Button init = (Button) getControl(PayrollControlNames.INIT_PAYROLL).get();
+		init.click();
 		return new DialogOkCancel(driver.findElement(By.cssSelector("div[class='modal-dialog']")));
+	}
+	
+	public String getPayPeriod() {
+		TextSelect payPer = (TextSelect) getControl(PayrollControlNames.PAY_PERIODS).get();
+		return payPer.getText();
 	}
 	
 	public void closeForm() {

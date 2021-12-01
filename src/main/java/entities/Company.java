@@ -6,7 +6,7 @@ package entities;
 import java.util.List;
 
 import utils.ListSetter;
-import utils.ListTest;
+import utils.ListTestFind;
 
 /**
  * @author SteveBrown
@@ -26,7 +26,7 @@ public class Company {
 		payGroups.addValue(pg);		
 	}
 	public PayGroup getPayGroup(String groupName) {
-		ListTest<PayGroup, String> test = (t,v) -> { return t.getPayGroupName().equals(v); };
+		ListTestFind<PayGroup, String> test = (t,v) -> { return t.getPayGroupName().equals(v); };
 		return payGroups.getValue(test, groupName);
 	}	
 	public void setPayGroups(List<PayGroup> payPeriods) {

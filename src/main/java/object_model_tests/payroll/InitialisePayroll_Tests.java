@@ -24,10 +24,8 @@ import logging.TestResultLogger;
 import object_models.dialog.DialogOkCancel;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.payroll.initialise.InitialisePayroll;
-import object_models.left_menu.payroll.initialise.PayrollInitialiser;
 import object_models.pages.UserLoginPage;
-import object_models.pages.homepage.CompanyLoader;
-import object_models.pages.homepage.HomePage;
+import object_models.pages.homepage.HomePagePayroll;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import test_data.UserProvider;
@@ -45,13 +43,13 @@ import xml_reader.config_file.ConfigReader;
 	LoginPageResolverPayroll.class, 
 	TestResultLogger.class })
 public final class InitialisePayroll_Tests {
-	private static HomePage hp;
+	private static HomePagePayroll hp;
 	private static LeftMenu leftMenu;	
 	private static InitialisePayroll initPay;
 	
 	@BeforeAll
 	static void setUpBeforeClass(ConfigReader configReader, UserLoginPage userLogin) throws Exception {
-		hp = userLogin.loginValidUser(UserProvider.userPortal());
+		hp = (HomePagePayroll) userLogin.loginValidUser(UserProvider.userPortal());
 		leftMenu = hp.getLeftMenu();
 		// Load initialise pay from container.
 		leftMenu
@@ -93,18 +91,13 @@ public final class InitialisePayroll_Tests {
 	
 	@Test	@Order(6)
 	void cooooooooooooooomp() {
-		PayPeriod pp = new PayPeriod(10, LocalDate.of(2021, Month.OCTOBER, 1), LocalDate.of(2021, Month.OCTOBER, 31));
+		PayPeriod pp = new PayPeriod(10, true, LocalDate.of(2021, Month.OCTOBER, 1), LocalDate.of(2021, Month.OCTOBER, 31));
 		PayGroup pg = new PayGroup("Monthly Paygroup", pp);
-		Company co = new Company("Mars Northern Products Ltd");
-//		Company co = new Company("Mars Incorporated Ltd");
+//		Company co = new Company("Mars Northern Products Ltd");
+		Company co = new Company("Mars Incorporated Ltd");
 		co.addPayGroup(pg);
 		
-		CompanyLoader loader = hp;
-		loader.loadCompany(co);
-//		PayrollInitialiser init = new PayrollInitialiser();
-//		initPay.closeFormAndContext();
-//		initPay.initialisePayroll(new Company("Mars Northern Products Ltd"), null, null);
-//		initPay.initialisePayroll(new Company("Mars Incorporated Ltd"), null, null);
+		hp.initialisePayroll(co);		
 	}
 	
 	@Test	@Order(15) //TODO - update test num!!!

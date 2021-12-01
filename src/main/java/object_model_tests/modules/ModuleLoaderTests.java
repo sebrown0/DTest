@@ -11,7 +11,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.WebDriver;
 
 import object_models.modules.payroll.PayrollModuleElements;
-import object_models.modules.personnel.PersonnelModuleLoader;
+import object_models.modules.personnel.PersonnelModuleElements;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import object_models.pages.homepage.HomePagePersonnel;
@@ -49,7 +49,7 @@ class ModuleLoaderTests {
 	
 	@Test @Order(2)
 	void switchToPersonnel() {
-		HomePagePersonnel personnel = (HomePagePersonnel) hp.loadModule(new PersonnelModuleLoader());
+		HomePagePersonnel personnel = (HomePagePersonnel) hp.loadModule(new PersonnelModuleElements());
 		assertTrue(personnel != null);
 	}
 	

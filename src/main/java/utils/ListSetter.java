@@ -11,6 +11,9 @@ import org.apache.logging.log4j.LogManager;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
+ * @version 1.1
+ * 	Add getValue for ListTestPredicate. 
  * @since 1.0
  * @param T the objects in the list.
  * 
@@ -35,10 +38,21 @@ public class ListSetter <T extends Object> {
 		}		
 	}
 	
-	public <V extends Object> T getValue(ListTest<T,V> listTest, V v) {
+	public <V extends Object> T getValue(ListTestFind<T,V> listTest, V v) {
 		T res = null;
 		for (T t : values) {
 			if(listTest.test(t,v)) {
+				res = t;
+				break;
+			}
+		}		
+		return res;
+	}	
+	
+	public T getValue(ListTestPredicate<T> listTest) {
+		T res = null;
+		for (T t : values) {
+			if(listTest.test(t) == true) {
 				res = t;
 				break;
 			}

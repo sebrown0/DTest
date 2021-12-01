@@ -83,5 +83,9 @@ public class UserLoginPage extends LoadablePage {
 		HomePage hp = moduleLoader.loadModule(moduleElements.getModuleName());			
 		return hp;
 	}
+
+	public CoreData getCoreData() {
+		return coreData;
+	}
 	
 }

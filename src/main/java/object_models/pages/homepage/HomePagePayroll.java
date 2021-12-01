@@ -3,6 +3,9 @@
  */
 package object_models.pages.homepage;
 
+import entities.Company;
+import object_models.left_menu.payroll.initialise.PayrollInitialiser;
+
 /**
  * @author SteveBrown
  * @version 1.0
@@ -11,10 +14,14 @@ package object_models.pages.homepage;
 public final class HomePagePayroll extends HomePage {
 
 	public HomePagePayroll(CoreData coreData) {
-		super(coreData);
-		// TODO Auto-generated constructor stub
+		super(coreData);		
 	}
 
+	public void initialisePayroll(Company forCompany) {
+		PayrollInitialiser initialiser = new PayrollInitialiser(this, forCompany, super.getLeftMenu());
+		initialiser.initialisePayroll();
+	}
+	
 	@Override
 	public String getModuleName() {
 		return "Payroll";

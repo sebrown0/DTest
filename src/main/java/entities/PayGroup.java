@@ -6,7 +6,8 @@ package entities;
 import java.util.List;
 
 import utils.ListSetter;
-import utils.ListTest;
+import utils.ListTestFind;
+import utils.ListTestPredicate;
 
 /**
  * @author SteveBrown
@@ -30,8 +31,12 @@ public class PayGroup {
 		ls.addValue(pg);		
 	}
 	public PayPeriod getPayPeriod(int periodNum) {
-		ListTest<PayPeriod, Integer> test = (t,v) -> { return t.getCurrentPeriodNum() == v; };
+		ListTestFind<PayPeriod, Integer> test = (t,v) -> { return t.getPeriodNum() == v; };
 		return ls.getValue(test, periodNum);
+	}
+	public PayPeriod getCurrentPayPeriod() {
+		ListTestPredicate<PayPeriod> test = (t) -> { return t.isCurrentPayPeriod(); };
+		return ls.getValue(test);
 	}	
 	public void setPayPeriods(List<PayPeriod> payPeriods) {
 		ls.setValues(payPeriods);
