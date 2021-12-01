@@ -15,12 +15,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
+ * @version 1.1
+ *  Add isAvailable().
  * @since 1.0
  *
  */
 public class Button implements Control {
 	private WebDriver driver;
 	private By btnLocator;
+	private WebElement btn;
 	
 	public Button(WebDriver driver, By btnLocator) {
 		this.driver = driver;
@@ -28,12 +32,21 @@ public class Button implements Control {
 	}
 
 	public void click() {		
+		if(isAvailable()) {
+			btn.click();
+		}
+	}
+
+	@Override
+	public boolean isAvailable() {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		try {
-			WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(btnLocator));
-			btn.click();	
+			btn = wait.until(ExpectedConditions.elementToBeClickable(btnLocator));
+			return true;
 		} catch (Exception e) {
-			LogManager.getLogger().error("Unable to click btn [" + e + "]");
+			LogManager.getLogger().error("Unable to find btn [" + e + "]");
+			return false;
 		}		
 	}
+	
 }

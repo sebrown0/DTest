@@ -64,17 +64,31 @@ public class ModuleLoader {
 		if (driver == null) {	logger.error("Null driver"); }
 	}
 		
-	public HomePage loadModule(HomePage current, String modName) {
-		HomePage res = loadModule(modName);
-		return (res == null) ? current : res;
-	}
+//	public HomePage forceLoadModule(String modName) {		
+//		if(!ModuleChecker.isCurrentModule(modName, driver)){
+//			moduleElements.getQuickLinkToLoadModule().clickMe();				
+//		}	
+//		return load();
+//	}	
+//	public HomePage loadModule(HomePage current, String modName) {
+//		if(!ModuleChecker.isCurrentModule(modName, driver)){
+//			moduleElements.getQuickLinkToLoadModule().clickMe();				
+//		}	
+//		return load();
+////		HomePage res = loadModule(modName);
+////		return (res == null) ? current : res;
+//	}
 	public HomePage loadModule(String modName) {
-		if(ModuleChecker.isCurrentModule(modName, driver)){		
-			return null;
-		}else {
-			moduleElements.getQuickLinkToLoadModule().clickMe();
-			return load();	
-		}		
+		if(!ModuleChecker.isCurrentModule(modName, driver)){
+			moduleElements.getQuickLinkToLoadModule().clickMe();				
+		}	
+		return load();
+//		if(ModuleChecker.isCurrentModule(modName, driver)){		
+//			return null;
+//		}else {
+//			moduleElements.getQuickLinkToLoadModule().clickMe();
+//			return load();	
+//		}		
 	}	
 	private HomePage load() {
 		hp = moduleElements.getHomePage();		

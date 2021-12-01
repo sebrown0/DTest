@@ -10,6 +10,9 @@ import java.util.Locale;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
+ * @version 1.1
+ * 	Add getPeriodAsString() & isCurrentPayPeriod().
  * @since 1.0
  */
 public class PayPeriod {
@@ -31,12 +34,20 @@ public class PayPeriod {
 		return periodNum;
 	}
 	public String getPayPeriodDateWithPeriodNum() {
-		return String.valueOf(periodNum) + " - " + getLongPayPeriodDate();
+		return getPeriodAsString() + " - " + getLongPayPeriodDate();
+	}
+	private String getPeriodAsString() {
+		if(periodNum < 10) {
+			return String.valueOf("0" + periodNum);
+		}else {
+			return String.valueOf(periodNum);
+		}
 	}
 	public String getLongPayPeriodDate() {		
 		String date = "";
 		try {
-			date = startDate.format(dtf) + " to " + endDate.format(dtf);	
+			// 2 spaces either side of 'to' as this is the way it comes from the form.
+			date = startDate.format(dtf) + "  to  " + endDate.format(dtf); 	
 		} catch (Exception e) {
 			
 		}		

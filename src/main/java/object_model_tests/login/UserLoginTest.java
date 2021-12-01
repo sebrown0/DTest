@@ -10,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
 
+import entities.Company;
 import entities.User;
 import logging.TestResultLogger;
 import object_models.modules.payroll.PayrollModuleElements;
@@ -44,7 +45,7 @@ class UserLoginTest { // <- TEST SUITE
 	@Tag("T3834")	
 	void validUserLogin(User user) {		
 		// Supply valid user, login and check home page is loaded.
-		UserLoginPage userLogin = new UserLoginPage(driver, new PayrollModuleElements()); // <- POM		
+		UserLoginPage userLogin = new UserLoginPage(driver, new PayrollModuleElements(new Company("Mars Incorporated Ltd"))); // <- POM		
 		HomePage hp = userLogin.loginValidUser(user); // <- FLUENT API
 		assertTrue(hp != null); // <- TEST VERIFICATION & TEST LOGGING
 	}

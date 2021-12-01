@@ -13,6 +13,7 @@ import context_manager.ContextState;
 import context_manager.contexts.Context;
 import context_manager.contexts.ContextPayroll;
 import context_manager.states.StateFactorySetter;
+import entities.Company;
 import object_models.forms.ContainerAction;
 import object_models.helpers.IFrame;
 import object_models.helpers.title.PageTitle;
@@ -43,7 +44,12 @@ import providers.ModuleNames;
 public class PayrollModuleElements implements ModuleElements {
 	private WebDriver driver;
 	private CoreData coreData;
-	
+	private Company company;
+		
+	public PayrollModuleElements(Company company) {
+		this.company = company;
+	}
+
 	@Override
 	public void setCoreData(CoreData coreData) {
 		this.coreData = coreData;
@@ -130,7 +136,12 @@ public class PayrollModuleElements implements ModuleElements {
 
 	@Override
 	public HomePage getHomePage() {
-		return new HomePagePayroll(coreData);
+		return new HomePagePayroll(coreData, company);
+	}
+
+	@Override
+	public Company getCompany() {
+		return company;
 	}
 		
 }

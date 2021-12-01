@@ -5,6 +5,7 @@ package object_models.modules.common;
 
 import context_manager.ContextManager;
 import context_manager.contexts.Context;
+import entities.Company;
 import object_models.left_menu.common.LeftMenu;
 import object_models.pages.homepage.CoreData;
 import object_models.pages.homepage.HomePage;
@@ -32,4 +33,5 @@ public interface ModuleElements {
 	NavBarElementStrategy getElementStrategy(ContextManager contextManager);
 	QuickLink getQuickLinkToLoadModule();	
 	String getModuleName();	
+	Company getCompany();
 }

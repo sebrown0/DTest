@@ -3,6 +3,7 @@
  */
 package object_models.controls;
 
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -57,6 +58,12 @@ public class DropdownCombo extends FormWithIFrame implements Control {
 	public ContextId getContextId() {		
 		return new ContextId(PANEL_TITLE, "None");
 	}
+	
+	@Override // Control
+	public boolean isAvailable() {
+		LogManager.getLogger().error("NOT IMPLEMENTED");		
+		return false;
+	}	
 	// Elements
 	// Actions
 }

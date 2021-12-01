@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import exceptions.StaleAnchorException;
 import logging.TestResultLogger;
 import object_models.forms.ContainerAction;
 import object_models.helpers.title.PageTitle;
@@ -102,7 +103,7 @@ public class LeftMenuChildren_Payroll_Tests {
 	}
 		
 	@Test
-	void click_and_get_EmployeeList() {
+	void click_and_get_EmployeeList() throws StaleAnchorException {
 		ContainerAction empList = menu.clickAndLoad(EmployeeList.class).get();
 		PageTitle title = empList.getTitle();
 		assertEquals(title.getExpected(), title.getActual());
@@ -110,7 +111,7 @@ public class LeftMenuChildren_Payroll_Tests {
 	}
 	
 	@Test
-	void click_and_get_Documents() {
+	void click_and_get_Documents() throws StaleAnchorException {
 		ContainerAction doc = menu.clickAndLoad(Documents.class).get();
 		PageTitle title = doc.getTitle();
 		assertEquals(title.getExpected(), title.getActual());
@@ -298,7 +299,7 @@ public class LeftMenuChildren_Payroll_Tests {
 	}
 
 	@Test
-	void click_and_get_PayrollStatistics() {
+	void click_and_get_PayrollStatistics() throws StaleAnchorException {
 		ContainerAction obj = menu.clickAndLoad(PayrollStatistics.class).get();
 		PageTitle title = obj.getTitle();
 		assertEquals(title.getExpected(), title.getActual());
@@ -366,13 +367,13 @@ public class LeftMenuChildren_Payroll_Tests {
 	}
 
 	@Test
-	void load_and_check_MonthlyReports() {
+	void load_and_check_MonthlyReports() throws StaleAnchorException {
 		ContainerAction obj = loadAndCheckTitle(MonthlyReports.class).get();
 		closePanel(obj);
 	}
 
 	@Test
-	void load_and_check_YearlyReports() {
+	void load_and_check_YearlyReports() throws StaleAnchorException {
 		ContainerAction obj = loadAndCheckTitle(YearlyReports.class).get();
 		closePanel(obj);
 	}
@@ -390,7 +391,7 @@ public class LeftMenuChildren_Payroll_Tests {
 	}
 
 	@Test
-	void load_and_check_PayrollSettings() {
+	void load_and_check_PayrollSettings() throws StaleAnchorException {
 		ContainerAction obj = loadAndCheckTitle(SettingsPayroll.class).get();
 		closePanel(obj);
 	}
@@ -403,14 +404,19 @@ public class LeftMenuChildren_Payroll_Tests {
 	/* 
 	 * Helpers below
 	 */
-	private Optional<ContainerAction> loadAndCheckTitle(String prntName, Class<?> clazz) {	
-		Optional<ContainerAction> obj = menu.clickParent(prntName).clickAndLoad(clazz);
-		PageTitle title = obj.get().getTitle();
-		assertEquals(title.getExpected(), title.getActual());
-		return obj;
+	private Optional<ContainerAction> loadAndCheckTitle(String prntName, Class<?> clazz) {
+		try {
+			Optional<ContainerAction> obj = menu.clickParent(prntName).clickAndLoad(clazz);
+			PageTitle title = obj.get().getTitle();
+			assertEquals(title.getExpected(), title.getActual());
+			return obj;	
+		} catch (Exception e) {
+			return null;
+		}
+		
 	}
 	
-	private Optional<ContainerAction> loadAndCheckTitle(Class<?> clazz) {
+	private Optional<ContainerAction> loadAndCheckTitle(Class<?> clazz) throws StaleAnchorException {
 		Optional<ContainerAction> obj = menu.clickAndLoad(clazz);
 		PageTitle title = obj.get().getTitle();
 		assertEquals(title.getExpected(), title.getActual());
@@ -445,7 +451,12 @@ public class LeftMenuChildren_Payroll_Tests {
 	}
 	
 	private void closeParent(String prntName) {
-		menu.clickParent(prntName);
+		try {
+			menu.clickParent(prntName);
+		} catch (StaleAnchorException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 		
 }

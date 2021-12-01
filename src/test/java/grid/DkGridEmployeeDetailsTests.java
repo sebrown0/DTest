@@ -54,9 +54,15 @@ public class DkGridEmployeeDetailsTests {
 	}		
 	
 	private static void loadGrid() {
-		Optional<ContainerAction> obj = menuPayroll
-				.clickParent(EmployeeDetails.MENU_PARENT_NAME)
-				.clickAndLoad(EmployeeDetails.class);
+		Optional<ContainerAction> obj = null;
+		try {
+			obj = menuPayroll
+					.clickParent(EmployeeDetails.MENU_PARENT_NAME)
+					.clickAndLoad(EmployeeDetails.class);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		EmployeeDetails empDetails = (EmployeeDetails) obj.get();
 		

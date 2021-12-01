@@ -44,5 +44,11 @@ public class TextOut implements Control {
 			LogManager.getLogger().error("Could not get text by value");
 		}
 		return "";
+	}
+
+	@Override
+	public boolean isAvailable() {
+		LogManager.getLogger().error("NOT IMPLEMENTED");		
+		return false;
 	}	
 }

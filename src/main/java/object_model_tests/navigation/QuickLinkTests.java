@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
+import entities.Company;
 import exceptions.NullDriverException;
 import object_models.modules.payroll.PayrollModuleElements;
 import object_models.pages.UserLoginPage;
@@ -30,7 +31,7 @@ class QuickLinkTests {
 		/*
 		 * ADD CONTEXT MANAGER
 		 */
-		UserLoginPage userLogin = new UserLoginPage(driver, new PayrollModuleElements());
+		UserLoginPage userLogin = new UserLoginPage(driver, new PayrollModuleElements(new Company("Mars Incorporated Ltd")));
 		/*
 		 * ADD CONTEXT MANAGER
 		 */

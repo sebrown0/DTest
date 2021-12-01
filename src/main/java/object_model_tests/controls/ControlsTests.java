@@ -51,7 +51,7 @@ class ControlsTests {
 	private static PageControl empDetailsPageControl;
 	
 	@BeforeAll	
-	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
+	public static void setup(ConfigReader configReader, UserLoginPage userLogin) throws Exception {
 		// Login to the homepage
 		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());		
 		// Load the menu.

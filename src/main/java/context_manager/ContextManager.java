@@ -78,6 +78,10 @@ public class ContextManager implements CurrentContext {
 		Optional<ContextState> first = getContextThatIsFirstContext();
 		first.ifPresentOrElse(f -> {			 		
 			stateManager.switchToStateInContext(StateLeftMenu.class, f);	
+			/*
+			 * If problems are encountered put a wait in here.
+			 * DriverWait.getElementAfterWait(driver, By.id("#nav-accordion"), Duration.ofNanos(1));
+			 */
 		},
 			new Runnable() {				
 				@Override

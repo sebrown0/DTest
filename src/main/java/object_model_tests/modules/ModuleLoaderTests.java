@@ -10,11 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.WebDriver;
 
+import entities.Company;
 import object_models.modules.payroll.PayrollModuleElements;
-import object_models.modules.personnel.PersonnelModuleElements;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
-import object_models.pages.homepage.HomePagePersonnel;
 import providers.XMLFileProvider;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
@@ -41,16 +40,16 @@ class ModuleLoaderTests {
 	@Test @Order(1)
 	void loadHomePage_withPayrollModule() {
 		// Get a login page, with the required module loaded.
-		userLogin = new UserLoginPage(driver, new PayrollModuleElements());
+		userLogin = new UserLoginPage(driver, new PayrollModuleElements(new Company("Mars Incorporated Ltd")));
 		// Get a home page after successful login
 		hp = userLogin.loginValidUser(UserProvider.userPortal());		
 		assertTrue(hp != null);
 	}
 	
-	@Test @Order(2)
-	void switchToPersonnel() {
-		HomePagePersonnel personnel = (HomePagePersonnel) hp.loadModule(new PersonnelModuleElements());
-		assertTrue(personnel != null);
-	}
+//	@Test @Order(2)
+//	void switchToPersonnel() {
+//		HomePagePersonnel personnel = (HomePagePersonnel) hp.loadModule(new PersonnelModuleElements(new Company("Mars Incorporated Ltd")));
+//		assertTrue(personnel != null);
+//	}
 	
 }

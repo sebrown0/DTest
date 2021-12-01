@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchSessionException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 import context_manager.ContextManager;
@@ -32,28 +33,28 @@ public class LeftMenuActions {
 	private Map<String, WebElement> anchors;
 	private LeftMenuMapper menuMapper;	
 	private MenuContextChecker menuContextChecker;
-	private CoreData hp;
+	private CoreData coreData;
 	
-	public LeftMenuActions(CoreData hp, Map<String, WebElement> anchors, LeftMenuMapper menuMapper) {
-		this.hp = hp;
-		this.logger = hp.getLogger();
-		this.contextManager = hp.getContextManager();
+	public LeftMenuActions(CoreData coreData, Map<String, WebElement> anchors, LeftMenuMapper menuMapper) {
+		this.coreData = coreData;
+		this.logger = coreData.getLogger();
+		this.contextManager = coreData.getContextManager();
 		this.anchors = anchors;
 		this.menuMapper = menuMapper;
 		this.menuContextChecker = new MenuContextChecker(contextManager);
 	}
 	
-	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
+	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) throws Exception{		
 		contextManager.switchToLeftMenu();		// Puts the context @ Module.StateLeftMenu
 		ClassFieldGetter fieldGetter = new ClassFieldGetter(clazz);
 		return getMenuItemAsContainer(fieldGetter);
 	}
 
-	private Optional<ContainerAction> getMenuItemAsContainer(ClassFieldGetter fieldGetter) {
+	private Optional<ContainerAction> getMenuItemAsContainer(ClassFieldGetter fieldGetter) throws Exception{
 		Optional<String> prntName = fieldGetter.getParentName();
 		Optional<String> menuItem = fieldGetter.getMenuItemName();
 		
-		if(isChildMenuItem(prntName, menuItem)) {		
+		if(isChildMenuItem(prntName, menuItem)) {			
 			return clickParent(prntName.get()).loadElement(fieldGetter);			
 		}else if (isParentMenuItem(prntName)) {
 			return loadElement(fieldGetter);
@@ -107,11 +108,9 @@ public class LeftMenuActions {
 					elementContainer = menuContextChecker.getExistingContainerFromContext(name, cs.get());
 					menuContextChecker.setExistingAsCurrent(elementContainer);					
 				}else { 	
-//					e.click(); // didn;t work here
 					elementContainer = Optional.of(getNewElementContainer(name));
 					logger.debug("[" + elementContainer.get().toString() + "] does not exist. Creating now");
-				}
-											
+				}											
 			} catch (Exception ex) {
 				logger.error("Could not get menu element [" + name + "] [" + ex.getMessage() + "]");				 	
 			}	
@@ -121,19 +120,43 @@ public class LeftMenuActions {
 		return elementContainer; 
 	}
 		
-	public LeftMenuActions clickParent(String prntName) {
+	public LeftMenuActions clickParent(String prntName) throws Exception, StaleElementReferenceException {
 		contextManager.switchToLeftMenu();		
 		WebElement activeMenuItem = getActiveMenuItem();
 		if(activeMenuItem != null) {
 			String currentlyActive = activeMenuItem.getText().trim();			
 			if(!currentlyActive.equalsIgnoreCase(prntName)) {
+//				clickAnchor(prntName,1);
 				anchors.get(prntName).click();
 			}	
 		}	else {
-			anchors.get(prntName).click();
+//			clickAnchor(prntName,1);
+			WebElement app = coreData.getWebDriver().findElement(By.cssSelector("div[class='app-body']"));
+			WebElement nav = app.findElement(By.id("nav-accordion"));
+			System.out.println("->" + nav.getAttribute("class")); // TODO - remove or log 	
+			WebElement anc = anchors.get(prntName);
+			System.out.println("->" + anc.toString()); // TODO - remove or log 	
+			anc.click();
 		}
 		return this;
 	}
+	
+//	private void clickAnchor(String prntName, int tryNum) throws StaleElementReferenceException {
+//		final int MAX_TRIES = 5;
+//		if(tryNum <= MAX_TRIES) {
+//			try {
+//				System.out.println("->" + coreData.getWebDriver().findElement(By.id("nav-accordion")).getAttribute("class")); // TODO - remove or log 	
+//				WebElement anchor = anchors.get(prntName); 
+//				anchor.click();
+//			} catch (StaleElementReferenceException e) {
+//				//Reload
+//				menuMapper.map();
+//				throw new StaleElementReferenceException("");
+//			} catch (Exception e) {
+//				System.out.println("->" + e); // TODO - remove or log
+//			}	
+//		}		
+//	}
 	
 	public WebElement getActiveMenuItem() {
 		WebElement activeMenuItem = null;
@@ -144,13 +167,13 @@ public class LeftMenuActions {
 		} catch (NoSuchSessionException e) {
 			logger.error("No session found. Driver has probably been closed [" + e.getMessage() + "]"); 	
 		} catch (Exception e) {
-			logger.error("Failed to find active menu element [" + e.getMessage() + "]");
+			logger.debug("No active menu element");
 		}
 		return activeMenuItem;
 	}
 	
 	private ContainerAction getNewElementContainer(String elementName) {
-		MenuElementFactory elementFactory = new PayrollLeftMenuElementFactory(hp); 
+		MenuElementFactory elementFactory = new PayrollLeftMenuElementFactory(coreData); 
 		return elementFactory.getElementForName(elementName);		
 	}
 }

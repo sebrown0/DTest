@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 
+import entities.Company;
 import exceptions.NullDriverException;
 import logging.TestResultLogger;
 import object_models.modules.payroll.PayrollModuleElements;
@@ -43,7 +44,7 @@ class TopRightNavBar_Personnel_ElementsTests {
 		// Get a web driver as specified in the config.xml		
 		driver = configReader.getDriver();
 		// Get a login page, with the required module loaded.
-		userLogin = new UserLoginPage(driver, new PayrollModuleElements());
+		userLogin = new UserLoginPage(driver, new PayrollModuleElements(new Company("Mars Incorporated Ltd")));
 		// Get a home page after successful login
 		hp = userLogin.loginValidUser(UserProvider.userPortal());		
 	}

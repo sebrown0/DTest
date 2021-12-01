@@ -12,5 +12,5 @@ import entities.Company;
  */
 public interface CompanyLoader {
 	Company getCurrentCompany();
-	Company loadCompany(Company co);
+	HomePage loadCompany(Company co);
 }

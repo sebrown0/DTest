@@ -88,16 +88,25 @@ public final class InitialisePayroll_Tests {
 		DialogOkCancel okCancel = initPay.clickInitialisePayroll();
 		okCancel.getBtnCancel().ifPresent(b -> b.click());
 	}
-	
+
 	@Test	@Order(6)
 	void cooooooooooooooomp() {
 		PayPeriod pp = new PayPeriod(10, true, LocalDate.of(2021, Month.OCTOBER, 1), LocalDate.of(2021, Month.OCTOBER, 31));
-		PayGroup pg = new PayGroup("Monthly Paygroup", pp);
-//		Company co = new Company("Mars Northern Products Ltd");
 		Company co = new Company("Mars Incorporated Ltd");
-		co.addPayGroup(pg);
-		
-		hp.initialisePayroll(co);		
+		PayGroup pg = new PayGroup("Monthly Paygroup", pp);		
+
+		co.addPayGroup(pg);		
+		hp.initialisePayroll(co, pg);		
+	}
+	
+	@Test	@Order(7)
+	void cooooooooomp() {		
+		PayPeriod pp = new PayPeriod(02, true, LocalDate.of(2021, Month.JANUARY, 29), LocalDate.of(2021, Month.FEBRUARY, 25));
+		Company co = new Company("Mars Northern Products Ltd");		
+		PayGroup pg = new PayGroup("Fourweekly", pp);		
+
+		co.addPayGroup(pg);		
+		hp.initialisePayroll(co, pg);		
 	}
 	
 	@Test	@Order(15) //TODO - update test num!!!

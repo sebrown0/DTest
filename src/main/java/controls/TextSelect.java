@@ -41,4 +41,10 @@ public class TextSelect implements Control {
 		}
 		return "";
 	}	
+	
+	@Override
+	public boolean isAvailable() {
+		LogManager.getLogger().error("NOT IMPLEMENTED");		
+		return false;
+	}	
 }

@@ -17,6 +17,7 @@ import object_models.pages.homepage.CoreData;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
  * @since 1.0
  */
 public class InitialisePayroll extends FormWithIFrame {	
@@ -38,7 +39,6 @@ public class InitialisePayroll extends FormWithIFrame {
 	private void initialise() {
 		setMyContainers();	
 		buildMyControls();
-//		setCurrentCompany();
 	}
 	
 	@Override
@@ -64,11 +64,24 @@ public class InitialisePayroll extends FormWithIFrame {
 		return payPer.getText();
 	}
 	
-	public void closeForm() {
-		super.switchToDefaultContent();
-		closeMe();
-		// KEEP THIS CONTEXT BUT SWITCH CONTEXT
-	}	
+	public String getPayGroup() {
+		TextSelect payGrp = (TextSelect) getControl(PayrollControlNames.PAY_GROUP).get();
+		return payGrp.getText();
+	}
+	
+	public Button getInitialisePayroll() {
+		Button init = null;				
+		if(getControl(PayrollControlNames.INIT_PAYROLL).isPresent()) {
+			init = (Button) getControl(PayrollControlNames.INIT_PAYROLL).get();
+		}
+		return init;
+	}
+	
+//	public void closeForm() {
+//		super.switchToDefaultContent();
+//		closeMe();
+//		// KEEP THIS CONTEXT BUT SWITCH CONTEXT
+//	}	
 	public void closeFormAndContext() {
 		super.switchToDefaultContent().deleteMyContextAndRevertToCallingContext();
 		closeMe();		
@@ -86,10 +99,4 @@ public class InitialisePayroll extends FormWithIFrame {
 		return close;
 	}
 	
-	// Helpers
-//	private CompanyLoader getCompanyLoader() {
-//		return (CompanyLoader) hp;
-//	}
-	
-
 }

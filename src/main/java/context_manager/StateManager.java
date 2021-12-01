@@ -46,17 +46,10 @@ public class StateManager {
 			return state;
 		}				
 	}
-	/*
-	 * asked for StateTopRightNavBar got StateHeaderPanel!!
-	 */
+	
 	public <T extends State> Optional<State> switchToStateInContext(Class<T> clazzRequiredState, ContextState findCs) {
 		Optional<State> state = Optional.empty();		
 		state = moveToStateInContext(clazzRequiredState, findCs);		
-		/*
-		 * this will switch to findCs
-		 * we want findCs to be used to switch to clazzRequiredState!
-		 * HAVE TO DO IT IN THE PANEL!!
-		 */
 		state.ifPresent(s -> s.switchToMe());
 		return state;
 	}

@@ -6,10 +6,12 @@ package controls;
 /**
  * @author SteveBrown
  * @version 1.0
+ *  Initial
+ * @version 1.1
+ *  Add isAvailable().
  * @since 1.0
- *
- * Marker for classes that are considered a control.
+ * * 
  */
 public interface Control {
-
+	boolean isAvailable();
 }

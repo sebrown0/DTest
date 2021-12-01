@@ -13,6 +13,7 @@ import context_manager.ContextState;
 import context_manager.contexts.Context;
 import context_manager.contexts.ContextPersonnel;
 import context_manager.states.StateFactorySetter;
+import entities.Company;
 import object_models.forms.ContainerAction;
 import object_models.helpers.IFrame;
 import object_models.helpers.title.PageTitle;
@@ -39,6 +40,11 @@ import providers.ModuleNames;
 public class PersonnelModuleElements implements ModuleElements {
 	private WebDriver driver;
 	private CoreData coreData;
+	private Company company;
+	
+	public PersonnelModuleElements(Company company) {
+		this.company = company;
+	}
 	
 	@Override
 	public void setCoreData(CoreData coreData) {
@@ -126,7 +132,11 @@ public class PersonnelModuleElements implements ModuleElements {
 	
 	@Override
 	public HomePage getHomePage() {		
-		return new HomePagePersonnel(coreData);
+		return new HomePagePersonnel(coreData, company);
 	}
 
+	@Override
+	public Company getCompany() {
+		return company;
+	}
 }

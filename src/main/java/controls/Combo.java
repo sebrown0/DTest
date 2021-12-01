@@ -70,4 +70,10 @@ public abstract class Combo implements Control {
 	protected Logger getLogger() {
 		return LogManager.getLogger();
 	}
+	
+	@Override // Control
+	public boolean isAvailable() {
+		LogManager.getLogger().error("NOT IMPLEMENTED");		
+		return false;
+	}	
 }

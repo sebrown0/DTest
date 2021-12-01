@@ -16,6 +16,9 @@ import object_models.element.ElementButton;
 /**
  * @author SteveBrown
  * @version 1.0
+ *  Initial
+ * @version 1.1
+ *  Add clickCancel().
  * @since 1.0
  *
  * Given a modal dialog element the elements of
@@ -87,6 +90,10 @@ public class DialogOkCancel implements Dialog {
 		} catch (Exception e) {
 			logger.error("Could not get Cancel button [" + e + "]");
 		}
+	}
+	
+	public void clickCancel() {
+		getBtnCancel().ifPresent(btn -> btn.click());
 	}
 	
 	public Optional<String> getTitle() {

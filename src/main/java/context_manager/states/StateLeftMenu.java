@@ -11,6 +11,9 @@ import context_manager.ContextState;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
+ * @version 1.1
+ * 	Changed how the element is located.
  * @since 1.0
  *
  */
@@ -28,8 +31,8 @@ public class StateLeftMenu extends State {
 	@Override
 	public State switchToMe() {
 		logger.debug("Switching to state [left menu]");
-		switchToDefaultContentAndThenElement(By.cssSelector("body > form > div.app-body > div"));
-		setCurrentContextToThisStatesContext();		
+		switchToDefaultContentAndThenElement(By.cssSelector("div[class='app-body']"), By.id("nav-accordion"));
+		setCurrentContextToThisStatesContext();			
 		return this;
 	}
 

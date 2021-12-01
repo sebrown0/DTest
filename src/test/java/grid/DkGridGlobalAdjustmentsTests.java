@@ -18,6 +18,7 @@ import controls.ComboWriteAndSelect;
 import enums.GridButtonNames;
 import enums.control_names.EmployeeControlNames;
 import enums.control_names.GlobalAdjustmentControlNames;
+import exceptions.StaleAnchorException;
 import logging.TestResultLogger;
 import object_models.date_picker.DatePickerPopup;
 import object_models.dk_grid.Cell;
@@ -62,7 +63,7 @@ public class DkGridGlobalAdjustmentsTests {
 	private static GlobalAdjustments globalAdjustments;
 	
 	@BeforeAll	
-	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
+	public static void setup(ConfigReader configReader, UserLoginPage userLogin) throws StaleAnchorException {
 		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
 		globalAdjustments =	(GlobalAdjustments) homepagePayroll.getLeftMenu().clickAndLoad(GlobalAdjustments.class).get();
 	}		

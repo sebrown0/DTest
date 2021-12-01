@@ -66,6 +66,11 @@ public abstract class State {
 	protected void switchToDefaultContentAndThenElement(By byLocator) {		
 		switchToDefaultContent().findElement(byLocator);
 	}
+	protected void switchToDefaultContentAndThenElement(By byParentLocator, By byChildLocator) {		
+		switchToDefaultContent()
+			.findElement(byParentLocator)
+			.findElement(byChildLocator);
+	}
 	
 	protected void setCurrentContextToThisStatesContext() {
 		if(myContext != null) {	

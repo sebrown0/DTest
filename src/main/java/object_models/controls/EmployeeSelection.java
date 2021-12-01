@@ -3,6 +3,7 @@
  */
 package object_models.controls;
 
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -61,4 +62,10 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 		topLevelContainer = driver.findElement(By.id("corners"));
 		table = driver.findElement(By.id("employeeListTable"));
 	}
+	
+	@Override // Control
+	public boolean isAvailable() {
+		LogManager.getLogger().error("NOT IMPLEMENTED");		
+		return false;
+	}	
 }

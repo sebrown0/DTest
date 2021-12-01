@@ -6,6 +6,7 @@ package object_models.dk_grid;
 import java.time.Duration;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -156,6 +157,12 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 			});
 		});
 	}
+	
+	@Override // Control
+	public boolean isAvailable() {
+		LogManager.getLogger().error("NOT IMPLEMENTED");		
+		return false;
+	}	
 	/*
 	 * Was having problems with reloading content.
 	 * Changing the selector for the content seems 

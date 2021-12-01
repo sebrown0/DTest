@@ -1,5 +1,7 @@
 package object_models.dk_grid;
 
+import org.apache.logging.log4j.LogManager;
+
 import controls.Control;
 import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
@@ -26,7 +28,10 @@ public final class DkGridEmployeeDetails extends JsPanelWithIFrame implements Co
 		return grid.loadGridIfNecessary();
 	}
 	
-	/*
-	 * Add close method and reload emp details
-	 */
+	@Override // Control
+	public boolean isAvailable() {
+		LogManager.getLogger().error("NOT IMPLEMENTED");		
+		return false;
+	}
+	
 }

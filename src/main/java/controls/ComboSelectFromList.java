@@ -41,4 +41,5 @@ public class ComboSelectFromList extends Combo {
 		}
 		return listBox.getAlert();
 	}
+	
 }

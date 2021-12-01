@@ -18,6 +18,7 @@ import dto.Employee;
 import enums.control_names.EmployeeControlNames;
 import enums.control_names.GlobalAdjustmentControlNames;
 import enums.control_names.PayrollControlNames;
+import exceptions.StaleAnchorException;
 import logging.TestResultLogger;
 import object_models.dialog.DialogOkCancel;
 import object_models.dk_grid.Cell;
@@ -53,7 +54,7 @@ public class EmployeeOvertimeTests {
 	private static Employee emp;
 	
 	@BeforeAll	
-	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
+	public static void setup(ConfigReader configReader, UserLoginPage userLogin) throws StaleAnchorException {
 		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
 		globalAdjustments =	(GlobalAdjustments) homepagePayroll.getLeftMenu().clickAndLoad(GlobalAdjustments.class).get();
 		
