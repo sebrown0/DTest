@@ -10,7 +10,10 @@ import utils.ListTestFind;
 
 /**
  * @author SteveBrown
+ * @version 1.0
+ * 	Initial
  * @version 1.1
+ * 	Add hashCode().
  * @since 1.0
  *
  */
@@ -39,6 +42,13 @@ public class Company {
 		return name;
 	}
 	
+	@Override
+	public int hashCode() {
+		int result = 1;
+		final int prime = 31;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
 	@Override
 	public boolean equals(Object other) {
     if (other == null || other.getClass() != this.getClass()) {

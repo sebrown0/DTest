@@ -9,7 +9,6 @@ import java.util.Optional;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchSessionException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 import context_manager.ContextManager;
@@ -44,13 +43,13 @@ public class LeftMenuActions {
 		this.menuContextChecker = new MenuContextChecker(contextManager);
 	}
 	
-	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) throws Exception{		
+	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
 		contextManager.switchToLeftMenu();		// Puts the context @ Module.StateLeftMenu
 		ClassFieldGetter fieldGetter = new ClassFieldGetter(clazz);
 		return getMenuItemAsContainer(fieldGetter);
 	}
 
-	private Optional<ContainerAction> getMenuItemAsContainer(ClassFieldGetter fieldGetter) throws Exception{
+	private Optional<ContainerAction> getMenuItemAsContainer(ClassFieldGetter fieldGetter) {
 		Optional<String> prntName = fieldGetter.getParentName();
 		Optional<String> menuItem = fieldGetter.getMenuItemName();
 		
@@ -120,44 +119,20 @@ public class LeftMenuActions {
 		return elementContainer; 
 	}
 		
-	public LeftMenuActions clickParent(String prntName) throws Exception, StaleElementReferenceException {
+	public LeftMenuActions clickParent(String prntName) {
 		contextManager.switchToLeftMenu();		
 		WebElement activeMenuItem = getActiveMenuItem();
 		if(activeMenuItem != null) {
 			String currentlyActive = activeMenuItem.getText().trim();			
 			if(!currentlyActive.equalsIgnoreCase(prntName)) {
-//				clickAnchor(prntName,1);
 				anchors.get(prntName).click();
 			}	
 		}	else {
-//			clickAnchor(prntName,1);
-			WebElement app = coreData.getWebDriver().findElement(By.cssSelector("div[class='app-body']"));
-			WebElement nav = app.findElement(By.id("nav-accordion"));
-			System.out.println("->" + nav.getAttribute("class")); // TODO - remove or log 	
-			WebElement anc = anchors.get(prntName);
-			System.out.println("->" + anc.toString()); // TODO - remove or log 	
-			anc.click();
+			anchors.get(prntName).click();
 		}
 		return this;
 	}
-	
-//	private void clickAnchor(String prntName, int tryNum) throws StaleElementReferenceException {
-//		final int MAX_TRIES = 5;
-//		if(tryNum <= MAX_TRIES) {
-//			try {
-//				System.out.println("->" + coreData.getWebDriver().findElement(By.id("nav-accordion")).getAttribute("class")); // TODO - remove or log 	
-//				WebElement anchor = anchors.get(prntName); 
-//				anchor.click();
-//			} catch (StaleElementReferenceException e) {
-//				//Reload
-//				menuMapper.map();
-//				throw new StaleElementReferenceException("");
-//			} catch (Exception e) {
-//				System.out.println("->" + e); // TODO - remove or log
-//			}	
-//		}		
-//	}
-	
+
 	public WebElement getActiveMenuItem() {
 		WebElement activeMenuItem = null;
 		try {

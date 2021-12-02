@@ -4,6 +4,7 @@
 package company;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -26,9 +27,12 @@ import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * @since 1.0
  *
- * 
+ * Check the home page is created correctly
+ * after changing companies.
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({ 
@@ -45,7 +49,7 @@ class HomePageAferChangeOfCompany {
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-//		homepagePayroll.close();
+		homepagePayroll.close();
 	}
 		
 	@Test @Order(1)
@@ -63,5 +67,16 @@ class HomePageAferChangeOfCompany {
 		LeftMenu menu = newHomepageTwo.getLeftMenu();
 		menu.clickAndLoad(InitialisePayroll.class);
 		assertFalse(newHomepageTwo == newHomepageOne);
+	}
+	
+	@Test @Order(3)
+	void loadTheSameCompanyTwice_checkTheyAreEqual_loadMenuItem() throws StaleAnchorException {
+		HomePage newHomepageOne = homepagePayroll.loadCompany(new Company("Mars Incorporated Ltd"));
+		HomePage newHomepageTwo = homepagePayroll.loadCompany(new Company("Mars Incorporated Ltd"));
+		assertTrue(newHomepageOne.equals(newHomepageTwo));
+		
+		LeftMenu menu = newHomepageTwo.getLeftMenu();
+		menu.clickAndLoad(InitialisePayroll.class);
+		assertTrue(newHomepageTwo == newHomepageOne);
 	}
 }

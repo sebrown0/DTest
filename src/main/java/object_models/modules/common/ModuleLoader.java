@@ -20,6 +20,7 @@ import object_models.top_right_nav_bar.common.TopRightNavBar;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
  * @since 1.0
  *
  * Loads a module using the supplied ModuleElements.

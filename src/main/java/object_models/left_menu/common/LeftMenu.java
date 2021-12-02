@@ -57,17 +57,9 @@ public class LeftMenu implements CallingState {
 		}
 	}
 
-	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) throws StaleAnchorException {
-		try {
-			Optional<ContainerAction> action = menuActions.clickAndLoad(clazz);
-			return action;
-		} catch (StaleElementReferenceException e) {
-			System.out.println("caught A- reload" ); // TODO - remove or log
-			mapAnchors();
-			throw new StaleAnchorException("Left menu anchors are stale");
-		} catch (Exception e) { 	
-			return null;
-		}		 
+	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
+		Optional<ContainerAction> action = menuActions.clickAndLoad(clazz);
+		return action;		
 	}
 	
 	public LeftMenuActions clickParent(String prntName) throws StaleAnchorException {

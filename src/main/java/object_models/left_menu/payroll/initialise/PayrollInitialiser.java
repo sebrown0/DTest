@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 import controls.Button;
 import entities.Company;
 import entities.PayGroup;
-import exceptions.StaleAnchorException;
 import object_models.dialog.DialogOkCancel;
 import object_models.left_menu.common.LeftMenu;
 import object_models.pages.homepage.CompanyLoader;
@@ -64,20 +63,10 @@ public class PayrollInitialiser {
 		return null;
 	}
 	
-	private void openInitialisePayroll() {
-		/*
-		 * catch
-		 */
-		try {
-			leftMenu
+	private void openInitialisePayroll() {		
+		leftMenu
 			.clickAndLoad(InitialisePayroll.class)
-			.ifPresent(c -> initPay = (InitialisePayroll) c);
-		} catch (StaleAnchorException e) {
-			System.out.println("SHOULD HAVE REMAPPED ANCHS. TRY AGAIN"); // TODO - remove or log 	
-			openInitialisePayroll();
-			System.out.println("Tried again"); // TODO - remove or log 	
-		}
-
+			.ifPresent(c -> initPay = (InitialisePayroll) c);		
 	}
 	
 	private boolean actualIsRequired() {
