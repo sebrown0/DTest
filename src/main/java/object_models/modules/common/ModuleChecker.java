@@ -14,13 +14,18 @@ import exceptions.ElementDoesNotExistException;
  * @version 1.0
  * 	Initial
  * @version 1.1
- * 	Add isCurrentModule(...) 
+ * 	Add isCurrentModule(...)
+ * @version 1.2 
+ * 	Add isValidModuleName(...)
  * @since 1.0
  *
  */
 public class ModuleChecker {
 	private static final By MOD_NAME_LOCATOR = By.cssSelector("body>form>header>div>div");
 
+	public static  boolean isValidModuleName(String moduleName) {
+		return moduleName != null;
+	}
 	public static boolean isCurrentModule(String modName, WebDriver driver) {
 		try {
 			return getCurrentModule(driver).equals(modName);

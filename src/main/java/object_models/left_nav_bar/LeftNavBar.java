@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import context_manager.ContextManager;
-import entities.Company;
+import entities.company.Company;
 
 /**
  * @author SteveBrown

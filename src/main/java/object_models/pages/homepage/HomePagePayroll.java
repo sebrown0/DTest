@@ -3,24 +3,28 @@
  */
 package object_models.pages.homepage;
 
-import entities.Company;
 import entities.PayGroup;
+import entities.company.Company;
 import object_models.left_menu.payroll.initialise.PayrollInitialiser;
 
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
  * @since 1.0
  */
 public final class HomePagePayroll extends HomePage {
 
-	public HomePagePayroll(CoreData coreData, Company co) {
-		super(coreData, co);		
+	public HomePagePayroll(CoreData coreData) {
+		super(coreData);		
 	}
 
-	public void initialisePayroll(Company forCompany, PayGroup payGroup) {
+	public HomePagePayroll initialisePayroll(Company forCompany, PayGroup payGroup) {
+		super.loadCompany(forCompany);
 		PayrollInitialiser initialiser = new PayrollInitialiser(this, forCompany, payGroup, super.getLeftMenu());		
-		initialiser.initialisePayroll();		
+		initialiser.initialisePayroll();
+		
+		return null;
 	}
 	
 	@Override

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
-import entities.Company;
+import entities.company.Company;
 import exceptions.NullDriverException;
 import object_models.modules.payroll.PayrollModuleElements;
 import object_models.pages.UserLoginPage;

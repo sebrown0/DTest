@@ -12,9 +12,9 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import entities.Company;
 import entities.PayGroup;
 import entities.PayPeriod;
+import entities.company.Company;
 
 /**
  * @author SteveBrown

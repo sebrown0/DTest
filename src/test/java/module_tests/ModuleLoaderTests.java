@@ -1,4 +1,4 @@
-package object_model_tests.modules;
+package module_tests;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.WebDriver;
 
-import entities.Company;
+import entities.company.Company;
 import object_models.modules.payroll.PayrollModuleElements;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;

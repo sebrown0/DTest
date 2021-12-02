@@ -3,7 +3,7 @@
  */
 package object_models.pages.homepage;
 
-import entities.Company;
+import entities.company.Company;
 
 /**
  * @author SteveBrown

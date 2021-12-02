@@ -1,10 +1,11 @@
 /**
  * 
  */
-package entities;
+package entities.company;
 
 import java.util.List;
 
+import entities.PayGroup;
 import utils.ListSetter;
 import utils.ListTestFind;
 
@@ -23,6 +24,10 @@ public class Company {
 
 	public Company(String name) {
 		this.name = name;
+	}
+	public Company(String name, PayGroup payGroup) {
+		this.name = name;
+		this.addPayGroup(payGroup);
 	}
 	
 	public void addPayGroup(PayGroup pg) {

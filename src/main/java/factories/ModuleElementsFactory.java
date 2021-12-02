@@ -5,10 +5,10 @@ package factories;
 
 import org.apache.logging.log4j.LogManager;
 
-import entities.Company;
-import object_models.modules.common.ModuleElements;
+import entities.company.Company;
 import object_models.modules.payroll.PayrollModuleElements;
 import object_models.modules.personnel.PersonnelModuleElements;
+import object_models.pages.homepage.loader.HomePageElements;
 
 /**
  * @author SteveBrown
@@ -17,8 +17,8 @@ import object_models.modules.personnel.PersonnelModuleElements;
  * @since 1.0
  */
 public class ModuleElementsFactory {
-	public static ModuleElements getModuleElements(String moduleName, Company company) {
-		ModuleElements elements = null;
+	public static HomePageElements getModuleElements(String moduleName, Company company) {
+		HomePageElements elements = null;
 		
 		switch (moduleName) {
 		case "Payroll":

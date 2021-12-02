@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 
-import entities.Company;
+import entities.company.Company;
 import exceptions.NullDriverException;
 import logging.TestResultLogger;
 import object_models.modules.payroll.PayrollModuleElements;

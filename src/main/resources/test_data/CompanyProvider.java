@@ -5,7 +5,7 @@ package test_data;
 
 import java.util.stream.Stream;
 
-import entities.Company;
+import entities.company.Company;
 
 /**
  * @author Steve Brown

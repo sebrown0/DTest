@@ -3,8 +3,6 @@
  */
 package object_models.pages.homepage;
 
-import entities.Company;
-
 /**
  * @author SteveBrown
  * @version 1.0
@@ -12,9 +10,8 @@ import entities.Company;
  */
 public final class HomePagePersonnel extends HomePage {
 
-	public HomePagePersonnel(CoreData coreData, Company co) {
-		super(coreData, co);
-		// TODO Auto-generated constructor stub
+	public HomePagePersonnel(CoreData coreData) {
+		super(coreData);
 	}
 
 	@Override

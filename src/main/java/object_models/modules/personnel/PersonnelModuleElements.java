@@ -13,15 +13,15 @@ import context_manager.ContextState;
 import context_manager.contexts.Context;
 import context_manager.contexts.ContextPersonnel;
 import context_manager.states.StateFactorySetter;
-import entities.Company;
+import entities.company.Company;
 import object_models.forms.ContainerAction;
 import object_models.helpers.IFrame;
 import object_models.helpers.title.PageTitle;
 import object_models.left_menu.common.LeftMenu;
-import object_models.modules.common.ModuleElements;
 import object_models.pages.homepage.CoreData;
 import object_models.pages.homepage.HomePage;
 import object_models.pages.homepage.HomePagePersonnel;
+import object_models.pages.homepage.loader.HomePageElements;
 import object_models.panels.JsPanelHeaderBar;
 import object_models.top_right_nav_bar.all_elements.NavBarElementStrategy;
 import object_models.top_right_nav_bar.personnel.NavBarPersonnelElements;
@@ -37,7 +37,7 @@ import providers.ModuleNames;
  * @since 1.0
  *
  */
-public class PersonnelModuleElements implements ModuleElements {
+public class PersonnelModuleElements implements HomePageElements {
 	private WebDriver driver;
 	private CoreData coreData;
 	private Company company;
@@ -132,7 +132,7 @@ public class PersonnelModuleElements implements ModuleElements {
 	
 	@Override
 	public HomePage getHomePage() {		
-		return new HomePagePersonnel(coreData, company);
+		return new HomePagePersonnel(coreData);
 	}
 
 	@Override

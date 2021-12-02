@@ -10,8 +10,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
 
-import entities.Company;
 import entities.User;
+import entities.company.Company;
 import logging.TestResultLogger;
 import object_models.modules.payroll.PayrollModuleElements;
 import object_models.pages.UserLoginPage;

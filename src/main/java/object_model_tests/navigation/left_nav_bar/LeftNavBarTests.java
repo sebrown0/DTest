@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import entities.Company;
+import entities.company.Company;
 import logging.TestResultLogger;
 import object_models.left_nav_bar.LeftNavBar;
 import object_models.pages.UserLoginPage;

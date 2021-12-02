@@ -14,10 +14,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import entities.Company;
+import entities.company.Company;
 import logging.TestResultLogger;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.payroll.initialise.InitialisePayroll;
+import object_models.modules.payroll.PayrollModuleElements;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
@@ -49,16 +50,18 @@ class HomePageAferChangeOfCompany {
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-		homepagePayroll.close();
+//		homepagePayroll.close();
 	}
 		
+	/*
+	 * TODO - ADD COMPANY NAME TO CONFIG READER.
+	 */
+	
 	@Test @Order(1)
 	void getNewHomepage_afterLoading_newCompany() {
-		/*
-		 * Original company is provided by UserLoginPageProvider.
-		 */
+		// Original company is provided by LoginPageResolverPayroll.
 		newHomepageOne = homepagePayroll.loadCompany(new Company("Mars Northern Products Ltd"));		
-		assertFalse(homepagePayroll == newHomepageOne);
+		assertFalse(homepagePayroll.equals(newHomepageOne));
 	}
 	
 	@Test @Order(2)
@@ -78,5 +81,10 @@ class HomePageAferChangeOfCompany {
 		LeftMenu menu = newHomepageTwo.getLeftMenu();
 		menu.clickAndLoad(InitialisePayroll.class);
 		assertTrue(newHomepageTwo == newHomepageOne);
+	}
+	
+	@Test @Order(3)
+	void klljljlk() {
+//		UserLoginPage p = new UserLoginPage(null, new PayrollModuleElements(null));
 	}
 }

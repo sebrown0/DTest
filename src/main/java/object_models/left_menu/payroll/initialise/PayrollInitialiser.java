@@ -8,8 +8,8 @@ import java.util.Optional;
 import org.apache.logging.log4j.Logger;
 
 import controls.Button;
-import entities.Company;
 import entities.PayGroup;
+import entities.company.Company;
 import object_models.dialog.DialogOkCancel;
 import object_models.left_menu.common.LeftMenu;
 import object_models.pages.homepage.CompanyLoader;
@@ -59,7 +59,7 @@ public class PayrollInitialiser {
 	}
 	
 	private Optional<Company> loadCompany() {
-//		return Optional.ofNullable(companyLoader.loadCompany(forCompany));
+//		return Optional.ofNullable(companyLoader.loadCompany(forCompany));		
 		return null;
 	}
 	

@@ -1,11 +1,11 @@
 /**
  * 
  */
-package object_models.modules.common;
+package object_models.pages.homepage.loader;
 
 import context_manager.ContextManager;
 import context_manager.contexts.Context;
-import entities.Company;
+import entities.company.Company;
 import object_models.left_menu.common.LeftMenu;
 import object_models.pages.homepage.CoreData;
 import object_models.pages.homepage.HomePage;
@@ -18,13 +18,15 @@ import object_models.top_right_nav_bar.quick_links.QuickLink;
  * 	Initial
  * @version 1.1
  * 	Add setCoreData(...)
+ * @version 1.2
+ * 	Renamed 
  * @since 1.0
  *
  * This is passed to ModuleLoader so it can load the 
  * correct elements for the module.
  *  
  */
-public interface ModuleElements {
+public interface HomePageElements {
 	void setCoreData(CoreData coreData);
 	void setLeftMenuElements(LeftMenu menu);
 	

@@ -11,11 +11,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import entities.User;
-import object_models.modules.common.ModuleElements;
-import object_models.modules.common.ModuleLoader;
 import object_models.pages.homepage.CoreData;
 import object_models.pages.homepage.CoreDataLoader;
 import object_models.pages.homepage.HomePage;
+import object_models.pages.homepage.loader.HomePageElements;
+import object_models.pages.homepage.loader.NewHomePageLoader;
 
 /**
  * @author SteveBrown
@@ -24,13 +24,15 @@ import object_models.pages.homepage.HomePage;
  * @version 1.1
  * 	Load module from here and not HomePage.
  * 	Return the correct HomePage for the module.
+ * @version 1.2
+ * 	Get HomePage from NewHomePageLoader.
  * @since 1.0
  *
  * Try to login a user and return the HomePage.
  */
 
 public class UserLoginPage extends LoadablePage {
-	private ModuleElements moduleElements;
+	private HomePageElements homePageElements;
 	private CoreData coreData;
 	private Logger logger = LogManager.getLogger();
 	
@@ -43,22 +45,21 @@ public class UserLoginPage extends LoadablePage {
 		super(driver, "None", LOGIN_PAGE_URI);		
 		
 		setCoreData();
-	}
-	
+	}	
 	// Login with ModuleElements so a HomePage can be returned.
-	public UserLoginPage(WebDriver driver, ModuleElements moduleElements) {
+	public UserLoginPage(WebDriver driver, HomePageElements homePageElements) {
 		super(driver, "None", LOGIN_PAGE_URI);
 	
 		setCoreData();
-		setModuleElements(moduleElements);
+		setHomePageElements(homePageElements);
 	}
 		
 	private void setCoreData() {
 		coreData = new CoreDataLoader(driver);
 	}
-	private void setModuleElements(ModuleElements moduleElements) {
-		this.moduleElements = moduleElements;
-		this.moduleElements.setCoreData(coreData);
+	private void setHomePageElements(HomePageElements homePageElements) {
+		this.homePageElements = homePageElements;
+		this.homePageElements.setCoreData(coreData);
 	}
 	
 	public HomePage loginValidUser(User user) {
@@ -70,22 +71,21 @@ public class UserLoginPage extends LoadablePage {
 	}
 	
 	private HomePage getHomePageIfModuleSupplied() {
-		if(moduleElements == null) {
+		if(homePageElements == null) {
 			logger.error("No module supplied");			
 			return null;
 		}else {
-			return loadModule();
+			return loadHomePage();
 		}
 	}
 	
-	private HomePage loadModule() {		
-		ModuleLoader moduleLoader = new ModuleLoader(coreData, moduleElements);
-		HomePage hp = moduleLoader.loadModule(moduleElements.getModuleName());			
-		return hp;
+	private HomePage loadHomePage() {		
+		NewHomePageLoader loader = new NewHomePageLoader(driver, homePageElements);
+		return loader.loadHomePage();
 	}
 
-	public CoreData getCoreData() {
-		return coreData;
-	}
+//	public CoreData getCoreData() {
+//		return coreData;
+//	}
 	
 }

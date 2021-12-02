@@ -5,7 +5,7 @@ package object_models.top_right_nav_bar.quick_links;
 
 import org.openqa.selenium.WebDriver;
 
-import object_models.modules.common.ModuleElements;
+import object_models.pages.homepage.loader.HomePageElements;
 
 /**
  * @author Steve Brown
@@ -49,7 +49,7 @@ public class QuickLinksPayroll extends QuickLinks implements PersonnelLoader{
 	}
 
 	@Override
-	public ModuleElements load() {
+	public HomePageElements load() {
 		personnel.clickMe();
 		return null;
 	}

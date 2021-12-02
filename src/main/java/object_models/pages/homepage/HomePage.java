@@ -10,11 +10,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextManager;
-import entities.Company;
-import object_models.helpers.company.LoadCompany;
+import entities.company.Company;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_nav_bar.LeftNavBar;
+import object_models.modules.payroll.PayrollModuleElements;
+import object_models.modules.personnel.PersonnelModuleElements;
 import object_models.pages.Page;
+import object_models.pages.homepage.loader.ExistingHomePageLoader;
+import object_models.pages.homepage.loader.HomePageElements;
 import object_models.top_right_nav_bar.common.TopRightNavBar;;
 
 
@@ -34,43 +37,46 @@ public abstract class HomePage extends Page implements CoreData, CompanyLoader {
 	private Company currentCompany;
 		
 	//CoreData
+	private CoreData coreData;
 	private ContextManager contextManager;
 	private Logger logger;
 	private WebDriver driver;
 	
-	private static By byXpathActualModuleName = By.xpath("html/body/form/header/div/div");
-	
+	private static By byXpathActualModuleName = By.xpath("html/body/form/header/div/div");	
 	public static final String PAGE_TITLE = HOME_PAGE_TITLE;
 	
-	public HomePage(CoreData coreData, Company co) {		
+	public HomePage(CoreData coreData) {		
 		super(coreData.getWebDriver(), PAGE_TITLE);		
 		
+		this.coreData = coreData;
 		this.driver = coreData.getWebDriver();
 		this.contextManager = coreData.getContextManager();
 		this.logger = coreData.getLogger();		
-		this.currentCompany = co;
 	}
 	
 	public abstract String getModuleName();
 	
-	// Actions	
+	private HomePageElements getElements(Company co) {
+		HomePageElements elements;
+		if(getModuleName().equals("Payroll")){
+			elements = new PayrollModuleElements(co);	
+		}else {
+			elements = new PersonnelModuleElements(co);
+		}
+		elements.setCoreData(coreData);
+		return elements;
+	}
+	public HomePage loadModule() {
+		ExistingHomePageLoader loader = new ExistingHomePageLoader(coreData, driver, getElements(currentCompany), this);	
+		return loader.loadHomePage();
+	}
+	// Actions
 	@Override //CompanyLoader
 	public HomePage loadCompany(Company co) {		
-		if(co != null) {
-			if(currentCompany.equals(co)) {
-				logger.info("Is current company. Not reloading");
-				return this;
-			}else {
-				logger.info("Loading new company [" + co.getName() + "]");
-				LoadCompany loader = new LoadCompany(co, this, leftNavBar);
-				currentCompany = loader.loadCompany();			
-				return HomePageLoader.loadHomePage(getModuleName(), currentCompany, driver);	
-			}					
-		}else {
-			logger.error("Cannot load null company");
-			return this;
-		}		
+		ExistingHomePageLoader loader = new ExistingHomePageLoader(coreData, driver, getElements(co), this);	
+		return loader.loadHomePage();
 	}			
+	
 	@Override //CompanyLoader
 	public Company getCurrentCompany() {
 		return leftNavBar.getCompany();
@@ -91,8 +97,16 @@ public abstract class HomePage extends Page implements CoreData, CompanyLoader {
 		this.leftMenu = leftMenu;
 	}
 	
+	@Override
+	public int hashCode() {
+		int result = 1;
+		final int prime = 31;
+		result = prime * result + ((currentCompany == null) ? 0 : currentCompany.hashCode());
+		return result;
+	}
+	
 	/*
-	 * Getters Below
+	 * Getters & Setters Below
 	 */
 	public String getActualModuleName() {		
 		return driver.findElement(byXpathActualModuleName).getAttribute("innerHTML");
@@ -119,5 +133,28 @@ public abstract class HomePage extends Page implements CoreData, CompanyLoader {
 	public Logger getLogger() {		
 		return logger;
 	}
+	
+	public void setCurrentCompany(Company currentCompany) {
+		this.currentCompany = currentCompany;
+	}
 
 }
+//@Override //CompanyLoader
+//public HomePage loadCompany(Company co) {		
+//if(co != null) {
+//	if(currentCompany.equals(co)) {
+//		System.out.println("Is current company. Not reloading"); // TODO - remove or log 	
+//		logger.info("Is current company. Not reloading");
+//		return this;
+//	}else {
+//		System.out.println("Loading new comp"); // TODO - remove or log
+//		logger.info("Loading new company [" + co.getName() + "]");
+//		LoadCompany loader = new LoadCompany(co, this, leftNavBar);
+//		currentCompany = loader.loadCompany();			
+//		return HomePageLoader.loadHomePage(getModuleName(), currentCompany, driver);	
+//	}					
+//}else {
+//	logger.error("Cannot load null company");
+//	return this;
+//}		
+//}		

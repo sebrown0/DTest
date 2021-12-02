@@ -15,9 +15,9 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import controls.TextSelect;
-import entities.Company;
 import entities.PayGroup;
 import entities.PayPeriod;
+import entities.company.Company;
 import enums.control_names.CommonControlNames;
 import enums.control_names.PayrollControlNames;
 import logging.TestResultLogger;
@@ -25,6 +25,7 @@ import object_models.dialog.DialogOkCancel;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.payroll.initialise.InitialisePayroll;
 import object_models.pages.UserLoginPage;
+import object_models.pages.homepage.HomePage;
 import object_models.pages.homepage.HomePagePayroll;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
@@ -88,25 +89,17 @@ public final class InitialisePayroll_Tests {
 		DialogOkCancel okCancel = initPay.clickInitialisePayroll();
 		okCancel.getBtnCancel().ifPresent(b -> b.click());
 	}
-
-	@Test	@Order(6)
-	void cooooooooooooooomp() {
-		PayPeriod pp = new PayPeriod(10, true, LocalDate.of(2021, Month.OCTOBER, 1), LocalDate.of(2021, Month.OCTOBER, 31));
-		Company co = new Company("Mars Incorporated Ltd");
-		PayGroup pg = new PayGroup("Monthly Paygroup", pp);		
-
-		co.addPayGroup(pg);		
-		hp.initialisePayroll(co, pg);		
-	}
 	
-	@Test	@Order(7)
+	@Test	@Order(6)
 	void cooooooooomp() {		
-		PayPeriod pp = new PayPeriod(02, true, LocalDate.of(2021, Month.JANUARY, 29), LocalDate.of(2021, Month.FEBRUARY, 25));
-		Company co = new Company("Mars Northern Products Ltd");		
-		PayGroup pg = new PayGroup("Fourweekly", pp);		
-
-		co.addPayGroup(pg);		
-		hp.initialisePayroll(co, pg);		
+//		HomePage hp = hp.loadCompany(new Company("Mars Incorporated Ltd"));
+//		
+//		PayPeriod pp = new PayPeriod(02, true, LocalDate.of(2021, Month.JANUARY, 29), LocalDate.of(2021, Month.FEBRUARY, 25));				
+//		PayGroup pg = new PayGroup("Fourweekly", pp);		
+//		Company coMarsNorthern = new Company("Mars Northern Products Ltd", pg);		
+//		HomePagePayroll hpMarsNorthern = (HomePagePayroll) hp.initialisePayroll(coMarsNorthern, pg);
+		
+				
 	}
 	
 	@Test	@Order(15) //TODO - update test num!!!

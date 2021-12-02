@@ -13,16 +13,16 @@ import context_manager.ContextState;
 import context_manager.contexts.Context;
 import context_manager.contexts.ContextPayroll;
 import context_manager.states.StateFactorySetter;
-import entities.Company;
+import entities.company.Company;
 import object_models.forms.ContainerAction;
 import object_models.helpers.IFrame;
 import object_models.helpers.title.PageTitle;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.payroll_only.LeftMenuPayroll;
-import object_models.modules.common.ModuleElements;
 import object_models.pages.homepage.CoreData;
 import object_models.pages.homepage.HomePage;
 import object_models.pages.homepage.HomePagePayroll;
+import object_models.pages.homepage.loader.HomePageElements;
 import object_models.panels.JsPanelHeaderBar;
 import object_models.top_right_nav_bar.all_elements.NavBarElementStrategy;
 import object_models.top_right_nav_bar.payroll.NavBarPayrollElements;
@@ -41,7 +41,7 @@ import providers.ModuleNames;
  * The required elements of the payroll module.
  * 
  */
-public class PayrollModuleElements implements ModuleElements {
+public class PayrollModuleElements implements HomePageElements {
 	private WebDriver driver;
 	private CoreData coreData;
 	private Company company;
@@ -136,7 +136,7 @@ public class PayrollModuleElements implements ModuleElements {
 
 	@Override
 	public HomePage getHomePage() {
-		return new HomePagePayroll(coreData, company);
+		return new HomePagePayroll(coreData);
 	}
 
 	@Override
