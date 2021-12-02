@@ -9,7 +9,6 @@ import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -19,13 +18,13 @@ import context_manager.ContextState;
 import context_manager.states.State;
 import context_manager.states.StateLeftMenu;
 import control_mapping.MenuMap;
-import exceptions.StaleAnchorException;
 import object_models.forms.ContainerAction;
 import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
  * @since 1.0
  *
  */
@@ -62,19 +61,9 @@ public class LeftMenu implements CallingState {
 		return action;		
 	}
 	
-	public LeftMenuActions clickParent(String prntName) throws StaleAnchorException {
-		try {
-			LeftMenuActions action = menuActions.clickParent(prntName); 
-			return action;	
-		} catch (StaleElementReferenceException e) {
-			System.out.println("caught 1- reload" ); // TODO - remove or log 	
-			mapAnchors();
-			throw new StaleAnchorException("Left menu anchors are stale");
-		} catch (Exception e) {
-			System.out.println("caught 2- reload" ); // TODO - remove or log 	
-			return null;
-		}
-		
+	public LeftMenuActions clickParent(String prntName) {		
+		LeftMenuActions action = menuActions.clickParent(prntName); 
+		return action;		
 	}
 		
 	/*

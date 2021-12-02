@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import enums.control_names.GroupControlNames;
-import exceptions.StaleAnchorException;
 import logging.TestResultLogger;
 import object_models.controls.DropdownCombo;
 import object_models.left_menu.common.LeftMenu;
@@ -50,7 +49,7 @@ class FormsTests {
 	
 
 	@Test
-	void modalFormWith_iFrame() throws StaleAnchorException {		
+	void modalFormWith_iFrame() {		
 		EmployeeDetails empDetails = (EmployeeDetails) menu.clickAndLoad(EmployeeDetails.class).get();		
 		DropdownCombo combos = (DropdownCombo) empDetails.getPanelControl().getControl(GroupControlNames.COMBOS).get();
 		assertEquals("Dropdown Combo", combos.getHeader().getTitle().get());		

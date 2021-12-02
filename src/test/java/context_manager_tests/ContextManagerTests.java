@@ -26,7 +26,6 @@ import context_manager.states.StateHeaderPanel;
 import context_manager.states.StateLeftMenu;
 import context_manager.states.StateTop;
 import enums.control_names.GroupControlNames;
-import exceptions.StaleAnchorException;
 import logging.TestResultLogger;
 import object_models.controls.EmployeeSelection;
 import object_models.employee_creation.EmployeeCreationWizard;
@@ -84,7 +83,7 @@ class ContextManagerTests {
 	}
 
 	@Test	@Order(1)
-	void checkContextId() throws StaleAnchorException {
+	void checkContextId() {
 		menu.clickAndLoad(Documents.class);
 		ContextId id = manager.getLastContext().getContextId();
 		manager.closeCurrentStateInCurrentContext();
@@ -111,7 +110,7 @@ class ContextManagerTests {
 	}
 	
 	@Test	@Order(3)
-	void checkContextIsInQueue() throws StaleAnchorException {
+	void checkContextIsInQueue() {
 		menu.clickAndLoad(Documents.class);
 		ContextState cs = manager.getEndOfQueue();
 		manager.closeCurrentStateInCurrentContext();
@@ -120,7 +119,7 @@ class ContextManagerTests {
 	
 
 	@Test	@Order(4)
-	void getContextFromQueue_usingContextId_contextName() throws StaleAnchorException {
+	void getContextFromQueue_usingContextId_contextName() {
 		menu.clickAndLoad(Documents.class);
 		ContextState cs = manager.findContext(Documents.PANEL_TITLE).get(); 
 		manager.closeCurrentStateInCurrentContext();
@@ -128,7 +127,7 @@ class ContextManagerTests {
 	}
 	
 	@Test	@Order(5)
-	void getContextFromQueue_usingContextId_object() throws StaleAnchorException {
+	void getContextFromQueue_usingContextId_object() {
 		menu.clickAndLoad(Documents.class);
 		ContextState cs = manager.findContext(new ContextId("Employee Document Management", "jsPanel-1")).get();
 		manager.closeCurrentStateInCurrentContext();
@@ -136,14 +135,14 @@ class ContextManagerTests {
 	}
 	
 	@Test	@Order(6)
-	void loadDocument_and_checkState_revertFromIframe_to_headerPanel() throws StaleAnchorException {	
+	void loadDocument_and_checkState_revertFromIframe_to_headerPanel() {	
 		menu.clickAndLoad(Documents.class);
 		manager.closeCurrentStateInCurrentContext(); 	
 		assertTrue(manager.getLastContext().getState() instanceof StateHeaderPanel);				
 	}
 
 	@Test	@Order(7)
-	void loadDocuments_then_employeeDetails_then_close_employeeDetailsState_newStateShouldBeHeaderPanel() throws StaleAnchorException {
+	void loadDocuments_then_employeeDetails_then_close_employeeDetailsState_newStateShouldBeHeaderPanel() {
 		menu.clickAndLoad(Documents.class);
 		assertEquals("Employee Document Management", manager.getExpectedNameOfCurrentContext());
 		
@@ -155,7 +154,7 @@ class ContextManagerTests {
 	}
 
 	@Test	@Order(8)
-	void loadDocuments_then_employeeDetails_then_close_employeeDetailsState_twice_newContextShouldBeDocuments() throws StaleAnchorException {
+	void loadDocuments_then_employeeDetails_then_close_employeeDetailsState_twice_newContextShouldBeDocuments() {
 		menu.clickAndLoad(Documents.class);
 		assertEquals("Employee Document Management", manager.getExpectedNameOfCurrentContext());
 		
@@ -168,7 +167,7 @@ class ContextManagerTests {
 	}
 
 	@Test	@Order(9)
-	void loadEmployeeBanks_then_loadDocuments() throws StaleAnchorException {
+	void loadEmployeeBanks_then_loadDocuments() {
 		menu.clickAndLoad(Banks.class);
 		menu.clickAndLoad(Documents.class);		
 	}
@@ -199,7 +198,7 @@ class ContextManagerTests {
 	}
 		
 	@Test	@Order(14)
-	void loadTwoPanels_then_close_currentContext_thrice_shouldBe_ContextPayroll() throws StaleAnchorException {
+	void loadTwoPanels_then_close_currentContext_thrice_shouldBe_ContextPayroll() {
 		menu.clickAndLoad(Banks.class);
 		menu.clickAndLoad(Documents.class);
 		manager.removeLastContextFromQueue();
@@ -214,7 +213,7 @@ class ContextManagerTests {
 	}
 
 	@Test	@Order(15)
-	void penultimateContext_exists() throws StaleAnchorException {
+	void penultimateContext_exists() {
 		menu.clickAndLoad(Banks.class);
 		menu.clickAndLoad(MonthlyReports.class);
 		menu.clickAndLoad(Documents.class);
@@ -225,7 +224,7 @@ class ContextManagerTests {
 	}
 	
 	@Test	@Order(16)
-	void findContextInQueue_usingPanelTitle() throws StaleAnchorException {
+	void findContextInQueue_usingPanelTitle() {
 		menu.clickAndLoad(Banks.class);
 		menu.clickAndLoad(MonthlyReports.class);
 		assertEquals(
@@ -234,7 +233,7 @@ class ContextManagerTests {
 	}
 
 	@Test	@Order(17)
-	void findPrevContextInQueue() throws StaleAnchorException {
+	void findPrevContextInQueue() {
 		menu.clickAndLoad(Banks.class);
 		menu.clickAndLoad(MonthlyReports.class);
 		
@@ -244,7 +243,7 @@ class ContextManagerTests {
 	}
 
 	@Test	@Order(18)
-	void checkExistingContextIsLoaded_fromMenu() throws StaleAnchorException {
+	void checkExistingContextIsLoaded_fromMenu() {
 		menu.clickAndLoad(Banks.class);
 		menu.clickAndLoad(MonthlyReports.class);
 		Banks b = (Banks) menu.clickAndLoad(Banks.class).get();
@@ -252,7 +251,7 @@ class ContextManagerTests {
 	}
 
 	@Test	@Order(19)	
-	void loadTwoPanels_switchToFirstPanel_contextManager() throws StaleAnchorException {
+	void loadTwoPanels_switchToFirstPanel_contextManager() {
 		menu.clickAndLoad(MonthlyReports.class);
 		menu.clickAndLoad(Banks.class);		
 		
@@ -263,7 +262,7 @@ class ContextManagerTests {
 	}
 
 	@Test	@Order(20)
-	void currentContext_afterDeleting_currentContext() throws StaleAnchorException {
+	void currentContext_afterDeleting_currentContext() {
 		menu.clickAndLoad(MonthlyReports.class);
 		menu.clickAndLoad(YearlyReports.class);
 		menu.clickAndLoad(Banks.class);	
@@ -273,7 +272,7 @@ class ContextManagerTests {
 	}
 
 	@Test	@Order(21)
-	void getContextThatIsPanel_shouldReturnCurrentContext_thatIs_YearlyReports() throws StaleAnchorException {
+	void getContextThatIsPanel_shouldReturnCurrentContext_thatIs_YearlyReports() {
 		menu.clickAndLoad(MonthlyReports.class);
 		menu.clickAndLoad(YearlyReports.class); 		
 		JsPanel reports = manager.getContextThatIsPanel().get();
@@ -281,7 +280,7 @@ class ContextManagerTests {
 	}
 	
 	@Test	@Order(22)
-	void getContextThatIsPanel_shouldReturnEmployeeDetails_thatIs_YearlyReports() throws StaleAnchorException {
+	void getContextThatIsPanel_shouldReturnEmployeeDetails_thatIs_YearlyReports() {
 		EmployeeDetails empDetails = (EmployeeDetails) menu.clickAndLoad(EmployeeDetails.class).get();
 		EmployeeSelection empSelection = (EmployeeSelection) empDetails.getPanelControl().getControl(GroupControlNames.SELECT_EMP).get();
 		assertTrue(empSelection instanceof FormModal);
@@ -291,7 +290,7 @@ class ContextManagerTests {
 	}
 	
 	@Test	@Order(23)
-	void currentContext_afterDeleting_currentContext_which_isFirstContext_shouldBePayroll() throws StaleAnchorException {
+	void currentContext_afterDeleting_currentContext_which_isFirstContext_shouldBePayroll() {
 		menu.clickAndLoad(MonthlyReports.class);				
 		
 		ContextState first = manager.findContext("Payroll Module").get();
@@ -303,7 +302,7 @@ class ContextManagerTests {
 	}
 		
 	@Test	@Order(24)
-	void findContext() throws StaleAnchorException {
+	void findContext() {
 		menu.clickAndLoad(MonthlyReports.class);
 		menu.clickAndLoad(YearlyReports.class);		
 		

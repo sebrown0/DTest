@@ -14,7 +14,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import controls.TextOut;
 import dto.Employee;
 import enums.control_names.EmployeeControlNames;
-import exceptions.StaleAnchorException;
 import logging.TestResultLogger;
 import object_models.employee_creation.EmployeeCreationWizard;
 import object_models.forms.FormFadeShow;
@@ -72,7 +71,7 @@ class EmployeeCreationTests {
 	}
 
 	@Test @Order(2)
-	void createRandomEmployee_withLowerCaseCode_openEmpDetails_codeShouldBeInUpperCase() throws StaleAnchorException {
+	void createRandomEmployee_withLowerCaseCode_openEmpDetails_codeShouldBeInUpperCase() {
 		// Get an employee with random code
 		RandomEmployeeProvider empProvider = new EmployeeFromXml(); 
 		emp = empProvider.getAnyEmpWithRandomCode();		
@@ -90,7 +89,7 @@ class EmployeeCreationTests {
 	}
 
 	@Test @Order(3)
-	void createRandomEmployee_withSpaceInCode_openEmpDetails_spaceShouldBeRemoved() throws StaleAnchorException {
+	void createRandomEmployee_withSpaceInCode_openEmpDetails_spaceShouldBeRemoved() {
 		// Get an employee with random code and add space.
 		RandomEmployeeProvider empProvider = new EmployeeFromXml(); 
 		emp = empProvider.getAnyEmpWithRandomCode();		
@@ -110,7 +109,7 @@ class EmployeeCreationTests {
 	}
 	
 	@Test @Order(4)
-	void createRandomEmployee_withSymbolInCode_openEmpDetails_symbolsShouldBeRemoved() throws StaleAnchorException {
+	void createRandomEmployee_withSymbolInCode_openEmpDetails_symbolsShouldBeRemoved() {
 		// Get an employee with random code and add symbols.
 		RandomEmployeeProvider empProvider = new EmployeeFromXml(); 
 		emp = empProvider.getAnyEmpWithRandomCode();		

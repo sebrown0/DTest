@@ -20,7 +20,10 @@ import object_models.top_right_nav_bar.common.TopRightNavBar;;
 
 /**
  * @author SteveBrown
+ * @version 1.0
+ * 	Initial
  * @version 1.1
+ * 	Load company and get new HomePage if company loaded.
  * @since 1.0
  *
  */

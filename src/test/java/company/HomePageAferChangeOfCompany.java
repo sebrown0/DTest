@@ -15,7 +15,6 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import entities.Company;
-import exceptions.StaleAnchorException;
 import logging.TestResultLogger;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_menu.payroll.initialise.InitialisePayroll;
@@ -29,6 +28,7 @@ import xml_reader.config_file.ConfigReader;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
  * @since 1.0
  *
  * Check the home page is created correctly
@@ -62,7 +62,7 @@ class HomePageAferChangeOfCompany {
 	}
 	
 	@Test @Order(2)
-	void loadMenuItem_after_another_companyLoad() throws StaleAnchorException {
+	void loadMenuItem_after_another_companyLoad() {
 		HomePage newHomepageTwo = homepagePayroll.loadCompany(new Company("Mars Incorporated Ltd"));
 		LeftMenu menu = newHomepageTwo.getLeftMenu();
 		menu.clickAndLoad(InitialisePayroll.class);
@@ -70,7 +70,7 @@ class HomePageAferChangeOfCompany {
 	}
 	
 	@Test @Order(3)
-	void loadTheSameCompanyTwice_checkTheyAreEqual_loadMenuItem() throws StaleAnchorException {
+	void loadTheSameCompanyTwice_checkTheyAreEqual_loadMenuItem() {
 		HomePage newHomepageOne = homepagePayroll.loadCompany(new Company("Mars Incorporated Ltd"));
 		HomePage newHomepageTwo = homepagePayroll.loadCompany(new Company("Mars Incorporated Ltd"));
 		assertTrue(newHomepageOne.equals(newHomepageTwo));

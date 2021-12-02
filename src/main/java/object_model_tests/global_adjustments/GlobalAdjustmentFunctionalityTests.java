@@ -18,7 +18,6 @@ import enums.control_names.CommonControlNames;
 import enums.control_names.EmployeeControlNames;
 import enums.control_names.GlobalAdjustmentControlNames;
 import enums.control_names.PayrollControlNames;
-import exceptions.StaleAnchorException;
 import logging.TestResultLogger;
 import object_models.helpers.text_utils.RemoveX;
 import object_models.left_menu.payroll.GlobalAdjustments;
@@ -47,7 +46,7 @@ class GlobalAdjustmentFunctionalityTests {
 	private static GlobalAdjustments globalAdjustments; 
 	
 	@BeforeAll	
-	public static void setup(ConfigReader configReader, UserLoginPage userLogin) throws StaleAnchorException {
+	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
 		// Login to the home page.
 		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
 		// Load the page.
