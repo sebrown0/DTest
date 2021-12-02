@@ -8,9 +8,7 @@ import java.util.Optional;
 import org.apache.logging.log4j.Logger;
 
 import context_manager.ContextManager;
-import context_manager.ContextState;
-import object_models.forms.ContainerAction;
-import object_models.forms.FormModal;
+import object_models.forms.ModalCloser;
 import object_models.left_nav_bar.LeftNavBar;
 import object_models.pages.homepage.CoreData;
 
@@ -42,7 +40,8 @@ public class LoaderCompany {
 	public Optional<Company> loadCompany() {		
 		if(forCompany != null) {
 			try {
-				closeAnyOpenModalForms();
+//				ModalCloser.closeAnyOpenModalForms(cm);
+//				closeAnyOpenModalForms();
 				return Optional.ofNullable(leftNavBar.loadCompany(forCompany.getName()));	
 			} catch (Exception e) {
 				logger.error("Error loading company");
@@ -51,23 +50,24 @@ public class LoaderCompany {
 		}
 		return null;			
 	}
-	private void closeAnyOpenModalForms() {
-		try {
-			if(modalFormIsOpen()) {
-				closeModalForm(cm.getCurrentContext());
-			}	
-		} catch (Exception e) {
-			// Nothing. Assume no open forms.
-		}		
-	}
-	private boolean modalFormIsOpen() {		
-		ContainerAction current = cm.getCurrentContext().getContinerAction();
-		return (current instanceof FormModal) ? true : false;
-	}
-	private void closeModalForm(ContextState modalForm) {
-		ContainerAction current = cm.getCurrentContext().getContinerAction();
-		current.close();
-	}
+	
+//	private void closeAnyOpenModalForms() {
+//		try {
+//			if(modalFormIsOpen()) {
+//				closeModalForm(cm.getCurrentContext());
+//			}	
+//		} catch (Exception e) {
+//			// Nothing. Assume no open forms.
+//		}		
+//	}
+//	private boolean modalFormIsOpen() {		
+//		ContainerAction current = cm.getCurrentContext().getContinerAction();
+//		return (current instanceof FormModal) ? true : false;
+//	}
+//	private void closeModalForm(ContextState modalForm) {
+//		ContainerAction current = cm.getCurrentContext().getContinerAction();
+//		current.close();
+//	}
 	
 	
 	

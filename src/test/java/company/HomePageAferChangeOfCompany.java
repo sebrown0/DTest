@@ -57,33 +57,34 @@ class HomePageAferChangeOfCompany {
 	 * TODO - ADD COMPANY NAME TO CONFIG READER.
 	 */
 	
-	@Test @Order(1)
+	@Test
 	void getNewHomepage_afterLoading_newCompany() {
 		// Original company is provided by LoginPageResolverPayroll.
-		newHomepageOne = homepagePayroll.loadCompany(new Company("Mars Northern Products Ltd"));		
-		assertFalse(homepagePayroll.equals(newHomepageOne));
+		HomePage newHomepage = homepagePayroll.loadCompany(new Company("Mars Northern Products Ltd"));		
+		assertFalse(homepagePayroll.equals(newHomepage));
 	}
 	
-	@Test @Order(2)
+	@Test
 	void loadMenuItem_after_another_companyLoad() {
-		HomePage newHomepageTwo = homepagePayroll.loadCompany(new Company("Mars Incorporated Ltd"));
+		HomePage newHomepageOne = homepagePayroll.loadCompany(new Company("Mars Northern Products Ltd"));
+		HomePage newHomepageTwo = newHomepageOne.loadCompany(new Company("Mars Incorporated Ltd"));
 		LeftMenu menu = newHomepageTwo.getLeftMenu();
-		menu.clickAndLoad(InitialisePayroll.class);
+//		menu.clickAndLoad(InitialisePayroll.class);
 		assertFalse(newHomepageTwo == newHomepageOne);
 	}
 	
-	@Test @Order(3)
+	@Test
 	void loadTheSameCompanyTwice_checkTheyAreEqual_loadMenuItem() {
 		HomePage newHomepageOne = homepagePayroll.loadCompany(new Company("Mars Incorporated Ltd"));
-		HomePage newHomepageTwo = homepagePayroll.loadCompany(new Company("Mars Incorporated Ltd"));
-		assertTrue(newHomepageOne.equals(newHomepageTwo));
+		LeftMenu menu = newHomepageOne.getLeftMenu();
+//		menu.clickAndLoad(InitialisePayroll.class);
+		HomePage newHomepageTwo = newHomepageOne.loadCompany(new Company("Mars Incorporated Ltd"));
 		
-		LeftMenu menu = newHomepageTwo.getLeftMenu();
-		menu.clickAndLoad(InitialisePayroll.class);
+		
 		assertTrue(newHomepageTwo == newHomepageOne);
 	}
 	
-	@Test @Order(3)
+	@Test 
 	void klljljlk() {
 //		UserLoginPage p = new UserLoginPage(null, new PayrollModuleElements(null));
 	}

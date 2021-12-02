@@ -6,7 +6,11 @@ package object_models.pages.homepage.loader;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
+import context_manager.CallingState;
 import context_manager.ContextManager;
+import context_manager.ContextState;
+import context_manager.states.State;
+import context_manager.states.StateModule;
 import entities.company.Company;
 import entities.company.LoaderCompany;
 import object_models.left_menu.common.LeftMenu;
@@ -47,43 +51,56 @@ public abstract class HomePageLoader {
 	public HomePageLoader(WebDriver driver, HomePageElements elements) {
 		this.driver = driver;
 		this.elements = elements;		
-		this.moduleName = elements.getModuleName(); //TODO
-		this.currentCompany = elements.getCompany();
+		this.moduleName = elements.getModuleName();		
+	}
+		
+	public void setCurrentCompany(Company currentCompany) {
+		this.currentCompany = currentCompany;
 	}
 	
-//	public HomePageLoader(CoreData coreData, WebDriver driver, HomePageElements elements) {
-//		this.coreData = coreData;
-//		this.driver = driver;
-//		this.elements = elements;		
-//		this.moduleName = elements.getModuleName(); //TODO
-//		this.currentCompany = elements.getCompany();
-//	}
-
 	public void setCoreData(CoreData coreData) {
 		this.coreData = coreData;
-		//TODO - redo
-		this.contextManager = coreData.getContextManager();
 		this.logger = coreData.getLogger();
-		//TODO
+		this.driver = coreData.getWebDriver();
+		this.contextManager = coreData.getContextManager();
+		
+		elements.setCoreData(coreData);
+		setInitialStateOfContextManager();
 		setNavBars();
+	}
+	
+	public void setInitialStateOfContextManager() {
+		logger.debug("Setting initial state of Context Manager");
+		contextManager.setLatestCallingState(new CallingState() {			
+			@Override
+			public State getState(ContextState context) {
+				return new StateModule(context, driver);
+			}
+		});
+		contextManager.setFirstContext(elements.getContextForModule());				
 	}
 
 	public abstract HomePage loadHomePage();
 		
-	protected boolean loadModule() {
-		if(ModuleChecker.isValidModuleName(moduleName) && !ModuleChecker.isCurrentModule(moduleName, driver)){
+	protected boolean loadModule() {		
+		if(ModuleChecker.isValidModuleName(moduleName) && !ModuleChecker.isCurrentModule(moduleName, driver)){			
 			elements.getQuickLinkToLoadModule().clickMe();
 			return true;
 		}	
 		return false;		
 	}	
 	protected boolean loadCompany() {
-		if(leftNavBar == null) {
-			setNavBars();
-		}
-		LoaderCompany loader = new LoaderCompany(elements.getCompany(), coreData, leftNavBar);
-		loader.loadCompany().ifPresent(c -> currentCompany = c);		
-		return true;
+		Company forCompany = elements.getCompany();
+		if(forCompany.equals(currentCompany)) {
+			return false;
+		}else {
+			if(leftNavBar == null) {
+				setNavBars();
+			}
+			LoaderCompany loader = new LoaderCompany(elements.getCompany(), coreData, leftNavBar);
+			loader.loadCompany().ifPresent(c -> currentCompany = c);		
+			return true;	
+		}		
 	}
 
 	private void setNavBars() {

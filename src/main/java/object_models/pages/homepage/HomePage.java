@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextManager;
 import entities.company.Company;
+import object_models.forms.ModalCloser;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_nav_bar.LeftNavBar;
 import object_models.modules.payroll.PayrollModuleElements;
@@ -63,16 +64,19 @@ public abstract class HomePage extends Page implements CoreData, CompanyLoader {
 		}else {
 			elements = new PersonnelModuleElements(co);
 		}
+		//giving elements existing CM
 		elements.setCoreData(coreData);
 		return elements;
 	}
 	public HomePage loadModule() {
+		ModalCloser.closeAnyOpenModalForms(contextManager);
 		ExistingHomePageLoader loader = new ExistingHomePageLoader(coreData, driver, getElements(currentCompany), this);	
 		return loader.loadHomePage();
 	}
 	// Actions
 	@Override //CompanyLoader
-	public HomePage loadCompany(Company co) {		
+	public HomePage loadCompany(Company co) {
+		ModalCloser.closeAnyOpenModalForms(contextManager);
 		ExistingHomePageLoader loader = new ExistingHomePageLoader(coreData, driver, getElements(co), this);	
 		return loader.loadHomePage();
 	}			
