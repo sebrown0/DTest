@@ -3,15 +3,13 @@
  */
 package company;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import entities.company.Company;
@@ -37,7 +35,6 @@ import xml_reader.config_file.ConfigReader;
  * Check the home page is created correctly
  * after changing companies.
  */
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({ 
 	ConfigParameterResolver.class, 
 	TestResultLogger.class, 
@@ -59,7 +56,7 @@ class HomePageAferChangeOfCompany {
 	 * TODO - ADD COMPANY NAME TO CONFIG READER.
 	 */
 	
-	@Test @Order(1)
+	@Test
 	void getNewHomepage_afterLoading_newCompany() {
 		// Original company is provided by LoginPageResolverPayroll.
 		HomePage newHomepage = currentHomepage.loadCompany(new Company("Mars Northern Products Ltd"));		
@@ -67,35 +64,35 @@ class HomePageAferChangeOfCompany {
 		currentHomepage = newHomepage;
 	}
 	
-	@Test @Order(2)
+	@Test
 	void loadMenuItem_after_another_companyLoad() {
 		HomePage newHomepageOne = currentHomepage.loadCompany(new Company("Mars Northern Products Ltd"));
 		HomePage newHomepageTwo = newHomepageOne.loadCompany(new Company("Mars Incorporated Ltd"));
-		LeftMenu menu = newHomepageTwo.getLeftMenu();
-		menu.clickAndLoad(InitialisePayroll.class);
 		assertFalse(newHomepageTwo == newHomepageOne);
 		currentHomepage = newHomepageTwo;
 	}
 	
-	@Test @Order(3)
-	void loadTheSameCompanyTwice_checkTheyAreEqual_loadMenuItem() {
-		/*
-		 * in modal closer: current container is PayrollModuleElements -> has to contexts -> payroll
-		 * Where is the 
-		 */
-		HomePage newHomepageOne = currentHomepage.loadCompany(new Company("Mars Northern Products Ltd"));
+	@Test
+	void loadTheSameCompanyTwice_checkTheyAreEqual_loadMenuItem() {		
+		HomePage newHomepageOne = currentHomepage.loadCompany(new Company("Mars Incorporated Ltd"));
 		LeftMenu menu = newHomepageOne.getLeftMenu();
 		menu.clickAndLoad(InitialisePayroll.class);
-		//have not got a new CM. There are 3 context payroll
 		HomePage newHomepageTwo = newHomepageOne.loadCompany(new Company("Mars Incorporated Ltd"));
-		
-		
-		assertTrue(newHomepageTwo != newHomepageOne);
+		assertTrue(newHomepageTwo.equals(newHomepageOne));
 		currentHomepage = newHomepageTwo;
+	}	
+
+	@Test
+	void loadInvalidNewModule() {		
+		HomePage newHomepageOne = currentHomepage.loadModule("Giberish");		
+		assertTrue(newHomepageOne.equals(currentHomepage));
+		currentHomepage = newHomepageOne;
 	}
 	
-//	@Test 
-//	void klljljlk() {
-////		UserLoginPage p = new UserLoginPage(null, new PayrollModuleElements(null));
-//	}
+	@Test
+	void loadValidNewModule() {		
+		HomePage newHomepageOne = currentHomepage.loadModule("Personnel");		
+		assertEquals("Personnel", newHomepageOne.waitForAndGetModuleName("Personnel"));
+		currentHomepage = newHomepageOne;
+	}
 }

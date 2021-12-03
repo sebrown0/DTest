@@ -3,8 +3,7 @@
  */
 package object_models.pages.homepage.loader;
 
-import org.openqa.selenium.WebDriver;
-
+import exceptions.HomePageElementException;
 import object_models.pages.homepage.CoreData;
 import object_models.pages.homepage.CoreDataLoader;
 import object_models.pages.homepage.HomePage;
@@ -22,8 +21,8 @@ import object_models.pages.homepage.HomePage;
  */
 public final class ExistingHomePageLoader extends HomePageLoader{
 
-	public ExistingHomePageLoader(CoreData coreData, WebDriver driver, HomePageElements elements, HomePage hp) {
-		super(driver, elements);
+	public ExistingHomePageLoader(CoreData coreData, HomePageElements elements, HomePage hp) throws HomePageElementException {
+		super(coreData.getWebDriver(), elements);
 		
 		super.initialiseLoader(coreData);
 		super.setCurrentCompany(hp.getCurrentCompany());
@@ -40,7 +39,10 @@ public final class ExistingHomePageLoader extends HomePageLoader{
 
 	// Only load if not null and different from existing module/company.
 	private boolean haveLoadedModuleOrCompany() {		
-		return (super.loadModule() || super.loadCompany()) ? true : false;
+		boolean loadedOneOfThem;
+		loadedOneOfThem = super.loadModule();
+		loadedOneOfThem = super.loadCompany();
+		return loadedOneOfThem;
 	}
 
 	private void createNewHomePage() {

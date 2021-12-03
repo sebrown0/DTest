@@ -13,6 +13,7 @@ import context_manager.states.State;
 import context_manager.states.StateModule;
 import entities.company.Company;
 import entities.company.LoaderCompany;
+import exceptions.HomePageElementException;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_nav_bar.LeftNavBar;
 import object_models.modules.common.ModuleChecker;
@@ -33,7 +34,6 @@ import object_models.top_right_nav_bar.common.TopRightNavBar;
  *  2. A company is loaded (if it's the same company return same HP).
  *  3. Both of the above.
  */
-
 public abstract class HomePageLoader {
 	protected HomePageElements elements;
 	protected HomePage hp;
@@ -48,7 +48,10 @@ public abstract class HomePageLoader {
 	private CoreData coreData;
 	private Company currentCompany;
 	
-	public HomePageLoader(WebDriver driver, HomePageElements elements) {
+	public HomePageLoader(WebDriver driver, HomePageElements elements) throws HomePageElementException {
+		if(elements == null) {
+			throw new HomePageElementException("Elements is null");
+		}
 		this.driver = driver;
 		this.elements = elements;		
 		this.moduleName = elements.getModuleName();		

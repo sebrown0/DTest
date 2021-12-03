@@ -5,6 +5,7 @@ package object_models.pages.homepage.loader;
 
 import org.openqa.selenium.WebDriver;
 
+import exceptions.HomePageElementException;
 import object_models.pages.homepage.CoreDataLoader;
 import object_models.pages.homepage.HomePage;
 
@@ -18,7 +19,7 @@ import object_models.pages.homepage.HomePage;
  * Use when there is no existing HomePage, i.e. login.
  */
 public final class NewHomePageLoader extends HomePageLoader{
-	public NewHomePageLoader(WebDriver driver, HomePageElements elements) {
+	public NewHomePageLoader(WebDriver driver, HomePageElements elements) throws HomePageElementException {
 		super(driver, elements);
 
 		super.initialiseLoader(new CoreDataLoader(driver));

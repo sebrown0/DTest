@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import entities.User;
+import exceptions.HomePageElementException;
 import object_models.pages.homepage.CoreData;
 import object_models.pages.homepage.CoreDataLoader;
 import object_models.pages.homepage.HomePage;
@@ -26,6 +27,8 @@ import object_models.pages.homepage.loader.NewHomePageLoader;
  * 	Return the correct HomePage for the module.
  * @version 1.2
  * 	Get HomePage from NewHomePageLoader.
+ * @version 1.3
+ *  Handle HomePageElementException when trying to load HomePage.
  * @since 1.0
  *
  * Try to login a user and return the HomePage.
@@ -80,12 +83,14 @@ public class UserLoginPage extends LoadablePage {
 	}
 	
 	private HomePage loadHomePage() {		
-		NewHomePageLoader loader = new NewHomePageLoader(driver, homePageElements);
-		return loader.loadHomePage();
+		NewHomePageLoader loader;
+		try {
+			loader = new NewHomePageLoader(driver, homePageElements);
+			return loader.loadHomePage();
+		} catch (HomePageElementException e) {
+			logger.error("Cannot load homepage.");
+		}
+		return null;
 	}
-
-//	public CoreData getCoreData() {
-//		return coreData;
-//	}
 	
 }

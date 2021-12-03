@@ -12,7 +12,7 @@ import entities.PayGroup;
 import entities.company.Company;
 import object_models.dialog.DialogOkCancel;
 import object_models.left_menu.common.LeftMenu;
-import object_models.pages.homepage.CompanyLoader;
+import object_models.pages.homepage.HomePageElement;
 import object_models.pages.homepage.CoreData;
 
 /**
@@ -21,7 +21,7 @@ import object_models.pages.homepage.CoreData;
  * @since 1.0
  */
 public class PayrollInitialiser {
-	private CompanyLoader companyLoader;
+	private HomePageElement companyLoader;
 	private Company forCompany;
 	private PayGroup forPayGroup;
 	private InitialisePayroll initPay;
@@ -29,7 +29,7 @@ public class PayrollInitialiser {
 	private CoreData coreData;
 	private Logger logger;
 	
-	public PayrollInitialiser(CompanyLoader companyLoader, Company forCompany, PayGroup forPayGroup, LeftMenu leftMenu) {
+	public PayrollInitialiser(HomePageElement companyLoader, Company forCompany, PayGroup forPayGroup, LeftMenu leftMenu) {
 		this.companyLoader = companyLoader;
 		this.forCompany = forCompany;
 		this.forPayGroup = forPayGroup;

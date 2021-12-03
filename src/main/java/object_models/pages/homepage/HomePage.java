@@ -5,22 +5,24 @@ package object_models.pages.homepage;
 
 import static providers.PageTitleProvider.HOME_PAGE_TITLE;
 
+import java.time.Duration;
+
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import context_manager.ContextManager;
 import entities.company.Company;
+import exceptions.HomePageElementException;
+import factories.ModuleElementsFactory;
 import object_models.forms.ModalCloser;
+import object_models.helpers.DriverWait;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_nav_bar.LeftNavBar;
-import object_models.modules.payroll.PayrollModuleElements;
-import object_models.modules.personnel.PersonnelModuleElements;
 import object_models.pages.Page;
 import object_models.pages.homepage.loader.ExistingHomePageLoader;
-import object_models.pages.homepage.loader.HomePageElements;
 import object_models.top_right_nav_bar.common.TopRightNavBar;;
-
 
 /**
  * @author SteveBrown
@@ -28,10 +30,12 @@ import object_models.top_right_nav_bar.common.TopRightNavBar;;
  * 	Initial
  * @version 1.1
  * 	Load company and get new HomePage if company loaded.
+ * @version 1.2
+ *  Handle HomePageElementException when trying to load HomePage.
  * @since 1.0
  *
  */
-public abstract class HomePage extends Page implements CoreData, CompanyLoader {
+public abstract class HomePage extends Page implements CoreData, HomePageElement {
 	private LeftNavBar leftNavBar;
 	private TopRightNavBar topRightNavBar;
 	private LeftMenu leftMenu;
@@ -57,46 +61,34 @@ public abstract class HomePage extends Page implements CoreData, CompanyLoader {
 	
 	public abstract String getModuleName();
 	
-	private HomePageElements getElements(Company co) {
-		HomePageElements elements;
-		if(getModuleName().equals("Payroll")){
-			elements = new PayrollModuleElements(co);	
-		}else {
-			elements = new PersonnelModuleElements(co);
-		}
-		return elements;
-	}
-	public HomePage loadModule() {
-		ModalCloser.closeAnyOpenModalForms(contextManager);
-		ExistingHomePageLoader loader = new ExistingHomePageLoader(coreData, driver, getElements(currentCompany), this);	
-		return loader.loadHomePage();
-	}
-	// Actions
-	@Override //CompanyLoader
+	// Actions	
+	@Override //HomePageElement
+	public HomePage loadModule(String moduleName) {
+		return loadHomePageFromExisting(moduleName, currentCompany);
+	}	
+	@Override //HomePageElement
 	public HomePage loadCompany(Company co) {
+		return loadHomePageFromExisting(getModuleName(), co);
+	}	
+	private HomePage loadHomePageFromExisting(String moduleName, Company co) {
 		ModalCloser.closeAnyOpenModalForms(contextManager);
-		ExistingHomePageLoader loader = new ExistingHomePageLoader(coreData, driver, getElements(co), this);	
-		return loader.loadHomePage();
-	}			
-	
-	@Override //CompanyLoader
-	public Company getCurrentCompany() {
-		return leftNavBar.getCompany();
+		ExistingHomePageLoader loader;
+		try {
+			loader = new ExistingHomePageLoader(
+					coreData, 
+					ModuleElementsFactory.getModuleElements(moduleName, co), 
+					this
+			);
+			return loader.loadHomePage();
+		} catch (HomePageElementException e) {
+			logger.error("Cannot load home page from existing. Keeping existing home page");
+		}	
+		return this;
 	}
-	
+
 	@Override //Page
 	public void close() {
 		driver.quit();
-	}
-	
-	public void setLeftNavBar(LeftNavBar leftNavBar) {
-		this.leftNavBar = leftNavBar;
-	}
-	public void setTopRightNavBar(TopRightNavBar topRightNavBar) {
-		this.topRightNavBar = topRightNavBar;
-	}
-	public void setLeftMenu(LeftMenu leftMenu) {
-		this.leftMenu = leftMenu;
 	}
 	
 	@Override
@@ -110,12 +102,34 @@ public abstract class HomePage extends Page implements CoreData, CompanyLoader {
 	/*
 	 * Getters & Setters Below
 	 */
+	public void setLeftNavBar(LeftNavBar leftNavBar) {
+		this.leftNavBar = leftNavBar;
+	}
+	public void setTopRightNavBar(TopRightNavBar topRightNavBar) {
+		this.topRightNavBar = topRightNavBar;
+	}
+	public void setLeftMenu(LeftMenu leftMenu) {
+		this.leftMenu = leftMenu;
+	}
+
+//	@Override //CompanyLoader
+	public Company getCurrentCompany() {
+		return leftNavBar.getCompany();
+	}
+	
+	public String waitForAndGetModuleName(String modName) {
+		WebElement e = DriverWait.getElementAfterWaitForValue(driver, byXpathActualModuleName, Duration.ofSeconds(2), modName);
+		return (e == null) ? "" : e.getAttribute("innerHTML");		
+	}
 	public String getActualModuleName() {		
 		return driver.findElement(byXpathActualModuleName).getAttribute("innerHTML");
 	}
-	public LeftNavBar getLeftNavBar() {
-		return leftNavBar;
-	}
+	/*
+	 * ABSTRACTIONS FOR ELEMENTS!!!!!
+	 */
+//	public LeftNavBar getLeftNavBar() {
+//		return leftNavBar;
+//	}
 	public TopRightNavBar getTopRightNavBar() {
 		return topRightNavBar;
 	}	
@@ -141,22 +155,3 @@ public abstract class HomePage extends Page implements CoreData, CompanyLoader {
 	}
 
 }
-//@Override //CompanyLoader
-//public HomePage loadCompany(Company co) {		
-//if(co != null) {
-//	if(currentCompany.equals(co)) {
-//		System.out.println("Is current company. Not reloading"); // TODO - remove or log 	
-//		logger.info("Is current company. Not reloading");
-//		return this;
-//	}else {
-//		System.out.println("Loading new comp"); // TODO - remove or log
-//		logger.info("Loading new company [" + co.getName() + "]");
-//		LoadCompany loader = new LoadCompany(co, this, leftNavBar);
-//		currentCompany = loader.loadCompany();			
-//		return HomePageLoader.loadHomePage(getModuleName(), currentCompany, driver);	
-//	}					
-//}else {
-//	logger.error("Cannot load null company");
-//	return this;
-//}		
-//}		

@@ -15,6 +15,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
+ * @version 1.1
+ *  Add getElementAfterWaitForValue(...).
  * @since 1.0
  */
 public class DriverWait {
@@ -39,4 +42,19 @@ public class DriverWait {
 		}
 		return result;
 	}
+	/*
+	 * Wait for the specified duration for the element to contain text.
+	 */
+	public static WebElement getElementAfterWaitForValue(WebDriver driver, By byLocator, Duration duration, String text) {
+		WebDriverWait wait = new WebDriverWait(driver, duration);
+		WebElement result = null;
+		try {
+			wait.until(ExpectedConditions.textToBe(byLocator, text));
+			result = driver.findElement(byLocator);
+		} catch (Exception e) {
+			LogManager.getLogger().error("Failed to get element with text after wait");
+		}
+		return result;
+	}
+
 }
