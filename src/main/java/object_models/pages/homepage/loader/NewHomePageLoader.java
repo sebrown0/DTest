@@ -13,23 +13,23 @@ import object_models.pages.homepage.HomePage;
  * @version 1.0
  * 	Initial
  * @since 1.0
+ * 
+ * Create a new HomePage.
+ * Use when there is no existing HomePage, i.e. login.
  */
 public final class NewHomePageLoader extends HomePageLoader{
 	public NewHomePageLoader(WebDriver driver, HomePageElements elements) {
 		super(driver, elements);
 
-		super.setCoreData(new CoreDataLoader(driver));
+		super.initialiseLoader(new CoreDataLoader(driver));
 	}
 
 	@Override
-	public HomePage loadHomePage() {
-		
-		super.setCoreData(new CoreDataLoader(driver));
+	public HomePage loadHomePage() {		
 		super.loadModule();
 		super.loadCompany();
 		super.hp = super.elements.getHomePage();
 		super.initialiseHomePage(super.hp);
-		super.setInitialStateOfContextManager();
 		return super.hp;
 	}
 

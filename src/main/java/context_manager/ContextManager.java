@@ -19,6 +19,7 @@ import object_models.panels.PanelSwitcher;
 /**  
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
  * @since 1.0
  * 
  * Manages the contexts within the app.

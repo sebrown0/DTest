@@ -55,7 +55,7 @@ public class PayrollModuleElements implements HomePageElements {
 		this.coreData = coreData;
 		this.driver = coreData.getWebDriver();
 	}
-//THIS
+
 	@Override
 	public Context getContextForModule() { 	
 		// TODO - REMOVE ANONYMOUS CLASSES

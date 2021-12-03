@@ -54,22 +54,24 @@ public abstract class HomePageLoader {
 		this.moduleName = elements.getModuleName();		
 	}
 		
-	public void setCurrentCompany(Company currentCompany) {
-		this.currentCompany = currentCompany;
-	}
+	public abstract HomePage loadHomePage();
 	
-	public void setCoreData(CoreData coreData) {
-		this.coreData = coreData;
-		this.logger = coreData.getLogger();
-		this.driver = coreData.getWebDriver();
-		this.contextManager = coreData.getContextManager();
-		
-		elements.setCoreData(coreData);
+	public void initialiseLoader(CoreData coreData) {
+		setCoreData(coreData);
+		setHomePageElementsCoreData();
 		setInitialStateOfContextManager();
 		setNavBars();
 	}
-	
-	public void setInitialStateOfContextManager() {
+	private void setCoreData(CoreData coreData) {
+		this.coreData = coreData;
+		this.logger = coreData.getLogger();
+		this.driver = coreData.getWebDriver();
+		this.contextManager = coreData.getContextManager();		
+	}	
+	private void setHomePageElementsCoreData() {
+		elements.setCoreData(coreData);
+	}
+	private void setInitialStateOfContextManager() {
 		logger.debug("Setting initial state of Context Manager");
 		contextManager.setLatestCallingState(new CallingState() {			
 			@Override
@@ -79,9 +81,15 @@ public abstract class HomePageLoader {
 		});
 		contextManager.setFirstContext(elements.getContextForModule());				
 	}
+	private void setNavBars() {
+		leftNavBar = getLeftNavBar();
+		rightNavBar = getTopRightNavBar();
+	}		
 
-	public abstract HomePage loadHomePage();
-		
+	public void setCurrentCompany(Company currentCompany) {
+		this.currentCompany = currentCompany;
+	}
+	
 	protected boolean loadModule() {		
 		if(ModuleChecker.isValidModuleName(moduleName) && !ModuleChecker.isCurrentModule(moduleName, driver)){			
 			elements.getQuickLinkToLoadModule().clickMe();
@@ -103,10 +111,6 @@ public abstract class HomePageLoader {
 		}		
 	}
 
-	private void setNavBars() {
-		leftNavBar = getLeftNavBar();
-		rightNavBar = getTopRightNavBar();
-	}
 	protected void initialiseHomePage(HomePage hp) {
 		hp.setLeftNavBar(leftNavBar);
 		hp.setTopRightNavBar(rightNavBar);

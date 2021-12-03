@@ -13,7 +13,9 @@ import org.apache.logging.log4j.core.LoggerContext;
 import test_result.TestResultGetter;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * 	Initial
  * @params
  *  logDir: where the log is kept. Specified in config.xml.
  *  testSuiteName: forms part of the name of the log result file.

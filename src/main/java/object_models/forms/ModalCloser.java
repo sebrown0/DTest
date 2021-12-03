@@ -3,6 +3,9 @@
  */
 package object_models.forms;
 
+import org.apache.logging.log4j.LogManager;
+import org.openqa.selenium.NoSuchElementException;
+
 import context_manager.ContextManager;
 import context_manager.ContextState;
 
@@ -22,8 +25,10 @@ public class ModalCloser {
 			if(modalFormIsOpen(cm)) {
 				closeModalForm(cm, cm.getCurrentContext());
 			}	
-		} catch (Exception e) {
+		} catch (NoSuchElementException e) {			 	
 			// Nothing. Assume no open modal form.
+		}	catch (Exception e) {
+			LogManager.getLogger().error("Error closing modal form [" + e.getMessage() + "]");
 		}		
 	}
 	

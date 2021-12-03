@@ -14,22 +14,25 @@ import object_models.pages.homepage.HomePage;
  * @version 1.0
  * 	Initial
  * @since 1.0
+ * 
+ * Create a new HomePage.
+ * Use when there is an existing HomePage, 
+ * i.e. changing the company or module.
+ * 
  */
 public final class ExistingHomePageLoader extends HomePageLoader{
 
 	public ExistingHomePageLoader(CoreData coreData, WebDriver driver, HomePageElements elements, HomePage hp) {
 		super(driver, elements);
 		
-		super.setCoreData(coreData);
+		super.initialiseLoader(coreData);
 		super.setCurrentCompany(hp.getCurrentCompany());
 		super.hp = hp;
 	}
 
 	@Override
 	public HomePage loadHomePage() {
-		//TODO - are we using the correct version HP?
 		if(haveLoadedModuleOrCompany()) {
-			super.setInitialStateOfContextManager();
 			createNewHomePage();
 		}		
 		return hp;		
@@ -41,7 +44,7 @@ public final class ExistingHomePageLoader extends HomePageLoader{
 	}
 
 	private void createNewHomePage() {
-		super.setCoreData(new CoreDataLoader(driver));
+		super.initialiseLoader(new CoreDataLoader(driver));
 		super.hp = super.elements.getHomePage();
 		super.initialiseHomePage(super.hp);
 	}

@@ -64,8 +64,6 @@ public abstract class HomePage extends Page implements CoreData, CompanyLoader {
 		}else {
 			elements = new PersonnelModuleElements(co);
 		}
-		//giving elements existing CM
-		elements.setCoreData(coreData);
 		return elements;
 	}
 	public HomePage loadModule() {
