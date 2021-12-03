@@ -21,6 +21,8 @@ import xml_reader.config_file.ConfigReader;
  * 	Initial
  * @version 1.1
  * 	Pass company to PayrollModuleElements.
+ * @version 1.2
+ * 	Get company from config.
  * @since 1.0
  *
  */
@@ -28,10 +30,10 @@ public class LoginPageResolverPayroll extends LoginPageResolver {
 
 	@Override
 	public Object resolveParameter(ParameterContext pc, ExtensionContext ec) throws ParameterResolutionException {
-		ConfigReader reader = (ConfigReader) ec.getStore(Namespace.GLOBAL).get(ConfigParameterResolver.CONFIG_PARAM_ID);
+		ConfigReader reader = (ConfigReader) ec.getStore(Namespace.GLOBAL).get(ConfigParameterResolver.CONFIG_PARAM_ID);		
 		WebDriver driver = reader.getDriver();
 		LogManager.getLogger().debug("Loging in with default company");
-		return new UserLoginPage(driver, new PayrollModuleElements(new Company("Mars Incorporated Ltd")));
+		return new UserLoginPage(driver, new PayrollModuleElements(new Company(reader.getCompany())));
 	}
 
 }

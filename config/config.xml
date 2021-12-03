@@ -10,6 +10,10 @@
 	<ApplicationUnderTest>
 		<Name>Dakar 2021</Name>
 		<Version>1.0.0</Version>
+			<AppParams>
+				<Module>Payroll</Module>
+				<Company>Mars Incorporated Ltd</Company>
+			</AppParams>
 	</ApplicationUnderTest>
 	
 	<WebDriver>Google</WebDriver>

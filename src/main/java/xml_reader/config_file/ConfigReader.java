@@ -10,10 +10,15 @@ import reporting.strategy.ResultWriter;
 import xml_file.XMLFile;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * 	Initial
+ * @version 1.1
+ * 	Add company and module.
+ * @since 1.0
  *
  */
-public class ConfigReader implements WebDriverGetter, ResultWritterGetter {
+public class ConfigReader implements WebDriverGetter, ResultWritterGetter, AppParameters {
 	private XMLFile xmlFile;
 	private static final String CONFIG_FILE_PATH = "./config/config.xml";
 	
@@ -21,7 +26,7 @@ public class ConfigReader implements WebDriverGetter, ResultWritterGetter {
 		xmlFile = new XMLFile(CONFIG_FILE_PATH);
 	}	
 	
-	// Use if we want to specifiy the location of the config file.
+	// Use if we want to specify the location of the config file.
 	public ConfigReader(String filePath) {
 		xmlFile = new XMLFile(filePath);
 	}	
@@ -37,5 +42,15 @@ public class ConfigReader implements WebDriverGetter, ResultWritterGetter {
 				ConfigFileContents.getResultStrategyName(xmlFile), 
 				ConfigFileContents.getLogDir(xmlFile), 
 				testSuiteName);
+	}
+
+	@Override
+	public String getModule() {
+		return ConfigFileContents.getModule(xmlFile);
+	}
+
+	@Override
+	public String getCompany() {
+		return ConfigFileContents.getCompany(xmlFile);
 	}
 }
