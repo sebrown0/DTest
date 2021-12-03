@@ -29,36 +29,41 @@ import xml_reader.config_file.ConfigReader;
  * 	Initial
  * @since 1.0 
  * 
- * Test the Initialise Payroll form.
- * Does not test the initialisation of payroll.
- * For this see InitialisePayroll_Tests
+ * Test payroll functionality from initialisation, 
+ * through calculation until closed and locked.
+ * 
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({ 
 	ConfigParameterResolver.class, 
 	LoginPageResolverPayroll.class, 
 	TestResultLogger.class })
-public final class InitialisePayroll_Tests {
+public final class Payroll_Tests {
 	private static HomePagePayroll hp;
-		
+	private static PayGroup pg;	
+	private static Company comp;
+	
 	@BeforeAll
 	static void setUpBeforeClass(ConfigReader configReader, UserLoginPage userLogin) throws Exception {
-		hp = (HomePagePayroll) userLogin.loginValidUser(UserProvider.userPortal());		
+		hp = (HomePagePayroll) userLogin.loginValidUser(UserProvider.userPortal());
+		
+		PayPeriod pp = new CurrentPayPeriod(2, LocalDate.of(2021, Month.JANUARY, 29), LocalDate.of(2021, Month.FEBRUARY, 25));
+		pg = new PayGroup("Fourweekly", pp);
+		
+		comp = new Company("Mars Northern Products Ltd");
+		comp.addPayGroup(pg);
 	}
 	
 	@Test	@Order(1)
-	void checkInitPay_loaded() {
-//		hp.initialisePayroll(null, null);
+	void initialisePay() {
+		hp = hp.initialisePayroll(comp, pg);
 	}
 	
-	private Company getCompany() {
-		PayPeriod pp = new CurrentPayPeriod(2, LocalDate.of(2021, Month.JANUARY, 1), LocalDate.of(2021, Month.FEBRUARY, 25));
-		PayGroup pg = new PayGroup("Fourweekly", pp);
-		Company c = new Company("Mars Northern Products Ltd");
-		c.addPayGroup(pg);
-		
-		return c;
+	@Test	@Order(2)
+	void globalAdjustments() {
+		hp.openGlobalAdjustments();
 	}
+	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 //		hp.close();

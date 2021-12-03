@@ -5,7 +5,6 @@ package object_models.left_menu.payroll.initialise;
 
 import org.apache.logging.log4j.Logger;
 
-import controls.Button;
 import entities.company.Company;
 import entities.payroll.PayGroup;
 import exceptions.PayrollAlreadyInitialisedException;
@@ -26,7 +25,6 @@ public class PayrollInitialiser {
 	private Company forCompany;
 	private PayGroup forPayGroup;
 	private InitialisePayroll initPay;
-	private LeftMenuLoadItem leftMenu;
 	private CoreData coreData;
 	private Logger logger;
 	
@@ -35,67 +33,31 @@ public class PayrollInitialiser {
 		this.companyLoader = companyLoader;
 		this.forCompany = forCompany;
 		this.forPayGroup = forPayGroup;
-		this.leftMenu = leftMenu;
 		this.coreData = (CoreData) companyLoader;
 		this.logger = this.coreData.getLogger();
 	}
 
 	public HomePagePayroll initialisePayroll() {
-		loadCompany();
-		openInitialisePayroll();
-		if(actualIsRequired()) {
-			
-			try {
-				DialogOkCancel okCancel = initPay.clickInitialisePayroll();
-				okCancel.clickCancel();
-			} catch (PayrollAlreadyInitialisedException e) {
-				logger.info("The payroll is already intitialised");
-				System.out.println("The payroll is already intitialised"); // TODO - remove or log
-			}
-				
-				
-		}
-	
+		loadCompanyIfNecessary();
+		if(openInitialisePayrollForm()) {
+			if(formValuesEqualRequired()) {
+				tryAndClickInitialise();				
+			}	
+			unloadForm();
+		}		
 		return currentHomePage;
 	}
 	
-//	public void initialisePayroll() {
-//		if(loadCompany().isPresent()) {
-//			openInitialisePayroll();
-//			if(actualIsRequired()) {
-//				if(notAlreadyInitialised()) {
-//					
-//					try {
-//						DialogOkCancel okCancel = initPay.clickInitialisePayroll();
-//						okCancel.clickCancel();
-//					} catch (PayrollAlreadyInitialisedException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//					
-//					
-//					System.out.println("intitialise"); // TODO - remove or log
-//				}else {
-//					logger.info("The payroll is already intitialised");
-//					System.out.println("The payroll is already intitialised"); // TODO - remove or log 	
-//				}						
-//			}
-//		}else {
-//			coreData.getLogger().error("Could not initialise payroll.");			
-//		}		
-//	}
-	
-	private void loadCompany() {
+	private void loadCompanyIfNecessary() {
 		currentHomePage = (HomePagePayroll) companyLoader.loadCompany(forCompany);
 	}
 	
-	private void openInitialisePayroll() {		
-		leftMenu
-			.clickAndLoad(InitialisePayroll.class)
-			.ifPresent(c -> initPay = (InitialisePayroll) c);		
+	private boolean openInitialisePayrollForm() {		
+		initPay = currentHomePage.openInitialisePayroll();
+		return (initPay == null) ? false : true;
 	}
 	
-	private boolean actualIsRequired() {
+	private boolean formValuesEqualRequired() {
 		boolean res = true;
 		String actualPayPeriod = initPay.getPayPeriod();
 		String requiredPayPeriod = forPayGroup.getCurrentPayPeriod().getPayPeriodDateWithPeriodNum();
@@ -118,18 +80,17 @@ public class PayrollInitialiser {
 		logger.info("Currently available paygroup is [" + initPay.getPayGroup() + "], required [" + forPayGroup.getPayGroupName() + "]");
 		logger.info("Currently available pay period is [" + actualPayPeriod + "], required [" + requiredPayPeriod + "]");
 	}
-	
-	private boolean notAlreadyInitialised() {
-		Button init = initPay.getInitialisePayroll(); 
-		if(init != null) {
-			return init.isAvailable();
-		}else {
-			return false;
+
+	private void tryAndClickInitialise() {
+		try {
+			DialogOkCancel okCancel = initPay.clickInitialisePayroll();
+			okCancel.clickCancel();
+		} catch (PayrollAlreadyInitialisedException e) {
+			logger.info("The payroll is already intitialised");
 		}
 	}
-//	public DialogOkCancel clickInitialisePayroll() {
-//		Button init = (Button) getControl(PayrollControlNames.INIT_PAYROLL).get();
-//		init.click();
-//		return new DialogOkCancel(driver.findElement(By.cssSelector("div[class='modal-dialog']")));
-//	}
-}
+
+	private void unloadForm() {
+		initPay.closeFormAndContext();
+	}
+}	

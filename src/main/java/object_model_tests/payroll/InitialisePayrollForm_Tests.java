@@ -34,7 +34,7 @@ import xml_reader.config_file.ConfigReader;
  * 
  * Test the Initialise Payroll form.
  * Does not test the initialisation of payroll.
- * For this see InitialisePayroll_Tests
+ * For this see Payroll_Tests
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({ 

@@ -26,7 +26,7 @@ import object_models.panels.JsPanelWithIFrame;
  * @since 1.0
  * @version 1.0
  */
-public final class GlobalAdjustments extends JsPanelWithIFrame implements JsPanelControl {
+public final class GlobalAdjustments extends JsPanelWithIFrame implements JsPanelControl, PayrollElement {
 	private ControlDataFactory controlFactory;
 	private DkGrid<?> grid;
 	

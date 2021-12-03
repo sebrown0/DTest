@@ -38,9 +38,10 @@ import object_models.top_right_nav_bar.common.TopRightNavBar;;
  *
  */
 public abstract class HomePage extends Page implements CoreData, HomePageElement {
+	protected LeftMenu leftMenu;
+	
 	private LeftNavBar leftNavBar;
-	private TopRightNavBar topRightNavBar;
-	private LeftMenu leftMenu;
+	private TopRightNavBar topRightNavBar;	
 	private Company currentCompany;
 		
 	//CoreData

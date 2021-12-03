@@ -13,15 +13,18 @@ import exceptions.PayrollAlreadyInitialisedException;
 import factories.ControlDataFactory;
 import object_models.dialog.DialogOkCancel;
 import object_models.forms.FormWithIFrame;
+import object_models.left_menu.payroll.PayrollElement;
 import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
  * @version 1.0
  * 	Initial
+ * @version 1.1
+ * 	Add PayrollAlreadyInitialisedException to clickInitialisePayroll.
  * @since 1.0
  */
-public class InitialisePayroll extends FormWithIFrame {	
+public class InitialisePayroll extends FormWithIFrame implements PayrollElement {	
 	private ControlDataFactory controlFactory;
 	private By byMyLocator;
 	
@@ -60,10 +63,9 @@ public class InitialisePayroll extends FormWithIFrame {
 		if(init.click()) {
 			okCancel = new DialogOkCancel(driver.findElement(By.cssSelector("div[class='modal-dialog']")));	
 		}else {
-			WebElement e = driver.findElement(By.cssSelector("div[type='button'][class='btn btn-danger']"));
-			if(e != null) {
+			WebElement initBtn = driver.findElement(By.cssSelector("div[type='button'][class='btn btn-danger']"));
+			if(initBtn != null) {
 				throw new PayrollAlreadyInitialisedException("");
-//				System.out.println("THROW!!!!!!!"); // TODO - remove or log 	
 			}
 		}
 		return okCancel;				
