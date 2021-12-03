@@ -16,6 +16,7 @@ import object_models.helpers.ElementControls;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
  * @since 1.0
  * 
  * The controls that are in the body (iFrame) of the form.
@@ -50,17 +51,17 @@ public class InitialisePayrollControls implements ElementControls {
 						By.cssSelector("select[name='SelectPays']"))
 				.getControlData(),
 			
-//			controlFactory
-//				.buildButton(
-//						CommonControlNames.CLOSE,
-//						By.cssSelector("button[class='btn btn-primary']"))
-//				.getControlData(),		
+			controlFactory
+				.buildButton(
+						CommonControlNames.CLOSE,
+						By.cssSelector("button[class='btn btn-primary']"))
+				.getControlData(),		
 				
-				controlFactory
-					.buildButton(
-							PayrollControlNames.INIT_PAYROLL,
-							By.cssSelector("div[type='button'][class='btn btn-warning']"))
-					.getControlData()		
+			controlFactory
+				.buildButton(
+						PayrollControlNames.INIT_PAYROLL,
+						By.cssSelector("div[type='button'][class='btn btn-warning']"))
+				.getControlData()		
 		);	
 	}
 

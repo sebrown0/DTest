@@ -28,7 +28,7 @@ import object_models.pages.homepage.CoreData;
  * @since 1.0
  *
  */
-public class LeftMenu implements CallingState {
+public class LeftMenu implements CallingState, LeftMenuLoadItem {
 	private Map<String, WebElement> anchors;	
 	private WebDriver driver;
 	private Logger logger;
@@ -56,6 +56,7 @@ public class LeftMenu implements CallingState {
 		}
 	}
 
+	@Override
 	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
 		Optional<ContainerAction> action = menuActions.clickAndLoad(clazz);
 		return action;		
@@ -84,5 +85,6 @@ public class LeftMenu implements CallingState {
 	@Override
 	public State getState(ContextState context) { 
 		return new StateLeftMenu(context, driver);
-	}	
+	}
+
 }

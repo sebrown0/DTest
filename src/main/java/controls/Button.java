@@ -31,15 +31,17 @@ public class Button implements Control {
 		this.btnLocator = btnLocator;
 	}
 
-	public void click() {		
+	public boolean click() {		
 		if(isAvailable()) {
 			btn.click();
+			return true;
 		}
+		return false;
 	}
 
 	@Override
 	public boolean isAvailable() {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 		try {
 			btn = wait.until(ExpectedConditions.elementToBeClickable(btnLocator));
 			return true;

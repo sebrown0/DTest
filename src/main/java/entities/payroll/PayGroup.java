@@ -1,7 +1,7 @@
 /**
  * 
  */
-package entities;
+package entities.payroll;
 
 import java.util.List;
 

@@ -1,8 +1,5 @@
 package object_model_tests.payroll;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -14,18 +11,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import controls.TextSelect;
-import entities.PayGroup;
-import entities.PayPeriod;
 import entities.company.Company;
-import enums.control_names.CommonControlNames;
-import enums.control_names.PayrollControlNames;
+import entities.payroll.CurrentPayPeriod;
+import entities.payroll.PayGroup;
+import entities.payroll.PayPeriod;
 import logging.TestResultLogger;
-import object_models.dialog.DialogOkCancel;
-import object_models.left_menu.common.LeftMenu;
-import object_models.left_menu.payroll.initialise.InitialisePayroll;
 import object_models.pages.UserLoginPage;
-import object_models.pages.homepage.HomePage;
 import object_models.pages.homepage.HomePagePayroll;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
@@ -35,8 +26,12 @@ import xml_reader.config_file.ConfigReader;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
  * @since 1.0 
  * 
+ * Test the Initialise Payroll form.
+ * Does not test the initialisation of payroll.
+ * For this see InitialisePayroll_Tests
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({ 
@@ -45,96 +40,27 @@ import xml_reader.config_file.ConfigReader;
 	TestResultLogger.class })
 public final class InitialisePayroll_Tests {
 	private static HomePagePayroll hp;
-	private static LeftMenu leftMenu;	
-	private static InitialisePayroll initPay;
-	
+		
 	@BeforeAll
 	static void setUpBeforeClass(ConfigReader configReader, UserLoginPage userLogin) throws Exception {
-		hp = (HomePagePayroll) userLogin.loginValidUser(UserProvider.userPortal());
-		leftMenu = hp.getLeftMenu();
-		// Load initialise pay from container.
-		leftMenu
-				.clickParent(InitialisePayroll.MENU_PARENT_NAME)
-				.clickAndLoad(InitialisePayroll.class)
-				.ifPresent(c -> initPay = (InitialisePayroll) c);
+		hp = (HomePagePayroll) userLogin.loginValidUser(UserProvider.userPortal());		
 	}
 	
 	@Test	@Order(1)
 	void checkInitPay_loaded() {
-		if(initPay == null) {
-			fail("Could not get InitialisePayroll object");
-		}	
+//		hp.initialisePayroll(null, null);
 	}
 	
-	@Test	@Order(2)
-	void checkCompany() {
-		TextSelect comp = (TextSelect) initPay.getControl(CommonControlNames.COMPANY).get();
-		assertTrue(comp.getText().length() > 0);
-	}
-	
-	@Test	@Order(3)
-	void checkPayGroup() {
-		TextSelect payGrp = (TextSelect) initPay.getControl(PayrollControlNames.PAY_GROUP).get();
-		assertTrue(payGrp.getText().length() > 0);
-	}
-
-	@Test	@Order(4)
-	void checkPayPeriod() {
-		TextSelect payPer = (TextSelect) initPay.getControl(PayrollControlNames.PAY_PERIODS).get();
-		assertTrue(payPer.getText().length() > 0);
-	}
-	
-	@Test	@Order(5)
-	void initPayroll() {
-		DialogOkCancel okCancel = initPay.clickInitialisePayroll();
-		okCancel.getBtnCancel().ifPresent(b -> b.click());
-	}
-	
-	@Test	@Order(6)
-	void cooooooooomp() {		
-//		HomePage hp = hp.loadCompany(new Company("Mars Incorporated Ltd"));
-//		
-//		PayPeriod pp = new PayPeriod(02, true, LocalDate.of(2021, Month.JANUARY, 29), LocalDate.of(2021, Month.FEBRUARY, 25));				
-//		PayGroup pg = new PayGroup("Fourweekly", pp);		
-//		Company coMarsNorthern = new Company("Mars Northern Products Ltd", pg);		
-//		HomePagePayroll hpMarsNorthern = (HomePagePayroll) hp.initialisePayroll(coMarsNorthern, pg);
+	private Company getCompany() {
+		PayPeriod pp = new CurrentPayPeriod(2, LocalDate.of(2021, Month.JANUARY, 1), LocalDate.of(2021, Month.FEBRUARY, 25));
+		PayGroup pg = new PayGroup("Fourweekly", pp);
+		Company c = new Company("Mars Northern Products Ltd");
+		c.addPayGroup(pg);
 		
-				
+		return c;
 	}
-	
-	@Test	@Order(15) //TODO - update test num!!!
-	void closeForm() {
-		initPay.closeFormAndContext();
-	}
-	
-//	@Test
-//	@Order()
-//	void click_initialisePayroll_check_DialogAppears_and_clickCancel() {
-//		DialogOkCancel okCancel = (DialogOkCancel) initPay.clickInitialisePayroll();
-//		okCancel.getBtnCancel().get().click();
-//		assertEquals("Are you sure you want to Initialise the Payroll ?", okCancel.getMsg().get());
-//		assertEquals("Payroll Initialisation", okCancel.getTitle().get());
-//		assertEquals("OK", okCancel.getBtnOk().get().getElementKey());
-//		assertEquals("Cancel", okCancel.getBtnCancel().get().getElementKey());
-//	}
-	
-//	@Test
-//	@Order()
-//	void click_initialisePayroll_then_clickOk() {
-//		DialogOkCancel okCancel = (DialogOkCancel) initPay.clickInitialisePayroll();
-//		okCancel.getBtnOk().get().click();
-//		Optional<String> msg = initPay.getPayrollInitialisedMsg();
-//	}
-	
-//	@Test
-//	@Order()
-//	void assert_that_payroll_is_already_initialised() {
-//		assertEquals("This Payroll has already been Initialised", initPay.getPayrollAlreadyInitialisedMsg().get());
-//	}
-		
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-//		initPay.close();
 //		hp.close();
 	}
 

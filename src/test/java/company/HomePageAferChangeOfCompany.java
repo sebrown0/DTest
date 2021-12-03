@@ -49,12 +49,8 @@ class HomePageAferChangeOfCompany {
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-//		homepagePayroll.close();
+		currentHomepage.close();
 	}
-		
-	/*
-	 * TODO - ADD COMPANY NAME TO CONFIG READER.
-	 */
 	
 	@Test
 	void getNewHomepage_afterLoading_newCompany() {

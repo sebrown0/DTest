@@ -3,8 +3,8 @@
  */
 package object_models.pages.homepage;
 
-import entities.PayGroup;
 import entities.company.Company;
+import entities.payroll.PayGroup;
 import object_models.left_menu.payroll.initialise.PayrollInitialiser;
 
 /**
@@ -22,9 +22,7 @@ public final class HomePagePayroll extends HomePage {
 	public HomePagePayroll initialisePayroll(Company forCompany, PayGroup payGroup) {
 		super.loadCompany(forCompany);
 		PayrollInitialiser initialiser = new PayrollInitialiser(this, forCompany, payGroup, super.getLeftMenu());		
-		initialiser.initialisePayroll();
-		
-		return null;
+		return initialiser.initialisePayroll();
 	}
 	
 	@Override

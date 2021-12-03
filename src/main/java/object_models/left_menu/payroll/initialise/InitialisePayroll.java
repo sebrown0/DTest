@@ -9,6 +9,7 @@ import control_builder.ControlData;
 import controls.Button;
 import controls.TextSelect;
 import enums.control_names.PayrollControlNames;
+import exceptions.PayrollAlreadyInitialisedException;
 import factories.ControlDataFactory;
 import object_models.dialog.DialogOkCancel;
 import object_models.forms.FormWithIFrame;
@@ -53,10 +54,19 @@ public class InitialisePayroll extends FormWithIFrame {
 	}
 			
 	// Actions		
-	public DialogOkCancel clickInitialisePayroll() {
+	public DialogOkCancel clickInitialisePayroll() throws PayrollAlreadyInitialisedException {
+		DialogOkCancel okCancel = null;
 		Button init = (Button) getControl(PayrollControlNames.INIT_PAYROLL).get();
-		init.click();
-		return new DialogOkCancel(driver.findElement(By.cssSelector("div[class='modal-dialog']")));
+		if(init.click()) {
+			okCancel = new DialogOkCancel(driver.findElement(By.cssSelector("div[class='modal-dialog']")));	
+		}else {
+			WebElement e = driver.findElement(By.cssSelector("div[type='button'][class='btn btn-danger']"));
+			if(e != null) {
+				throw new PayrollAlreadyInitialisedException("");
+//				System.out.println("THROW!!!!!!!"); // TODO - remove or log 	
+			}
+		}
+		return okCancel;				
 	}
 	
 	public String getPayPeriod() {
@@ -77,11 +87,6 @@ public class InitialisePayroll extends FormWithIFrame {
 		return init;
 	}
 	
-//	public void closeForm() {
-//		super.switchToDefaultContent();
-//		closeMe();
-//		// KEEP THIS CONTEXT BUT SWITCH CONTEXT
-//	}	
 	public void closeFormAndContext() {
 		super.switchToDefaultContent().deleteMyContextAndRevertToCallingContext();
 		closeMe();		

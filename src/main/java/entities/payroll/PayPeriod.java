@@ -1,7 +1,7 @@
 /**
  * 
  */
-package entities;
+package entities.payroll;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -22,9 +22,8 @@ public class PayPeriod {
 	private LocalDate startDate;
 	private LocalDate endDate;
 	
-	public PayPeriod(int periodNum, boolean isCurrentPayPeriod, LocalDate startDate, LocalDate endDate) {
-		this.periodNum = periodNum;
-		this.isCurrentPayPeriod = isCurrentPayPeriod;
+	public PayPeriod(int periodNum, LocalDate startDate, LocalDate endDate) {
+		this.periodNum = periodNum;		
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.dtf = DateTimeFormatter.ofPattern("dd MMM u", Locale.ENGLISH);
@@ -58,8 +57,8 @@ public class PayPeriod {
 		return isCurrentPayPeriod;
 	}
 
-	public void setCurrentPayPeriod(boolean isCurrentPayPeriod) {
-		this.isCurrentPayPeriod = isCurrentPayPeriod;
+	public void setAsCurrentPayPeriod() {
+		this.isCurrentPayPeriod = true;
 	}
 	
 }

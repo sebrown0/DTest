@@ -5,7 +5,7 @@ package entities.company;
 
 import java.util.List;
 
-import entities.PayGroup;
+import entities.payroll.PayGroup;
 import utils.ListSetter;
 import utils.ListTestFind;
 
