@@ -6,6 +6,7 @@ package object_models.pages.homepage;
 import static providers.PageTitleProvider.HOME_PAGE_TITLE;
 
 import java.time.Duration;
+import java.util.Optional;
 
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -22,6 +23,7 @@ import object_models.left_menu.common.LeftMenu;
 import object_models.left_nav_bar.LeftNavBar;
 import object_models.pages.Page;
 import object_models.pages.homepage.loader.ExistingHomePageLoader;
+import object_models.top_right_nav_bar.common.NavBarElement;
 import object_models.top_right_nav_bar.common.TopRightNavBar;;
 
 /**
@@ -125,14 +127,19 @@ public abstract class HomePage extends Page implements CoreData, HomePageElement
 		return driver.findElement(byXpathActualModuleName).getAttribute("innerHTML");
 	}
 	/*
-	 * ABSTRACTIONS FOR ELEMENTS!!!!!
+	 * TODO - USE ABSTRACTIONS FOR ELEMENTS.
+	 * Remove the getters below and replace with abstractions.
+	 * This will make handling the contexts easier & more robust.
 	 */
-//	public LeftNavBar getLeftNavBar() {
-//		return leftNavBar;
-//	}
+
 	public TopRightNavBar getTopRightNavBar() {
 		return topRightNavBar;
 	}	
+	
+	public Optional<NavBarElement> getTopRightNavBarElement(String elementName){
+		return topRightNavBar.getNavBarElement(elementName);
+	}
+		
 	public LeftMenu getLeftMenu() {
 		return leftMenu;
 	}

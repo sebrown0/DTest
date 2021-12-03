@@ -46,7 +46,7 @@ class EmployeeCreationTests {
 		// Login to the homepage
 		homepage = userLogin.loginValidUser(UserProvider.userPortal());
 		// Get the employee creation wizard from the nav bar.
-		navEmpWizard = homepage.getTopRightNavBar().getNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
+		navEmpWizard = homepage.getTopRightNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
 	}	
 
 	@Test @Order(1)

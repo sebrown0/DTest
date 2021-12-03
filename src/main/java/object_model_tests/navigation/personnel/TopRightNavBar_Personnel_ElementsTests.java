@@ -71,7 +71,7 @@ class TopRightNavBar_Personnel_ElementsTests {
 	@Order(3)
 	void clickEmployeeCreation() {
 		// Does not work. But leave for know as it is an example of a failing test.
-		NavBarElement empCr = hp.getTopRightNavBar().getNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
+		NavBarElement empCr = hp.getTopRightNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
 		empCr.clickElement();
 		assertEquals(NavBarEmployeeCreation.ORIGINAL_NAME, empCr.getOriginalName());
 	}
@@ -79,7 +79,7 @@ class TopRightNavBar_Personnel_ElementsTests {
 	@Test
 	@Order(4)
 	void clickEmployeeCV() {
-		NavBarElement empCV = hp.getTopRightNavBar().getNavBarElement(NavBarEmployeeCVPayroll.ORIGINAL_NAME).get();
+		NavBarElement empCV = hp.getTopRightNavBarElement(NavBarEmployeeCVPayroll.ORIGINAL_NAME).get();
 		empCV.clickElement();
 		assertEquals(NavBarEmployeeCVPayroll.ORIGINAL_NAME, empCV.getOriginalName());
 	}
@@ -87,7 +87,7 @@ class TopRightNavBar_Personnel_ElementsTests {
 	@Test
 	@Order(5)
 	void clickEmployeeGridView() {
-		NavBarElement empGrid = hp.getTopRightNavBar().getNavBarElement(NavBarEmpGridView.ORIGINAL_NAME).get();
+		NavBarElement empGrid = hp.getTopRightNavBarElement(NavBarEmpGridView.ORIGINAL_NAME).get();
 		empGrid.clickElement();
 		assertEquals(NavBarEmpGridView.ORIGINAL_NAME, empGrid.getOriginalName());
 	}
@@ -95,7 +95,7 @@ class TopRightNavBar_Personnel_ElementsTests {
 	@Test
 	@Order(6)
 	void clickVisualReports() {
-		NavBarElement rep = hp.getTopRightNavBar().getNavBarElement(NavBarVisualReports.ORIGINAL_NAME).get();
+		NavBarElement rep = hp.getTopRightNavBarElement(NavBarVisualReports.ORIGINAL_NAME).get();
 		rep.clickElement();
 		assertEquals(NavBarVisualReports.ORIGINAL_NAME, rep.getOriginalName());
 	}
@@ -103,7 +103,7 @@ class TopRightNavBar_Personnel_ElementsTests {
 	@Test
 	@Order(7)
 	void clickDakarIntelligence() {
-		NavBarElement dak = hp.getTopRightNavBar().getNavBarElement(NavBarDakarIntelligence.ORIGINAL_NAME).get();
+		NavBarElement dak = hp.getTopRightNavBarElement(NavBarDakarIntelligence.ORIGINAL_NAME).get();
 		dak.clickElement();
 		assertEquals(NavBarDakarIntelligence.ORIGINAL_NAME, dak.getOriginalName());
 	}
@@ -111,7 +111,7 @@ class TopRightNavBar_Personnel_ElementsTests {
 	@Test
 	@Order(8)
 	void clickCompanyLastViewed() {
-		NavBarElement myCo = hp.getTopRightNavBar().getNavBarElement(NavBarMyCoLastViewed.ORIGINAL_NAME).get();
+		NavBarElement myCo = hp.getTopRightNavBarElement(NavBarMyCoLastViewed.ORIGINAL_NAME).get();
 		myCo.clickElement();
 		assertEquals(NavBarMyCoLastViewed.ORIGINAL_NAME, myCo.getOriginalName());
 	}
@@ -119,7 +119,7 @@ class TopRightNavBar_Personnel_ElementsTests {
 	@Test
 	@Order(9)
 	void clickNotifications() {
-		NavBarElement not = hp.getTopRightNavBar().getNavBarElement(NavBarNotifications.ORIGINAL_NAME).get();
+		NavBarElement not = hp.getTopRightNavBarElement(NavBarNotifications.ORIGINAL_NAME).get();
 		not.clickElement();
 		assertEquals(NavBarNotifications.ORIGINAL_NAME, not.getOriginalName());
 	}
@@ -127,7 +127,7 @@ class TopRightNavBar_Personnel_ElementsTests {
 	@Test
 	@Order(10)
 	void clickNewEmployments() {
-		NavBarElement newEmps = hp.getTopRightNavBar().getNavBarElement(NavBarNewEmployments.ORIGINAL_NAME).get();
+		NavBarElement newEmps = hp.getTopRightNavBarElement(NavBarNewEmployments.ORIGINAL_NAME).get();
 		newEmps.clickElement();
 		assertEquals(NavBarNewEmployments.ORIGINAL_NAME, newEmps.getOriginalName());
 	}
@@ -135,7 +135,7 @@ class TopRightNavBar_Personnel_ElementsTests {
 	@Test
 	@Order(11)
 	void clickTerminations() {
-		NavBarElement term = hp.getTopRightNavBar().getNavBarElement(NavBarTerminations.ORIGINAL_NAME).get();
+		NavBarElement term = hp.getTopRightNavBarElement(NavBarTerminations.ORIGINAL_NAME).get();
 		term.clickElement();
 		assertEquals(NavBarTerminations.ORIGINAL_NAME, term.getOriginalName());
 	}
@@ -143,7 +143,7 @@ class TopRightNavBar_Personnel_ElementsTests {
 	@Test
 	@Order(12)
 	void clickUserManagement() {
-		NavBarElement user = hp.getTopRightNavBar().getNavBarElement(NavBarUserManagment.ORIGINAL_NAME).get();
+		NavBarElement user = hp.getTopRightNavBarElement(NavBarUserManagment.ORIGINAL_NAME).get();
 		user.clickElement();
 		assertEquals(NavBarUserManagment.ORIGINAL_NAME, user.getOriginalName());
 	}
