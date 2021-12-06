@@ -8,11 +8,20 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
 import dto.Employee;
+import enums.EmployeeTitle;
 import providers.XMLFileProvider;
 import providers.employee.EmployeeFromXml;
 import providers.employee.EmployeeProvider;
 import xml_reader.config_file.ConfigReader;
 
+/** 
+ * @author SteveBrown
+ * @version 1.0
+ *  Initial 	
+ * @since 1.0
+ * 
+ * Read & validate data from various XML files.
+ */
 class XMLReaderTests {
 	private static ConfigReader reader;
 	
@@ -36,11 +45,18 @@ class XMLReaderTests {
 	}
 	
 	@Test
-	void getEmployee() {
+	void getEmployee_withRequiredFields() {
 		EmployeeProvider empXml = new EmployeeFromXml();
 		Employee emp = empXml.getEmployeeWithRequiredFields("VALID_WITH_REQUIRED_ONLY");
 		assertEquals("HS_2345", emp.getEmpCode());
 		assertEquals("123456", emp.getNiNumber());
+	}
+	
+	@Test
+	void getEmployee_withAllFields() {
+		EmployeeProvider empXml = new EmployeeFromXml();
+		Employee emp = empXml.getEmployeeWithAllFields("VALID_WITH_ALL_FIELDS");
+		assertEquals(EmployeeTitle.MRS, emp.getEmployeeTitle());
 	}
 	
 //	@Test

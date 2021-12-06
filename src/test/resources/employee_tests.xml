@@ -23,33 +23,9 @@
 			<AnnualSalary>10000</AnnualSalary>
 			<HourlyRate>10</HourlyRate>
 		</Required>
-		<Optional>
-			<Title>Mr</Title>
-			<Street></Street>
-			<PostCode></PostCode>
-			<Bank></Bank>
-			<IBAN></IBAN>
-			<EmailAddress></EmailAddress>
-			<MobileNumber></MobileNumber>
-			<TaxStatus></TaxStatus>
-			<ContractType></ContractType>
-			<Company></Company>
-			<Department></Department>
-			<Schedule></Schedule>
-			<EmploymentType></EmploymentType>
-			<IsSpecialPartTimer></IsSpecialPartTimer>
-			<Grade></Grade>
-			<CostCenter></CostCenter>			
-			<TaxablePermanentAllowances>
-				<!-- None -->
-			</TaxablePermanentAllowances>
-			<NonTaxablePermanentAllowances>
-				<!-- None -->
-			</NonTaxablePermanentAllowances>
-		</Optional>		
 	</Employee>
 	
-	<Employee id = "2">
+	<Employee id = "VALID_WITH_ALL_FIELDS">
 		<Required>
 			<Code>"MS_123"</Code>
 			<FirstName>"Marge"</FirstName>
@@ -69,13 +45,13 @@
 		</Required>
 		<Optional>
 			<Title>Mrs</Title>
-			<Street></Street>
-			<PostCode></PostCode>
-			<Bank></Bank>
-			<IBAN></IBAN>
-			<EmailAddress></EmailAddress>
-			<MobileNumber></MobileNumber>
-			<TaxStatus></TaxStatus>
+			<Street>A Street</Street>
+			<PostCode>A Postcode</PostCode>
+			<Bank>A Bank</Bank>
+			<IBAN>iban</IBAN>
+			<EmailAddress>email@address</EmailAddress>
+			<MobileNumber>123456</MobileNumber>
+			<TaxStatus>P</TaxStatus>
 			<ContractType></ContractType>
 			<Company></Company>
 			<Department></Department>

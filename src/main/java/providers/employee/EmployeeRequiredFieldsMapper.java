@@ -7,7 +7,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import dto.EmployeeRequired;
+import dto.EmployeeOptional;
 import enums.Gender;
 
 /**
@@ -17,14 +17,17 @@ import enums.Gender;
  * @since 1.0
  */
 public class EmployeeRequiredFieldsMapper extends EmployeeMapper {
+private EmployeeOptional empWithRequiredFields;
 	
-	public void mapRequired(EmployeeRequired empWithRequiredFields, Node n) {
+	public EmployeeRequiredFieldsMapper(EmployeeOptional empWithRequiredFields) {
+		this.empWithRequiredFields = empWithRequiredFields;
+	}
+	
+	public void mapFields(Node n) {
 		Element required = (Element) n;
 		NodeList nodes = required.getElementsByTagName("Required");		
 		Element e = (Element) nodes.item(0);
 		
-//		getEmp();
-//		EmployeeRequired empWithRequiredFields = emp;		
 		empWithRequiredFields
 			.setEmpCode(getContent(e, "Code"))
 			.setFirstName(getContent(e, "FirstName"))

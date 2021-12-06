@@ -6,6 +6,7 @@ package providers.employee;
 import java.math.BigDecimal;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * @author SteveBrown
@@ -13,8 +14,10 @@ import org.w3c.dom.Element;
  * 	Initial
  * @since 1.0
  */
-public class EmployeeMapper {
+public abstract class EmployeeMapper {
 
+	public abstract void mapFields(Node n);
+	
 	protected String getContent(Element e, String tagName) {
 		return e.getElementsByTagName(tagName).item(0).getTextContent();
 	}
