@@ -13,5 +13,6 @@ public class XMLFileProvider {
 	public static final String EMPLOYEE_TESTS_FILE_PATH = "./src/test/resources/employee_tests.xml";
 	public static final String TEST_CONFIG_FILE_PATH = "./src/test/resources/test_config.xml";	
 	public static final String PROD_CONFIG_FILE_PATH = "./config/config.xml";
-	public static final String INCLUDE_TESTS_FILE_PATH = "./include_tests";	 
+	public static final String INCLUDE_TESTS_FILE_PATH = "./include_tests";	 	
+	public static final String SITE_MAP_FILE_PATH = "./src/main/resources/site_map/site_map.xml";
 }

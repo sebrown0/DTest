@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<SiteMap>
+  <Modules>
+    <Module name="Payroll">
+      <Panels>
+        <Panel title="Employee List" nav="LM.Employee List">
+          <Buttons>
+            <Button name="B1"></Button>
+          </Buttons>
+        </Panel>
+        <Panel title="Employee Document Management" nav="LM.Documents">
+          <Buttons>
+            <Button name="B2"></Button>
+          </Buttons>
+        </Panel>
+      </Panels>      
+    </Module>
+    
+    <Module name="Personnel">
+      <Panels>
+        <Panel title="Employee List" nav="LM.Employee List"></Panel>    
+        <Buttons>
+          <Button name="B3"></Button>
+        </Buttons>
+      </Panels>      
+    </Module>
+    
+  </Modules>
+</SiteMap>
