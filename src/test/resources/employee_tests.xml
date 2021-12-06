@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+** For unit testing of the Employee & EmployeeFromXml classes.
+-->
+
+<Employees>
+	<Employee id = "VALID_WITH_REQUIRED_ONLY">
+		<Required>
+			<Code>HS_2345</Code>
+			<FirstName>Homer</FirstName>
+			<Surname>Simpson</Surname>
+			<IdCardNumber>0134213A</IdCardNumber>
+			<AddressOne>747</AddressOne>
+			<Town>Attard</Town>
+			<Country>Malta</Country>
+			<Gender>MALE</Gender>
+			<DOB>21/05/2002</DOB>
+			<DOE>01/01/2021</DOE>
+			<TaxNumber>123456</TaxNumber>
+			<NiNumber>123456</NiNumber>
+			<PayGroup>Fourweekly</PayGroup>
+			<AnnualSalary>10000</AnnualSalary>
+			<HourlyRate>10</HourlyRate>
+		</Required>
+		<Optional>
+			<Title>Mr</Title>
+			<Street></Street>
+			<PostCode></PostCode>
+			<Bank></Bank>
+			<IBAN></IBAN>
+			<EmailAddress></EmailAddress>
+			<MobileNumber></MobileNumber>
+			<TaxStatus></TaxStatus>
+			<ContractType></ContractType>
+			<Company></Company>
+			<Department></Department>
+			<Schedule></Schedule>
+			<EmploymentType></EmploymentType>
+			<IsSpecialPartTimer></IsSpecialPartTimer>
+			<Grade></Grade>
+			<CostCenter></CostCenter>			
+			<TaxablePermanentAllowances>
+				<!-- None -->
+			</TaxablePermanentAllowances>
+			<NonTaxablePermanentAllowances>
+				<!-- None -->
+			</NonTaxablePermanentAllowances>
+		</Optional>		
+	</Employee>
+	
+	<Employee id = "2">
+		<Required>
+			<Code>"MS_123"</Code>
+			<FirstName>"Marge"</FirstName>
+			<Surname>"Simpson"</Surname>
+			<IdCardNumber>"0154213A"</IdCardNumber>
+			<AddressOne>747</AddressOne>
+			<Town>"Attard"</Town>
+			<Country>"Malta"</Country>
+			<Gender>FEMALE</Gender>
+			<DOB>"11/03/2002"</DOB>
+			<DOE>"01/01/2021"</DOE>
+			<TaxNumber>"153456"</TaxNumber>
+			<NiNumber>"153456"</NiNumber>
+			<PayGroup>"Fourweekly"</PayGroup>
+			<AnnualSalary>100000</AnnualSalary>
+			<HourlyRate>100</HourlyRate>
+		</Required>
+		<Optional>
+			<Title>Mrs</Title>
+			<Street></Street>
+			<PostCode></PostCode>
+			<Bank></Bank>
+			<IBAN></IBAN>
+			<EmailAddress></EmailAddress>
+			<MobileNumber></MobileNumber>
+			<TaxStatus></TaxStatus>
+			<ContractType></ContractType>
+			<Company></Company>
+			<Department></Department>
+			<Schedule></Schedule>
+			<EmploymentType></EmploymentType>
+			<IsSpecialPartTimer></IsSpecialPartTimer>
+			<Grade></Grade>
+			<CostCenter></CostCenter>			
+			<TaxablePermanentAllowances>
+				<!-- None -->
+			</TaxablePermanentAllowances>
+			<NonTaxablePermanentAllowances>
+				<!-- None -->
+			</NonTaxablePermanentAllowances>
+		</Optional>		
+	</Employee>
+</Employees>

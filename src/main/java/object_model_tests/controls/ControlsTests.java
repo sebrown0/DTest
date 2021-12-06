@@ -28,8 +28,8 @@ import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
-import providers.EmployeeFromXml;
-import providers.EmployeeProvider;
+import providers.employee.EmployeeFromXml;
+import providers.employee.EmployeeProvider;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
@@ -60,7 +60,7 @@ class ControlsTests {
 		empDetails = (EmployeeDetails) menu.clickParent("Employees").clickAndLoad(EmployeeDetails.class).get();
 		// Get the employee we're going to use with required fields from the provider.
 		EmployeeProvider empProvider = new EmployeeFromXml();
-		emp = empProvider.getEmployeeRequired("1");
+		emp = empProvider.getEmployeeWithRequiredFields("1");
 		// Get PageControl for EmployeeDetails
 		empDetailsPageControl = empDetails.getPanelControl();
 	}

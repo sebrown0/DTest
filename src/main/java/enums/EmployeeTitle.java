@@ -8,8 +8,7 @@ package enums;
  * @version 1.0
  * 	Initial
  * @since 1.0
- *
  */
-public enum ContractType {
-	DEFINITE,INDEFINITE,SPECIAL,SECONDMENT,STUDENT,SPONSOR;
+public enum EmployeeTitle {
+	MRS,MR,MS,PROF,SIR,DR
 }

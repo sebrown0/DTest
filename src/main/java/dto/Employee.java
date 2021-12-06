@@ -7,7 +7,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import entities.company.Company;
 import enums.ContractType;
+import enums.EmployeeTitle;
 import enums.EmploymentType;
 import enums.Gender;
 import enums.TaxStatus;
@@ -15,17 +17,21 @@ import enums.TaxStatus;
 /**
  * @author SteveBrown
  * @version 1.0
+ *  Initial
+ * @version 1.1
+ * 	
  * @since 1.0
  *
  */
-public class Employee {
+public class Employee implements EmployeeRequired, EmployeeOptional {
+	//Required
 	private String firstName; 
 	private String lastName;
-	private String idCardNumber;
 	private String empCode;
+	private BigDecimal annualSalary;
+	private BigDecimal hourlyRate;
+	private String idCardNumber;	
 	private String addressOne;
-	private String street;
-	private String postCode;	
 	private String town;
 	private String country;
 	private Gender gender;
@@ -33,333 +39,335 @@ public class Employee {
 	private String dateOfEmployement;
 	private String taxNumber;
 	private String niNumber;
+	private String payGroup;
+	
+	//Optional
+	private String street;
+	private String postCode;
 	private String bank;
 	private String ibanNumber;
 	private String emailAddress;
 	private String mobileNumber;
 	private TaxStatus taxStatus;
 	private ContractType contractType;
-	private String Company;
-	private String payGroup;
+	private Company Company;
 	private String department;
 	private String schedule;
 	private EmploymentType employmentType;
+	private EmployeeTitle employeeTitle;
 	private boolean isSpecialPartTimer;
 	private String grade;
 	private String costCentre;
 	private List<Allowance> taxablePermanentAllowances = new ArrayList<>();
 	private List<Allowance> nonTaxablePermanentAllowances = new ArrayList<>();
-	private BigDecimal annualSalary;
-	private BigDecimal hourlyRate;
-	private static RequiredFields requiredFields = new RequiredFields();
 	
-	public String getFirstName() {
-		return firstName;
-	}	
-	public String getLastName() {
-		return lastName;
-	}
+	// Employee/Helpers
 	public String getFullName() {
 		return firstName + " " + lastName;
 	}
 	public String getFormalName() {
 		return lastName + " " + firstName;
 	}
-	public String getIdCardNumber() {
-		return idCardNumber;
+	
+	// Required 
+	@Override //RequiredFields
+	public String getFirstName() {
+		return firstName;
 	}
+	@Override //RequiredFields
+	public EmployeeRequired setFirstName(String firstName) {
+		this.firstName = firstName;
+		return this;
+	}
+	@Override //RequiredFields
+	public String getLastName() {
+		return lastName;
+	}
+	@Override //RequiredFields
+	public EmployeeRequired setLastName(String lastName) {
+		this.lastName = lastName;
+		return this;
+	}
+	@Override //RequiredFields
 	public String getEmpCode() {
 		return empCode;
 	}
-	public String getAddressOne() {
-		return addressOne;
+	@Override //RequiredFields
+	public EmployeeRequired setEmpCode(String empCode) {
+		this.empCode = empCode;
+		return this;
 	}
-	public String getStreet() {
-		return street;
-	}
-	public String getPostCode() {
-		return postCode;
-	}
-	public String getTown() {
-		return town;
-	}
-	public String getCountry() {
-		return country;
-	}
-	public Gender getGender() {
-		return gender;
-	}
-	public String getDateOfBirth() {
-		return dateOfBirth;
-	}
-	public String getDateOfEmployement() {
-		return dateOfEmployement;
-	}
-	public String getTaxNumber() {
-		return taxNumber;
-	}
-	public String getNiNumber() {
-		return niNumber;
-	}
-	public String getBank() {
-		return bank;
-	}
-	public String getIbanNumber() {
-		return ibanNumber;
-	}
-	public String getEmailAddress() {
-		return emailAddress;
-	}
-	public String getMobileNumber() {
-		return mobileNumber;
-	}
-	public TaxStatus getTaxStatus() {
-		return taxStatus;
-	}
-	public ContractType getContractType() {
-		return contractType;
-	}
-	public String getCompany() {
-		return Company;
-	}
-	public String getPayGroup() {
-		return payGroup;
-	}
-	public String getDepartment() {
-		return department;
-	}
-	public String getSchedule() {
-		return schedule;
-	}
-	public EmploymentType getEmploymentType() {
-		return employmentType;
-	}
-	public boolean isSpecialPartTimer() {
-		return isSpecialPartTimer;
-	}
-	public String getGrade() {
-		return grade;
-	}
-	public String getCostCentre() {
-		return costCentre;
-	}
-	public List<Allowance> getTaxablePermanentAllowances() {
-		return taxablePermanentAllowances;
-	}
-	public List<Allowance> getNonTaxablePermanentAllowances() {
-		return nonTaxablePermanentAllowances;
-	}
+	@Override //RequiredFields
 	public BigDecimal getAnnualSalary() {
 		return annualSalary;
 	}
-	public BigDecimal getHourlyRate() {
-		return hourlyRate;
-	}
-	
-	public Employee setFirstName(String firstName) {
-		this.firstName = firstName.trim();;
-		return this;
-	}
-	public Employee setLastName(String lastName) {
-		this.lastName = lastName.trim();
-		return this;
-	}
-	public Employee setIdCardNumber(String idCardNumber) {
-		this.idCardNumber = idCardNumber.trim();;
-		return this;
-	}
-	public Employee setEmpCode(String empCode) {
-		this.empCode = empCode.trim();;
-		return this;
-	}
-	public Employee setAddressOne(String addressOne) {
-		this.addressOne = addressOne.trim();;
-		return this;
-	}
-	public Employee setStreet(String street) {
-		this.street = street.trim();;
-		return this;
-	}
-	public Employee setPostCode(String postCode) {
-		this.postCode = postCode.trim();;
-		return this;
-	}
-	public Employee setTown(String town) {
-		this.town = town.trim();;
-		return this;
-	}
-	public Employee setCountry(String country) {
-		this.country = country.trim();;
-		return this;
-	}
-	public Employee setGender(Gender gender) {
-		this.gender = gender;
-		return this;
-	}
-	public Employee setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth.trim();;
-		return this;
-	}
-	public Employee setDateOfEmployement(String dateOfEmployement) {
-		this.dateOfEmployement = dateOfEmployement.trim();;
-		return this;
-	}
-	public Employee setTaxNumber(String taxNumber) {
-		this.taxNumber = taxNumber.trim();;
-		return this;
-	}
-	public Employee setNiNumber(String niNumber) {
-		this.niNumber = niNumber.trim();;
-		return this;
-	}
-	public Employee setBank(String bank) {
-		this.bank = bank.trim();;
-		return this;
-	}
-	public Employee setIbanNumber(String ibanNumber) {
-		this.ibanNumber = ibanNumber.trim();;
-		return this;
-	}
-	public Employee setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress.trim();;
-		return this;
-	}
-	public Employee setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber.trim();;
-		return this;
-	}
-	public Employee setTaxStatus(TaxStatus taxStatus) {
-		this.taxStatus = taxStatus;
-		return this;
-	}
-	public Employee setContractType(ContractType contractType) {
-		this.contractType = contractType;
-		return this;
-	}
-	public Employee setCompany(String company) {
-		Company = company.trim();;
-		return this;
-	}
-	public Employee setPayGroup(String payGroup) {
-		this.payGroup = payGroup.trim();;
-		return this;
-	}
-	public Employee setDepartment(String department) {
-		this.department = department.trim();;
-		return this;
-	}
-	public Employee setSchedule(String schedule) {
-		this.schedule = schedule.trim();;
-		return this;
-	}
-	public Employee setEmploymentType(EmploymentType employmentType) {
-		this.employmentType = employmentType;
-		return this;
-	}
-	public Employee setSpecialPartTimer(boolean isSpecialPartTimer) {
-		this.isSpecialPartTimer = isSpecialPartTimer;
-		return this;
-	}
-	public Employee setGrade(String grade) {
-		this.grade = grade.trim();;
-		return this;
-	}
-	public Employee setCostCentre(String costCentre) {
-		this.costCentre = costCentre.trim();;
-		return this;
-	}
-	public Employee setTaxablePermanentAllowances(List<Allowance> taxablePermanentAllowances) {
-		this.taxablePermanentAllowances = taxablePermanentAllowances;
-		return this;
-	}
-	public Employee setNonTaxablePermanentAllowances(List<Allowance> nonTaxablePermanentAllowances) {
-		this.nonTaxablePermanentAllowances = nonTaxablePermanentAllowances;
-		return this;
-	}
-	public Employee setAnnualSalary(BigDecimal annualSalary) {
+	@Override //RequiredFields
+	public EmployeeRequired setAnnualSalary(BigDecimal annualSalary) {
 		this.annualSalary = annualSalary;
 		return this;
 	}
-	public Employee setHourlyRate(BigDecimal hourlyRate) {
+	@Override //RequiredFields
+	public BigDecimal getHourlyRate() {
+		return hourlyRate;
+	}
+	@Override //RequiredFields
+	public EmployeeRequired setHourlyRate(BigDecimal hourlyRate) {
 		this.hourlyRate = hourlyRate;
 		return this;
 	}
+	@Override //RequiredFields
+	public String getIdCardNumber() {
+		return idCardNumber;
+	}
+	@Override //RequiredFields
+	public EmployeeRequired setIdCardNumber(String idCardNumber) {
+		this.idCardNumber = idCardNumber;
+		return this;
+	}
+	@Override //RequiredFields
+	public String getAddressOne() {
+		return addressOne;
+	}
+	@Override //RequiredFields
+	public EmployeeRequired setAddressOne(String addressOne) {
+		this.addressOne = addressOne;
+		return this;
+	}
+	@Override //RequiredFields
+	public String getTown() {
+		return town;
+	}
+	@Override //RequiredFields
+	public EmployeeRequired setTown(String town) {
+		this.town = town;
+		return this;
+	}
+	@Override //RequiredFields
+	public String getCountry() {
+		return country;
+	}
+	@Override //RequiredFields
+	public EmployeeRequired setCountry(String country) {
+		this.country = country;
+		return this;
+	}
+	@Override //RequiredFields
+	public Gender getGender() {
+		return gender;
+	}
+	@Override //RequiredFields
+	public EmployeeRequired setGender(Gender gender) {
+		this.gender = gender;
+		return this;
+	}
+	@Override //RequiredFields
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+	@Override //RequiredFields
+	public EmployeeRequired setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+		return this;
+	}
+	@Override //RequiredFields
+	public String getDateOfEmployement() {
+		return dateOfEmployement;
+	}
+	@Override //RequiredFields
+	public EmployeeRequired setDateOfEmployement(String dateOfEmployement) {
+		this.dateOfEmployement = dateOfEmployement;
+		return this;
+	}
+	@Override //RequiredFields
+	public String getTaxNumber() {
+		return taxNumber;
+	}
+	@Override //RequiredFields
+	public EmployeeRequired setTaxNumber(String taxNumber) {
+		this.taxNumber = taxNumber;
+		return this;
+	}
+	@Override //RequiredFields
+	public String getNiNumber() {
+		return niNumber;
+	}
+	@Override //RequiredFields
+	public EmployeeRequired setNiNumber(String niNumber) {
+		this.niNumber = niNumber;
+		return this;
+	}
+	@Override //RequiredFields
+	public String getPayGroup() {
+		return payGroup;
+	}
+	@Override //RequiredFields
+	public EmployeeRequired setPayGroup(String payGroup) {
+		this.payGroup = payGroup;
+		return this;
+	}
 
-	public static RequiredFields withRequiredFields() {
-		return requiredFields;
+	// Optional
+	@Override //OptionalFields
+	public String getStreet() {
+		return street;
 	}
-	
+	@Override //OptionalFields
+	public EmployeeOptional setStreet(String street) {
+		this.street = street;
+		return this;
+	}
+	@Override //OptionalFields
+	public String getPostCode() {
+		return postCode;
+	}
+	@Override //OptionalFields
+	public EmployeeOptional setPostCode(String postCode) {
+		this.postCode = postCode;
+		return this;
+	}
+	@Override //OptionalFields
+	public String getBank() {
+		return bank;
+	}
+	@Override //OptionalFields
+	public EmployeeOptional setBank(String bank) {
+		this.bank = bank;
+		return this;
+	}
+	@Override //OptionalFields
+	public String getIbanNumber() {
+		return ibanNumber;
+	}
+	@Override //OptionalFields
+	public EmployeeOptional setIbanNumber(String ibanNumber) {
+		this.ibanNumber = ibanNumber;
+		return this;
+	}
+	@Override //OptionalFields
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+	@Override //OptionalFields
+	public EmployeeOptional setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+		return this;
+	}
+	@Override //OptionalFields
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+	@Override //OptionalFields
+	public EmployeeOptional setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+		return this;
+	}
+	@Override //OptionalFields
+	public TaxStatus getTaxStatus() {
+		return taxStatus;
+	}
+	@Override //OptionalFields
+	public EmployeeOptional setTaxStatus(TaxStatus taxStatus) {
+		this.taxStatus = taxStatus;
+		return this;
+	}
+	@Override //OptionalFields
+	public ContractType getContractType() {
+		return contractType;
+	}
+	@Override //OptionalFields
+	public EmployeeOptional setContractType(ContractType contractType) {
+		this.contractType = contractType;
+		return this;
+	}
+	@Override //OptionalFields
+	public Company getCompany() {
+		return Company;
+	}
+	@Override //OptionalFields
+	public EmployeeOptional setCompany(Company company) {
+		Company = company;
+		return this;
+	}
+	@Override //OptionalFields
+	public String getDepartment() {
+		return department;
+	}
+	@Override //OptionalFields
+	public EmployeeOptional setDepartment(String department) {
+		this.department = department;
+		return this;
+	}
+	@Override //OptionalFields
+	public String getSchedule() {
+		return schedule;
+	}
+	@Override //OptionalFields
+	public EmployeeOptional setSchedule(String schedule) {
+		this.schedule = schedule;
+		return this;
+	}
+	@Override //OptionalFields
+	public EmploymentType getEmploymentType() {
+		return employmentType;
+	}
+	@Override //OptionalFields
+	public EmployeeOptional setEmploymentType(EmploymentType employmentType) {
+		this.employmentType = employmentType;
+		return this;
+	}
+	@Override //OptionalFields
+	public boolean isSpecialPartTimer() {
+		return isSpecialPartTimer;
+	}
+	@Override //OptionalFields
+	public EmployeeOptional setSpecialPartTimer(boolean isSpecialPartTimer) {
+		this.isSpecialPartTimer = isSpecialPartTimer;
+		return this;
+	}
+	@Override //OptionalFields
+	public String getGrade() {
+		return grade;
+	}
+	@Override //OptionalFields
+	public EmployeeOptional setGrade(String grade) {
+		this.grade = grade;
+		return this;
+	}
+	@Override //OptionalFields
+	public String getCostCentre() {
+		return costCentre;
+	}
+	@Override //OptionalFields
+	public EmployeeOptional setCostCentre(String costCentre) {
+		this.costCentre = costCentre;
+		return this;
+	}
+	@Override //OptionalFields
+	public List<Allowance> getTaxablePermanentAllowances() {
+		return taxablePermanentAllowances;
+	}
+	@Override //OptionalFields
+	public EmployeeOptional setTaxablePermanentAllowances(List<Allowance> taxablePermanentAllowances) {
+		this.taxablePermanentAllowances = taxablePermanentAllowances;
+		return this;
+	}
+	@Override //OptionalFields
+	public List<Allowance> getNonTaxablePermanentAllowances() {
+		return nonTaxablePermanentAllowances;
+	}
+	@Override //OptionalFields
+	public EmployeeOptional setNonTaxablePermanentAllowances(List<Allowance> nonTaxablePermanentAllowances) {
+		this.nonTaxablePermanentAllowances = nonTaxablePermanentAllowances;
+		return this;
+	}
 	@Override
-	public String toString() {
-		return "Employee [firstName=" + firstName + ", lastName=" + lastName + ", empCode=" + empCode + "]";
+	public EmployeeOptional setEmployeeTitle(EmployeeTitle employeeTitle) {
+		this.employeeTitle = employeeTitle;
+		return this;
+	}
+	@Override
+	public EmployeeTitle getEmployeeTitle() {
+		return employeeTitle;
 	}
 	
-	public static class RequiredFields {
-		private Employee emp = new Employee();
-		
-		public RequiredFields firstName(String firstName) {
-			emp.setFirstName(firstName);
-			return this;
-		}		
-		public RequiredFields lastName(String lastName) {
-			emp.setLastName(lastName);
-			return this;
-		}		
-		public RequiredFields idCardNumber(String idCardNumber) {
-			emp.setIdCardNumber(idCardNumber);
-			return this;
-		}
-		public RequiredFields empCode(String empCode) {
-			emp.setEmpCode(empCode);
-			return this;
-		}
-		public RequiredFields addressOne(String addressOne) {
-			emp.setAddressOne(addressOne);
-			return this;
-		}
-		public RequiredFields town(String town) {
-			emp.setTown(town);
-			return this;
-		}
-		public RequiredFields country(String country) {
-			emp.setCountry(country);
-			return this;
-		}
-		public RequiredFields gender(Gender gender) {
-			emp.setGender(gender);
-			return this;
-		}
-		public RequiredFields dateOfBirth(String dateOfBirth) {
-			emp.setDateOfBirth(dateOfBirth);
-			return this;
-		}
-		public RequiredFields dateOfEmployement(String dateOfEmployement) {
-			emp.setDateOfEmployement(dateOfEmployement);
-			return this;
-		}
-		public RequiredFields taxNumber(String taxNumber) {
-			emp.setTaxNumber(taxNumber);
-			return this;
-		}
-		public RequiredFields niNumber(String niNumber) {
-			emp.setNiNumber(niNumber);
-			return this;
-		}
-		public RequiredFields annualSalary(BigDecimal annualSalary) {
-			emp.setAnnualSalary(annualSalary);
-			return this;
-		}
-		public RequiredFields hourlyRate(BigDecimal hourlyRate) {
-			emp.setHourlyRate(hourlyRate);
-			return this;
-		}
-		public RequiredFields payGroup(String payGroup) {
-			emp.setPayGroup(payGroup);
-			return this;
-		}
-				
-		public Employee build() {
-			return emp;
-		}
-	}
 }

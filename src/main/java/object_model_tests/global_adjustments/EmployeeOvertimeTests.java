@@ -30,12 +30,17 @@ import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
-import providers.EmployeeFromXml;
-import providers.EmployeeProvider;
+import providers.employee.EmployeeFromXml;
+import providers.employee.EmployeeProvider;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
-/*
+/**
+ * @author SteveBrown
+ * @version 1.0
+ *  Initial 	
+ * @since 1.0
+ *
  * Test the grid in Global Payroll Adjustments.
  * 
  * The tests should be run in order as they go
@@ -62,7 +67,7 @@ public class EmployeeOvertimeTests {
 //		emp = empProvider.getAnyEmpWithRandomCode();
 		
 		EmployeeProvider empProvider = new EmployeeFromXml(); 
-		emp = empProvider.getEmployeeRequired("1");
+		emp = empProvider.getEmployeeWithRequiredFields("1");
 		
 //		String randomEmpCode = emp.getEmpCode();
 		

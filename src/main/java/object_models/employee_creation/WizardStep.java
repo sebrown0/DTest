@@ -13,6 +13,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import control_mapping.PageMap;
 import object_models.element.InputWriter;
 
+/**
+ * @author SteveBrown
+ * @version 1.0
+ *  Initial 	
+ * @since 1.0
+ */
 public abstract class WizardStep implements WizardStepExecutor, WizardMove{
 	private int stepNumber;
 	

@@ -8,14 +8,13 @@ import org.openqa.selenium.StaleElementReferenceException;
 import dto.Employee;
 
 /**
- * @author Steve Brown
- *
+ * @author SteveBrown
+ * @version 1.0
+ *  Initial 	
+ * @since 1.0
  */
 public interface WizardStepExecutor {
 	int getStepNumber();
-//	void loadControls();
-//	void setTextBoxes(Map<String, InputWriter> textBoxes);	
-//	void setTextCombos(Map<String, InputWriter> combos);
 	WizardStepExecutor writeValues(Employee emp) throws StaleElementReferenceException;
 	WizardStepExecutor getNext();
 }

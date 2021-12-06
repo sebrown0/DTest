@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
 import dto.Employee;
-import providers.EmployeeFromXml;
-import providers.EmployeeProvider;
 import providers.XMLFileProvider;
+import providers.employee.EmployeeFromXml;
+import providers.employee.EmployeeProvider;
 import xml_reader.config_file.ConfigReader;
 
 class XMLReaderTests {
@@ -38,8 +38,8 @@ class XMLReaderTests {
 	@Test
 	void getEmployee() {
 		EmployeeProvider empXml = new EmployeeFromXml();
-		Employee emp = empXml.getEmployeeAll("1");
-		assertEquals("EMP_23", emp.getEmpCode());
+		Employee emp = empXml.getEmployeeWithRequiredFields("VALID_WITH_REQUIRED_ONLY");
+		assertEquals("HS_2345", emp.getEmpCode());
 		assertEquals("123456", emp.getNiNumber());
 	}
 	

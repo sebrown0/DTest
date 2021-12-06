@@ -12,8 +12,10 @@ import object_models.date_picker.DatePickerPage;
 import object_models.helpers.Jquery;
 
 /**
- * @author Steve Brown
- *
+ * @author SteveBrown
+ * @version 1.0
+ *  Initial 	
+ * @since 1.0
  */
 public class WizardStepTwo extends WizardStep {
 	

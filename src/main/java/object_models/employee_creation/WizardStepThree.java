@@ -12,7 +12,10 @@ import enums.EnumNameGetter;
 import object_models.helpers.Jquery;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ *  Initial 	
+ * @since 1.0
  *
  */
 public class WizardStepThree extends WizardStep {

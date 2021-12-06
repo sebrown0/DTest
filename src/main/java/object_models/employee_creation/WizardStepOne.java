@@ -10,8 +10,10 @@ import control_mapping.PageMap;
 import dto.Employee;
 
 /**
- * @author Steve Brown
- *
+ * @author SteveBrown
+ * @version 1.0
+ *  Initial 	
+ * @since 1.0
  */
 public class WizardStepOne extends WizardStep {
 	

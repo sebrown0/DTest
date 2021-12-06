@@ -24,9 +24,9 @@ import object_models.top_right_nav_bar.all_elements.NavBarEmployeeCreation;
 import object_models.top_right_nav_bar.common.NavBarElement;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
-import providers.EmployeeFromXml;
-import providers.EmployeeProvider;
-import providers.RandomEmployeeProvider;
+import providers.employee.EmployeeFromXml;
+import providers.employee.EmployeeProvider;
+import providers.employee.RandomEmployeeProvider;
 import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
@@ -53,7 +53,7 @@ class EmployeeCreationTests {
 	void createDuplicateEmployee_codeInUseFormShouldBeShown() {
 		// GET AN EMPLOYEE FROM XML
 		EmployeeProvider empProvider = new EmployeeFromXml(); 
-		emp = empProvider.getEmployeeRequired("1");
+		emp = empProvider.getEmployeeWithRequiredFields("1");
 		
 		// GET THE EMPLOYEE WIZARD
 		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();

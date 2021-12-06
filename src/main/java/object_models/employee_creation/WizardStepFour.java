@@ -11,8 +11,10 @@ import dto.Employee;
 import object_models.helpers.Jquery;
 
 /**
- * @author Steve Brown
- *
+ * @author SteveBrown
+ * @version 1.0
+ *  Initial 	
+ * @since 1.0
  */
 public class WizardStepFour extends WizardStep {
 	

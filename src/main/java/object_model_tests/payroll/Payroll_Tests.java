@@ -36,7 +36,7 @@ import xml_reader.config_file.ConfigReader;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({ 
 	ConfigParameterResolver.class, 
-	LoginPageResolverPayroll.class, 
+	LoginPageResolverPayroll.class,
 	TestResultLogger.class })
 public final class Payroll_Tests {
 	private static HomePagePayroll hp;
@@ -44,7 +44,7 @@ public final class Payroll_Tests {
 	private static Company comp;
 	
 	@BeforeAll
-	static void setUpBeforeClass(ConfigReader configReader, UserLoginPage userLogin) throws Exception {
+	static void setUpBeforeClass(ConfigReader configReader, UserLoginPage userLogin) throws Exception {		
 		hp = (HomePagePayroll) userLogin.loginValidUser(UserProvider.userPortal());
 		
 		PayPeriod pp = new CurrentPayPeriod(2, LocalDate.of(2021, Month.JANUARY, 29), LocalDate.of(2021, Month.FEBRUARY, 25));
@@ -53,7 +53,7 @@ public final class Payroll_Tests {
 		comp = new Company("Mars Northern Products Ltd");
 		comp.addPayGroup(pg);
 	}
-	
+		
 	@Test	@Order(1)
 	void initialisePay() {
 		hp = hp.initialisePayroll(comp, pg);
