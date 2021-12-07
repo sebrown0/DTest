@@ -120,7 +120,7 @@ public class LeftMenuChildren_Payroll_Tests {
 	
 	@Test
 	void click_Employees_and_get_EmployeeDetails() {
-		ContainerAction obj = loadAndCheckTitle("Employees", EmployeeDetails.class).get();
+		ContainerAction obj = loadAndCheckTitle("Employees", EmployeeDetails.class).get();		
 		closePanelAndParent(obj, "Employees");
 	}
 	
@@ -398,7 +398,7 @@ public class LeftMenuChildren_Payroll_Tests {
 	
 	@AfterAll
 	static void tearDown() {
-		homepagePayroll.close();
+//		homepagePayroll.close();
 	}
 	
 	/* 

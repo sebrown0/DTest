@@ -4,17 +4,21 @@
 package object_models.left_menu.employees;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import context_manager.states.StateIframe;
 import control_builder.ControlData;
+import control_builder.ControlGetterButton;
 import control_builder.ControlGetterDkGridEmployeeDetails;
 import control_builder.ControlGetterDropdownCombo;
 import control_builder.ControlGetterEmployeeSelection;
 import control_builder.ControlGetterTextOut;
+import controls.Button;
 import controls.ComboSelectFromList;
+import controls.Control;
 import controls.TextOut;
 import enums.control_names.EmployeeControlNames;
 import enums.control_names.GroupControlNames;
@@ -23,7 +27,12 @@ import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * 	Initial
+ * @version 1.1
+ * 	Add save(...).
+ * @since 1.0
  *
  * Employee details page.
  */
@@ -48,11 +57,20 @@ public class EmployeeDetails extends JsPanelWithIFrame {
 						new ControlData(EmployeeControlNames.EMP_NAME, new ControlGetterTextOut(coreData, By.xpath("/html/body/form/div[3]/div[3]/div[2]/input"))),
 						new ControlData(GroupControlNames.SELECT_EMP, new ControlGetterEmployeeSelection(coreData, By.cssSelector("i[class='fa fa-list']"))),
 						new ControlData(GroupControlNames.COMBOS, new ControlGetterDropdownCombo(coreData, By.cssSelector("i[class='fa fa-window-maximize']"))),
-						new ControlData(GroupControlNames.GRID_VIEW, new ControlGetterDkGridEmployeeDetails(coreData, By.cssSelector("i[class='fa fw fa-table']")))
+						new ControlData(GroupControlNames.GRID_VIEW, new ControlGetterDkGridEmployeeDetails(coreData, By.cssSelector("i[class='fa fw fa-table']"))),
+						new ControlData(GroupControlNames.SAVE, new ControlGetterButton(coreData, By.cssSelector("button[name='SAVE']")))
 				);
 		super.buildPanelControls(myControls);				
 	}
 						
+	public void save() {
+		Optional<Control> cntrl = panelControl.getControl(GroupControlNames.SAVE);
+		cntrl.ifPresent(c -> {
+			Button b = (Button) c;
+			b.click();
+		});
+	}
+	
 	public EmpDetailsTabs tab() {
 		manager.switchToStateInCurrentContext(StateIframe.class);
 		return this.myTabs;

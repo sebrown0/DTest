@@ -18,12 +18,6 @@ public class Module implements ChildMapper {
 	private String name;
 	private Map<String, Panel> panels = new HashMap<>();
 	
-	/*
-	 *	
-	 * Pass the parent map 
-	 * 
-	 */
-	
 	public Module(String name) {
 		this.name = name;
 		System.out.println("->" + name); // TODO - remove or log 	
@@ -37,8 +31,8 @@ public class Module implements ChildMapper {
 	private void mapPanels(Element panel) {
 		Mapper
 			.mapTags(panel, "Panel")
-				.forEach(p -> {
-					Panel pnl = new Panel(panels, p.getAttribute("title"));
+			.forEach(p -> { 
+				new Panel(panels, p.getAttribute("title")).map(panel); 
 				}
 			);
 	}

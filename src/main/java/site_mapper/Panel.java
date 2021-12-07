@@ -3,6 +3,7 @@
  */
 package site_mapper;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.w3c.dom.Element;
@@ -15,23 +16,25 @@ import org.w3c.dom.Element;
  */
 public class Panel implements ChildMapper {
 	private String title;
+	private Map<String, Button> buttons = new HashMap<>();
 	
 	public Panel(Map<String, Panel> panels, String title) {
 		this.title = title;
 		panels.putIfAbsent(title, this);
 		System.out.println(" Panel: " + title); // TODO - remove or log 	
+		
 	}
 
 	@Override
-	public void map(Element prnt) {
-		mapButtons(prnt);
+	public void map(Element panel) {
+		mapButtons(panel);
 	}
 	
 	private void mapButtons(Element panel) {
 		Mapper
 			.mapTags(panel, "Button")
-				.forEach(p -> {
-//					Button btn = new Panel(panels, p.getAttribute("title"));
+				.forEach(b -> {
+					new Button(buttons, b);
 				}
 			);
 	}

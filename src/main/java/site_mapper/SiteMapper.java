@@ -21,12 +21,8 @@ import xml_file.XMLFile;
 public class SiteMapper {
 	private XMLFile xmlFile = new XMLFile(XMLFileProvider.SITE_MAP_FILE_PATH);
 	private Map<String, ChildMapper> modules = new HashMap<>();
-	
-	public void mapPayroll() {
-		mapModules();
-	}
-	
-	private void mapModules() {
+		
+	public void mapModules() {
 		Mapper.mapTags(getModules(), "name").forEach(m -> {
 			Element el = (Element) m;	  		
   		Module mod = new Module(el.getAttribute("name"));
