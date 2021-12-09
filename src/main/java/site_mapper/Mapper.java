@@ -13,6 +13,7 @@ import org.w3c.dom.NodeList;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
  * @since 1.0
  * 
  * Map the tags from an element or node list.

@@ -20,16 +20,15 @@ import xml_file.XMLFile;
  */
 public class SiteMapper {
 	private XMLFile xmlFile = new XMLFile(XMLFileProvider.SITE_MAP_FILE_PATH);
-	private Map<String, ChildMapper> modules = new HashMap<>();
+	private Map<String, Module> modules = new HashMap<>();
 		
 	public void mapModules() {
 		Mapper.mapTags(getModules(), "name").forEach(m -> {
 			Element el = (Element) m;	  		
   		Module mod = new Module(el.getAttribute("name"));
+  		mod.mapNodes(getNodes(m));
   		modules.putIfAbsent(mod.getName(), mod);
-  		mod.map(el);
 		});
-//		System.out.println("->"); // TODO - remove or log 	
 	}
 	
 	private NodeList getModules() {		 
@@ -38,5 +37,11 @@ public class SiteMapper {
 	private Element getRoot() {
 		return xmlFile.getElement("SiteMap");
 	}
+	private NodeList getNodes(Element module) {
+		return module.getElementsByTagName("Node");
+	}
 
+	public Map<String, Module> getModuleMap(){
+		return modules;
+	}
 }

@@ -4,31 +4,21 @@
   <Modules>
   
     <Module name="Payroll">
-      <Panels>
-        <Panel obj="" title="Employee Details" nav="LM.Employees.Employee Details">
-          <Buttons>
-            <Button 
-              obj="button" 
-              name="SAVE" 
-              text="Save" 
-              by="css" 
-              locator="button[name='SAVE']"></Button>
-          </Buttons>
-        </Panel>
-        <!-- 
-        <Panel obj="" title="Employee Document Management" nav="LM.Documents">
-          <Buttons>
-            <Button obj="" name="B2"></Button>
-          </Buttons>
-        </Panel>
-         -->
-      </Panels>      
+      <Nodes>
+        <Node type="panel" obj="EmployeeDetails" title="Employee Details" nav="LM.Employees.Employee Details">
+          <Elements>
+          <!-- get tests from type. get method from method -->
+            <Element type="button" method = "save" name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="Element[name='SAVE']"></Element>
+          </Elements>
+        </Node>
+        
+      </Nodes>      
     </Module>
     
     <Module name="Personnel">
-      <Panels>
-        <Panel obj="" title="Employee List" nav="LM.Employee List"></Panel>
-      </Panels>      
+      <Nodes>
+        <Node obj="" title="Employee List" nav="LM.Employee List"></Node>
+      </Nodes>      
     </Module>
     
   </Modules>

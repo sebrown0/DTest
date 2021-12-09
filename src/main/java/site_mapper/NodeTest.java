@@ -3,14 +3,13 @@
  */
 package site_mapper;
 
-import org.w3c.dom.Element;
+import org.junit.jupiter.api.DynamicNode;
 
 /**
  * @author SteveBrown
  * @version 1.0
- *  Initial
  * @since 1.0
  */
-public interface ChildMapper {
-	void map(Element prnt);
+public interface NodeTest {
+	DynamicNode getTests();
 }

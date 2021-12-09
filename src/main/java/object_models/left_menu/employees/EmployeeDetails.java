@@ -63,6 +63,10 @@ public class EmployeeDetails extends JsPanelWithIFrame {
 		super.buildPanelControls(myControls);				
 	}
 						
+	/*
+	 * Get by reflection?
+	 * 
+	 */
 	public void save() {
 		Optional<Control> cntrl = panelControl.getControl(GroupControlNames.SAVE);
 		cntrl.ifPresent(c -> {

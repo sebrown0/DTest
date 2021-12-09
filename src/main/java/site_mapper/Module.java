@@ -6,7 +6,7 @@ package site_mapper;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 /**
  * @author SteveBrown
@@ -14,31 +14,32 @@ import org.w3c.dom.Element;
  * 	Initial
  * @since 1.0
  */
-public class Module implements ChildMapper {
+public class Module implements NodeAdder {
 	private String name;
-	private Map<String, Panel> panels = new HashMap<>();
+	private Map<String, Node> nodes = new HashMap<>();
 	
 	public Module(String name) {
 		this.name = name;
-		System.out.println("->" + name); // TODO - remove or log 	
+		System.out.println(name); // TODO - remove or log 	
 	}
 
-	@Override
-	public void map(Element prnt) {
-		mapPanels(prnt);		
-	}
-
-	private void mapPanels(Element panel) {
+	public void mapNodes(NodeList node) {
 		Mapper
-			.mapTags(panel, "Panel")
-			.forEach(p -> { 
-				new Panel(panels, p.getAttribute("title")).map(panel); 
-				}
-			);
+			.mapTags(node, "Node")
+			.forEach( p ->	new Node(this, p).mapAttributes().mapElements().addToModule() );
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public Node getNode(String key) {
+		return (Node) nodes.get(key);
+	}
+	
+	@Override //NodeAdder
+	public void addNode(Node node) {		
+		nodes.put(((MapKey) node).getKey(), node);		
 	}
 
 }
