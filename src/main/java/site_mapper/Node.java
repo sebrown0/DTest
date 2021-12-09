@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.DynamicTest;
 import org.w3c.dom.Element;
 
+import site_mapper.class_finder.ClassFinder;
 import site_mapper.elements.ElementFactory;
 import site_mapper.elements.NodeElement;
 
@@ -21,7 +22,7 @@ import site_mapper.elements.NodeElement;
  *  Initial
  * @since 1.0
  */
-public class Node implements MapKey, ElementAdder, NodeTest {
+public class Node implements MapKey, ElementAdder, NodeTest, NodeClass {
 	private NodeAdder nodeAdder;
 	private Element node;
 	
@@ -59,6 +60,19 @@ public class Node implements MapKey, ElementAdder, NodeTest {
 		return title;
 	}
 
+	public Class<?> getClazz(){
+		return ClassFinder.getClazz(this);
+//		try {
+//			return Class.forName("object_models.left_menu.employees.EmployeeDetails");
+//			
+////			return Class.forName("./object_models/left_menu/employees/EmployeeDetails");
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return null;
+	}
+	
 	public void addToModule() {
 		nodeAdder.addNode(this);
 	}
@@ -74,16 +88,26 @@ public class Node implements MapKey, ElementAdder, NodeTest {
 	}
 
 	@Override
-	public String toString() {
-		return "Node [type=" + type + ", title=" + title + ", objectName=" + objectName + ", navPath=" + navPath + "]";
-	}
-
-	@Override
 	public DynamicNode getTests() {		
 		return DynamicContainer.dynamicContainer(navPath, getNodeTests());
 	}
 
 	private Collection<DynamicTest> getNodeTests(){		
 		return elements.get("save").getTests();		
+	}
+
+	@Override //NodeClass
+	public String getPath() {
+		return navPath;
+	}
+
+	@Override //NodeClass
+	public String getClassName() {
+		return objectName;
+	}	
+
+	@Override
+	public String toString() {
+		return "Node [type=" + type + ", title=" + title + ", objectName=" + objectName + ", navPath=" + navPath + "]";
 	}
 }

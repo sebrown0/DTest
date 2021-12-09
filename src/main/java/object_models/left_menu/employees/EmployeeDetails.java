@@ -25,6 +25,7 @@ import enums.control_names.GroupControlNames;
 import object_models.element.TextInOut;
 import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
+import site_mapper.UiTest;
 
 /**
  * @author SteveBrown
@@ -62,11 +63,9 @@ public class EmployeeDetails extends JsPanelWithIFrame {
 				);
 		super.buildPanelControls(myControls);				
 	}
-						
-	/*
-	 * Get by reflection?
-	 * 
-	 */
+		
+	@UiTest
+	@Deprecated
 	public void save() {
 		Optional<Control> cntrl = panelControl.getControl(GroupControlNames.SAVE);
 		cntrl.ifPresent(c -> {

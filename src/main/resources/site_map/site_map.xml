@@ -4,11 +4,21 @@
   <Modules>
   
     <Module name="Payroll">
-      <Nodes>
-        <Node type="panel" obj="EmployeeDetails" title="Employee Details" nav="LM.Employees.Employee Details">
+      <Nodes>      
+        
+        <Node type="panel" obj="EmployeeDetails" title="Employee Details" nav="left_menu.employees.Employee Details">
           <Elements>
           <!-- get tests from type. get method from method -->
-            <Element type="button" method = "save" name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="Element[name='SAVE']"></Element>
+            <Element type="button" method = "save" name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']"></Element>
+            <Element type="button" method = "search" name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']"></Element>
+          </Elements>
+        </Node>
+        
+        <Node type="panel" obj="AbsenceEntitlements" title="Employee Absence Entitlements" nav="left_menu.Employee Others.Absence Entitlements">
+          <Elements>
+          <!-- get tests from type. get method from method -->
+            <Element type="button" method = "save" name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']"></Element>
+            <Element type="button" method = "clear" name="clear" text="Clear" fafa="fa fa-file-o" response="" by="css" locator="button[name='CLEAR1']"></Element>
           </Elements>
         </Node>
         
@@ -17,7 +27,7 @@
     
     <Module name="Personnel">
       <Nodes>
-        <Node obj="" title="Employee List" nav="LM.Employee List"></Node>
+        <Node obj="" title="Employee List" nav="left_menu.Employee List"></Node>
       </Nodes>      
     </Module>
     

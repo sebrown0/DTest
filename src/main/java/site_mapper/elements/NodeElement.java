@@ -29,7 +29,6 @@ public abstract class NodeElement implements MapKey, ElementType, ElementTest {
 	protected Collection<DynamicTest> tests = new ArrayList<DynamicTest>();
 	
 	private ElementAdder elementAdder;	
-	
 		
 	public NodeElement(Element element, ElementAdder elementAdder) {
 		this.element = element;
@@ -47,24 +46,7 @@ public abstract class NodeElement implements MapKey, ElementType, ElementTest {
 		by = element.getAttribute("by");
 		locator = element.getAttribute("locator");
 	}
-	
-//	public NodeElement mapAttributes() {
-//	
-//		methodName = element.getAttribute("method");
-//		name = element.getAttribute("name");
-//		text = element.getAttribute("text");
-//		fafa = element.getAttribute("fafa");
-//		response = element.getAttribute("response");
-//		
-//		
-//		System.out.println("  " + this.toString()); // TODO - remove or log
-//		return this;
-//	}
-	
-//	public NodeElement createTests() {
-//		tests = TestFactory.getTests(this);
-//		return this;
-//	}
+
 	public void addToNode() {
 		elementAdder.addElement(this);
 	}
