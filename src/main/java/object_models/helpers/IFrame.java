@@ -8,7 +8,6 @@ import java.time.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,33 +16,31 @@ import context_manager.states.StateIframe;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
+ * @version 1.1
+ * 	1. Remove getIFrameElement().
+ *  2. Change expected conditions.
  * @since 1.0
  *
  */
 public class IFrame {
-	private WebDriver driver;
-	private WebElement iFrame;
+	private WebDriver driver;	
 	private By byLocator;
 	private WebDriverWait wait;
 	
 	public IFrame(WebDriver driver, By byLocator) {
 		this.driver = driver;
-		this.byLocator = byLocator;
-		this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		this.byLocator = byLocator;		
 	}
 		
-	public IFrame switchUsingLocator(StateIframe stateIframe) {		
+	public IFrame switchUsingLocator(StateIframe stateIframe) {
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		try {			 	
-			iFrame = wait.until(ExpectedConditions.visibilityOfElementLocated(byLocator));
-			driver.switchTo().frame(iFrame); 	
+			wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(byLocator)); 	
 		} catch (Exception e) {
-			LogManager.getLogger().error("Could not switch to iFrame");
+			LogManager.getLogger().error("Could not switch to iFrame [" + e + "]"); 	
 		}		 	
 		return this;
-	}
-		
-	public WebElement getIFrameElement() {
-		return iFrame;
-	}
+	}		
 	
 }

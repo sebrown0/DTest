@@ -11,6 +11,8 @@ import controls.ControlName;
  * 	Initial
  * @version 1.1
  *  Add SAVE
+ * @version 1.2
+ * 	Add SEARCH, PRINT, CLEAR.
  * @since 1.0
  *
  */
@@ -19,7 +21,10 @@ public enum GroupControlNames implements ControlName {
 	COMBOS("combos"), 
 	GRID_VIEW("grid"), 
 	DOCUMENTS("docs"),
-	SAVE("save");
+	SAVE("save"),
+	SEARCH("search"),
+	PRINT("print"),
+	CLEAR("clear");
 
 	private final String key;
 	

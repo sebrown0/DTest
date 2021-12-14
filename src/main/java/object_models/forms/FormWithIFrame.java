@@ -46,9 +46,9 @@ public abstract class FormWithIFrame extends FormModal {
 			.switchToMe();		
 	}
 		
-	public WebElement getIFrameElement() {
-		return iFrame.getIFrameElement();
-	}
+//	public WebElement getIFrameElement() {
+//		return iFrame.getIFrameElement();
+//	}
 
 	/*
 	 * THIS IS IN JsPanelWithIframe for JsPanel 

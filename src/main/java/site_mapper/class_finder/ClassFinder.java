@@ -44,9 +44,9 @@ public class ClassFinder {
 
 	public static List<Method> getMethodsAnnotatedWith(final Class<?> type, final Class<? extends Annotation> annotation) {
     final List<Method> methods = new ArrayList<Method>();
-    Class<?> klass = type;
+    Class<?> clazz = type;
    
-    for (final Method method : klass.getDeclaredMethods()) {
+    for (final Method method : clazz.getDeclaredMethods()) {
         if (method.isAnnotationPresent(annotation)) {
             // Annotation annotInstance = method.getAnnotation(annotation);
             // TODO process annotInstance

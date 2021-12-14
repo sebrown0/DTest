@@ -14,6 +14,10 @@ import controls.ControlName;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
+ * @version 1.1
+ * 	Get control using control name as String.
+ *  Added for Dynamic Tests.
  * @since 1.0
  *
  * All the controls that may be on a page.
@@ -26,9 +30,14 @@ public class PageControl {
 	public PageControl(BuildControls builder) {
 		this.controls = builder.build();
 	}
-		
+	
 	public Optional<Control> getControl(ControlName cntrlName){
 		String cntrlKey = cntrlName.getName();
+		return getControl(cntrlKey);
+
+	}
+	public Optional<Control> getControl(String cntrlKey){
+
 		if(controls.containsKey(cntrlKey)) {
 			return (Optional<Control>) Optional.of(controls.get(cntrlKey).getControl());
 		}else {

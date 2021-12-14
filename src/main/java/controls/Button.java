@@ -18,10 +18,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * 	Initial
  * @version 1.1
  *  Add isAvailable().
+ * @version 1.2
+ * 	Add getFaFaText().
  * @since 1.0
  *
  */
-public class Button implements Control {
+public class Button implements Control, HasFaFa, DisplayedText {
 	private WebDriver driver;
 	private By btnLocator;
 	private WebElement btn;
@@ -39,7 +41,25 @@ public class Button implements Control {
 		return false;
 	}
 
-	@Override
+	@Override //HasFaFa
+	public String getFaFaText() {
+		if(isAvailable()) {
+			WebElement faFa = btn.findElement(By.tagName("i"));
+			return faFa.getAttribute("class");	
+		}else {
+			return null;
+		}		
+	}
+	@Override //DisplayedText
+	public String getText() {
+		if(isAvailable()) {
+			return btn.getText().trim();	
+		}else {
+			return null;
+		}		
+	}
+	
+	@Override //Control
 	public boolean isAvailable() {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 		try {

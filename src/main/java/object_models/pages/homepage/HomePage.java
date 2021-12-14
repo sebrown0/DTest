@@ -17,6 +17,7 @@ import context_manager.ContextManager;
 import entities.company.Company;
 import exceptions.HomePageElementException;
 import factories.ModuleElementsFactory;
+import object_models.forms.ContainerAction;
 import object_models.forms.ModalCloser;
 import object_models.helpers.DriverWait;
 import object_models.left_menu.common.LeftMenu;
@@ -37,7 +38,7 @@ import object_models.top_right_nav_bar.common.TopRightNavBar;;
  * @since 1.0
  *
  */
-public abstract class HomePage extends Page implements CoreData, HomePageElement {
+public abstract class HomePage extends Page implements CoreData, HomePageElement, LeftMenuLoadItem {
 	protected LeftMenu leftMenu;
 	
 	private LeftNavBar leftNavBar;
@@ -127,12 +128,17 @@ public abstract class HomePage extends Page implements CoreData, HomePageElement
 	public String getActualModuleName() {		
 		return driver.findElement(byXpathActualModuleName).getAttribute("innerHTML");
 	}
+	
+	@Override //LeftMenuLoadItem
+	public Optional<ContainerAction> loadLeftMenuItem(Class<?> clazz) {
+		return leftMenu.clickAndLoad(clazz);		
+	}
+	
 	/*
 	 * TODO - USE ABSTRACTIONS FOR ELEMENTS.
 	 * Remove the getters below and replace with abstractions.
 	 * This will make handling the contexts easier & more robust.
 	 */
-
 	public TopRightNavBar getTopRightNavBar() {
 		return topRightNavBar;
 	}	

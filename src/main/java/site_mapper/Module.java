@@ -11,6 +11,8 @@ import java.util.Map;
 import org.junit.jupiter.api.DynamicContainer;
 import org.w3c.dom.NodeList;
 
+import object_models.pages.homepage.HomePage;
+
 /**
  * @author SteveBrown
  * @version 1.0
@@ -20,10 +22,11 @@ import org.w3c.dom.NodeList;
 public class Module implements NodeAdder {
 	private String name;
 	private Map<String, Node> nodes = new HashMap<>();
+	private HomePage homePage;
 	
-	public Module(String name) {
+	public Module(String name, HomePage homePage) {
 		this.name = name;
-//		System.out.println(name); // TODO - remove or log 	
+		this.homePage = homePage;
 	}
 
 	public Collection<DynamicContainer> runTests() {
@@ -37,7 +40,7 @@ public class Module implements NodeAdder {
 	public void mapNodes(NodeList node) {
 		Mapper
 			.mapTags(node, "Node")
-			.forEach( p ->	new Node(this, p).mapAttributes().mapElements().addToModule() );
+			.forEach( p ->	new Node(this, p, homePage).mapAttributes().mapElements().addToModule() );
 	}
 
 	public String getName() {

@@ -13,6 +13,7 @@ import site_mapper.ElementAdder;
 import site_mapper.ElementTest;
 import site_mapper.ElementType;
 import site_mapper.MapKey;
+import site_mapper.NodeClass;
 
 /**
  * @author SteveBrown
@@ -65,5 +66,9 @@ public abstract class NodeElement implements MapKey, ElementType, ElementTest {
 	public String getType() {
 		return type;
 	}		
+	
+	protected NodeClass getNodeClass() {
+		return (NodeClass) elementAdder;
+	}
 
 }

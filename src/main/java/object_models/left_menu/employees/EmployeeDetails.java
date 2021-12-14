@@ -4,7 +4,6 @@
 package object_models.left_menu.employees;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -16,16 +15,13 @@ import control_builder.ControlGetterDkGridEmployeeDetails;
 import control_builder.ControlGetterDropdownCombo;
 import control_builder.ControlGetterEmployeeSelection;
 import control_builder.ControlGetterTextOut;
-import controls.Button;
 import controls.ComboSelectFromList;
-import controls.Control;
 import controls.TextOut;
 import enums.control_names.EmployeeControlNames;
 import enums.control_names.GroupControlNames;
 import object_models.element.TextInOut;
 import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
-import site_mapper.UiTest;
 
 /**
  * @author SteveBrown
@@ -59,20 +55,24 @@ public class EmployeeDetails extends JsPanelWithIFrame {
 						new ControlData(GroupControlNames.SELECT_EMP, new ControlGetterEmployeeSelection(coreData, By.cssSelector("i[class='fa fa-list']"))),
 						new ControlData(GroupControlNames.COMBOS, new ControlGetterDropdownCombo(coreData, By.cssSelector("i[class='fa fa-window-maximize']"))),
 						new ControlData(GroupControlNames.GRID_VIEW, new ControlGetterDkGridEmployeeDetails(coreData, By.cssSelector("i[class='fa fw fa-table']"))),
-						new ControlData(GroupControlNames.SAVE, new ControlGetterButton(coreData, By.cssSelector("button[name='SAVE']")))
+						new ControlData(GroupControlNames.SAVE, new ControlGetterButton(coreData, By.cssSelector("button[name='SAVE']"))),
+						new ControlData(GroupControlNames.SEARCH, new ControlGetterButton(coreData, By.cssSelector("button[name='QBF1']")))
 				);
 		super.buildPanelControls(myControls);				
 	}
 		
-	@UiTest
-	@Deprecated
-	public void save() {
-		Optional<Control> cntrl = panelControl.getControl(GroupControlNames.SAVE);
-		cntrl.ifPresent(c -> {
-			Button b = (Button) c;
-			b.click();
-		});
-	}
+	/*
+	 * NOT USING AT PRESENT
+	 */
+//	@UiTest
+//	public void save() {
+//		System.out.println("->SAVING....." ); // TODO - remove or log 	
+//		Optional<Control> cntrl = panelControl.getControl(GroupControlNames.SAVE);
+//		cntrl.ifPresent(c -> {
+//			Button b = (Button) c;
+//			b.click();
+//		});
+//	}
 	
 	public EmpDetailsTabs tab() {
 		manager.switchToStateInCurrentContext(StateIframe.class);

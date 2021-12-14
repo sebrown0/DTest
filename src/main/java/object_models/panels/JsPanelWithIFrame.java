@@ -4,7 +4,6 @@
 package object_models.panels;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import object_models.helpers.IFrame;
 import object_models.pages.homepage.CoreData;
@@ -12,6 +11,9 @@ import object_models.pages.homepage.CoreData;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
+ * @version 1.1
+ * 	Remove getIFrameAsElement().
  * @since 1.0
  *
  */
@@ -38,10 +40,6 @@ public abstract class JsPanelWithIFrame extends JsPanel implements JsPanelContex
 		super.manager.setLatestCallingStateToCurrent();
 	}	
 		
-	public WebElement getIFrameAsElement() {
-		return iFrame.getIFrameElement();
-	}
-
 	@Override
 	public JsPanelWithIFrame getPanelWithIFrame() {
 		return this;

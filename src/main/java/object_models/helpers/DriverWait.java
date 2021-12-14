@@ -18,9 +18,25 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * 	Initial
  * @version 1.1
  *  Add getElementAfterWaitForValue(...).
+ * @version 1.2
+ *  Add explicitWait(...).
  * @since 1.0
  */
 public class DriverWait {
+	
+	/*
+	 * Wait for the desired period of time for a non existent element.
+	 * Use this instead of the WebDriver explicit wait as this is not 
+	 * applied to all subsequent elements.
+	 */
+	public static void explicitWait(WebDriver driver, Duration duration) {		
+		WebDriverWait wait = new WebDriverWait(driver, duration);		
+		try {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("class=['NON_EXISTANT_CLASS']")));
+		} catch (Exception e) {
+			// Don't care. It's the wait we want.
+		}
+	}
 	
 	/*
 	 * Use default wait.

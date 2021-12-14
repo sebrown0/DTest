@@ -27,20 +27,27 @@ import control_builder.ControlGetter;
 import control_builder.PageControl;
 import controls.Control;
 import controls.ControlName;
+import controls.ControlTest;
+import controls.DisplayedText;
+import controls.HasFaFa;
 import exceptions.PanelException;
 import object_models.forms.ContainerAction;
 import object_models.helpers.IFrame;
 import object_models.helpers.title.PageTitle;
 import object_models.helpers.title.TitlePanel;
 import object_models.pages.homepage.CoreData;
+import site_mapper.SiteMapElement;
 
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
+ * @version 1.1
+ *  Add ControlTest & SiteMapElement.
  * @since 1.0
  *
  */
-public abstract class JsPanel implements ContainerAction, ContextSetter, ContextIdGetter, StateFactorySetter { 
+public abstract class JsPanel implements ContainerAction, ContextSetter, ContextIdGetter, StateFactorySetter, ControlTest, SiteMapElement { 
 	protected WebDriver driver;
 	protected Logger logger;
 	protected ContextManager manager;	
@@ -54,8 +61,7 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	private WebElement container;
 	private Optional<String> panelId;	
 	private JsPanelHeaderBar headerBar;	
-	
-			
+				
 	public JsPanel(CoreData coreData, String expectedTitle) {
 		this.coreData = coreData;
 		this.logger = LogManager.getLogger();
@@ -78,6 +84,34 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	protected void buildPanelControls(List<ControlData> panelControls) {
 		builder.addControls(panelControls);
 		panelControl = new PageControl(builder);		
+	}
+	
+	@Override //ControlTest
+	public String getFaFaText(String controlName) {		
+		String faFaText = null;
+		Optional<Control> cntrl = getControl(controlName);
+		if(cntrl.isPresent()) {
+			Object o = cntrl.get();
+			if(o instanceof HasFaFa) {
+				HasFaFa faFa = (HasFaFa) o;
+				faFaText = faFa.getFaFaText();
+			}			
+		}	
+		return faFaText;
+	}
+	
+	@Override //ControlTest
+	public String getControlText(String controlName) {		
+		String cntrlText = null;
+		Optional<Control> cntrl = getControl(controlName);
+		if(cntrl.isPresent()) {
+			Object o = cntrl.get();
+			if(o instanceof DisplayedText) {
+				DisplayedText displayedText = (DisplayedText) o;
+				cntrlText = displayedText.getText();
+			}			
+		}	
+		return cntrlText;
 	}
 	
 	/*
@@ -122,6 +156,10 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	}
 	
 	public Optional<Control> getControl(ControlName cntrlName){		
+		manager.switchToStateInCurrentContext(StateIframe.class);
+		return panelControl.getControl(cntrlName);
+	}
+	public Optional<Control> getControl(String cntrlName){		
 		manager.switchToStateInCurrentContext(StateIframe.class);
 		return panelControl.getControl(cntrlName);
 	}

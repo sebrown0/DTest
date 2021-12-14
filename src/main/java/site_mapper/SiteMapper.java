@@ -9,6 +9,7 @@ import java.util.Map;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import object_models.pages.homepage.HomePage;
 import providers.XMLFileProvider;
 import xml_file.XMLFile;
 
@@ -21,11 +22,11 @@ import xml_file.XMLFile;
 public class SiteMapper {
 	private XMLFile xmlFile = new XMLFile(XMLFileProvider.SITE_MAP_FILE_PATH);
 	private Map<String, Module> modules = new HashMap<>();
-		
-	public void mapModules() {
+	
+	public void mapModules(HomePage homePage) {
 		Mapper.mapTags(getModules(), "name").forEach(m -> {
 			Element el = (Element) m;	  		
-  		Module mod = new Module(el.getAttribute("name"));
+  		Module mod = new Module(el.getAttribute("name"), homePage);
   		mod.mapNodes(getNodes(m));
   		modules.putIfAbsent(mod.getName(), mod);
 		});

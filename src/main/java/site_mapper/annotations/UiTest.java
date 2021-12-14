@@ -1,7 +1,7 @@
 /**
  * 
  */
-package site_mapper;
+package site_mapper.annotations;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
