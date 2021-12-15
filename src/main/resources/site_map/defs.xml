@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+  <Element type="button" name="clear" text="Clear" fafa="fa fa-file-o" response="" by="css" locator="button[name='CLEAR1']"></Element>
+</document>
