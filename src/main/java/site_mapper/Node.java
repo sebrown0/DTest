@@ -110,7 +110,7 @@ public class Node implements MapKey, ElementAdder, NodeTest, NodeClass {
 		Class<?> clazz = getClazz();		
 		return 
 			Optional.ofNullable(
-				NavFactory.getSiteMapElement(navPath, homePage, clazz));
+				SiteMapElementLoader.getAndLoadSiteMapElement(navPath, homePage, clazz));
 	}
 //	@Override //NodeClass
 //	public Optional<SiteMapElement> getNodeAsSiteMapElement() {

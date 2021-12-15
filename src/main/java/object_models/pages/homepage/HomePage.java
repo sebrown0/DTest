@@ -38,7 +38,7 @@ import object_models.top_right_nav_bar.common.TopRightNavBar;;
  * @since 1.0
  *
  */
-public abstract class HomePage extends Page implements CoreData, HomePageElement, LeftMenuLoadItem {
+public abstract class HomePage extends Page implements CoreData, HomePageElement {
 	protected LeftMenu leftMenu;
 	
 	private LeftNavBar leftNavBar;
@@ -116,7 +116,6 @@ public abstract class HomePage extends Page implements CoreData, HomePageElement
 		this.leftMenu = leftMenu;
 	}
 
-//	@Override //CompanyLoader
 	public Company getCurrentCompany() {
 		return leftNavBar.getCompany();
 	}
@@ -129,7 +128,6 @@ public abstract class HomePage extends Page implements CoreData, HomePageElement
 		return driver.findElement(byXpathActualModuleName).getAttribute("innerHTML");
 	}
 	
-	@Override //LeftMenuLoadItem
 	public Optional<ContainerAction> loadLeftMenuItem(Class<?> clazz) {
 		return leftMenu.clickAndLoad(clazz);		
 	}

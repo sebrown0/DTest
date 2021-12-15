@@ -10,5 +10,5 @@ package site_mapper;
  * @since 1.0
  */
 public interface SiteMapElement {
-	//Marker for objects included in the site map.
+	//Marker for objects that can be included in the site map.
 }
