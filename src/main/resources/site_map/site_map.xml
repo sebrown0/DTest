@@ -9,14 +9,14 @@
         <Node type="panel" obj="EmployeeDetails" title="Employee Details" nav="left_menu.employees.Employee Details">
           <Elements>
           <!-- get tests from type. get method from method -->
-            <Element type="button" method = "save" name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']"></Element>
-            <Element type="button" method = "search" name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']"></Element>
+            <Element type="button" name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']"></Element>
+            <Element type="button" name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']"></Element>
           </Elements>
         </Node>
          
         <Node type="panel" obj="AbsenceEntitlements" title="Employee Absence Entitlements" nav="left_menu.employee_others.Absence Entitlements">
           <Elements>
-            <Element type="button" method = "clear" name="clear" text="Clear" fafa="fa fa-file-o" response="" by="css" locator="button[name='CLEAR1']"></Element>
+            <Element type="button" name="clear" text="Clear" fafa="fa fa-file-o" response="" by="css" locator="button[name='CLEAR1']"></Element>
             <!-- 
             <Element type="button" method = "search" name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']"></Element>
              -->

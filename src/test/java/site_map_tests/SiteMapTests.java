@@ -58,76 +58,104 @@ class SiteMapTests {
 //		empDetails =	(EmployeeDetails) homepagePayroll.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();		
 	}		
 	
-	@Test
-	void mapModules_withoutErrors() {
-		SiteMapper mapper = new SiteMapper();
-		mapper.mapModules(homepagePayroll);		
-	}
-	@Test
-	void getPayrollModule() {
-		SiteMapper mapper = new SiteMapper();
-		mapper.mapModules(homepagePayroll);
-		
-		Map<String, Module> modules = mapper.getModuleMap();
-		Module payroll = modules.get("Payroll");
-		assertTrue(payroll != null);
-	}
-	@Test
-	void getEmployeeDetails_fromPayroll() {
-		SiteMapper mapper = new SiteMapper();
-		mapper.mapModules(homepagePayroll);
-		
-		Map<String, Module> modules = mapper.getModuleMap();
-		Module payroll = modules.get("Payroll");
-		
-		Node empDetails = payroll.getNode("left_menu.employees.Employee Details");
-		assertTrue(empDetails != null);
-	}
-	
-	@Test
-	void classForObj() {
-		
-		SiteMapper mapper = new SiteMapper();
-		mapper.mapModules(homepagePayroll);
-		
-		Map<String, Module> modules = mapper.getModuleMap();
-		Module payroll = modules.get("Payroll");
-		
-		
-		// Get specific node from XML
-		Node empDetailsNode = payroll.getNode("left_menu.employees.Employee Details");
-		// Get the class for the Node.
-		Class<?> clazzEmpDetails = empDetailsNode.getClazz();
-		// Get al the methods with the annotation in the class.
-		List<Method> methods = ClassFinder.getMethodsAnnotatedWith(clazzEmpDetails, UiTest.class);
-		// Get the specific object for the class. TODO - change the interface to TestType or similar.
-		ContainerAction ed = homepagePayroll.getLeftMenu().clickAndLoad(clazzEmpDetails).get();
-		
-		
-		methods.forEach(m -> { 
-			System.out.println("->" + m.getName());
-			try {
-				m.invoke(ed);
-			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		);
+//	@Test
+//	void mapModules_withoutErrors() {
+//		SiteMapper mapper = new SiteMapper();
+//		mapper.mapModules(homepagePayroll);		
+//	}
+//	@Test
+//	void getPayrollModule() {
+//		SiteMapper mapper = new SiteMapper();
+//		mapper.mapModules(homepagePayroll);
 //		
-//		assertTrue(clazzEmpDetails != null);
-	}
+//		Map<String, Module> modules = mapper.getModuleMap();
+//		Module payroll = modules.get("Payroll");
+//		assertTrue(payroll != null);
+//	}
+//	@Test
+//	void getEmployeeDetails_fromPayroll() {
+//		SiteMapper mapper = new SiteMapper();
+//		mapper.mapModules(homepagePayroll);
+//		
+//		Map<String, Module> modules = mapper.getModuleMap();
+//		Module payroll = modules.get("Payroll");
+//		
+//		Node empDetails = payroll.getNode("left_menu.employees.Employee Details");
+//		assertTrue(empDetails != null);
+//	}
+//	
+//	@Test
+//	void classForObj() {
+//		
+//		SiteMapper mapper = new SiteMapper();
+//		mapper.mapModules(homepagePayroll);
+//		
+//		Map<String, Module> modules = mapper.getModuleMap();
+//		Module payroll = modules.get("Payroll");
+//		
+//		
+//		// Get specific node from XML
+//		Node empDetailsNode = payroll.getNode("left_menu.employees.Employee Details");
+//		// Get the class for the Node.
+//		Class<?> clazzEmpDetails = empDetailsNode.getClazz();
+//		// Get al the methods with the annotation in the class.
+//		List<Method> methods = ClassFinder.getMethodsAnnotatedWith(clazzEmpDetails, UiTest.class);
+//		// Get the specific object for the class. TODO - change the interface to TestType or similar.
+//		ContainerAction ed = homepagePayroll.getLeftMenu().clickAndLoad(clazzEmpDetails).get();
+//		
+//		
+//		methods.forEach(m -> { 
+//			System.out.println("->" + m.getName());
+//			try {
+//				m.invoke(ed);
+//			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//		);
+////		
+////		assertTrue(clazzEmpDetails != null);
+//	}
+//	
+//	@TestFactory
+//	DynamicNode payrollModule() {
+//		SiteMapper mapper = new SiteMapper();
+//		mapper.mapModules(homepagePayroll);
+//		
+//		Map<String, Module> modules = mapper.getModuleMap();
+//		Module payroll = modules.get("Payroll");
+//		
+//		NodeTest empDetails = payroll.getNode("left_menu.employees.Employee Details");
+//		return empDetails.getTests();
+//	}
 	
 	@TestFactory
-	DynamicNode payrollModule() {
+	Collection<DynamicContainer> payrollModule_H() {
 		SiteMapper mapper = new SiteMapper();
 		mapper.mapModules(homepagePayroll);
 		
 		Map<String, Module> modules = mapper.getModuleMap();
 		Module payroll = modules.get("Payroll");
+		return payroll.runTests();
+	}
+	@TestFactory
+	Collection<DynamicContainer> payrollModule_HH() {
+		SiteMapper mapper = new SiteMapper();
+		mapper.mapModules(homepagePayroll);
 		
-		NodeTest empDetails = payroll.getNode("left_menu.employees.Employee Details");
-		return empDetails.getTests();
+		Map<String, Module> modules = mapper.getModuleMap();
+		Module payroll = modules.get("Payroll");
+		return payroll.runTests();
+	}
+	@TestFactory
+	Collection<DynamicContainer> payrollModule_HHH() {
+		SiteMapper mapper = new SiteMapper();
+		mapper.mapModules(homepagePayroll);
+		
+		Map<String, Module> modules = mapper.getModuleMap();
+		Module payroll = modules.get("Payroll");
+		return payroll.runTests();
 	}
 	
 	@TestFactory
@@ -139,4 +167,11 @@ class SiteMapTests {
 		Module payroll = modules.get("Payroll");
 		return payroll.runTests();
 	}
+	
+	/*
+	 * 1. WHAT TO DO ABOUT DIFFERENT BUTTONS AT THE BOTTOM OF A PAGE DEPENDING ON THE DATA.
+	 * 2. LOAD THE ELEMENT FOR THE NODE ONCE.
+	 * 3. FUNCTIONS.
+	 * 4. DOES FALL OVER SOMETIMES.
+	 */
 }

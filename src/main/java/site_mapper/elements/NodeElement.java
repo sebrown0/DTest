@@ -59,7 +59,7 @@ public abstract class NodeElement implements MapKey, ElementType, ElementTest {
 	}
 	
 	/*
-	 * SHOULD BE LOADING CONTAINER ONCE PER NODE
+	 * TODO - Load the container for the Node & not every element.
 	 */
 	protected ControlTest getControlTest() {
 		loadContainerIfNull();		
@@ -67,19 +67,20 @@ public abstract class NodeElement implements MapKey, ElementType, ElementTest {
 			SiteMapElement e = container.get();
 			if(e instanceof ControlTest) {
 				return (ControlTest) e;
+			}else {
+				System.out.println("***** getControlTest() 1 *****"); // TODO - remove or log
 			}
 		}else {
+			System.out.println("***** getControlTest() 2 *****"); // TODO - remove or log 	
 			// TODO - THROW ERROR??
 		}
 		return null;
 	}
 	
 	private void loadContainerIfNull() {
-		if(container == null) {
-			loadContainer();
-		}
+		if(container == null) { loadContainer(); }
 	}	
-	public void loadContainer() {
+	private void loadContainer() {
 		container = getNodeClass().getNodeAsSiteMapElement();
 	}
 	

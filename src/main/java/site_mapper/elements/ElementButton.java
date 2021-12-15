@@ -19,7 +19,6 @@ import site_mapper.ElementAdder;
  * @since 1.0
  */
 public class ElementButton extends NodeElement{
-	private String methodName;
 	private String text;
 	private String fafa;
 	private String response;
@@ -29,7 +28,6 @@ public class ElementButton extends NodeElement{
 	}
 	
 	public NodeElement mapAttributes() {		
-		methodName = element.getAttribute("method");		
 		text = element.getAttribute("text");
 		fafa = element.getAttribute("fafa");
 		response = element.getAttribute("response");		
@@ -46,7 +44,7 @@ public class ElementButton extends NodeElement{
 	private void createButtonFaFaCheck() {
 		super.tests.add(
 				DynamicTest.dynamicTest(
-					"Is [" + methodName +"] button [FaFa] correct?", 
+					"Is [" + name +"] button [FaFa] correct?", 
 					() -> {							
 						String faFaActual = super.getControlTest().getFaFaText(name);							
 						assertEquals(fafa, faFaActual);
@@ -57,7 +55,7 @@ public class ElementButton extends NodeElement{
 	private void createButtonTextCheck() {
 		super.tests.add(
 				DynamicTest.dynamicTest(
-					"Is [" + methodName +"] button [text] correct?", 
+					"Is [" + name +"] button [text] correct?", 
 					() -> {							
 						String textActual = super.getControlTest().getControlText(name);							
 						assertEquals(text, textActual);
@@ -68,7 +66,7 @@ public class ElementButton extends NodeElement{
 
 	@Override
 	public String toString() {
-		return "NodeElement [type=" + type + ", methodName=" + methodName + ", name=" + name + ", text=" + text + ", fafa="
+		return "NodeElement [type=" + type + ", name=" + name + ", text=" + text + ", fafa="
 				+ fafa + ", response=" + response + ", by=" + by + ", locator=" + locator + "]";
 	}
 

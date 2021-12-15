@@ -94,9 +94,7 @@ public class Node implements MapKey, ElementAdder, NodeTest, NodeClass {
 		Collection<DynamicTest> tests = new ArrayList<>();		
 		nodeElements.entrySet().forEach(s -> { 
 			NodeElement n = s.getValue(); 			
-//			n.loadContainer();
-			tests.addAll(n.createTests().getTests());
-			
+			tests.addAll(n.createTests().getTests());			
 		});
 		return tests;
 	}
