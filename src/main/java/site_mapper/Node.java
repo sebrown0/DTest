@@ -14,7 +14,6 @@ import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.DynamicTest;
 import org.w3c.dom.Element;
 
-import object_models.forms.ContainerAction;
 import object_models.pages.homepage.HomePage;
 import site_mapper.class_finder.ClassFinder;
 import site_mapper.elements.ElementFactory;
@@ -24,6 +23,8 @@ import site_mapper.elements.NodeElement;
  * @author SteveBrown
  * @version 1.0
  *  Initial
+ * @version 1.1
+ *  Create and run tests on demand.
  * @since 1.0
  */
 public class Node implements MapKey, ElementAdder, NodeTest, NodeClass {
@@ -36,7 +37,7 @@ public class Node implements MapKey, ElementAdder, NodeTest, NodeClass {
 	private String objectName;
 	private String navPath;
 	
-	private Map<String, NodeElement> elements = new HashMap<>();
+	private Map<String, NodeElement> nodeElements = new HashMap<>();
 		
 	public Node(NodeAdder nodeAdder, Element node, HomePage homePage) {
 		this.nodeAdder = nodeAdder;
@@ -47,7 +48,7 @@ public class Node implements MapKey, ElementAdder, NodeTest, NodeClass {
 	public Node mapElements() {		
 		Mapper
 			.mapTags(node, "Element")
-				.forEach( b ->	ElementFactory.getNodeElement(b, this) );
+				.forEach( n ->	ElementFactory.getNodeElement(n, this) );
 		return this;
 	}
 
@@ -81,7 +82,7 @@ public class Node implements MapKey, ElementAdder, NodeTest, NodeClass {
 	
 	@Override // ElementAdder
 	public void addElement(NodeElement nodeElement) {
-		elements.put(((MapKey)nodeElement).getKey(), nodeElement);
+		nodeElements.put(((MapKey)nodeElement).getKey(), nodeElement);
 	}
 
 	@Override
@@ -91,8 +92,11 @@ public class Node implements MapKey, ElementAdder, NodeTest, NodeClass {
 
 	private Collection<DynamicTest> getNodeTests(){
 		Collection<DynamicTest> tests = new ArrayList<>();		
-		elements.entrySet().forEach(s -> {
-			tests.addAll(s.getValue().getTests());
+		nodeElements.entrySet().forEach(s -> { 
+			NodeElement n = s.getValue(); 			
+//			n.loadContainer();
+			tests.addAll(n.createTests().getTests());
+			
 		});
 		return tests;
 	}
@@ -112,18 +116,6 @@ public class Node implements MapKey, ElementAdder, NodeTest, NodeClass {
 			Optional.ofNullable(
 				SiteMapElementLoader.getAndLoadSiteMapElement(navPath, homePage, clazz));
 	}
-//	@Override //NodeClass
-//	public Optional<SiteMapElement> getNodeAsSiteMapElement() {
-//		SiteMapElement siteElement = null;
-//		Class<?> clazz = getClazz();
-//		if(homePage.loadLeftMenuItem(clazz).isPresent()) {
-//			ContainerAction containerAction = homePage.loadLeftMenuItem(clazz).get();
-//			if(containerAction instanceof SiteMapElement) {
-//				siteElement = (SiteMapElement) containerAction;
-//			}
-//		}		
-//		return Optional.ofNullable(siteElement);
-//	}
 	
 	@Override
 	public String toString() {

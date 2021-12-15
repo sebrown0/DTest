@@ -31,8 +31,8 @@ public class Module implements NodeAdder {
 
 	public Collection<DynamicContainer> runTests() {
 		Collection<DynamicContainer> containers = new ArrayList<DynamicContainer>();		
-		for (String node : nodes.keySet()) {
-			containers.add((DynamicContainer) nodes.get(node).getTests());
+		for (String key : nodes.keySet()) {
+			containers.add((DynamicContainer) nodes.get(key).getTests());
 		}
 		return containers;		
 	}

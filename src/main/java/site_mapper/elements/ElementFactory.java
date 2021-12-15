@@ -11,6 +11,8 @@ import site_mapper.ElementAdder;
  * @author SteveBrown
  * @version 1.0
  * 	Initial
+ * @version 1.1
+ *  Stop tests being created when the element is created.
  * @since 1.0
  */
 public class ElementFactory {
@@ -29,7 +31,7 @@ public class ElementFactory {
 			break;
 		}
 		
-		if(nodeElement != null) { nodeElement.mapAttributes().createTests().addToNode(); }
+		if(nodeElement != null) { nodeElement.mapAttributes().addToNode(); }
 		return nodeElement;
 	}
 }

@@ -13,12 +13,13 @@
             <Element type="button" method = "search" name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']"></Element>
           </Elements>
         </Node>
- <!--        
-        <Node type="panel" obj="AbsenceEntitlements" title="Employee Absence Entitlements" nav="left_menu.Employee Others.Absence Entitlements">
+         
+        <Node type="panel" obj="AbsenceEntitlements" title="Employee Absence Entitlements" nav="left_menu.employee_others.Absence Entitlements">
           <Elements>
-     
-            <Element type="button" method = "save" name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']"></Element>
             <Element type="button" method = "clear" name="clear" text="Clear" fafa="fa fa-file-o" response="" by="css" locator="button[name='CLEAR1']"></Element>
+            <!-- 
+            <Element type="button" method = "search" name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']"></Element>
+             -->
           </Elements>
         </Node>
         
@@ -30,8 +31,6 @@
         <Node obj="" title="Employee List" nav="left_menu.Employee List"></Node>
       </Nodes>      
     </Module>
-  -->
-      </Nodes>
-    </Module>
+        
   </Modules>
 </SiteMap>
