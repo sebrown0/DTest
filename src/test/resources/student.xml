@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE document [
+<!ENTITY aCollege SYSTEM "college.xml">
+]>
+<student id="0">
+    &aCollege;
+    <className>MCA final</className>
+    <name>jai</name>
+    <rollNo>MCA/07/06</rollNo>
+    <subject>
+        <subjectId>1</subjectId>
+        <subjectname>Java</subjectname>
+    </subject>
+    <subject>
+        <subjectId>2</subjectId>
+        <subjectname>Oracle</subjectname>
+    </subject>
+</student>

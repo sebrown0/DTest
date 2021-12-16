@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE document [
+<!ENTITY aDef SYSTEM "defs.xml">
+]>
+<APP>
+ 
+   <MODULE>
+    <value>Hello World</value>
+   </MODULE>
+   <PAGE>
+    <boofer>BOOF IT!!</boofer>
+   </PAGE> 
+    <!-- 
+   &aDef;
+    -->
+</APP>
