@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE document [
+<!ENTITY aDef SYSTEM "defs.xml">
+]>
+<App xmlns="PageNS" xmlns:pgg="PageNS/Page">
+  <Modules>
+   <Module name="Payroll">
+    <Menus>
+      <Menu name = "Left">
+        
+        <!-- <p:boofer>App Boofer</p:boofer> 
+        <p:Page></p:Page>-->
+        
+        <pgg:Page>
+          <pgg:boofer>BOOF IT!!</pgg:boofer>
+          <pgg:pooper>Poof It!!</pgg:pooper>
+        </pgg:Page>
+        <!-- 
+        <Page>
+          <boofer>BOOF IT!!</boofer>
+          <pooper>Poof It!!</pooper>
+        </Page>
+         -->
+        <Nodes>
+          <Node type="panel" obj="EmployeeDetails" title="Employee Details">
+            <Element type="button" name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']"></Element>
+            <Element type="button" name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']"></Element> 
+          </Node>
+        </Nodes>
+      </Menu>
+    </Menus>       
+   </Module>
+   
+  </Modules>
+</App>

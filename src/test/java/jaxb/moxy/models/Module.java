@@ -1,13 +1,27 @@
 package jaxb.moxy.models;
 
+import java.util.List;
+
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "MODULE")
 public class Module {
-  private String value;
+	@XmlAttribute
+	private String name;
 
-  public String getValue() {
-      return value;
+  @XmlElementWrapper(name="Menus")
+  @XmlElement(name="Menu")
+  private List<Menu> menus;
+  
+  public String getName() {
+      return name;
   }
 
-  public void setValue(String value) {
-      this.value = value;
-  }
+	public List<Menu> getMenus() {
+		return menus;
+	}
+  
 }

@@ -27,7 +27,7 @@ import parameter_resolvers.LoginPageResolverPayroll;
 import providers.employee.EmployeeFromXml;
 import providers.employee.EmployeeProvider;
 import providers.employee.RandomEmployeeProvider;
-import test_data.UserProvider;
+import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

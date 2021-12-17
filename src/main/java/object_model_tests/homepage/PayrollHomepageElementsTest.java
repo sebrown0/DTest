@@ -19,7 +19,7 @@ import object_models.top_right_nav_bar.quick_links.QuickLinksPayroll;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import providers.ModuleNames;
-import test_data.UserProvider;
+import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
 /**

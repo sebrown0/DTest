@@ -12,7 +12,7 @@ import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import object_models.top_right_nav_bar.common.TopRightNavBar;
 import providers.XMLFileProvider;
-import test_data.UserProvider;
+import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
 class QuickLinkTests {	

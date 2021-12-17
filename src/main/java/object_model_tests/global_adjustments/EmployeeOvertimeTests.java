@@ -32,7 +32,7 @@ import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import providers.employee.EmployeeFromXml;
 import providers.employee.EmployeeProvider;
-import test_data.UserProvider;
+import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
 /**

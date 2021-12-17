@@ -3,27 +3,6 @@
   <groupId>com.dakar.testing</groupId>
   <artifactId>demo</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>jaxb2-maven-plugin</artifactId>
-        <version>2.3</version>
-        
-        <configuration>
-            <xjbSources>
-                <xjbSource>src/main/resources/global.xjb</xjbSource>
-            </xjbSources>
-            <sources>
-                <source>src/main/resources/user.xsd</source>
-            </sources>
-            <outputDirectory>${basedir}/src/main/java</outputDirectory>
-            <clearOutputDir>false</clearOutputDir>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
   
   <dependencies>  	
 
@@ -126,6 +105,7 @@
       <artifactId>eclipselink</artifactId>
       <version>3.1.0-M1</version>
     </dependency>
+    
     
   </dependencies>
 

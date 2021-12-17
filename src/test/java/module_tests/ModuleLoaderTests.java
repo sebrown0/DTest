@@ -15,7 +15,7 @@ import object_models.modules.payroll.PayrollModuleElements;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import providers.XMLFileProvider;
-import test_data.UserProvider;
+import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

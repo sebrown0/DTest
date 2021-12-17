@@ -34,7 +34,7 @@ import object_models.top_right_nav_bar.common.NavBarElement;
 import object_models.top_right_nav_bar.common.TopRightNavBar;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
-import test_data.UserProvider;
+import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 /**
  * @author SteveBrown

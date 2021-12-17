@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<customer 
+  xmlns="http://www.example.org/package" 
+  xmlns:ns0="http://www.example.org/type" 
+  xmlns:ns1="http://www.example.org/order" 
+  
+  id="123">
+  
+   <ns0:order id="4321">
+      <ns1:name>new order</ns1:name>
+   </ns0:order>
+   <ns0:name>Jane Doe</ns0:name>
+</customer>

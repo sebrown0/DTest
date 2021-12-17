@@ -5,12 +5,27 @@
 <APP>
  
    <MODULE>
+    <value>A Module</value>
+    <Pages>
+      <Page boofer="BOOF 1 IT!!"> </Page> 
+      <Page boofer="BOOF 2 IT!!"> </Page>
+    </Pages>
+   </MODULE>
+   
+</APP>
+<!-- 
+<APP>
+ 
+   <MODULE>
     <value>Hello World</value>
    </MODULE>
-   <PAGE>
+   <Page>
     <boofer>BOOF IT!!</boofer>
-   </PAGE> 
+   </Page> 
+    
+</APP>
+ -->
+ 
     <!-- 
    &aDef;
     -->
-</APP>

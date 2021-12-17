@@ -3,40 +3,21 @@
  */
 package site_map_tests;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.lang.reflect.AnnotatedType;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DynamicContainer;
-import org.junit.jupiter.api.DynamicNode;
-import org.junit.jupiter.api.DynamicTest;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import logging.TestResultLogger;
-import object_models.forms.ContainerAction;
-import object_models.left_menu.employees.EmployeeDetails;
-import object_models.left_menu.payroll.GlobalAdjustments;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
-import providers.employee.EmployeeFromXml;
-import providers.employee.EmployeeProvider;
+import resources.test_data.UserProvider;
 import site_mapper.Module;
-import site_mapper.Node;
-import site_mapper.NodeTest;
 import site_mapper.SiteMapper;
-import site_mapper.annotations.UiTest;
-import site_mapper.class_finder.ClassFinder;
-import test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
 /**
@@ -50,7 +31,7 @@ import xml_reader.config_file.ConfigReader;
 	LoginPageResolverPayroll.class })
 class SiteMapTests {
 	private static HomePage homepagePayroll;	
-	private static EmployeeDetails empDetails;	
+//	private static EmployeeDetails empDetails;s	
 	
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {

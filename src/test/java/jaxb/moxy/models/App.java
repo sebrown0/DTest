@@ -1,20 +1,19 @@
 package jaxb.moxy.models;
 
+import java.util.List;
+
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "App")
 public class App {
-  private Module module;
-  private Page page;
-	public Module getModule() {
-		return module;
+	@XmlElementWrapper(name="Modules")
+  @XmlElement(name="Module")
+  private List<Module> modules;
+
+	public List<Module> getModules() {
+		return modules;
 	}
-	public void setModule(Module module) {
-		this.module = module;
-	}
-	public Page getPage() {
-		return page;
-	}
-	public void setPage(Page page) {
-		this.page = page;
-	}
-  
-  
+    
 }

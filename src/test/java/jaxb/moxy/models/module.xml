@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-bindings
+    xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/oxm"
+    package-name="jaxb.moxy.models">
+    <java-types>
+        <java-type name="Module">
+            <xml-root-element name="MODULE"/>
+            
+        </java-type>
+                
+    </java-types>
+</xml-bindings>

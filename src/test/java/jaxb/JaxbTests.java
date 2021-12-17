@@ -1,49 +1,70 @@
 package jaxb;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.xml.transform.stream.StreamSource;
 
-import org.eclipse.persistence.jaxb.JAXBContextFactory;
-import org.eclipse.persistence.jaxb.JAXBContextProperties;
 import org.eclipse.persistence.jaxb.UnmarshallerProperties;
 import org.junit.jupiter.api.Test;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
-import jaxb.moxy.models.Module;
-import jaxb.moxy.models.Page;
 import jaxb.moxy.models.App;
+import jaxb.moxy.models.Menu;
+import jaxb.moxy.models.Module;
 
 class JaxbTests {
+	
+//	@Test
+//	void moxy_unmarshaller_oxm() {
+//		System.setProperty("jakarta.xml.bind.context.factory", "org.eclipse.persistence.jaxb.JAXBContextFactory");
+//		
+//		Map<String, Object> properties = new HashMap<>(1);
+//		properties.put(JAXBContextProperties.OXM_METADATA_SOURCE, "jaxb/moxy/models/oxm.xml");
+//		
+//		try {
+//			JAXBContext jc = org.eclipse.persistence.jaxb.JAXBContextFactory.createContext(new Class[] {}, properties);
+//			
+//      Unmarshaller unmarshaller = jc.createUnmarshaller();
+//      unmarshaller.setProperty("eclipselink.media-type", "application/xml");      
+//      unmarshaller.setProperty(UnmarshallerProperties.DISABLE_SECURE_PROCESSING, Boolean.TRUE);
+//      
+//      StreamSource source = new StreamSource("./src/test/resources/foo.xml");      
+//      JAXBElement<App> jaxbElement = unmarshaller.unmarshal(source, App.class);
+//      
+////      System.out.println("->" + jaxbElement.getValue().getModule().getValue()); // TODO - remove or log
+//		} catch (JAXBException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 	
 	@Test
 	void moxy_unmarshaller() {
 		System.setProperty("jakarta.xml.bind.context.factory", "org.eclipse.persistence.jaxb.JAXBContextFactory");
-		
-		Map<String, Object> properties = new HashMap<>(1);
-		properties.put(JAXBContextProperties.OXM_METADATA_SOURCE, "jaxb/moxy/models/oxm.xml");
+				
 		try {
-//			JAXBContext jc = org.eclipse.persistence.jaxb.JAXBContext.newInstance(Foo.class);
-			JAXBContext jc = org.eclipse.persistence.jaxb.JAXBContextFactory.createContext(new Class[] {}, properties);
+			JAXBContext jc = org.eclipse.persistence.jaxb.JAXBContext.newInstance(App.class);
 			
       Unmarshaller unmarshaller = jc.createUnmarshaller();
       unmarshaller.setProperty("eclipselink.media-type", "application/xml");      
       unmarshaller.setProperty(UnmarshallerProperties.DISABLE_SECURE_PROCESSING, Boolean.TRUE);
       
-      StreamSource source = new StreamSource("./src/test/resources/foo.xml");
+      StreamSource source = new StreamSource("./src/test/resources/app.xml");
       
       JAXBElement<App> jaxbElement = unmarshaller.unmarshal(source, App.class);
-      System.out.println("->" + jaxbElement.getValue().getModule().getValue()); // TODO - remove or log 	
-      System.out.println("->" + jaxbElement.getValue().getPage().getBoofer()); // TODO - remove or log
       
-//      JAXBElement<Boof> jaxbElement = unmarshaller.unmarshal(source, Boof.class);
-//      System.out.println("->" + jaxbElement.getValue().getBoofer()); // TODO - remove or log
+      Module payroll = jaxbElement.getValue().getModules().get(0);
+      
+      System.out.println("->" + payroll.getName());
+      Menu left = payroll.getMenus().get(0); 
+      left.getNodes().forEach(n -> {
+      	System.out.println("->" + n.getObj());
+      	n.getElements().forEach(e -> System.out.println(" ->" + e)); // TODO - remove or log 	))); // TODO - remove or log 	
+      });
+      
+      System.out.println("->" + left.getPage().getBoofer()); // TODO - remove or log 	
+      
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

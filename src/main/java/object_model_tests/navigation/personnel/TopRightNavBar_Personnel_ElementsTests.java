@@ -28,7 +28,7 @@ import object_models.top_right_nav_bar.all_elements.NavBarVisualReports;
 import object_models.top_right_nav_bar.common.NavBarElement;
 import object_models.top_right_nav_bar.quick_links.QuickLinks;
 import providers.XMLFileProvider;
-import test_data.UserProvider;
+import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
 @ExtendWith(TestResultLogger.class)
