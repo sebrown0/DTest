@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.DynamicTest;
 import org.w3c.dom.Element;
 
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import site_mapper.ElementAdder;
 
 /**
@@ -18,11 +20,17 @@ import site_mapper.ElementAdder;
  *  Move loading and getting of control into super implementation.
  * @since 1.0
  */
+@XmlRootElement(name="ElementButton")
 public class ElementButton extends NodeElement{
+	@XmlAttribute
 	private String text;
+	@XmlAttribute
 	private String fafa;
-	private String response;
+	@XmlAttribute
+	private String response;	
 			
+	public ElementButton() {System.out.println("new ElementButton"); }
+	
 	public ElementButton(Element element, ElementAdder elementAdder) {
 		super(element, elementAdder);		
 	}
@@ -66,7 +74,7 @@ public class ElementButton extends NodeElement{
 
 	@Override
 	public String toString() {
-		return "NodeElement [type=" + type + ", name=" + name + ", text=" + text + ", fafa="
+		return "NodeElement [name=" + name + ", text=" + text + ", fafa="
 				+ fafa + ", response=" + response + ", by=" + by + ", locator=" + locator + "]";
 	}
 

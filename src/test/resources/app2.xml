@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+** 
+** DO WE NEED COMPANY???
+** DO WE HAVE TEST DATA (IF SO FROM ANOTHER FILE?)? 
+ -->
+<App>
+  <Modules>
+   <Module name="Payroll">   
+    <Menus>
+      <Menu name = "Left">      
+        <MenuItem name = "Employee Details">
+          <ElementButton name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']"></ElementButton>
+          <ElementButton name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']"></ElementButton>
+        </MenuItem>        
+      </Menu>
+    </Menus>          
+   </Module>
+   
+   <Module name="Personnel">   
+              
+   </Module>
+  </Modules>
+</App>

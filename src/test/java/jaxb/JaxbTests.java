@@ -58,12 +58,12 @@ class JaxbTests {
       
       System.out.println("->" + payroll.getName());
       Menu left = payroll.getMenus().get(0); 
-      left.getNodes().forEach(n -> {
-      	System.out.println("->" + n.getObj());
-      	n.getElements().forEach(e -> System.out.println(" ->" + e)); // TODO - remove or log 	))); // TODO - remove or log 	
-      });
-      
-      System.out.println("->" + left.getPage().getBoofer()); // TODO - remove or log 	
+//      left.getNodes().forEach(n -> {
+//      	System.out.println("->" + n.getObj());
+//      	n.getElements().forEach(e -> System.out.println(" ->" + e)); // TODO - remove or log 	))); // TODO - remove or log 	
+//      });
+//      
+//      System.out.println("->" + left.getPage().getBoofer()); // TODO - remove or log 	
       
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block

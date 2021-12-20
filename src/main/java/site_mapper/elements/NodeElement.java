@@ -11,6 +11,9 @@ import org.junit.jupiter.api.DynamicTest;
 import org.w3c.dom.Element;
 
 import controls.ControlTest;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
 import site_mapper.ElementAdder;
 import site_mapper.ElementTest;
 import site_mapper.ElementType;
@@ -26,17 +29,29 @@ import site_mapper.SiteMapElement;
  *  Loading and get control.
  * @since 1.0
  */
-public abstract class NodeElement implements MapKey, ElementType, ElementTest {
+@XmlRootElement
+@XmlSeeAlso(ElementButton.class)
+public  class NodeElement implements MapKey, ElementType, ElementTest {	
+	@XmlAttribute
+	protected String name;	
+	@XmlAttribute
+	protected String by;
+	@XmlAttribute
+	protected String locator;
+	
+	
 	protected Element element;
 	protected Collection<DynamicTest> tests = new ArrayList<DynamicTest>();
-	protected String type;	
-	protected String name;	
-	protected String by;
-	protected String locator;	
+//	protected String type;	
+//	protected String name;	
+//	protected String by;
+//	protected String locator;	
 	
 	private ElementAdder elementAdder;	
 	private Optional<SiteMapElement> container;
 		
+	public NodeElement() {}
+	
 	public NodeElement(Element element, ElementAdder elementAdder) {
 		this.element = element;
 		this.elementAdder = elementAdder;
@@ -44,11 +59,16 @@ public abstract class NodeElement implements MapKey, ElementType, ElementTest {
 		mapCommonAttributes();
 	}
 
-	public abstract NodeElement mapAttributes();
-	public abstract NodeElement createTests();
+//	public abstract NodeElement mapAttributes();	
+//	public abstract NodeElement createTests();
+	
+	public NodeElement mapAttributes() {
+		return null;}
+	public NodeElement createTests() {
+		return null;}
 	
 	private void mapCommonAttributes() {
-		type = element.getAttribute("type");
+//		type = element.getAttribute("type");
 		name = element.getAttribute("name");
 		by = element.getAttribute("by");
 		locator = element.getAttribute("locator");
@@ -96,7 +116,8 @@ public abstract class NodeElement implements MapKey, ElementType, ElementTest {
 
 	@Override //TestType
 	public String getType() {
-		return type;
+		return null;
+//		return type;
 	}		
 	
 	protected NodeClass getNodeClass() {

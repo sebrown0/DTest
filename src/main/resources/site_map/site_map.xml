@@ -18,8 +18,9 @@
          
         <Node type="panel" obj="AbsenceEntitlements" title="Employee Absence Entitlements" nav="left_menu.employee_others.Absence Entitlements">
           <Elements>
-            &aDef;
-            <!-- 
+            
+            <!--
+            &aDef; 
             <Element type="button" name="clear" text="Clear" fafa="fa fa-file-o" response="" by="css" locator="button[name='CLEAR1']"></Element>
             
             <Element type="button" method = "search" name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']"></Element>
