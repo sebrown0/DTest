@@ -7,7 +7,7 @@
  -->
 <App>
   <Modules>
-   <Module name="Payroll">   
+   <Module name="payroll">   
     <Menus>
       <Menu name="Left" package="left_menu">      
         <MenuItem name="Employee Details" package="employees" class="EmployeeDetails">
@@ -22,7 +22,7 @@
       </Menu>
     </Menus>          
    </Module>
-   <!--  -->
+   <!-- 
    <Module name="Personnel">   
     <Menus>
       <Menu name = "Left" package="left_menu">
@@ -35,5 +35,6 @@
       </Menu>
     </Menus>                          
    </Module>
+    -->
   </Modules>
 </App>

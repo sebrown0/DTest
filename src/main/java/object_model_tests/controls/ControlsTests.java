@@ -23,7 +23,7 @@ import logging.TestResultLogger;
 import object_models.controls.DropdownCombo;
 import object_models.controls.EmployeeSelection;
 import object_models.left_menu.common.LeftMenu;
-import object_models.left_menu.employees.EmployeeDetails;
+import object_models.module_payroll.left_menu.employees.EmployeeDetails;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;

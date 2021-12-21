@@ -15,7 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import entities.company.Company;
 import logging.TestResultLogger;
 import object_models.left_menu.common.LeftMenu;
-import object_models.left_menu.payroll.initialise.InitialisePayroll;
+import object_models.module_payroll.left_menu.payroll.initialise.InitialisePayroll;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;

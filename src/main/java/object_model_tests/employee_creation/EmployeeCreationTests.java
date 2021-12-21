@@ -17,7 +17,7 @@ import enums.control_names.EmployeeControlNames;
 import logging.TestResultLogger;
 import object_models.employee_creation.EmployeeCreationWizard;
 import object_models.forms.FormFadeShow;
-import object_models.left_menu.employees.EmployeeDetails;
+import object_models.module_payroll.left_menu.employees.EmployeeDetails;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import object_models.top_right_nav_bar.all_elements.NavBarEmployeeCreation;
