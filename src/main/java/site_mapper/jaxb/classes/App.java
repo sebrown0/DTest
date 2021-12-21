@@ -1,4 +1,4 @@
-package jaxb.moxy.models;
+package site_mapper.jaxb.classes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,16 @@ import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import object_models.pages.homepage.HomePage;
 
+/** 
+ * @author SteveBrown
+ * @version 1.0
+ * 	Initial
+ * @since 1.0
+ * 
+ * JAXB class representing the top level element root.
+ * This will return a DynamicContainer with all the 
+ * sub DynamicContainers found in the relevant XML doc.
+ */
 @XmlRootElement(name = "App")
 public class App {		
 	@XmlElementWrapper(name="Modules")

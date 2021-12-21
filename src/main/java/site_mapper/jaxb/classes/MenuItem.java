@@ -1,7 +1,7 @@
 /**
  * 
  */
-package jaxb.moxy.models;
+package site_mapper.jaxb.classes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +23,7 @@ import site_mapper.elements.ElementLoader;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
  * @since 1.0
  */
 @XmlRootElement(name="MenuItem")

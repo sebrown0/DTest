@@ -1,4 +1,4 @@
-package jaxb.moxy.models;
+package site_mapper.jaxb.classes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,15 +12,12 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import object_models.pages.homepage.HomePage;
 
 /**
- * 
  * @author SteveBrown
  * @version 1.0
  * 	Initial
  * @since 1.0
- */
-
-/*
- * HAVE TO GET/LOAD MODULE
+ * 
+ * Module found in the app.
  */
 @XmlRootElement(name = "Module")
 public class Module {	

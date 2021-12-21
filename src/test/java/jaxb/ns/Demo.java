@@ -5,7 +5,7 @@ import java.io.File;
 import javax.xml.transform.stream.StreamSource;
 
 import jakarta.xml.bind.*;
-import jaxb.moxy.models.App;
+import site_mapper.jaxb.classes.App;
 
 public class Demo {
   public static void main(String[] args) throws Exception {

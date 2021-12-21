@@ -19,6 +19,8 @@ import jakarta.xml.bind.annotation.XmlRootElement;
  * 	Initial
  * @version 1.1
  *  Move loading and getting of control into super implementation.
+ * @version 1.2
+ * 	Convert to JAXB class.
  * @since 1.0
  */
 @XmlRootElement(name="ElementButton")
@@ -37,16 +39,7 @@ public class ElementButton {
 	private String response;	
 
 	private Collection<DynamicTest> tests = new ArrayList<>();
-//	private Collection<DynamicContainer> containers;
-	private ElementLoader loader;
-	
-//	public ElementButton createTests(ElementLoader loader, Collection<DynamicTest> tests) {
-//		this.loader = loader;
-//		this.tests = tests;
-//		createButtonFaFaCheck();
-//		createButtonTextCheck();		
-//		return this;
-//	}		
+	private ElementLoader loader;	
 
 	public ElementButton createTests(ElementLoader loader) {
 		this.loader = loader;
@@ -87,6 +80,5 @@ public class ElementButton {
 		return "NodeElement [name=" + name + ", text=" + text + ", fafa="
 				+ fafa + ", response=" + response + ", by=" + by + ", locator=" + locator + "]";
 	}
-
 
 }

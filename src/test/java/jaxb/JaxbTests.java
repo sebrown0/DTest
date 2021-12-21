@@ -9,9 +9,9 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
-import jaxb.moxy.models.App;
-import jaxb.moxy.models.Menu;
-import jaxb.moxy.models.Module;
+import site_mapper.jaxb.classes.App;
+import site_mapper.jaxb.classes.Menu;
+import site_mapper.jaxb.classes.Module;
 
 class JaxbTests {
 	
