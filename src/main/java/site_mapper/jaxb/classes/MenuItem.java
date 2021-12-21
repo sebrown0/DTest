@@ -54,9 +54,11 @@ public class MenuItem implements NodeClass {
 //		hp.loadModule(moduleName);
 
 		//SHOULD BE A MAP OF ELEMENTS!!!!
-		buttons.forEach(b -> {
-			menuItemTests.addAll(b.createTests(new ElementLoader(this, hp)).getTests());
-		});	
+		if(buttons != null) {
+			buttons.forEach(b -> {
+				menuItemTests.addAll(b.createTests(new ElementLoader(this, hp)).getTests());
+			});	
+		}			
 	}
 
 	

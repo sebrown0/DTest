@@ -24,18 +24,17 @@ public class ClassFinder {
 	private static String ROOT = "object_models";
 	
 	public static Class<?> getClazz(NodeClass nodeClass){		
-//		String fullPath = ROOT + "." + nodeClass.getParentPackage() + "." + nodeClass.getPackage() + "." + nodeClass.getClassName();
-		String fullPath = 
-				getPathInLowerCase(nodeClass) + "." + 
-				nodeClass.getClassName();
 		try {
-			return Class.forName(fullPath);
+			return Class.forName(getPathToClass(nodeClass));
 		} catch (ClassNotFoundException e) {
 			LogManager.getLogger().error("Could not get class for [" + nodeClass + "]");
 		}
 		return null;
 	}
 	
+	public static String getPathToClass(NodeClass nodeClass) {
+		return getPathInLowerCase(nodeClass) + "." + nodeClass.getClassName();
+	}
 	public static String getPathInLowerCase(NodeClass nodeClass) {
 		String path = 
 				ROOT + "." +
