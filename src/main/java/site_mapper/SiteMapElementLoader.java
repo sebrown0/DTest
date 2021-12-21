@@ -21,7 +21,29 @@ import object_models.pages.homepage.HomePage;
  */
 public class SiteMapElementLoader {
 	private static String[] parts;
+	private static String packageName;
 	
+	public static SiteMapElement getAndLoadSiteMapElement(NodeClass nodeClass, HomePage hp, Class<?> clazz) {
+		SiteMapElement siteElement = null;
+				
+		if(nodeClass != null){
+			packageName = nodeClass.getParentPackage();
+//			splitNavPath(navPath);
+			if(isLeftMenu()) {			
+				siteElement = loadLeft(hp, clazz);		
+			}else if (isTopRightNavBar()) {
+				siteElement = loadTopRightNavBar(hp, clazz);			
+			}else {
+				System.out.println("ERROR: NOT IMPLEMENTED"); // TODO - remove or log
+				LogFactory.getAppLog(SiteMapElementLoader.class).error("NOT IMPLEMENTED");			
+			}
+		}else {
+			LogFactory.getAppLog(SiteMapElementLoader.class).error("Cannot get SiteMapElement for null nav path");
+		}
+		return siteElement;
+	}
+	
+	//TODO - REMOVE
 	public static SiteMapElement getAndLoadSiteMapElement(String navPath, HomePage hp, Class<?> clazz) {
 		SiteMapElement siteElement = null;
 		
@@ -45,13 +67,16 @@ public class SiteMapElementLoader {
 		parts = navPath.split(Pattern.quote("."));
 	}
 	
-	private static boolean isLeftMenu() {
-		if(parts != null) {
-			return (parts[0].equals("left_menu")) ? true : false;
-		}else {
-			return false;
-		} 
+	private static boolean isLeftMenu() {		
+		return (packageName.equalsIgnoreCase("left_menu")) ? true : false;		 
 	}
+//	private static boolean isLeftMenu() {
+//		if(parts != null) {
+//			return (parts[0].equals("left_menu")) ? true : false;
+//		}else {
+//			return false;
+//		} 
+//	}
 	private static SiteMapElement loadLeft(HomePage hp, Class<?> clazz) {
 		Optional<ContainerAction> leftMenuItem = hp.loadLeftMenuItem(clazz); 
 		if(leftMenuItem.isPresent()) {

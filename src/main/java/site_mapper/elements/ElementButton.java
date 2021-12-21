@@ -5,6 +5,10 @@ package site_mapper.elements;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.junit.jupiter.api.DynamicContainer;
 import org.junit.jupiter.api.DynamicTest;
 import org.w3c.dom.Element;
 
@@ -21,51 +25,60 @@ import site_mapper.ElementAdder;
  * @since 1.0
  */
 @XmlRootElement(name="ElementButton")
-public class ElementButton extends NodeElement{
+public class ElementButton {
+	@XmlAttribute
+	private String name;	
+	@XmlAttribute
+	private String by;
+	@XmlAttribute
+	private String locator;
 	@XmlAttribute
 	private String text;
 	@XmlAttribute
 	private String fafa;
 	@XmlAttribute
 	private String response;	
-			
-	public ElementButton() {System.out.println("new ElementButton"); }
+
+	private Collection<DynamicTest> tests = new ArrayList<>();
+//	private Collection<DynamicContainer> containers;
+	private ElementLoader loader;
 	
-	public ElementButton(Element element, ElementAdder elementAdder) {
-		super(element, elementAdder);		
+//	public ElementButton createTests(ElementLoader loader, Collection<DynamicTest> tests) {
+//		this.loader = loader;
+//		this.tests = tests;
+//		createButtonFaFaCheck();
+//		createButtonTextCheck();		
+//		return this;
+//	}		
+
+	public ElementButton createTests(ElementLoader loader) {
+		this.loader = loader;
+		createButtonFaFaCheck();
+		createButtonTextCheck();
+		return this;		
 	}
 	
-	public NodeElement mapAttributes() {		
-		text = element.getAttribute("text");
-		fafa = element.getAttribute("fafa");
-		response = element.getAttribute("response");		
-		return this;
+	public Collection<DynamicTest> getTests() {
+		return tests;
 	}
 
-	@Override
-	public NodeElement createTests() {		
-		createButtonFaFaCheck();
-		createButtonTextCheck();		
-		return this;
-	}		
-		
 	private void createButtonFaFaCheck() {
-		super.tests.add(
+		tests.add(
 				DynamicTest.dynamicTest(
 					"Is [" + name +"] button [FaFa] correct?", 
 					() -> {							
-						String faFaActual = super.getControlTest().getFaFaText(name);							
+						String faFaActual = loader.getControlTest().getFaFaText(name);
 						assertEquals(fafa, faFaActual);
 					}
 				)
 			);
 	}
 	private void createButtonTextCheck() {
-		super.tests.add(
+		tests.add(
 				DynamicTest.dynamicTest(
 					"Is [" + name +"] button [text] correct?", 
 					() -> {							
-						String textActual = super.getControlTest().getControlText(name);							
+						String textActual = loader.getControlTest().getControlText(name);
 						assertEquals(text, textActual);
 					}
 				)
@@ -77,5 +90,6 @@ public class ElementButton extends NodeElement{
 		return "NodeElement [name=" + name + ", text=" + text + ", fafa="
 				+ fafa + ", response=" + response + ", by=" + by + ", locator=" + locator + "]";
 	}
+
 
 }

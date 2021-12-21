@@ -7,7 +7,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.LogManager;
 
@@ -23,7 +22,7 @@ public class ClassFinder {
 	private static String ROOT = "object_models";
 	
 	public static Class<?> getClazz(NodeClass nodeClass){		
-		String fullPath = ROOT + "." + getPath(nodeClass) + nodeClass.getClassName();
+		String fullPath = ROOT + "." + nodeClass.getParentPackage() + "." + nodeClass.getPackage() + "." + nodeClass.getClassName();
 		try {
 			return Class.forName(fullPath);
 		} catch (ClassNotFoundException e) {
@@ -32,15 +31,25 @@ public class ClassFinder {
 		return null;
 	}
 	
-	private static String getPath(NodeClass nodeClass) {
-		String[] parts = nodeClass.getPath().split(Pattern.quote("."));
-		String path = "";
-		
-		for(int i = 0; i < parts.length - 1; i++) {
-			path += parts[i] + ".";
-		}
-		return path;
-	}
+//	public static Class<?> getClazz(NodeClass nodeClass){		
+//		String fullPath = ROOT + "." + getPath(nodeClass) + nodeClass.getClassName();
+//		try {
+//			return Class.forName(fullPath);
+//		} catch (ClassNotFoundException e) {
+//			LogManager.getLogger().error("Could not get class for [" + nodeClass + "]");
+//		}
+//		return null;
+//	}
+	
+//	private static String getPath(NodeClass nodeClass) {
+//		String[] parts = nodeClass.getPackage().split(Pattern.quote("."));
+//		String path = "";
+//		
+//		for(int i = 0; i < parts.length - 1; i++) {
+//			path += parts[i] + ".";
+//		}
+//		return path;
+//	}
 
 	public static List<Method> getMethodsAnnotatedWith(final Class<?> type, final Class<? extends Annotation> annotation) {
     final List<Method> methods = new ArrayList<Method>();
@@ -58,3 +67,43 @@ public class ClassFinder {
 	}
 
 }
+
+//public class ClassFinder {
+//	private static String ROOT = "object_models";
+//	
+//	public static Class<?> getClazz(NodeClass nodeClass){		
+//		String fullPath = ROOT + "." + getPath(nodeClass) + nodeClass.getClassName();
+//		try {
+//			return Class.forName(fullPath);
+//		} catch (ClassNotFoundException e) {
+//			LogManager.getLogger().error("Could not get class for [" + nodeClass + "]");
+//		}
+//		return null;
+//	}
+//	
+//	private static String getPath(NodeClass nodeClass) {
+//		String[] parts = nodeClass.getPath().split(Pattern.quote("."));
+//		String path = "";
+//		
+//		for(int i = 0; i < parts.length - 1; i++) {
+//			path += parts[i] + ".";
+//		}
+//		return path;
+//	}
+//
+//	public static List<Method> getMethodsAnnotatedWith(final Class<?> type, final Class<? extends Annotation> annotation) {
+//    final List<Method> methods = new ArrayList<Method>();
+//    Class<?> clazz = type;
+//   
+//    for (final Method method : clazz.getDeclaredMethods()) {
+//        if (method.isAnnotationPresent(annotation)) {
+//            // Annotation annotInstance = method.getAnnotation(annotation);
+//            // TODO process annotInstance
+//            methods.add(method);
+//        }
+//    }
+//   
+//    return methods;
+//	}
+//
+//}

@@ -1,13 +1,12 @@
 package site_mapper.with_jaxb;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.xml.transform.stream.StreamSource;
 
 import org.eclipse.persistence.jaxb.UnmarshallerProperties;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DynamicContainer;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -46,10 +45,14 @@ class Tests {
 //	}
 	
 	@TestFactory
-	Collection<DynamicContainer> runAppTests() {		
+	DynamicContainer runAppTests() {		
     return getApp().setHomePage(homepage).getTests();
 	}
 
+//	@Test
+//	void runAppTests() {		
+//    getApp().setHomePage(homepage).getTests();
+//	}
 	private App getApp() {
 		JAXBContext jc;
 		try {

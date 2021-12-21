@@ -100,7 +100,7 @@ public class Node implements MapKey, ElementAdder, NodeTest, NodeClass {
 	}
 
 	@Override //NodeClass
-	public String getPath() {
+	public String getPackage() {
 		return navPath;
 	}
 	@Override //NodeClass
@@ -118,6 +118,13 @@ public class Node implements MapKey, ElementAdder, NodeTest, NodeClass {
 	@Override
 	public String toString() {
 		return "Node [type=" + type + ", title=" + title + ", objectName=" + objectName + ", navPath=" + navPath + "]";
+	}
+
+	@Override
+	public String getParentPackage() {
+		// TODO Auto-generated method stub
+		System.out.println("getParentPackage NOT IMPLEMENTED ************"); // TODO - remove or log 	
+		return null;
 	}
 
 }

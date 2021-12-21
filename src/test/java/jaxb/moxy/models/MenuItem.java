@@ -4,19 +4,21 @@
 package jaxb.moxy.models;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.DynamicContainer;
-import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.DynamicTest;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlElements;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import object_models.pages.homepage.HomePage;
+import site_mapper.NodeClass;
+import site_mapper.SiteMapElement;
 import site_mapper.elements.ElementButton;
-import site_mapper.elements.NodeElement;
+import site_mapper.elements.ElementLoader;
 
 /**
  * @author SteveBrown
@@ -24,49 +26,68 @@ import site_mapper.elements.NodeElement;
  * @since 1.0
  */
 @XmlRootElement(name="MenuItem")
-public class MenuItem {
+public class MenuItem implements NodeClass {
 	@XmlAttribute(name="name")
 	private String name;
+	@XmlAttribute(name="package")
+	private String packageName;
+	@XmlAttribute(name="class")
+	private String className;
+	@XmlElementWrapper(name="Elements")
+	@XmlElement(name="ElementButton")
+	private List<ElementButton> buttons;
 	
-//	@XmlElement(name="ElementButton")
+	private List<DynamicTest> menuItemTests = new ArrayList<>();
+	private String menuPackageName;
 	
-	@XmlElements({
-		@XmlElement(name="ElementButton")
-	})
-	private List<NodeElement> elements;
-	
-	public void runMenuItemTests() {
-		if(elements != null) {
-			elements.forEach(e -> {
-				ElementButton btn = (ElementButton) e;
-				System.out.println("   Running element test: " + btn.toString()); // TODO - remove or log 	
-			});	
-		}	else {
-			System.out.println("CVVVVVVVVVVVVV"); // TODO - remove or log 	
-		}
+	public DynamicContainer getDynamicContainer(HomePage hp, String menuPackageName) {
+		this.menuPackageName = menuPackageName;
+		getNodeTests(hp);
+		return DynamicContainer.dynamicContainer(name, menuItemTests);
 	}
 	
-	private DynamicNode getTests() {		
-		return DynamicContainer.dynamicContainer(name, getNodeTests());
-	}
+	private void getNodeTests(HomePage hp){
 
-	private Collection<DynamicTest> getNodeTests(){
-		Collection<DynamicTest> tests = new ArrayList<>();		
-		elements.forEach(e -> { 			
-			tests.addAll(e.createTests().getTests());			
-		});
-		return tests;
+		//SHOULD BE A MAP OF ELEMENTS!!!!
+		buttons.forEach(b -> {
+			menuItemTests.addAll(b.createTests(new ElementLoader(this, hp)).getTests());
+		});	
 	}
+//	private Collection<DynamicTest> getNodeTests(){
+////		Collection<DynamicTest> tests = new ArrayList<>();
+//		//SHOULD BE A MAP OF ELEMENTS!!!!
+//		buttons.forEach(b -> { 			
+////			tests.addAll(b.createTests(new ElementLoader(this, homePage)).getTests());			
+////			b.createTests(new ElementLoader(this, homePage), tests);
+//			b.createTests(new ElementLoader(this, homePage), containers);
+//		});
+////		elements.forEach(e -> { 			
+////			tests.addAll(e.createTests().getTests());			
+////		});
+//		return tests;
+//	}
 
+	
+	@Override //NodeClass
+	public String getClassName() {
+		return className;
+	}
+	@Override //NodeClass
+	public String getPackage() {
+		return packageName;
+	}
+	@Override //NodeClass
+	public Optional<SiteMapElement> getNodeAsSiteMapElement() {
+		// TODO Auto-generated method stub
+		System.out.println("[MenuItem.getNodeAsSiteMapElement] *********** NOT IMPLEMENTED ***********"); // TODO - remove or log 	
+		return null;
+	}
+	@Override //NodeClass
+	public String getParentPackage() {
+		return menuPackageName;
+	}
 	public String getName() {
 		return name;
 	}
 
-	public List<NodeElement> getElements() {
-		return elements;
-	}
-	
-	/*
-	 * 
-	 */
 }

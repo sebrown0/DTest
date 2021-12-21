@@ -24,14 +24,15 @@ public class ElementFactory {
 		switch (type) {
 		case "button":
 		case "Button":
-			nodeElement = new ElementButton(element, elementAdder);			
+			System.out.println("************** DEPRICIATED **************"); // TODO - remove or log 	
+//			nodeElement = new ElementButton(element, elementAdder);			
 			break;
 
 		default:
 			break;
 		}
 		
-		if(nodeElement != null) { nodeElement.mapAttributes().addToNode(); }
+//		if(nodeElement != null) { nodeElement.mapAttributes().addToNode(); }
 		return nodeElement;
 	}
 }

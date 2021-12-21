@@ -8,7 +8,7 @@ package site_mapper.elements;
  * @version 1.0
  * @since 1.0
  */
-public class ElementTextBox extends NodeElement{
+public class ZZZ_ElementTextBox extends NodeElement{
 
 	@Override
 	public NodeElement mapAttributes() {
