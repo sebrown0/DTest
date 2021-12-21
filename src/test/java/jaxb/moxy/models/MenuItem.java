@@ -53,19 +53,6 @@ public class MenuItem implements NodeClass {
 			menuItemTests.addAll(b.createTests(new ElementLoader(this, hp)).getTests());
 		});	
 	}
-//	private Collection<DynamicTest> getNodeTests(){
-////		Collection<DynamicTest> tests = new ArrayList<>();
-//		//SHOULD BE A MAP OF ELEMENTS!!!!
-//		buttons.forEach(b -> { 			
-////			tests.addAll(b.createTests(new ElementLoader(this, homePage)).getTests());			
-////			b.createTests(new ElementLoader(this, homePage), tests);
-//			b.createTests(new ElementLoader(this, homePage), containers);
-//		});
-////		elements.forEach(e -> { 			
-////			tests.addAll(e.createTests().getTests());			
-////		});
-//		return tests;
-//	}
 
 	
 	@Override //NodeClass

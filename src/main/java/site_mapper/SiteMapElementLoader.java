@@ -4,7 +4,6 @@
 package site_mapper;
 
 import java.util.Optional;
-import java.util.regex.Pattern;
 
 import logging.LogFactory;
 import object_models.forms.ContainerAction;
@@ -16,6 +15,8 @@ import object_models.pages.homepage.HomePage;
  *  Initial
  * @version 1.1
  * 	Rename and refactor.
+ * @version 1.2
+ * 	Change the way the menu element is found.
  * @since 1.0
  * 
  */
@@ -28,7 +29,6 @@ public class SiteMapElementLoader {
 				
 		if(nodeClass != null){
 			packageName = nodeClass.getParentPackage();
-//			splitNavPath(navPath);
 			if(isLeftMenu()) {			
 				siteElement = loadLeft(hp, clazz);		
 			}else if (isTopRightNavBar()) {
@@ -41,42 +41,11 @@ public class SiteMapElementLoader {
 			LogFactory.getAppLog(SiteMapElementLoader.class).error("Cannot get SiteMapElement for null nav path");
 		}
 		return siteElement;
-	}
-	
-	//TODO - REMOVE
-	public static SiteMapElement getAndLoadSiteMapElement(String navPath, HomePage hp, Class<?> clazz) {
-		SiteMapElement siteElement = null;
-		
-		if(navPath != null){
-			splitNavPath(navPath);
-			if(isLeftMenu()) {			
-				siteElement = loadLeft(hp, clazz);		
-			}else if (isTopRightNavBar()) {
-				siteElement = loadTopRightNavBar(hp, clazz);			
-			}else {
-				System.out.println("ERROR: NOT IMPLEMENTED"); // TODO - remove or log
-				LogFactory.getAppLog(SiteMapElementLoader.class).error("NOT IMPLEMENTED");			
-			}
-		}else {
-			LogFactory.getAppLog(SiteMapElementLoader.class).error("Cannot get SiteMapElement for null nav path");
-		}
-		return siteElement;
-	}
-	
-	private static void splitNavPath(String navPath) {
-		parts = navPath.split(Pattern.quote("."));
 	}
 	
 	private static boolean isLeftMenu() {		
 		return (packageName.equalsIgnoreCase("left_menu")) ? true : false;		 
 	}
-//	private static boolean isLeftMenu() {
-//		if(parts != null) {
-//			return (parts[0].equals("left_menu")) ? true : false;
-//		}else {
-//			return false;
-//		} 
-//	}
 	private static SiteMapElement loadLeft(HomePage hp, Class<?> clazz) {
 		Optional<ContainerAction> leftMenuItem = hp.loadLeftMenuItem(clazz); 
 		if(leftMenuItem.isPresent()) {

@@ -17,7 +17,7 @@ import org.w3c.dom.Element;
 import object_models.pages.homepage.HomePage;
 import site_mapper.class_finder.ClassFinder;
 import site_mapper.elements.ElementFactory;
-import site_mapper.elements.NodeElement;
+import site_mapper.elements.ZZZ_NodeElement;
 
 /**
  * @author SteveBrown
@@ -27,7 +27,7 @@ import site_mapper.elements.NodeElement;
  *  Create and run tests on demand.
  * @since 1.0
  */
-public class Node implements MapKey, ElementAdder, NodeTest, NodeClass {
+public class ZZZ_Node implements MapKey, ElementAdder, NodeTest, NodeClass {
 	private NodeAdder nodeAdder;
 	private Element node;
 	private HomePage homePage;
@@ -37,22 +37,22 @@ public class Node implements MapKey, ElementAdder, NodeTest, NodeClass {
 	private String objectName;
 	private String navPath;
 	
-	private Map<String, NodeElement> nodeElements = new HashMap<>();
+	private Map<String, ZZZ_NodeElement> nodeElements = new HashMap<>();
 		
-	public Node(NodeAdder nodeAdder, Element node, HomePage homePage) {
+	public ZZZ_Node(NodeAdder nodeAdder, Element node, HomePage homePage) {
 		this.nodeAdder = nodeAdder;
 		this.node = node;
 		this.homePage = homePage;
 	}
 
-	public Node mapElements() {		
+	public ZZZ_Node mapElements() {		
 		Mapper
 			.mapTags(node, "Element")
 				.forEach( n ->	ElementFactory.getNodeElement(n, this) );
 		return this;
 	}
 
-	public Node mapAttributes() {
+	public ZZZ_Node mapAttributes() {
 		type = node.getAttribute("type");
 		objectName = node.getAttribute("obj");
 		title = node.getAttribute("title");
@@ -81,7 +81,7 @@ public class Node implements MapKey, ElementAdder, NodeTest, NodeClass {
 	}
 	
 	@Override // ElementAdder
-	public void addElement(NodeElement nodeElement) {
+	public void addElement(ZZZ_NodeElement nodeElement) {
 		nodeElements.put(((MapKey)nodeElement).getKey(), nodeElement);
 	}
 
@@ -93,7 +93,7 @@ public class Node implements MapKey, ElementAdder, NodeTest, NodeClass {
 	private Collection<DynamicTest> getNodeTests(){
 		Collection<DynamicTest> tests = new ArrayList<>();		
 		nodeElements.entrySet().forEach(s -> { 
-			NodeElement n = s.getValue(); 			
+			ZZZ_NodeElement n = s.getValue(); 			
 			tests.addAll(n.createTests().getTests());			
 		});
 		return tests;
@@ -108,11 +108,12 @@ public class Node implements MapKey, ElementAdder, NodeTest, NodeClass {
 		return objectName;
 	}
 	@Override //NodeClass
-	public Optional<SiteMapElement> getNodeAsSiteMapElement() {		
-		Class<?> clazz = getClazz();		
-		return 
-			Optional.ofNullable(
-				SiteMapElementLoader.getAndLoadSiteMapElement(navPath, homePage, clazz));
+	public Optional<SiteMapElement> getNodeAsSiteMapElement() {
+		return null;		
+//		Class<?> clazz = getClazz();		
+//		return 
+//			Optional.ofNullable(
+//				SiteMapElementLoader.getAndLoadSiteMapElement(navPath, homePage, clazz));
 	}
 	
 	@Override

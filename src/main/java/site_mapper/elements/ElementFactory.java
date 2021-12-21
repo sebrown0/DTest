@@ -17,8 +17,8 @@ import site_mapper.ElementAdder;
  */
 public class ElementFactory {
 	
-	public static NodeElement getNodeElement(Element element, ElementAdder elementAdder) {
-		NodeElement nodeElement = null;		
+	public static ZZZ_NodeElement getNodeElement(Element element, ElementAdder elementAdder) {
+		ZZZ_NodeElement nodeElement = null;		
 		String type = element.getAttribute("type");
 		
 		switch (type) {

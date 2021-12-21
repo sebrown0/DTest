@@ -31,7 +31,7 @@ import site_mapper.SiteMapElement;
  */
 @XmlRootElement
 @XmlSeeAlso(ElementButton.class)
-public  class NodeElement implements MapKey, ElementType, ElementTest {	
+public  class ZZZ_NodeElement implements MapKey, ElementType, ElementTest {	
 	@XmlAttribute
 	protected String name;	
 	@XmlAttribute
@@ -50,9 +50,9 @@ public  class NodeElement implements MapKey, ElementType, ElementTest {
 	private ElementAdder elementAdder;	
 	private Optional<SiteMapElement> container;
 		
-	public NodeElement() {}
+	public ZZZ_NodeElement() {}
 	
-	public NodeElement(Element element, ElementAdder elementAdder) {
+	public ZZZ_NodeElement(Element element, ElementAdder elementAdder) {
 		this.element = element;
 		this.elementAdder = elementAdder;
 		
@@ -62,9 +62,9 @@ public  class NodeElement implements MapKey, ElementType, ElementTest {
 //	public abstract NodeElement mapAttributes();	
 //	public abstract NodeElement createTests();
 	
-	public NodeElement mapAttributes() {
+	public ZZZ_NodeElement mapAttributes() {
 		return null;}
-	public NodeElement createTests() {
+	public ZZZ_NodeElement createTests() {
 		return null;}
 	
 	private void mapCommonAttributes() {

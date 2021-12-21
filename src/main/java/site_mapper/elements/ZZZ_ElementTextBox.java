@@ -8,16 +8,16 @@ package site_mapper.elements;
  * @version 1.0
  * @since 1.0
  */
-public class ZZZ_ElementTextBox extends NodeElement{
+public class ZZZ_ElementTextBox extends ZZZ_NodeElement{
 
 	@Override
-	public NodeElement mapAttributes() {
+	public ZZZ_NodeElement mapAttributes() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public NodeElement createTests() {
+	public ZZZ_NodeElement createTests() {
 		// TODO Auto-generated method stub
 		return null;
 	}

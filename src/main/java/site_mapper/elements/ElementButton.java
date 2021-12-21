@@ -8,13 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.junit.jupiter.api.DynamicContainer;
 import org.junit.jupiter.api.DynamicTest;
-import org.w3c.dom.Element;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
-import site_mapper.ElementAdder;
 
 /**
  * @author SteveBrown

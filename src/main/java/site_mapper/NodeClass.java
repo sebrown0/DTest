@@ -11,6 +11,8 @@ import java.util.Optional;
  * 	Initial
  * @version 1.1
  * 	Add getNodeAsSiteMapElement().
+ * @version 1.2
+ * 	Add getParentPackage().
  * @since 1.0
  */
 public interface NodeClass {

@@ -21,7 +21,7 @@ import object_models.pages.homepage.HomePage;
  */
 public class Module implements NodeAdder {
 	private String name;
-	private Map<String, Node> nodes = new HashMap<>();
+	private Map<String, ZZZ_Node> nodes = new HashMap<>();
 	private HomePage homePage;
 	
 	public Module(String name, HomePage homePage) {
@@ -40,19 +40,19 @@ public class Module implements NodeAdder {
 	public void mapNodes(NodeList node) {
 		Mapper
 			.mapTags(node, "Node")
-			.forEach( p ->	new Node(this, p, homePage).mapAttributes().mapElements().addToModule() );
+			.forEach( p ->	new ZZZ_Node(this, p, homePage).mapAttributes().mapElements().addToModule() );
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public Node getNode(String key) {
-		return (Node) nodes.get(key);
+	public ZZZ_Node getNode(String key) {
+		return (ZZZ_Node) nodes.get(key);
 	}
 	
 	@Override //NodeAdder
-	public void addNode(Node node) {		
+	public void addNode(ZZZ_Node node) {		
 		nodes.put(((MapKey) node).getKey(), node);		
 	}
 

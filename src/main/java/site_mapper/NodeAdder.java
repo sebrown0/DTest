@@ -10,5 +10,5 @@ package site_mapper;
  * @since 1.0
  */
 public interface NodeAdder {
-	void addNode(Node node);
+	void addNode(ZZZ_Node node);
 }

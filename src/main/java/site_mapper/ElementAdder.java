@@ -3,7 +3,7 @@
  */
 package site_mapper;
 
-import site_mapper.elements.NodeElement;
+import site_mapper.elements.ZZZ_NodeElement;
 
 /**
  * @author SteveBrown
@@ -12,5 +12,5 @@ import site_mapper.elements.NodeElement;
  * @since 1.0
  */
 public interface ElementAdder {
-	void addElement(NodeElement nodeElement);
+	void addElement(ZZZ_NodeElement nodeElement);
 }
