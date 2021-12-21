@@ -125,10 +125,15 @@ public abstract class HomePage extends Page implements CoreData, HomePageElement
 		return (e == null) ? "" : e.getAttribute("innerHTML");		
 	}
 	public String getActualModuleName() {		
+		/*
+		 * TODO - THIS HAS TO USE THE CM TO MOVE TO THE NAV BAR.
+		 * WE COULD BE IN AN IFRAME SOMEWHERE ELSE!!!!!!!!!!!!!!
+		 */
 		return driver.findElement(byXpathActualModuleName).getAttribute("innerHTML");
 	}
 	
 	public Optional<ContainerAction> loadLeftMenuItem(Class<?> clazz) {
+//		contextManager.switchToLeftMenu();
 		return leftMenu.clickAndLoad(clazz);		
 	}
 	

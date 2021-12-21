@@ -17,7 +17,7 @@ import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;
 import site_mapper.Module;
-import site_mapper.SiteMapper;
+import site_mapper.ZZZ_SiteMapper;
 import xml_reader.config_file.ConfigReader;
 
 /**
@@ -113,7 +113,7 @@ class SiteMapTests {
 	
 	@TestFactory
 	Collection<DynamicContainer> payrollModule_H() {
-		SiteMapper mapper = new SiteMapper();
+		ZZZ_SiteMapper mapper = new ZZZ_SiteMapper();
 		mapper.mapModules(homepagePayroll);
 		
 		Map<String, Module> modules = mapper.getModuleMap();
@@ -122,7 +122,7 @@ class SiteMapTests {
 	}
 	@TestFactory
 	Collection<DynamicContainer> payrollModule_HH() {
-		SiteMapper mapper = new SiteMapper();
+		ZZZ_SiteMapper mapper = new ZZZ_SiteMapper();
 		mapper.mapModules(homepagePayroll);
 		
 		Map<String, Module> modules = mapper.getModuleMap();
@@ -131,7 +131,7 @@ class SiteMapTests {
 	}
 	@TestFactory
 	Collection<DynamicContainer> payrollModule_HHH() {
-		SiteMapper mapper = new SiteMapper();
+		ZZZ_SiteMapper mapper = new ZZZ_SiteMapper();
 		mapper.mapModules(homepagePayroll);
 		
 		Map<String, Module> modules = mapper.getModuleMap();
@@ -141,7 +141,7 @@ class SiteMapTests {
 	
 	@TestFactory
 	Collection<DynamicContainer> payrollModule_HHHHHHH() {
-		SiteMapper mapper = new SiteMapper();
+		ZZZ_SiteMapper mapper = new ZZZ_SiteMapper();
 		mapper.mapModules(homepagePayroll);
 		
 		Map<String, Module> modules = mapper.getModuleMap();

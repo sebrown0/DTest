@@ -5,7 +5,6 @@ package site_mapper.jaxb.classes;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.DynamicContainer;
 import org.junit.jupiter.api.DynamicTest;
@@ -16,7 +15,6 @@ import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import object_models.pages.homepage.HomePage;
 import site_mapper.NodeClass;
-import site_mapper.SiteMapElement;
 import site_mapper.elements.ElementButton;
 import site_mapper.elements.ElementLoader;
 
@@ -24,6 +22,8 @@ import site_mapper.elements.ElementLoader;
  * @author SteveBrown
  * @version 1.0
  * 	Initial
+ * @version 1.1
+ * 	Add moduleName.
  * @since 1.0
  */
 @XmlRootElement(name="MenuItem")
@@ -40,14 +40,18 @@ public class MenuItem implements NodeClass {
 	
 	private List<DynamicTest> menuItemTests = new ArrayList<>();
 	private String menuPackageName;
+	private String moduleName;
 	
-	public DynamicContainer getDynamicContainer(HomePage hp, String menuPackageName) {
+	public DynamicContainer getDynamicContainer(HomePage hp, String menuPackageName, String moduleName) {
 		this.menuPackageName = menuPackageName;
+		this.moduleName = moduleName;
 		getNodeTests(hp);
 		return DynamicContainer.dynamicContainer(name, menuItemTests);
 	}
 	
 	private void getNodeTests(HomePage hp){
+		
+//		hp.loadModule(moduleName);
 
 		//SHOULD BE A MAP OF ELEMENTS!!!!
 		buttons.forEach(b -> {
@@ -65,17 +69,17 @@ public class MenuItem implements NodeClass {
 		return packageName;
 	}
 	@Override //NodeClass
-	public Optional<SiteMapElement> getNodeAsSiteMapElement() {
-		// TODO Auto-generated method stub
-		System.out.println("[MenuItem.getNodeAsSiteMapElement] *********** NOT IMPLEMENTED ***********"); // TODO - remove or log 	
-		return null;
-	}
-	@Override //NodeClass
 	public String getParentPackage() {
 		return menuPackageName;
 	}
+	@Override //NodeClass
+	public String getModuleName() {
+		return moduleName;
+	}
+	
 	public String getName() {
 		return name;
 	}
+
 
 }

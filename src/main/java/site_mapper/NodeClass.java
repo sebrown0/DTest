@@ -3,8 +3,6 @@
  */
 package site_mapper;
 
-import java.util.Optional;
-
 /**
  * @author SteveBrown
  * @version 1.0
@@ -13,11 +11,13 @@ import java.util.Optional;
  * 	Add getNodeAsSiteMapElement().
  * @version 1.2
  * 	Add getParentPackage().
+ * @version 1.3
+ * 	Add getModuleName().
  * @since 1.0
  */
 public interface NodeClass {
 	String getParentPackage();
 	String getPackage();
 	String getClassName();	
-	Optional<SiteMapElement> getNodeAsSiteMapElement();
+	String getModuleName();
 }

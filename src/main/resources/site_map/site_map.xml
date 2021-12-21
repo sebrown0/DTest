@@ -1,41 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE document [
-<!ENTITY aDef SYSTEM "defs.xml">
-]>
-<SiteMap>
+
+<!--
+** 
+** DO WE NEED COMPANY???
+** DO WE HAVE TEST DATA (IF SO FROM ANOTHER FILE?)? 
+ -->
+<App>
   <Modules>
-  
-    <Module name="Payroll">
-      <Nodes>      
-        
-        <Node type="panel" obj="EmployeeDetails" title="Employee Details" nav="left_menu.employees.Employee Details">
-          <Elements>
-          <!-- get tests from type. get method from method -->
-            <Element type="button" name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']"></Element>
-            <Element type="button" name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']"></Element>
-          </Elements>
-        </Node>
-         
-        <Node type="panel" obj="AbsenceEntitlements" title="Employee Absence Entitlements" nav="left_menu.employee_others.Absence Entitlements">
+   <Module name="Payroll">   
+    <Menus>
+      <Menu name="Left" package="left_menu">      
+        <MenuItem name="Employee Details" package="employees" class="EmployeeDetails">
           <Elements>
             
-            <!--
-            &aDef; 
-            <Element type="button" name="clear" text="Clear" fafa="fa fa-file-o" response="" by="css" locator="button[name='CLEAR1']"></Element>
+              <ElementButton name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']"></ElementButton>
+              <ElementButton name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']"></ElementButton>    
             
-            <Element type="button" method = "search" name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']"></Element>
-             -->
           </Elements>
-        </Node>
-        
-      </Nodes>      
-    </Module>
-    
-    <Module name="Personnel">
-      <Nodes>
-        <Node obj="" title="Employee List" nav="left_menu.Employee List"></Node>
-      </Nodes>      
-    </Module>
-        
+          
+        </MenuItem>        
+      </Menu>
+    </Menus>          
+   </Module>
+   <!--  -->
+   <Module name="Personnel">   
+    <Menus>
+      <Menu name = "Left" package="left_menu">
+      <MenuItem name="Employee Details" package="employees" class="EmployeeDetails">
+          <Elements>              
+            <ElementButton name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']"></ElementButton>
+            <ElementButton name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']"></ElementButton>
+          </Elements>
+        </MenuItem>        
+      </Menu>
+    </Menus>                          
+   </Module>
   </Modules>
-</SiteMap>
+</App>

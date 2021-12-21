@@ -12,6 +12,8 @@ import object_models.pages.homepage.HomePage;
  * @author SteveBrown
  * @version 1.0
  * 	Initial
+ * @version 1.1
+ * 	Fix bug that was stopping a new HomePage from being created.
  * @since 1.0
  * 
  * Create a new HomePage.
@@ -38,11 +40,8 @@ public final class ExistingHomePageLoader extends HomePageLoader{
 	}
 
 	// Only load if not null and different from existing module/company.
-	private boolean haveLoadedModuleOrCompany() {		
-		boolean loadedOneOfThem;
-		loadedOneOfThem = super.loadModule();
-		loadedOneOfThem = super.loadCompany();
-		return loadedOneOfThem;
+	private boolean haveLoadedModuleOrCompany() {
+		return super.loadModule() || super.loadCompany();
 	}
 
 	private void createNewHomePage() {

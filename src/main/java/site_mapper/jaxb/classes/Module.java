@@ -17,13 +17,12 @@ import object_models.pages.homepage.HomePage;
  * 	Initial
  * @since 1.0
  * 
- * Module found in the app.
+ * Module found in the app XML.
  */
 @XmlRootElement(name = "Module")
 public class Module {	
-	@XmlAttribute
+	@XmlAttribute(name="name")
 	private String name;
-
   @XmlElementWrapper(name="Menus")
   @XmlElement(name="Menu")
   private List<Menu> menus;
@@ -31,10 +30,10 @@ public class Module {
   private List<DynamicContainer> moduleMenus = new ArrayList<>();
   
 	public DynamicContainer getModuleContainers(HomePage hp) {  	
-//	homePage.loadModule(name);
+//		hp.loadModule(name);
 		if(menus != null) {
 			menus.forEach(m -> {
-				moduleMenus.add(m.getMenuContainers(hp));
+				moduleMenus.add(m.getMenuContainers(hp, name));
 	  	});	
 		}  	
 		return DynamicContainer.dynamicContainer(name, moduleMenus);

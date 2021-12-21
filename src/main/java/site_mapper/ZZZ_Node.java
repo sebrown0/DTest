@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import org.junit.jupiter.api.DynamicContainer;
 import org.junit.jupiter.api.DynamicNode;
@@ -30,7 +29,7 @@ import site_mapper.elements.ZZZ_NodeElement;
 public class ZZZ_Node implements MapKey, ElementAdder, NodeTest, NodeClass {
 	private NodeAdder nodeAdder;
 	private Element node;
-	private HomePage homePage;
+//	private HomePage homePage;
 	
 	private String type;
 	private String title;
@@ -42,7 +41,7 @@ public class ZZZ_Node implements MapKey, ElementAdder, NodeTest, NodeClass {
 	public ZZZ_Node(NodeAdder nodeAdder, Element node, HomePage homePage) {
 		this.nodeAdder = nodeAdder;
 		this.node = node;
-		this.homePage = homePage;
+//		this.homePage = homePage;
 	}
 
 	public ZZZ_Node mapElements() {		
@@ -107,14 +106,14 @@ public class ZZZ_Node implements MapKey, ElementAdder, NodeTest, NodeClass {
 	public String getClassName() {
 		return objectName;
 	}
-	@Override //NodeClass
-	public Optional<SiteMapElement> getNodeAsSiteMapElement() {
-		return null;		
-//		Class<?> clazz = getClazz();		
-//		return 
-//			Optional.ofNullable(
-//				SiteMapElementLoader.getAndLoadSiteMapElement(navPath, homePage, clazz));
-	}
+//	@Override //NodeClass
+//	public Optional<SiteMapElement> getNodeAsSiteMapElement() {
+//		return null;		
+////		Class<?> clazz = getClazz();		
+////		return 
+////			Optional.ofNullable(
+////				SiteMapElementLoader.getAndLoadSiteMapElement(navPath, homePage, clazz));
+//	}
 	
 	@Override
 	public String toString() {
@@ -125,6 +124,12 @@ public class ZZZ_Node implements MapKey, ElementAdder, NodeTest, NodeClass {
 	public String getParentPackage() {
 		// TODO Auto-generated method stub
 		System.out.println("getParentPackage NOT IMPLEMENTED ************"); // TODO - remove or log 	
+		return null;
+	}
+
+	@Override
+	public String getModuleName() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

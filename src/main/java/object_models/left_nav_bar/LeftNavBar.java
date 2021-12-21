@@ -17,6 +17,7 @@ import entities.company.Company;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
  * @since 1.0
  *
  */
@@ -36,6 +37,9 @@ public class LeftNavBar {
 	}
 	
 	private void setHeader() {
+		//HAVE TO MOVE TO THE CORRECT CONTEXT
+		contextManager.switchToTopLeftNavBar();
+		//
 		appHeader = driver.findElement(By.cssSelector("header[class='app-header navbar']"));
 	}
 	

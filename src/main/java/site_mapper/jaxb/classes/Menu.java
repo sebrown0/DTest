@@ -29,10 +29,10 @@ public class Menu {
   
   private List<DynamicContainer> menuItemContainers = new ArrayList<>();
   
-	public DynamicContainer getMenuContainers(HomePage hp) {	
+	public DynamicContainer getMenuContainers(HomePage hp, String moduleName) {	
 		if(menuItems != null) {
 			menuItems.forEach(item -> {
-				menuItemContainers.add(item.getDynamicContainer(hp, packageName));
+				menuItemContainers.add(item.getDynamicContainer(hp, packageName, moduleName));
 			});	
 		}		
 		return DynamicContainer.dynamicContainer(name, menuItemContainers);

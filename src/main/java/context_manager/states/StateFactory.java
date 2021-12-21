@@ -53,7 +53,9 @@ public class StateFactory {
 			state = new StateTop(cs, driver);
 		}else if (clazzName.equals("StateTopRightNavBar")) {
 			state = new StateTopRightNavBar(cs, driver);
-		}						
+		}else if (clazzName.equals("StateTopLeftNavBar")) {
+			state = new StateTopLeftNavBar(cs, driver);
+		}							
 		
 		return Optional.ofNullable(state);
 	}

@@ -60,7 +60,8 @@ class Tests {
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
 	    unmarshaller.setProperty("eclipselink.media-type", "application/xml");      
 	    unmarshaller.setProperty(UnmarshallerProperties.DISABLE_SECURE_PROCESSING, Boolean.TRUE);    
-	    StreamSource source = new StreamSource("./src/test/resources/app2.xml");    
+	    StreamSource source = new StreamSource("./src/main/resources/site_map/site_map.xml"); 
+	    
 	    JAXBElement<App> app = unmarshaller.unmarshal(source, App.class);
 	    return app.getValue();
 		} catch (JAXBException e) {

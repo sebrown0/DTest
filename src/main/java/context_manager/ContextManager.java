@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import context_manager.contexts.Context;
 import context_manager.states.State;
 import context_manager.states.StateLeftMenu;
+import context_manager.states.StateTopLeftNavBar;
 import context_manager.states.StateTopRightNavBar;
 import object_models.panels.JsPanel;
 import object_models.panels.PanelSwitcher;
@@ -97,6 +98,19 @@ public class ContextManager implements CurrentContext {
 		Optional<ContextState> first = getContextThatIsFirstContext();
 		first.ifPresentOrElse(f -> {			 		
 			stateManager.switchToStateInContext(StateTopRightNavBar.class, f);	
+		},
+			new Runnable() {				
+				@Override
+				public void run() {					
+					System.out.println("CM -> switchToTopRightNavBar -> LOAD NEW CONTEXT *NOT IMPLENTED*"); // TODO - remove or log
+					LogManager.getLogger().error("CM -> switchToTopRightNavBar -> LOAD NEW CONTEXT *NOT IMPLENTED*");
+				}
+		});
+	}
+	public void switchToTopLeftNavBar() { //TODO - CHANGE THIS TO BRAND. IT'S NOT THE NAV BAR.
+		Optional<ContextState> first = getContextThatIsFirstContext();
+		first.ifPresentOrElse(f -> {			 		
+			stateManager.switchToStateInContext(StateTopLeftNavBar.class, f);	
 		},
 			new Runnable() {				
 				@Override

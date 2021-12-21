@@ -19,7 +19,7 @@ import xml_file.XMLFile;
  * 	Initial
  * @since 1.0
  */
-public class SiteMapper {
+public class ZZZ_SiteMapper {
 	private XMLFile xmlFile = new XMLFile(XMLFileProvider.SITE_MAP_FILE_PATH);
 	private Map<String, Module> modules = new HashMap<>();
 	

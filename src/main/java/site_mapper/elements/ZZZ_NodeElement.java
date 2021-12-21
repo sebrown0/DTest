@@ -101,7 +101,7 @@ public  class ZZZ_NodeElement implements MapKey, ElementType, ElementTest {
 		if(container == null) { loadContainer(); }
 	}	
 	private void loadContainer() {
-		container = getNodeClass().getNodeAsSiteMapElement();
+//		container = getNodeClass().getNodeAsSiteMapElement();
 	}
 	
 	@Override //MapKey

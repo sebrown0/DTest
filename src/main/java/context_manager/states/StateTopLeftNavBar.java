@@ -14,9 +14,9 @@ import context_manager.ContextState;
  * 	Initial
  * @since 1.0
  */
-public class StateTopRightNavBar extends State {
+public class StateTopLeftNavBar extends State {
 
-	public StateTopRightNavBar(ContextState cs, WebDriver driver) {
+	public StateTopLeftNavBar(ContextState cs, WebDriver driver) {
 		super(cs, driver);		
 	}
 
@@ -27,8 +27,10 @@ public class StateTopRightNavBar extends State {
 
 	@Override
 	public State switchToMe() {
-		logger.debug("Switching to state [top-right nav-bar]");
-		switchToDefaultContentAndThenElement(By.cssSelector("body > form > header > ul.nav.navbar-nav.ml-auto"));
+		logger.debug("Switching to state [top-left brand]");		
+//		switchToDefaultContentAndThenElement(By.cssSelector("body > form > header > div"));
+		switchToDefaultContentAndThenElement(By.cssSelector("header[class='app-header navbar']"));
+		
 		setCurrentContextToThisStatesContext();		
 		return this;
 	}

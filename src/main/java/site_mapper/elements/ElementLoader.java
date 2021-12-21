@@ -9,8 +9,8 @@ import controls.ControlTest;
 import object_models.pages.homepage.HomePage;
 import site_mapper.NodeClass;
 import site_mapper.SiteMapElement;
-import site_mapper.SiteMapElementLoader;
 import site_mapper.class_finder.ClassFinder;
+import site_mapper.jaxb.SiteMapElementLoader;
 
 /**
  * @author SteveBrown

@@ -1,13 +1,15 @@
 /**
  * 
  */
-package site_mapper;
+package site_mapper.jaxb;
 
 import java.util.Optional;
 
 import logging.LogFactory;
 import object_models.forms.ContainerAction;
 import object_models.pages.homepage.HomePage;
+import site_mapper.NodeClass;
+import site_mapper.SiteMapElement;
 
 /**
  * @author SteveBrown
@@ -23,12 +25,23 @@ import object_models.pages.homepage.HomePage;
 public class SiteMapElementLoader {
 	private static String[] parts;
 	private static String packageName;
+	private static String moduleName;
 	
 	public static SiteMapElement getAndLoadSiteMapElement(NodeClass nodeClass, HomePage hp, Class<?> clazz) {
 		SiteMapElement siteElement = null;
 				
 		if(nodeClass != null){
+			/*
+			 * use CM to check if current container is the required.
+			 * 	get the containerAction from the current context
+			 * 	check if it's required
+			 * use hp to check if the module is required.
+			 */
+			
 			packageName = nodeClass.getParentPackage();
+			
+			loadModuleIfRequired(nodeClass, hp);
+			
 			if(isLeftMenu()) {			
 				siteElement = loadLeft(hp, clazz);		
 			}else if (isTopRightNavBar()) {
@@ -43,10 +56,19 @@ public class SiteMapElementLoader {
 		return siteElement;
 	}
 	
+	private static void loadModuleIfRequired(NodeClass nodeClass, HomePage hp) {
+		String reqModuleName = nodeClass.getModuleName();
+		String actModuleName = hp.getModuleName();
+		if(!reqModuleName.equalsIgnoreCase(actModuleName)) {
+			hp.loadModule(reqModuleName);
+		}
+	}
+	
 	private static boolean isLeftMenu() {		
 		return (packageName.equalsIgnoreCase("left_menu")) ? true : false;		 
 	}
 	private static SiteMapElement loadLeft(HomePage hp, Class<?> clazz) {
+//		hp.loadModule(moduleName);
 		Optional<ContainerAction> leftMenuItem = hp.loadLeftMenuItem(clazz); 
 		if(leftMenuItem.isPresent()) {
 			ContainerAction element = leftMenuItem.get();
