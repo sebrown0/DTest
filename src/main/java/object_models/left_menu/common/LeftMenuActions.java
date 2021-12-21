@@ -45,6 +45,11 @@ public class LeftMenuActions {
 	}
 	
 	public Optional<ContainerAction> clickAndLoad(Class<?> clazz) {		
+		/*
+		 * 
+		 * CHECK IF WE NEED TO CHANGE OR GET NEW CONTAINER!!
+		 * 
+		 */
 		contextManager.switchToLeftMenu();		// Puts the context @ Module.StateLeftMenu
 		ClassFieldGetter fieldGetter = new ClassFieldGetter(clazz);
 		return getMenuItemAsContainer(fieldGetter);
