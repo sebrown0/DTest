@@ -10,6 +10,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import object_models.pages.homepage.HomePage;
+import site_mapper.elements.IncludedTests;
 
 /** 
  * @author SteveBrown
@@ -22,7 +23,10 @@ import object_models.pages.homepage.HomePage;
  * sub DynamicContainers found in the relevant XML doc.
  */
 @XmlRootElement(name = "App")
-public class App {		
+public class App {
+	@XmlElementWrapper(name="IncludeElementsForTest")
+	@XmlElement(name="Include")
+	private List<String> includeElementsForTest;
 	@XmlElementWrapper(name="Modules")
   @XmlElement(name="Module")
   private List<Module> modules;
@@ -30,11 +34,13 @@ public class App {
 	private HomePage homePage;
 		
 	public DynamicContainer getTests() {
+		includeElementsForTest.forEach(c -> System.out.println("->" + c));
+		
 		List<DynamicContainer> appModules = new ArrayList<>();
 		
 		if(homepageOk() && modules != null) {			
 			for (Module module : modules) {
-				appModules.add(module.getModuleContainers(homePage));
+				appModules.add(module.getModuleContainers(new IncludedTests(includeElementsForTest), homePage));
 			}			
 		}else {
 			LogManager.getLogger().error("Homepage or modules is null. Cannot run tests");			

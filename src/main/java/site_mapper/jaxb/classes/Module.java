@@ -10,6 +10,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import object_models.pages.homepage.HomePage;
+import site_mapper.elements.IncludedElements;
 
 /**
  * @author SteveBrown
@@ -29,11 +30,10 @@ public class Module {
   
   private List<DynamicContainer> moduleMenus = new ArrayList<>();
   
-	public DynamicContainer getModuleContainers(HomePage hp) {  	
-//		hp.loadModule(name);
+	public DynamicContainer getModuleContainers(IncludedElements includedElements, HomePage hp) {  	
 		if(menus != null) {
 			menus.forEach(m -> {
-				moduleMenus.add(m.getMenuContainers(hp, name));
+				moduleMenus.add(m.getMenuContainers(includedElements, hp, name));
 	  	});	
 		}  	
 		return DynamicContainer.dynamicContainer(name, moduleMenus);

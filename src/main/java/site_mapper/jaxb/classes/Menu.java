@@ -11,6 +11,7 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import object_models.pages.homepage.HomePage;
+import site_mapper.elements.IncludedElements;
 
 /** 
  * @author SteveBrown
@@ -34,6 +35,7 @@ public class Menu {
   @XmlElement(name="MenuItem")
   private List<MenuItem> menuItems;
 
+  
   // All the tests for each menu item.
   private Map<String, List<DynamicTest>> menuItemTests;;  
   // List of all test containers in the menu item.
@@ -41,19 +43,19 @@ public class Menu {
   // List of individual test containers for each menu item. 
   private List<DynamicContainer> menuItemContainers = new ArrayList<>();
   
-  public DynamicContainer getMenuContainers(HomePage hp, String moduleName) {
+  public DynamicContainer getMenuContainers(IncludedElements includedElements, HomePage hp, String moduleName) {
   	
-		if(menuItems != null) {
+		if(menuItems != null && includedElements != null) {
 			menuItems.forEach(item -> {				
-				getTestsForMenuItem(item, hp, moduleName);	
+				getTestsForMenuItem(includedElements, item, hp, moduleName);	
 				addTestsToMenuItemContainer();
 				addMenuItemContainerToMenuContainer(item);
 			});	
 		}		
 		return DynamicContainer.dynamicContainer(name, menuContainers);
 	}
-  private void getTestsForMenuItem(MenuItem item, HomePage hp, String moduleName) {
-  	menuItemTests = item.getTests(hp, moduleName, packageName);			
+  private void getTestsForMenuItem(IncludedElements includedElements, MenuItem item, HomePage hp, String moduleName) {
+  	menuItemTests = item.getTests(includedElements, hp, moduleName, packageName);			
   }
   private void addTestsToMenuItemContainer() {
   	menuItemTests.entrySet().forEach(s ->{

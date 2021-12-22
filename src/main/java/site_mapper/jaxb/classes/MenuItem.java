@@ -18,6 +18,7 @@ import object_models.pages.homepage.HomePage;
 import site_mapper.NodeClass;
 import site_mapper.elements.Element;
 import site_mapper.elements.ElementTestButton;
+import site_mapper.elements.IncludedElements;
 import site_mapper.elements.ElementLoader;
 import site_mapper.elements.TestElement;
 
@@ -47,17 +48,19 @@ public class MenuItem implements NodeClass {
 	private String moduleName;	
 	private Map<String, List<DynamicTest>> tests = new HashMap<>();
 	
-	public Map<String, List<DynamicTest>> getTests(HomePage hp, String moduleName, String menuPackageName) {
+	public Map<String, List<DynamicTest>> getTests(IncludedElements includedElements, HomePage hp, String moduleName, String menuPackageName) {		
 		this.menuPackageName = menuPackageName;
 		this.moduleName = moduleName;
-		setElementsTests(hp);
+		setElementsTests(includedElements, hp);
 		return tests;
 	}
 	
-	private void setElementsTests(HomePage hp){		
+	private void setElementsTests(IncludedElements includedElements, HomePage hp){		
 		if(elements != null) {
 			elements.forEach(e -> {
-				addElementsTests(e, hp);				
+				if(includedElements.isIncluded(e.getType())) {
+					addElementsTests(e, hp);	
+				}								
 			});	
 		}		
 	}
@@ -67,7 +70,6 @@ public class MenuItem implements NodeClass {
 		Optional<TestElement> test = null;
 		switch (elementType) {
 			case "button" -> { 
-//				test = Optional.of(new ElementTestButton(e.getName(), e.getText(), e.getFafa()));
 				test = Optional.of(
 						new ElementTestButton(
 								new ElementLoader(this, hp), e.getName(), e.getText(), e.getFafa())); 

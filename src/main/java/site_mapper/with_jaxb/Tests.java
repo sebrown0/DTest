@@ -1,12 +1,13 @@
 package site_mapper.with_jaxb;
 
-import java.util.List;
+import java.util.Arrays;
 
 import javax.xml.transform.stream.StreamSource;
 
 import org.eclipse.persistence.jaxb.UnmarshallerProperties;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DynamicContainer;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -19,6 +20,7 @@ import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;
+import site_mapper.elements.IncludedElements;
 import site_mapper.jaxb.classes.App;
 import xml_reader.config_file.ConfigReader;
 
@@ -49,6 +51,12 @@ class Tests {
     return getApp().setHomePage(homepage).getTests();
 	}
 
+//	@Test
+//	void kkkkkkk() {
+////		IncludedElements all = (e,v) -> e.contains(v);
+//		System.out.println("->" + IncludedElements.isIncluded(Arrays.asList("t","v"), "t")); 
+//		
+//	}
 //	@Test
 //	void runAppTests() {		
 //    getApp().setHomePage(homepage).getTests();
