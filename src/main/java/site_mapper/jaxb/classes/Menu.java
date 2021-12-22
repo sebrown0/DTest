@@ -30,22 +30,32 @@ public class Menu {
   private List<MenuItem> menuItems;
   
   private List<DynamicContainer> menuItemContainers = new ArrayList<>();
+  private List<DynamicContainer> menuItemTestContainers = new ArrayList<>();
+  
   private Map<String, List<DynamicTest>> menuItemTests;;
   
-  public DynamicContainer getMenuContainers(HomePage hp, String moduleName) {  	
+  public DynamicContainer getMenuContainers(HomePage hp, String moduleName) {
+  	
 		if(menuItems != null) {
 			menuItems.forEach(item -> {
+				
 				menuItemTests = item.getTests(hp, moduleName, packageName);
+				
 				getRequiredTests();
+				menuItemTestContainers.add(DynamicContainer.dynamicContainer(item.getName(), menuItemContainers));
 //				menuItemContainers.add(item.getDynamicContainer(hp, packageName, moduleName));
 			});	
 		}		
-		return DynamicContainer.dynamicContainer(name, menuItemContainers);
+		//left
+		return DynamicContainer.dynamicContainer(name, menuItemTestContainers);
+//		return DynamicContainer.dynamicContainer(name, menuItemContainers);
 	}
   
   private void getRequiredTests() {
   	menuItemTests.entrySet().forEach(s ->{
   		menuItemContainers.add(DynamicContainer.dynamicContainer(s.getKey(), s.getValue()));
+  		//
+  		
   	});
   }
 //	public DynamicContainer getMenuContainers(HomePage hp, String moduleName) {	
