@@ -50,6 +50,9 @@ public class Element {
 	public String getHasFunction() {
 		return hasFunction;
 	}
+	public boolean hasFunction() {
+		return (hasFunction.equalsIgnoreCase("true")) ? true : false;
+	}
 	
 	@Override
 	public String toString() {

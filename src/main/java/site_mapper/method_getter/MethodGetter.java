@@ -14,4 +14,5 @@ import java.util.List;
 public interface MethodGetter {
 	List<Method> getAllTestMethods();
 	List<Method> getAllTestMethodsWithType(String type);
+	Method getMethodsWithTypeAndName(String type, String name);
 }

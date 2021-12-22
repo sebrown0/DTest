@@ -37,7 +37,6 @@ import object_models.helpers.IFrame;
 import object_models.helpers.title.PageTitle;
 import object_models.helpers.title.TitlePanel;
 import object_models.pages.homepage.CoreData;
-import site_mapper.annotations.TestControl;
 import site_mapper.elements.SiteMapElement;
 import site_mapper.finders.MethodFinder;
 import site_mapper.method_getter.MethodGetter;
@@ -209,12 +208,16 @@ public abstract class JsPanel
 	
 	@Override //MethodGetter
 	public List<Method> getAllTestMethods(){
-		return MethodFinder.getMethodsAnnotatedWith(this.getClass(), TestControl.class);
+		return MethodFinder.getTestMethods(this.getClass());
 	}
 	
 	@Override //MethodGetter
 	public List<Method> getAllTestMethodsWithType(String type){
 		return MethodFinder.getTestMethodsOfType(this.getClass(), type);
+	}
+	@Override //MethodGetter
+	public Method getMethodsWithTypeAndName(String type, String name) {
+		return MethodFinder.getTestMethodOfTypeWithName(this.getClass(), type, name);
 	}
 	
 	public Optional<String> getPanelId() {

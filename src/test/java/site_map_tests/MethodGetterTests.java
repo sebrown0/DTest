@@ -26,7 +26,7 @@ class MethodGetterTests {
 
 	@Test
 	void getAllMethods() {		
-		List<Method> methods = MethodFinder.getMethodsAnnotatedWith(AnnotatedClass.class, TestControl.class);
+		List<Method> methods = MethodFinder.getMethodsAnnotatedWith(TestControl.class, AnnotatedClass.class);
 		assertTrue(methods.size()==3);
 	}
 	
@@ -34,6 +34,12 @@ class MethodGetterTests {
 	void getMethodsThatAreButtons() {		
 		List<Method> methods = MethodFinder.getTestMethodsOfType(AnnotatedClass.class, "button");
 		assertEquals(2, methods.size());
+	}
+	
+	@Test
+	void getMethodWithName() {		
+		Method method = MethodFinder.getTestMethodOfTypeWithName(AnnotatedClass.class, "button", "buttonSave");
+		assertEquals("buttonSave", method.getName());
 	}
 	
 	@Test

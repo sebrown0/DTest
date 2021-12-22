@@ -5,11 +5,14 @@ package site_mapper.elements;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 import org.junit.jupiter.api.DynamicTest;
 
 import controls.ControlTest;
+import site_mapper.method_getter.MethodGetter;
+import utils.StringUtil;
 
 /**
  * @author SteveBrown
@@ -36,7 +39,8 @@ public class ElementTestButton extends ElementTest {
 	}
 	
 	@Override //TestElement
-	public List<DynamicTest> createTests() {		
+	public List<DynamicTest> createTests() {
+		getTestMethods((MethodGetter) super.getControlTest());
 		createButtonFaFaCheck();
 		createButtonTextCheck();
 		return super.getTests();		
@@ -63,6 +67,16 @@ public class ElementTestButton extends ElementTest {
 					}
 				)
 			);
+	}
+	
+	private void getTestMethods(MethodGetter methodGetter) {
+		Method m = methodGetter.getMethodsWithTypeAndName("button","button" + StringUtil.capitiliseFirstChar(super.getName()));
+		System.out.println("->" + m); // TODO - remove or log 	
+		/*
+		 * ************************************************************************
+		 * We've got the method now we have to add it as a test to the container! *
+		 * ************************************************************************
+		 */
 	}
 	
 }

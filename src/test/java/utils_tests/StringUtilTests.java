@@ -12,5 +12,9 @@ class StringUtilTests {
 	void getValueFromStringAtPostion() {
 		assertEquals("B", StringUtil.getValueAt("A,B,C", 1, ","));
 	}
+	@Test
+	void capitialiseFirst() {
+		assertEquals("Save", StringUtil.capitiliseFirstChar("save"));
+	}
 
 }

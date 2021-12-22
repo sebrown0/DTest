@@ -69,10 +69,7 @@ public class EmployeeDetails extends JsPanelWithIFrame {
 	public void buttonSave() {
 		System.out.println("BUTTON SAVE TEST"); // TODO - remove or log 	
 	}
-	@TestControl(type = "button")
-	public void buttonSav2e() {
-		System.out.println("BUTTON SAVE TEST"); // TODO - remove or log 	
-	}
+	
 	/*
 	 * NOT USING AT PRESENT
 	 */

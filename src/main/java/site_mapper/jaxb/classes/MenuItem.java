@@ -3,6 +3,7 @@
  */
 package site_mapper.jaxb.classes;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import site_mapper.elements.ElementLoader;
 import site_mapper.elements.ElementTestButton;
 import site_mapper.elements.IncludedElements;
 import site_mapper.elements.TestElement;
+import site_mapper.method_getter.MethodGetter;
 
 /**
  * @author SteveBrown
@@ -63,9 +65,12 @@ public class MenuItem implements ElementClass {
 	private void setElementsTests(IncludedElements includedElements, HomePage hp){		
 		if(elements != null) {
 			controlTest = ElementLoader.getControlTest(this, hp);
+						
 			elements.forEach(e -> {
 				if(includedElements.isIncluded(e.getType())) {
-					addElementsTests(e, hp);	
+					
+					addElementsTests(e, hp);
+					
 				}								
 			});	
 		}		
@@ -85,8 +90,12 @@ public class MenuItem implements ElementClass {
 				throw new IllegalArgumentException("Unexpected value: " + elementType); 
 			}
 		}		
-		test.ifPresent(t -> { tests.put(getKey(t), t.createTests()); });
+		test.ifPresent(t -> {	tests.put(getKey(t), t.createTests()); });
 	}	
+	
+//	private void getTestMethods(MethodGetter methodGetter) {
+//		methodGetter.getAllTestMethods().forEach(m -> System.out.println("->" + m));
+//	}
 	
 	private String getKey(TestElement e) {
 		return e.getType() + "." + e.getName();
