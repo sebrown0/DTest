@@ -1,7 +1,7 @@
 /**
  * 
  */
-package site_mapper;
+package site_mapper.elements;
 
 /**
  * @author SteveBrown

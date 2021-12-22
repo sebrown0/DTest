@@ -1,13 +1,10 @@
-package site_mapper.with_jaxb;
-
-import java.util.Arrays;
+package site_map_tests;
 
 import javax.xml.transform.stream.StreamSource;
 
 import org.eclipse.persistence.jaxb.UnmarshallerProperties;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DynamicContainer;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -20,41 +17,29 @@ import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;
-import site_mapper.elements.IncludedElements;
 import site_mapper.jaxb.classes.App;
 import xml_reader.config_file.ConfigReader;
 
 @ExtendWith({ 
 	ConfigParameterResolver.class, 
 	LoginPageResolverPayroll.class })
-class Tests {
+class DynamicTests {
 	private static HomePage homepage;	
 
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
 		homepage = userLogin.loginValidUser(UserProvider.userPortal());		
 	}		
-	
-//	@Test
-//	void mapXml() {
-//		App app = getApp();
-//		assertTrue(app != null);
-//	}
-	
-//	@Test
-//	void changeModule() {
-//		homepage.loadModule("Personnel");
-//	}
-	
-	@TestFactory
-	DynamicContainer runAppTests() {		
+		
+	/*
+	 *  Implicit pass if there are no errors.
+	 *  Check that the created tests conform to the XML.
+	 */
+	@TestFactory	
+	DynamicContainer runTests() {		
     return getApp().setHomePage(homepage).getTests();
 	}
 
-//	@Test
-//	void runAppTests() {		
-//    getApp().setHomePage(homepage).getTests();
-//	}
 	private App getApp() {
 		JAXBContext jc;
 		try {
@@ -62,12 +47,11 @@ class Tests {
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
 	    unmarshaller.setProperty("eclipselink.media-type", "application/xml");      
 	    unmarshaller.setProperty(UnmarshallerProperties.DISABLE_SECURE_PROCESSING, Boolean.TRUE);    
-	    StreamSource source = new StreamSource("./src/main/resources/site_map/site_map.xml"); 
-	    
+	    StreamSource source = new StreamSource("./src/test/resources/site_map.xml");	    
 	    JAXBElement<App> app = unmarshaller.unmarshal(source, App.class);
+	    
 	    return app.getValue();
 		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;    

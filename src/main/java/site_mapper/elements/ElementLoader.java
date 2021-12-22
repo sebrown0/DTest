@@ -7,8 +7,6 @@ import java.util.Optional;
 
 import controls.ControlTest;
 import object_models.pages.homepage.HomePage;
-import site_mapper.NodeClass;
-import site_mapper.SiteMapElement;
 import site_mapper.class_finder.ClassFinder;
 import site_mapper.jaxb.SiteMapElementLoader;
 
@@ -25,15 +23,15 @@ import site_mapper.jaxb.SiteMapElementLoader;
  */
 public class ElementLoader {
 	private static Optional<SiteMapElement> container;
-	private static NodeClass nodeClass;
+	private static ElementClass nodeClass;
 	private static HomePage homePage;
 	
-	public static ControlTest getControlTest(NodeClass nc, HomePage hp) {		
+	public static ControlTest getControlTest(ElementClass nc, HomePage hp) {		
 		setVariables(nc, hp);
 		loadContainer();		
 		return getContainerAsControlTest();
 	}
-	private static void setVariables(NodeClass nc, HomePage hp) {
+	private static void setVariables(ElementClass nc, HomePage hp) {
 		nodeClass = nc;
 		homePage = hp;
 	}

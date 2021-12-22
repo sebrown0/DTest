@@ -6,18 +6,7 @@
 ** DO WE HAVE TEST DATA (IF SO FROM ANOTHER FILE?)? 
  -->
 <App>
-<!--
-  ***************************************************
-  ****** THIS IS THE TEST VERSION OF THIS FILE ******
-  *************************************************** 
- -->
- 
-  <!--
-  ********************************************************************
-  ****** TODO The included elements should be in separate file. ******
-  ********************************************************************
-   
-  -->
+  <!-- TODO The included elements should be in separate file. -->
   <IncludeElementsForTest>
     <Include>button</Include>
     <!-- <Include>text_out</Include> -->

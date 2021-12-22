@@ -36,7 +36,7 @@ import object_models.helpers.IFrame;
 import object_models.helpers.title.PageTitle;
 import object_models.helpers.title.TitlePanel;
 import object_models.pages.homepage.CoreData;
-import site_mapper.SiteMapElement;
+import site_mapper.elements.SiteMapElement;
 
 /**
  * @author SteveBrown

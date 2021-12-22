@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 
-import site_mapper.NodeClass;
+import site_mapper.elements.ElementClass;
 
 /**
  * @author SteveBrown
@@ -23,7 +23,7 @@ import site_mapper.NodeClass;
 public class ClassFinder {
 	private static String ROOT = "object_models";
 	
-	public static Class<?> getClazz(NodeClass nodeClass){		
+	public static Class<?> getClazz(ElementClass nodeClass){		
 		try {
 			return Class.forName(getPathToClass(nodeClass));
 		} catch (ClassNotFoundException e) {
@@ -32,10 +32,10 @@ public class ClassFinder {
 		return null;
 	}
 	
-	public static String getPathToClass(NodeClass nodeClass) {
+	public static String getPathToClass(ElementClass nodeClass) {
 		return getPathInLowerCase(nodeClass) + "." + nodeClass.getClassName();
 	}
-	public static String getPathInLowerCase(NodeClass nodeClass) {
+	public static String getPathInLowerCase(ElementClass nodeClass) {
 		String path = 
 				ROOT + "." +
 				"module_" + nodeClass.getModuleName() + "." + 

@@ -16,8 +16,8 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import object_models.pages.homepage.HomePage;
-import site_mapper.NodeClass;
 import site_mapper.elements.Element;
+import site_mapper.elements.ElementClass;
 import site_mapper.elements.ElementLoader;
 import site_mapper.elements.ElementTestButton;
 import site_mapper.elements.IncludedElements;
@@ -34,7 +34,7 @@ import site_mapper.elements.TestElement;
  * @since 1.0
  */
 @XmlRootElement(name="MenuItem")
-public class MenuItem implements NodeClass {
+public class MenuItem implements ElementClass {
 	@XmlAttribute(name="name")
 	private String name;
 	@XmlAttribute(name="package")

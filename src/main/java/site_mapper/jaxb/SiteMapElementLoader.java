@@ -8,8 +8,8 @@ import java.util.Optional;
 import logging.LogFactory;
 import object_models.forms.ContainerAction;
 import object_models.pages.homepage.HomePage;
-import site_mapper.NodeClass;
-import site_mapper.SiteMapElement;
+import site_mapper.elements.ElementClass;
+import site_mapper.elements.SiteMapElement;
 
 /**
  * @author SteveBrown
@@ -26,7 +26,7 @@ public class SiteMapElementLoader {
 	private static String[] parts;
 	private static String packageName;
 	
-	public static SiteMapElement getAndLoadSiteMapElement(NodeClass nodeClass, HomePage hp, Class<?> clazz) {
+	public static SiteMapElement getAndLoadSiteMapElement(ElementClass nodeClass, HomePage hp, Class<?> clazz) {
 		SiteMapElement siteElement = null;
 				
 		if(nodeClass != null){
@@ -47,7 +47,7 @@ public class SiteMapElementLoader {
 		return siteElement;
 	}
 	
-	private static void loadModuleIfRequired(NodeClass nodeClass, HomePage hp) {
+	private static void loadModuleIfRequired(ElementClass nodeClass, HomePage hp) {
 		String reqModuleName = nodeClass.getModuleName();
 		String actModuleName = hp.getModuleName();
 		if(!reqModuleName.equalsIgnoreCase(actModuleName)) {

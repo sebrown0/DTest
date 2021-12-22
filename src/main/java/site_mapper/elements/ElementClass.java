@@ -1,7 +1,7 @@
 /**
  * 
  */
-package site_mapper;
+package site_mapper.elements;
 
 /**
  * @author SteveBrown
@@ -15,7 +15,7 @@ package site_mapper;
  * 	Add getModuleName().
  * @since 1.0
  */
-public interface NodeClass {
+public interface ElementClass {
 	String getParentPackage();
 	String getPackage();
 	String getClassName();	
