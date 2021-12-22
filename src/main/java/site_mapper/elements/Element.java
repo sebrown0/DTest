@@ -26,8 +26,8 @@ public class Element {
 	private String locator;	
 	@XmlAttribute(name="fafa")
 	private String fafa;
-	@XmlAttribute(name="response")
-	private String response;
+	@XmlAttribute(name="hasFunction")
+	private String hasFunction;
 	
 	public String getType() {
 		return type;
@@ -47,14 +47,14 @@ public class Element {
 	public String getFafa() {
 		return fafa;
 	}
-	public String getResponse() {
-		return response;
+	public String getHasFunction() {
+		return hasFunction;
 	}
 	
 	@Override
 	public String toString() {
 		return "Element [type=" + type + ", name=" + name + ", by=" + by + ", locator=" + locator + ", text=" + text
-				+ ", fafa=" + fafa + ", response=" + response + "]";
+				+ ", fafa=" + fafa + ", response=" + hasFunction + "]";
 	}	
 	
 }

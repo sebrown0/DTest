@@ -22,6 +22,7 @@ import enums.control_names.GroupControlNames;
 import object_models.element.TextInOut;
 import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
+import site_mapper.annotations.TestControl;
 
 /**
  * @author SteveBrown
@@ -47,6 +48,9 @@ public class EmployeeDetails extends JsPanelWithIFrame {
 		buildMyControls();
 	}
 	
+	// USE FOR TESTING WHEN WE WANT A BLANK OBJECT 
+	public EmployeeDetails() { super();	}
+
 	private void buildMyControls() {		
 		var myControls = 
 				List.of(
@@ -61,6 +65,14 @@ public class EmployeeDetails extends JsPanelWithIFrame {
 		super.buildPanelControls(myControls);				
 	}
 		
+	@TestControl(type = "button")
+	public void buttonSave() {
+		System.out.println("BUTTON SAVE TEST"); // TODO - remove or log 	
+	}
+	@TestControl(type = "button")
+	public void buttonSav2e() {
+		System.out.println("BUTTON SAVE TEST"); // TODO - remove or log 	
+	}
 	/*
 	 * NOT USING AT PRESENT
 	 */

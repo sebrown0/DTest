@@ -19,7 +19,10 @@ import object_models.pages.homepage.CoreData;
  */
 public abstract class JsPanelWithIFrame extends JsPanel implements JsPanelContext { //, IframeSwitcher {
 	private IFrame iFrame;
-		
+
+	// USE FOR TESTING WHEN WE WANT A BLANK OBJECT
+	public JsPanelWithIFrame() {}
+	
 	public JsPanelWithIFrame(CoreData coreData, String expectedTitle) {
 		super(coreData, expectedTitle);
 	

@@ -1,12 +1,7 @@
 /**
  * 
  */
-package site_mapper.class_finder;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
+package site_mapper.finders;
 
 import org.apache.logging.log4j.LogManager;
 
@@ -18,6 +13,8 @@ import site_mapper.elements.ElementClass;
  * 	Initial
  * @version 1.1
  * 	Update the way the fullPath is found.
+ * @version 1.2
+ * 	Remove method finders into separate class.
  * @since 1.0
  */
 public class ClassFinder {
@@ -43,21 +40,6 @@ public class ClassFinder {
 				nodeClass.getPackage();
 		
 		return path.toLowerCase();
-	}
-	
-	public static List<Method> getMethodsAnnotatedWith(final Class<?> type, final Class<? extends Annotation> annotation) {
-    final List<Method> methods = new ArrayList<Method>();
-    Class<?> clazz = type;
-   
-    for (final Method method : clazz.getDeclaredMethods()) {
-        if (method.isAnnotationPresent(annotation)) {
-            // Annotation annotInstance = method.getAnnotation(annotation);
-            // TODO process annotInstance
-            methods.add(method);
-        }
-    }
-   
-    return methods;
 	}
 	
 }

@@ -3,6 +3,7 @@
  */
 package object_models.panels;
 
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +37,10 @@ import object_models.helpers.IFrame;
 import object_models.helpers.title.PageTitle;
 import object_models.helpers.title.TitlePanel;
 import object_models.pages.homepage.CoreData;
+import site_mapper.annotations.TestControl;
 import site_mapper.elements.SiteMapElement;
+import site_mapper.finders.MethodFinder;
+import site_mapper.method_getter.MethodGetter;
 
 /**
  * @author SteveBrown
@@ -47,7 +51,11 @@ import site_mapper.elements.SiteMapElement;
  * @since 1.0
  *
  */
-public abstract class JsPanel implements ContainerAction, ContextSetter, ContextIdGetter, StateFactorySetter, ControlTest, SiteMapElement { 
+public abstract class JsPanel 
+	implements 
+	ContainerAction, ContextSetter, ContextIdGetter, 
+	StateFactorySetter, ControlTest, SiteMapElement, MethodGetter {
+	
 	protected WebDriver driver;
 	protected Logger logger;
 	protected ContextManager manager;	
@@ -61,7 +69,10 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 	private WebElement container;
 	private Optional<String> panelId;	
 	private JsPanelHeaderBar headerBar;	
-				
+
+	// USE FOR TESTING WHEN WE WANT A BLANK OBJECT
+	public JsPanel() {}
+	
 	public JsPanel(CoreData coreData, String expectedTitle) {
 		this.coreData = coreData;
 		this.logger = LogManager.getLogger();
@@ -194,6 +205,16 @@ public abstract class JsPanel implements ContainerAction, ContextSetter, Context
 		 *   headerBar.closeForm();  
 		 */
 		getContextManager().removeAndCloseContext(getMyContext());
+	}
+	
+	@Override //MethodGetter
+	public List<Method> getAllTestMethods(){
+		return MethodFinder.getMethodsAnnotatedWith(this.getClass(), TestControl.class);
+	}
+	
+	@Override //MethodGetter
+	public List<Method> getAllTestMethodsWithType(String type){
+		return MethodFinder.getTestMethodsOfType(this.getClass(), type);
 	}
 	
 	public Optional<String> getPanelId() {
