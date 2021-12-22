@@ -13,13 +13,12 @@ import org.junit.jupiter.api.DynamicTest;
  * 	Initial
  * @version 1.1
  * 	Add getName & getType.
+ * @version 1.2
+ * 	Remove or update createTests() & getTests().
  * @since 1.0
  */
 public interface TestElement {
 	String getName();
 	String getType();
 	List<DynamicTest> createTests();
-//	 getTests();
-//	TestElement createTests();
-//	List<DynamicTest> getTests();
 }

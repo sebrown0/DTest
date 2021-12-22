@@ -6,9 +6,10 @@
 ** DO WE HAVE TEST DATA (IF SO FROM ANOTHER FILE?)? 
  -->
 <App>
+  <!-- TODO The included elements should be in separate file. -->
   <IncludeElementsForTest>
     <Include>button</Include>
-    <Include>text_out</Include>
+    <!-- <Include>text_out</Include> -->
   </IncludeElementsForTest>
   
   <Modules>
@@ -20,9 +21,9 @@
             
             <Element type="button" name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']" />
             <Element type="button" name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']" />
-   <!--          
+   
             <Element type="text_out" name="code" text="EMP_CODE" by="css" locator="input[id='FORM_ID']" />
-        -->    
+   <!--               -->    
           </Elements>
           
         </MenuItem>        

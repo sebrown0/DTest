@@ -52,12 +52,6 @@ class Tests {
 	}
 
 //	@Test
-//	void kkkkkkk() {
-////		IncludedElements all = (e,v) -> e.contains(v);
-//		System.out.println("->" + IncludedElements.isIncluded(Arrays.asList("t","v"), "t")); 
-//		
-//	}
-//	@Test
 //	void runAppTests() {		
 //    getApp().setHomePage(homepage).getTests();
 //	}
