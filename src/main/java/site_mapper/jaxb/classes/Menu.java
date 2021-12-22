@@ -16,9 +16,14 @@ import object_models.pages.homepage.HomePage;
  * @author SteveBrown
  * @version 1.0
  * 	Initial
+ * @version 1.1
+ * 	Get MenuItems' tests from the map returned from MenuItem.
  * @since 1.0
  * 
  * Menu found in a module.
+ * The tests for each menu item, i.e. EmployeeDetails are
+ * returned from MenuItem as a Map<String, List<DynamicTest>>.
+ * 
  */
 @XmlRootElement(name="Menu")
 public class Menu {
@@ -28,44 +33,36 @@ public class Menu {
 	private String packageName;	
   @XmlElement(name="MenuItem")
   private List<MenuItem> menuItems;
-  
+
+  // All the tests for each menu item.
+  private Map<String, List<DynamicTest>> menuItemTests;;  
+  // List of all test containers in the menu item.
+  private List<DynamicContainer> menuContainers = new ArrayList<>();
+  // List of individual test containers for each menu item. 
   private List<DynamicContainer> menuItemContainers = new ArrayList<>();
-  private List<DynamicContainer> menuItemTestContainers = new ArrayList<>();
-  
-  private Map<String, List<DynamicTest>> menuItemTests;;
   
   public DynamicContainer getMenuContainers(HomePage hp, String moduleName) {
   	
 		if(menuItems != null) {
-			menuItems.forEach(item -> {
-				
-				menuItemTests = item.getTests(hp, moduleName, packageName);
-				
-				getRequiredTests();
-				menuItemTestContainers.add(DynamicContainer.dynamicContainer(item.getName(), menuItemContainers));
-//				menuItemContainers.add(item.getDynamicContainer(hp, packageName, moduleName));
+			menuItems.forEach(item -> {				
+				getTestsForMenuItem(item, hp, moduleName);	
+				addTestsToMenuItemContainer();
+				addMenuItemContainerToMenuContainer(item);
 			});	
 		}		
-		//left
-		return DynamicContainer.dynamicContainer(name, menuItemTestContainers);
-//		return DynamicContainer.dynamicContainer(name, menuItemContainers);
+		return DynamicContainer.dynamicContainer(name, menuContainers);
 	}
-  
-  private void getRequiredTests() {
+  private void getTestsForMenuItem(MenuItem item, HomePage hp, String moduleName) {
+  	menuItemTests = item.getTests(hp, moduleName, packageName);			
+  }
+  private void addTestsToMenuItemContainer() {
   	menuItemTests.entrySet().forEach(s ->{
-  		menuItemContainers.add(DynamicContainer.dynamicContainer(s.getKey(), s.getValue()));
-  		//
-  		
+  		menuItemContainers.add(DynamicContainer.dynamicContainer(s.getKey(), s.getValue()));  		
   	});
   }
-//	public DynamicContainer getMenuContainers(HomePage hp, String moduleName) {	
-//		if(menuItems != null) {
-//			menuItems.forEach(item -> {
-//				menuItemContainers.add(item.getDynamicContainer(hp, packageName, moduleName));
-//			});	
-//		}		
-//		return DynamicContainer.dynamicContainer(name, menuItemContainers);
-//	}
+	private void addMenuItemContainerToMenuContainer(MenuItem item) {
+		menuContainers.add(DynamicContainer.dynamicContainer(item.getName(), menuItemContainers));
+	}
 	
 	public List<MenuItem> getMenuItems() {
 		return menuItems;
