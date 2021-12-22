@@ -8,22 +8,26 @@ import java.util.List;
 
 import org.junit.jupiter.api.DynamicTest;
 
+import controls.ControlTest;
+
 /**
  * @author SteveBrown
  * @version 1.0
  * 	Initial
+ * @version 1.1
+ * 	Pass the container that has the control test.
  * @since 1.0
  */
 public abstract class ElementTest implements TestElement{	
 	private String name;
 	private String type;
+	private ControlTest controlTest;
 	private List<DynamicTest> tests = new ArrayList<>();
-	private ElementLoader loader;	
 
-	public ElementTest(String type, String name, ElementLoader loader) {
+	public ElementTest(String type, String name, ControlTest controlTest) {
+		this.controlTest = controlTest;
 		this.type = type;
 		this.name = name;
-		this.loader = loader;
 	}
 
 	public List<DynamicTest> getTests() {
@@ -39,7 +43,7 @@ public abstract class ElementTest implements TestElement{
 		return type;
 	}
 	
-	protected ElementLoader getLoader() {
-		return loader;
-	}		
+	protected ControlTest getControlTest() {
+		return controlTest;
+	}
 }

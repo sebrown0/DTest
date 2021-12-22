@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.DynamicTest;
 
+import controls.ControlTest;
+
 /**
  * @author SteveBrown
  * @version 1.0
@@ -19,18 +21,20 @@ import org.junit.jupiter.api.DynamicTest;
  * 	Convert to JAXB class.
  * @version 1.3
  * 	Revert to standard class.
+ * @version 1.4
+ * 	Pass the container that has the control test.
  * @since 1.0
  */
 public class ElementTestButton extends ElementTest {	
 	private String text;
 	private String fafa;	
-
-	public ElementTestButton(ElementLoader loader, String name, String text, String fafa) {
-		super("button", name, loader);
+	
+	public ElementTestButton(ControlTest controlTest, String name, String text, String fafa) {
+		super("button", name, controlTest);
 		this.text = text;
 		this.fafa = fafa;
 	}
-
+	
 	@Override //TestElement
 	public List<DynamicTest> createTests() {		
 		createButtonFaFaCheck();
@@ -43,7 +47,7 @@ public class ElementTestButton extends ElementTest {
 				DynamicTest.dynamicTest(
 					"Is [" + super.getName() +"] button [FaFa] correct?", 
 					() -> {							
-						String faFaActual = super.getLoader().getControlTest().getFaFaText(super.getName());
+						String faFaActual = super.getControlTest().getFaFaText(super.getName());
 						assertEquals(fafa, faFaActual);
 					}
 				)
@@ -54,7 +58,7 @@ public class ElementTestButton extends ElementTest {
 				DynamicTest.dynamicTest(
 					"Is [" + super.getName() +"] button [text] correct?", 
 					() -> {							
-						String textActual = super.getLoader().getControlTest().getControlText(super.getName());
+						String textActual = super.getControlTest().getControlText(super.getName());
 						assertEquals(text, textActual);
 					}
 				)

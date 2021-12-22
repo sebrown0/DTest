@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.DynamicTest;
 
+import controls.ControlTest;
+
 /**
  * @author SteveBrown
  * @version 1.0
@@ -19,13 +21,15 @@ import org.junit.jupiter.api.DynamicTest;
  * 	Convert to JAXB class.
  * @version 1.3
  * 	Revert to standard class.
+ * @version 1.4
+ * 	Pass the container that has the control test.
  * @since 1.0
  */
 public class ElementTestTextOut extends ElementTest {
 	private String textExpected;
 	
-	public ElementTestTextOut(String name, ElementLoader loader, String textExpected) {
-		super("text_out", name, loader);
+	public ElementTestTextOut(ControlTest controlTest, String name, String textExpected) {
+		super("text_out", name, controlTest);
 		this.textExpected = textExpected;
 	}
 ;	
@@ -41,7 +45,7 @@ public class ElementTestTextOut extends ElementTest {
 				DynamicTest.dynamicTest(
 					"Is [" + super.getName() +"] [text] correct?", 
 					() -> {							
-						String textActual = super.getLoader().getControlTest().getControlText(super.getName());
+						String textActual = super.getControlTest().getControlText(super.getName());
 						assertEquals(textExpected, textActual);
 					}
 				)

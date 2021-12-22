@@ -30,15 +30,7 @@ public class SiteMapElementLoader {
 		SiteMapElement siteElement = null;
 				
 		if(nodeClass != null){
-			/*
-			 * use CM to check if current container is the required.
-			 * 	get the containerAction from the current context
-			 * 	check if it's required
-			 * use hp to check if the module is required.
-			 */
-			
-			packageName = nodeClass.getParentPackage();
-			
+			packageName = nodeClass.getParentPackage();			
 			loadModuleIfRequired(nodeClass, hp);
 			
 			if(isLeftMenu()) {			

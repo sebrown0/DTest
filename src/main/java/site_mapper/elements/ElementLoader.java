@@ -16,27 +16,45 @@ import site_mapper.jaxb.SiteMapElementLoader;
  * @author SteveBrown
  * @version 1.0
  * 	Initial
+ * @version 1.1
+ * 	Make static class.
  * @since 1.0
+ * 
+ * Get the node as a container, convert to ControlTest
+ * and return it.
  */
 public class ElementLoader {
-	private Optional<SiteMapElement> container;
-	private NodeClass nodeClass;
-	private HomePage homePage;
+	private static Optional<SiteMapElement> container;
+	private static NodeClass nodeClass;
+	private static HomePage homePage;
 	
-	public ElementLoader(NodeClass nodeClass, HomePage homePage) {
-		this.nodeClass = nodeClass;
-		this.homePage = homePage;
+	public static ControlTest getControlTest(NodeClass nc, HomePage hp) {		
+		setVariables(nc, hp);
+		loadContainer();		
+		return getContainerAsControlTest();
 	}
-
-	/*
-	 * TODO - Load the container for the Node & not every element.
-	 */
-	public ControlTest getControlTest() {
-		loadContainerIfNull();		
+	private static void setVariables(NodeClass nc, HomePage hp) {
+		nodeClass = nc;
+		homePage = hp;
+	}
+	private static void loadContainer() {
+		container = getNodeAsSiteMapElement();
+	}
+	private static Optional<SiteMapElement> getNodeAsSiteMapElement() {		
+		Class<?> clazz = getClazz();		
+		return 
+			Optional.ofNullable(
+				SiteMapElementLoader.getAndLoadSiteMapElement(nodeClass, homePage, clazz));		
+	}
+	private static Class<?> getClazz(){		
+		return ClassFinder.getClazz(nodeClass);
+	}
+	private static ControlTest getContainerAsControlTest() {
+		ControlTest ct = null;
 		if(container.isPresent()) {
 			SiteMapElement e = container.get();
 			if(e instanceof ControlTest) {
-				return (ControlTest) e;
+				ct = (ControlTest) e;
 			}else {
 				System.out.println("***** getControlTest() 1 *****"); // TODO - remove or log
 			}
@@ -44,23 +62,6 @@ public class ElementLoader {
 			System.out.println("***** getControlTest() 2 *****"); // TODO - remove or log 	
 			// TODO - THROW ERROR??
 		}
-		return null;
+		return ct;
 	}
-	
-	private void loadContainerIfNull() {
-		if(container == null) { loadContainer(); }
-	}	
-	private void loadContainer() {
-		container = getNodeAsSiteMapElement();
-	}
-	public Optional<SiteMapElement> getNodeAsSiteMapElement() {		
-		Class<?> clazz = getClazz();		
-		return 
-			Optional.ofNullable(
-				SiteMapElementLoader.getAndLoadSiteMapElement(nodeClass, homePage, clazz));		
-	}
-	public Class<?> getClazz(){		
-		return ClassFinder.getClazz(nodeClass);
-	}
-	
 }

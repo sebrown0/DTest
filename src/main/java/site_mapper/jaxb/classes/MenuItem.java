@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.DynamicTest;
 
+import controls.ControlTest;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElementWrapper;
@@ -17,9 +18,9 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import object_models.pages.homepage.HomePage;
 import site_mapper.NodeClass;
 import site_mapper.elements.Element;
+import site_mapper.elements.ElementLoader;
 import site_mapper.elements.ElementTestButton;
 import site_mapper.elements.IncludedElements;
-import site_mapper.elements.ElementLoader;
 import site_mapper.elements.TestElement;
 
 /**
@@ -47,16 +48,21 @@ public class MenuItem implements NodeClass {
 	private String menuPackageName;
 	private String moduleName;	
 	private Map<String, List<DynamicTest>> tests = new HashMap<>();
+	private ControlTest controlTest;
 	
-	public Map<String, List<DynamicTest>> getTests(IncludedElements includedElements, HomePage hp, String moduleName, String menuPackageName) {		
+	public Map<String, List<DynamicTest>> getTests(
+			IncludedElements includedElements, HomePage hp, String moduleName, String menuPackageName) {
+		
 		this.menuPackageName = menuPackageName;
 		this.moduleName = moduleName;
+		
 		setElementsTests(includedElements, hp);
 		return tests;
 	}
 	
 	private void setElementsTests(IncludedElements includedElements, HomePage hp){		
 		if(elements != null) {
+			controlTest = ElementLoader.getControlTest(this, hp);
 			elements.forEach(e -> {
 				if(includedElements.isIncluded(e.getType())) {
 					addElementsTests(e, hp);	
@@ -68,11 +74,12 @@ public class MenuItem implements NodeClass {
 	private void addElementsTests(Element e, HomePage hp) {
 		String elementType = e.getType();
 		Optional<TestElement> test = null;
+		 	
 		switch (elementType) {
 			case "button" -> { 
 				test = Optional.of(
 						new ElementTestButton(
-								new ElementLoader(this, hp), e.getName(), e.getText(), e.getFafa())); 
+								controlTest, e.getName(), e.getText(), e.getFafa())); 
 			}
 			default -> { 
 				throw new IllegalArgumentException("Unexpected value: " + elementType); 
@@ -80,6 +87,7 @@ public class MenuItem implements NodeClass {
 		}		
 		test.ifPresent(t -> { tests.put(getKey(t), t.createTests()); });
 	}	
+	
 	private String getKey(TestElement e) {
 		return e.getType() + "." + e.getName();
 	}
