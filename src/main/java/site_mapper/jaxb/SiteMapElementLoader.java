@@ -25,7 +25,6 @@ import site_mapper.SiteMapElement;
 public class SiteMapElementLoader {
 	private static String[] parts;
 	private static String packageName;
-	private static String moduleName;
 	
 	public static SiteMapElement getAndLoadSiteMapElement(NodeClass nodeClass, HomePage hp, Class<?> clazz) {
 		SiteMapElement siteElement = null;
@@ -68,7 +67,6 @@ public class SiteMapElementLoader {
 		return (packageName.equalsIgnoreCase("left_menu")) ? true : false;		 
 	}
 	private static SiteMapElement loadLeft(HomePage hp, Class<?> clazz) {
-//		hp.loadModule(moduleName);
 		Optional<ContainerAction> leftMenuItem = hp.loadLeftMenuItem(clazz); 
 		if(leftMenuItem.isPresent()) {
 			ContainerAction element = leftMenuItem.get();

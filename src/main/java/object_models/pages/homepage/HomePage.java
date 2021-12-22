@@ -133,7 +133,6 @@ public abstract class HomePage extends Page implements CoreData, HomePageElement
 	}
 	
 	public Optional<ContainerAction> loadLeftMenuItem(Class<?> clazz) {
-//		contextManager.switchToLeftMenu();
 		return leftMenu.clickAndLoad(clazz);		
 	}
 	

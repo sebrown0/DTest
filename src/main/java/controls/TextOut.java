@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
  * @version 1.0
  * @since 1.0
  */
-public class TextOut implements Control {
+public class TextOut implements Control, DisplayedText {
 	private WebElement text;
 
 	public TextOut(WebDriver driver, By findBy) {
@@ -37,6 +37,7 @@ public class TextOut implements Control {
 		return "";
 	}	
 	
+	@Override //DisplayedText
 	public String getText() {
 		try {
 			return text.getAttribute("innerHTML");

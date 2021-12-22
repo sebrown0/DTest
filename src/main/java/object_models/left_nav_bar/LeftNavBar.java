@@ -39,7 +39,7 @@ public class LeftNavBar {
 	private void setHeader() {
 		//HAVE TO MOVE TO THE CORRECT CONTEXT
 		contextManager.switchToTopLeftNavBar();
-		//
+		//The driver should be at this position but we need the specific element.
 		appHeader = driver.findElement(By.cssSelector("header[class='app-header navbar']"));
 	}
 	

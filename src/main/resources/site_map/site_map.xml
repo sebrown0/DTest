@@ -13,16 +13,18 @@
         <MenuItem name="Employee Details" package="employees" class="EmployeeDetails">
           <Elements>
             
-              <ElementButton name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']"></ElementButton>
-              <ElementButton name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']"></ElementButton>    
-            
+            <Element type="button" name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']" />
+            <Element type="button" name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']" />
+   <!--          
+            <Element type="textOut" name="code" text="EMP_CODE" by="css" locator="input[id='FORM_ID']" />
+        -->    
           </Elements>
           
         </MenuItem>        
       </Menu>
     </Menus>          
    </Module>
-   <!-- --> 
+    
    <Module name="Personnel">   
     <Menus>
       <Menu name = "Left" package="left_menu">

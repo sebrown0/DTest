@@ -6,12 +6,9 @@ package site_mapper.elements;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import org.junit.jupiter.api.DynamicTest;
-
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author SteveBrown
@@ -23,35 +20,39 @@ import jakarta.xml.bind.annotation.XmlRootElement;
  * 	Convert to JAXB class.
  * @since 1.0
  */
-@XmlRootElement(name="ElementButton")
-public class ElementButton {
-	@XmlAttribute
-	private String name;	
-	@XmlAttribute
-	private String by;
-	@XmlAttribute
-	private String locator;
-	@XmlAttribute
+public class ElementButton implements TestElement{	
+	private String name;
 	private String text;
-	@XmlAttribute
 	private String fafa;
-	@XmlAttribute
-	private String response;	
-
-	private Collection<DynamicTest> tests = new ArrayList<>();
+	private List<DynamicTest> tests = new ArrayList<>();
 	private ElementLoader loader;	
 
+	public ElementButton(String name, String text, String fafa) {
+		this.name = name;
+		this.text = text;
+		this.fafa = fafa;
+	}
+
+	@Override //TestElement
 	public ElementButton createTests(ElementLoader loader) {
 		this.loader = loader;
 		createButtonFaFaCheck();
 		createButtonTextCheck();
 		return this;		
 	}
-	
-	public Collection<DynamicTest> getTests() {
+	@Override //TestElement
+	public List<DynamicTest> getTests() {
 		return tests;
 	}
-
+	@Override //TestElement
+	public String getName() {
+		return name;
+	}
+	@Override //TestElement
+	public String getType() {
+		return "button";
+	}
+	
 	private void createButtonFaFaCheck() {
 		tests.add(
 				DynamicTest.dynamicTest(
@@ -75,10 +76,66 @@ public class ElementButton {
 			);
 	}
 
-	@Override
-	public String toString() {
-		return "NodeElement [name=" + name + ", text=" + text + ", fafa="
-				+ fafa + ", response=" + response + ", by=" + by + ", locator=" + locator + "]";
-	}
-
+	
 }
+
+//@XmlRootElement(name="ElementButton")
+//public class ElementButton implements TestElement{
+//	@XmlAttribute
+//	private String name;	
+//	@XmlAttribute
+//	private String by;
+//	@XmlAttribute
+//	private String locator;
+//	@XmlAttribute
+//	private String text;
+//	@XmlAttribute
+//	private String fafa;
+//	@XmlAttribute
+//	private String response;	
+//
+//	private Collection<DynamicTest> tests = new ArrayList<>();
+//	private ElementLoader loader;	
+//
+//	@Override //TestElement
+//	public ElementButton createTests(ElementLoader loader) {
+//		this.loader = loader;
+//		createButtonFaFaCheck();
+//		createButtonTextCheck();
+//		return this;		
+//	}
+//	@Override //TestElement
+//	public Collection<DynamicTest> getTests() {
+//		return tests;
+//	}
+//
+//	private void createButtonFaFaCheck() {
+//		tests.add(
+//				DynamicTest.dynamicTest(
+//					"Is [" + name +"] button [FaFa] correct?", 
+//					() -> {							
+//						String faFaActual = loader.getControlTest().getFaFaText(name);
+//						assertEquals(fafa, faFaActual);
+//					}
+//				)
+//			);
+//	}
+//	private void createButtonTextCheck() {
+//		tests.add(
+//				DynamicTest.dynamicTest(
+//					"Is [" + name +"] button [text] correct?", 
+//					() -> {							
+//						String textActual = loader.getControlTest().getControlText(name);
+//						assertEquals(text, textActual);
+//					}
+//				)
+//			);
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "NodeElement [name=" + name + ", text=" + text + ", fafa="
+//				+ fafa + ", response=" + response + ", by=" + by + ", locator=" + locator + "]";
+//	}
+//
+//}
