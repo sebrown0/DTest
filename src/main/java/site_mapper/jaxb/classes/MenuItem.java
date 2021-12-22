@@ -17,7 +17,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import object_models.pages.homepage.HomePage;
 import site_mapper.NodeClass;
 import site_mapper.elements.Element;
-import site_mapper.elements.ElementButton;
+import site_mapper.elements.ElementTestButton;
 import site_mapper.elements.ElementLoader;
 import site_mapper.elements.TestElement;
 
@@ -67,13 +67,16 @@ public class MenuItem implements NodeClass {
 		Optional<TestElement> test = null;
 		switch (elementType) {
 			case "button" -> { 
-				test = Optional.of(new ElementButton(e.getName(), e.getText(), e.getFafa())); 
+//				test = Optional.of(new ElementTestButton(e.getName(), e.getText(), e.getFafa()));
+				test = Optional.of(
+						new ElementTestButton(
+								new ElementLoader(this, hp), e.getName(), e.getText(), e.getFafa())); 
 			}
 			default -> { 
 				throw new IllegalArgumentException("Unexpected value: " + elementType); 
 			}
 		}		
-		test.ifPresent(t -> { tests.put(getKey(t), t.createTests(new ElementLoader(this, hp)).getTests()); });
+		test.ifPresent(t -> { tests.put(getKey(t), t.createTests()); });
 	}	
 	private String getKey(TestElement e) {
 		return e.getType() + "." + e.getName();

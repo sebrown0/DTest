@@ -30,7 +30,7 @@ import site_mapper.SiteMapElement;
  * @since 1.0
  */
 @XmlRootElement
-@XmlSeeAlso(ElementButton.class)
+@XmlSeeAlso(ElementTestButton.class)
 public  class ZZZ_NodeElement implements MapKey, ElementType, ElementTest {	
 	@XmlAttribute
 	protected String name;	

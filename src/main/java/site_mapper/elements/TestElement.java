@@ -18,6 +18,8 @@ import org.junit.jupiter.api.DynamicTest;
 public interface TestElement {
 	String getName();
 	String getType();
-	TestElement createTests(ElementLoader loader);
-	List<DynamicTest> getTests();
+	List<DynamicTest> createTests();
+//	 getTests();
+//	TestElement createTests();
+//	List<DynamicTest> getTests();
 }
