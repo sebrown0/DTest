@@ -9,7 +9,7 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
-import site_mapper.jaxb.classes.App;
+import site_mapper.jaxb.classes.DynamicTestApp;
 import site_mapper.jaxb.classes.Menu;
 import site_mapper.jaxb.classes.Module;
 
@@ -44,7 +44,7 @@ class JaxbTests {
 		System.setProperty("jakarta.xml.bind.context.factory", "org.eclipse.persistence.jaxb.JAXBContextFactory");
 				
 		try {
-			JAXBContext jc = org.eclipse.persistence.jaxb.JAXBContext.newInstance(App.class);
+			JAXBContext jc = org.eclipse.persistence.jaxb.JAXBContext.newInstance(DynamicTestApp.class);
 			
       Unmarshaller unmarshaller = jc.createUnmarshaller();
       unmarshaller.setProperty("eclipselink.media-type", "application/xml");      
@@ -52,7 +52,7 @@ class JaxbTests {
       
       StreamSource source = new StreamSource("./src/test/resources/app.xml");
       
-      JAXBElement<App> jaxbElement = unmarshaller.unmarshal(source, App.class);
+      JAXBElement<DynamicTestApp> jaxbElement = unmarshaller.unmarshal(source, DynamicTestApp.class);
       
       Module payroll = jaxbElement.getValue().getModules().get(0);
       

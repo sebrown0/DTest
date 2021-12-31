@@ -5,7 +5,7 @@ import java.io.File;
 import javax.xml.transform.stream.StreamSource;
 
 import jakarta.xml.bind.*;
-import site_mapper.jaxb.classes.App;
+import site_mapper.jaxb.classes.DynamicTestApp;
 
 public class Demo {
   public static void main(String[] args) throws Exception {

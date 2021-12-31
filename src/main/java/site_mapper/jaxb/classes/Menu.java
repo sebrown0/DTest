@@ -43,6 +43,17 @@ public class Menu {
   // List of individual test containers for each menu item. 
   private List<DynamicContainer> menuItemContainers = new ArrayList<>();
   
+  public Menu getMenuContainers() {
+  	System.out.println("  Create menu package:" + name); // TODO - remove or log
+		if(menuItems != null) {
+			menuItems.forEach(item -> {
+				 	
+				item.createPoms();
+			});	
+		}		
+		return this;
+	}
+
   public DynamicContainer getMenuContainers(IncludedElements includedElements, HomePage hp, String moduleName) {
   	
 		if(menuItems != null && includedElements != null) {

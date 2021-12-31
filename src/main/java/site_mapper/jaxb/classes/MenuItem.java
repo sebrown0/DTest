@@ -3,7 +3,6 @@
  */
 package site_mapper.jaxb.classes;
 
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +22,6 @@ import site_mapper.elements.ElementLoader;
 import site_mapper.elements.ElementTestButton;
 import site_mapper.elements.IncludedElements;
 import site_mapper.elements.TestElement;
-import site_mapper.method_getter.MethodGetter;
 
 /**
  * @author SteveBrown
@@ -51,6 +49,16 @@ public class MenuItem implements ElementClass {
 	private String moduleName;	
 	private Map<String, List<DynamicTest>> tests = new HashMap<>();
 	private ControlTest controlTest;
+	
+	protected void createPoms(){		
+		System.out.println("   Create class: " + name); // TODO - remove or log 	
+//		if(elements != null) {
+//						
+//			elements.forEach(e -> {
+//				System.out.println("   -" + e.getName()); // TODO - remove or log 	
+//			});	
+//		}		
+	}
 	
 	public Map<String, List<DynamicTest>> getTests(
 			IncludedElements includedElements, HomePage hp, String moduleName, String menuPackageName) {

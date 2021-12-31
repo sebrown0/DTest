@@ -28,9 +28,21 @@ public class Module {
   @XmlElement(name="Menu")
   private List<Menu> menus;
   
-  private List<DynamicContainer> moduleMenus = new ArrayList<>();
+  private List<DynamicContainer> moduleMenus;
   
-	public DynamicContainer getModuleContainers(IncludedElements includedElements, HomePage hp) {  	
+  public Module getModuleContainers() {
+  	System.out.println(" Create module package:" + name); // TODO - remove or log
+		if(menus != null) {			
+			menus.forEach(m -> {				
+				 	
+				m.getMenuContainers();
+	  	});	
+		}  	
+		return this;
+	}
+  
+	public DynamicContainer getModuleContainers(IncludedElements includedElements, HomePage hp) {
+		moduleMenus = new ArrayList<>();
 		if(menus != null) {
 			menus.forEach(m -> {
 				moduleMenus.add(m.getMenuContainers(includedElements, hp, name));

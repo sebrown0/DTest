@@ -16,6 +16,8 @@ import site_mapper.elements.IncludedTests;
  * @author SteveBrown
  * @version 1.0
  * 	Initial
+ * @version 1.1
+ * 	Rename
  * @since 1.0
  * 
  * JAXB class representing the top level element root.
@@ -23,7 +25,7 @@ import site_mapper.elements.IncludedTests;
  * sub DynamicContainers found in the relevant XML doc.
  */
 @XmlRootElement(name = "App")
-public class App {
+public class DynamicTestApp {
 	@XmlElementWrapper(name="IncludeElementsForTest")
 	@XmlElement(name="Include")
 	private List<String> includeElementsForTest;
@@ -51,7 +53,7 @@ public class App {
 	private boolean homepageOk() {
 		return (homePage != null) ? true : false;
 	}
-	public App setHomePage(HomePage homePage) {
+	public DynamicTestApp setHomePage(HomePage homePage) {
 		this.homePage = homePage;
 		return this;
 	}
