@@ -12,6 +12,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import object_models.pages.homepage.HomePage;
 import site_mapper.elements.IncludedElements;
+import utils.PackageMaker;
 
 /** 
  * @author SteveBrown
@@ -43,11 +44,11 @@ public class Menu {
   // List of individual test containers for each menu item. 
   private List<DynamicContainer> menuItemContainers = new ArrayList<>();
   
-  public Menu getMenuContainers() {
+  public Menu getMenuContainers(String root, String prntPackage) {
   	System.out.println("  Create menu package:" + name); // TODO - remove or log
 		if(menuItems != null) {
 			menuItems.forEach(item -> {
-				 	
+				PackageMaker.makeWithPackageInfo(root, prntPackage, name);
 				item.createPoms();
 			});	
 		}		

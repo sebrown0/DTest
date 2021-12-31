@@ -1,6 +1,8 @@
 package site_mapper.jaxb.classes.pom;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElementWrapper;
@@ -30,9 +32,13 @@ public class PomMapperApp {
 	public void createPoms() {
 			
 		for (Module module : modules) {
-			System.out.println(module.getName()); // TODO - remove or log
-			PackageMaker.makeWithPackageInfo("./src/main/java", "object_models", "a_" + module.getName());
-			module.getModuleContainers();
+			Queue<String> packageNames = new LinkedList<String>();
+			packageNames.add("object_models");
+			
+			System.out.println(module.getName()); // TODO - remove or log			
+			
+//			PackageMaker.makeWithPackageInfo("./src/main/java", "object_models", "a_" + name);
+			module.getModuleContainers("./src/main/java", "object_models", packageNames);
 		}			
 	}
 	
