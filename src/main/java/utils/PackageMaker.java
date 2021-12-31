@@ -19,28 +19,35 @@ import java.nio.charset.StandardCharsets;
  */
 public class PackageMaker {
 	private static String filePath;
+	private static String packagePath;
 	
 	public static void makeWithPackageInfo(String root, String packageName) {
 		filePath = root + "/" + packageName;
+		packagePath = packageName;
+		
 		makePackages();
-		createPackageInfo(packageName);
+		createPackageInfo();
 	}
 	
 	public static void makeWithPackageInfo(String root, String parentPackage, String packageName) {
 		filePath = root + "/" + parentPackage + "/" + packageName;
+		packagePath = parentPackage + "." + packageName;
 		
 		makePackages();
-		createPackageInfo(parentPackage + "." + packageName);
+		createPackageInfo();
 	}
 	
 	private static void makePackages() {
 		new File(filePath).mkdirs();
 	}
 	
-	private static void createPackageInfo(String packageName) {
-		String packageFilePath = filePath + "/package-info.java";
-		try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(packageFilePath), StandardCharsets.UTF_8))) {
-	    writer.write("package " + packageName + ";");
+	private static void createPackageInfo() {
+//		String packageFilePath = filePath + "/package-info.java";
+		try (Writer writer = 
+				new BufferedWriter(
+						new OutputStreamWriter(
+								new FileOutputStream(filePath + "/package-info.java"), StandardCharsets.UTF_8))) {
+	    writer.write("package " + packagePath + ";");
 		} 
 		catch (IOException ex) {
 		    // TODO - Handle me
