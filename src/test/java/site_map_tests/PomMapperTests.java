@@ -12,16 +12,16 @@ import site_mapper.jaxb.classes.pom.PomMapperApp;
 import utils.PackageMaker;
 
 class PomMapperTests {
-//	@Test
-//	void jsdksdjds() {
-//		createPoms();
-//	}
-
 	@Test
-	void sdjksjku() {
-		PackageMaker.makeWithPackageInfo("./src/test/java", "a");
-		PackageMaker.makeWithPackageInfo("./src/test/java", "a", "b");		
+	void jsdksdjds() {
+		createPoms();
 	}
+
+//	@Test
+//	void sdjksjku() {
+//		PackageMaker.makeWithPackageInfo("./src/test/java", "a");
+//		PackageMaker.makeWithPackageInfo("./src/test/java", "a", "b");		
+//	}
 	
 	private void createPoms() {
 		JAXBContext jc;

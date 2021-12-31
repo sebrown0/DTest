@@ -6,6 +6,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import site_mapper.jaxb.classes.Module;
+import utils.PackageMaker;
 
 /** 
  * @author SteveBrown
@@ -30,6 +31,7 @@ public class PomMapperApp {
 			
 		for (Module module : modules) {
 			System.out.println(module.getName()); // TODO - remove or log
+			PackageMaker.makeWithPackageInfo("./src/main/java", "object_models", "a_" + module.getName());
 			module.getModuleContainers();
 		}			
 	}

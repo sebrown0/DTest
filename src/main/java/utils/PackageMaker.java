@@ -42,7 +42,6 @@ public class PackageMaker {
 	}
 	
 	private static void createPackageInfo() {
-//		String packageFilePath = filePath + "/package-info.java";
 		try (Writer writer = 
 				new BufferedWriter(
 						new OutputStreamWriter(
