@@ -11,15 +11,29 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 
+import site_mapper.jaxb.classes.pom.PackageHierarchy;
+
 /**
  * @author SteveBrown
  * @version 1.0
  * 	Initial
  * @since 1.0
+ * 
+ * Create specified package(s), starting at the given root.
+ * If the package already exists it will not be overwritten.
+ * 
  */
 public class PackageMaker {
 	private static String filePath;
 	private static String packagePath;
+	
+	public static void makeWithPackageInfo(PackageHierarchy ph) {
+		filePath = ph.getRoot() + "/" + ph.getHierarchyFwdSlashNotation();
+		packagePath = ph.getHierarchyDotNotation();
+		
+		makePackages();
+		createPackageInfo();
+	}
 	
 	public static void makeWithPackageInfo(String root, String packageName) {
 		filePath = root + "/" + packageName;

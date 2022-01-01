@@ -33,6 +33,10 @@ class PomMapperTests {
 	    StreamSource source = new StreamSource("./src/test/resources/site_map.xml");	    
 	    PomMapperApp app = unmarshaller.unmarshal(source, PomMapperApp.class).getValue();
 	    
+	    /*
+	     * give it the root & current 
+	     * "./src/main/java", "object_models"
+	     */
 	    app.createPoms();
 		} catch (JAXBException e) {
 			e.printStackTrace();

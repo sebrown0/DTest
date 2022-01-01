@@ -11,6 +11,11 @@ import java.util.Queue;
  * @version 1.0
  * 	Initial
  * @since 1.0
+ * 
+ * A record or hierarchy of all packages added to the start point (root).
+ * The hierarchy can be retrieved in either:
+ *  dot notation root.package1.package2, or
+ *  fwd slash notation root/package1/package2
  */
 public class PackageHierarchy {
 	private String root;
@@ -26,9 +31,10 @@ public class PackageHierarchy {
 		addCurrent(current);
 	}
 
-	public void addCurrent(String current) {
+	public PackageHierarchy addCurrent(String current) {
 		this.current = current;
 		packageNames.add(current);
+		return this;
 	}
 	
 	public String getCurrent() {
