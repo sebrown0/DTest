@@ -29,16 +29,17 @@ public class PomMapperApp {
   @XmlElement(name="Module")
   private List<Module> modules;
 
-	public void createPoms() {
+	public void createPoms(PackageHierarchy ph) {
 			
 		for (Module module : modules) {
-			Queue<String> packageNames = new LinkedList<String>();
-			packageNames.add("object_models");
+//			Queue<String> packageNames = new LinkedList<String>();
+//			packageNames.add("object_models");
 			
 			System.out.println(module.getName()); // TODO - remove or log			
 			
 //			PackageMaker.makeWithPackageInfo("./src/main/java", "object_models", "a_" + name);
-			module.getModuleContainers("./src/main/java", "object_models", packageNames);
+//			module.getModuleContainers("./src/main/java", "object_models", packageNames);
+			module.getModuleContainers(ph);
 		}			
 	}
 	

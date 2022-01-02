@@ -12,6 +12,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import object_models.pages.homepage.HomePage;
 import site_mapper.elements.IncludedElements;
+import site_mapper.jaxb.classes.pom.PackageHierarchy;
 import utils.PackageMaker;
 
 /** 
@@ -44,16 +45,30 @@ public class Menu {
   // List of individual test containers for each menu item. 
   private List<DynamicContainer> menuItemContainers = new ArrayList<>();
   
-  public Menu getMenuContainers(String root, String prntPackage) {
+  public Menu getMenuContainers(PackageHierarchy ph) {
   	System.out.println("  Create menu package:" + name); // TODO - remove or log
+
+		PackageMaker.makeWithPackageInfo(ph.addCurrent(name));
+		
 		if(menuItems != null) {
 			menuItems.forEach(item -> {
-				PackageMaker.makeWithPackageInfo(root, prntPackage, name);
-				item.createPoms();
+				
+				
+				item.createPoms(ph);
 			});	
 		}		
 		return this;
 	}
+//  public Menu getMenuContainers(String root, String prntPackage) {
+//  	System.out.println("  Create menu package:" + name); // TODO - remove or log
+//		if(menuItems != null) {
+//			menuItems.forEach(item -> {
+//				PackageMaker.makeWithPackageInfo(root, prntPackage, name);
+//				item.createPoms();
+//			});	
+//		}		
+//		return this;
+//	}
 
   public DynamicContainer getMenuContainers(IncludedElements includedElements, HomePage hp, String moduleName) {
   	

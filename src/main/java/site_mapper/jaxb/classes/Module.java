@@ -13,6 +13,7 @@ import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import object_models.pages.homepage.HomePage;
 import site_mapper.elements.IncludedElements;
+import site_mapper.jaxb.classes.pom.PackageHierarchy;
 import utils.PackageMaker;
 
 /**
@@ -32,21 +33,15 @@ public class Module {
   private List<Menu> menus;
   
   private List<DynamicContainer> moduleMenus;
-  /*
-   * Every time a package is added to the root put
-   * it in a list to use for package name
-   */
   
-  public Module getModuleContainers(String root, String prntPackage, Queue<String> packageNames) {
-  	
-  	packageNames.add(name);
+  public Module getModuleContainers(PackageHierarchy ph) {
   	
   	System.out.println(" Create module package:" + name); // TODO - remove or log
-  	PackageMaker.makeWithPackageInfo(root, prntPackage, "a_" + name);
+  	
+  	PackageMaker.makeWithPackageInfo(ph.reset().addCurrent("a_" + name)); //TODO - remove a_
 		if(menus != null) {			
-			menus.forEach(m -> {				
-				 	
-				m.getMenuContainers(root, prntPackage);
+			menus.forEach(m -> {								 	
+				m.getMenuContainers(ph);
 	  	});	
 		}  	
 		return this;

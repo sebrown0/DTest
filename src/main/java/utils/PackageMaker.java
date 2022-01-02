@@ -55,7 +55,7 @@ public class PackageMaker {
 		new File(filePath).mkdirs();
 	}
 	
-	private static void createPackageInfo() {
+	private static void createPackageInfo() {		
 		try (Writer writer = 
 				new BufferedWriter(
 						new OutputStreamWriter(

@@ -22,6 +22,9 @@ import site_mapper.elements.ElementLoader;
 import site_mapper.elements.ElementTestButton;
 import site_mapper.elements.IncludedElements;
 import site_mapper.elements.TestElement;
+import site_mapper.jaxb.classes.pom.PackageHierarchy;
+import utils.ClassMaker;
+import utils.PackageMaker;
 
 /**
  * @author SteveBrown
@@ -50,14 +53,36 @@ public class MenuItem implements ElementClass {
 	private Map<String, List<DynamicTest>> tests = new HashMap<>();
 	private ControlTest controlTest;
 	
-	protected void createPoms(){		
-		System.out.println("   Create class: " + name); // TODO - remove or log 	
-//		if(elements != null) {
-//						
-//			elements.forEach(e -> {
-//				System.out.println("   -" + e.getName()); // TODO - remove or log 	
-//			});	
-//		}		
+	protected void createPoms(PackageHierarchy ph){
+		boolean createPackage = createPackageForClassIfNecessary(ph);
+		createClass(ph);
+		removeThisClassPackageFromHierarchy(createPackage, ph);		
+	}
+	private void createClass(PackageHierarchy ph) {
+		ClassMaker cm = new ClassMaker(className, ph);
+		cm.makeClass();
+		
+		/*
+		 * Add the elements to the class here or in the ClassMaker????
+		 */
+	//	if(elements != null) {
+	//	
+	//elements.forEach(e -> {
+	//System.out.println("   -" + e.getName()); // TODO - remove or log 	
+	//});	
+	//}		
+	}
+	private boolean createPackageForClassIfNecessary(PackageHierarchy ph) {
+		if(packageName != null && packageName.length() > 0) {
+			PackageMaker.makeWithPackageInfo(ph.addCurrent(packageName));
+			return true;			
+		}
+		return false;
+	}
+	private void removeThisClassPackageFromHierarchy(boolean packageWasAddedToHierarchy, PackageHierarchy ph) {
+		if(packageWasAddedToHierarchy) {
+			ph.removeCurrent();
+		}		
 	}
 	
 	public Map<String, List<DynamicTest>> getTests(

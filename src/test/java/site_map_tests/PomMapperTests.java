@@ -8,20 +8,14 @@ import org.junit.jupiter.api.Test;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
+import site_mapper.jaxb.classes.pom.PackageHierarchy;
 import site_mapper.jaxb.classes.pom.PomMapperApp;
-import utils.PackageMaker;
 
 class PomMapperTests {
 	@Test
 	void jsdksdjds() {
 		createPoms();
 	}
-
-//	@Test
-//	void sdjksjku() {
-//		PackageMaker.makeWithPackageInfo("./src/test/java", "a");
-//		PackageMaker.makeWithPackageInfo("./src/test/java", "a", "b");		
-//	}
 	
 	private void createPoms() {
 		JAXBContext jc;
@@ -37,7 +31,8 @@ class PomMapperTests {
 	     * give it the root & current 
 	     * "./src/main/java", "object_models"
 	     */
-	    app.createPoms();
+	    PackageHierarchy ph = new PackageHierarchy("./src/main/java", "object_models");
+	    app.createPoms(ph);
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}    

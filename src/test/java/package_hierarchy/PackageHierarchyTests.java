@@ -24,7 +24,23 @@ class PackageHierarchyTests {
 		ph.addCurrent("left");
 		assertEquals("object_models/payroll/left", ph.getHierarchyFwdSlashNotation());
 	}
-
+	@Test
+	void test_hierarchyReset() {
+		PackageHierarchy ph = new PackageHierarchy("./src/main/java", "object_models");
+		ph.addCurrent("payroll");
+		ph.addCurrent("left");
+		ph.reset();
+		assertEquals("object_models", ph.getHierarchyFwdSlashNotation());
+	}
+	@Test
+	void test_hierarchyRemoveCurrent() {
+		PackageHierarchy ph = new PackageHierarchy("./src/main/java", "object_models");
+		ph.addCurrent("payroll");
+		ph.addCurrent("left");
+		ph.removeCurrent();
+		assertEquals("object_models/payroll", ph.getHierarchyFwdSlashNotation());
+	}
+	
 	@Test
 	void test_packageMaker() {
 		/*

@@ -31,6 +31,18 @@ public class PackageHierarchy {
 		addCurrent(current);
 	}
 
+	public PackageHierarchy removeCurrent() {		
+		packageNames.remove(current);		
+		return this;
+	}
+	
+	public PackageHierarchy reset() {
+		current = packageNames.peek();
+		packageNames.clear();		
+		packageNames.add(current);
+		return this;
+	}
+	
 	public PackageHierarchy addCurrent(String current) {
 		this.current = current;
 		packageNames.add(current);
