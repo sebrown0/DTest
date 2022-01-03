@@ -44,8 +44,12 @@ public class MenuItem implements ElementClass {
 	private String packageName;
 	@XmlAttribute(name="class")
 	private String className;	
-	@XmlAttribute(name="type")
-	private String type;	
+//	@XmlAttribute(name="type")	
+//	private String type;	
+	
+	@XmlElement(name="Type")
+	private MenuItemType menuItemType;
+	
 	@XmlElementWrapper(name="Elements")
 	@XmlElement(name="Element")
 	private List<Element> elements;	
@@ -99,13 +103,10 @@ public class MenuItem implements ElementClass {
 	
 	private void setElementsTests(IncludedElements includedElements, HomePage hp){		
 		if(elements != null) {
-			controlTest = ElementLoader.getControlTest(this, hp);
-						
+			controlTest = ElementLoader.getControlTest(this, hp);						
 			elements.forEach(e -> {
-				if(includedElements.isIncluded(e.getType())) {
-					
-					addElementsTests(e, hp);
-					
+				if(includedElements.isIncluded(e.getType())) {					
+					addElementsTests(e, hp);					
 				}								
 			});	
 		}		
@@ -153,12 +154,17 @@ public class MenuItem implements ElementClass {
 		return moduleName;
 	}
 	@Override //ElementClass
-	public String getType() {
-		return type;
+	public String getTypeName() {
+		return menuItemType.getType();
+	}
+	@Override //ElementClass
+	public MenuItemType getMenuItemType() {
+		return menuItemType;
 	}
 	
 	public String getName() {
 		return name;
 	}
+	
 
 }

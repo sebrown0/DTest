@@ -17,7 +17,13 @@
    <Module name="payroll">   
     <Menus>
       <Menu name="Left" package="left_menu">      
-        <MenuItem name="Employee Details" package="employees" class="EmployeeDetails" type="JsPanelWithIFrame">
+        <MenuItem name="Employee Details" package="employees" class="EmployeeDetails">
+          <Type name="JsPanelWithIFrame">
+            <PanelTitle>Employee Details</PanelTitle>
+            <MenuTitle>Employee Details</MenuTitle>
+            <MenuParent>Employees</MenuParent>
+          </Type>
+          
           <Elements>            
             <Element type="button" name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']" />
             <Element type="button" name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']" />   
@@ -25,7 +31,10 @@
           </Elements>          
         </MenuItem>
         
-        <MenuItem name="Employee List" package="" class="EmployeeList" type="JsPanelWithIFrame">
+        <MenuItem name="Employee List" package="" class="EmployeeList">
+          <Type name="JsPanelWithIFrame">
+          </Type>
+          
           <Elements>            
             <Element type="button" name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']" />   
           </Elements>          

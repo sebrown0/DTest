@@ -1,5 +1,7 @@
 package site_map_tests;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import javax.xml.transform.stream.StreamSource;
 
 import org.eclipse.persistence.jaxb.UnmarshallerProperties;
@@ -8,12 +10,21 @@ import org.junit.jupiter.api.Test;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
+import site_mapper.creators.ClassComponentFactory;
+import site_mapper.creators.ComponentWriter;
+import site_mapper.creators.ComponentWriterJsPanelWithIFrame;
 import site_mapper.jaxb.classes.pom.PackageHierarchy;
 import site_mapper.jaxb.classes.pom.PomMapperApp;
 
 class PomMapperTests {
 	@Test
-	void jsdksdjds() {
+	void classComponents() {
+		ComponentWriter cw = ClassComponentFactory.getComponentWriter("JsPanelWithIFrame");
+		assertTrue(cw instanceof ComponentWriterJsPanelWithIFrame);
+	}
+	
+	@Test
+	void createPomsFromXML() {
 		createPoms();
 	}
 	

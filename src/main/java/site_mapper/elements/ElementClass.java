@@ -3,6 +3,8 @@
  */
 package site_mapper.elements;
 
+import site_mapper.jaxb.classes.MenuItemType;
+
 /**
  * @author SteveBrown
  * @version 1.0
@@ -20,5 +22,6 @@ public interface ElementClass {
 	String getPackage();
 	String getClassName();	
 	String getModuleName();
-	String getType();
+	String getTypeName();
+	MenuItemType getMenuItemType();
 }

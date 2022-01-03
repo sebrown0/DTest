@@ -42,18 +42,18 @@ public class ClassMaker {
 		setWriter();
 		writer.ifPresent(w -> {
 			try {
-				ClassWriter cw = new ClassWriter(className, ph, w);				
-				cw.writePackage();
-				cw.openClass(elementClass.getType());
-				cw.closeClass();
+				ClassWriter cw = 
+						new ClassWriter(
+								className, ph, w, ClassComponentFactory.getComponentWriter(elementClass.getTypeName()));
 				
-//				w.write("package " + ph.getHierarchyDotNotation() + ";");
-//				w.newLine();
-//				w.newLine();
-//				w.write("public class " + className + " {");
-//				w.newLine();
-//				w.newLine();
-//				w.write("}");
+				cw.writePackage();
+				cw.writeImports();
+				cw.openClass(elementClass.getTypeName());
+				//
+				cw.writePanelVars(elementClass);
+				//
+				cw.createConstructor();
+				cw.closeClass();				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();			
