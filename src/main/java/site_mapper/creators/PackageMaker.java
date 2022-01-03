@@ -1,7 +1,7 @@
 /**
  * 
  */
-package utils;
+package site_mapper.creators;
 
 import java.io.BufferedWriter;
 import java.io.File;

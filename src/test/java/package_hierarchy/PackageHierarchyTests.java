@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import site_mapper.creators.PackageMaker;
 import site_mapper.jaxb.classes.pom.PackageHierarchy;
-import utils.PackageMaker;
 
 class PackageHierarchyTests {
 

@@ -1,12 +1,10 @@
-package utils;
+package site_mapper.creators;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
@@ -41,13 +39,18 @@ public class ClassMaker {
 		setWriter();
 		writer.ifPresent(w -> {
 			try {
-				w.write("package " + ph.getHierarchyDotNotation() + ";");
-				w.newLine();
-				w.newLine();
-				w.write("public class " + className + " {");
-				w.newLine();
-				w.newLine();
-				w.write("}");
+				ClassWriter cw = new ClassWriter(className, ph, w);				
+				cw.writePackage();
+				cw.openClass();
+				cw.closeClass();
+				
+//				w.write("package " + ph.getHierarchyDotNotation() + ";");
+//				w.newLine();
+//				w.newLine();
+//				w.write("public class " + className + " {");
+//				w.newLine();
+//				w.newLine();
+//				w.write("}");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();			
