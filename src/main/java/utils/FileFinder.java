@@ -20,14 +20,23 @@ public class FileFinder {
 	private static Optional<String> filePath;
 	private static String result;
 	
+	public static String findPathWithoutRootAndExtension(final String ROOT, final String fileName) {
+		result = findPathWithoutRoot(ROOT, fileName);
+		if(result.length() > 0) {
+			int pos = result.indexOf(".");
+			result = result.substring(0, pos);
+		}
+		return result;
+	}
+	
 	public static String findPathWithoutRoot(final String ROOT, final String fileName) {
 		result = "";
 		findFilePath(ROOT, fileName).ifPresent(fp ->{
 			result = fp.substring(ROOT.length() + 1);
 		});		
-		System.out.println("->" + result); // TODO - remove or log 	
 		return result;
 	}
+	
 	public static String findPathWithRoot(final String ROOT, final String fileName) {
 		result = "";
 		findFilePath(ROOT, fileName).ifPresent(fp ->{

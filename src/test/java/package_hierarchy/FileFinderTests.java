@@ -32,5 +32,11 @@ class FileFinderTests {
 				ROOT + "\\package_hierarchy\\FileFinderTests.java", 
 				FileFinder.findPathWithRoot(ROOT, "FileFinderTests.java"));
 	}
-	
+	@Test
+	void find_filePath_withoutRoot_dotNotation_noFileExtension() throws IOException {			
+		String p = FileFinder
+								.findPathWithoutRootAndExtension(ROOT, "FileFinderTests.java")
+								.replaceAll("\\\\", "."); 
+		assertEquals("package_hierarchy.FileFinderTests", p);
+	}
 }
