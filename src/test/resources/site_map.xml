@@ -17,7 +17,7 @@
    <Module name="payroll">   
     <Menus>
       <Menu name="Left" package="left_menu">      
-        <MenuItem name="Employee Details" package="employees" class="EmployeeDetails">
+        <MenuItem name="Employee Details" package="employees" class="EmployeeDetails" type="JsPanelWithIFrame">
           <Elements>            
             <Element type="button" name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']" />
             <Element type="button" name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']" />   
@@ -25,7 +25,7 @@
           </Elements>          
         </MenuItem>
         
-        <MenuItem name="Employee List" package="" class="EmployeeList">
+        <MenuItem name="Employee List" package="" class="EmployeeList" type="JsPanelWithIFrame">
           <Elements>            
             <Element type="button" name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']" />   
           </Elements>          

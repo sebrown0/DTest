@@ -20,4 +20,5 @@ public interface ElementClass {
 	String getPackage();
 	String getClassName();	
 	String getModuleName();
+	String getType();
 }

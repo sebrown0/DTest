@@ -1,6 +1,6 @@
 package package_hierarchy;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -53,4 +53,5 @@ class PackageHierarchyTests {
 		PackageMaker.makeWithPackageInfo(ph.addCurrent("left"));
 		PackageMaker.makeWithPackageInfo(ph.addCurrent("employees"));
 	}
+	
 }

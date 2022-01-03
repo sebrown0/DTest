@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
+import site_mapper.elements.ElementClass;
 import site_mapper.jaxb.classes.pom.PackageHierarchy;
 
 /**
@@ -19,12 +20,14 @@ import site_mapper.jaxb.classes.pom.PackageHierarchy;
  * 
  */
 public class ClassMaker {
+	private ElementClass elementClass;
 	private PackageHierarchy ph;
 	private String className;
 	private Optional<BufferedWriter> writer;
 	
-	public ClassMaker(String className, PackageHierarchy ph) {
-		this.className = className;
+	public ClassMaker(ElementClass elementClass, PackageHierarchy ph) {
+		this.elementClass = elementClass;
+		this.className = elementClass.getClassName();
 		this.ph = ph;
 	}
 
@@ -41,7 +44,7 @@ public class ClassMaker {
 			try {
 				ClassWriter cw = new ClassWriter(className, ph, w);				
 				cw.writePackage();
-				cw.openClass();
+				cw.openClass(elementClass.getType());
 				cw.closeClass();
 				
 //				w.write("package " + ph.getHierarchyDotNotation() + ";");

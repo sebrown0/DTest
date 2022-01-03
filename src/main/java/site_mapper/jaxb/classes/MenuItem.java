@@ -44,6 +44,8 @@ public class MenuItem implements ElementClass {
 	private String packageName;
 	@XmlAttribute(name="class")
 	private String className;	
+	@XmlAttribute(name="type")
+	private String type;	
 	@XmlElementWrapper(name="Elements")
 	@XmlElement(name="Element")
 	private List<Element> elements;	
@@ -59,7 +61,7 @@ public class MenuItem implements ElementClass {
 		removeThisClassPackageFromHierarchy(createPackage, ph);		
 	}
 	private void createClass(PackageHierarchy ph) {
-		ClassMaker cm = new ClassMaker(className, ph);
+		ClassMaker cm = new ClassMaker(this, ph);
 		cm.makeClass();
 		
 		/*
@@ -134,21 +136,25 @@ public class MenuItem implements ElementClass {
 		return e.getType() + "." + e.getName();
 	}
 	
-	@Override //NodeClass
+	@Override //ElementClass
 	public String getClassName() {
 		return className;
 	}
-	@Override //NodeClass
+	@Override //ElementClass
 	public String getPackage() {
 		return packageName;
 	}
-	@Override //NodeClass
+	@Override //ElementClass
 	public String getParentPackage() {
 		return menuPackageName;
 	}
-	@Override //NodeClass
+	@Override //ElementClass
 	public String getModuleName() {
 		return moduleName;
+	}
+	@Override //ElementClass
+	public String getType() {
+		return type;
 	}
 	
 	public String getName() {

@@ -30,8 +30,12 @@ public class ClassWriter {
 		writer.write("package " + ph.getHierarchyDotNotation() + ";");
 		writeNewLines(2);		
 	}
-	public void openClass() throws IOException {
-		writer.write("public class " + className + " {");
+	public void openClass(String type) throws IOException {
+		if(type != null && type.length() > 0) {
+			writer.write("public class " + className + " extends " + type + " {");
+		}else {
+			writer.write("public class " + className + " {");	
+		}		
 		writeNewLines(2);		
 	}
 	public void closeClass() throws IOException {
