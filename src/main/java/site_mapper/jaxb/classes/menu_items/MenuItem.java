@@ -1,7 +1,7 @@
 /**
  * 
  */
-package site_mapper.jaxb.classes;
+package site_mapper.jaxb.classes.menu_items;
 
 import java.util.HashMap;
 import java.util.List;
@@ -44,8 +44,6 @@ public class MenuItem implements ElementClass {
 	private String packageName;
 	@XmlAttribute(name="class")
 	private String className;	
-//	@XmlAttribute(name="type")	
-//	private String type;	
 	
 	@XmlElement(name="Type")
 	private MenuItemType menuItemType;
@@ -59,7 +57,7 @@ public class MenuItem implements ElementClass {
 	private Map<String, List<DynamicTest>> tests = new HashMap<>();
 	private ControlTest controlTest;
 	
-	protected void createPoms(PackageHierarchy ph){
+	public void createPoms(PackageHierarchy ph){
 		boolean createPackage = createPackageForClassIfNecessary(ph);
 		createClass(ph);
 		removeThisClassPackageFromHierarchy(createPackage, ph);		

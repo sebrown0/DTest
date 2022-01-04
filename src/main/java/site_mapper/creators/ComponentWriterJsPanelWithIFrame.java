@@ -7,8 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import site_mapper.elements.ElementClass;
-import site_mapper.jaxb.classes.JsPanelMenuItemType;
-import site_mapper.jaxb.classes.MenuItemType;
+import site_mapper.jaxb.classes.menu_items.JsPanelWithIframe;
+import site_mapper.jaxb.classes.menu_items.MenuItemType;
 
 /**
  * @author SteveBrown
@@ -39,7 +39,7 @@ public class ComponentWriterJsPanelWithIFrame implements ComponentWriterVisitor{
 	public void writeComponents(ClassWriterActions fileOut, ElementClass elementClass) {
 		this.fileOut = fileOut;
 		MenuItemType t = elementClass.getMenuItemType();		
-		JsPanelMenuItemType js = t.getJs();
+		JsPanelWithIframe js = (JsPanelWithIframe) t.getJs();
 		
 		System.out.println("<->" + js.getMenuParentName()); // TODO - remove or log 	
 		System.out.println("<->" + js.getMenuTitle()); // TODO - remove or log

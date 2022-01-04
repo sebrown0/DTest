@@ -3,7 +3,7 @@
  */
 package site_mapper.elements;
 
-import site_mapper.jaxb.classes.MenuItemType;
+import site_mapper.jaxb.classes.menu_items.MenuItemType;
 
 /**
  * @author SteveBrown

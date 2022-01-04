@@ -1,7 +1,7 @@
 /**
  * 
  */
-package site_mapper.jaxb.classes;
+package site_mapper.jaxb.classes.menu_items;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -14,14 +14,14 @@ import jakarta.xml.bind.annotation.XmlRootElement;
  * 	Initial
  * @since 1.0
  */
-@XmlRootElement(name="JsPanel")
+@XmlRootElement(name="JsPanelWithIFrame")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class JsPanelMenuItemType extends MenuItemType {	
+public class JsPanelWithIframe extends TypeAttributes {	
 	private String panelTitle;	
 	private String menuTitle;	
 	private String menuParentName;
 	
-	public JsPanelMenuItemType() {
+	public JsPanelWithIframe() {
 		System.out.println("new JsPanelMenuItemType"); // TODO - remove or log 	
 	}
 	
