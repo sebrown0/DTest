@@ -6,14 +6,19 @@ package site_mapper.creators;
 import java.util.Arrays;
 import java.util.List;
 
+import site_mapper.elements.ElementClass;
+import site_mapper.jaxb.classes.JsPanelMenuItemType;
+import site_mapper.jaxb.classes.MenuItemType;
+
 /**
  * @author SteveBrown
  * @version 1.0
  * 	Initial
  * @since 1.0
  */
-public class ComponentWriterJsPanelWithIFrame implements JsPanelComponentWriter{
-
+public class ComponentWriterJsPanelWithIFrame implements ComponentWriterVisitor{
+	private ClassWriterActions fileOut;
+	
 	@Override //ComponentWriter
 	public List<String> getImportNames() {
 		return Arrays.asList("JsPanelWithIFrame","CoreData");
@@ -29,10 +34,20 @@ public class ComponentWriterJsPanelWithIFrame implements JsPanelComponentWriter{
 		return Arrays.asList("CoreData coreData");
 	}
 
-	@Override
-	public List<String> getNamesAndTitle() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	@Override //ComponentWriterVisitor
+	public void writeComponents(ClassWriterActions fileOut, ElementClass elementClass) {
+		this.fileOut = fileOut;
+		MenuItemType t = elementClass.getMenuItemType();		
+		JsPanelMenuItemType js = t.getJs();
+		
+		System.out.println("<->" + js.getMenuParentName()); // TODO - remove or log 	
+		System.out.println("<->" + js.getMenuTitle()); // TODO - remove or log
+		System.out.println("<->" + js.getPanelTitle()); // TODO - remove or log
+	}
+
+	private void writePanelVars() {
+		
 	}
 
 }

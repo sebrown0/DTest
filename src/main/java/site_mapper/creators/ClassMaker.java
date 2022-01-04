@@ -23,7 +23,7 @@ public class ClassMaker {
 	private ElementClass elementClass;
 	private PackageHierarchy ph;
 	private String className;
-	private Optional<BufferedWriter> writer;
+	private Optional<BufferedWriter> fileOut;
 	
 	public ClassMaker(ElementClass elementClass, PackageHierarchy ph) {
 		this.elementClass = elementClass;
@@ -31,29 +31,23 @@ public class ClassMaker {
 		this.ph = ph;
 	}
 
-	/*
-	 * CREATEING THE CLASS WITH PACKAGE AND CLASS NAME.
-	 * HAVE TO ADD 
-	 * 	ELEMENTS
-	 * 	CONSTRUCTOR
-	 * 	INTERFACES ETC, ETC
-	 */
 	public void makeClass() {
 		setWriter();
-		writer.ifPresent(w -> {
+		fileOut.ifPresent(w -> {
 			try {
-				ClassWriter cw = 
-						new ClassWriter(
-								className, ph, w, ClassComponentFactory.getComponentWriter(elementClass.getTypeName()));
+				ComponentWriter compWriter = ClassComponentFactory.getComponentWriter(elementClass.getTypeName()); 
+				ClassWriter classWriter = new ClassWriter(elementClass, ph, w, compWriter);
 				
-				cw.writePackage();
-				cw.writeImports();
-				cw.openClass(elementClass.getTypeName());
-				//
-				cw.writePanelVars(elementClass);
-				//
-				cw.createConstructor();
-				cw.closeClass();				
+				classWriter.writePackage();
+				classWriter.writeImports();
+				classWriter.openClass(elementClass.getTypeName());
+				
+				// Visitor
+				classWriter.writeIndividualElements(compWriter);				
+				// Visitor
+				
+				classWriter.createConstructor();				
+				classWriter.closeClass();				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();			
@@ -64,7 +58,7 @@ public class ClassMaker {
 	
 	private void setWriter(){
 		try {
-			writer = 				
+			fileOut = 				
 					Optional.ofNullable(new BufferedWriter(
 						new OutputStreamWriter(
 								new FileOutputStream(
@@ -79,7 +73,7 @@ public class ClassMaker {
 	}
 	
 	private void closeFile() {
-		writer.ifPresent(w -> {
+		fileOut.ifPresent(w -> {
 			try {
 				w.close();
 			} catch (IOException e) {

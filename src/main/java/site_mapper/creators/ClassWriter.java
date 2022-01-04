@@ -5,6 +5,7 @@ package site_mapper.creators;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,14 +18,16 @@ import utils.FileFinder;
  * @version 1.0
  * @since 1.0
  */
-public class ClassWriter {
+public class ClassWriter implements ClassWriterActions {
 	private PackageHierarchy ph;	
 	private String className;
 	private BufferedWriter writer;
 	private ComponentWriter componentWriter;
+	private ElementClass elementClass;
 	
-	public ClassWriter(String className, PackageHierarchy ph, BufferedWriter writer, ComponentWriter componentWriter) {
-		this.className = className;
+	public ClassWriter(ElementClass elementClass, PackageHierarchy ph, BufferedWriter writer, ComponentWriter componentWriter) {
+		this.elementClass = elementClass;
+		this.className = elementClass.getClassName();
 		this.ph = ph;
 		this.writer = writer;
 		this.componentWriter = componentWriter;
@@ -59,10 +62,11 @@ public class ClassWriter {
 					.replaceAll("\\\\", "."));
 	}
 	
-	public void writePanelVars(ElementClass elementClass) {
-		System.out.println("->" + elementClass.getMenuItemType().getMenuParentName()); // TODO - remove or log 	
-		System.out.println("->" + elementClass.getMenuItemType().getMenuTitle()); // TODO - remove or log
-		System.out.println("->" + elementClass.getMenuItemType().getPanelTitle()); // TODO - remove or log
+	public void writeIndividualElements(ComponentWriter compWriter) {
+		if(compWriter instanceof ComponentWriterVisitor ) {
+			ComponentWriterVisitor visitor = (ComponentWriterVisitor) compWriter;
+			visitor.writeComponents(this, elementClass);			
+		}		
 	}
 	
 	public void openClass(String type) throws IOException {
@@ -113,16 +117,22 @@ public class ClassWriter {
 	public void closeClass() throws IOException {
 		writer.write("}");	
 	}
-	
-	private void writeNewLines(int numLines) throws IOException {
+	@Override //ClassWriterActions
+	public void writeNewLines(int numLines) throws IOException {
 		for (int i = 1; i <= numLines; i++) {
 			writer.newLine();	
 		}
 	}
-	private void writeNewLine() throws IOException {
+	@Override //ClassWriterActions
+	public void writeNewLine() throws IOException {
 		writer.newLine();
 	}
-	private void addTab() throws IOException {
+	@Override //ClassWriterActions
+	public void addTab() throws IOException {
 		writer.write("\t");
+	}
+	@Override //ClassWriterActions
+	public Writer getWriter() {
+		return writer;
 	}
 }
