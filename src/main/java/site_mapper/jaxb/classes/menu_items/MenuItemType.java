@@ -34,14 +34,12 @@ public class MenuItemType {
 		@XmlElement(name="JsPanelWithIFrame", type=JsPanelWithIframe.class)
 	})
 	public void setJs(TypeAttributes js) {
-		this.js = js;
-		System.out.println("->>>>>>>>>>>>>>>>>>>JS"); // TODO - remove or log
+		this.js = js;		
 	}
 	
 	@XmlAttribute(name="name")
 	public void setType(String type) {
 		this.type = type;
-		System.out.println("->>>>>>>>>>>>>>>>>>>" + type ); // TODO - remove or log 	
 	}
 	
 }

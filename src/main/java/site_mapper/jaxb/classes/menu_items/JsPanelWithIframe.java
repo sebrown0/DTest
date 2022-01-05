@@ -21,24 +21,17 @@ public class JsPanelWithIframe extends TypeAttributes {
 	private String menuTitle;	
 	private String menuParentName;
 	
-	public JsPanelWithIframe() {
-		System.out.println("new JsPanelMenuItemType"); // TODO - remove or log 	
-	}
-	
 	@XmlElement(name="PanelTitle")
 	public void setPanelTitle(String panelTitle) {
-		this.panelTitle = panelTitle;
-		System.out.println("-->" + panelTitle); // TODO - remove or log 	
+		this.panelTitle = panelTitle; 	
 	}
 	@XmlElement(name="MenuTitle")
 	public void setMenuTitle(String menuTitle) {
 		this.menuTitle = menuTitle;
-		System.out.println("-->" + menuTitle); // TODO - remove or log
 	}
 	@XmlElement(name="MenuParent")
 	public void setMenuParentName(String menuParentName) {
 		this.menuParentName = menuParentName;
-		System.out.println("-->" + menuParentName); // TODO - remove or log
 	}
 	
 	public String getPanelTitle() {

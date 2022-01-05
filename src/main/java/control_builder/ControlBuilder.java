@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import controls.ControlName;
-
 /**
  * @author SteveBrown
  * @version 1.0
@@ -28,8 +26,8 @@ public class ControlBuilder implements BuildControls {
 		return this;
 	}
 
-	public ControlBuilder addControl(ControlName cntrlName, ControlGetter controlGetter) {
-		controls.put(cntrlName.getName(), controlGetter);
+	public ControlBuilder addControl(String cntrlName, ControlGetter controlGetter) {
+		controls.put(cntrlName, controlGetter);
 		return this;
 	}
 		

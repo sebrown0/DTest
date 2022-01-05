@@ -4,7 +4,6 @@
 package site_mapper.creators;
 
 import java.io.IOException;
-import java.io.Writer;
 
 /**
  * @author SteveBrown
@@ -13,7 +12,8 @@ import java.io.Writer;
  * @since 1.0
  */
 public interface ClassWriterActions {
-	Writer getWriter();
+	void writeValue(String value) throws IOException;
+	void writeLine(String value) throws IOException;
 	void writeNewLines(int numLines) throws IOException;
 	void writeNewLine() throws IOException; 
 	void addTab() throws IOException; 

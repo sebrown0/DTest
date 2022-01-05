@@ -37,7 +37,6 @@ public class Menu {
 	private String packageName;	
   @XmlElement(name="MenuItem")
   private List<MenuItem> menuItems;
-
   
   // All the tests for each menu item.
   private Map<String, List<DynamicTest>> menuItemTests;;  
@@ -47,29 +46,14 @@ public class Menu {
   private List<DynamicContainer> menuItemContainers = new ArrayList<>();
   
   public Menu getMenuContainers(PackageHierarchy ph) {
-  	System.out.println("  Create menu package:" + name); // TODO - remove or log
-
-		PackageMaker.makeWithPackageInfo(ph.addCurrent(name));
-		
+		PackageMaker.makeWithPackageInfo(ph.addCurrent(name));		
 		if(menuItems != null) {
 			menuItems.forEach(item -> {
-				
-				
 				item.createPoms(ph);
 			});	
 		}		
 		return this;
 	}
-//  public Menu getMenuContainers(String root, String prntPackage) {
-//  	System.out.println("  Create menu package:" + name); // TODO - remove or log
-//		if(menuItems != null) {
-//			menuItems.forEach(item -> {
-//				PackageMaker.makeWithPackageInfo(root, prntPackage, name);
-//				item.createPoms();
-//			});	
-//		}		
-//		return this;
-//	}
 
   public DynamicContainer getMenuContainers(IncludedElements includedElements, HomePage hp, String moduleName) {
   	

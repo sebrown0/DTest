@@ -21,5 +21,5 @@ package site_mapper.jaxb.classes.menu_items;
  * TODO - Make into interface?
  */
 public abstract class TypeAttributes {
-
+//	public abstract void writeElements();
 }

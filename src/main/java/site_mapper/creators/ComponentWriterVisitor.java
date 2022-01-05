@@ -3,6 +3,8 @@
  */
 package site_mapper.creators;
 
+import java.io.IOException;
+
 import site_mapper.elements.ElementClass;
 
 /**
@@ -11,6 +13,8 @@ import site_mapper.elements.ElementClass;
  * 	Initial
  * @since 1.0
  */
-public interface ComponentWriterVisitor extends ComponentWriter {
-	void writeComponents(ClassWriterActions fileOut, ElementClass elementClass);
+public interface ComponentWriterVisitor extends ComponentWriter {	
+	ComponentWriterVisitor setFileOutWriter(ClassWriterActions fileOut);
+	ComponentWriterVisitor setElementClass(ElementClass elementClass);
+	void writeComponents() throws IOException;
 }

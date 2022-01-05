@@ -5,7 +5,6 @@ package site_mapper.creators;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +38,7 @@ public class ClassWriter implements ClassWriterActions {
 	}
 	public void writeImports() throws IOException {
 		componentWriter.getImportNames().forEach(n -> addImport(n));
-		writeNewLines(2);		
+		writeNewLine();		
 	}
 	
 	private void addImport(String importName) {
@@ -62,10 +61,12 @@ public class ClassWriter implements ClassWriterActions {
 					.replaceAll("\\\\", "."));
 	}
 	
-	public void writeIndividualElements(ComponentWriter compWriter) {
+	public void writeIndividualElements(ComponentWriter compWriter) throws IOException {
 		if(compWriter instanceof ComponentWriterVisitor ) {
-			ComponentWriterVisitor visitor = (ComponentWriterVisitor) compWriter;
-			visitor.writeComponents(this, elementClass);			
+			((ComponentWriterVisitor) compWriter)
+				.setElementClass(elementClass)
+				.setFileOutWriter(this)
+				.writeComponents();		
 		}		
 	}
 	
@@ -75,7 +76,7 @@ public class ClassWriter implements ClassWriterActions {
 		}else {
 			writer.write("public class " + className + " {");	
 		}		
-		writeNewLines(2);		
+		writeNewLine();		
 	}
 	public void createConstructor() throws IOException {
 		String constructor = "public " + className + "(";
@@ -131,8 +132,19 @@ public class ClassWriter implements ClassWriterActions {
 	public void addTab() throws IOException {
 		writer.write("\t");
 	}
-	@Override //ClassWriterActions
-	public Writer getWriter() {
-		return writer;
+//	@Override //ClassWriterActions
+//	public BufferedWriter getWriter() {
+//		return writer;
+//	}
+
+	@Override
+	public void writeValue(String value) throws IOException {
+		writer.write(value);
+	}
+
+	@Override
+	public void writeLine(String value) throws IOException {
+		writer.write(value);
+		writer.newLine();
 	}
 }

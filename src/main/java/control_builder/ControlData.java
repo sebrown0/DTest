@@ -13,15 +13,24 @@ import controls.ControlName;
  * can be added to the map of controls.
  */
 public class ControlData {
-	private ControlName cntrlName;
+	private String cntrlName;
 	private ControlGetter controlGetter;
 	
-	public ControlData(ControlName cntrlName, ControlGetter controlGetter) {
+	/*
+	 * TODO - put an enum in the XML that matches ControlName, or
+	 * make sure that we have ONE place for getting the control names!
+	 */
+	public ControlData(String cntrlName, ControlGetter controlGetter) {
 		this.cntrlName = cntrlName;
 		this.controlGetter = controlGetter;
 	}
 	
-	public ControlName getCntrlName() {
+	public ControlData(ControlName cntrlName, ControlGetter controlGetter) {
+		this.cntrlName = cntrlName.getName();
+		this.controlGetter = controlGetter;
+	}
+	
+	public String getCntrlName() {
 		return cntrlName;
 	}
 	public ControlGetter getControlGetter() {

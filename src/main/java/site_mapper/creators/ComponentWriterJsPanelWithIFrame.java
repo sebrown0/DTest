@@ -3,12 +3,12 @@
  */
 package site_mapper.creators;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 import site_mapper.elements.ElementClass;
 import site_mapper.jaxb.classes.menu_items.JsPanelWithIframe;
-import site_mapper.jaxb.classes.menu_items.MenuItemType;
 
 /**
  * @author SteveBrown
@@ -18,6 +18,7 @@ import site_mapper.jaxb.classes.menu_items.MenuItemType;
  */
 public class ComponentWriterJsPanelWithIFrame implements ComponentWriterVisitor{
 	private ClassWriterActions fileOut;
+	private JsPanelWithIframe jsPanel;
 	
 	@Override //ComponentWriter
 	public List<String> getImportNames() {
@@ -34,20 +35,32 @@ public class ComponentWriterJsPanelWithIFrame implements ComponentWriterVisitor{
 		return Arrays.asList("CoreData coreData");
 	}
 
-	
 	@Override //ComponentWriterVisitor
-	public void writeComponents(ClassWriterActions fileOut, ElementClass elementClass) {
+	public ComponentWriterVisitor setFileOutWriter(ClassWriterActions fileOut) {
 		this.fileOut = fileOut;
-		MenuItemType t = elementClass.getMenuItemType();		
-		JsPanelWithIframe js = (JsPanelWithIframe) t.getJs();
-		
-		System.out.println("<->" + js.getMenuParentName()); // TODO - remove or log 	
-		System.out.println("<->" + js.getMenuTitle()); // TODO - remove or log
-		System.out.println("<->" + js.getPanelTitle()); // TODO - remove or log
+		return this;
 	}
 
-	private void writePanelVars() {
-		
+	@Override //ComponentWriterVisitor
+	public ComponentWriterVisitor setElementClass(ElementClass elementClass) {
+		this.jsPanel = (JsPanelWithIframe) elementClass.getMenuItemType().getJs();
+		return this;
+	}
+	
+	@Override //ComponentWriterVisitor
+	public void writeComponents() throws IOException {
+		writePanelVars();
+	}
+
+	private void writePanelVars() throws IOException {
+		writeStaticString("PANEL_TITLE", jsPanel.getPanelTitle());
+		writeStaticString("MENU_TITLE", jsPanel.getMenuTitle());
+		writeStaticString("MENU_PARENT_NAME", jsPanel.getMenuParentName());
+		fileOut.writeNewLine();
+	}
+
+	private void writeStaticString(String name, String val) throws IOException {
+		fileOut.writeLine(String.format("\tpublic static final String %s = \"%s\";", name, val));
 	}
 
 }
