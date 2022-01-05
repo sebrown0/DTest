@@ -15,4 +15,11 @@ public class StringUtil {
 		String[] elements = s.split(delimitter);
 		return elements[pos].replace("'", "");
 	}
+	public static String removeLastChar(String s) {		
+		if(s != null && s.length() > 1) {
+			return s.substring(0, s.length()-1);
+		}else {
+			return s;
+		}		
+	}
 }

@@ -16,5 +16,8 @@ class StringUtilTests {
 	void capitialiseFirst() {
 		assertEquals("Save", StringUtil.capitiliseFirstChar("save"));
 	}
-
+	@Test
+	void removeLastChar() {
+		assertEquals("Test", StringUtil.removeLastChar("Test,"));
+	}
 }

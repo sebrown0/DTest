@@ -41,12 +41,12 @@ public class ClassMaker {
 				classWriter.writePackage();
 				classWriter.writeImports();
 				classWriter.openClass(elementClass.getTypeName());
+//				classWriter.createConstructor();				
 				
 				// Visitor
 				classWriter.writeIndividualElements(compWriter);				
 				// Visitor
 				
-				classWriter.createConstructor();				
 				classWriter.closeClass();				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

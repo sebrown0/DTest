@@ -65,16 +65,6 @@ public class MenuItem implements ElementClass {
 	private void createClass(PackageHierarchy ph) {
 		ClassMaker cm = new ClassMaker(this, ph);
 		cm.makeClass();
-		
-		/*
-		 * Add the elements to the class here or in the ClassMaker????
-		 */
-	//	if(elements != null) {
-	//	
-	//elements.forEach(e -> {
-	//System.out.println("   -" + e.getName()); // TODO - remove or log 	
-	//});	
-	//}		
 	}
 	private boolean createPackageForClassIfNecessary(PackageHierarchy ph) {
 		if(packageName != null && packageName.length() > 0) {
@@ -126,11 +116,7 @@ public class MenuItem implements ElementClass {
 		}		
 		test.ifPresent(t -> {	tests.put(getKey(t), t.createTests()); });
 	}	
-	
-//	private void getTestMethods(MethodGetter methodGetter) {
-//		methodGetter.getAllTestMethods().forEach(m -> System.out.println("->" + m));
-//	}
-	
+		
 	private String getKey(TestElement e) {
 		return e.getType() + "." + e.getName();
 	}
@@ -159,10 +145,14 @@ public class MenuItem implements ElementClass {
 	public MenuItemType getMenuItemType() {
 		return menuItemType;
 	}
+	@Override //ElementClass
+	public List<Element> getElements() {
+		return elements;
+	}
 	
 	public String getName() {
 		return name;
-	}
+	}	
 	
 
 }

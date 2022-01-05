@@ -5,12 +5,9 @@ package site_mapper.creators;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
 
 import site_mapper.elements.ElementClass;
 import site_mapper.jaxb.classes.pom.PackageHierarchy;
-import utils.FileFinder;
 
 /**
  * @author SteveBrown
@@ -37,28 +34,20 @@ public class ClassWriter implements ClassWriterActions {
 		writeNewLines(2);		
 	}
 	public void writeImports() throws IOException {
-		componentWriter.getImportNames().forEach(n -> addImport(n));
-		writeNewLine();		
-	}
-	
-	private void addImport(String importName) {
-		
-		getImportPath(importName).ifPresent(p -> {
+		componentWriter.getImportNames().forEach(n -> {
 			try {
-				writer.write("import " + p + ";");
-				writeNewLine();
+				addImport(n);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}			
+			}
 		});
+		writeNewLine();		
 	}
-	private Optional<String> getImportPath(String importName){
-		return 
-		  Optional.ofNullable(
-			  FileFinder
-					.findPathWithoutRootAndExtension("./src/main/java", importName + ".java")
-					.replaceAll("\\\\", "."));
+	
+	private void addImport(ImportType type) throws IOException {
+		writer.write(type.getPath());
+		writeNewLine();
 	}
 	
 	public void writeIndividualElements(ComponentWriter compWriter) throws IOException {
@@ -78,45 +67,71 @@ public class ClassWriter implements ClassWriterActions {
 		}		
 		writeNewLine();		
 	}
-	public void createConstructor() throws IOException {
-		String constructor = "public " + className + "(";
-		for (String arg : componentWriter.getConstructorArgs()) {
-			constructor += arg + ",";
-		}
-		
-		if(constructor.endsWith(",")) {
-			constructor = constructor.substring(0, constructor.length()-1);
-		}
-		
-		constructor += ") {";
-		addTab();
-		writer.write(constructor);
-		writeNewLine();
-		addTab();
-		writeSuperConstructor();
-		addTab();
-		writer.write("}");
-		writeNewLine();
-	}
-	public void writeSuperConstructor() throws IOException {
-		List<String> args = componentWriter.getSuperArgs();
-		if(args.size()>0) {
-			String constructor = "super(";
-			for (String arg : args) {
-				constructor += arg + ",";
-			}
-			if(constructor.endsWith(",")) {
-				constructor = constructor.substring(0, constructor.length()-1);
-			}
-			constructor += ");";
-			addTab();
-			writer.write(constructor);
-			writeNewLine();
-		}
-		
-	}
+
+//	@Override //ClassWriterActions
+//	public void writeConstuctor(List<String> lines) throws IOException {
+//		String constructor = "public " + className + "(";
+//		for (String arg : componentWriter.getConstructorArgs()) {
+//			constructor += arg + ",";
+//		}
+//		
+//		if(constructor.endsWith(",")) {
+//			constructor = constructor.substring(0, constructor.length()-1);
+//		}
+//		
+//		constructor += ") {";
+//		addTab();
+//		writer.write(constructor);
+//		writeNewLine();
+//		addTab();
+//		writeSuperConstructor();
+//		for (String s : lines) {
+//			writer.write(s);
+//			writeNewLine();	
+//		}
+//		addTab();
+//		writer.write("}");
+//		writeNewLine();
+//	}
+//	public void createConstructor() throws IOException {
+//		String constructor = "public " + className + "(";
+//		for (String arg : componentWriter.getConstructorArgs()) {
+//			constructor += arg + ",";
+//		}
+//		
+//		if(constructor.endsWith(",")) {
+//			constructor = constructor.substring(0, constructor.length()-1);
+//		}
+//		
+//		constructor += ") {";
+//		addTab();
+//		writer.write(constructor);
+//		writeNewLine();
+//		addTab();
+//		writeSuperConstructor();
+//		addTab();
+//		writer.write("}");
+//		writeNewLine();
+//	}
+//	public void writeSuperConstructor() throws IOException {
+//		List<String> args = componentWriter.getSuperArgs();
+//		if(args.size()>0) {
+//			String constructor = "super(";
+//			for (String arg : args) {
+//				constructor += arg + ",";
+//			}
+//			if(constructor.endsWith(",")) {
+//				constructor = constructor.substring(0, constructor.length()-1);
+//			}
+//			constructor += ");";
+//			addTab();
+//			writer.write(constructor);
+//			writeNewLine();
+//		}
+//		
+//	}
 	public void closeClass() throws IOException {
-		writer.write("}");	
+		writer.write("\n}");	
 	}
 	@Override //ClassWriterActions
 	public void writeNewLines(int numLines) throws IOException {
@@ -147,4 +162,5 @@ public class ClassWriter implements ClassWriterActions {
 		writer.write(value);
 		writer.newLine();
 	}
+
 }
