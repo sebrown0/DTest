@@ -12,6 +12,7 @@ import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 
 import site_mapper.jaxb.classes.pom.PackageHierarchy;
+import site_mapper.jaxb.classes.pom.SiteMap;
 
 /**
  * @author SteveBrown
@@ -27,43 +28,45 @@ public class PackageMaker {
 	private static String filePath;
 	private static String packagePath;
 	
-	public static void makeWithPackageInfo(PackageHierarchy ph) {
+	public static void makeWithPackageInfo(SiteMap siteMap, PackageHierarchy ph) {
 		filePath = ph.getRoot() + "/" + ph.getHierarchyFwdSlashNotation();
 		packagePath = ph.getHierarchyDotNotation();
 		
 		makePackages();
-		createPackageInfo();
+		createPackageInfo(siteMap);
 	}
 	
-	public static void makeWithPackageInfo(String root, String packageName) {
+	public static void makeWithPackageInfo(SiteMap siteMap, String root, String packageName) {
 		filePath = root + "/" + packageName;
 		packagePath = packageName;
 		
 		makePackages();
-		createPackageInfo();
+		createPackageInfo(siteMap);
 	}
 	
-	public static void makeWithPackageInfo(String root, String parentPackage, String packageName) {
+	public static void makeWithPackageInfo(SiteMap siteMap, String root, String parentPackage, String packageName) {
 		filePath = root + "/" + parentPackage + "/" + packageName;
 		packagePath = parentPackage + "." + packageName;
 		
 		makePackages();
-		createPackageInfo();
+		createPackageInfo(siteMap);
 	}
 	
 	private static void makePackages() {
 		new File(filePath).mkdirs();
 	}
 	
-	private static void createPackageInfo() {		
+	private static void createPackageInfo(SiteMap siteMap) {		
 		try (Writer writer = 
 				new BufferedWriter(
 						new OutputStreamWriter(
 								new FileOutputStream(filePath + "/package-info.java"), StandardCharsets.UTF_8))) {
+			writer.write(Comments.getPackageComments(siteMap));
 	    writer.write("package " + packagePath + ";");
 		} 
 		catch (IOException ex) {
 		    // TODO - Handle me
 		}  
 	}
+
 }

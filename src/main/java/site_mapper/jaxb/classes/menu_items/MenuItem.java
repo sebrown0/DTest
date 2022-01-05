@@ -20,11 +20,13 @@ import site_mapper.creators.ClassMaker;
 import site_mapper.creators.PackageMaker;
 import site_mapper.elements.Element;
 import site_mapper.elements.ElementClass;
+import site_mapper.elements.ElementCreation;
 import site_mapper.elements.ElementLoader;
 import site_mapper.elements.ElementTestButton;
 import site_mapper.elements.IncludedElements;
 import site_mapper.elements.TestElement;
 import site_mapper.jaxb.classes.pom.PackageHierarchy;
+import site_mapper.jaxb.classes.pom.SiteMap;
 
 /**
  * @author SteveBrown
@@ -56,9 +58,11 @@ public class MenuItem implements ElementClass {
 	private String moduleName;	
 	private Map<String, List<DynamicTest>> tests = new HashMap<>();
 	private ControlTest controlTest;
+	private SiteMap siteMap;
 	
-	public void createPoms(PackageHierarchy ph){
-		boolean createPackage = createPackageForClassIfNecessary(ph);
+	public void createPoms(SiteMap siteMap, PackageHierarchy ph){
+		this.siteMap = siteMap;
+		boolean createPackage = createPackageForClassIfNecessary(siteMap, ph);
 		createClass(ph);
 		removeThisClassPackageFromHierarchy(createPackage, ph);		
 	}
@@ -66,9 +70,9 @@ public class MenuItem implements ElementClass {
 		ClassMaker cm = new ClassMaker(this, ph);
 		cm.makeClass();
 	}
-	private boolean createPackageForClassIfNecessary(PackageHierarchy ph) {
+	private boolean createPackageForClassIfNecessary(SiteMap siteMap, PackageHierarchy ph) {
 		if(packageName != null && packageName.length() > 0) {
-			PackageMaker.makeWithPackageInfo(ph.addCurrent(packageName));
+			PackageMaker.makeWithPackageInfo(siteMap, ph.addCurrent(packageName));
 			return true;			
 		}
 		return false;
@@ -93,22 +97,22 @@ public class MenuItem implements ElementClass {
 		if(elements != null) {
 			controlTest = ElementLoader.getControlTest(this, hp);						
 			elements.forEach(e -> {
-				if(includedElements.isIncluded(e.getType())) {					
+				if(includedElements.isIncluded(e.getElementType())) {					
 					addElementsTests(e, hp);					
 				}								
 			});	
 		}		
 	}
 
-	private void addElementsTests(Element e, HomePage hp) {
-		String elementType = e.getType();
+	private void addElementsTests(ElementCreation e, HomePage hp) {
+		String elementType = e.getElementType();
 		Optional<TestElement> test = null;
 		 	
 		switch (elementType) {
 			case "button" -> { 
 				test = Optional.of(
 						new ElementTestButton(
-								controlTest, e.getName(), e.getText(), e.getFafa())); 
+								controlTest, e.getElementName(), e.getText(), e.getFafa())); 
 			}
 			default -> { 
 				throw new IllegalArgumentException("Unexpected value: " + elementType); 
@@ -149,6 +153,10 @@ public class MenuItem implements ElementClass {
 	public List<Element> getElements() {
 		return elements;
 	}
+	@Override //ElementClass
+	public SiteMap getSiteMap() {
+		return siteMap;
+	}	
 	
 	public String getName() {
 		return name;

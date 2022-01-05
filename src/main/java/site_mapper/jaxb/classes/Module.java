@@ -1,9 +1,7 @@
 package site_mapper.jaxb.classes;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 import org.junit.jupiter.api.DynamicContainer;
 
@@ -15,6 +13,7 @@ import object_models.pages.homepage.HomePage;
 import site_mapper.creators.PackageMaker;
 import site_mapper.elements.IncludedElements;
 import site_mapper.jaxb.classes.pom.PackageHierarchy;
+import site_mapper.jaxb.classes.pom.SiteMap;
 
 /**
  * @author SteveBrown
@@ -34,14 +33,15 @@ public class Module {
   
   private List<DynamicContainer> moduleMenus;
   
-  public Module getModuleContainers(PackageHierarchy ph) {
+  public Module getModuleContainers(PackageHierarchy ph, final SiteMap siteMap) {
   	
   	System.out.println(" Create module package:" + name); // TODO - remove or log
+  	System.out.println("->" + siteMap); // TODO - remove or log
   	
-  	PackageMaker.makeWithPackageInfo(ph.reset().addCurrent("a_" + name)); //TODO - remove a_
+  	PackageMaker.makeWithPackageInfo(siteMap, ph.reset().addCurrent("a_" + name)); //TODO - remove a_
 		if(menus != null) {			
 			menus.forEach(m -> {								 	
-				m.getMenuContainers(ph);
+				m.getMenuContainers(siteMap, ph);
 	  	});	
 		}  	
 		return this;

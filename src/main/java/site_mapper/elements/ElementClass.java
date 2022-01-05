@@ -6,6 +6,7 @@ package site_mapper.elements;
 import java.util.List;
 
 import site_mapper.jaxb.classes.menu_items.MenuItemType;
+import site_mapper.jaxb.classes.pom.SiteMap;
 
 /**
  * @author SteveBrown
@@ -17,6 +18,8 @@ import site_mapper.jaxb.classes.menu_items.MenuItemType;
  * 	Add getParentPackage().
  * @version 1.3
  * 	Add getModuleName().
+ * @version 1.4
+ * 	Add getSiteMap().
  * @since 1.0
  */
 public interface ElementClass {
@@ -27,4 +30,5 @@ public interface ElementClass {
 	String getTypeName();
 	MenuItemType getMenuItemType();
 	List<Element> getElements();
+	SiteMap getSiteMap();
 }

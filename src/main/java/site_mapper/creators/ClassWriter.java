@@ -12,6 +12,7 @@ import site_mapper.jaxb.classes.pom.PackageHierarchy;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
  * @since 1.0
  */
 public class ClassWriter implements ClassWriterActions {
@@ -50,6 +51,9 @@ public class ClassWriter implements ClassWriterActions {
 		writeNewLine();
 	}
 	
+	public void writeComments() throws IOException {
+		writer.write(Comments.getClassComments(elementClass.getSiteMap()));
+	}
 	public void writeIndividualElements(ComponentWriter compWriter) throws IOException {
 		if(compWriter instanceof ComponentWriterVisitor ) {
 			((ComponentWriterVisitor) compWriter)
@@ -61,9 +65,9 @@ public class ClassWriter implements ClassWriterActions {
 	
 	public void openClass(String type) throws IOException {
 		if(type != null && type.length() > 0) {
-			writer.write("public class " + className + " extends " + type + " {");
+			writer.write("\npublic class " + className + " extends " + type + " {");
 		}else {
-			writer.write("public class " + className + " {");	
+			writer.write("\npublic class " + className + " {");	
 		}		
 		writeNewLine();		
 	}
@@ -85,10 +89,6 @@ public class ClassWriter implements ClassWriterActions {
 	public void addTab() throws IOException {
 		writer.write("\t");
 	}
-//	@Override //ClassWriterActions
-//	public BufferedWriter getWriter() {
-//		return writer;
-//	}
 
 	@Override
 	public void writeValue(String value) throws IOException {

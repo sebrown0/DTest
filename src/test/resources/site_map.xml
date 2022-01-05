@@ -6,6 +6,11 @@
 ** DO WE HAVE TEST DATA (IF SO FROM ANOTHER FILE?)? 
  -->
 <App>
+  <SiteMap>
+    <Author>SteveBrown</Author>
+    <Version>1.0.0</Version>
+  </SiteMap>
+  
   <!-- TODO The included elements should be in separate file. -->
   <IncludeElementsForTest>
     <Include>button</Include>

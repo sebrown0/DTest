@@ -30,12 +30,13 @@ class PomMapperTests {
 	
 	private void createPoms() {
 		JAXBContext jc;
+		final String XML_SOURCE = "./src/test/resources/site_map.xml";
 		try {
 			jc = org.eclipse.persistence.jaxb.JAXBContext.newInstance(PomMapperApp.class);
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
 	    unmarshaller.setProperty("eclipselink.media-type", "application/xml");      
 	    unmarshaller.setProperty(UnmarshallerProperties.DISABLE_SECURE_PROCESSING, Boolean.TRUE);    
-	    StreamSource source = new StreamSource("./src/test/resources/site_map.xml");	    
+	    StreamSource source = new StreamSource(XML_SOURCE);	    
 	    PomMapperApp app = unmarshaller.unmarshal(source, PomMapperApp.class).getValue();
 	    
 	    /*
@@ -43,7 +44,8 @@ class PomMapperTests {
 	     * "./src/main/java", "object_models"
 	     */
 	    PackageHierarchy ph = new PackageHierarchy("./src/main/java", "object_models");
-	    app.createPoms(ph);
+	    app.createPoms(ph, XML_SOURCE);
+//	    app.createPoms(ph);
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}    

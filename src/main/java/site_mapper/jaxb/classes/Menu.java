@@ -15,6 +15,7 @@ import site_mapper.creators.PackageMaker;
 import site_mapper.elements.IncludedElements;
 import site_mapper.jaxb.classes.menu_items.MenuItem;
 import site_mapper.jaxb.classes.pom.PackageHierarchy;
+import site_mapper.jaxb.classes.pom.SiteMap;
 
 /** 
  * @author SteveBrown
@@ -45,18 +46,17 @@ public class Menu {
   // List of individual test containers for each menu item. 
   private List<DynamicContainer> menuItemContainers = new ArrayList<>();
   
-  public Menu getMenuContainers(PackageHierarchy ph) {
-		PackageMaker.makeWithPackageInfo(ph.addCurrent(name));		
+  public Menu getMenuContainers(SiteMap siteMap, PackageHierarchy ph) {
+		PackageMaker.makeWithPackageInfo(siteMap, ph.addCurrent(name));		
 		if(menuItems != null) {
 			menuItems.forEach(item -> {
-				item.createPoms(ph);
+				item.createPoms(siteMap, ph);
 			});	
 		}		
 		return this;
 	}
 
-  public DynamicContainer getMenuContainers(IncludedElements includedElements, HomePage hp, String moduleName) {
-  	
+  public DynamicContainer getMenuContainers(IncludedElements includedElements, HomePage hp, String moduleName) {  	
 		if(menuItems != null && includedElements != null) {
 			menuItems.forEach(item -> {				
 				getTestsForMenuItem(includedElements, item, hp, moduleName);	

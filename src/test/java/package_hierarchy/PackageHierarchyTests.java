@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import site_mapper.creators.PackageMaker;
 import site_mapper.jaxb.classes.pom.PackageHierarchy;
+import site_mapper.jaxb.classes.pom.SiteMap;
 
 class PackageHierarchyTests {
 
@@ -47,11 +48,12 @@ class PackageHierarchyTests {
 		 * CHECK PROJECT EXPLORER MANUALLY TO CONFIRM TEST. 
 		 * DELETE PACKAGES AFTER.
 		 */
+		SiteMap siteMap = new SiteMap().setAuthor("SEB").setVersion("1.0.0");
 		PackageHierarchy ph = new PackageHierarchy("./src/main/java", "object_models");
 		ph.addCurrent("payroll");
-		PackageMaker.makeWithPackageInfo(ph);		
-		PackageMaker.makeWithPackageInfo(ph.addCurrent("left"));
-		PackageMaker.makeWithPackageInfo(ph.addCurrent("employees"));
+		PackageMaker.makeWithPackageInfo(siteMap, ph);		
+		PackageMaker.makeWithPackageInfo(siteMap, ph.addCurrent("left"));
+		PackageMaker.makeWithPackageInfo(siteMap, ph.addCurrent("employees"));
 	}
 	
 }

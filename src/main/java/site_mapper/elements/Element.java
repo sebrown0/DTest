@@ -13,7 +13,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
  * @since 1.0
  */
 @XmlRootElement(name="Element")
-public class Element {
+public class Element implements ElementCreation, ElementFunction {
 	@XmlAttribute(name="type")
 	private String type;
 	@XmlAttribute(name="name")
@@ -57,27 +57,33 @@ public class Element {
 		this.hasFunction = hasFunction;
 		return this;
 	}
-	public String getType() {
-		return type;
-	}
-	public String getName() {
+	@Override //ElementDetails
+	public String getElementName() {
 		return name;
 	}
-	public String getBy() {
-		return by;
-	}
-	public String getLocator() {
-		return locator;
-	}
+	@Override //ElementDetails
 	public String getText() {
 		return text;
 	}
+	@Override //ElementDetails
 	public String getFafa() {
 		return fafa;
 	}
-	public String getHasFunction() {
-		return hasFunction;
+	
+	@Override //ElementCreation
+	public String getElementType() {
+		return type;
 	}
+	@Override //ElementCreation
+	public String getByLocatorValue() {
+		return locator;
+	}
+	@Override //ElementCreation
+	public String getByLocatorType() {
+		return by;
+	}
+	
+	@Override //ElementFunction
 	public boolean hasFunction() {
 		return (hasFunction.equalsIgnoreCase("true")) ? true : false;
 	}
@@ -86,6 +92,6 @@ public class Element {
 	public String toString() {
 		return "Element [type=" + type + ", name=" + name + ", by=" + by + ", locator=" + locator + ", text=" + text
 				+ ", fafa=" + fafa + ", response=" + hasFunction + "]";
-	}	
-	
+	}
+		
 }

@@ -85,7 +85,6 @@ public class ComponentWriterJsPanelWithIFrame implements ComponentWriterVisitor{
 		if(elements != null) {
 			List<ControlDataValues> values = new ArrayList<>();					
 			elements.forEach(e -> {
-//				values.add(new ControlDataValues(e.getName(), e.getType(), e.getLocator(), e.getBy()));
 				values.add(new ControlDataValues(e));
 			});	
 			

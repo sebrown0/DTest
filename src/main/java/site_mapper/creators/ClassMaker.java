@@ -17,36 +17,39 @@ import site_mapper.jaxb.classes.pom.PackageHierarchy;
  * 	Initial
  * @since 1.0
  * 
+ * Direct the creation of each required
+ * element of the class.
  * 
  */
 public class ClassMaker {
 	private ElementClass elementClass;
-	private PackageHierarchy ph;
+	private PackageHierarchy packageHierarchy;
 	private String className;
 	private Optional<BufferedWriter> fileOut;
 	
 	public ClassMaker(ElementClass elementClass, PackageHierarchy ph) {
 		this.elementClass = elementClass;
 		this.className = elementClass.getClassName();
-		this.ph = ph;
+		this.packageHierarchy = ph;
 	}
 
 	public void makeClass() {
 		setWriter();
-		fileOut.ifPresent(w -> {
-			try {
-				ComponentWriter compWriter = ClassComponentFactory.getComponentWriter(elementClass.getTypeName()); 
-				ClassWriter classWriter = new ClassWriter(elementClass, ph, w, compWriter);
-				
+		fileOut.ifPresent(fileWriter -> {
+			
+			ComponentWriter compWriter = 
+					ClassComponentFactory.getComponentWriter(elementClass.getTypeName());
+			
+			ClassWriter classWriter = 
+					new ClassWriter(elementClass, packageHierarchy, fileWriter, compWriter);
+			
+			try {				
 				classWriter.writePackage();
 				classWriter.writeImports();
-				classWriter.openClass(elementClass.getTypeName());
-//				classWriter.createConstructor();				
-				
-				// Visitor
+				classWriter.writeComments();
+				classWriter.openClass(elementClass.getTypeName());				
+				// Write elements specific to the class. 
 				classWriter.writeIndividualElements(compWriter);				
-				// Visitor
-				
 				classWriter.closeClass();				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -69,7 +72,10 @@ public class ClassMaker {
 		}
 	}
 	private String getFilePath() {
-		return ph.getRoot() + "/" + ph.getHierarchyFwdSlashNotation() + "/" + className + ".java";
+		return 
+				packageHierarchy.getRoot() + "/" + 
+				packageHierarchy.getHierarchyFwdSlashNotation() + "/" + 
+				className + ".java";
 	}
 	
 	private void closeFile() {
