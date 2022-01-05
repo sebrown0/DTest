@@ -68,68 +68,6 @@ public class ClassWriter implements ClassWriterActions {
 		writeNewLine();		
 	}
 
-//	@Override //ClassWriterActions
-//	public void writeConstuctor(List<String> lines) throws IOException {
-//		String constructor = "public " + className + "(";
-//		for (String arg : componentWriter.getConstructorArgs()) {
-//			constructor += arg + ",";
-//		}
-//		
-//		if(constructor.endsWith(",")) {
-//			constructor = constructor.substring(0, constructor.length()-1);
-//		}
-//		
-//		constructor += ") {";
-//		addTab();
-//		writer.write(constructor);
-//		writeNewLine();
-//		addTab();
-//		writeSuperConstructor();
-//		for (String s : lines) {
-//			writer.write(s);
-//			writeNewLine();	
-//		}
-//		addTab();
-//		writer.write("}");
-//		writeNewLine();
-//	}
-//	public void createConstructor() throws IOException {
-//		String constructor = "public " + className + "(";
-//		for (String arg : componentWriter.getConstructorArgs()) {
-//			constructor += arg + ",";
-//		}
-//		
-//		if(constructor.endsWith(",")) {
-//			constructor = constructor.substring(0, constructor.length()-1);
-//		}
-//		
-//		constructor += ") {";
-//		addTab();
-//		writer.write(constructor);
-//		writeNewLine();
-//		addTab();
-//		writeSuperConstructor();
-//		addTab();
-//		writer.write("}");
-//		writeNewLine();
-//	}
-//	public void writeSuperConstructor() throws IOException {
-//		List<String> args = componentWriter.getSuperArgs();
-//		if(args.size()>0) {
-//			String constructor = "super(";
-//			for (String arg : args) {
-//				constructor += arg + ",";
-//			}
-//			if(constructor.endsWith(",")) {
-//				constructor = constructor.substring(0, constructor.length()-1);
-//			}
-//			constructor += ");";
-//			addTab();
-//			writer.write(constructor);
-//			writeNewLine();
-//		}
-//		
-//	}
 	public void closeClass() throws IOException {
 		writer.write("\n}");	
 	}

@@ -35,7 +35,7 @@ public class ControlDataStringFactory {
 		if(values != null && values.size() > 0) {
 			numControls = values.size();		
 			func = 
-				"\tprivate void buildMyControls() {\n" +
+				"\n\n\tprivate void buildMyControls() {\n" +
 				"\t\tvar myControls = \r\n" +
 				"\t\t\tList.of(";
 		
@@ -47,7 +47,7 @@ public class ControlDataStringFactory {
 			}			
 			func += "\n\t\t\t);\n\t\tsuper.buildPanelControls(myControls);\n\t}";		
 		}else {
-			func = "\tprivate void buildMyControls() {}";
+			func = "\t\tprivate void buildMyControls() {}";
 		}	
 		return func;
 	}

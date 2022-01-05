@@ -12,7 +12,9 @@ import java.util.List;
  * @since 1.0
  */
 public interface ComponentWriter {
+	String getClassName();
 	List<ImportType> getImportNames();
 	List<String> getSuperArgs();
 	List<String> getConstructorArgs();
+	List<String> getConstructorLines();
 }

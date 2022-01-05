@@ -60,12 +60,12 @@ class ControlDataFactoryTests {
 	@Test
 	void buildControlsFunction() throws InvalidArgumentException {
 		String expected = 
-				"private void buildMyControls() {\n" +
-				"\tvar myControls = \r\n" +
-				"\t\tList.of(" +
-				"\n\t\t\tnew ControlData(\"search\", new ControlGetterButton(coreData, By.id(\"button[name='QBF1']\")))," +
-				"\n\t\t\tnew ControlData(\"save\", new ControlGetterButton(coreData, By.cssSelector(\"button[name='QBF2']\")))" +
-				"\n\t\t);\n\tsuper.buildPanelControls(myControls);\n}";
+				"\n\n\tprivate void buildMyControls() {\n" +
+				"\t\tvar myControls = \r\n" +
+				"\t\t\tList.of(" +
+				"\n\t\t\t\tnew ControlData(\"search\", new ControlGetterButton(coreData, By.id(\"button[name='QBF1']\")))," +
+				"\n\t\t\t\tnew ControlData(\"save\", new ControlGetterButton(coreData, By.cssSelector(\"button[name='QBF2']\")))" +
+				"\n\t\t\t);\n\t\tsuper.buildPanelControls(myControls);\n\t}";
 		
 		ControlDataStringFactory fact = 
 				new ControlDataStringFactory(
@@ -78,7 +78,7 @@ class ControlDataFactoryTests {
 	@Test
 	void build_empty_ControlsFunction() throws InvalidArgumentException {
 		String expected = 
-				"private void buildMyControls() {}";
+				"\t\tprivate void buildMyControls() {}";
 		
 		ControlDataStringFactory fact = 
 				new ControlDataStringFactory(null); 	

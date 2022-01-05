@@ -34,17 +34,23 @@ public class ComponentWriterJsPanelWithIFrame implements ComponentWriterVisitor{
 				new FindImport("JsPanelWithIFrame"),
 				new FindImport("CoreData"));
 	}
-
 	@Override //ComponentWriter
 	public List<String> getSuperArgs() {
 		return Arrays.asList("coreData", "PANEL_TITLE");
-	}
-	
+	}	
 	@Override //ComponentWriter
 	public List<String> getConstructorArgs() {
 		return Arrays.asList("CoreData coreData");
 	}
-
+	@Override
+	public List<String> getConstructorLines() {
+		return Arrays.asList("\n\t\tbuildMyControls();");
+	}
+	@Override //ComponentWriter
+	public String getClassName() {		
+		return className;
+	}
+	
 	@Override //ComponentWriterVisitor
 	public ComponentWriterVisitor setFileOutWriter(ClassWriterActions fileOut) {
 		this.fileOut = fileOut;
@@ -61,10 +67,8 @@ public class ComponentWriterJsPanelWithIFrame implements ComponentWriterVisitor{
 	
 	@Override //ComponentWriterVisitor
 	public void writeComponents() throws IOException {
-		writePanelVars();
-		
-//		fileOut.writeConstuctor(Arrays.asList("\t\tbuildMyControls();"));
-		writeConstuctor(Arrays.asList("\t\tbuildMyControls();"));
+		writePanelVars();		
+		writeConstructor();
 		writeBuildControlsFunction();
 	}
 
@@ -72,50 +76,14 @@ public class ComponentWriterJsPanelWithIFrame implements ComponentWriterVisitor{
 		writeStaticString("PANEL_TITLE", jsPanel.getPanelTitle());
 		writeStaticString("MENU_TITLE", jsPanel.getMenuTitle());
 		writeStaticString("MENU_PARENT_NAME", jsPanel.getMenuParentName());
-		fileOut.writeNewLine();
+	}
+	private void writeConstructor() throws IOException {
+		new ConstructorWriter(fileOut, this).writeConstuctor();
 	}
 	private void writeStaticString(String name, String val) throws IOException {
 		fileOut.writeLine(String.format("\tpublic static final String %s = \"%s\";", name, val));
 	}
-	
-	private void writeConstuctor(List<String> lines) throws IOException {
-		String constructor = "public " + className + "(";
-		for (String arg : getConstructorArgs()) {
-			constructor += arg + ",";
-		}		
-		constructor = constructor.substring(0, constructor.length()-1) + ") {";
 		
-		fileOut.addTab();
-		fileOut.writeValue(constructor);
-		fileOut.writeNewLine();
-		fileOut.addTab();
-		writeSuperConstructor();
-		for (String s : lines) {
-			fileOut.writeValue(s);
-			fileOut.writeNewLine();	
-		}
-		fileOut.addTab();
-		fileOut.writeValue("}");
-		fileOut.writeNewLine();
-	}
-	public void writeSuperConstructor() throws IOException {
-		List<String> args = getSuperArgs();
-		if(args.size()>0) {
-			String constructor = "super(";
-			for (String arg : args) {
-				constructor += arg + ",";
-			}
-			if(constructor.endsWith(",")) {
-				constructor = constructor.substring(0, constructor.length()-1);
-			}
-			constructor += ");";
-			fileOut.addTab();
-			fileOut.writeValue(constructor);
-			fileOut.writeNewLine();
-		}
-		
-	}
-	
 	private void writeBuildControlsFunction() throws IOException {		
 		String func;
 		if(elements != null) {
@@ -128,9 +96,7 @@ public class ComponentWriterJsPanelWithIFrame implements ComponentWriterVisitor{
 			ControlDataStringFactory fact = new ControlDataStringFactory(values);
 			try {
 				func = fact.getFunctionBuildMyControls();
-				fileOut.writeNewLine();
-				fileOut.writeValue(func);
-				System.out.println("FUNC\n" + func); // TODO - remove or log 	
+				fileOut.writeValue(func); 	
 			} catch (InvalidArgumentException e1) {
 				// TODO Auto-generated catch block
 				// ** TODO - Add to sitemapper log **
@@ -140,9 +106,5 @@ public class ComponentWriterJsPanelWithIFrame implements ComponentWriterVisitor{
 			
 		}		
 	}
-	/* 
-Element [type=button, name=save, by=css, locator=button[name='SAVE'], text=Save, fafa=fa fa-save, response=null]
-Element [type=button, name=search, by=css, locator=button[name='QBF1'], text=Search, fafa=fa fa-search, response=null]
-Element [type=text_out, name=code, by=css, locator=input[id='FORM_ID'], text=EMP_CODE, fafa=null, response=null]
-	 */
+		
 }
