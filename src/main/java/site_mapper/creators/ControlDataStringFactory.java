@@ -75,12 +75,17 @@ public class ControlDataStringFactory {
 	public static Optional<String> getControlData(ControlDataValues values)	throws InvalidArgumentException {		
 		String cd = null;
 		Optional<String> actualType = checkByType(values.getByType());
+		Optional<String> controlTypeName = Optional.ofNullable(values.getControlTypeName());
 		if(actualType.isPresent()) {
-			cd = switch (values.getControlTypeName()) {
-				case "button" -> getControlDataStr(values.getControlName(), "ControlGetterButton", values.getByValue(), actualType.get());
-				case "text_out" -> getControlDataStr(values.getControlName(), "ControlGetterTextOut", values.getByValue(), actualType.get());
-				default -> throw new InvalidArgumentException("[" + values.getControlTypeName() + "] is not a valid control type name.");
-			};	
+			if(controlTypeName.isPresent()) {
+				cd = switch (controlTypeName.get()) {
+					case "button" -> getControlDataStr(values.getControlName(), "ControlGetterButton", values.getByValue(), actualType.get());
+					case "text_out" -> getControlDataStr(values.getControlName(), "ControlGetterTextOut", values.getByValue(), actualType.get());
+					default -> throw new InvalidArgumentException("[" + values.getControlTypeName() + "] is not a valid control type name.");
+				};	
+			}else {
+				throw new InvalidArgumentException("[" + values.getControlTypeName() + "] is not a valid control type name.");
+			}
 		}else {
 			throw new InvalidArgumentException("[" + values.getByType() + "] is not a valid By type name.");
 		}					
@@ -89,16 +94,18 @@ public class ControlDataStringFactory {
 
 	private static Optional<String> checkByType(String byType) {
 		String ret = null;
-		if(byType.equalsIgnoreCase("CSS")) {
-			ret = "By.cssSelector";
-		}else if(byType.equalsIgnoreCase("XPATH")){
-			ret = "By.xpath";
-		}else if(byType.equalsIgnoreCase("ID") ) {
-			ret = "By.id";
-		}
+		if(byType != null) {
+			if(byType.equalsIgnoreCase("CSS")) {
+				ret = "By.cssSelector";
+			}else if(byType.equalsIgnoreCase("XPATH")){
+				ret = "By.xpath";
+			}else if(byType.equalsIgnoreCase("ID") ) {
+				ret = "By.id";
+			}	
+		}		
 		return Optional.ofNullable(ret);
 	}
-	
+
 	private static String getControlDataStr(String controlName, String controlGetter, String byValue, String byActualType) {
 		String str = 
 				"new ControlData(" + 

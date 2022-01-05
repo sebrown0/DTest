@@ -29,6 +29,34 @@ public class Element {
 	@XmlAttribute(name="hasFunction")
 	private String hasFunction;
 	
+	public Element setType(String type) {
+		this.type = type;
+		return this;
+	}
+	public Element setName(String name) {
+		this.name = name;
+		return this;
+	}
+	public Element setText(String text) {
+		this.text = text;
+		return this;
+	}
+	public Element setBy(String by) {
+		this.by = by;
+		return this;
+	}
+	public Element setLocator(String locator) {
+		this.locator = locator;
+		return this;
+	}
+	public Element setFafa(String fafa) {
+		this.fafa = fafa;
+		return this;
+	}
+	public Element setHasFunction(String hasFunction) {
+		this.hasFunction = hasFunction;
+		return this;
+	}
 	public String getType() {
 		return type;
 	}

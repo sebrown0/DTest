@@ -71,26 +71,22 @@ public class ComponentWriterJsPanelWithIFrame implements ComponentWriterVisitor{
 		writeConstructor();
 		writeBuildControlsFunction();
 	}
-
-	private void writePanelVars() throws IOException {
-		writeStaticString("PANEL_TITLE", jsPanel.getPanelTitle());
-		writeStaticString("MENU_TITLE", jsPanel.getMenuTitle());
-		writeStaticString("MENU_PARENT_NAME", jsPanel.getMenuParentName());
+	
+	public void writePanelVars() throws IOException {
+		new VariableWriter(fileOut, jsPanel).writePanelVars();;
 	}
+	
 	private void writeConstructor() throws IOException {
 		new ConstructorWriter(fileOut, this).writeConstuctor();
 	}
-	private void writeStaticString(String name, String val) throws IOException {
-		fileOut.writeLine(String.format("\tpublic static final String %s = \"%s\";", name, val));
-	}
-		
+			
 	private void writeBuildControlsFunction() throws IOException {		
 		String func;
 		if(elements != null) {
-			List<ControlDataValues> values = new ArrayList<>();
-					
+			List<ControlDataValues> values = new ArrayList<>();					
 			elements.forEach(e -> {
-				values.add(new ControlDataValues(e.getName(), e.getType(), e.getLocator(), e.getBy()));
+//				values.add(new ControlDataValues(e.getName(), e.getType(), e.getLocator(), e.getBy()));
+				values.add(new ControlDataValues(e));
 			});	
 			
 			ControlDataStringFactory fact = new ControlDataStringFactory(values);
