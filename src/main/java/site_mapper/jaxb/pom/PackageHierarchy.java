@@ -23,12 +23,9 @@ public class PackageHierarchy {
 	private Queue<String> packageNames = new LinkedList<String>();
 	private String ret;
 	
-	public PackageHierarchy(String root) {
-		this.root = root;		
-	}
 	public PackageHierarchy(String root, String current) {
 		this.root = root;
-		addCurrent(current);
+		addCurrent(current);		
 	}
 
 	public PackageHierarchy removeCurrent() {		

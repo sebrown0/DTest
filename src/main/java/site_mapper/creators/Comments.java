@@ -12,6 +12,14 @@ import site_mapper.jaxb.pom.SiteMapInfo;
  * @since 1.0
  */
 public class Comments {
+	public static String getParentPackageComments(SiteMapInfo siteMapInfo) {
+		return 
+				"/**\n* Parent Package for all Generated Packages." + 
+				"\n* ------------------------------------------" +
+				getFields(siteMapInfo) + 
+				"\n*/\n";
+	}
+	
 	public static String getPackageComments(SiteMapInfo siteMapInfo) {
 		return 
 				"/**\n* Generated Package." + 

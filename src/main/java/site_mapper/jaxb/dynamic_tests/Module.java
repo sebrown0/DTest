@@ -33,12 +33,8 @@ public class Module {
   
   private List<DynamicContainer> moduleMenus;
   
-  public Module getModuleContainers(PackageHierarchy ph, final SiteMapInfo siteMap) {
-  	
-  	System.out.println(" Create module package:" + name); // TODO - remove or log
-  	System.out.println("->" + siteMap); // TODO - remove or log
-  	
-  	PackageMaker.makeWithPackageInfo(siteMap, ph.reset().addCurrent("a_" + name)); //TODO - remove a_
+  public Module getModuleContainers(PackageHierarchy ph, final SiteMapInfo siteMap) {  	
+  	PackageMaker.makeWithPackageInfo(siteMap, ph.reset().addCurrent(name));
 		if(menus != null) {			
 			menus.forEach(m -> {								 	
 				m.getMenuContainers(siteMap, ph);

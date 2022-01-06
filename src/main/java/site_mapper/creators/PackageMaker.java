@@ -28,12 +28,20 @@ public class PackageMaker {
 	private static String filePath;
 	private static String packagePath;
 	
+	public static void makeParentWithPackageInfo(SiteMapInfo siteMap, PackageHierarchy ph) {
+		filePath = ph.getRoot() + "/" + ph.getHierarchyFwdSlashNotation();
+		packagePath = ph.getHierarchyDotNotation();
+		
+		makePackages();
+		createPackageInfo(siteMap, Comments.getParentPackageComments(siteMap));
+	}
+	
 	public static void makeWithPackageInfo(SiteMapInfo siteMap, PackageHierarchy ph) {
 		filePath = ph.getRoot() + "/" + ph.getHierarchyFwdSlashNotation();
 		packagePath = ph.getHierarchyDotNotation();
 		
 		makePackages();
-		createPackageInfo(siteMap);
+		createPackageInfo(siteMap, Comments.getPackageComments(siteMap));
 	}
 	
 	public static void makeWithPackageInfo(SiteMapInfo siteMap, String root, String packageName) {
@@ -41,7 +49,7 @@ public class PackageMaker {
 		packagePath = packageName;
 		
 		makePackages();
-		createPackageInfo(siteMap);
+		createPackageInfo(siteMap, Comments.getPackageComments(siteMap));
 	}
 	
 	public static void makeWithPackageInfo(SiteMapInfo siteMap, String root, String parentPackage, String packageName) {
@@ -49,19 +57,19 @@ public class PackageMaker {
 		packagePath = parentPackage + "." + packageName;
 		
 		makePackages();
-		createPackageInfo(siteMap);
+		createPackageInfo(siteMap, Comments.getPackageComments(siteMap));
 	}
 	
 	private static void makePackages() {
 		new File(filePath).mkdirs();
 	}
 	
-	private static void createPackageInfo(SiteMapInfo siteMap) {		
+	private static void createPackageInfo(SiteMapInfo siteMap, String comments) {		
 		try (Writer writer = 
 				new BufferedWriter(
 						new OutputStreamWriter(
 								new FileOutputStream(filePath + "/package-info.java"), StandardCharsets.UTF_8))) {
-			writer.write(Comments.getPackageComments(siteMap));
+			writer.write(comments);
 	    writer.write("package " + packagePath + ";");
 		} 
 		catch (IOException ex) {

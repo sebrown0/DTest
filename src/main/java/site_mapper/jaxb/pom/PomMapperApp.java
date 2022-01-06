@@ -5,6 +5,7 @@ import java.util.List;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import site_mapper.creators.PackageMaker;
 import site_mapper.jaxb.dynamic_tests.Module;
 
 /** 
@@ -37,11 +38,18 @@ public class PomMapperApp {
   @XmlElement(name="Module")
   private List<Module> modules;
 		
-	public void createPoms(PackageHierarchy ph, final String XML_SOURCE) {			
+	public void createPoms(final String XML_SOURCE) {
 		siteMapInfo.setXmlSource(XML_SOURCE);
-		for (Module module : modules) {
-			module.getModuleContainers(ph, siteMapInfo);
-		}			
+		
+		PackageHierarchy packageHierarchy = 
+				new PackageHierarchy(siteMapInfo.getRootDir(), siteMapInfo.getParentPackage());		
+		
+		if(siteMapInfo != null) {
+			PackageMaker.makeParentWithPackageInfo(siteMapInfo, packageHierarchy);
+			for (Module module : modules) {
+				module.getModuleContainers(packageHierarchy, siteMapInfo);
+			}	
+		}					
 	}
 	
 }

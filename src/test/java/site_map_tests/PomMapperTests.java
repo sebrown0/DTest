@@ -13,7 +13,6 @@ import jakarta.xml.bind.Unmarshaller;
 import site_mapper.creators.ClassComponentFactory;
 import site_mapper.creators.ComponentWriter;
 import site_mapper.creators.ComponentWriterJsPanelWithIFrame;
-import site_mapper.jaxb.pom.PackageHierarchy;
 import site_mapper.jaxb.pom.PomMapperApp;
 
 class PomMapperTests {
@@ -33,19 +32,16 @@ class PomMapperTests {
 		final String XML_SOURCE = "./src/test/resources/site_map.xml";
 		try {
 			jc = org.eclipse.persistence.jaxb.JAXBContext.newInstance(PomMapperApp.class);
+			
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
 	    unmarshaller.setProperty("eclipselink.media-type", "application/xml");      
 	    unmarshaller.setProperty(UnmarshallerProperties.DISABLE_SECURE_PROCESSING, Boolean.TRUE);    
-	    StreamSource source = new StreamSource(XML_SOURCE);	    
-	    PomMapperApp app = unmarshaller.unmarshal(source, PomMapperApp.class).getValue();
 	    
-	    /*
-	     * give it the root & current 
-	     * "./src/main/java", "object_models"
-	     */
-	    PackageHierarchy ph = new PackageHierarchy("./src/main/java", "object_models");
-	    app.createPoms(ph, XML_SOURCE);
-//	    app.createPoms(ph);
+	    StreamSource source = new StreamSource(XML_SOURCE);	    
+	    
+	    PomMapperApp app = unmarshaller.unmarshal(source, PomMapperApp.class).getValue();	    
+	    app.createPoms(XML_SOURCE);
+
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}    

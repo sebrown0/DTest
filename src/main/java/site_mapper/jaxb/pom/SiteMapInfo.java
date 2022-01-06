@@ -25,7 +25,11 @@ public class SiteMapInfo {
 	private String author;
 	@XmlElement(name="Version")
 	private String version;
-	
+	@XmlElement(name="RootDir")	
+	private String rootDir;
+	@XmlElement(name="ParentPackage")
+	private String parentPackage;
+
 	private String xmlSource;
 	private String date;
 	private String time;
@@ -65,11 +69,18 @@ public class SiteMapInfo {
 	}
 	public String getTimeStamp() {
 		return date + " " + time;
+	}	
+	public String getRootDir() {
+		return rootDir;
 	}
+	public String getParentPackage() {
+		return parentPackage;
+	}
+
 	@Override
 	public String toString() {
-		return "SiteMapInfo [author=" + author + ", version=" + version + ", xmlSource=" + xmlSource + ", date=" + date
-				+ ", time=" + time + "]";
+		return "SiteMapInfo [author=" + author + ", version=" + version + ", rootDir=" + rootDir + ", parentPackage="
+				+ parentPackage + ", xmlSource=" + xmlSource + ", date=" + date + ", time=" + time + "]";
 	}
-		
+			
 }
