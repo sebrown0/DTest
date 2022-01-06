@@ -1,7 +1,7 @@
 /**
  * 
  */
-package site_mapper.jaxb.classes.menu_items;
+package site_mapper.jaxb.menu_items;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;

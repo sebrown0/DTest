@@ -1,7 +1,7 @@
 /**
  * 
  */
-package site_mapper.jaxb.classes.pom;
+package site_mapper.jaxb.pom;
 
 import java.util.LinkedList;
 import java.util.Queue;

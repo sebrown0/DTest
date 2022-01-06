@@ -6,7 +6,7 @@ package site_mapper.creators;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import site_mapper.jaxb.classes.pom.SiteMap;
+import site_mapper.jaxb.pom.SiteMapInfo;
 
 /**
  * @author SteveBrown
@@ -15,7 +15,7 @@ import site_mapper.jaxb.classes.pom.SiteMap;
  * @since 1.0
  */
 public class Comments {
-	public static String getPackageComments(SiteMap siteMap) {
+	public static String getPackageComments(SiteMapInfo siteMap) {
 		return 
 				"/**\n* Generated Package." + 
 				"\n* ------------------" +
@@ -23,7 +23,7 @@ public class Comments {
 				"\n*/\n";
 	}
 	
-	public static String getClassComments(SiteMap siteMap) {
+	public static String getClassComments(SiteMapInfo siteMap) {
 		return 
 				"/**\n* Generated Class." + 
 				"\n* ----------------" +
@@ -31,7 +31,7 @@ public class Comments {
 				"\n*/\n";
 	}
 	
-	private static String getFields(SiteMap siteMap) {
+	private static String getFields(SiteMapInfo siteMap) {
 		return 
 				"\n* Source:  " + siteMap.getXmlSource() +
 				"\n* Author:  " +	siteMap.getAuthor() + 

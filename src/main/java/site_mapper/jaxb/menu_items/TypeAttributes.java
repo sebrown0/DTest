@@ -1,7 +1,7 @@
 /**
  * 
  */
-package site_mapper.jaxb.classes.menu_items;
+package site_mapper.jaxb.menu_items;
 
 /**
  * @author SteveBrown
@@ -21,5 +21,4 @@ package site_mapper.jaxb.classes.menu_items;
  * TODO - Make into interface?
  */
 public abstract class TypeAttributes {
-//	public abstract void writeElements();
 }

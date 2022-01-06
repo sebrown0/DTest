@@ -1,7 +1,7 @@
 /**
  * 
  */
-package site_mapper.jaxb.classes.pom;
+package site_mapper.jaxb.pom;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -14,9 +14,9 @@ import jakarta.xml.bind.annotation.XmlRootElement;
  * 	Initial
  * @since 1.0
  */
-@XmlRootElement(name="SiteMap")
+@XmlRootElement(name="Info")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SiteMap {
+public class SiteMapInfo {
 	@XmlElement(name="Author")
 	private String author;
 	@XmlElement(name="Version")
@@ -24,15 +24,15 @@ public class SiteMap {
 	
 	private String xmlSource;
 	
-	public SiteMap setAuthor(String author) {
+	public SiteMapInfo setAuthor(String author) {
 		this.author = author;
 		return this;
 	}
-	public SiteMap setVersion(String version) {
+	public SiteMapInfo setVersion(String version) {
 		this.version = version;
 		return this;
 	}
-	public SiteMap setXmlSource(String xmlSource) {
+	public SiteMapInfo setXmlSource(String xmlSource) {
 		this.xmlSource = xmlSource;
 		return this;
 	}

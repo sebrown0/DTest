@@ -1,4 +1,4 @@
-package site_mapper.jaxb.classes;
+package site_mapper.jaxb.dynamic_tests;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,7 @@ import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import object_models.pages.homepage.HomePage;
 import site_mapper.elements.IncludedTests;
+import site_mapper.jaxb.pom.SiteMapInfo;
 
 /** 
  * @author SteveBrown
@@ -23,9 +24,15 @@ import site_mapper.elements.IncludedTests;
  * JAXB class representing the top level element root.
  * This will return a DynamicContainer with all the 
  * sub DynamicContainers found in the relevant XML doc.
+ * 
+ * TODO: Use SiteMapInfo.
  */
-@XmlRootElement(name = "App")
+@XmlRootElement(name = "SiteMap")
 public class DynamicTestApp {
+	//Added 06/01/2022 NOT TESTED
+	@XmlElement(name="Info")
+	private SiteMapInfo siteMapInfo;
+	
 	@XmlElementWrapper(name="IncludeElementsForTest")
 	@XmlElement(name="Include")
 	private List<String> includeElementsForTest;
@@ -36,10 +43,8 @@ public class DynamicTestApp {
 	private HomePage homePage;
 		
 	public DynamicContainer getTests() {
-		includeElementsForTest.forEach(c -> System.out.println("->" + c));
-		
-		List<DynamicContainer> appModules = new ArrayList<>();
-		
+//		includeElementsForTest.forEach(c -> System.out.println("->" + c));		
+		List<DynamicContainer> appModules = new ArrayList<>();		
 		if(homepageOk() && modules != null) {			
 			for (Module module : modules) {
 				appModules.add(module.getModuleContainers(new IncludedTests(includeElementsForTest), homePage));

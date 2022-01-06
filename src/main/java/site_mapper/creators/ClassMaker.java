@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import site_mapper.elements.ElementClass;
-import site_mapper.jaxb.classes.pom.PackageHierarchy;
+import site_mapper.jaxb.pom.PackageHierarchy;
 
 /**
  * @author SteveBrown

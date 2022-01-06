@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import site_mapper.creators.PackageMaker;
-import site_mapper.jaxb.classes.pom.PackageHierarchy;
-import site_mapper.jaxb.classes.pom.SiteMap;
+import site_mapper.jaxb.pom.PackageHierarchy;
+import site_mapper.jaxb.pom.SiteMapInfo;
 
 class PackageHierarchyTests {
 
@@ -48,7 +48,7 @@ class PackageHierarchyTests {
 		 * CHECK PROJECT EXPLORER MANUALLY TO CONFIRM TEST. 
 		 * DELETE PACKAGES AFTER.
 		 */
-		SiteMap siteMap = new SiteMap().setAuthor("SEB").setVersion("1.0.0");
+		SiteMapInfo siteMap = new SiteMapInfo().setAuthor("SEB").setVersion("1.0.0");
 		PackageHierarchy ph = new PackageHierarchy("./src/main/java", "object_models");
 		ph.addCurrent("payroll");
 		PackageMaker.makeWithPackageInfo(siteMap, ph);		

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package site_mapper.jaxb;
+package site_mapper.jaxb.dynamic_tests;
 
 import java.util.Optional;
 

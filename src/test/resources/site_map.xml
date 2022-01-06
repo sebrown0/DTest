@@ -5,11 +5,11 @@
 ** DO WE NEED COMPANY???
 ** DO WE HAVE TEST DATA (IF SO FROM ANOTHER FILE?)? 
  -->
-<App>
-  <SiteMap>
+<SiteMap>
+  <Info>
     <Author>SteveBrown</Author>
     <Version>1.0.0</Version>
-  </SiteMap>
+  </Info>
   
   <!-- TODO The included elements should be in separate file. -->
   <IncludeElementsForTest>
@@ -66,4 +66,4 @@
    </Module>
      -->    
   </Modules>
-</App>
+</SiteMap>

@@ -17,7 +17,7 @@ import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;
-import site_mapper.jaxb.classes.DynamicTestApp;
+import site_mapper.jaxb.dynamic_tests.DynamicTestApp;
 import xml_reader.config_file.ConfigReader;
 
 @ExtendWith({ 

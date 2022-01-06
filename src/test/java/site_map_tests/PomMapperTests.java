@@ -13,8 +13,8 @@ import jakarta.xml.bind.Unmarshaller;
 import site_mapper.creators.ClassComponentFactory;
 import site_mapper.creators.ComponentWriter;
 import site_mapper.creators.ComponentWriterJsPanelWithIFrame;
-import site_mapper.jaxb.classes.pom.PackageHierarchy;
-import site_mapper.jaxb.classes.pom.PomMapperApp;
+import site_mapper.jaxb.pom.PackageHierarchy;
+import site_mapper.jaxb.pom.PomMapperApp;
 
 class PomMapperTests {
 	@Test

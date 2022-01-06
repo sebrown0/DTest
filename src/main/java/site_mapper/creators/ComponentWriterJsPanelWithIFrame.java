@@ -11,7 +11,7 @@ import java.util.List;
 import exceptions.InvalidArgumentException;
 import site_mapper.elements.Element;
 import site_mapper.elements.ElementClass;
-import site_mapper.jaxb.classes.menu_items.JsPanelWithIframe;
+import site_mapper.jaxb.menu_items.JsPanelWithIframe;
 
 /**
  * @author SteveBrown

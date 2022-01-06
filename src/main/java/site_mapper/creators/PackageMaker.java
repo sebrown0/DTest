@@ -11,8 +11,8 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 
-import site_mapper.jaxb.classes.pom.PackageHierarchy;
-import site_mapper.jaxb.classes.pom.SiteMap;
+import site_mapper.jaxb.pom.PackageHierarchy;
+import site_mapper.jaxb.pom.SiteMapInfo;
 
 /**
  * @author SteveBrown
@@ -28,7 +28,7 @@ public class PackageMaker {
 	private static String filePath;
 	private static String packagePath;
 	
-	public static void makeWithPackageInfo(SiteMap siteMap, PackageHierarchy ph) {
+	public static void makeWithPackageInfo(SiteMapInfo siteMap, PackageHierarchy ph) {
 		filePath = ph.getRoot() + "/" + ph.getHierarchyFwdSlashNotation();
 		packagePath = ph.getHierarchyDotNotation();
 		
@@ -36,7 +36,7 @@ public class PackageMaker {
 		createPackageInfo(siteMap);
 	}
 	
-	public static void makeWithPackageInfo(SiteMap siteMap, String root, String packageName) {
+	public static void makeWithPackageInfo(SiteMapInfo siteMap, String root, String packageName) {
 		filePath = root + "/" + packageName;
 		packagePath = packageName;
 		
@@ -44,7 +44,7 @@ public class PackageMaker {
 		createPackageInfo(siteMap);
 	}
 	
-	public static void makeWithPackageInfo(SiteMap siteMap, String root, String parentPackage, String packageName) {
+	public static void makeWithPackageInfo(SiteMapInfo siteMap, String root, String parentPackage, String packageName) {
 		filePath = root + "/" + parentPackage + "/" + packageName;
 		packagePath = parentPackage + "." + packageName;
 		
@@ -56,7 +56,7 @@ public class PackageMaker {
 		new File(filePath).mkdirs();
 	}
 	
-	private static void createPackageInfo(SiteMap siteMap) {		
+	private static void createPackageInfo(SiteMapInfo siteMap) {		
 		try (Writer writer = 
 				new BufferedWriter(
 						new OutputStreamWriter(

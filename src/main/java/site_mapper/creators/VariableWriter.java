@@ -5,7 +5,7 @@ package site_mapper.creators;
 
 import java.io.IOException;
 
-import site_mapper.jaxb.classes.menu_items.JsPanelWithIframe;
+import site_mapper.jaxb.menu_items.JsPanelWithIframe;
 
 /**
  * @author SteveBrown

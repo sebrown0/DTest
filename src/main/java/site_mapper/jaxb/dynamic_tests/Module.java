@@ -1,4 +1,4 @@
-package site_mapper.jaxb.classes;
+package site_mapper.jaxb.dynamic_tests;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,8 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import object_models.pages.homepage.HomePage;
 import site_mapper.creators.PackageMaker;
 import site_mapper.elements.IncludedElements;
-import site_mapper.jaxb.classes.pom.PackageHierarchy;
-import site_mapper.jaxb.classes.pom.SiteMap;
+import site_mapper.jaxb.pom.PackageHierarchy;
+import site_mapper.jaxb.pom.SiteMapInfo;
 
 /**
  * @author SteveBrown
@@ -33,7 +33,7 @@ public class Module {
   
   private List<DynamicContainer> moduleMenus;
   
-  public Module getModuleContainers(PackageHierarchy ph, final SiteMap siteMap) {
+  public Module getModuleContainers(PackageHierarchy ph, final SiteMapInfo siteMap) {
   	
   	System.out.println(" Create module package:" + name); // TODO - remove or log
   	System.out.println("->" + siteMap); // TODO - remove or log

@@ -1,4 +1,4 @@
-package site_mapper.jaxb.classes;
+package site_mapper.jaxb.dynamic_tests;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,9 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import object_models.pages.homepage.HomePage;
 import site_mapper.creators.PackageMaker;
 import site_mapper.elements.IncludedElements;
-import site_mapper.jaxb.classes.menu_items.MenuItem;
-import site_mapper.jaxb.classes.pom.PackageHierarchy;
-import site_mapper.jaxb.classes.pom.SiteMap;
+import site_mapper.jaxb.menu_items.MenuItem;
+import site_mapper.jaxb.pom.PackageHierarchy;
+import site_mapper.jaxb.pom.SiteMapInfo;
 
 /** 
  * @author SteveBrown
@@ -46,7 +46,7 @@ public class Menu {
   // List of individual test containers for each menu item. 
   private List<DynamicContainer> menuItemContainers = new ArrayList<>();
   
-  public Menu getMenuContainers(SiteMap siteMap, PackageHierarchy ph) {
+  public Menu getMenuContainers(SiteMapInfo siteMap, PackageHierarchy ph) {
 		PackageMaker.makeWithPackageInfo(siteMap, ph.addCurrent(name));		
 		if(menuItems != null) {
 			menuItems.forEach(item -> {

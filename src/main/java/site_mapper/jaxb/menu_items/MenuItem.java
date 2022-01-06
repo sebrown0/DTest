@@ -1,7 +1,7 @@
 /**
  * 
  */
-package site_mapper.jaxb.classes.menu_items;
+package site_mapper.jaxb.menu_items;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,8 +25,8 @@ import site_mapper.elements.ElementLoader;
 import site_mapper.elements.ElementTestButton;
 import site_mapper.elements.IncludedElements;
 import site_mapper.elements.TestElement;
-import site_mapper.jaxb.classes.pom.PackageHierarchy;
-import site_mapper.jaxb.classes.pom.SiteMap;
+import site_mapper.jaxb.pom.PackageHierarchy;
+import site_mapper.jaxb.pom.SiteMapInfo;
 
 /**
  * @author SteveBrown
@@ -58,9 +58,9 @@ public class MenuItem implements ElementClass {
 	private String moduleName;	
 	private Map<String, List<DynamicTest>> tests = new HashMap<>();
 	private ControlTest controlTest;
-	private SiteMap siteMap;
+	private SiteMapInfo siteMap;
 	
-	public void createPoms(SiteMap siteMap, PackageHierarchy ph){
+	public void createPoms(SiteMapInfo siteMap, PackageHierarchy ph){
 		this.siteMap = siteMap;
 		boolean createPackage = createPackageForClassIfNecessary(siteMap, ph);
 		createClass(ph);
@@ -70,7 +70,7 @@ public class MenuItem implements ElementClass {
 		ClassMaker cm = new ClassMaker(this, ph);
 		cm.makeClass();
 	}
-	private boolean createPackageForClassIfNecessary(SiteMap siteMap, PackageHierarchy ph) {
+	private boolean createPackageForClassIfNecessary(SiteMapInfo siteMap, PackageHierarchy ph) {
 		if(packageName != null && packageName.length() > 0) {
 			PackageMaker.makeWithPackageInfo(siteMap, ph.addCurrent(packageName));
 			return true;			
@@ -154,7 +154,7 @@ public class MenuItem implements ElementClass {
 		return elements;
 	}
 	@Override //ElementClass
-	public SiteMap getSiteMap() {
+	public SiteMapInfo getSiteMap() {
 		return siteMap;
 	}	
 	

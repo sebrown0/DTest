@@ -7,7 +7,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 
 import site_mapper.elements.ElementClass;
-import site_mapper.jaxb.classes.pom.PackageHierarchy;
+import site_mapper.jaxb.pom.PackageHierarchy;
 
 /**
  * @author SteveBrown

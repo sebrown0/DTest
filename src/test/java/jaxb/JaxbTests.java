@@ -9,9 +9,9 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
-import site_mapper.jaxb.classes.DynamicTestApp;
-import site_mapper.jaxb.classes.Menu;
-import site_mapper.jaxb.classes.Module;
+import site_mapper.jaxb.dynamic_tests.DynamicTestApp;
+import site_mapper.jaxb.dynamic_tests.Menu;
+import site_mapper.jaxb.dynamic_tests.Module;
 
 class JaxbTests {
 	
