@@ -5,8 +5,6 @@ package site_mapper.creators;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import site_mapper.jaxb.pom.SiteMapInfo;
 
@@ -27,11 +25,10 @@ public class AnnotationWriter {
 	
 	private void createAnnotation(SiteMapInfo siteMapInfo) {
 		if(siteMapInfo != null) {
-			String timeStamp = 	DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDate.now());
 			annotation =
 					"\t@SiteMap(author=\"" + siteMapInfo.getAuthor() + "\"" + 
 					", version=\"" + siteMapInfo.getVersion() + "\"" + 
-					", date=\"" + timeStamp + "\")\n";	
+					", date=\"" + siteMapInfo.getDate() + "\")\n";	
 		}else {
 			annotation =
 					"\t@SiteMap(author=\"\", version=\"\", date=\"\")\n";	

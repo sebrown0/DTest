@@ -3,9 +3,6 @@
  */
 package site_mapper.creators;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import site_mapper.jaxb.pom.SiteMapInfo;
 
 /**
@@ -15,27 +12,36 @@ import site_mapper.jaxb.pom.SiteMapInfo;
  * @since 1.0
  */
 public class Comments {
-	public static String getPackageComments(SiteMapInfo siteMap) {
+	public static String getPackageComments(SiteMapInfo siteMapInfo) {
 		return 
 				"/**\n* Generated Package." + 
 				"\n* ------------------" +
-				getFields(siteMap) + 
+				getFields(siteMapInfo) + 
 				"\n*/\n";
 	}
 	
-	public static String getClassComments(SiteMapInfo siteMap) {
+	public static String getClassComments(SiteMapInfo siteMapInfo) {
 		return 
 				"/**\n* Generated Class." + 
 				"\n* ----------------" +
-				getFields(siteMap) + 
+				getFields(siteMapInfo) + 
 				"\n*/\n";
 	}
 	
-	private static String getFields(SiteMapInfo siteMap) {
-		return 
-				"\n* Source:  " + siteMap.getXmlSource() +
-				"\n* Author:  " +	siteMap.getAuthor() + 
-				"\n* Version: " + siteMap.getVersion() +
-				"\n* Created: " + DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now());
+	private static String getFields(SiteMapInfo siteMapInfo) {
+		if(siteMapInfo != null) {
+			return 
+					"\n* Source:  " + siteMapInfo.getXmlSource() +
+					"\n* Author:  " +	siteMapInfo.getAuthor() + 
+					"\n* Version: " + siteMapInfo.getVersion() +
+					"\n* Created: " + siteMapInfo.getTimeStamp();	
+		}else {
+			return 
+					"\n* Source:  unknown" +
+					"\n* Author:  unknown" + 
+					"\n* Version: unknown" +
+					"\n* Created: unknown"; 
+		}
+		
 	}
 }

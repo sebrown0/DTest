@@ -3,6 +3,10 @@
  */
 package site_mapper.jaxb.pom;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
@@ -23,6 +27,13 @@ public class SiteMapInfo {
 	private String version;
 	
 	private String xmlSource;
+	private String date;
+	private String time;
+	
+	public SiteMapInfo() {
+		date = DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDate.now());
+		time = DateTimeFormatter.ofPattern("HH:mm:ss").format(LocalTime.now());
+	}
 	
 	public SiteMapInfo setAuthor(String author) {
 		this.author = author;
@@ -46,10 +57,19 @@ public class SiteMapInfo {
 	public String getXmlSource() {
 		return xmlSource;
 	}
-	
+	public String getDate() {
+		return date;
+	}
+	public String getTime() {
+		return time;
+	}
+	public String getTimeStamp() {
+		return date + " " + time;
+	}
 	@Override
 	public String toString() {
-		return "SiteMap [author=" + author + ", version=" + version + "]";
+		return "SiteMapInfo [author=" + author + ", version=" + version + ", xmlSource=" + xmlSource + ", date=" + date
+				+ ", time=" + time + "]";
 	}
-	
+		
 }
