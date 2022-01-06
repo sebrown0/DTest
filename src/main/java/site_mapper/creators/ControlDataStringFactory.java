@@ -35,7 +35,7 @@ public class ControlDataStringFactory {
 		if(values != null && values.size() > 0) {
 			numControls = values.size();		
 			func = 
-				"\n\n\tprivate void buildMyControls() {\n" +
+				"\tprivate void buildMyControls() {\n" +
 				"\t\tvar myControls = \r\n" +
 				"\t\t\tList.of(";
 		

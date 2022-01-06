@@ -29,7 +29,7 @@ import site_mapper.elements.Element;
  * 
  */
 class ControlDataFactoryTests {
-//values.add(new ControlDataValues(e.getName(), e.getType(), e.getLocator(), e.getBy()));
+
 	@Test
 	void incorrectControlName() {		
 		Element e = new Element();
@@ -77,7 +77,7 @@ class ControlDataFactoryTests {
 	@Test
 	void buildControlsFunction() throws InvalidArgumentException {
 		String expected = 
-				"\n\n\tprivate void buildMyControls() {\n" +
+				"\tprivate void buildMyControls() {\n" +
 				"\t\tvar myControls = \r\n" +
 				"\t\t\tList.of(" +
 				"\n\t\t\t\tnew ControlData(\"search\", new ControlGetterButton(coreData, By.id(\"\"button[name='QBF1']\"\")))," +

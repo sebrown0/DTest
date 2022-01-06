@@ -28,7 +28,7 @@ public class ConstructorWriter {
 		closeConstructor();
 	}
 	private void openConstructor() throws IOException {
-		String opening = "\n\tpublic " + componentWriter.getClassName() + "(";
+		String opening = "\tpublic " + componentWriter.getClassName() + "(";
 		for (String arg : componentWriter.getConstructorArgs()) {
 			opening += arg + ",";
 		}		

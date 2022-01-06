@@ -21,10 +21,12 @@ public class ClassWriter implements ClassWriterActions {
 	private BufferedWriter writer;
 	private ComponentWriter componentWriter;
 	private ElementClass elementClass;
+	private AnnotationWriter annotationWriter;
 	
 	public ClassWriter(ElementClass elementClass, PackageHierarchy ph, BufferedWriter writer, ComponentWriter componentWriter) {
 		this.elementClass = elementClass;
 		this.className = elementClass.getClassName();
+		this.annotationWriter = new AnnotationWriter(writer, elementClass.getSiteMapInfo());
 		this.ph = ph;
 		this.writer = writer;
 		this.componentWriter = componentWriter;
@@ -52,7 +54,7 @@ public class ClassWriter implements ClassWriterActions {
 	}
 	
 	public void writeComments() throws IOException {
-		writer.write(Comments.getClassComments(elementClass.getSiteMap()));
+		writer.write(Comments.getClassComments(elementClass.getSiteMapInfo()));
 	}
 	public void writeIndividualElements(ComponentWriter compWriter) throws IOException {
 		if(compWriter instanceof ComponentWriterVisitor ) {
@@ -89,16 +91,22 @@ public class ClassWriter implements ClassWriterActions {
 	public void addTab() throws IOException {
 		writer.write("\t");
 	}
-
-	@Override
+	@Override //ClassWriterActions
 	public void writeValue(String value) throws IOException {
 		writer.write(value);
 	}
-
-	@Override
+	@Override //ClassWriterActions
 	public void writeLine(String value) throws IOException {
 		writer.write(value);
 		writer.newLine();
+	}
+	@Override //ClassWriterActions
+	public void writeAnnotation() throws IOException {
+		annotationWriter.writeAnnotation();
+//		writer.write(
+//				"\t@SiteMap(author=\"" + siteMapInfo.getAuthor() + "\"" + 
+//				", version=\"" + siteMapInfo.getVersion() + "\"" + 
+//				", date=\"" + timeStamp + "\")\n");
 	}
 
 }

@@ -31,6 +31,7 @@ public class ComponentWriterJsPanelWithIFrame implements ComponentWriterVisitor{
 				new UseImport("java.util.List"),
 				new UseImport("org.openqa.selenium.By"),
 				new UseImport("control_builder.*"),
+				new UseImport("site_mapper.annotations.SiteMap"),
 				new FindImport("JsPanelWithIFrame"),
 				new FindImport("CoreData"));
 	}
@@ -77,6 +78,8 @@ public class ComponentWriterJsPanelWithIFrame implements ComponentWriterVisitor{
 	}
 	
 	private void writeConstructor() throws IOException {
+		fileOut.writeNewLine();
+		fileOut.writeAnnotation();
 		new ConstructorWriter(fileOut, this).writeConstuctor();
 	}
 			
@@ -91,6 +94,8 @@ public class ComponentWriterJsPanelWithIFrame implements ComponentWriterVisitor{
 			ControlDataStringFactory fact = new ControlDataStringFactory(values);
 			try {
 				func = fact.getFunctionBuildMyControls();
+				fileOut.writeNewLines(2);
+				fileOut.writeAnnotation();
 				fileOut.writeValue(func); 	
 			} catch (InvalidArgumentException e1) {
 				// TODO Auto-generated catch block

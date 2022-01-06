@@ -30,5 +30,5 @@ public interface ElementClass {
 	String getTypeName();
 	MenuItemType getMenuItemType();
 	List<Element> getElements();
-	SiteMapInfo getSiteMap();
+	SiteMapInfo getSiteMapInfo();
 }

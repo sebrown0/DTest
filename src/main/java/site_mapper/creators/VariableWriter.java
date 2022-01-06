@@ -29,6 +29,7 @@ public class VariableWriter {
 	}
 	
 	private void writeStaticString(String name, String val) throws IOException {
+		fileOut.writeAnnotation();
 		fileOut.writeLine(String.format("\tpublic static final String %s = \"%s\";", name, val));
 	}
 	

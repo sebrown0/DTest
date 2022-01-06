@@ -154,7 +154,7 @@ public class MenuItem implements ElementClass {
 		return elements;
 	}
 	@Override //ElementClass
-	public SiteMapInfo getSiteMap() {
+	public SiteMapInfo getSiteMapInfo() {
 		return siteMap;
 	}	
 	
