@@ -3,24 +3,19 @@
   
     <Properties>
         <Property name="logPath">logs</Property>
-        <Property name="appLogName">app.log</Property>
-        <Property name="testLogName">automated_tests</Property>
+        <Property name="rollingFileName">site_map</Property>
+        
     </Properties>        
     
-    <CustomLevels>    	
-    	<CustomLevel name="PASSED" intLevel="700" />
-    	<CustomLevel name="IGNORED" intLevel="800" />
-    	<CustomLevel name="FAILED" intLevel="900" />    	
-    </CustomLevels> 
-    
     <Appenders>
+    <!-- 
         <Appender type="Console" name="Console">
             <Layout type="PatternLayout" pattern="%d %p [%t] %m%n" />
         </Appender>
-        
+        -->
         <Appender 
         	type="File" 
-        	name="TestFile"        	
+        	name="SiteMapFile"        	
         	fileName="${sys:logFilePath}">
             <Layout type="PatternLayout" pattern="%d, [%p] %msg; %n" />
         </Appender>
@@ -30,7 +25,7 @@
         	fileName="${logPath}/${appLogName}.log" 
         	filePattern="${logPath}/${appLogName}_%d{yyyy-MM-dd}.log"
         	append="true">
-        <!-- <PatternLayout pattern="[%highlight{%-5level}] %d{DEFAULT} %c{1}.%M() - %msg%n%throwable{short.lineNumber}" /> -->
+
 	        <PatternLayout pattern="%d [%p] [%c{1}] [%M()] - %msg; %n" />
 	        <Policies>
 	            <OnStartupTriggeringPolicy />
@@ -42,14 +37,11 @@
     
     <Loggers>    
         <Logger name="TEST_LOGGER" level="FAILED" additivity="false">        
-        	<AppenderRef ref="TestFile" />
+        	<AppenderRef ref="SiteMapFile" />
         </Logger>  
  	        
         <Root level="debug">
             <AppenderRef ref="rollingFile" />
-            <!-- <AppenderRef ref="Console" /> -->            
         </Root>         
     </Loggers>
 </Configuration>
-
-<!--  fileName="${logPath}/${testLogName}.log"> -->

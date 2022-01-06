@@ -11,7 +11,6 @@ import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import object_models.pages.homepage.HomePage;
 import site_mapper.elements.IncludedTests;
-import site_mapper.jaxb.pom.SiteMapInfo;
 
 /** 
  * @author SteveBrown
@@ -30,8 +29,8 @@ import site_mapper.jaxb.pom.SiteMapInfo;
 @XmlRootElement(name = "SiteMap")
 public class DynamicTestApp {
 	//Added 06/01/2022 NOT TESTED
-	@XmlElement(name="Info")
-	private SiteMapInfo siteMapInfo;
+//	@XmlElement(name="Info")
+//	private SiteMapInfo siteMapInfo;
 	
 	@XmlElementWrapper(name="IncludeElementsForTest")
 	@XmlElement(name="Include")

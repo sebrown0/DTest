@@ -5,43 +5,82 @@
 ** DO WE NEED COMPANY???
 ** DO WE HAVE TEST DATA (IF SO FROM ANOTHER FILE?)? 
  -->
-<App>
-<!--
-  ***************************************************
-  ****** THIS IS THE TEST VERSION OF THIS FILE ******
-  *************************************************** 
- -->
- 
-  <!--
-  ********************************************************************
-  ****** TODO The included elements should be in separate file. ******
-  ********************************************************************
-   
-  -->
+<SiteMap>
+  <Info>
+    <Author>SteveBrown</Author>
+    <Version>1.0.0</Version>
+    <RootDir>C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/java</RootDir>
+    <ParentPackage>a</ParentPackage>
+  </Info>
+  
+  <!-- TODO The included elements should be in separate file. -->
   <IncludeElementsForTest>
     <Include>button</Include>
     <!-- <Include>text_out</Include> -->
   </IncludeElementsForTest>
   
   <Modules>
+  
    <Module name="payroll">   
     <Menus>
       <Menu name="Left" package="left_menu">      
-        <MenuItem name="Employee Details" package="employees" class="EmployeeDetails">
-          <Elements>
-            
-            <Element type="button" name="save" text="Save" fafa="fa fa-save" by="css" locator="button[name='SAVE']" hasFunction="true" />
-            <Element type="button" name="search" text="Search" fafa="fa fa-search" by="css" locator="button[name='QBF1']" hasFunction="true" />
-   
-            <Element type="text_out" name="code" text="EMP_CODE" by="css" locator="input[id='FORM_ID']" hasFunction="false"/>
-   <!--               -->    
-          </Elements>
+        <MenuItem name="Employee Details" package="employees" class="EmployeeDetails">          
+          <Type name="JsPanelWithIFrame">
+            <JsPanelWithIFrame>
+              <PanelTitle>Employee Details</PanelTitle>
+              <MenuTitle>Employee Details</MenuTitle>
+              <MenuParent>Employees</MenuParent>
+            </JsPanelWithIFrame>
+          </Type>
           
+          <Elements>            
+            <Element type="button" name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']" />
+            <Element type="button" name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']" />   
+            <Element type="text_out" name="code" text="EMP_CODE" by="css" locator="input[id='FORM_ID']" />   
+          </Elements>          
+        </MenuItem>
+        <!-- 
+        <MenuItem name="Employee List" package="" class="EmployeeList">        
+          <Type name="JsPanelWithIFrame">
+            <Attributes>
+              <PanelTitle>Employee List</PanelTitle>
+              <MenuTitle>Employee List</MenuTitle>
+            </Attributes>                        
+          </Type>
+          
+          <Elements>            
+            <Element type="button" name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']" />   
+          </Elements>          
         </MenuItem>        
+              -->   
       </Menu>
-    </Menus>          
+    </Menus>
    </Module>
-    
+   
+   <Module name="personnel">   
+    <Menus>
+      <Menu name="Left" package="left_menu">      
+        <MenuItem name="Employee Details" package="employees" class="EmployeeDetails">          
+          <Type name="JsPanelWithIFrame">
+            <JsPanelWithIFrame>
+              <PanelTitle>Employee Details</PanelTitle>
+              <MenuTitle>Employee Details</MenuTitle>
+              <MenuParent>Employees</MenuParent>
+            </JsPanelWithIFrame>
+          </Type>
+          
+          <Elements>            
+            <Element type="button" name="save" text="Save" fafa="fa fa-save" response="" by="css" locator="button[name='SAVE']" />
+            <Element type="button" name="search" text="Search" fafa="fa fa-search" response="" by="css" locator="button[name='QBF1']" />   
+            <Element type="text_out" name="code" text="EMP_CODE" by="css" locator="input[id='FORM_ID']" />   
+          </Elements>          
+        </MenuItem>
+           
+      </Menu>
+    </Menus>
+   </Module>
+   
+  <!--          
    <Module name="Personnel">   
     <Menus>
       <Menu name = "Left" package="left_menu">
@@ -51,6 +90,6 @@
       </Menu>
     </Menus>                          
    </Module>
-    
+     -->    
   </Modules>
-</App>
+</SiteMap>

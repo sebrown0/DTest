@@ -16,8 +16,6 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import object_models.pages.homepage.HomePage;
-import site_mapper.creators.ClassMaker;
-import site_mapper.creators.PackageMaker;
 import site_mapper.elements.Element;
 import site_mapper.elements.ElementClass;
 import site_mapper.elements.ElementCreation;
@@ -25,8 +23,6 @@ import site_mapper.elements.ElementLoader;
 import site_mapper.elements.ElementTestButton;
 import site_mapper.elements.IncludedElements;
 import site_mapper.elements.TestElement;
-import site_mapper.jaxb.pom.PackageHierarchy;
-import site_mapper.jaxb.pom.SiteMapInfo;
 
 /**
  * @author SteveBrown
@@ -58,31 +54,8 @@ public class MenuItem implements ElementClass {
 	private String moduleName;	
 	private Map<String, List<DynamicTest>> tests = new HashMap<>();
 	private ControlTest controlTest;
-	private SiteMapInfo siteMap;
-	
-	public void createPoms(SiteMapInfo siteMap, PackageHierarchy ph){
-		this.siteMap = siteMap;
-		boolean createPackage = createPackageForClassIfNecessary(siteMap, ph);
-		createClass(ph);
-		removeThisClassPackageFromHierarchy(createPackage, ph);		
-	}
-	private void createClass(PackageHierarchy ph) {
-		ClassMaker cm = new ClassMaker(this, ph);
-		cm.makeClass();
-	}
-	private boolean createPackageForClassIfNecessary(SiteMapInfo siteMap, PackageHierarchy ph) {
-		if(packageName != null && packageName.length() > 0) {
-			PackageMaker.makeWithPackageInfo(siteMap, ph.addCurrent(packageName));
-			return true;			
-		}
-		return false;
-	}
-	private void removeThisClassPackageFromHierarchy(boolean packageWasAddedToHierarchy, PackageHierarchy ph) {
-		if(packageWasAddedToHierarchy) {
-			ph.removeCurrent();
-		}		
-	}
-	
+//	private SiteMapInfo siteMap;
+		
 	public Map<String, List<DynamicTest>> getTests(
 			IncludedElements includedElements, HomePage hp, String moduleName, String menuPackageName) {
 		
@@ -153,10 +126,10 @@ public class MenuItem implements ElementClass {
 	public List<Element> getElements() {
 		return elements;
 	}
-	@Override //ElementClass
-	public SiteMapInfo getSiteMapInfo() {
-		return siteMap;
-	}	
+//	@Override //ElementClass
+//	public SiteMapInfo getSiteMapInfo() {
+//		return siteMap;
+//	}	
 	
 	public String getName() {
 		return name;

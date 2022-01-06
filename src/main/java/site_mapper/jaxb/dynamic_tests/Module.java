@@ -10,10 +10,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import object_models.pages.homepage.HomePage;
-import site_mapper.creators.PackageMaker;
 import site_mapper.elements.IncludedElements;
-import site_mapper.jaxb.pom.PackageHierarchy;
-import site_mapper.jaxb.pom.SiteMapInfo;
 
 /**
  * @author SteveBrown
@@ -33,15 +30,15 @@ public class Module {
   
   private List<DynamicContainer> moduleMenus;
   
-  public Module getModuleContainers(PackageHierarchy ph, final SiteMapInfo siteMap) {  	
-  	PackageMaker.makeWithPackageInfo(siteMap, ph.reset().addCurrent(name));
-		if(menus != null) {			
-			menus.forEach(m -> {								 	
-				m.getMenuContainers(siteMap, ph);
-	  	});	
-		}  	
-		return this;
-	}
+//  public Module getModuleContainers(PackageHierarchy ph, final SiteMapInfo siteMap) {  	
+//  	PackageMaker.makeWithPackageInfo(siteMap, ph.reset().addCurrent(name));
+//		if(menus != null) {			
+//			menus.forEach(m -> {								 	
+//				m.getMenuContainers(siteMap, ph);
+//	  	});	
+//		}  	
+//		return this;
+//	}
   
 	public DynamicContainer getModuleContainers(IncludedElements includedElements, HomePage hp) {
 		moduleMenus = new ArrayList<>();
