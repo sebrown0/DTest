@@ -30,6 +30,8 @@ import test_result.TestResultGetter;
  *  logDir: where the log is kept. Specified in config.xml.
  *  testSuiteName: forms part of the name of the log result file.
  *  
+ * Configure the Logger.
+ * 
  * Write the result to the test log in the format
  * specified in constructLogMsg().
  * 
