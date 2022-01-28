@@ -27,7 +27,7 @@ public class DriverFactory {
 	public static WebDriver getDriver(String driverName) {
 		DriverGetter dg = null;
 		WebDriver driver;
-		Logger logger = LogManager.getLogger();
+		Logger logger = LogManager.getLogger(DriverFactory.class);
 		
 		if(driverName.equalsIgnoreCase("XXXX")) {
 			// ANOTHER DRIVER
