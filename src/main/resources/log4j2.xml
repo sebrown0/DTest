@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+  <Properties>
+    <Property name="basePath">logs</Property>
+    <Property name="appFileName">app_log.txt</Property>
+  </Properties>
+ 
+  <CustomLevels>      
+    <CustomLevel name="IGNORED" intLevel="900" />
+    <CustomLevel name="PASSED" intLevel="800" />
+    <CustomLevel name="FAILED" intLevel="700" />              
+  </CustomLevels> 
+     
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT" follow="true">
+    
+    </Console>
+    <!-- 
+    <File name="TestFile" fileName="${sys:logFilePath}" append="true">
+      <PatternLayout>
+        <pattern>%d, [%p] %msg; %n</pattern>
+      </PatternLayout>      
+    </File>
+    -->
+    
+    <RollingFile name="AppLog" fileName="${basePath}/dtest-app-log.log" filePattern="${basePath}/dtest-app-log.log-%d{yyyy-MM-dd}.log">
+      <LevelRangeFilter minLevel="ERROR" maxLevel="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+      <PatternLayout>
+        <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+      </PatternLayout>
+      <Policies>
+        <OnStartupTriggeringPolicy />
+        <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+        <SizeBasedTriggeringPolicy size="2MB" />        
+      </Policies>      
+    </RollingFile>
+        
+  </Appenders>
+  
+  <Loggers>
+     
+    <Root level="warn" additivity="false">
+      <appender-ref ref="fileLogger" />
+    </Root>
+    
+    <Logger name = "dtest.app.log"  level="debug" additivity="false">
+      <AppenderRef ref="AppLog" />
+    </Logger>
+
+     <!-- TEST LOGGER IS CONFIGURED AND GOT FROM TestLog.java --> 
+  </Loggers>
+  
+</Configuration>

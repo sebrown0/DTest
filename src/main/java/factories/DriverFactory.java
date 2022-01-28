@@ -24,7 +24,7 @@ import drivers.GoogleDriver;
  */
 public class DriverFactory {
 	
-	public static WebDriver getDriver(String driverName) {
+	public static WebDriver getDriver(String driverName) {	
 		DriverGetter dg = null;
 		WebDriver driver;
 		Logger logger = LogManager.getLogger(DriverFactory.class);

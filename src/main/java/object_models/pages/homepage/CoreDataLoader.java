@@ -24,7 +24,7 @@ public class CoreDataLoader implements CoreData {
 	public CoreDataLoader(WebDriver driver) {
 		this.driver = driver;
 		this.cm = new ContextManager(driver);
-		this.logger = LogManager.getLogger();
+		this.logger = LogManager.getLogger("dtest.app.log");
 	}
 
 	@Override
