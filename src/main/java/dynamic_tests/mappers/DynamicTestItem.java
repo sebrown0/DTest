@@ -1,7 +1,7 @@
 /**
  * 
  */
-package dynamic_tests;
+package dynamic_tests.mappers;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,36 +11,32 @@ import java.util.Optional;
 import org.junit.jupiter.api.DynamicTest;
 
 import controls.ControlTest;
+import dynamic_tests.elements.ElementLoader;
+import dynamic_tests.elements.ElementTestButton;
+import dynamic_tests.elements.IncludedElements;
+import dynamic_tests.elements.TestElement;
 import object_models.pages.homepage.HomePage;
 import site_mapper.elements.Element;
 import site_mapper.elements.ElementCreation;
-import site_mapper.elements.ElementLoader;
-import site_mapper.elements.ElementTestButton;
-import site_mapper.elements.IncludedElements;
-import site_mapper.elements.TestElement;
 import site_mapper.jaxb.menu_items.MenuItem;
 
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
  * @since 1.0
  */
 public class DynamicTestItem {
-	private String menuPackageName;
-	private String moduleName;	
 	private Map<String, List<DynamicTest>> tests = new HashMap<>();
 	private ControlTest controlTest;
 	private List<Element> elements;
 	private MenuItem item;
 	
 	public Map<String, List<DynamicTest>> getTests(
-			MenuItem item, List<Element> elements, IncludedElements includedElements, 
-				HomePage hp, String moduleName, String menuPackageName) {
+		MenuItem item, IncludedElements includedElements,	HomePage hp) {
 	
 		this.item = item;
-		this.elements = elements;
-		this.menuPackageName = menuPackageName;
-		this.moduleName = moduleName;
+		this.elements = item.getElements();
 		
 		setElementsTests(includedElements, hp);
 		return tests;

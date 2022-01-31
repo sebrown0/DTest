@@ -1,7 +1,7 @@
 /**
  * 
  */
-package site_mapper.annotations;
+package dynamic_tests.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -17,12 +17,12 @@ import control_builder.ControlGetterEmployeeSelection;
 import control_builder.ControlGetterTextOut;
 import controls.ComboSelectFromList;
 import controls.TextOut;
+import dynamic_tests.annotations.TestControl;
 import enums.control_names.EmployeeControlNames;
 import enums.control_names.GroupControlNames;
 import object_models.element.TextInOut;
 import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
-import site_mapper.annotations.TestControl;
 
 /**
  * @author SteveBrown

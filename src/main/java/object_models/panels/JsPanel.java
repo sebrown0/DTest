@@ -31,15 +31,15 @@ import controls.ControlName;
 import controls.ControlTest;
 import controls.DisplayedText;
 import controls.HasFaFa;
+import dynamic_tests.elements.SiteMapElement;
+import dynamic_tests.finders.MethodFinder;
+import dynamic_tests.finders.MethodGetter;
 import exceptions.PanelException;
 import object_models.forms.ContainerAction;
 import object_models.helpers.IFrame;
 import object_models.helpers.title.PageTitle;
 import object_models.helpers.title.TitlePanel;
 import object_models.pages.homepage.CoreData;
-import site_mapper.elements.SiteMapElement;
-import site_mapper.finders.MethodFinder;
-import site_mapper.method_getter.MethodGetter;
 
 /**
  * @author SteveBrown

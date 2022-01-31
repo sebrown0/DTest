@@ -1,7 +1,7 @@
 /**
  * 
  */
-package site_mapper.elements;
+package dynamic_tests.elements;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

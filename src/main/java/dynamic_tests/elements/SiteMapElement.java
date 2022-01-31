@@ -1,7 +1,7 @@
 /**
  * 
  */
-package site_mapper.elements;
+package dynamic_tests.elements;
 
 /**
  * @author SteveBrown

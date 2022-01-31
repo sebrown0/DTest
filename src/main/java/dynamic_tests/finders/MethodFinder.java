@@ -1,14 +1,14 @@
 /**
  * 
  */
-package site_mapper.finders;
+package dynamic_tests.finders;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import site_mapper.annotations.TestControl;
+import dynamic_tests.annotations.TestControl;
 
 /**
  * @author SteveBrown

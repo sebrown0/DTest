@@ -12,9 +12,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import dynamic_tests.annotations.TestControl;
+import dynamic_tests.finders.MethodFinder;
 import object_models.module_payroll.left_menu.employees.EmployeeDetails;
-import site_mapper.annotations.TestControl;
-import site_mapper.finders.MethodFinder;
 
 /**
  * @author SteveBrown

@@ -1,15 +1,15 @@
 /**
  * 
  */
-package dynamic_tests;
+package dynamic_tests.mappers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.DynamicContainer;
 
+import dynamic_tests.elements.IncludedElements;
 import object_models.pages.homepage.HomePage;
-import site_mapper.elements.IncludedElements;
 import site_mapper.jaxb.pom.Menu;
 import site_mapper.jaxb.pom.Module;
 
@@ -18,6 +18,9 @@ import site_mapper.jaxb.pom.Module;
  * @version 1.0
  * 	Initial
  * @since 1.0
+ * 
+ * Get the modules for dynamic tests.
+ * 
  */
 public class DynamicTestModule {
   private List<DynamicContainer> moduleMenus;
@@ -32,15 +35,5 @@ public class DynamicTestModule {
 		}  	
 		return DynamicContainer.dynamicContainer(module.getName(), moduleMenus);
 	}
-	/*
-	private List<DynamicContainer> moduleMenus = new ArrayList<>();
-	
-	public DynamicContainer getModuleContainers(Module module) {
-		DynamicTestMenu menu = new DynamicTestMenu();
-		module.getMenus().forEach(m ->{
-			moduleMenus.add(menu.getMenuContainers(m));
-		});
-		return null;
-	}
-		*/	
+
 }

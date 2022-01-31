@@ -1,26 +1,29 @@
 /**
  * 
  */
-package dynamic_tests;
+package dynamic_tests.mappers;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.DynamicContainer;
 import org.junit.jupiter.api.DynamicTest;
 
+import dynamic_tests.elements.IncludedElements;
 import object_models.pages.homepage.HomePage;
-import site_mapper.elements.IncludedElements;
 import site_mapper.jaxb.menu_items.MenuItem;
 import site_mapper.jaxb.pom.Menu;
 
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
  * @since 1.0
  */
 public class DynamicTestMenu {
+	// Key = element type + "_" + elementName, i.e. [buttonSave].
 	private Map<String, List<DynamicTest>> menuItemTests;;  
   // List of all test containers in the menu item.
   private List<DynamicContainer> menuContainers = new ArrayList<>();
@@ -32,22 +35,30 @@ public class DynamicTestMenu {
   public DynamicContainer getMenuContainers(
   		Menu menu, IncludedElements includedElements, HomePage hp, String moduleName) {
   	
-//		if(menu.getMenuItems() != null && includedElements != null) {
-  	if(menu.getMenuItems() != null) {
+		if(menu.getMenuItems() != null && includedElements != null) {  	
   		menuName = menu.getPackageName();
 			menu.getMenuItems().forEach(item -> {				
 				getTestsForMenuItem(includedElements, item, hp, moduleName);	
 				addTestsToMenuItemContainer();
 				addMenuItemContainerToMenuContainer(item);
 			});	
-		}		
+		}else {
+			LogManager
+				.getLogger(DynamicTestMenu.class)
+				.error(
+						String.format(
+								"Cannot get DynamicContainer for " +
+								"DynamicTestMenu with Menu [%s] & IncludedElements[%s]", 
+								menu.toString(), includedElements.toString()));
+		}
 		return DynamicContainer.dynamicContainer(menu.getName(), menuContainers);
 	}
   private void getTestsForMenuItem(IncludedElements includedElements, MenuItem item, HomePage hp, String moduleName) {
-//  	menuItemTests = item.getTests(includedElements, hp, moduleName, "packageName"); //TODO
   	item.setTestModuleName(moduleName);
   	item.setTestMenuName(menuName);
-  	menuItemTests = new DynamicTestItem().getTests(item, item.getElements(), includedElements, hp, moduleName, moduleName);	
+  	menuItemTests = 
+  			new DynamicTestItem()
+  				.getTests(item, includedElements, hp);	
   }
   private void addTestsToMenuItemContainer() {
   	menuItemTests.entrySet().forEach(s ->{

@@ -1,13 +1,14 @@
 /**
  * 
  */
-package site_mapper.elements;
+package dynamic_tests.elements;
 
 import java.util.Optional;
 
 import controls.ControlTest;
+import dynamic_tests.finders.ClassFinder;
 import object_models.pages.homepage.HomePage;
-import site_mapper.finders.ClassFinder;
+import site_mapper.elements.ElementClass;
 
 /**
  * @author SteveBrown

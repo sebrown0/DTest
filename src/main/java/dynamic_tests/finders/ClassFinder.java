@@ -1,7 +1,7 @@
 /**
  * 
  */
-package site_mapper.finders;
+package dynamic_tests.finders;
 
 import org.apache.logging.log4j.LogManager;
 

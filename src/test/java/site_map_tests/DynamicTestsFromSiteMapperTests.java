@@ -16,7 +16,7 @@ import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import app.xml_content.DynamicTestMapper;
-import dynamic_tests.DynamicTestApp;
+import dynamic_tests.mappers.DynamicTestApp;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
@@ -59,11 +59,11 @@ class DynamicTestsFromSiteMapperTests {
 
 	@TestFactory
 	DynamicContainer runTests() {
-		DynamicTestApp app = new DynamicTestApp();
-		
-		return app.getAppTests(
-				DynamicTestMapper.getDynamicTestContent(XML_SOURCE).get(),				
-				hp);
+		DynamicTestApp app = 
+				new DynamicTestApp(
+						DynamicTestMapper.getDynamicTestContent(XML_SOURCE).get(), 
+						hp);		
+		return app.getAppTests();
 	}
 //	@Test
 //	void get_dynamicContainer() {

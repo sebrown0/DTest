@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DynamicContainer;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import dynamic_tests.DynamicTestApp;
+import dynamic_tests.mappers.DynamicTestApp;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.JAXBException;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package site_mapper.elements;
+package dynamic_tests.elements;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import org.junit.jupiter.api.DynamicTest;
 
 import controls.ControlTest;
-import site_mapper.method_getter.MethodGetter;
+import dynamic_tests.finders.MethodGetter;
 import utils.StringUtil;
 
 /**

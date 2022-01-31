@@ -1,7 +1,7 @@
 /**
  * 
  */
-package site_mapper.method_getter;
+package dynamic_tests.finders;
 
 import java.lang.reflect.Method;
 import java.util.List;
