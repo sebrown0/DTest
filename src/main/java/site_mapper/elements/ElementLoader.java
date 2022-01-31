@@ -8,7 +8,6 @@ import java.util.Optional;
 import controls.ControlTest;
 import object_models.pages.homepage.HomePage;
 import site_mapper.finders.ClassFinder;
-import site_mapper.jaxb.dynamic_tests.SiteMapElementLoader;
 
 /**
  * @author SteveBrown
@@ -25,17 +24,7 @@ public class ElementLoader {
 	private static Optional<SiteMapElement> container;
 	private static ElementClass nodeClass;
 	private static HomePage homePage;
-	
-//	public static ControlTest getControlTest(Element nc, HomePage hp) {		
-//		setVariables(nc, hp);
-//		loadContainer();		
-//		return getContainerAsControlTest();
-//	}
-//	private static void setVariables(Element nc, HomePage hp) {
-//		nodeClass = nc;
-//		homePage = hp;
-//	}
-	
+		
 	public static ControlTest getControlTest(ElementClass nc, HomePage hp) {		
 		setVariables(nc, hp);
 		loadContainer();		

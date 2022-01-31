@@ -1,15 +1,13 @@
 /**
  * 
  */
-package site_mapper.jaxb.dynamic_tests;
+package site_mapper.elements;
 
 import java.util.Optional;
 
 import logging.LogFactory;
 import object_models.forms.ContainerAction;
 import object_models.pages.homepage.HomePage;
-import site_mapper.elements.ElementClass;
-import site_mapper.elements.SiteMapElement;
 
 /**
  * @author SteveBrown
