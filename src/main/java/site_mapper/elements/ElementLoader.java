@@ -26,6 +26,16 @@ public class ElementLoader {
 	private static ElementClass nodeClass;
 	private static HomePage homePage;
 	
+//	public static ControlTest getControlTest(Element nc, HomePage hp) {		
+//		setVariables(nc, hp);
+//		loadContainer();		
+//		return getContainerAsControlTest();
+//	}
+//	private static void setVariables(Element nc, HomePage hp) {
+//		nodeClass = nc;
+//		homePage = hp;
+//	}
+	
 	public static ControlTest getControlTest(ElementClass nc, HomePage hp) {		
 		setVariables(nc, hp);
 		loadContainer();		

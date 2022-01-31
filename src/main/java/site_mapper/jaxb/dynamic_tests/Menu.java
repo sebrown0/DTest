@@ -12,7 +12,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import object_models.pages.homepage.HomePage;
 import site_mapper.elements.IncludedElements;
-import site_mapper.jaxb.menu_items.MenuItem;
+import site_mapper.jaxb.menu_items.ZZZ_MenuItem;
 
 /** 
  * @author SteveBrown
@@ -34,7 +34,7 @@ public class Menu {
 	@XmlAttribute(name="package")
 	private String packageName;	
   @XmlElement(name="MenuItem")
-  private List<MenuItem> menuItems;
+  private List<ZZZ_MenuItem> menuItems;
   
   // All the tests for each menu item.
   private Map<String, List<DynamicTest>> menuItemTests;;  
@@ -53,7 +53,7 @@ public class Menu {
 		}		
 		return DynamicContainer.dynamicContainer(name, menuContainers);
 	}
-  private void getTestsForMenuItem(IncludedElements includedElements, MenuItem item, HomePage hp, String moduleName) {
+  private void getTestsForMenuItem(IncludedElements includedElements, ZZZ_MenuItem item, HomePage hp, String moduleName) {
   	menuItemTests = item.getTests(includedElements, hp, moduleName, packageName);			
   }
   private void addTestsToMenuItemContainer() {
@@ -61,11 +61,11 @@ public class Menu {
   		menuItemContainers.add(DynamicContainer.dynamicContainer(s.getKey(), s.getValue()));  		
   	});
   }
-	private void addMenuItemContainerToMenuContainer(MenuItem item) {
+	private void addMenuItemContainerToMenuContainer(ZZZ_MenuItem item) {
 		menuContainers.add(DynamicContainer.dynamicContainer(item.getName(), menuItemContainers));
 	}
 	
-	public List<MenuItem> getMenuItems() {
+	public List<ZZZ_MenuItem> getMenuItems() {
 		return menuItems;
 	}
 	public String getName() {

@@ -35,7 +35,7 @@ import site_mapper.elements.TestElement;
  * @since 1.0
  */
 @XmlRootElement(name="MenuItem")
-public class MenuItem implements ElementClass {
+public class ZZZ_MenuItem implements ElementClass {
 	@XmlAttribute(name="name")
 	private String name;
 	@XmlAttribute(name="package")
