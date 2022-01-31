@@ -37,5 +37,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/java/com/jars/XMLReader.jar" sourcepath="/XMLReader"/>
+	<classpathentry kind="lib" path="C:/Users/SteveBrown/eclipse-workspace/2021/com/jars/SiteMapper.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
