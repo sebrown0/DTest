@@ -61,7 +61,7 @@ public class DynamicTestItem {
 			case "button" -> { 
 				test = Optional.of(
 						new ElementTestButton(
-								controlTest, e.getElementName(), e.getText(), e.getFafa())); 
+								item, controlTest, e.getElementName(), e.getText(), e.getFafa())); 
 			}
 			default -> { 
 				throw new IllegalArgumentException("Unexpected value: " + elementType); 

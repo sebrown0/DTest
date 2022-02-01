@@ -50,8 +50,7 @@ import object_models.pages.homepage.CoreData;
  * @since 1.0
  *
  */
-public abstract class JsPanel 
-	implements 
+public abstract class JsPanel implements 
 	ContainerAction, ContextSetter, ContextIdGetter, 
 	StateFactorySetter, ControlTest, SiteMapElement, MethodGetter {
 	

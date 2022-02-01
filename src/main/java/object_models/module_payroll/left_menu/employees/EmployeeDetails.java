@@ -3,8 +3,11 @@
  */
 package object_models.module_payroll.left_menu.employees;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.List;
 
+import org.junit.jupiter.api.DynamicTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -66,8 +69,9 @@ public class EmployeeDetails extends JsPanelWithIFrame {
 	}
 		
 	@TestControl(type = "button")
-	public void buttonSave() {
-		System.out.println("BUTTON SAVE TEST"); // TODO - remove or log 	
+	public DynamicTest buttonSave() {
+//		return DynamicTest.dynamicTest("buttonSave", () -> fail("NOT IMPLEMENTED"));
+		return DynamicTest.dynamicTest("buttonSave", () -> assertTrue(true));
 	}
 	
 	/*

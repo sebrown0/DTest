@@ -3,12 +3,20 @@
  */
 package dynamic_tests.elements;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.DynamicTest;
 
 import controls.ControlTest;
+import dynamic_tests.factories.ClazzFactory;
+import dynamic_tests.finders.MethodGetter;
+import site_mapper.jaxb.menu_items.MenuItem;
+import utils.StringUtil;
 
 /**
  * @author SteveBrown
@@ -18,13 +26,16 @@ import controls.ControlTest;
  * 	Pass the container that has the control test.
  * @since 1.0
  */
-public abstract class ElementTest implements TestElement{	
+public abstract class ElementTest implements TestElement{
+	protected MenuItem item;
+	
 	private String name;
 	private String type;
 	private ControlTest controlTest;
 	private List<DynamicTest> tests = new ArrayList<>();
 
-	public ElementTest(String type, String name, ControlTest controlTest) {
+	public ElementTest(MenuItem item, String type, String name, ControlTest controlTest) {
+		this.item = item;
 		this.controlTest = controlTest;
 		this.type = type;
 		this.name = name;
@@ -46,4 +57,46 @@ public abstract class ElementTest implements TestElement{
 	protected ControlTest getControlTest() {
 		return controlTest;
 	}
+	
+	protected void addTestMethod(String methodType) {
+		String methodName = methodType + StringUtil.capitiliseFirstChar(name);
+		Method m = 
+				((MethodGetter) controlTest)
+				.getMethodsWithTypeAndName(methodType, methodName);
+		
+		Optional
+			.ofNullable(ClazzFactory.getClazz(m))
+			.ifPresentOrElse(
+					c -> {
+						try {							
+							DynamicTest test = (DynamicTest)m.invoke(c);
+							tests.add(test);							
+						} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+							new MethodError(methodName).run();
+						}
+					}, 
+					new MethodError(methodName)
+			);		
+	}
+	
+	private class MethodError implements Runnable {
+		String methodName;
+		
+		public MethodError(String methodName) {
+			this.methodName = methodName;
+		}
+
+		@Override
+		public void run() {
+			LogManager
+				.getLogger(ElementTest.class)
+				.error(
+						String.format(
+								"Error setting dynamic test method, for [%s.%s]", 
+								item.getClassName(), methodName
+						)
+				);
+		}		
+	}
+	
 }
