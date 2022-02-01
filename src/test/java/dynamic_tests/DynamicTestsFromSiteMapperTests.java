@@ -1,7 +1,7 @@
 /**
  * 
  */
-package site_map_tests;
+package dynamic_tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DynamicContainer;
 import org.junit.jupiter.api.Test;
@@ -45,6 +46,11 @@ class DynamicTestsFromSiteMapperTests {
 	private static final String XML_SOURCE = 
 	"./src/test/resources/site_map/site_map.xml";
 
+	@AfterAll
+	public static void tearDown() {
+		hp.close();
+	}
+	
 	@Test
 	void getincludeElementsForTestFrom_DynamicTestMapper() {				
 		Optional<app.xml_content.DynamicTestApp> content = 

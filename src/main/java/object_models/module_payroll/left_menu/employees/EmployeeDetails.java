@@ -70,8 +70,8 @@ public class EmployeeDetails extends JsPanelWithIFrame {
 		
 	@TestControl(type = "button")
 	public DynamicTest buttonSave() {
-//		return DynamicTest.dynamicTest("buttonSave", () -> fail("NOT IMPLEMENTED"));
-		return DynamicTest.dynamicTest("buttonSave", () -> assertTrue(true));
+//		return DynamicTest.dynamicTest("buttonSave", () -> fail(""));
+		return DynamicTest.dynamicTest("[buttonSave] *NOT IMPLEMENTED*", () -> assertTrue(true));
 	}
 	
 	/*

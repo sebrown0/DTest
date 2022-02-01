@@ -14,10 +14,14 @@ import object_models.module_payroll.left_menu.employees.EmployeeDetails;
  * @version 1.0
  * 	Initial
  * @since 1.0
+ * 
+ * Get an instance of a class from either:
+ * 	1. Enclosing class with method type [i.e. button] and method name [i.e. buttonSave].
+ *  2. Method from Enclosing class.
+ *  3. From classes canonical name.
  */
 public class ClazzFactory {
-
-	//getTestMethodOfTypeWithName
+	
 	public static Object getClazz(final Class<?> target, final String methodType, final String methodName) {
 		Method m = MethodFinder.getTestMethodOfTypeWithName(EmployeeDetails.class, methodType, methodName);
 		
