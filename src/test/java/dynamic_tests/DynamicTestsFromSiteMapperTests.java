@@ -42,9 +42,10 @@ class DynamicTestsFromSiteMapperTests {
 		// Login to the homepage
 		hp = userLogin.loginValidUser(UserProvider.userPortal());
 	}
-	
 	private static final String XML_SOURCE = 
-	"./src/test/resources/site_map/site_map.xml";
+			"./src/main/resources/site_map/site_map.xml";
+//	private static final String XML_SOURCE = 
+//	"./src/test/resources/site_map/site_map.xml";
 
 	@AfterAll
 	public static void tearDown() {
