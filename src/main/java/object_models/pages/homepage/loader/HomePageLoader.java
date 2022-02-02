@@ -16,7 +16,7 @@ import entities.company.LoaderCompany;
 import exceptions.HomePageElementException;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_nav_bar.LeftNavBar;
-import object_models.modules.common.ModuleChecker;
+import object_models.modules.helpers.ModuleChecker;
 import object_models.pages.homepage.CoreData;
 import object_models.pages.homepage.HomePage;
 import object_models.top_right_nav_bar.common.TopRightNavBar;

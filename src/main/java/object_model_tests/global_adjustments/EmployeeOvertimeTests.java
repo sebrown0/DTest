@@ -25,7 +25,7 @@ import object_models.dk_grid.CellChecker;
 import object_models.dk_grid.DkGrid;
 import object_models.dk_grid.Row;
 import object_models.element.ElementButton;
-import object_models.module_payroll.left_menu.payroll.GlobalAdjustments;
+import object_models.modules.payroll.left_menu.payroll.GlobalAdjustments;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;

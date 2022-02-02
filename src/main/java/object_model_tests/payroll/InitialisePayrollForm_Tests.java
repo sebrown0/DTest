@@ -18,7 +18,7 @@ import exceptions.PayrollAlreadyInitialisedException;
 import logging.TestResultLogger;
 import object_models.dialog.DialogOkCancel;
 import object_models.left_menu.common.LeftMenuLoadItem;
-import object_models.module_payroll.left_menu.payroll.initialise.InitialisePayroll;
+import object_models.modules.payroll.left_menu.payroll.initialise.InitialisePayroll;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePagePayroll;
 import parameter_resolvers.ConfigParameterResolver;

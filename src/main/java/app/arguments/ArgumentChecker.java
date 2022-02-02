@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 import app.test_reader.IncludedTestsReader;
 import app.test_reader.TestPackage;
 import exceptions.InvalidArgumentException;
-import object_models.modules.common.Modules;
+import object_models.modules.helpers.Modules;
 import providers.XMLFileProvider;
 
 /**

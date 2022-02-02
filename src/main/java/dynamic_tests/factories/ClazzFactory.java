@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import dynamic_tests.finders.MethodFinder;
-import object_models.module_payroll.left_menu.employees.EmployeeDetails;
+import object_models.modules.payroll.left_menu.employees.EmployeeDetails;
 
 /**
  * @author SteveBrown

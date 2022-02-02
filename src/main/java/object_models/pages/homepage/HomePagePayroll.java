@@ -8,10 +8,10 @@ import java.util.Optional;
 import entities.company.Company;
 import entities.payroll.PayGroup;
 import object_models.forms.ContainerAction;
-import object_models.module_payroll.left_menu.payroll.GlobalAdjustments;
-import object_models.module_payroll.left_menu.payroll.PayrollElement;
-import object_models.module_payroll.left_menu.payroll.initialise.InitialisePayroll;
-import object_models.module_payroll.left_menu.payroll.initialise.PayrollInitialiser;
+import object_models.modules.payroll.left_menu.payroll.GlobalAdjustments;
+import object_models.modules.payroll.left_menu.payroll.PayrollElement;
+import object_models.modules.payroll.left_menu.payroll.initialise.InitialisePayroll;
+import object_models.modules.payroll.left_menu.payroll.initialise.PayrollInitialiser;
 
 /**
  * @author SteveBrown

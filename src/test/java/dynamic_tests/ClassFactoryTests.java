@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import dynamic_tests.factories.ClazzFactory;
 import dynamic_tests.finders.MethodFinder;
-import object_models.module_payroll.left_menu.employees.EmployeeDetails;
+import object_models.modules.payroll.left_menu.employees.EmployeeDetails;
 
 /**
  * @author SteveBrown

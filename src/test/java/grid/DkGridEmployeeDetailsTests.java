@@ -25,7 +25,7 @@ import object_models.element.ElementPointInTime;
 import object_models.forms.ContainerAction;
 import object_models.helpers.TestFail;
 import object_models.left_menu.common.LeftMenu;
-import object_models.module_payroll.left_menu.employees.EmployeeDetails;
+import object_models.modules.payroll.left_menu.employees.EmployeeDetails;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;

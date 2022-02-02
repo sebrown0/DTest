@@ -1,1 +1,0 @@
-package object_models.module_personnel.left_menu;

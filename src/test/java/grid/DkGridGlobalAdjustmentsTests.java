@@ -29,7 +29,7 @@ import object_models.dk_grid.Row;
 import object_models.dk_grid.buttons.GridButton;
 import object_models.element.ElementInput;
 import object_models.helpers.TestFail;
-import object_models.module_payroll.left_menu.payroll.GlobalAdjustments;
+import object_models.modules.payroll.left_menu.payroll.GlobalAdjustments;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;

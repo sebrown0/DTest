@@ -20,7 +20,7 @@ import enums.control_names.GlobalAdjustmentControlNames;
 import enums.control_names.PayrollControlNames;
 import logging.TestResultLogger;
 import object_models.helpers.text_utils.RemoveX;
-import object_models.module_payroll.left_menu.payroll.GlobalAdjustments;
+import object_models.modules.payroll.left_menu.payroll.GlobalAdjustments;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;

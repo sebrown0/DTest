@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import dynamic_tests.annotations.TestControl;
 import dynamic_tests.finders.MethodFinder;
-import object_models.module_payroll.left_menu.employees.EmployeeDetails;
+import object_models.modules.payroll.left_menu.employees.EmployeeDetails;
 
 /**
  * @author SteveBrown
