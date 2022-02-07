@@ -48,7 +48,18 @@ public class DynamicTestItem {
 	private void setElementsTests(IncludedElements includedElements, HomePage hp){		
 		if(elements != null) {
 			//this is BANKS!!!! its being loaded again??????????
-			controlTest = ElementLoader.getControlTest(item, hp);		
+			/*
+			 * going to load the panel now bit it should be when 
+			 * the test is run!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			 */
+			
+			/*
+			 * CHANGE THIS TO GET controlTest BUT NOT LOAD THE PAGE
+			 * ----------------------------------------------------
+			 */
+			//MenuItem
+			controlTest = ElementLoader.getControlTest(item, hp);
+			// ----------------------------------------------------
 			elements.forEach(e -> {							
 				if(includedElements.isIncluded(e.getElementType())) {					
 					addElementsTests(e, hp);					
@@ -71,7 +82,7 @@ public class DynamicTestItem {
 			case "button" -> { 
 				test = Optional.of(
 						new ElementTestButton(
-								coreData, item, controlTest, e.getElementName(), e.getText(), e.getFafa())); 
+								hp, coreData, item, controlTest, e.getElementName(), e.getText(), e.getFafa())); 
 			}
 			default -> { 
 				throw new IllegalArgumentException("Unexpected value: " + elementType); 

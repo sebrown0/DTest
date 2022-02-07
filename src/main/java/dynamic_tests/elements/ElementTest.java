@@ -16,6 +16,7 @@ import controls.ControlTest;
 import dynamic_tests.factories.ClazzFactory;
 import dynamic_tests.finders.MethodGetter;
 import object_models.pages.homepage.CoreData;
+import object_models.pages.homepage.HomePage;
 import site_mapper.jaxb.menu_items.MenuItem;
 import utils.StringUtil;
 
@@ -29,13 +30,15 @@ import utils.StringUtil;
  */
 public abstract class ElementTest implements TestElement{
 	protected MenuItem item;
+	protected HomePage hp;
 	
 	private String name;
 	private String type;
-	private ControlTest controlTest;
+	protected ControlTest controlTest;
 	private List<DynamicTest> tests = new ArrayList<>();
 
-	public ElementTest(MenuItem item, String type, String name, ControlTest controlTest) {
+	public ElementTest(HomePage hp, MenuItem item, String type, String name, ControlTest controlTest) {
+		this.hp = hp;
 		this.item = item;
 		this.controlTest = controlTest;
 		this.type = type;
@@ -56,7 +59,11 @@ public abstract class ElementTest implements TestElement{
 	}
 	
 	protected ControlTest getControlTest() {
-		return controlTest;
+//		controlTest = ElementLoader.getControlTest(item, item);		
+		/*
+		 * load the panel here??????????????????
+		 */
+		return controlTest.loadParent(item, hp);
 	}
 	
 	//can the item be passed????????????????????????????????????????????

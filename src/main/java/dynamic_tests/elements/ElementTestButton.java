@@ -9,8 +9,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.DynamicTest;
 
+import context_manager.ContextManager;
 import controls.ControlTest;
 import object_models.pages.homepage.CoreData;
+import object_models.pages.homepage.HomePage;
+import object_models.panels.JsPanel;
 import site_mapper.jaxb.menu_items.MenuItem;
 
 /**
@@ -25,8 +28,8 @@ public class ElementTestButton extends ElementTest {
 //	private CoreData coreData;
 	
 	public ElementTestButton(
-			CoreData coreData, MenuItem item, ControlTest controlTest, String name, String text, String fafa) {
-		super(item, "button", name, controlTest);
+			HomePage hp, CoreData coreData, MenuItem item, ControlTest controlTest, String name, String text, String fafa) {
+		super(hp, item, "button", name, controlTest);
 	
 //		this.coreData = coreData;
 		this.text = text;
@@ -42,6 +45,11 @@ public class ElementTestButton extends ElementTest {
 	}
 	
 	private void createButtonFaFaCheck() {
+		
+//		JsPanel panel = (JsPanel) controlTest;
+//		ContextManager cm = panel.getContextManager();
+//		cm.findContext(panel);
+		
 		super.getTests().add(
 				DynamicTest.dynamicTest(
 					"Is [" + super.getName() +"] button [FaFa] correct?", 

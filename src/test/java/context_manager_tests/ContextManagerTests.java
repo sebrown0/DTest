@@ -79,7 +79,7 @@ class ContextManagerTests {
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-//		homepagePayroll.close();
+		homepagePayroll.close();
 	}
 
 	@Test	@Order(1)

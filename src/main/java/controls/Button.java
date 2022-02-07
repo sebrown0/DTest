@@ -43,13 +43,37 @@ public class Button implements Control, HasFaFa, DisplayedText {
 
 	@Override //HasFaFa
 	public String getFaFaText() {
-		if(isAvailable()) {
-			WebElement faFa = btn.findElement(By.tagName("i"));
-			return faFa.getAttribute("class");	
-		}else {
-			return null;
-		}		
+		String strFaFa = "";
+		
+		if(isAvailable()) {			
+			if(currentElementIsFaFaClass()) {
+				strFaFa = btn.getAttribute("class");
+			}else if(currentElementContainsFaFaClass()) {
+				strFaFa = btn.findElement(By.tagName("i")).getAttribute("class");					
+			}				
+		}
+		return strFaFa;	
 	}
+	
+	private boolean currentElementIsFaFaClass() {
+		String checkFaFa = btn.getAttribute("class");
+		return isFaFa(checkFaFa);
+	}
+	private boolean currentElementContainsFaFaClass() {
+		WebElement elmntFaFa = btn.findElement(By.tagName("i"));
+		if(elmntFaFa != null ) {
+			return isFaFa(elmntFaFa.getAttribute("class"));
+		}
+		return false;
+	}
+	private boolean isFaFa(String checkFaFaStr) {
+		boolean res = false;
+		if(checkFaFaStr != null && checkFaFaStr.contains("fa fa")) {
+			res = true;
+		}
+		return res;
+	}
+	
 	@Override //DisplayedText
 	public String getText() {
 		if(isAvailable()) {

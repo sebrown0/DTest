@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.DynamicTest;
 
 import controls.ControlTest;
+import object_models.pages.homepage.HomePage;
 import site_mapper.jaxb.menu_items.MenuItem;
 
 /**
@@ -29,8 +30,8 @@ import site_mapper.jaxb.menu_items.MenuItem;
 public class ElementTestTextOut extends ElementTest {
 	private String textExpected;
 	
-	public ElementTestTextOut(MenuItem item, ControlTest controlTest, String name, String textExpected) {
-		super(item, "text_out", name, controlTest);
+	public ElementTestTextOut(HomePage hp, MenuItem item, ControlTest controlTest, String name, String textExpected) {
+		super(hp, item, "text_out", name, controlTest);
 		this.textExpected = textExpected;
 	}
 ;	

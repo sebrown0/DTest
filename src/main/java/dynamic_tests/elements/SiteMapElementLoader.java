@@ -26,6 +26,7 @@ public class SiteMapElementLoader {
 	private static String packageName;
 	
 	public static SiteMapElement getAndLoadSiteMapElement(ElementClass nodeClass, HomePage hp, Class<?> clazz) {
+		
 		SiteMapElement siteElement = null;
 				
 		if(nodeClass != null){

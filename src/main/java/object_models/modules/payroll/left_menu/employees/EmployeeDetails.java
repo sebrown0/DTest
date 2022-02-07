@@ -1,6 +1,3 @@
-/**
- * 
- */
 package object_models.modules.payroll.left_menu.employees;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -14,79 +11,76 @@ import org.openqa.selenium.WebElement;
 import context_manager.states.StateIframe;
 import control_builder.ControlData;
 import control_builder.ControlGetterButton;
-import control_builder.ControlGetterDkGridEmployeeDetails;
-import control_builder.ControlGetterDropdownCombo;
-import control_builder.ControlGetterEmployeeSelection;
-import control_builder.ControlGetterTextOut;
 import controls.ComboSelectFromList;
 import controls.TextOut;
 import dynamic_tests.annotations.TestControl;
-import enums.control_names.EmployeeControlNames;
-import enums.control_names.GroupControlNames;
 import object_models.element.TextInOut;
 import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
+import site_mapper.annotations.SiteMap;
 
 /**
- * @author SteveBrown
- * @version 1.0
- * 	Initial
- * @version 1.1
- * 	Add save(...).
- * @since 1.0
- *
- * Employee details page.
- */
+* Generated Class.
+* ----------------
+* Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
+* Author:  SteveBrown
+* Version: 1.0.0
+* Created: 07/02/2022 10:07:48
+*/
+
 public class EmployeeDetails extends JsPanelWithIFrame {
 	private EmpDetailsTabs myTabs;
-
-	public static final String PANEL_TITLE = "Employee Details";
-	public static final String MENU_TITLE = PANEL_TITLE;
-	public static final String MENU_PARENT_NAME = "Employees";
 	
-	public EmployeeDetails(CoreData coreData) {
+	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	public static final String PANEL_TITLE = "Employee Details";
+	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	public static final String MENU_TITLE = "Employee Details";
+	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	public static final String MENU_PARENT_NAME = "Employees";
+
+	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	public EmployeeDetails(CoreData coreData){
 		super(coreData, PANEL_TITLE);
-		
-		this.myTabs = new EmpDetailsTabs();
 		buildMyControls();
 	}
-	
-	// USE FOR TESTING WHEN WE WANT A BLANK OBJECT 
-	public EmployeeDetails() { super();	}
 
-	private void buildMyControls() {		
-		var myControls = 
-				List.of(
-						new ControlData(EmployeeControlNames.EMP_CODE, new ControlGetterTextOut(coreData, By.id("FORM_ID"))),
-						new ControlData(EmployeeControlNames.EMP_NAME, new ControlGetterTextOut(coreData, By.xpath("/html/body/form/div[3]/div[3]/div[2]/input"))),
-						new ControlData(GroupControlNames.SELECT_EMP, new ControlGetterEmployeeSelection(coreData, By.cssSelector("i[class='fa fa-list']"))),
-						new ControlData(GroupControlNames.COMBOS, new ControlGetterDropdownCombo(coreData, By.cssSelector("i[class='fa fa-window-maximize']"))),
-						new ControlData(GroupControlNames.GRID_VIEW, new ControlGetterDkGridEmployeeDetails(coreData, By.cssSelector("i[class='fa fw fa-table']"))),
-						new ControlData(GroupControlNames.SAVE, new ControlGetterButton(coreData, By.cssSelector("button[name='SAVE']"))),
-						new ControlData(GroupControlNames.SEARCH, new ControlGetterButton(coreData, By.cssSelector("button[name='QBF1']")))
-				);
-		super.buildPanelControls(myControls);				
+	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	private void buildMyControls() {
+		var myControls =
+			List.of(
+				new ControlData("save", new ControlGetterButton(coreData, By.cssSelector("button[name='SAVE']"))),
+				new ControlData("search", new ControlGetterButton(coreData, By.cssSelector("button[name='QBF1']"))),
+				new ControlData("clear", new ControlGetterButton(coreData, By.cssSelector("button[name='CLEAR1']"))),
+				new ControlData("print", new ControlGetterButton(coreData, By.cssSelector("button[name='PRINT1']"))),
+				new ControlData("employee_list", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-list']")))
+			);
+		super.buildPanelControls(myControls);
 	}
-		
-	@TestControl(type = "button")
-	public DynamicTest buttonSave() {
-//		return DynamicTest.dynamicTest("buttonSave", () -> fail(""));
+	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	@TestControl(type="button")
+	public DynamicTest buttonSave () {
 		return DynamicTest.dynamicTest("[buttonSave] *NOT IMPLEMENTED*", () -> assertTrue(true));
 	}
-	
-	/*
-	 * NOT USING AT PRESENT
-	 */
-//	@UiTest
-//	public void save() {
-//		System.out.println("->SAVING....." ); // TODO - remove or log 	
-//		Optional<Control> cntrl = panelControl.getControl(GroupControlNames.SAVE);
-//		cntrl.ifPresent(c -> {
-//			Button b = (Button) c;
-//			b.click();
-//		});
-//	}
-	
+	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	@TestControl(type="button")
+	public DynamicTest buttonSearch () {
+		return DynamicTest.dynamicTest("[buttonSearch] *NOT IMPLEMENTED*", () -> assertTrue(true));
+	}
+	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	@TestControl(type="button")
+	public DynamicTest buttonClear () {
+		return DynamicTest.dynamicTest("[buttonClear] *NOT IMPLEMENTED*", () -> assertTrue(true));
+	}
+	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	@TestControl(type="button")
+	public DynamicTest buttonPrint () {
+		return DynamicTest.dynamicTest("[buttonPrint] *NOT IMPLEMENTED*", () -> assertTrue(true));
+	}
+	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	@TestControl(type="button")
+	public DynamicTest buttonEmployee_list () {
+		return DynamicTest.dynamicTest("[buttonEmployee_list] *NOT IMPLEMENTED*", () -> assertTrue(true));
+	}
 	public EmpDetailsTabs tab() {
 		manager.switchToStateInCurrentContext(StateIframe.class);
 		return this.myTabs;
@@ -170,5 +164,4 @@ public class EmployeeDetails extends JsPanelWithIFrame {
 						
 		}
 	}
-
 }
