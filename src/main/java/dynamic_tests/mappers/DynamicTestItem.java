@@ -57,6 +57,12 @@ public class DynamicTestItem {
 		}		
 	}
 
+	/**
+	 * @param e: The Element from XML.
+	 * @param hp: Homepage.
+	 * 
+	 * Get the type of test and add it to the map of tests.
+	 */
 	private void addElementsTests(ElementCreation e, HomePage hp) {
 		String elementType = e.getElementType();
 		Optional<TestElement> test = null;
