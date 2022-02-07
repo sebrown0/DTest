@@ -49,20 +49,20 @@ class DynamicTestsFromSiteMapperTests {
 
 	@AfterAll
 	public static void tearDown() {
-		hp.close();
+//		hp.close();
 	}
 	
-	@Test
-	void getincludeElementsForTestFrom_DynamicTestMapper() {				
-		Optional<app.xml_content.DynamicTestApp> content = 
-				DynamicTestMapper.getDynamicTestContent(XML_SOURCE);
-		
-		List<String> elements = 
-				content.get().getIncludeElementsForTest();
-		
-		assertTrue(elements.size()>0);
-		assertEquals("button",elements.get(0));
-	}
+//	@Test
+//	void getincludeElementsForTestFrom_DynamicTestMapper() {				
+//		Optional<app.xml_content.DynamicTestApp> content = 
+//				DynamicTestMapper.getDynamicTestContent(XML_SOURCE);
+//		
+//		List<String> elements = 
+//				content.get().getIncludeElementsForTest();
+//		
+//		assertTrue(elements.size()>0);
+//		assertEquals("button",elements.get(0));
+//	}
 
 	@TestFactory
 	DynamicContainer runTests() {

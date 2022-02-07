@@ -15,6 +15,7 @@ import org.junit.jupiter.api.DynamicTest;
 import controls.ControlTest;
 import dynamic_tests.factories.ClazzFactory;
 import dynamic_tests.finders.MethodGetter;
+import object_models.pages.homepage.CoreData;
 import site_mapper.jaxb.menu_items.MenuItem;
 import utils.StringUtil;
 
@@ -58,14 +59,15 @@ public abstract class ElementTest implements TestElement{
 		return controlTest;
 	}
 	
-	protected void addTestMethod(String methodType) {
+	//can the item be passed????????????????????????????????????????????
+	protected void addTestMethod(String methodType, CoreData coreData) {
 		String methodName = methodType + StringUtil.capitiliseFirstChar(name);
 		Method m = 
 				((MethodGetter) controlTest)
 				.getMethodsWithTypeAndName(methodType, methodName);
 		
 		Optional
-			.ofNullable(ClazzFactory.getClazz(m))
+			.ofNullable(ClazzFactory.getClazz(m, coreData))
 			.ifPresentOrElse(
 					c -> {
 						try {							

@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import file.helpers.Formatter;
+
 /**
  * @author Steve Brown
  *
@@ -68,7 +70,12 @@ public class ClassFieldGetter {
 		return parentName;
 	}
 	public Optional<String> getMenuItemName() {
-		return menuItemName;
+		if(menuItemName.isPresent()) {
+			return Optional.ofNullable(Formatter.capitaliseFirstChar(menuItemName.get()));	
+		}else {
+			return Optional.empty();
+		}
+		
 	}
 	public Optional<String> getPanelTitle() {
 		return elementId;

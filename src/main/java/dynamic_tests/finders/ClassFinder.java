@@ -19,10 +19,15 @@ import site_mapper.elements.ElementClass;
  */
 public class ClassFinder {
 	private static String ROOT = "object_models";
+	//object_models.module_payroll.left_menu.employees.Banks
 	
+	//object_models/modules/payroll/left_menu/employees/Banks.java
+	//"object_models.payroll.left_menu.employees.Banks" (id=108)	
+
 	public static Class<?> getClazz(ElementClass nodeClass){		
 		try {
-			return Class.forName(getPathToClass(nodeClass));
+			String className = getPathToClass(nodeClass);
+			return Class.forName(className);
 		} catch (ClassNotFoundException e) {
 			LogManager.getLogger().error("Could not get class for [" + nodeClass + "]");
 		}
@@ -34,8 +39,8 @@ public class ClassFinder {
 	}
 	public static String getPathInLowerCase(ElementClass nodeClass) {
 		String path = 
-				ROOT + "." +
-				"module_" + nodeClass.getModuleName() + "." + 
+				ROOT + ".modules." +
+				nodeClass.getModuleName() + "." + 
 				nodeClass.getParentPackage() + "." + 
 				nodeClass.getPackage();
 		

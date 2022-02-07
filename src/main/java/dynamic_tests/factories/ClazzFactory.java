@@ -3,11 +3,13 @@
  */
 package dynamic_tests.factories;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import dynamic_tests.finders.MethodFinder;
 import object_models.modules.payroll.left_menu.employees.EmployeeDetails;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -22,27 +24,34 @@ import object_models.modules.payroll.left_menu.employees.EmployeeDetails;
  */
 public class ClazzFactory {
 	
-	public static Object getClazz(final Class<?> target, final String methodType, final String methodName) {
+	public static Object getClazz(final Class<?> target, final String methodType, final String methodName, final CoreData coreData) {
 		Method m = MethodFinder.getTestMethodOfTypeWithName(EmployeeDetails.class, methodType, methodName);
 		
-		return getClazz(m);
+		return getClazz(m, coreData);
 	}
 	
-	public static Object getClazz(Method m) {
+	public static Object getClazz(Method m, CoreData coreData) {
 		Object clazz = null;
 		if(m != null) {
 			String canonicalName = m.getDeclaringClass().getCanonicalName();
-			clazz = getClazz(canonicalName);	
+			clazz = getClazz(canonicalName, coreData);	
 		}	
 		
 		return clazz;
 	}
+
 	
-	public static Object getClazz(String canonicalName) {
-		Object clazz = null;
+	public static Object getClazz(String canonicalName, CoreData coreData) {
+		Object clazzObj = null;
 		
 		try {
-			clazz = Class.forName(canonicalName).getConstructor().newInstance();
+			//object_models.modules.payroll.left_menu.employees.EmployeeDetails
+//			object_models.modules.payroll.left_menu.employees.Banks
+			Class<?> clazz = Class.forName(canonicalName);
+			Constructor<?> cnstr = clazz.getConstructor(new Class[] {CoreData.class});
+			clazzObj = cnstr.newInstance(coreData);
+			
+//			clazz = Class.forName(canonicalName).getConstructor(CoreData coreData).newInstance();
 		} catch (	InstantiationException | IllegalAccessException | 
 							IllegalArgumentException | InvocationTargetException |
 							NoSuchMethodException | SecurityException | ClassNotFoundException e) {
@@ -50,7 +59,7 @@ public class ClazzFactory {
 			e.printStackTrace();
 		}
 		
-		return clazz;
+		return clazzObj;
 	}
 
 }

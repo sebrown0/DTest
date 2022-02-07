@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.DynamicTest;
 
 import controls.ControlTest;
+import object_models.pages.homepage.CoreData;
 import site_mapper.jaxb.menu_items.MenuItem;
 
 /**
@@ -21,16 +22,20 @@ import site_mapper.jaxb.menu_items.MenuItem;
 public class ElementTestButton extends ElementTest {	
 	private String text;
 	private String fafa;	
+//	private CoreData coreData;
 	
-	public ElementTestButton(MenuItem item, ControlTest controlTest, String name, String text, String fafa) {
+	public ElementTestButton(
+			CoreData coreData, MenuItem item, ControlTest controlTest, String name, String text, String fafa) {
 		super(item, "button", name, controlTest);
+	
+//		this.coreData = coreData;
 		this.text = text;
 		this.fafa = fafa;
 	}
 	
 	@Override //TestElement
 	public List<DynamicTest> createTests() {
-		addTestMethod("button");
+//		addTestMethod("button", coreData);
 		createButtonFaFaCheck();
 		createButtonTextCheck();
 		return super.getTests();		

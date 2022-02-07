@@ -15,10 +15,11 @@ import dynamic_tests.elements.ElementLoader;
 import dynamic_tests.elements.ElementTestButton;
 import dynamic_tests.elements.IncludedElements;
 import dynamic_tests.elements.TestElement;
+import object_models.pages.homepage.CoreData;
 import object_models.pages.homepage.HomePage;
-import site_mapper.elements.Element;
 import site_mapper.elements.ElementCreation;
 import site_mapper.jaxb.menu_items.MenuItem;
+import site_mapper.jaxb.pom.Element;
 
 /**
  * @author SteveBrown
@@ -31,10 +32,12 @@ public class DynamicTestItem {
 	private ControlTest controlTest;
 	private List<Element> elements;
 	private MenuItem item;
+	private CoreData coreData;
 	
 	public Map<String, List<DynamicTest>> getTests(
-		MenuItem item, IncludedElements includedElements,	HomePage hp) {
+			MenuItem item, IncludedElements includedElements,	HomePage hp) {
 	
+		this.coreData = hp;
 		this.item = item;
 		this.elements = item.getElements();
 		
@@ -44,6 +47,7 @@ public class DynamicTestItem {
 	
 	private void setElementsTests(IncludedElements includedElements, HomePage hp){		
 		if(elements != null) {
+			//this is BANKS!!!! its being loaded again??????????
 			controlTest = ElementLoader.getControlTest(item, hp);		
 			elements.forEach(e -> {							
 				if(includedElements.isIncluded(e.getElementType())) {					
@@ -61,7 +65,7 @@ public class DynamicTestItem {
 			case "button" -> { 
 				test = Optional.of(
 						new ElementTestButton(
-								item, controlTest, e.getElementName(), e.getText(), e.getFafa())); 
+								coreData, item, controlTest, e.getElementName(), e.getText(), e.getFafa())); 
 			}
 			default -> { 
 				throw new IllegalArgumentException("Unexpected value: " + elementType); 
