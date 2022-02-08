@@ -23,7 +23,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * @since 1.0
  *
  */
-public class Button implements Control, HasFaFa, DisplayedText {
+public class Button implements Control, HasToolTip, HasFaFa, DisplayedText {
 	private WebDriver driver;
 	private By btnLocator;
 	private WebElement btn;
@@ -39,6 +39,20 @@ public class Button implements Control, HasFaFa, DisplayedText {
 			return true;
 		}
 		return false;
+	}
+
+	@Override //HasToolTip
+	public String getToolTipText() {
+		if(isAvailable()) {		
+			WebElement prnt = btn.findElement(By.xpath(".."));
+			if(prnt != null && prnt.getAttribute("title") != null) {
+				return prnt.getAttribute("title"); 	
+			}else {
+				//Try another approach.
+			}
+		}
+		LogManager.getLogger(this.getClass()).error("Tool tip not found");
+		return "** NOT FOUND **";
 	}
 
 	@Override //HasFaFa
@@ -68,7 +82,7 @@ public class Button implements Control, HasFaFa, DisplayedText {
 	}
 	private boolean isFaFa(String checkFaFaStr) {
 		boolean res = false;
-		if(checkFaFaStr != null && checkFaFaStr.contains("fa fa")) {
+		if(checkFaFaStr != null && checkFaFaStr.startsWith("fa")) {
 			res = true;
 		}
 		return res;

@@ -64,8 +64,15 @@ public class DynamicTestItem {
 		 	
 		switch (elementType) {
 			case "button" -> { 
+				
+				
 				test = 
-						Optional.of(new ElementTestButton(hp, coreData, item, e)); 
+						Optional.of(new ElementTestButton(hp, coreData, item, e));
+				
+				var tip = e.getToolTipText();
+				if(tip != null && tip.length()>0) {
+					
+				}
 			}
 			default -> { 
 				throw new IllegalArgumentException("Unexpected value: " + elementType); 

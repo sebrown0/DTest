@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.DynamicTest;
 
+import controls.ControlTestData;
 import object_models.pages.homepage.HomePage;
 import site_mapper.jaxb.menu_items.MenuItem;
 
@@ -47,7 +48,8 @@ public class ElementTestTextOut extends ElementTest {
 				DynamicTest.dynamicTest(
 					"Is [" + super.getName() +"] [text] correct?", 
 					() -> {							
-						String textActual = super.getControlTest().getControlText(getName());
+//						String textActual = super.myControlTest().getControlText(getName());
+						String textActual = ControlTestData.getControlText(super.getControl());
 						assertEquals(textExpected, textActual);
 					}
 				)

@@ -3,6 +3,8 @@
  */
 package controls;
 
+import java.util.Optional;
+
 /**
  * @author SteveBrown
  * @version 1.0
@@ -10,6 +12,5 @@ package controls;
  * @since 1.0
  */
 public interface ControlTest {
-	public String getFaFaText(String cntrlName);
-	public String getControlText(String cntrlName);
+	public Optional<Control> getControl(String cntrlName);
 }

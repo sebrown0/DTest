@@ -40,4 +40,16 @@ public class ControlTestData {
 		return cntrlText;
 	}
 	
+	public static String getControlToolTip(Optional<Control> cntrl) {		
+		String toolTipText = null;
+		if(cntrl.isPresent()) {
+			Object o = cntrl.get();
+			if(o instanceof HasToolTip) {
+				HasToolTip tip = (HasToolTip) o;
+				toolTipText = tip.getToolTipText();
+			}			
+		}	
+		return toolTipText;
+	}
+	
 }

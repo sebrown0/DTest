@@ -29,7 +29,6 @@ import control_builder.PageControl;
 import controls.Control;
 import controls.ControlName;
 import controls.ControlTest;
-import controls.ControlTestData;
 import dynamic_tests.elements.SiteMapElement;
 import dynamic_tests.finders.MethodFinder;
 import dynamic_tests.finders.MethodGetter;
@@ -94,17 +93,7 @@ public abstract class JsPanel implements
 		builder.addControls(panelControls);
 		panelControl = new PageControl(builder);		
 	}
-		
-	@Override //ControlTest
-	public String getFaFaText(String cntrlName) {		
-		return ControlTestData.getFaFaText(getControl(cntrlName));
-	}
-	
-	@Override //ControlTest
-	public String getControlText(String cntrlName) {				
-		return ControlTestData.getControlText(getControl(cntrlName));
-	}
-	
+			
 	/*
 	 * Causing errors, if the panel fails to load this could be the cause.
 	 */
@@ -150,6 +139,10 @@ public abstract class JsPanel implements
 		manager.switchToStateInCurrentContext(StateIframe.class);
 		return panelControl.getControl(cntrlName);
 	}
+	/*
+	 * TODO - CHECK TO SEE IF IT'S THE CURRENT CONTROL.
+	 */
+	@Override //ControlTest
 	public Optional<Control> getControl(String cntrlName){		
 		manager.switchToStateInCurrentContext(StateIframe.class);
 		return panelControl.getControl(cntrlName);

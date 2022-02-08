@@ -25,26 +25,26 @@ import site_mapper.annotations.SiteMap;
 * Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
 * Author:  SteveBrown
 * Version: 1.0.0
-* Created: 07/02/2022 10:07:48
+* Created: 08/02/2022 12:06:25
 */
 
 public class EmployeeDetails extends JsPanelWithIFrame {
 	private EmpDetailsTabs myTabs;
 	
-	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
 	public static final String PANEL_TITLE = "Employee Details";
-	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
 	public static final String MENU_TITLE = "Employee Details";
-	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
 	public static final String MENU_PARENT_NAME = "Employees";
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
 	public EmployeeDetails(CoreData coreData){
 		super(coreData, PANEL_TITLE);
 		buildMyControls();
 	}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
 	private void buildMyControls() {
 		var myControls =
 			List.of(
@@ -52,35 +52,54 @@ public class EmployeeDetails extends JsPanelWithIFrame {
 				new ControlData("search", new ControlGetterButton(coreData, By.cssSelector("button[name='QBF1']"))),
 				new ControlData("clear", new ControlGetterButton(coreData, By.cssSelector("button[name='CLEAR1']"))),
 				new ControlData("print", new ControlGetterButton(coreData, By.cssSelector("button[name='PRINT1']"))),
-				new ControlData("employee_list", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-list']")))
+				new ControlData("employee_list", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-list']"))),
+				new ControlData("combos", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-window-maximize']"))),
+				new ControlData("existing_records", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fw fa-table']"))),
+				new ControlData("documents", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-file-o']")))
 			);
 		super.buildPanelControls(myControls);
 	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
 	@TestControl(type="button")
 	public DynamicTest buttonSave () {
 		return DynamicTest.dynamicTest("[buttonSave] *NOT IMPLEMENTED*", () -> assertTrue(true));
 	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
 	@TestControl(type="button")
 	public DynamicTest buttonSearch () {
 		return DynamicTest.dynamicTest("[buttonSearch] *NOT IMPLEMENTED*", () -> assertTrue(true));
 	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
 	@TestControl(type="button")
 	public DynamicTest buttonClear () {
 		return DynamicTest.dynamicTest("[buttonClear] *NOT IMPLEMENTED*", () -> assertTrue(true));
 	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
 	@TestControl(type="button")
 	public DynamicTest buttonPrint () {
 		return DynamicTest.dynamicTest("[buttonPrint] *NOT IMPLEMENTED*", () -> assertTrue(true));
 	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="07/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
 	@TestControl(type="button")
 	public DynamicTest buttonEmployee_list () {
 		return DynamicTest.dynamicTest("[buttonEmployee_list] *NOT IMPLEMENTED*", () -> assertTrue(true));
 	}
+	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
+	@TestControl(type="button")
+	public DynamicTest buttonCombos () {
+		return DynamicTest.dynamicTest("[buttonCombos] *NOT IMPLEMENTED*", () -> assertTrue(true));
+	}
+	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
+	@TestControl(type="button")
+	public DynamicTest buttonExisting_records () {
+		return DynamicTest.dynamicTest("[buttonExisting_records] *NOT IMPLEMENTED*", () -> assertTrue(true));
+	}
+	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
+	@TestControl(type="button")
+	public DynamicTest buttonDocuments () {
+		return DynamicTest.dynamicTest("[buttonDocuments] *NOT IMPLEMENTED*", () -> assertTrue(true));
+	}
+
 	public EmpDetailsTabs tab() {
 		manager.switchToStateInCurrentContext(StateIframe.class);
 		return this.myTabs;
@@ -164,4 +183,5 @@ public class EmployeeDetails extends JsPanelWithIFrame {
 						
 		}
 	}
+
 }

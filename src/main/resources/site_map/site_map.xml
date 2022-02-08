@@ -56,6 +56,7 @@
 				<JsPanelWithIFrame panelTitle = "Employee Details" /> 
 			</Type>
          
+         <!-- ADD TOOL TIP -->
 			<Elements>            
 			   <Element type="button" name="save" text="Save" fafa="fa fa-save" by="css" locator="button[name='SAVE']">
                   <Function isDefaultPass="true" />
@@ -69,9 +70,21 @@
                <Element type="button" name="print" text="Print" fafa="fa fa-print" by="css" locator="button[name='PRINT1']">
                   <Function isDefaultPass="true" />
                </Element>      
-                <Element type="button" name="employee_list" text="" fafa="fa fa-list" by="css" locator="i[class='fa fa-list']">
+                <Element 
+                  type="button" name="employee_list" text="" fafa="fa fa-list" 
+                  by="css" locator="i[class='fa fa-list']" 
+                  toolTipText="Select from a list of employees within the chosen company">
                   <Function isDefaultPass="true" />
                </Element>   
+               <Element type="button" name="combos" text="" fafa="fa fa-window-maximize" by="css" locator="i[class='fa fa-window-maximize']">
+                  <Function isDefaultPass="true" />
+               </Element>   
+               <Element type="button" name="existing_records" text="" fafa="fa fw fa-table" by="css" locator="i[class='fa fw fa-table']">
+                  <Function isDefaultPass="true" />
+               </Element>
+               <Element type="button" name="documents" text="" fafa="fa fa-file-o" by="css" locator="i[class='fa fa-file-o']">
+                  <Function isDefaultPass="true" />
+               </Element>            
 			</Elements>              
 		</MenuItem>
   <!--   

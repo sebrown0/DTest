@@ -12,6 +12,7 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.DynamicTest;
 
+import controls.Control;
 import controls.ControlTest;
 import dynamic_tests.factories.ClazzFactory;
 import dynamic_tests.finders.MethodGetter;
@@ -29,12 +30,11 @@ import utils.StringUtil;
  * @since 1.0
  */
 public abstract class ElementTest implements TestElement{
-	protected MenuItem item;
-	protected HomePage hp;
-	
+	private MenuItem item;
+	private HomePage hp;	
 	private String name;
 	private String type;
-	protected ControlTest controlTest;
+	private ControlTest controlTest;
 	private List<DynamicTest> tests = new ArrayList<>();
 
 	public ElementTest(HomePage hp, MenuItem item, String type, String name) {
@@ -47,6 +47,18 @@ public abstract class ElementTest implements TestElement{
 	public List<DynamicTest> getTests() {
 		return tests;
 	}
+	protected Optional<Control> getControl() {
+		return myControlTest().getControl(name);
+	}
+	private ControlTest myControlTest() {		
+		if(controlTest == null) {
+			controlTest = getControlTest();
+		}
+		return controlTest;
+	}
+	private ControlTest getControlTest() {
+		return ElementLoader.getControlTest(item, hp);
+	}
 	
 	@Override //TestElement
 	public String getName() {
@@ -56,11 +68,7 @@ public abstract class ElementTest implements TestElement{
 	public String getType() {
 		return type;
 	}
-	
-	protected ControlTest getControlTest() {
-		return ElementLoader.getControlTest(item, hp);
-	}
-	
+		
 	//can the item be passed????????????????????????????????????????????
 	protected void addTestMethod(String methodType, CoreData coreData) {
 		String methodName = methodType + StringUtil.capitiliseFirstChar(name);
