@@ -43,18 +43,31 @@ public class Button implements Control, HasToolTip, HasFaFa, DisplayedText {
 
 	@Override //HasToolTip
 	public String getToolTipText() {
-		if(isAvailable()) {		
-			WebElement prnt = btn.findElement(By.xpath(".."));
-			if(prnt != null && prnt.getAttribute("title") != null) {
-				return prnt.getAttribute("title"); 	
-			}else {
-				//Try another approach.
-			}
+		String res = "** NOT FOUND **";
+		if(isAvailable()) {
+			res = getTipFromTitle(btn, 2);
 		}
 		LogManager.getLogger(this.getClass()).error("Tool tip not found");
-		return "** NOT FOUND **";
+		return res;
 	}
-
+	
+	/**
+	 * @param el: the current element
+	 * @param attempts: number of attempts to find title from parent.
+	 * @return the title if found.
+	 * 
+	 * Go through the button's parents recursively until the
+	 * title attribute is found, for n attempts.
+	 */
+	private String getTipFromTitle(WebElement el, int attempts) {
+		WebElement prnt = el.findElement(By.xpath(".."));		
+		var title = prnt.getAttribute("title");
+		if(title != null && title.length()>0) {
+			return title;				
+		}				
+		return getTipFromTitle(prnt, --attempts);
+	}
+	
 	@Override //HasFaFa
 	public String getFaFaText() {
 		String strFaFa = "";
