@@ -25,10 +25,9 @@ public class SiteMapElementLoader {
 	private static String[] parts;
 	private static String packageName;
 	
-	public static SiteMapElement getAndLoadSiteMapElement(ElementClass nodeClass, HomePage hp, Class<?> clazz) {
-		
+	public static SiteMapElement getAndLoadSiteMapElement(ElementClass nodeClass, HomePage hp, Class<?> clazz) {		
 		SiteMapElement siteElement = null;
-				
+		
 		if(nodeClass != null){
 			packageName = nodeClass.getParentPackage();			
 			loadModuleIfRequired(nodeClass, hp);
