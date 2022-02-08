@@ -58,6 +58,10 @@ public abstract class ElementTest implements TestElement{
 		return type;
 	}
 	
+	/*
+	 * NEED MenuItem & HomePage.
+	 * to create the controlTest and load it.
+	 */
 	protected ControlTest getControlTest() {
 //		controlTest = ElementLoader.getControlTest(item, item);		
 		/*

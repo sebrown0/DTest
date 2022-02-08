@@ -38,8 +38,11 @@ public class DynamicTestMenu {
 		if(menu.getMenuItems() != null && includedElements != null) {  	
   		menuName = menu.getPackageName();
 			menu.getMenuItems().forEach(item -> {				
+				//get map of tests
 				getTestsForMenuItem(includedElements, item, hp, moduleName);	
+				//add the tests in the map to a list of DynamicContainer(s)
 				addTestsToMenuItemContainer();
+				//add the above list to the menu container
 				addMenuItemContainerToMenuContainer(item);
 			});	
 		}else {

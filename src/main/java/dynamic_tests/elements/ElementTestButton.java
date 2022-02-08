@@ -9,11 +9,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.DynamicTest;
 
-import context_manager.ContextManager;
 import controls.ControlTest;
+import controls.ControlTestIMPL;
 import object_models.pages.homepage.CoreData;
 import object_models.pages.homepage.HomePage;
-import object_models.panels.JsPanel;
 import site_mapper.jaxb.menu_items.MenuItem;
 
 /**
@@ -25,6 +24,7 @@ import site_mapper.jaxb.menu_items.MenuItem;
 public class ElementTestButton extends ElementTest {	
 	private String text;
 	private String fafa;	
+	private ControlTestIMPL ct;
 //	private CoreData coreData;
 	
 	public ElementTestButton(
@@ -32,6 +32,7 @@ public class ElementTestButton extends ElementTest {
 		super(hp, item, "button", name, controlTest);
 	
 //		this.coreData = coreData;
+		this.ct = new ControlTestIMPL(name);
 		this.text = text;
 		this.fafa = fafa;
 	}
@@ -54,7 +55,7 @@ public class ElementTestButton extends ElementTest {
 				DynamicTest.dynamicTest(
 					"Is [" + super.getName() +"] button [FaFa] correct?", 
 					() -> {							
-						String faFaActual = super.getControlTest().getFaFaText(super.getName());
+						String faFaActual = super.getControlTest().getFaFaText(ct);
 						assertEquals(fafa, faFaActual);
 					}
 				)
@@ -65,7 +66,8 @@ public class ElementTestButton extends ElementTest {
 				DynamicTest.dynamicTest(
 					"Is [" + super.getName() +"] button [text] correct?", 
 					() -> {							
-						String textActual = super.getControlTest().getControlText(super.getName());
+//						String textActual = super.getControlTest().getControlText(super.getName());
+						String textActual = super.getControlTest().getControlText(ct);
 						assertEquals(text, textActual);
 					}
 				)

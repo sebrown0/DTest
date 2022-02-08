@@ -57,7 +57,7 @@ public class DynamicTestItem {
 			 * CHANGE THIS TO GET controlTest BUT NOT LOAD THE PAGE
 			 * ----------------------------------------------------
 			 */
-			//MenuItem
+			//MenuItem item
 			controlTest = ElementLoader.getControlTest(item, hp);
 			// ----------------------------------------------------
 			elements.forEach(e -> {							

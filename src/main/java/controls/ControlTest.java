@@ -14,6 +14,9 @@ import site_mapper.elements.ElementClass;
  */
 public interface ControlTest {
 	public ControlTest loadParent(ElementClass item, HomePage hp);
-	public String getFaFaText(String controlName);
-	public String getControlText(String controlName);
+//	
+	public String getFaFaText(ControlTestIMPL ct);
+	public String getControlText(ControlTestIMPL ct);
+//	public String getFaFaText(String controlName);
+//	public String getControlText(String controlName);
 }

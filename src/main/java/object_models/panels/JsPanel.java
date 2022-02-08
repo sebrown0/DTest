@@ -29,8 +29,7 @@ import control_builder.PageControl;
 import controls.Control;
 import controls.ControlName;
 import controls.ControlTest;
-import controls.DisplayedText;
-import controls.HasFaFa;
+import controls.ControlTestIMPL;
 import dynamic_tests.elements.ElementLoader;
 import dynamic_tests.elements.SiteMapElement;
 import dynamic_tests.finders.MethodFinder;
@@ -70,7 +69,7 @@ public abstract class JsPanel implements
 	private WebElement container;
 	private Optional<String> panelId;	
 	private JsPanelHeaderBar headerBar;	
-
+	
 	// USE FOR TESTING WHEN WE WANT A BLANK OBJECT
 	public JsPanel() {}
 	
@@ -80,7 +79,8 @@ public abstract class JsPanel implements
 		this.driver = coreData.getWebDriver();
 		this.expectedTitle = expectedTitle;
 		this.manager = coreData.getContextManager();		
-		this.builder = new ControlBuilder();		
+		this.builder = new ControlBuilder();
+		
 				
 		setPanelId();
 		setContainer();
@@ -108,31 +108,13 @@ public abstract class JsPanel implements
 	}
 	
 	@Override //ControlTest
-	public String getFaFaText(String controlName) {		
-		String faFaText = null;
-		Optional<Control> cntrl = getControl(controlName);
-		if(cntrl.isPresent()) {
-			Object o = cntrl.get();
-			if(o instanceof HasFaFa) {
-				HasFaFa faFa = (HasFaFa) o;
-				faFaText = faFa.getFaFaText();
-			}			
-		}	
-		return faFaText;
+	public String getFaFaText(ControlTestIMPL ct) {		
+		return ct.getFaFaText(this);
 	}
 	
 	@Override //ControlTest
-	public String getControlText(String controlName) {		
-		String cntrlText = null;
-		Optional<Control> cntrl = getControl(controlName);
-		if(cntrl.isPresent()) {
-			Object o = cntrl.get();
-			if(o instanceof DisplayedText) {
-				DisplayedText displayedText = (DisplayedText) o;
-				cntrlText = displayedText.getText();
-			}			
-		}	
-		return cntrlText;
+	public String getControlText(ControlTestIMPL ct) {				
+		return ct.getControlText(this);
 	}
 	
 	/*
