@@ -10,8 +10,6 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.DynamicTest;
 
-import controls.ControlTest;
-import dynamic_tests.elements.ElementLoader;
 import dynamic_tests.elements.ElementTestButton;
 import dynamic_tests.elements.IncludedElements;
 import dynamic_tests.elements.TestElement;
@@ -29,7 +27,6 @@ import site_mapper.jaxb.pom.Element;
  */
 public class DynamicTestItem {
 	private Map<String, List<DynamicTest>> tests = new HashMap<>();
-	private ControlTest controlTest;
 	private List<Element> elements;
 	private MenuItem item;
 	private CoreData coreData;
@@ -46,20 +43,7 @@ public class DynamicTestItem {
 	}
 	
 	private void setElementsTests(IncludedElements includedElements, HomePage hp){		
-		if(elements != null) {
-			//this is BANKS!!!! its being loaded again??????????
-			/*
-			 * going to load the panel now bit it should be when 
-			 * the test is run!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			 */
-			
-			/*
-			 * CHANGE THIS TO GET controlTest BUT NOT LOAD THE PAGE
-			 * ----------------------------------------------------
-			 */
-			//MenuItem item
-			controlTest = ElementLoader.getControlTest(item, hp);
-			// ----------------------------------------------------
+		if(elements != null) {			
 			elements.forEach(e -> {							
 				if(includedElements.isIncluded(e.getElementType())) {					
 					addElementsTests(e, hp);					
@@ -80,9 +64,8 @@ public class DynamicTestItem {
 		 	
 		switch (elementType) {
 			case "button" -> { 
-				test = Optional.of(
-						new ElementTestButton(
-								hp, coreData, item, controlTest, e.getElementName(), e.getText(), e.getFafa())); 
+				test = 
+						Optional.of(new ElementTestButton(hp, coreData, item, e)); 
 			}
 			default -> { 
 				throw new IllegalArgumentException("Unexpected value: " + elementType); 

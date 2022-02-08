@@ -10,6 +10,7 @@ import object_models.panels.JsPanel;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
  * @since 1.0
  */
 public class ControlTestIMPL {

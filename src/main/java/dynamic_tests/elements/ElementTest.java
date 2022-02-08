@@ -37,10 +37,9 @@ public abstract class ElementTest implements TestElement{
 	protected ControlTest controlTest;
 	private List<DynamicTest> tests = new ArrayList<>();
 
-	public ElementTest(HomePage hp, MenuItem item, String type, String name, ControlTest controlTest) {
+	public ElementTest(HomePage hp, MenuItem item, String type, String name) {
 		this.hp = hp;
 		this.item = item;
-		this.controlTest = controlTest;
 		this.type = type;
 		this.name = name;
 	}
@@ -58,16 +57,8 @@ public abstract class ElementTest implements TestElement{
 		return type;
 	}
 	
-	/*
-	 * NEED MenuItem & HomePage.
-	 * to create the controlTest and load it.
-	 */
 	protected ControlTest getControlTest() {
-//		controlTest = ElementLoader.getControlTest(item, item);		
-		/*
-		 * load the panel here??????????????????
-		 */
-		return controlTest.loadParent(item, hp);
+		return ElementLoader.getControlTest(item, hp);
 	}
 	
 	//can the item be passed????????????????????????????????????????????

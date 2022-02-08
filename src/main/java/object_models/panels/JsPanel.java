@@ -30,7 +30,6 @@ import controls.Control;
 import controls.ControlName;
 import controls.ControlTest;
 import controls.ControlTestIMPL;
-import dynamic_tests.elements.ElementLoader;
 import dynamic_tests.elements.SiteMapElement;
 import dynamic_tests.finders.MethodFinder;
 import dynamic_tests.finders.MethodGetter;
@@ -40,8 +39,6 @@ import object_models.helpers.IFrame;
 import object_models.helpers.title.PageTitle;
 import object_models.helpers.title.TitlePanel;
 import object_models.pages.homepage.CoreData;
-import object_models.pages.homepage.HomePage;
-import site_mapper.elements.ElementClass;
 
 /**
  * @author SteveBrown
@@ -97,16 +94,7 @@ public abstract class JsPanel implements
 		builder.addControls(panelControls);
 		panelControl = new PageControl(builder);		
 	}
-	
-	@Override //ControlTest
-	public ControlTest loadParent(ElementClass item, HomePage hp) {
-		/*
-		 * Check only loading if not PRESENT!!!!
-		 */
-		ElementLoader.getControlTest(item, hp);
-		return this;
-	}
-	
+		
 	@Override //ControlTest
 	public String getFaFaText(ControlTestIMPL ct) {		
 		return ct.getFaFaText(this);
