@@ -29,7 +29,7 @@ import control_builder.PageControl;
 import controls.Control;
 import controls.ControlName;
 import controls.ControlTest;
-import controls.ControlTestIMPL;
+import controls.ControlTestData;
 import dynamic_tests.elements.SiteMapElement;
 import dynamic_tests.finders.MethodFinder;
 import dynamic_tests.finders.MethodGetter;
@@ -96,13 +96,13 @@ public abstract class JsPanel implements
 	}
 		
 	@Override //ControlTest
-	public String getFaFaText(ControlTestIMPL ct) {		
-		return ct.getFaFaText(this);
+	public String getFaFaText(String cntrlName) {		
+		return ControlTestData.getFaFaText(getControl(cntrlName));
 	}
 	
 	@Override //ControlTest
-	public String getControlText(ControlTestIMPL ct) {				
-		return ct.getControlText(this);
+	public String getControlText(String cntrlName) {				
+		return ControlTestData.getControlText(getControl(cntrlName));
 	}
 	
 	/*

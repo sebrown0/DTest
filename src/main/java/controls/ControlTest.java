@@ -9,7 +9,7 @@ package controls;
  * 	Initial
  * @since 1.0
  */
-public interface ControlTest {	
-	public String getFaFaText(ControlTestIMPL ct);
-	public String getControlText(ControlTestIMPL ct);
+public interface ControlTest {
+	public String getFaFaText(String cntrlName);
+	public String getControlText(String cntrlName);
 }

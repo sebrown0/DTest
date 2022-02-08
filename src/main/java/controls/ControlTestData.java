@@ -5,24 +5,19 @@ package controls;
 
 import java.util.Optional;
 
-import object_models.panels.JsPanel;
-
 /**
  * @author SteveBrown
  * @version 1.0
  * 	Initial
  * @since 1.0
+ * 
+ * Get the data from a control so it can 
+ * be used in a dynamic test.
  */
-public class ControlTestIMPL {
-	private String controlName;
+public class ControlTestData {
 	
-	public ControlTestIMPL(String controlName) {
-		this.controlName = controlName;
-	}
-	
-	public String getFaFaText(JsPanel jsPanel) {		
+	public static String getFaFaText(Optional<Control> cntrl) {		
 		String faFaText = null;
-		Optional<Control> cntrl = jsPanel.getControl(controlName);
 		if(cntrl.isPresent()) {
 			Object o = cntrl.get();
 			if(o instanceof HasFaFa) {
@@ -32,9 +27,9 @@ public class ControlTestIMPL {
 		}	
 		return faFaText;
 	}
-	public String getControlText(JsPanel jsPanel) {		
+	
+	public static String getControlText(Optional<Control> cntrl) {		
 		String cntrlText = null;
-		Optional<Control> cntrl = jsPanel.getControl(controlName);
 		if(cntrl.isPresent()) {
 			Object o = cntrl.get();
 			if(o instanceof DisplayedText) {
@@ -44,4 +39,5 @@ public class ControlTestIMPL {
 		}	
 		return cntrlText;
 	}
+	
 }
