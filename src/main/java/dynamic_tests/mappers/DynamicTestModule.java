@@ -29,11 +29,15 @@ public class DynamicTestModule {
 		moduleMenus = new ArrayList<>();
 		List<Menu> menus = module.getMenus();
 		if(menus != null) {
+			var moduleName = module.getName();
 			menus.forEach(m -> {
-				moduleMenus.add(new DynamicTestMenu().getMenuContainers(m, includedElements, hp, module.getName()));
-	  	});	
+				moduleMenus.add(
+						new DynamicTestMenu(m, includedElements, hp, moduleName).getMenuContainers()
+				);
+	  	});
+			return DynamicContainer.dynamicContainer(moduleName, moduleMenus);
 		}  	
-		return DynamicContainer.dynamicContainer(module.getName(), moduleMenus);
+		return null;
 	}
 
 }

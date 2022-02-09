@@ -11,6 +11,7 @@ import context_manager.ContextManager;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
  * @since 1.0
  * 
  * Data required by many objects in the app.
