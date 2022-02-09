@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Element>
+  <Details type="button" name="print" text="Print" fafa="fa fa-print"/>
+  <Locator by="css" text="button[name='PRINT1']"/>                
+  <Function isDefaultPass="true" />
+</Element>

@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE document 
-    [ 
-      <!ENTITY saveBtn SYSTEM 
-      'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/SaveButton.xml'>    
-      <!ENTITY clearBtn SYSTEM 
-      'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/ClearButton.xml'>      
+    [    
       <!ENTITY empListBtn SYSTEM 
-      'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/EmpListButton.xml'>    
+        'file:./src/main/resources/site_map/header/EmpListButton.xml'>    
       <!ENTITY existingGridViewBtn SYSTEM 
-      'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/ExistingGridViewButton.xml'>    
+        'file:./src/main/resources/site_map/header/ExistingGridViewButton.xml'>    
+      <!ENTITY combosBtn SYSTEM 
+        'file:./src/main/resources/site_map/header/CombosButton.xml'>
+      <!ENTITY documentsBtn SYSTEM 
+        'file:./src/main/resources/site_map/header/DocumentsButton.xml'>        
+      
+      <!ENTITY saveBtn SYSTEM 
+        'file:./src/main/resources/site_map/footer/SaveButton.xml'>
+      <!ENTITY searchBtn SYSTEM 
+        'file:./src/main/resources/site_map/footer/SearchButton.xml'>    
+      <!ENTITY clearBtn SYSTEM 
+        'file:./src/main/resources/site_map/footer/ClearButton.xml'>      
+      <!ENTITY printBtn SYSTEM 
+        'file:./src/main/resources/site_map/footer/PrintButton.xml'>    
     ]
 >
 
@@ -62,60 +71,28 @@
    <Module name="payroll">   
     <Menus>
       <Menu name="Left" package="left_menu">
-    <!-- 
+    
       	<MenuItem name="Employee Details" package="Employees" class="EmployeeDetails">          
-			<Type name="JsPanelWithIFrame">
-				<JsPanelWithIFrame panelTitle = "Employee Details" /> 
-			</Type>
-                  
-			<Elements>            
-              <Element>
-                <Details type="button" name="save" text="Save" fafa="fa fa-save"/>
-                <Locator by="css" text="button[name='SAVE']"/>                
-                <Function isDefaultPass="true" />
-              </Element>
-              <Element>
-                <Details type="button" name="search" text="Search" fafa="fa fa-search"/>
-                <Locator by="css" text="button[name='QBF1']"/>                
-                <Function isDefaultPass="true" />
-              </Element>
-              <Element>
-                <Details type="button" name="clear" text="Clear" fafa="fa fa-file-o"/>
-                <Locator by="css" text="button[name='CLEAR1']"/>                
-                <Function isDefaultPass="true" />
-              </Element>
-              <Element>
-                <Details type="button" name="print" text="Print" fafa="fa fa-print"/>
-                <Locator by="css" text="button[name='PRINT1']"/>                
-                <Function isDefaultPass="true" />
-              </Element>
-              <Element>
-                <Details type="button" name="employee_list" text="" fafa="fa fa-list"/>
-                <Locator by="css" text="i[class='fa fa-list']"/>  
-                <ToolTip text="Select from a list of employees within the chosen company"/>              
-                <Function isDefaultPass="true" />
-              </Element>
-              <Element>
-                <Details type="button" name="combos" text="" fafa="fa fa-window-maximize"/>
-                <Locator by="css" text="i[class='fa fa-window-maximize']"/>
-                <ToolTip text="Combos"/>                
-                <Function isDefaultPass="true" />
-              </Element>
-              <Element>
-                <Details type="button" name="existing_records" text="" fafa="fa fw fa-table"/>
-                <Locator by="css" text="i[class='fa fw fa-table']"/>
-                <ToolTip text="Grid View for existing records"/>                
-                <Function isDefaultPass="true" />
-              </Element>
-              <Element>
-                <Details type="button" name="documents" text="" fafa="fa fa-file-o"/>
-                <Locator by="css" text="i[class='fa fa-file-o']"/>
-                <ToolTip text="No Documents Attached"/>                
-                <Function isDefaultPass="true" />
-              </Element>                  
-			</Elements>              
+		  <Type name="JsPanelWithIFrame">
+			<JsPanelWithIFrame panelTitle = "Employee Details" /> 
+          </Type>
+          <HeaderElements>
+            &empListBtn;
+            &combosBtn;
+            &existingGridViewBtn;
+            &documentsBtn;
+          </HeaderElements>
+              
+          <BodyElements></BodyElements>
+                
+          <FooterElements>
+            &saveBtn;
+            &searchBtn;
+            &clearBtn;
+            &printBtn;
+          </FooterElements>
 		</MenuItem>
-     -->
+     
         <MenuItem name="Contact Numbers" package="Employees" class="ContactNumbers">          
 		  <Type name="JsPanelWithIFrame">
 			<JsPanelWithIFrame panelTitle = "Employee Contact Details" /> 
@@ -131,21 +108,7 @@
             &saveBtn;
             &clearBtn;
           </FooterElements>              
-		</MenuItem>
-  <!--   
-      	<MenuItem name="banks" package="employees" class="banks">          
-			<Type name="JsPanelWithIFrame">
-				<JsPanelWithIFrame panelTitle = "Employee Banks and Unions Details" /> 
-			</Type>
-         
-			<Elements>
-               <Element type="button" name="save" text="Save" fafa="fa fa-save" by="css" locator="button[name='SAVE']">
-                  <Function isDefaultPass="false" />
-               </Element>   
-			</Elements>              
-		</MenuItem>
-  -->
-      
+		</MenuItem>        
       </Menu>
     </Menus>
    </Module>
