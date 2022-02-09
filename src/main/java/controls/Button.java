@@ -52,7 +52,7 @@ public class Button implements Control, HasToolTip, HasFaFa, DisplayedText {
 	}
 	
 	/**
-	 * @param el: the current element
+	 * @param el: the current element (btn is the root).
 	 * @param attempts: number of attempts to find title from parent.
 	 * @return the title if found.
 	 * 

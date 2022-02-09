@@ -28,7 +28,7 @@ public class DynamicTestMenu {
   // List of all test containers in the menu item.
   private List<DynamicContainer> menuContainers = new ArrayList<>();
   // List of individual test containers for each menu item. 
-  private List<DynamicContainer> menuItemContainers = new ArrayList<>();
+  private List<DynamicContainer> menuItemContainers;
   
   private String menuName;
   
@@ -38,6 +38,7 @@ public class DynamicTestMenu {
 		if(menu.getMenuItems() != null && includedElements != null) {  	
   		menuName = menu.getPackageName();
 			menu.getMenuItems().forEach(item -> {				
+				menuItemContainers = new ArrayList<>();
 				//get map of tests
 				getTestsForMenuItem(includedElements, item, hp, moduleName);	
 				//add the tests in the map to a list of DynamicContainer(s)
@@ -68,6 +69,7 @@ public class DynamicTestMenu {
   		menuItemContainers.add(DynamicContainer.dynamicContainer(s.getKey(), s.getValue()));  		
   	});
   }
+  //menuItemContainers is not being reset
 	private void addMenuItemContainerToMenuContainer(MenuItem item) {
 		menuContainers.add(DynamicContainer.dynamicContainer(item.getName(), menuItemContainers));
 	}

@@ -1,50 +1,51 @@
-/**
- * 
- */
 package object_models.modules.payroll.left_menu.employees;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-import object_models.pages.homepage.CoreData;
+import control_builder.*;
+import site_mapper.annotations.SiteMap;
+import org.junit.jupiter.api.DynamicTest;
+import dynamic_tests.annotations.TestControl;
 import object_models.panels.JsPanelWithIFrame;
+import object_models.pages.homepage.CoreData;
 
 /**
- * @author Steve Brown
- *
- */
-public class ContactNumbers extends JsPanelWithIFrame {	
-	private Tab myTabs;
-	
-	public static final String PANEL_TITLE ="Employee Contact Details";
-	public static final String MENU_TITLE ="Contact Numbers";
+* Generated Class.
+* ----------------
+* Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
+* Author:  SteveBrown
+* Version: 1.0.0
+* Created: 08/02/2022 16:45:03
+*/
+
+public class ContactNumbers extends JsPanelWithIFrame {
+	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
+	public static final String PANEL_TITLE = "Employee Contact Details";
+	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
+	public static final String MENU_TITLE = "Contact Numbers";
+	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
 	public static final String MENU_PARENT_NAME = "Employees";
-	
-	public ContactNumbers(CoreData coreData) {
+
+	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
+	public ContactNumbers(CoreData coreData){
 		super(coreData, PANEL_TITLE);
-		this.myTabs = new Tab();
+		buildMyControls();
 	}
-		
-	// Tabs
-	public Tab tab() {
-		return this.myTabs;
+
+	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
+	private void buildMyControls() {
+		var myControls =
+			List.of(
+				new ControlData("employee_list", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-list']")))
+			);
+		super.buildPanelControls(myControls);
 	}
-			
-	public class Tab{	
-		private WebElement tab;
-				
-		public Tab contacts() {
-			tab = driver.findElement(By.xpath("//a[@href='#tab1']"));
-			return this;
-		}
-		
-		public Tab emailDetails() {
-			tab = driver.findElement(By.xpath("//a[@href='#tab2']"));
-			return this;
-		}
-				
-		public void click() {
-			tab.click();			
-		}
+	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
+	@TestControl(type="button")
+	public DynamicTest buttonEmployee_list () {
+		return DynamicTest.dynamicTest("[buttonEmployee_list] *NOT IMPLEMENTED*", () -> assertTrue(true));
 	}
+
 }

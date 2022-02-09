@@ -33,7 +33,6 @@ public class ElementTestButton extends ElementTest {
 		text = e.getText();
 		fafa = e.getFafa();
 		toolTipText = ((ElementDetails)e).getToolTipText();
-		System.out.println("toolTipText->" + toolTipText + "<-"); // TODO - remove or log 	
 	}
 	
 	@Override //TestElement
