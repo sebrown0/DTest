@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE document 
+    [ 
+      <!ENTITY saveBtn SYSTEM 
+      'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/SaveButton.xml'>    
+      <!ENTITY clearBtn SYSTEM 
+      'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/ClearButton.xml'>      
+      <!ENTITY empListBtn SYSTEM 
+      'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/EmpListButton.xml'>    
+      <!ENTITY existingGridViewBtn SYSTEM 
+      'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/ExistingGridViewButton.xml'>    
+    ]
+>
+
 
 <SiteMap>
   <Info>
@@ -13,8 +26,7 @@
       2. DiffExisting: only write differences between new and existing.
       3. IgnoreExisting: ignore existing files.
     -->
-    <CreationMethod>IgnoreExisting</CreationMethod>
-    
+    <CreationMethod>IgnoreExisting</CreationMethod>    
     
     <!-- 
       RootDir
@@ -50,13 +62,12 @@
    <Module name="payroll">   
     <Menus>
       <Menu name="Left" package="left_menu">
-    
+    <!-- 
       	<MenuItem name="Employee Details" package="Employees" class="EmployeeDetails">          
 			<Type name="JsPanelWithIFrame">
 				<JsPanelWithIFrame panelTitle = "Employee Details" /> 
 			</Type>
-         
-         <!-- ADD TOOL TIP -->
+                  
 			<Elements>            
               <Element>
                 <Details type="button" name="save" text="Save" fafa="fa fa-save"/>
@@ -104,18 +115,16 @@
               </Element>                  
 			</Elements>              
 		</MenuItem>
-    
+     -->
         <MenuItem name="Contact Numbers" package="Employees" class="ContactNumbers">          
 		  <Type name="JsPanelWithIFrame">
 			<JsPanelWithIFrame panelTitle = "Employee Contact Details" /> 
 		  </Type>         
-		  <Elements>            
-		    <Element>
-                <Details type="button" name="employee_list" text="" fafa="fa fa-list"/>
-                <Locator by="css" text="i[class='fa fa-list']"/>  
-                <ToolTip text="Select from a List of Employees with the Selected Company"/>              
-                <Function isDefaultPass="true" />
-            </Element>
+		  <Elements>
+            &empListBtn;
+            &existingGridViewBtn;
+            &saveBtn;
+            &clearBtn;            
 		  </Elements>              
 		</MenuItem>
   <!--   

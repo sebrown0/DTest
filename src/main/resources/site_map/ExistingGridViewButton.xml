@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Element>
+  <Details type="button" name="existing_records" text="" fafa="fa fw fa-table"/>
+  <Locator by="css" text="i[class='fa fw fa-table']"/>
+  <ToolTip text="Grid View for existing records"/>                
+  <Function isDefaultPass="true" />
+</Element>

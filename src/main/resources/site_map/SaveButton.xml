@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Element>
+  <Details type="button" name="save" text="Save" fafa="fa fa-save"/>
+  <Locator by="css" text="button[name='SAVE']"/>                
+  <Function isDefaultPass="true" />
+</Element>

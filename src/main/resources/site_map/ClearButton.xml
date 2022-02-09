@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Element>
+  <Details type="button" name="clear" text="Clear" fafa="fa fa-file-o"/>
+  <Locator by="css" text="button[name='CLEAR1']"/>                
+  <Function isDefaultPass="true" />
+</Element>
