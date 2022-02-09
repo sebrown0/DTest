@@ -47,7 +47,7 @@ public class DynamicTestItem {
 		this.hp = hp;
 		this.coreData = hp;
 		this.item = item;
-		this.elements = item.getElements();
+		this.elements = item.getAllElements();
 	}
 
 	public void addTests() {

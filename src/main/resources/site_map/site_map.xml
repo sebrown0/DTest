@@ -120,12 +120,17 @@
 		  <Type name="JsPanelWithIFrame">
 			<JsPanelWithIFrame panelTitle = "Employee Contact Details" /> 
 		  </Type>         
-		  <Elements>
+          <HeaderElements>
             &empListBtn;
             &existingGridViewBtn;
+          </HeaderElements>
+          
+          <BodyElements></BodyElements>
+            
+          <FooterElements>
             &saveBtn;
-            &clearBtn;            
-		  </Elements>              
+            &clearBtn;
+          </FooterElements>              
 		</MenuItem>
   <!--   
       	<MenuItem name="banks" package="employees" class="banks">          
