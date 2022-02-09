@@ -2,22 +2,28 @@
 <!DOCTYPE document 
     [    
       <!ENTITY empListBtn SYSTEM 
-        'file:./src/main/resources/site_map/header/EmpListButton.xml'>    
+        'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/header/EmpListButton.xml'>    
       <!ENTITY existingGridViewBtn SYSTEM 
-        'file:./src/main/resources/site_map/header/ExistingGridViewButton.xml'>    
+        'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/header/ExistingGridViewButton.xml'>    
       <!ENTITY combosBtn SYSTEM 
-        'file:./src/main/resources/site_map/header/CombosButton.xml'>
+        'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/header/CombosButton.xml'>
       <!ENTITY documentsBtn SYSTEM 
-        'file:./src/main/resources/site_map/header/DocumentsButton.xml'>        
+        'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/header/DocumentsButton.xml'>
+       <!ENTITY calendarBtn SYSTEM 
+        'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/header/CalendarButton.xml'>             
       
       <!ENTITY saveBtn SYSTEM 
-        'file:./src/main/resources/site_map/footer/SaveButton.xml'>
+        'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/footer/SaveButton.xml'>
       <!ENTITY searchBtn SYSTEM 
-        'file:./src/main/resources/site_map/footer/SearchButton.xml'>    
+        'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/footer/SearchButton.xml'>    
       <!ENTITY clearBtn SYSTEM 
-        'file:./src/main/resources/site_map/footer/ClearButton.xml'>      
+        'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/footer/ClearButton.xml'>      
       <!ENTITY printBtn SYSTEM 
-        'file:./src/main/resources/site_map/footer/PrintButton.xml'>    
+        'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/footer/PrintButton.xml'> 
+      <!ENTITY newBtn SYSTEM 
+        'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/footer/NewButton.xml'>    
+      <!ENTITY deleteBtn SYSTEM 
+        'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/footer/DeleteButton.xml'>    
     ]
 >
 
@@ -108,7 +114,61 @@
             &saveBtn;
             &clearBtn;
           </FooterElements>              
-		</MenuItem>        
+		</MenuItem>
+    
+        <MenuItem name="Banks" package="Employees" class="Banks">          
+          <Type name="JsPanelWithIFrame">
+          <JsPanelWithIFrame panelTitle = "Employee Banks and Unions Details" /> 
+          </Type>         
+            <HeaderElements>
+              &empListBtn;
+              &existingGridViewBtn;
+            </HeaderElements>
+            
+            <BodyElements></BodyElements>
+              
+            <FooterElements>
+              &saveBtn;
+              &clearBtn;
+            </FooterElements>              
+        </MenuItem>
+        
+        <MenuItem name="Salary Details" package="Employees" class="SalaryDetails">          
+          <Type name="JsPanelWithIFrame">
+          <JsPanelWithIFrame panelTitle = "Employee Salary Details" /> 
+          </Type>         
+            <HeaderElements>
+              &empListBtn;
+              <Element>
+                <Details type="button" name="salary_history" text="" fafa="fa fa-list"/>
+                <Locator by="css" text="i[class='fa fa-list']"/>
+                <ToolTip text="View Salary History"/>                
+                <Function isDefaultPass="true" />
+              </Element>
+              &combosBtn;
+              <Element>
+                <Details type="button" name="grid_view" text="" fafa="fa fw fa-table"/>
+                <Locator by="css" text="i[class='fa fw fa-table']"/>
+                <ToolTip text="Grid View for this Employee"/>                
+                <Function isDefaultPass="true" />
+              </Element>
+              &existingGridViewBtn;              
+              &documentsBtn;
+              &calendarBtn;
+            </HeaderElements>
+            
+            <BodyElements></BodyElements>
+              
+            <FooterElements>
+              &newBtn;
+              &saveBtn;
+              &searchBtn;
+              &deleteBtn;
+              &clearBtn;
+              &printBtn;
+            </FooterElements>              
+        </MenuItem>           
+                   
       </Menu>
     </Menus>
    </Module>

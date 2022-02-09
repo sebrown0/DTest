@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Element>
+  <Details type="button" name="new" text="New" fafa="fa fa-plus"/>
+  <Locator by="css" text="button[name='NEW1']"/>                
+  <Function isDefaultPass="true" />
+</Element>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Element>
+  <Details type="button" name="delete" text="Delete" fafa="fa fa-trash"/>
+  <Locator by="css" text="button[name='DELETE1']"/>                
+  <Function isDefaultPass="true" />
+</Element>
