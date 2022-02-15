@@ -45,6 +45,10 @@ public class SalaryDetails extends JsPanelWithIFrame {
 		buildMyControls();
 	}
 
+	/*
+	 * IF WE HAVE CONTROLS (THE SalaryDetailsControls.java FILE IS THERE)
+	 * 'BUILD THEM'.
+	 */
 	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
 	private void buildMyControls() {
 		InputGroup grp = new InputGroup(coreData, By.cssSelector("div[class='input-group']"));
@@ -71,31 +75,6 @@ public class SalaryDetails extends JsPanelWithIFrame {
 						
 		super.buildPanelControls(myControls);
 	}
-//	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-//	private void buildMyControls() {
-//		InputGroup grp = new InputGroup(coreData, By.cssSelector("div[class='input-group']"));
-//		grp
-//			.addElement("employee_list", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-list']")))
-//			.addElement("salary_history", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-list']")))
-//			.addElement("combos", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-window-maximize']")))
-//			.addElement("grid_view", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fw fa-table']")))
-//			.addElement("existing_records", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fw fa-table']")))
-//			.addElement("documents", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-file-o']")))
-//			.addElement("calendar", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-calendar fa-fw']")));
-//			
-//		var myControls =
-//			List.of(					
-//				new ControlData("group_1", new ControlGetterInputGroup(coreData, grp)),
-//				new ControlData("new", new ControlGetterButton(coreData, By.cssSelector("button[name='NEW1']"))),
-//				new ControlData("save", new ControlGetterButton(coreData, By.cssSelector("button[name='SAVE']"))),
-//				new ControlData("search", new ControlGetterButton(coreData, By.cssSelector("button[name='QBF1']"))),
-//				new ControlData("delete", new ControlGetterButton(coreData, By.cssSelector("button[name='DELETE1']"))),
-//				new ControlData("clear", new ControlGetterButton(coreData, By.cssSelector("button[name='CLEAR1']"))),
-//				new ControlData("print", new ControlGetterButton(coreData, By.cssSelector("button[name='PRINT1']")))				
-//			);
-//						
-//		super.buildPanelControls(myControls);
-//	}
 	
 	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
 	@TestControl(type="button")

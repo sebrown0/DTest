@@ -34,7 +34,10 @@ public class ElementTestButton extends ElementTest {
 		fafa = e.getFafa();
 		toolTipText = ((ElementDetails)e).getToolTipText();
 	}
-	
+	/*
+	 * HAVE TO GERT THIS BEFORE WE GET HERE 
+	 * FROM THE IP GROUP!!!!!!!!!!!!!!!!!!!
+	 */
 	@Override //TestElement
 	public List<DynamicTest> createTests() {
 //		Not using dynamic test methods at present.
@@ -50,6 +53,7 @@ public class ElementTestButton extends ElementTest {
 				DynamicTest.dynamicTest(
 					"Is [" + super.getName() +"] button [FaFa] correct?", 
 					() -> {							
+						System.out.println("->" + super.getName()); // TODO - remove or log 	
 						String faFaActual = ControlTestData.getFaFaText(super.getControl());
 						assertEquals(fafa, faFaActual);
 					}

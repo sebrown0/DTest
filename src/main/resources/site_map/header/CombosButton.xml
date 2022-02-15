@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Element>
   <Details type="button" name="combos" text="" fafa="fa fa-window-maximize"/>
-  <Locator by="css" text="i[class='fa fa-window-maximize']"/>
+  <Locator by="css" text="div[title='Combos']"/>
   <ToolTip text="Combos"/>                
   <Function isDefaultPass="true"/>
 </Element>

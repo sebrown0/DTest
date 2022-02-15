@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Element>
   <Details type="button" name="documents" text="" fafa="fa fa-file-o"/>
-  <Locator by="css" text="i[class='fa fa-file-o']"/>
+  <Locator by="css" text="div[title='No Documents Attached']"/>
   <ToolTip text="No Documents Attached"/>                
   <Function isDefaultPass="true"/>
 </Element>

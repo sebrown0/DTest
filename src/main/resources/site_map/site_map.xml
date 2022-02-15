@@ -77,7 +77,7 @@
    <Module name="payroll">   
     <Menus>
       <Menu name="Left" package="left_menu">
-    
+    <!-- 
       	<MenuItem name="Employee Details" package="Employees" class="EmployeeDetails">          
 		  <Type name="JsPanelWithIFrame">
 			<JsPanelWithIFrame panelTitle = "Employee Details" /> 
@@ -132,41 +132,41 @@
               &clearBtn;
             </FooterElements>              
         </MenuItem>
-        
+        -->
         <MenuItem name="Salary Details" package="Employees" class="SalaryDetails">          
           <Type name="JsPanelWithIFrame">
-          <JsPanelWithIFrame panelTitle = "Employee Salary Details" /> 
+            <JsPanelWithIFrame panelTitle = "Employee Salary Details" /> 
           </Type>         
-            <HeaderElements>
-              &empListBtn;
-              <Element>
-                <Details type="button" name="salary_history" text="" fafa="fa fa-list"/>
-                <Locator by="css" text="i[class='fa fa-list']"/>
-                <ToolTip text="View Salary History"/>                
-                <Function isDefaultPass="true" />
-              </Element>
-              &combosBtn;
-              <Element>
-                <Details type="button" name="grid_view" text="" fafa="fa fw fa-table"/>
-                <Locator by="css" text="i[class='fa fw fa-table']"/>
-                <ToolTip text="Grid View for this Employee"/>                
-                <Function isDefaultPass="true" />
-              </Element>
-              &existingGridViewBtn;              
-              &documentsBtn;
-              &calendarBtn;
-            </HeaderElements>
+          <HeaderElements>
+            &empListBtn;
+            <Element>
+              <Details type="button" name="salary_history" text="" fafa="fa fa-list"/>
+              <Locator by="css" text="div[title='View Salary History']"/>
+              <ToolTip text="View Salary History"/>                
+              <Function isDefaultPass="true" />
+            </Element>
+            &combosBtn;
+            <Element>
+              <Details type="button" name="grid_view" text="" fafa="fa fw fa-table"/>
+              <Locator by="css" text="div[title='Grid View for this Employee']"/>
+              <ToolTip text="Grid View for this Employee"/>                
+              <Function isDefaultPass="true" />
+            </Element>
+            &existingGridViewBtn;              
+            &documentsBtn;
+            &calendarBtn;
+          </HeaderElements>
             
-            <BodyElements></BodyElements>
+          <BodyElements></BodyElements>
               
-            <FooterElements>
-              &newBtn;
-              &saveBtn;
-              &searchBtn;
-              &deleteBtn;
-              &clearBtn;
-              &printBtn;
-            </FooterElements>              
+          <FooterElements>
+            &newBtn;
+            &saveBtn;
+            &searchBtn;
+            &deleteBtn;
+            &clearBtn;
+            &printBtn;
+          </FooterElements>              
         </MenuItem>           
                    
       </Menu>
