@@ -32,5 +32,5 @@ public abstract class ControlGetter {
 		this.findBy = findBy;
 	}
 
-	protected abstract Control getControl();
+	public abstract Control getControl();
 }

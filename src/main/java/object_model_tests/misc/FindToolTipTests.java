@@ -10,9 +10,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.By;
 
+import control_builder.ControlGetterInputGroup;
 import controls.Button;
 import controls.Control;
+import controls.InputGroup;
 import object_models.left_menu.common.LeftMenu;
 import object_models.modules.payroll.left_menu.employees.SalaryDetails;
 import object_models.pages.UserLoginPage;
@@ -48,13 +51,25 @@ class FindToolTipTests {
 		
 	@Test @Order(1)
 	void selectEmployee() {
-		Control gridView = salDetails.getControl("existing_records").get();
-		Button btn = (Button) gridView;
-		String tip = btn.getToolTipText();
+		InputGroup grp =  (InputGroup) salDetails.getControl("group_1").get();
 		
-		System.out.println("->" + tip); // TODO - remove or log
+		grp
+			.getElementByTitle("combos")
+			.ifPresent(e -> {
+				Control c = e.getControl();
+				Button b = (Button) c;
+				b.click();
+			});
 		
-		assertEquals("Grid view for existing records", tip);
+//			.ifPresent(e -> e.findElement(By.cssSelector("i[class='fa fa-window-maximize']")).click());
+		
+//		Control gridView = salDetails.getControl("existing_records").get();
+//		Button btn = (Button) gridView;
+//		String tip = btn.getToolTipText();
+//		
+//		System.out.println("->" + tip); // TODO - remove or log
+//		
+//		assertEquals("Grid view for existing records", tip);
 		 	
 	}	
 	

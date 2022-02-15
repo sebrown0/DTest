@@ -28,6 +28,10 @@ public class Button implements Control, HasToolTip, HasFaFa, DisplayedText {
 	private By btnLocator;
 	private WebElement btn;
 	
+	public Button(WebElement btn) {
+		this.btn = btn;
+	}
+	
 	public Button(WebDriver driver, By btnLocator) {
 		this.driver = driver;
 		this.btnLocator = btnLocator;

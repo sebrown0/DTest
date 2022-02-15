@@ -1,15 +1,21 @@
 package object_models.modules.payroll.left_menu.employees;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+
 import java.util.List;
-import org.openqa.selenium.By;
-import control_builder.*;
-import site_mapper.annotations.SiteMap;
+
 import org.junit.jupiter.api.DynamicTest;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import control_builder.ControlData;
+import control_builder.ControlGetterButton;
+import control_builder.ControlGetterInputGroup;
+import controls.InputGroup;
 import dynamic_tests.annotations.TestControl;
-import object_models.panels.JsPanelWithIFrame;
 import object_models.pages.homepage.CoreData;
+import object_models.panels.JsPanelWithIFrame;
+import site_mapper.annotations.SiteMap;
 
 /**
 * Generated Class.
@@ -28,6 +34,11 @@ public class SalaryDetails extends JsPanelWithIFrame {
 	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
 	public static final String MENU_PARENT_NAME = "Employees";
 
+	@FunctionalInterface
+	interface Title {
+		WebElement getElement(String title);
+	}
+	
 	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
 	public SalaryDetails(CoreData coreData){
 		super(coreData, PANEL_TITLE);
@@ -36,24 +47,55 @@ public class SalaryDetails extends JsPanelWithIFrame {
 
 	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
 	private void buildMyControls() {
+		InputGroup grp = new InputGroup(coreData, By.cssSelector("div[class='input-group']"));
+		grp
+			.addElement("employee_list", By.cssSelector("div[title='Search Employee']"))
+//			.addElement("salary_history", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-list']")))
+			.addElement("combos", By.cssSelector("div[title='Combos']"));
+//			.addElement("grid_view", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fw fa-table']")))
+//			.addElement("existing_records", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fw fa-table']")))
+//			.addElement("documents", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-file-o']")))
+//			.addElement("calendar", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-calendar fa-fw']")));
+			
 		var myControls =
-			List.of(
+			List.of(					
+				new ControlData("group_1", new ControlGetterInputGroup(coreData, grp)),
 				new ControlData("new", new ControlGetterButton(coreData, By.cssSelector("button[name='NEW1']"))),
 				new ControlData("save", new ControlGetterButton(coreData, By.cssSelector("button[name='SAVE']"))),
 				new ControlData("search", new ControlGetterButton(coreData, By.cssSelector("button[name='QBF1']"))),
 				new ControlData("delete", new ControlGetterButton(coreData, By.cssSelector("button[name='DELETE1']"))),
 				new ControlData("clear", new ControlGetterButton(coreData, By.cssSelector("button[name='CLEAR1']"))),
-				new ControlData("print", new ControlGetterButton(coreData, By.cssSelector("button[name='PRINT1']"))),
-				new ControlData("employee_list", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-list']"))),
-				new ControlData("salary_history", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-list']"))),
-				new ControlData("combos", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-window-maximize']"))),
-				new ControlData("grid_view", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fw fa-table']"))),
-				new ControlData("existing_records", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fw fa-table']"))),
-				new ControlData("documents", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-file-o']"))),
-				new ControlData("calendar", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-calendar fa-fw']")))
+				new ControlData("print", new ControlGetterButton(coreData, By.cssSelector("button[name='PRINT1']")))				
 			);
+						
 		super.buildPanelControls(myControls);
 	}
+//	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
+//	private void buildMyControls() {
+//		InputGroup grp = new InputGroup(coreData, By.cssSelector("div[class='input-group']"));
+//		grp
+//			.addElement("employee_list", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-list']")))
+//			.addElement("salary_history", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-list']")))
+//			.addElement("combos", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-window-maximize']")))
+//			.addElement("grid_view", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fw fa-table']")))
+//			.addElement("existing_records", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fw fa-table']")))
+//			.addElement("documents", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-file-o']")))
+//			.addElement("calendar", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-calendar fa-fw']")));
+//			
+//		var myControls =
+//			List.of(					
+//				new ControlData("group_1", new ControlGetterInputGroup(coreData, grp)),
+//				new ControlData("new", new ControlGetterButton(coreData, By.cssSelector("button[name='NEW1']"))),
+//				new ControlData("save", new ControlGetterButton(coreData, By.cssSelector("button[name='SAVE']"))),
+//				new ControlData("search", new ControlGetterButton(coreData, By.cssSelector("button[name='QBF1']"))),
+//				new ControlData("delete", new ControlGetterButton(coreData, By.cssSelector("button[name='DELETE1']"))),
+//				new ControlData("clear", new ControlGetterButton(coreData, By.cssSelector("button[name='CLEAR1']"))),
+//				new ControlData("print", new ControlGetterButton(coreData, By.cssSelector("button[name='PRINT1']")))				
+//			);
+//						
+//		super.buildPanelControls(myControls);
+//	}
+	
 	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
 	@TestControl(type="button")
 	public DynamicTest buttonNew () {
