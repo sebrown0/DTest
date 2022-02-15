@@ -26,8 +26,6 @@ public class InputGroup implements Control {
 	private WebDriver driver;
 	private By findBy;
 	private WebElement prnt;
-//	private List<WebElement> elements;
-//	private List<ControlGetterButton> cntrls;
 	private List<ControlData> controlData = new ArrayList<>();
 	private CoreData coreData;
 	
@@ -37,36 +35,18 @@ public class InputGroup implements Control {
 		this.findBy = findBy;
 		
 		setParent();
+	}	
+
+	private void setParent() {
+		prnt = driver.findElement(findBy);
 	}
-	
 	
 	public InputGroup addElement(String name, By findBy) {
 		WebElement btn = prnt.findElement(findBy);
 		controlData.add(new ControlData(name, new ControlGetterButton(coreData, findBy, btn)));
 		return this;
 	}
-	
-//	public InputGroup addElement(String name, ControlGetter cntrl) {
-//		controlData.add(new ControlData(name, cntrl));
-//		return this;
-//	}
-		
-	public List<ControlData> getControlData(){
-
-		return controlData;
-	}
-	
-	//new ControlData("employee_list", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-list']"))),
-	private void setParent() {
-		prnt = driver.findElement(findBy);
-	}
-//	private void setElements() {
-//		elements = prnt.findElements(By.cssSelector("div[class='input-group-append']"));
-//		elements.forEach(e -> {
-//			System.out.println("->" + e.getAttribute("title"));
-//			e.click();
-//		});
-//	}
+				
 	public Optional<ControlGetter> getElementByTitle(String title) {
 		return 
 			controlData
@@ -75,6 +55,30 @@ public class InputGroup implements Control {
 				.map(c -> c.getControlGetter())
 				.findFirst();
 	}
+
+	@Override
+	public boolean isAvailable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	public List<ControlData> getControlData(){
+		return controlData;
+	}	
+	public CoreData getCoreData() {
+		return coreData;
+	}
+	public By getFindBy() {
+		return findBy;
+	}
+
+//private void setElements() {
+//	elements = prnt.findElements(By.cssSelector("div[class='input-group-append']"));
+//	elements.forEach(e -> {
+//		System.out.println("->" + e.getAttribute("title"));
+//		e.click();
+//	});
+//}
 //	public Optional<WebElement> getElementByTitle(String title) {
 //		return 
 //			elements
@@ -82,19 +86,5 @@ public class InputGroup implements Control {
 //				.filter(e -> e.getAttribute("title").equals(title))
 //				.findFirst();
 //	}
-
-	@Override
-	public boolean isAvailable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public CoreData getCoreData() {
-		return coreData;
-	}
-
-	public By getFindBy() {
-		return findBy;
-	}
 	
 }

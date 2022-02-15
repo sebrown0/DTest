@@ -28,21 +28,14 @@ public class Button implements Control, HasToolTip, HasFaFa, DisplayedText {
 	private By btnLocator;
 	private WebElement btn;
 	
-	public Button(WebElement btn) {
+	public Button(WebDriver driver, WebElement btn) {
+		this.driver = driver;
 		this.btn = btn;
 	}
 	
 	public Button(WebDriver driver, By btnLocator) {
 		this.driver = driver;
 		this.btnLocator = btnLocator;
-	}
-
-	public boolean click() {		
-		if(isAvailable()) {
-			btn.click();
-			return true;
-		}
-		return false;
 	}
 
 	@Override //HasToolTip
@@ -64,12 +57,15 @@ public class Button implements Control, HasToolTip, HasFaFa, DisplayedText {
 	 * title attribute is found, for n attempts.
 	 */
 	private String getTipFromTitle(WebElement el, int attempts) {
-		WebElement prnt = el.findElement(By.xpath(".."));		
-		var title = prnt.getAttribute("title");
+//		WebElement prnt = el.findElement(By.xpath(".."));		
+//		var title = prnt.getAttribute("title");
+		
+		var title = btn.getAttribute("title");
 		if(title != null && title.length()>0) {
 			return title;				
 		}				
-		return getTipFromTitle(prnt, --attempts);
+//		return getTipFromTitle(prnt, --attempts);
+		return "NO TOOL TIP FOUND";
 	}
 	
 	@Override //HasFaFa
@@ -118,12 +114,25 @@ public class Button implements Control, HasToolTip, HasFaFa, DisplayedText {
 	public boolean isAvailable() {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 		try {
-			btn = wait.until(ExpectedConditions.elementToBeClickable(btnLocator));
+			if(btn == null && btnLocator != null) {
+				btn = wait.until(ExpectedConditions.elementToBeClickable(btnLocator));	
+			}else if(btn != null){
+				btn = wait.until(ExpectedConditions.elementToBeClickable(btn));
+			}else {
+				return false;
+			}			
 			return true;
 		} catch (Exception e) {
 			LogManager.getLogger().error("Unable to find btn [" + e + "]");
 			return false;
 		}		
 	}
-	
+
+	public boolean click() {		
+		if(isAvailable()) {
+			btn.click();
+			return true;
+		}
+		return false;
+	}
 }

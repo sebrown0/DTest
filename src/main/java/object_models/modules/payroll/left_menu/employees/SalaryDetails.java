@@ -50,16 +50,17 @@ public class SalaryDetails extends JsPanelWithIFrame {
 		InputGroup grp = new InputGroup(coreData, By.cssSelector("div[class='input-group']"));
 		grp
 			.addElement("employee_list", By.cssSelector("div[title='Search Employee']"))
-//			.addElement("salary_history", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-list']")))
-			.addElement("combos", By.cssSelector("div[title='Combos']"));
-//			.addElement("grid_view", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fw fa-table']")))
-//			.addElement("existing_records", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fw fa-table']")))
-//			.addElement("documents", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-file-o']")))
-//			.addElement("calendar", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-calendar fa-fw']")));
+			.addElement("salary_history", By.cssSelector("div[title='View Salary History']"))
+			.addElement("combos", By.cssSelector("div[title='Combos']"))
+			.addElement("grid_view", By.cssSelector("div[title='Grid View for this Employee']"))
+			.addElement("existing_records", By.cssSelector("div[title='Grid View for existing records']"))
+			.addElement("documents", By.cssSelector("div[title='No Documents Attached']"))
+			.addElement("calendar", By.cssSelector("div[title='Combos']"));
 			
 		var myControls =
 			List.of(					
 				new ControlData("group_1", new ControlGetterInputGroup(coreData, grp)),
+				new ControlData("calendar", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-calendar fa-fw']"))),
 				new ControlData("new", new ControlGetterButton(coreData, By.cssSelector("button[name='NEW1']"))),
 				new ControlData("save", new ControlGetterButton(coreData, By.cssSelector("button[name='SAVE']"))),
 				new ControlData("search", new ControlGetterButton(coreData, By.cssSelector("button[name='QBF1']"))),

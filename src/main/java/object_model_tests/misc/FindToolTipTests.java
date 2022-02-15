@@ -10,9 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.By;
 
-import control_builder.ControlGetterInputGroup;
 import controls.Button;
 import controls.Control;
 import controls.InputGroup;
@@ -26,7 +24,10 @@ import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * 	Initial
+ * @since 1.0
  *
  * Verify and employee loaded by EmployeeProvider.
  */
@@ -44,37 +45,29 @@ class FindToolTipTests {
 		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());		
 		// Load the menu.
 		menu = homepagePayroll.getLeftMenu();
-		// Load the employee details page.
-		salDetails = (SalaryDetails) menu.clickParent("Employees").clickAndLoad(SalaryDetails.class).get();
-
+		// Load the employee salary details page.
+		salDetails = 
+				(SalaryDetails) menu
+						.clickParent("Employees")
+						.clickAndLoad(SalaryDetails.class)
+						.get();
 	}
 		
 	@Test @Order(1)
-	void selectEmployee() {
+	void select_existingRecords_forEmployee() {
 		InputGroup grp =  (InputGroup) salDetails.getControl("group_1").get();
 		
 		grp
-			.getElementByTitle("combos")
+			.getElementByTitle("existing_records")
 			.ifPresent(e -> {
 				Control c = e.getControl();
 				Button b = (Button) c;
-				b.click();
-			});
-		
-//			.ifPresent(e -> e.findElement(By.cssSelector("i[class='fa fa-window-maximize']")).click());
-		
-//		Control gridView = salDetails.getControl("existing_records").get();
-//		Button btn = (Button) gridView;
-//		String tip = btn.getToolTipText();
-//		
-//		System.out.println("->" + tip); // TODO - remove or log
-//		
-//		assertEquals("Grid view for existing records", tip);
-		 	
+				assertEquals("Grid View for existing records", b.getToolTipText());
+			});		 	
 	}	
 	
 	@AfterAll
 	static void tearDown() {		
-//		homepagePayroll.close();
+		homepagePayroll.close();
 	}
 }
