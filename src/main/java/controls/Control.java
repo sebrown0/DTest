@@ -12,6 +12,6 @@ package controls;
  * @since 1.0
  * * 
  */
-public interface Control {
+public interface Control {	
 	boolean isAvailable();
 }

@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
 
 import control_builder.ControlData;
 import control_builder.ControlGetter;
-import control_builder.ControlGetterButton;
+import control_builder.ControlGetterTab;
 import object_models.pages.homepage.CoreData;
 
 /**
@@ -22,7 +22,7 @@ import object_models.pages.homepage.CoreData;
  * 	Initial
  * @since 1.0
  */
-public class InputGroup implements Control {
+public class TabGroup implements ControlGroup {
 	private WebDriver driver;
 	private By findBy;
 	private WebElement prnt;
@@ -30,7 +30,7 @@ public class InputGroup implements Control {
 	private CoreData coreData;
 	private Control currentControl;
 	
-	public InputGroup(CoreData coreData, By findBy) {
+	public TabGroup(CoreData coreData, By findBy) {
 		this.coreData = coreData;
 		this.driver = coreData.getWebDriver();
 		this.findBy = findBy;
@@ -42,12 +42,13 @@ public class InputGroup implements Control {
 		prnt = driver.findElement(findBy);
 	}
 	
-	public InputGroup addElement(String name, By findBy) {
-		WebElement btn = prnt.findElement(findBy);
-		controlData.add(new ControlData(name, new ControlGetterButton(coreData, findBy, btn)));
+	public TabGroup add(String name, By findBy) {
+		WebElement tab = prnt.findElement(findBy);
+		controlData.add(new ControlData(name, new ControlGetterTab(coreData, findBy, tab)));
 		return this;
 	}
 				
+	@Override //ControlGroup
 	public Optional<Control> getControlByTitle(String title) {
 		currentControl = null;
 		getElementByTitle(title).ifPresent(e -> {
@@ -56,7 +57,7 @@ public class InputGroup implements Control {
 		return Optional.ofNullable(currentControl);
 	}
 	
-	public Optional<ControlGetter> getElementByTitle(String title) {
+	private Optional<ControlGetter> getElementByTitle(String title) {
 		return 
 			controlData
 				.stream()
@@ -64,36 +65,11 @@ public class InputGroup implements Control {
 				.map(c -> c.getControlGetter())
 				.findFirst();
 	}
-
-	@Override
-	public boolean isAvailable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
-//	public List<ControlData> getControlData(){
-//		return controlData;
-//	}	
 	public CoreData getCoreData() {
 		return coreData;
 	}
 	public By getFindBy() {
 		return findBy;
 	}
-
-//private void setElements() {
-//	elements = prnt.findElements(By.cssSelector("div[class='input-group-append']"));
-//	elements.forEach(e -> {
-//		System.out.println("->" + e.getAttribute("title"));
-//		e.click();
-//	});
-//}
-//	public Optional<WebElement> getElementByTitle(String title) {
-//		return 
-//			elements
-//				.stream()
-//				.filter(e -> e.getAttribute("title").equals(title))
-//				.findFirst();
-//	}
-	
 }

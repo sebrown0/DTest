@@ -11,7 +11,9 @@ import org.openqa.selenium.WebElement;
 import control_builder.ControlData;
 import control_builder.ControlGetterButton;
 import control_builder.ControlGetterInputGroup;
+import control_builder.ControlGetterTabs;
 import controls.InputGroup;
+import controls.TabGroup;
 import dynamic_tests.annotations.TestControl;
 import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
@@ -61,9 +63,14 @@ public class SalaryDetails extends JsPanelWithIFrame {
 			.addElement("documents", By.cssSelector("div[title='No Documents Attached']"))
 			.addElement("calendar", By.cssSelector("div[title='Combos']"));
 			
+		TabGroup tabs = new TabGroup(coreData, By.cssSelector("ul[class='nav nav-tabs']"));
+		tabs
+			.add("SalaryDetails", By.cssSelector("a[id='tab-tab1']"));
+		
 		var myControls =
 			List.of(					
-				new ControlData("group_1", new ControlGetterInputGroup(coreData, grp)),
+				new ControlData("EmpLookup", new ControlGetterInputGroup(coreData, grp)),
+				new ControlData("Tabs", new ControlGetterTabs(coreData, tabs)),
 				new ControlData("calendar", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-calendar fa-fw']"))),
 				new ControlData("new", new ControlGetterButton(coreData, By.cssSelector("button[name='NEW1']"))),
 				new ControlData("save", new ControlGetterButton(coreData, By.cssSelector("button[name='SAVE']"))),
