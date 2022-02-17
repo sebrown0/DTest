@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import control_builder.control_data.ControlData;
 import control_builder.control_getters.ControlGetter;
 import control_builder.control_getters.ControlGetterTab;
+import controls.finder.ControlFinder;
 import object_models.pages.homepage.CoreData;
 
 /**
@@ -24,7 +25,7 @@ public class TabGroup implements Control, ControlGroup {
 	private By findBy;
 	private List<ControlData> tabs = new ArrayList<>();
 	private CoreData coreData;
-	private Control currentControl;
+	private ControlFinder controlFinder;
 	
 	public TabGroup(CoreData coreData, By findBy) {
 		this.coreData = coreData;
@@ -52,22 +53,10 @@ public class TabGroup implements Control, ControlGroup {
 	}
 	@Override //ControlGroup
 	public Optional<Control> getControlByTitle(String title) {
-		currentControl = null;
-		getElementByTitle(title).ifPresent(e -> {
-			currentControl = e.getControl();
-		});
-		return Optional.ofNullable(currentControl);
+		controlFinder = new ControlFinder(tabs);
+		return controlFinder.getControlByTitle(title);
 	}
-	
-	private Optional<ControlGetter> getElementByTitle(String title) {
-		return 
-			tabs
-				.stream()
-				.filter(e -> e.getCntrlName().equals(title))
-				.map(c -> c.getControlGetter())
-				.findFirst();
-	}
-	
+		
 	public CoreData getCoreData() {
 		return coreData;
 	}

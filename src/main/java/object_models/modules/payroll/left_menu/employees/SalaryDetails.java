@@ -17,7 +17,6 @@ import control_builder.control_getters.ControlGetterGroup;
 import control_builder.control_getters.ControlGetterInputGroup;
 import control_builder.control_getters.ControlGetterTab;
 import control_builder.control_getters.ControlGetterTabs;
-import controls.InputGroup;
 import dynamic_tests.annotations.TestControl;
 import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
@@ -57,17 +56,27 @@ public class SalaryDetails extends JsPanelWithIFrame {
 	 */
 	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
 	private void buildMyControls() {
-		InputGroup grp = new InputGroup(coreData, By.cssSelector("div[class='input-group']"));
-		grp
-			.addElement("employee_list", By.cssSelector("div[title='Search Employee']"))
-			.addElement("salary_history", By.cssSelector("div[title='View Salary History']"))
-			.addElement("combos", By.cssSelector("div[title='Combos']"))
-			.addElement("grid_view", By.cssSelector("div[title='Grid View for this Employee']"))
-			.addElement("existing_records", By.cssSelector("div[title='Grid View for existing records']"))
-			.addElement("documents", By.cssSelector("div[title='No Documents Attached']"))
-			.addElement("calendar", By.cssSelector("div[title='Combos']"));
-			
-		//TODO --------------------------.............................
+		ControlGetter employeeList = 
+				new ControlGetterButton("EmployeeList", coreData, By.cssSelector("div[title='Search Employee']"));
+		ControlGetter salaryHistory = 
+				new ControlGetterButton("SalaryHistory", coreData, By.cssSelector("div[title='View Salary History']"));
+		ControlGetter combos = 
+				new ControlGetterButton("Combos", coreData, By.cssSelector("div[title='Combos']"));
+		ControlGetter grid_view = 
+				new ControlGetterButton("GridView", coreData, By.cssSelector("div[title='Grid View for this Employee']"));
+		ControlGetter existing_records = 
+				new ControlGetterButton("ExistingRecords", coreData, By.cssSelector("div[title='Grid View for existing records']"));
+		ControlGetter documents = 
+				new ControlGetterButton("Documents", coreData, By.cssSelector("div[title='No Documents Attached']"));
+		
+		//THIS IS ANOTHER IP GROUP
+//		ControlGetter calendar = 
+//				new ControlGetterButton("", coreData, By.cssSelector(""));
+		
+		ControlGetterGroup empLookup =  
+				new ControlGetterInputGroup("EmpLookup", coreData)
+					.addControls(Arrays.asList(employeeList, salaryHistory, combos, grid_view, existing_records, documents));
+							
 		ControlGetter reason = 
 			new ControlGetterComboSelectOnly(
 				"Reason", coreData,  By.cssSelector("span[id='select2-REASON-container']"), null);
@@ -82,7 +91,7 @@ public class SalaryDetails extends JsPanelWithIFrame {
 				
 		var myControls =
 			List.of(					
-				new ControlData(new ControlGetterInputGroup("EmpLookup", coreData, grp)),
+				new ControlData(empLookup),
 				new ControlData(tabs),
 				new ControlData(new ControlGetterButton("calendar", coreData, By.cssSelector("i[class='fa fa-calendar fa-fw']"))),
 				new ControlData(new ControlGetterButton("new", coreData, By.cssSelector("button[name='NEW1']"))),

@@ -66,7 +66,7 @@ class Control_Tests {
 					.getControl("EmpLookup")
 					.get();
 		
-		Button empList = (Button) grp.getControlByTitle("employee_list").get();
+		Button empList = (Button) grp.getControlByTitle("EmployeeList").get();
 		assertEquals("Search Employee", empList.getToolTipText());
 	}
 

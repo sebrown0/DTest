@@ -17,6 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import control_builder.control_data.ControlData;
 import control_builder.control_getters.ControlGetter;
+import controls.finder.ControlFinder;
 
 /**
  * @author SteveBrown
@@ -25,13 +26,13 @@ import control_builder.control_getters.ControlGetter;
  * @since 1.0
  *
  */
-public class Tab implements Control, DisplayedText {
+public class Tab implements Control, ControlGroup, DisplayedText {
 	private WebDriver driver;
 	private By locator;
 	private WebElement tab;
 	private List<ControlData> controlData = new ArrayList<>();
-	private Control currentControl;
 	private String name;
+	private ControlFinder controlFinder;
 	
 	public Tab(String name, WebDriver driver, By locator) {
 		this.driver = driver;
@@ -39,24 +40,7 @@ public class Tab implements Control, DisplayedText {
 		this.tab = driver.findElement(locator);
 		this.name = name;
 	}
-	
-	public Optional<Control> getControlByTitle(String title) {
-		currentControl = null;
-		getElementByTitle(title).ifPresent(e -> {
-			currentControl = e.getControl();
-		});
-		return Optional.ofNullable(currentControl);
-	}
-
-	private Optional<ControlGetter> getElementByTitle(String title) {
-		return 
-			controlData
-				.stream()
-				.filter(e -> e.getCntrlName().equals(title))
-				.map(c -> c.getControlGetter())
-				.findFirst();
-	}
-	
+		
 	public Tab addElements(List<ControlGetter> elements) {
 		if(elements != null) {
 			elements.forEach(v -> {
@@ -64,6 +48,12 @@ public class Tab implements Control, DisplayedText {
 			});
 		}
 		return this;
+	}
+	
+	@Override //ControlGroup
+	public Optional<Control> getControlByTitle(String title) {
+		controlFinder = new ControlFinder(controlData);
+		return controlFinder.getControlByTitle(title);
 	}
 	
 	private Tab addElement(String name, ControlGetter controlGetter) {

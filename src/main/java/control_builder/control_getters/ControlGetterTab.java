@@ -19,7 +19,6 @@ import object_models.pages.homepage.CoreData;
  *
  */
 public final class ControlGetterTab extends ControlGetterGroup {
-	private Control tab;
 	private List<ControlGetter> cntrls;
 	private String name;
 	private By findBy;
@@ -31,10 +30,6 @@ public final class ControlGetterTab extends ControlGetterGroup {
 		this.findBy = findBy;	
 	}
 
-//	public String getName() {
-//		return ((Tab)tab).getName();
-//	}
-
 	@Override
 	public ControlGetterGroup addControls(List<ControlGetter> cntrls) {
 		this.cntrls = cntrls;
@@ -45,6 +40,5 @@ public final class ControlGetterTab extends ControlGetterGroup {
 	public Control getControl() {
 		return new Tab(name, driver, findBy).addElements(cntrls);
 	}
-
 	
 }
