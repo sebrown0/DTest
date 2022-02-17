@@ -8,6 +8,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 
 import controls.Control;
+import controls.ControlGroup;
 import controls.Tab;
 import object_models.pages.homepage.CoreData;
 
@@ -38,7 +39,9 @@ public final class ControlGetterTab extends ControlGetterGroup {
 	
 	@Override
 	public Control getControl() {
-		return new Tab(name, driver, findBy).addElements(cntrls);
+		return 
+			new ControlGroup(name, driver, findBy)
+				.addElements(cntrls, new Tab());
 	}
 	
 }

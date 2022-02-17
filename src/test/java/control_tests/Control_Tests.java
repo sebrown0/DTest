@@ -15,9 +15,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import controls.Button;
 import controls.ComboSelectFromList;
+import controls.ControlGroup;
 import controls.InputGroup;
-import controls.Tab;
-import controls.TabGroup;
 import logging.TestResultLogger;
 import object_models.left_menu.common.LeftMenu;
 import object_models.modules.payroll.left_menu.employees.SalaryDetails;
@@ -72,25 +71,25 @@ class Control_Tests {
 
 	@Test
 	void get_tabSalaryDetails() {
-		TabGroup tabs = 
-			(TabGroup) salDetails
+		ControlGroup tabs = 
+			(ControlGroup) salDetails
 					.getPanelControl()
 					.getControl("Tabs")
 					.get();
 		
-		Tab salDetails = (Tab) tabs.getControlByTitle("SalaryDetails").get();
+		ControlGroup salDetails = (ControlGroup) tabs.getControlByTitle("SalaryDetails").get();
 		assertEquals("Salary Details", salDetails.getText());
 	}
 	
 	@Test
 	void get_reason_from_tabSalaryDetails() {
-		TabGroup tabs = 
-			(TabGroup) salDetails
+		ControlGroup tabs = 
+			(ControlGroup) salDetails
 					.getPanelControl()
 					.getControl("Tabs")
 					.get();
 		
-		Tab salDetails = (Tab) tabs.getControlByTitle("SalaryDetails").get();
+		ControlGroup salDetails = (ControlGroup) tabs.getControlByTitle("SalaryDetails").get();
 		ComboSelectFromList reason = 
 				(ComboSelectFromList) salDetails.getControlByTitle("Reason").get();
 		assertTrue(reason != null);

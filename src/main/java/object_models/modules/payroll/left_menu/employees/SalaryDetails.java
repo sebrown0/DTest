@@ -86,7 +86,7 @@ public class SalaryDetails extends JsPanelWithIFrame {
 					.addControls(Arrays.asList(reason));
 		
 		ControlGetterGroup tabs = 
-				new ControlGetterTabs("Tabs", coreData)
+				new ControlGetterTabs("Tabs", coreData, By.cssSelector("ul[class='nav nav-tabs']"))
 					.addControls(Arrays.asList(salaryDetails));
 				
 		var myControls =

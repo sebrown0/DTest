@@ -5,7 +5,10 @@ package control_builder.control_getters;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
+
 import controls.Control;
+import controls.ControlGroup;
 import controls.TabGroup;
 import object_models.pages.homepage.CoreData;
 
@@ -16,11 +19,11 @@ import object_models.pages.homepage.CoreData;
  * @since 1.0
  *
  */
-public class ControlGetterTabs extends ControlGetterGroup {
+public final class ControlGetterTabs extends ControlGetterGroup {
 	private List<ControlGetter> tabs;
-	
-	public ControlGetterTabs(String name, CoreData coreData) {
-		super(name, coreData);				
+		
+	public ControlGetterTabs(String name, CoreData coreData, By findBy) {
+		super(name, coreData, findBy);				
 	}
 
 	@Override
@@ -31,7 +34,9 @@ public class ControlGetterTabs extends ControlGetterGroup {
 	
 	@Override
 	public Control getControl() {
-		return new TabGroup(coreData, findBy).addTabs(tabs);
+		return 
+			new ControlGroup(super.getName(), driver, findBy)
+				.addElements(tabs, new TabGroup());
 	}
 
 }
