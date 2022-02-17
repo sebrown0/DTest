@@ -6,6 +6,7 @@ package object_models.left_menu.common;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchSessionException;
@@ -37,7 +38,7 @@ public class LeftMenuActions {
 	
 	public LeftMenuActions(CoreData coreData, Map<String, WebElement> anchors, LeftMenuMapper menuMapper) {
 		this.coreData = coreData;
-		this.logger = coreData.getLogger();
+		this.logger = LogManager.getLogger(LeftMenuActions.class);
 		this.contextManager = coreData.getContextManager();
 		this.anchors = anchors;
 		this.menuMapper = menuMapper;

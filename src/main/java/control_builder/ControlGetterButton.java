@@ -20,17 +20,24 @@ import object_models.pages.homepage.CoreData;
 public class ControlGetterButton extends ControlGetter {
 	private Control btn;
 	
+	public ControlGetterButton(CoreData coreData) {
+		super(coreData);				
+	}
 	public ControlGetterButton(CoreData coreData, By findBy) {
 		super(coreData, findBy);
 		
 		this.btn = new Button(driver, findBy);
 	}
-	public ControlGetterButton(CoreData coreData, By findBy, WebElement elButton) {
-		super(coreData, findBy);
+	public ControlGetterButton(CoreData coreData, WebElement elButton) {
+		super(coreData);
 		
 		this.btn = new Button(coreData.getWebDriver(), elButton);
 	}
-
+	@Override
+	public ControlGetter setElement(WebElement el) {
+		this.btn = new Button(coreData.getWebDriver(), el);
+		return this;
+	}
 	@Override
 	public Control getControl() {
 		return btn;

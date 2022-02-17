@@ -4,6 +4,9 @@
 package controls;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
@@ -11,6 +14,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import control_builder.ControlGetter;
+import control_builder.control_data.ControlData;
+import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -23,15 +30,43 @@ public class Tab implements Control, DisplayedText {
 	private WebDriver driver;
 	private By locator;
 	private WebElement tab;
+	private List<ControlData> controlData = new ArrayList<>();
+	private Control currentControl;
 	
-	public Tab(WebDriver driver, WebElement tab) {
-		this.driver = driver;
+	public Tab(CoreData coreData, WebElement tab) {	
+		this.driver = coreData.getWebDriver();
 		this.tab = tab;
 	}
 	
 	public Tab(WebDriver driver, By locator) {
 		this.driver = driver;
 		this.locator = locator;
+		this.tab = driver.findElement(locator);
+	}
+	
+	public Optional<Control> getControlByTitle(String title) {
+		currentControl = null;
+		getElementByTitle(title).ifPresent(e -> {
+			currentControl = e.getControl();
+		});
+		return Optional.ofNullable(currentControl);
+	}
+
+	private Optional<ControlGetter> getElementByTitle(String title) {
+		return 
+			controlData
+				.stream()
+				.filter(e -> e.getCntrlName().equals(title))
+				.map(c -> c.getControlGetter())
+				.findFirst();
+	}
+	
+	public Tab addElement(String name, ControlGetter controlGetter, By findBy) {
+		WebElement el = tab.findElement(findBy);
+		controlData.add(
+				new ControlData(
+						name,	controlGetter.setElement(el)));
+		return this;
 	}
 	
 	@Override //DisplayedText

@@ -5,6 +5,7 @@ package control_builder;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import controls.Control;
 import object_models.pages.homepage.CoreData;
@@ -33,4 +34,5 @@ public abstract class ControlGetter {
 	}
 
 	public abstract Control getControl();
+	public abstract ControlGetter setElement(WebElement el);
 }

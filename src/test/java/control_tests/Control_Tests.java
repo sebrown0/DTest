@@ -13,10 +13,12 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import controls.Button;
+import controls.ComboSelectFromList;
 import controls.InputGroup;
 import controls.Tab;
 import controls.TabGroup;
 import logging.TestResultLogger;
+import object_models.helpers.text_utils.RemoveX;
 import object_models.left_menu.common.LeftMenu;
 import object_models.modules.payroll.left_menu.employees.SalaryDetails;
 import object_models.pages.UserLoginPage;
@@ -53,7 +55,7 @@ class Control_Tests {
 
 	@AfterAll
 	static void tearDown() {		
-		homepagePayroll.close();
+//		homepagePayroll.close();
 	}
 	
 	@Test
@@ -78,5 +80,19 @@ class Control_Tests {
 		
 		Tab salDetails = (Tab) tabs.getControlByTitle("SalaryDetails").get();
 		assertEquals("Salary Details", salDetails.getText());
+	}
+	
+	@Test
+	void get_reason_from_tabSalaryDetails() {
+		TabGroup tabs = 
+			(TabGroup) salDetails
+					.getPanelControl()
+					.getControl("Tabs")
+					.get();
+		
+		Tab salDetails = (Tab) tabs.getControlByTitle("SalaryDetails").get();
+//		ComboSelectFromList reason = 
+//				(ComboSelectFromList) salDetails.getControlByTitle("Reason").get();
+//		assertEquals("Salary Details", reason.getText(new RemoveX()));
 	}
 }

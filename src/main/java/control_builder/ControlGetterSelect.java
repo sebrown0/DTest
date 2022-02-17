@@ -4,6 +4,7 @@
 package control_builder;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import controls.Control;
 import controls.TextSelect;
@@ -20,13 +21,25 @@ import object_models.pages.homepage.CoreData;
  * 
  */
 public final class ControlGetterSelect extends ControlGetter {
+	private Control cntrl;
+	
+	public ControlGetterSelect(CoreData coreData) {
+		super(coreData);	
+	}
+	
 	public ControlGetterSelect(CoreData coreData, By findBy) {
-		super(coreData, findBy);		
+		super(coreData, findBy);
+		
+		cntrl = new TextSelect(super.driver, super.findBy);
 	}
 
 	@Override
 	public Control getControl() {
-		return new TextSelect(super.driver, super.findBy);
+		return cntrl;
 	}
-
+	@Override
+	public ControlGetter setElement(WebElement el) {
+		cntrl = new TextSelect(el); 	
+		return this;
+	}
 }

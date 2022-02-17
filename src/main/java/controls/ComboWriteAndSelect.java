@@ -4,6 +4,7 @@
 package controls;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import object_models.helpers.text_utils.RemoveX;
 import object_models.helpers.text_utils.TextExtractor;
@@ -19,6 +20,11 @@ import object_models.pages.homepage.CoreData;
 public class ComboWriteAndSelect extends ComboSelectFromList {
 	protected TextWriter writer;
 	
+	public ComboWriteAndSelect(CoreData coreData, WebElement el, By resultsBy, TextWriter writer) {
+		super(coreData, el, resultsBy);
+		
+		this.writer = writer;
+	}
 	public ComboWriteAndSelect(CoreData coreData, By findBy, By resultsBy, TextWriter writer) {
 		super(coreData, findBy, resultsBy);
 		

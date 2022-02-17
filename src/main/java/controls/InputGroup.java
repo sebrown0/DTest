@@ -44,7 +44,7 @@ public class InputGroup implements Control {
 	
 	public InputGroup addElement(String name, By findBy) {
 		WebElement btn = prnt.findElement(findBy);
-		controlData.add(new ControlData(name, new ControlGetterButton(coreData, findBy, btn)));
+		controlData.add(new ControlData(name, new ControlGetterButton(coreData, btn)));
 		return this;
 	}
 				

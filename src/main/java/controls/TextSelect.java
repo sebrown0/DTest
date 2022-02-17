@@ -20,6 +20,10 @@ import org.openqa.selenium.WebElement;
 public class TextSelect implements Control {
 	private WebElement text;
 
+	public TextSelect(WebElement text) {
+		this.text = text;
+	}
+	
 	public TextSelect(WebDriver driver, By findBy) {
 		setTextOut(driver, findBy);		
 	}
@@ -44,7 +48,7 @@ public class TextSelect implements Control {
 	
 	@Override
 	public boolean isAvailable() {
-		LogManager.getLogger().error("NOT IMPLEMENTED");		
+		LogManager.getLogger(this.getClass()).error("NOT IMPLEMENTED");		
 		return false;
 	}	
 }

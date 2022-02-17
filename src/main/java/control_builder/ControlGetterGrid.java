@@ -3,6 +3,8 @@
  */
 package control_builder;
 
+import org.openqa.selenium.WebElement;
+
 import controls.Control;
 import object_models.dk_grid.DkGrid;
 import object_models.dk_grid.KeyStrategyRow;
@@ -27,5 +29,9 @@ public class ControlGetterGrid <T extends KeyStrategyRow> extends ControlGetter 
 	public Control getControl() {
 		return grid;
 	}
-
+	@Override
+	public ControlGetter setElement(WebElement el) {
+		System.out.println("ControlGetterGrid.setElement ** NOT IMPLEMENTED **"); // TODO - Implement 	
+		return null;
+	}
 }

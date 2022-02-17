@@ -29,12 +29,16 @@ public class ControlGetterTab extends ControlGetter {
 	public ControlGetterTab(CoreData coreData, By findBy, WebElement elTab) {
 		super(coreData, findBy);
 		
-		this.tab = new Tab(coreData.getWebDriver(), elTab);
+		this.tab = new Tab(coreData, elTab);
 	}
 
 	@Override
 	public Control getControl() {
 		return tab;
 	}
-
+	@Override
+	public ControlGetter setElement(WebElement el) {
+		System.out.println("ControlGetterTab.setElement ** NOT IMPLEMENTED **"); // TODO - Implement 	
+		return null;
+	}
 }

@@ -4,6 +4,7 @@
 package control_builder;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import controls.Control;
 import object_models.controls.EmployeeSelection;
@@ -24,5 +25,9 @@ public final class ControlGetterEmployeeSelection extends ControlGetter {
 		super.driver.findElement(findBy).click();
 		return new EmployeeSelection(super.coreData);
 	}
-
+	@Override
+	public ControlGetter setElement(WebElement el) {
+		System.out.println("ControlGetterEmployeeSelection.setElement ** NOT IMPLEMENTED **"); // TODO - Implement 	
+		return null;
+	}
 }

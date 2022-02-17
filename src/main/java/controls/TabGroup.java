@@ -42,11 +42,16 @@ public class TabGroup implements Control, ControlGroup {
 		prnt = driver.findElement(findBy);
 	}
 	
-	public TabGroup add(String name, By findBy) {
-		WebElement tab = prnt.findElement(findBy);
-		controlData.add(new ControlData(name, new ControlGetterTab(coreData, findBy, tab)));
+	public TabGroup add(Tab tab) {
+//		WebElement tab = prnt.findElement(findBy);
+//		controlData.add(new ControlData(name, new ControlGetterTab(coreData, findBy, tab)));
 		return this;
 	}
+//	public TabGroup add(String name, By findBy) {
+//		WebElement tab = prnt.findElement(findBy);
+//		controlData.add(new ControlData(name, new ControlGetterTab(coreData, findBy, tab)));
+//		return this;
+//	}
 
 	@Override //Control
 	public boolean isAvailable() {

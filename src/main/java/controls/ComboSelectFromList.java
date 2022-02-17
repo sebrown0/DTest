@@ -16,19 +16,29 @@ import object_models.pages.homepage.CoreData;
  * Can only select an item from an existing list.
  * 
  * @author Steve Brown
- * @since 1.0
  * @version 1.0
+ * 	Initial
+ * @since 1.0
+ * 
  */
 public class ComboSelectFromList extends Combo {
 	private By resultsBy;
 	private ListBox listBox;
 	
 	public ComboSelectFromList(CoreData coreData, By findBy, By resultsBy) {
-		super(coreData, findBy);
-		
+		super(coreData, findBy);		
 		this.resultsBy = resultsBy;
 	}
 		
+	public ComboSelectFromList(CoreData coreData, WebElement el, By resultsBy) {
+		super(coreData, el);
+		this.resultsBy = resultsBy;
+	}
+
+	public ComboSelectFromList(CoreData coreData, WebElement el) {
+		super(coreData, el);
+	}
+
 	public void selectFullText(String txt) {
 		listBox = new ListBox(driver, resultsBy);
 		Optional<WebElement> item = Optional.ofNullable(listBox.getListItem(txt));

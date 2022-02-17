@@ -4,6 +4,7 @@
 package control_builder;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import controls.Control;
 import object_models.dk_grid.DkGridEmployeeDetails;
@@ -23,6 +24,12 @@ public final class ControlGetterDkGridEmployeeDetails extends ControlGetter {
 	public Control getControl() {
 		driver.findElement(findBy).click();
 		return new DkGridEmployeeDetails(super.coreData);
+	}
+
+	@Override
+	public ControlGetter setElement(WebElement el) {
+		System.out.println("ControlGetterDkGridEmployeeDetails.setElement ** NOT IMPLEMENTED **"); // TODO - Implement 	
+		return null;
 	}
 
 }
