@@ -8,10 +8,10 @@ import org.junit.jupiter.api.DynamicTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import control_builder.ControlData;
 import control_builder.ControlGetterButton;
 import control_builder.ControlGetterInputGroup;
 import control_builder.ControlGetterTabs;
+import control_builder.control_data.ControlData;
 import controls.InputGroup;
 import controls.TabGroup;
 import dynamic_tests.annotations.TestControl;

@@ -3,6 +3,7 @@
  */
 package control_builder;
 
+import controls.Control;
 import controls.ControlGroup;
 import controls.TabGroup;
 import object_models.pages.homepage.CoreData;
@@ -14,8 +15,8 @@ import object_models.pages.homepage.CoreData;
  * @since 1.0
  *
  */
-public class ControlGetterTabs extends GroupControlGetter {
-	private ControlGroup grp;
+public class ControlGetterTabs extends ControlGetter {
+	private Control grp;
 	
 	public ControlGetterTabs(CoreData coreData, TabGroup grp) {
 		super(grp.getCoreData(), grp.getFindBy());
@@ -24,7 +25,7 @@ public class ControlGetterTabs extends GroupControlGetter {
 	}
 
 	@Override
-	public ControlGroup getControl() {
+	public Control getControl() {
 		return grp;
 	}
 

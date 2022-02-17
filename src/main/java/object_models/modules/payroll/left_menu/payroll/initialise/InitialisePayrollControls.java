@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 
-import control_builder.ControlData;
+import control_builder.control_data.ControlData;
 import enums.control_names.CommonControlNames;
 import enums.control_names.PayrollControlNames;
 import factories.ControlDataFactory;

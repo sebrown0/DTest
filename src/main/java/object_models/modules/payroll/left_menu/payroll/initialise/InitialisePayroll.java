@@ -5,7 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import control_builder.ControlData;
+import control_builder.control_data.ControlData;
 import controls.Button;
 import controls.TextSelect;
 import enums.control_names.PayrollControlNames;

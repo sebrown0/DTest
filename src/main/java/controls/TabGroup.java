@@ -11,9 +11,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import control_builder.ControlData;
 import control_builder.ControlGetter;
 import control_builder.ControlGetterTab;
+import control_builder.control_data.ControlData;
 import object_models.pages.homepage.CoreData;
 
 /**
@@ -22,7 +22,7 @@ import object_models.pages.homepage.CoreData;
  * 	Initial
  * @since 1.0
  */
-public class TabGroup implements ControlGroup {
+public class TabGroup implements Control, ControlGroup {
 	private WebDriver driver;
 	private By findBy;
 	private WebElement prnt;
@@ -47,7 +47,12 @@ public class TabGroup implements ControlGroup {
 		controlData.add(new ControlData(name, new ControlGetterTab(coreData, findBy, tab)));
 		return this;
 	}
-				
+
+	@Override //Control
+	public boolean isAvailable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	@Override //ControlGroup
 	public Optional<Control> getControlByTitle(String title) {
 		currentControl = null;
@@ -72,4 +77,5 @@ public class TabGroup implements ControlGroup {
 	public By getFindBy() {
 		return findBy;
 	}
+
 }

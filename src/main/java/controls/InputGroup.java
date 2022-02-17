@@ -11,9 +11,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import control_builder.ControlData;
 import control_builder.ControlGetter;
 import control_builder.ControlGetterButton;
+import control_builder.control_data.ControlData;
 import object_models.pages.homepage.CoreData;
 
 /**

@@ -1,8 +1,9 @@
 /**
  * 
  */
-package control_builder;
+package control_builder.control_data;
 
+import control_builder.ControlGetter;
 import controls.ControlName;
 
 /**

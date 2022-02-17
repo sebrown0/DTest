@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.util.List;
 import org.openqa.selenium.By;
 import control_builder.*;
+import control_builder.control_data.ControlData;
 import site_mapper.annotations.SiteMap;
 import org.junit.jupiter.api.DynamicTest;
 import dynamic_tests.annotations.TestControl;

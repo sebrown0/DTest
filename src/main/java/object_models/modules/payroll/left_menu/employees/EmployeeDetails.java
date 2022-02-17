@@ -9,8 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import context_manager.states.StateIframe;
-import control_builder.ControlData;
 import control_builder.ControlGetterButton;
+import control_builder.control_data.ControlData;
 import controls.ComboSelectFromList;
 import controls.TextOut;
 import dynamic_tests.annotations.TestControl;

@@ -6,13 +6,13 @@ package factories;
 import org.openqa.selenium.By;
 
 import context_manager.ContextManager;
-import control_builder.ControlData;
 import control_builder.ControlGetterButton;
 import control_builder.ControlGetterComboSelectOnly;
 import control_builder.ControlGetterComboWriteAndSelect;
 import control_builder.ControlGetterGrid;
 import control_builder.ControlGetterSelect;
 import control_builder.ControlGetterTextOut;
+import control_builder.control_data.ControlData;
 import controls.ControlName;
 import enums.control_names.CommonControlNames;
 import object_models.dk_grid.KeyStrategyRow;
