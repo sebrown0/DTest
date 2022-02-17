@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import control_builder.control_data.ControlData;
+import control_builder.control_getters.ControlGetter;
 
 /**
  * @author SteveBrown
@@ -23,13 +24,13 @@ public class ControlBuilder implements BuildControls {
 	
 	public ControlBuilder addControls(List<ControlData> controlDataList) {
 		for (ControlData cntrl : controlDataList) {
-			addControl(cntrl.getCntrlName(), cntrl.getControlGetter());
+			addControl(cntrl.getControlGetter());
 		}
 		return this;
 	}
 
-	public ControlBuilder addControl(String cntrlName, ControlGetter controlGetter) {
-		controls.put(cntrlName, controlGetter);
+	public ControlBuilder addControl(ControlGetter controlGetter) {
+		controls.put(controlGetter.getName(), controlGetter);
 		return this;
 	}
 		

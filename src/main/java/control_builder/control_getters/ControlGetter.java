@@ -1,7 +1,7 @@
 /**
  * 
  */
-package control_builder;
+package control_builder.control_getters;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,20 +22,19 @@ public abstract class ControlGetter {
 	protected By findBy;
 	protected By findParentBy;
 	
-	public ControlGetter(CoreData coreData) {
+	private String name;
+	
+	public ControlGetter(String name, CoreData coreData) {
 		this.coreData = coreData;
 		this.driver = coreData.getWebDriver();
-	}	
-	public ControlGetter(CoreData coreData, By findBy) {
-		this.coreData = coreData;
-		this.driver = coreData.getWebDriver();
-		this.findBy = findBy;
+		this.name = name;
 	}
-	public ControlGetter(CoreData coreData, By findBy, By findParentBy) {
+	
+	public ControlGetter(String name, CoreData coreData, By findBy) {
 		this.coreData = coreData;
 		this.driver = coreData.getWebDriver();
 		this.findBy = findBy;
-		this.findParentBy = findParentBy;
+		this.name = name;
 	}
 	
 	public abstract Control getControl();	
@@ -43,5 +42,9 @@ public abstract class ControlGetter {
 	public ControlGetter setParent(By findParentBy) {
 		this.findParentBy = findParentBy;
 		return this;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

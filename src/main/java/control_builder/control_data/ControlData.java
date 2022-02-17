@@ -3,7 +3,7 @@
  */
 package control_builder.control_data;
 
-import control_builder.ControlGetter;
+import control_builder.control_getters.ControlGetter;
 import controls.ControlName;
 
 /**
@@ -21,8 +21,8 @@ public class ControlData {
 	 * TODO - put an enum in the XML that matches ControlName, or
 	 * make sure that we have ONE place for getting the control names!
 	 */
-	public ControlData(String cntrlName, ControlGetter controlGetter) {
-		this.cntrlName = cntrlName;
+	public ControlData(ControlGetter controlGetter) {
+		this.cntrlName = controlGetter.getName();
 		this.controlGetter = controlGetter;
 	}
 	

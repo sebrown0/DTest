@@ -11,9 +11,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import control_builder.ControlGetter;
-import control_builder.ControlGetterButton;
 import control_builder.control_data.ControlData;
+import control_builder.control_getters.ControlGetter;
+import control_builder.control_getters.ControlGetterButton;
 import object_models.pages.homepage.CoreData;
 
 /**
@@ -44,7 +44,7 @@ public class InputGroup implements Control {
 	
 	public InputGroup addElement(String name, By findBy) {
 		WebElement btn = prnt.findElement(findBy);
-		controlData.add(new ControlData(name, new ControlGetterButton(coreData, btn)));
+		controlData.add(new ControlData(new ControlGetterButton(name, coreData, btn)));
 		return this;
 	}
 				

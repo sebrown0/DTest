@@ -9,9 +9,9 @@ import java.util.Optional;
 
 import org.openqa.selenium.By;
 
-import control_builder.ControlGetter;
-import control_builder.ControlGetterTab;
 import control_builder.control_data.ControlData;
+import control_builder.control_getters.ControlGetter;
+import control_builder.control_getters.ControlGetterTab;
 import object_models.pages.homepage.CoreData;
 
 /**
@@ -21,27 +21,27 @@ import object_models.pages.homepage.CoreData;
  * @since 1.0
  */
 public class TabGroup implements Control, ControlGroup {
-//	private WebDriver driver;
 	private By findBy;
-//	private WebElement prnt;
-	private List<ControlData> controlData = new ArrayList<>();
+	private List<ControlData> tabs = new ArrayList<>();
 	private CoreData coreData;
 	private Control currentControl;
 	
 	public TabGroup(CoreData coreData, By findBy) {
 		this.coreData = coreData;
-//		this.driver = coreData.getWebDriver();
-		this.findBy = findBy;
-		
-//		setParent();
+		this.findBy = findBy;		
 	}	
 
-//	private void setParent() {
-//		prnt = driver.findElement(findBy);
-//	}
+	public TabGroup addTabs(List<ControlGetter> tabs) {		
+		if(tabs != null) {
+			tabs.forEach(v -> {
+				add((ControlGetterTab) v);
+			});
+		}
+		return this;
+	}
 	
-	public TabGroup add(ControlGetterTab tab) {
-		controlData.add(new ControlData(tab.getName(), tab));
+	private TabGroup add(ControlGetterTab tab) {
+		tabs.add(new ControlData(tab));
 		return this;
 	}
 
@@ -61,7 +61,7 @@ public class TabGroup implements Control, ControlGroup {
 	
 	private Optional<ControlGetter> getElementByTitle(String title) {
 		return 
-			controlData
+			tabs
 				.stream()
 				.filter(e -> e.getCntrlName().equals(title))
 				.map(c -> c.getControlGetter())

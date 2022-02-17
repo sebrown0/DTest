@@ -1,7 +1,7 @@
 /**
  * 
  */
-package control_builder;
+package control_builder.control_getters;
 
 import org.openqa.selenium.By;
 
@@ -15,8 +15,8 @@ import object_models.pages.homepage.CoreData;
  */
 public final class ControlGetterEmployeeSelection extends ControlGetter {	
 	
-	public ControlGetterEmployeeSelection(CoreData coreData, By findBy) {
-		super(coreData, findBy);
+	public ControlGetterEmployeeSelection(String name, CoreData coreData, By findBy) {
+		super(name, coreData, findBy);
 	}
 
 	@Override

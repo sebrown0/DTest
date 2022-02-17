@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.openqa.selenium.By;
 
-import control_builder.ControlGetterGrid;
+import control_builder.control_getters.ControlGetterGrid;
 import controls.Control;
 import controls.ControlName;
 import enums.control_names.CommonControlNames;
@@ -103,7 +103,7 @@ public final class GlobalAdjustments extends JsPanelWithIFrame implements JsPane
 		btn.ifPresent(b -> {			
 			if(cntrlName.getName().equalsIgnoreCase(GlobalAdjustmentControlNames.ACCEPT_CRITERIA.getName())) {
 				super.logger.debug("Reloading grid after updating criteria");
-				super.updateControl(CommonControlNames.DK_GRID, new ControlGetterGrid<FindRowByEmpCode>(coreData, new FindRowByEmpCode()));
+				super.updateControl(CommonControlNames.DK_GRID, new ControlGetterGrid<FindRowByEmpCode>(CommonControlNames.DK_GRID.getName(), coreData, new FindRowByEmpCode()));
 				loadGrid();
 			}
 		});

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package control_builder;
+package control_builder.control_getters;
 
 import org.openqa.selenium.By;
 
@@ -16,8 +16,8 @@ import object_models.pages.homepage.CoreData;
  *
  */
 public final class ControlGetterDropdownCombo extends ControlGetter {	
-	public ControlGetterDropdownCombo(CoreData coreData, By findBy) {
-		super(coreData, findBy);
+	public ControlGetterDropdownCombo(String name, CoreData coreData, By findBy) {
+		super(name, coreData, findBy);
 	}
 
 	@Override

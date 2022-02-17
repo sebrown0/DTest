@@ -15,8 +15,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import control_builder.ControlGetter;
 import control_builder.control_data.ControlData;
+import control_builder.control_getters.ControlGetter;
 
 /**
  * @author SteveBrown
@@ -57,11 +57,18 @@ public class Tab implements Control, DisplayedText {
 				.findFirst();
 	}
 	
-	public Tab addElement(String name, ControlGetter controlGetter) {
-//		WebElement el = tab.findElement(findBy);
+	public Tab addElements(List<ControlGetter> elements) {
+		if(elements != null) {
+			elements.forEach(v -> {
+				addElement(v.getName(), v);
+			});
+		}
+		return this;
+	}
+	
+	private Tab addElement(String name, ControlGetter controlGetter) {
 		controlData.add(
 				new ControlData(
-						name,	
 						controlGetter
 								.setParent(By.cssSelector("div[class='tab-content']"))));
 		return this;

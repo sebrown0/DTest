@@ -2,21 +2,22 @@ package object_models.modules.payroll.left_menu.employees;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.DynamicTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import control_builder.ControlGetterButton;
-import control_builder.ControlGetterComboSelectOnly;
-import control_builder.ControlGetterInputGroup;
-import control_builder.ControlGetterTab;
-import control_builder.ControlGetterTabs;
 import control_builder.control_data.ControlData;
+import control_builder.control_getters.ControlGetter;
+import control_builder.control_getters.ControlGetterButton;
+import control_builder.control_getters.ControlGetterComboSelectOnly;
+import control_builder.control_getters.ControlGetterGroup;
+import control_builder.control_getters.ControlGetterInputGroup;
+import control_builder.control_getters.ControlGetterTab;
+import control_builder.control_getters.ControlGetterTabs;
 import controls.InputGroup;
-import controls.Tab;
-import controls.TabGroup;
 import dynamic_tests.annotations.TestControl;
 import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
@@ -66,30 +67,30 @@ public class SalaryDetails extends JsPanelWithIFrame {
 			.addElement("documents", By.cssSelector("div[title='No Documents Attached']"))
 			.addElement("calendar", By.cssSelector("div[title='Combos']"));
 			
-		Tab salaryDetails = 
-				new Tab("SalaryDetails", driver, By.cssSelector("a[id='tab-tab1']"));
-		salaryDetails
-		//TODO add results
-			.addElement(
-					"Reason", 
-					new ControlGetterComboSelectOnly(
-							coreData,  By.cssSelector("span[id='select2-REASON-container']"), null));
+		//TODO --------------------------.............................
+		ControlGetter reason = 
+			new ControlGetterComboSelectOnly(
+				"Reason", coreData,  By.cssSelector("span[id='select2-REASON-container']"), null);
 		
-		TabGroup tabs = new TabGroup(coreData, By.cssSelector("ul[class='nav nav-tabs']"));
-		tabs
-			.add(new ControlGetterTab(coreData, salaryDetails));
+		ControlGetterGroup salaryDetails = 
+				new ControlGetterTab("SalaryDetails", coreData, By.cssSelector("a[id='tab-tab1']"))
+					.addControls(Arrays.asList(reason));
 		
+		ControlGetterGroup tabs = 
+				new ControlGetterTabs("Tabs", coreData)
+					.addControls(Arrays.asList(salaryDetails));
+				
 		var myControls =
 			List.of(					
-				new ControlData("EmpLookup", new ControlGetterInputGroup(coreData, grp)),
-				new ControlData("Tabs", new ControlGetterTabs(coreData, tabs)),
-				new ControlData("calendar", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-calendar fa-fw']"))),
-				new ControlData("new", new ControlGetterButton(coreData, By.cssSelector("button[name='NEW1']"))),
-				new ControlData("save", new ControlGetterButton(coreData, By.cssSelector("button[name='SAVE']"))),
-				new ControlData("search", new ControlGetterButton(coreData, By.cssSelector("button[name='QBF1']"))),
-				new ControlData("delete", new ControlGetterButton(coreData, By.cssSelector("button[name='DELETE1']"))),
-				new ControlData("clear", new ControlGetterButton(coreData, By.cssSelector("button[name='CLEAR1']"))),
-				new ControlData("print", new ControlGetterButton(coreData, By.cssSelector("button[name='PRINT1']")))				
+				new ControlData(new ControlGetterInputGroup("EmpLookup", coreData, grp)),
+				new ControlData(tabs),
+				new ControlData(new ControlGetterButton("calendar", coreData, By.cssSelector("i[class='fa fa-calendar fa-fw']"))),
+				new ControlData(new ControlGetterButton("new", coreData, By.cssSelector("button[name='NEW1']"))),
+				new ControlData(new ControlGetterButton("save", coreData, By.cssSelector("button[name='SAVE']"))),
+				new ControlData(new ControlGetterButton("search", coreData, By.cssSelector("button[name='QBF1']"))),
+				new ControlData(new ControlGetterButton("delete", coreData, By.cssSelector("button[name='DELETE1']"))),
+				new ControlData(new ControlGetterButton("clear", coreData, By.cssSelector("button[name='CLEAR1']"))),
+				new ControlData(new ControlGetterButton("print", coreData, By.cssSelector("button[name='PRINT1']")))				
 			);
 						
 		super.buildPanelControls(myControls);

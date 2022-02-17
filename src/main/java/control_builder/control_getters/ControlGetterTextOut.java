@@ -1,7 +1,7 @@
 /**
  * 
  */
-package control_builder;
+package control_builder.control_getters;
 
 import org.openqa.selenium.By;
 
@@ -17,8 +17,8 @@ import object_models.pages.homepage.CoreData;
 public final class ControlGetterTextOut extends ControlGetter {
 	private Control cntrl;
 	
-	public ControlGetterTextOut(CoreData coreData, By findBy) {
-		super(coreData, findBy);
+	public ControlGetterTextOut(String name, CoreData coreData, By findBy) {
+		super(name, coreData, findBy);
 		this.cntrl = new TextOut(super.driver, super.findBy);
 	}
 

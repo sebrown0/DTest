@@ -1,7 +1,7 @@
 /**
  * 
  */
-package control_builder;
+package control_builder.control_getters;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -20,16 +20,14 @@ import object_models.pages.homepage.CoreData;
 public class ControlGetterButton extends ControlGetter {
 	private Control btn;
 	
-	public ControlGetterButton(CoreData coreData) {
-		super(coreData);				
-	}
-	public ControlGetterButton(CoreData coreData, By findBy) {
-		super(coreData, findBy);
+	public ControlGetterButton(String name, CoreData coreData, By findBy) {
+		super(name, coreData, findBy);
 		
 		this.btn = new Button(driver, findBy);
 	}
-	public ControlGetterButton(CoreData coreData, WebElement elButton) {
-		super(coreData);
+	
+	public ControlGetterButton(String name, CoreData coreData, WebElement elButton) {
+		super(name, coreData);
 		
 		this.btn = new Button(coreData.getWebDriver(), elButton);
 	}

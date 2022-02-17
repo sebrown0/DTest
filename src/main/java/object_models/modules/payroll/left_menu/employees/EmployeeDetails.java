@@ -2,15 +2,11 @@ package object_models.modules.payroll.left_menu.employees;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.List;
-
 import org.junit.jupiter.api.DynamicTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import context_manager.states.StateIframe;
-import control_builder.ControlGetterButton;
-import control_builder.control_data.ControlData;
 import controls.ComboSelectFromList;
 import controls.TextOut;
 import dynamic_tests.annotations.TestControl;
@@ -41,24 +37,24 @@ public class EmployeeDetails extends JsPanelWithIFrame {
 	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
 	public EmployeeDetails(CoreData coreData){
 		super(coreData, PANEL_TITLE);
-		buildMyControls();
+//		buildMyControls();
 	}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
-	private void buildMyControls() {
-		var myControls =
-			List.of(
-				new ControlData("save", new ControlGetterButton(coreData, By.cssSelector("button[name='SAVE']"))),
-				new ControlData("search", new ControlGetterButton(coreData, By.cssSelector("button[name='QBF1']"))),
-				new ControlData("clear", new ControlGetterButton(coreData, By.cssSelector("button[name='CLEAR1']"))),
-				new ControlData("print", new ControlGetterButton(coreData, By.cssSelector("button[name='PRINT1']"))),
-				new ControlData("employee_list", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-list']"))),
-				new ControlData("combos", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-window-maximize']"))),
-				new ControlData("existing_records", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fw fa-table']"))),
-				new ControlData("documents", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-file-o']")))
-			);
-		super.buildPanelControls(myControls);
-	}
+//	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
+//	private void buildMyControls() {
+//		var myControls =
+//			List.of(
+//				new ControlData("save", new ControlGetterButton(coreData, By.cssSelector("button[name='SAVE']"))),
+//				new ControlData("search", new ControlGetterButton(coreData, By.cssSelector("button[name='QBF1']"))),
+//				new ControlData("clear", new ControlGetterButton(coreData, By.cssSelector("button[name='CLEAR1']"))),
+//				new ControlData("print", new ControlGetterButton(coreData, By.cssSelector("button[name='PRINT1']"))),
+//				new ControlData("employee_list", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-list']"))),
+//				new ControlData("combos", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-window-maximize']"))),
+//				new ControlData("existing_records", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fw fa-table']"))),
+//				new ControlData("documents", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-file-o']")))
+//			);
+//		super.buildPanelControls(myControls);
+//	}
 	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
 	@TestControl(type="button")
 	public DynamicTest buttonSave () {

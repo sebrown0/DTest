@@ -1,7 +1,7 @@
 /**
  * 
  */
-package control_builder;
+package control_builder.control_getters;
 
 import org.openqa.selenium.By;
 
@@ -20,8 +20,8 @@ public class ControlGetterComboWriteAndSelect extends ControlGetter {
 	private Control combo;
 	
 	public ControlGetterComboWriteAndSelect(
-		CoreData coreData, By findBy, By resultsBy, TextWriter writer) {
-		super(coreData, findBy);
+		String name, CoreData coreData, By findBy, By resultsBy, TextWriter writer) {
+		super(name, coreData, findBy);
 		
 		this.combo = new ComboWriteAndSelect(coreData, findBy, resultsBy, writer);
 	}

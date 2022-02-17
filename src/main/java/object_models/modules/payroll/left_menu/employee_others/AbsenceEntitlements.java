@@ -1,12 +1,5 @@
 package object_models.modules.payroll.left_menu.employee_others;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-
-import control_builder.ControlGetterButton;
-import control_builder.control_data.ControlData;
-import enums.control_names.GroupControlNames;
 import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
 
@@ -22,16 +15,16 @@ public class AbsenceEntitlements extends JsPanelWithIFrame {
 	public AbsenceEntitlements(CoreData coreData) {
 		super(coreData, PANEL_TITLE);
 		
-		buildMyControls();
+//		buildMyControls();
 	}
 	
-	private void buildMyControls() {		
-		var myControls = 
-				List.of(
-						new ControlData(GroupControlNames.CLEAR, new ControlGetterButton(coreData, By.cssSelector("button[name='CLEAR1']")))
-				);
-		super.buildPanelControls(myControls);				
-	}
+//	private void buildMyControls() {		
+////		var myControls = 
+////				List.of(
+////						new ControlData(GroupControlNames.CLEAR, new ControlGetterButton(coreData, By.cssSelector("button[name='CLEAR1']")))
+////				);
+////		super.buildPanelControls(myControls);				
+//	}
 
 	// Elements
 

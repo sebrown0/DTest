@@ -1,7 +1,7 @@
 /**
  * 
  */
-package control_builder;
+package control_builder.control_getters;
 
 import controls.Control;
 import object_models.dk_grid.DkGrid;
@@ -17,8 +17,8 @@ import object_models.pages.homepage.CoreData;
 public class ControlGetterGrid <T extends KeyStrategyRow> extends ControlGetter {
 	private DkGrid<T> grid;
 	
-	public ControlGetterGrid(CoreData coreData, T keyStrategy) {
-		super(coreData);
+	public ControlGetterGrid(String name, CoreData coreData, T keyStrategy) {
+		super(name, coreData);
 	
 		grid = new DkGrid<>(super.driver, keyStrategy, coreData.getContextManager());
 	}

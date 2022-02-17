@@ -1,10 +1,10 @@
 /**
  * 
  */
-package control_builder;
+package control_builder.control_getters;
 
 import controls.Control;
-import controls.TabGroup;
+import controls.InputGroup;
 import object_models.pages.homepage.CoreData;
 
 /**
@@ -14,11 +14,11 @@ import object_models.pages.homepage.CoreData;
  * @since 1.0
  *
  */
-public class ControlGetterTabs extends ControlGetter {
+public class ControlGetterInputGroup extends ControlGetter {
 	private Control grp;
 	
-	public ControlGetterTabs(CoreData coreData, TabGroup grp) {
-		super(grp.getCoreData(), grp.getFindBy());
+	public ControlGetterInputGroup(String name, CoreData coreData, InputGroup grp) {
+		super(name, grp.getCoreData(), grp.getFindBy());
 		
 		this.grp = grp;
 	}
@@ -27,5 +27,5 @@ public class ControlGetterTabs extends ControlGetter {
 	public Control getControl() {
 		return grp;
 	}
-
+	
 }

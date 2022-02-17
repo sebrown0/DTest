@@ -1,7 +1,7 @@
 /**
  * 
  */
-package control_builder;
+package control_builder.control_getters;
 
 import org.openqa.selenium.By;
 
@@ -18,8 +18,8 @@ import object_models.pages.homepage.CoreData;
 public class ControlGetterComboSelectOnly extends ControlGetter {
 	private Control cntrl;
 		
-	public ControlGetterComboSelectOnly(CoreData coreData, By findBy, By resultsBy) {
-		super(coreData, findBy);
+	public ControlGetterComboSelectOnly(String name, CoreData coreData, By findBy, By resultsBy) {
+		super(name, coreData, findBy);
 		
 		this.cntrl = new ComboSelectFromList(coreData, findBy, resultsBy);
 	}

@@ -6,13 +6,13 @@ package factories;
 import org.openqa.selenium.By;
 
 import context_manager.ContextManager;
-import control_builder.ControlGetterButton;
-import control_builder.ControlGetterComboSelectOnly;
-import control_builder.ControlGetterComboWriteAndSelect;
-import control_builder.ControlGetterGrid;
-import control_builder.ControlGetterSelect;
-import control_builder.ControlGetterTextOut;
 import control_builder.control_data.ControlData;
+import control_builder.control_getters.ControlGetterButton;
+import control_builder.control_getters.ControlGetterComboSelectOnly;
+import control_builder.control_getters.ControlGetterComboWriteAndSelect;
+import control_builder.control_getters.ControlGetterGrid;
+import control_builder.control_getters.ControlGetterSelect;
+import control_builder.control_getters.ControlGetterTextOut;
 import controls.ControlName;
 import enums.control_names.CommonControlNames;
 import object_models.dk_grid.KeyStrategyRow;
@@ -40,7 +40,7 @@ public class ControlDataFactory {
 		controlData = 
 				new ControlData(
 						CommonControlNames.DK_GRID, 
-						new ControlGetterGrid<T>(coreData, keyStrategy));		
+						new ControlGetterGrid<T>(CommonControlNames.DK_GRID.getName(), coreData, keyStrategy));		
 		
 		return this;
 	}
@@ -49,7 +49,7 @@ public class ControlDataFactory {
 		controlData = 
 				new ControlData(
 						cntrlName, 
-						new ControlGetterButton(coreData, containerLoc));
+						new ControlGetterButton(cntrlName.getName(), coreData, containerLoc));
 		
 		return this;
 	}
@@ -58,7 +58,7 @@ public class ControlDataFactory {
 		controlData = 
 				new ControlData(
 						cntrlName, 
-						new ControlGetterComboSelectOnly(coreData, containerLoc, resultLoc));
+						new ControlGetterComboSelectOnly(cntrlName.getName(), coreData, containerLoc, resultLoc));
 		
 		return this;
 	}
@@ -68,7 +68,7 @@ public class ControlDataFactory {
 		controlData = 
 				new ControlData(
 						cntrlName, 
-						new ControlGetterComboWriteAndSelect(coreData,containerLoc,	resultLoc, writer));
+						new ControlGetterComboWriteAndSelect(cntrlName.getName(), coreData,containerLoc,	resultLoc, writer));
 		
 		return this;
 	}
@@ -84,7 +84,7 @@ public class ControlDataFactory {
 		controlData = 
 				new ControlData(
 						cntrlName, 
-						new ControlGetterComboWriteAndSelect(coreData, containerLoc,	resultLoc, writer));
+						new ControlGetterComboWriteAndSelect(cntrlName.getName(), coreData, containerLoc,	resultLoc, writer));
 		
 		return this;
 	}
@@ -93,7 +93,7 @@ public class ControlDataFactory {
 		controlData = 
 				new ControlData(
 						cntrlName, 
-						new ControlGetterTextOut(coreData, containerLoc));
+						new ControlGetterTextOut(cntrlName.getName(), coreData, containerLoc));
 		
 		return this;
 	}
@@ -102,7 +102,7 @@ public class ControlDataFactory {
 		controlData = 
 				new ControlData(
 						cntrlName, 
-						new ControlGetterSelect(coreData, containerLoc));
+						new ControlGetterSelect(cntrlName.getName(), coreData, containerLoc));
 		
 		return this;
 	}

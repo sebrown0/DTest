@@ -1,7 +1,7 @@
 /**
  * 
  */
-package control_builder;
+package control_builder.control_getters;
 
 import org.openqa.selenium.By;
 
@@ -22,8 +22,8 @@ import object_models.pages.homepage.CoreData;
 public final class ControlGetterSelect extends ControlGetter {
 	private Control cntrl;
 		
-	public ControlGetterSelect(CoreData coreData, By findBy) {
-		super(coreData, findBy);
+	public ControlGetterSelect(String name, CoreData coreData, By findBy) {
+		super(name, coreData, findBy);
 		
 		cntrl = new TextSelect(super.driver, super.findBy);
 	}
