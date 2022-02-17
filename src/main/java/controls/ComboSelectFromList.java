@@ -29,15 +29,6 @@ public class ComboSelectFromList extends Combo {
 		super(coreData, findBy);		
 		this.resultsBy = resultsBy;
 	}
-		
-	public ComboSelectFromList(CoreData coreData, WebElement el, By resultsBy) {
-		super(coreData, el);
-		this.resultsBy = resultsBy;
-	}
-
-	public ComboSelectFromList(CoreData coreData, WebElement el) {
-		super(coreData, el);
-	}
 
 	public void selectFullText(String txt) {
 		listBox = new ListBox(driver, resultsBy);

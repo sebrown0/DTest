@@ -3,8 +3,6 @@
  */
 package control_builder;
 
-import org.openqa.selenium.WebElement;
-
 import controls.Control;
 import controls.InputGroup;
 import object_models.pages.homepage.CoreData;
@@ -29,9 +27,5 @@ public class ControlGetterInputGroup extends ControlGetter {
 	public Control getControl() {
 		return grp;
 	}
-	@Override
-	public ControlGetter setElement(WebElement el) {
-		System.out.println("ControlGetterInputGroup.setElement ** NOT IMPLEMENTED **"); // TODO - Implement 	
-		return null;
-	}
+	
 }

@@ -33,11 +33,7 @@ public class ControlGetterButton extends ControlGetter {
 		
 		this.btn = new Button(coreData.getWebDriver(), elButton);
 	}
-	@Override
-	public ControlGetter setElement(WebElement el) {
-		this.btn = new Button(coreData.getWebDriver(), el);
-		return this;
-	}
+	
 	@Override
 	public Control getControl() {
 		return btn;

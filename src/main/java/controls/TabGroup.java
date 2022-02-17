@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import control_builder.ControlGetter;
 import control_builder.ControlGetterTab;
@@ -23,39 +21,33 @@ import object_models.pages.homepage.CoreData;
  * @since 1.0
  */
 public class TabGroup implements Control, ControlGroup {
-	private WebDriver driver;
+//	private WebDriver driver;
 	private By findBy;
-	private WebElement prnt;
+//	private WebElement prnt;
 	private List<ControlData> controlData = new ArrayList<>();
 	private CoreData coreData;
 	private Control currentControl;
 	
 	public TabGroup(CoreData coreData, By findBy) {
 		this.coreData = coreData;
-		this.driver = coreData.getWebDriver();
+//		this.driver = coreData.getWebDriver();
 		this.findBy = findBy;
 		
-		setParent();
+//		setParent();
 	}	
 
-	private void setParent() {
-		prnt = driver.findElement(findBy);
-	}
+//	private void setParent() {
+//		prnt = driver.findElement(findBy);
+//	}
 	
-	public TabGroup add(Tab tab) {
-//		WebElement tab = prnt.findElement(findBy);
-//		controlData.add(new ControlData(name, new ControlGetterTab(coreData, findBy, tab)));
+	public TabGroup add(ControlGetterTab tab) {
+		controlData.add(new ControlData(tab.getName(), tab));
 		return this;
 	}
-//	public TabGroup add(String name, By findBy) {
-//		WebElement tab = prnt.findElement(findBy);
-//		controlData.add(new ControlData(name, new ControlGetterTab(coreData, findBy, tab)));
-//		return this;
-//	}
 
 	@Override //Control
 	public boolean isAvailable() {
-		// TODO Auto-generated method stub
+		System.out.println("TabGroup.isAvailable ** NOT IMPLEMENTED **"); // TODO - remove or log 	
 		return false;
 	}
 	@Override //ControlGroup

@@ -4,7 +4,6 @@
 package control_builder;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import controls.Control;
 import controls.TextOut;
@@ -26,12 +25,6 @@ public final class ControlGetterTextOut extends ControlGetter {
 	@Override
 	public Control getControl() {
 		return cntrl;
-	}
-
-	@Override
-	public ControlGetter setElement(WebElement el) {
-		this.cntrl = new TextOut(el);
-		return this;
 	}
 
 }

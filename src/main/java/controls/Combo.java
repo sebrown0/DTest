@@ -24,27 +24,28 @@ public abstract class Combo implements Control {
 	private WebElement combo;
 	private By comboLocator;
 	
-	
+	protected By findParentBy;	
 	protected boolean isOpen = false;	
 	protected WebDriver driver;
 	
 	public Combo(CoreData coreData, WebElement combo) {
 		this.combo = combo;
 		this.driver = coreData.getWebDriver();		
-	}
-	
+	}	
 	public Combo(CoreData coreData, By findBy) {
 		this.driver = coreData.getWebDriver();
 		this.comboLocator = findBy;
 	}
 	
-	public void setComboLocator(By comboLocator) {
-		this.comboLocator = comboLocator;
-	}
-
-	public WebElement getComboElement() {
+	protected WebElement getComboElement() {
 		if(combo == null) {
-			combo = DriverWait.getElementAfterWait(driver, comboLocator);
+			if(findParentBy == null) {
+				combo = DriverWait.getElementAfterWait(driver, comboLocator);	
+			}else {
+				WebElement prnt = driver.findElement(findParentBy);
+				prnt.click();
+				combo = DriverWait.getElementAfterWait(driver, comboLocator);	
+			}			
 		}
 		return combo;
 	}
@@ -75,5 +76,8 @@ public abstract class Combo implements Control {
 	public boolean isAvailable() {
 		LogManager.getLogger().error("NOT IMPLEMENTED");		
 		return false;
+	}
+	public void setFindParentBy(By findParentBy) {
+		this.findParentBy = findParentBy;
 	}	
 }

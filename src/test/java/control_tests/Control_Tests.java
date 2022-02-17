@@ -4,6 +4,7 @@
 package control_tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,7 +19,6 @@ import controls.InputGroup;
 import controls.Tab;
 import controls.TabGroup;
 import logging.TestResultLogger;
-import object_models.helpers.text_utils.RemoveX;
 import object_models.left_menu.common.LeftMenu;
 import object_models.modules.payroll.left_menu.employees.SalaryDetails;
 import object_models.pages.UserLoginPage;
@@ -91,8 +91,8 @@ class Control_Tests {
 					.get();
 		
 		Tab salDetails = (Tab) tabs.getControlByTitle("SalaryDetails").get();
-//		ComboSelectFromList reason = 
-//				(ComboSelectFromList) salDetails.getControlByTitle("Reason").get();
-//		assertEquals("Salary Details", reason.getText(new RemoveX()));
+		ComboSelectFromList reason = 
+				(ComboSelectFromList) salDetails.getControlByTitle("Reason").get();
+		assertTrue(reason.isAvailable());
 	}
 }

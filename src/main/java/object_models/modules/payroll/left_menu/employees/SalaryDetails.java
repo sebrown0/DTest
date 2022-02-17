@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import control_builder.ControlGetterButton;
 import control_builder.ControlGetterComboSelectOnly;
 import control_builder.ControlGetterInputGroup;
+import control_builder.ControlGetterTab;
 import control_builder.ControlGetterTabs;
 import control_builder.control_data.ControlData;
 import controls.InputGroup;
@@ -65,15 +66,18 @@ public class SalaryDetails extends JsPanelWithIFrame {
 			.addElement("documents", By.cssSelector("div[title='No Documents Attached']"))
 			.addElement("calendar", By.cssSelector("div[title='Combos']"));
 			
-		Tab salaryDetails = new Tab(driver, By.cssSelector("a[id='tab-tab1']"));
+		Tab salaryDetails = 
+				new Tab("SalaryDetails", driver, By.cssSelector("a[id='tab-tab1']"));
 		salaryDetails
+		//TODO add results
 			.addElement(
 					"Reason", 
-					new ControlGetterComboSelectOnly(coreData), By.cssSelector("span[id='select2-REASON-container']"));
+					new ControlGetterComboSelectOnly(
+							coreData,  By.cssSelector("span[id='select2-REASON-container']"), null));
 		
 		TabGroup tabs = new TabGroup(coreData, By.cssSelector("ul[class='nav nav-tabs']"));
 		tabs
-			.add(salaryDetails);
+			.add(new ControlGetterTab(coreData, salaryDetails));
 		
 		var myControls =
 			List.of(					

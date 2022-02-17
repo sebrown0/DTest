@@ -17,7 +17,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import control_builder.ControlGetter;
 import control_builder.control_data.ControlData;
-import object_models.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -32,16 +31,13 @@ public class Tab implements Control, DisplayedText {
 	private WebElement tab;
 	private List<ControlData> controlData = new ArrayList<>();
 	private Control currentControl;
+	private String name;
 	
-	public Tab(CoreData coreData, WebElement tab) {	
-		this.driver = coreData.getWebDriver();
-		this.tab = tab;
-	}
-	
-	public Tab(WebDriver driver, By locator) {
+	public Tab(String name, WebDriver driver, By locator) {
 		this.driver = driver;
 		this.locator = locator;
 		this.tab = driver.findElement(locator);
+		this.name = name;
 	}
 	
 	public Optional<Control> getControlByTitle(String title) {
@@ -61,11 +57,13 @@ public class Tab implements Control, DisplayedText {
 				.findFirst();
 	}
 	
-	public Tab addElement(String name, ControlGetter controlGetter, By findBy) {
-		WebElement el = tab.findElement(findBy);
+	public Tab addElement(String name, ControlGetter controlGetter) {
+//		WebElement el = tab.findElement(findBy);
 		controlData.add(
 				new ControlData(
-						name,	controlGetter.setElement(el)));
+						name,	
+						controlGetter
+								.setParent(By.cssSelector("div[class='tab-content']"))));
 		return this;
 	}
 	
@@ -102,5 +100,9 @@ public class Tab implements Control, DisplayedText {
 			return true;
 		}
 		return false;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

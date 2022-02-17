@@ -4,7 +4,6 @@
 package control_builder;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import controls.Control;
 import object_models.controls.DropdownCombo;
@@ -27,9 +26,4 @@ public final class ControlGetterDropdownCombo extends ControlGetter {
 		return new DropdownCombo(super.coreData);
 	}
 
-	@Override
-	public ControlGetter setElement(WebElement el) {
-		System.out.println("ControlGetterDropdownCombo.setElement ** NOT IMPLEMENTED **"); // TODO - Implement 	
-		return null;
-	}
 }
