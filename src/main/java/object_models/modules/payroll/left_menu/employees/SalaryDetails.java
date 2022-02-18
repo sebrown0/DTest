@@ -11,13 +11,14 @@ import org.openqa.selenium.WebElement;
 
 import control_builder.control_data.ControlData;
 import control_builder.control_getters.ControlGetter;
-import control_builder.control_getters.ControlGetterButton;
-import control_builder.control_getters.ControlGetterComboSelectOnly;
-import control_builder.control_getters.ControlGetterGroup;
-import control_builder.control_getters.ControlGetterInputGroup;
-import control_builder.control_getters.ControlGetterTab;
-import control_builder.control_getters.ControlGetterTabs;
-import control_builder.control_getters.ControlGetterTextOut;
+import control_builder.control_getters.group.ControlGetterGroup;
+import control_builder.control_getters.group.ControlGetterInputGroup;
+import control_builder.control_getters.group.ControlGetterRow;
+import control_builder.control_getters.group.ControlGetterTab;
+import control_builder.control_getters.group.ControlGetterTabs;
+import control_builder.control_getters.single.ControlGetterButton;
+import control_builder.control_getters.single.ControlGetterComboSelectOnly;
+import control_builder.control_getters.single.ControlGetterTextOut;
 import dynamic_tests.annotations.TestControl;
 import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
@@ -69,11 +70,7 @@ public class SalaryDetails extends JsPanelWithIFrame {
 				new ControlGetterButton("ExistingRecords", coreData, By.cssSelector("div[title='Grid View for existing records']"));
 		ControlGetter documents = 
 				new ControlGetterButton("Documents", coreData, By.cssSelector("div[title='No Documents Attached']"));
-		
-		//THIS IS ANOTHER IP GROUP
-//		ControlGetter calendar = 
-//				new ControlGetterButton("", coreData, By.cssSelector(""));
-		
+				
 		ControlGetterGroup empLookup =  
 				new ControlGetterInputGroup("EmpLookup", coreData, By.cssSelector("div[class='input-group']"))
 					.addControls(Arrays.asList(employeeList, salaryHistory, combos, grid_view, existing_records, documents));
@@ -98,18 +95,31 @@ public class SalaryDetails extends JsPanelWithIFrame {
 				new ControlGetterTabs("Tabs", coreData, By.cssSelector("ul[class='nav nav-tabs']"))
 					.addControls(Arrays.asList(salaryDetails));
 				
+		ControlGetter calendar = 
+				new ControlGetterButton("Calendar", coreData, By.cssSelector("i[class='fa fa-calendar fa-fw']"));
+		ControlGetter newRec = 
+				new ControlGetterButton("NewRec", coreData, By.cssSelector("button[name='NEW1']"));
+		ControlGetter save = 
+				new ControlGetterButton("Save", coreData, By.cssSelector("button[name='SAVE']"));
+		ControlGetter search = 
+				new ControlGetterButton("Search", coreData, By.cssSelector("button[name='QBF1']"));
+		ControlGetter delete = 
+				new ControlGetterButton("Delete", coreData, By.cssSelector("button[name='DELETE1']"));
+		ControlGetter clear = 
+				new ControlGetterButton("Clear", coreData, By.cssSelector("button[name='CLEAR1']"));
+		ControlGetter print = 
+				new ControlGetterButton("Print", coreData, By.cssSelector("button[name='PRINT1']"));
+		
+		ControlGetterGroup footerBtns =
+				new ControlGetterRow("FooterBtns", coreData)
+					.addControls(Arrays.asList(calendar, newRec, save, search, delete, clear, print));
+		
 		var myControls =
 			List.of(					
 				new ControlData(empLookup),
 				new ControlData(tabs),
 				new ControlData(datePicker),
-				new ControlData(new ControlGetterButton("calendar", coreData, By.cssSelector("i[class='fa fa-calendar fa-fw']"))),
-				new ControlData(new ControlGetterButton("new", coreData, By.cssSelector("button[name='NEW1']"))),
-				new ControlData(new ControlGetterButton("save", coreData, By.cssSelector("button[name='SAVE']"))),
-				new ControlData(new ControlGetterButton("search", coreData, By.cssSelector("button[name='QBF1']"))),
-				new ControlData(new ControlGetterButton("delete", coreData, By.cssSelector("button[name='DELETE1']"))),
-				new ControlData(new ControlGetterButton("clear", coreData, By.cssSelector("button[name='CLEAR1']"))),
-				new ControlData(new ControlGetterButton("print", coreData, By.cssSelector("button[name='PRINT1']")))				
+				new ControlData(footerBtns)							
 			);
 						
 		super.buildPanelControls(myControls);

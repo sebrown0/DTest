@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.openqa.selenium.By;
 
-import control_builder.control_getters.ControlGetterGrid;
+import control_builder.control_getters.single.ControlGetterGrid;
 import controls.Control;
 import controls.ControlName;
 import enums.control_names.CommonControlNames;

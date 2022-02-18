@@ -1,10 +1,11 @@
 /**
  * 
  */
-package control_builder.control_getters;
+package control_builder.control_getters.single;
 
 import org.openqa.selenium.By;
 
+import control_builder.control_getters.ControlGetter;
 import controls.Control;
 import object_models.dk_grid.DkGridEmployeeDetails;
 import object_models.pages.homepage.CoreData;

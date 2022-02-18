@@ -1,11 +1,12 @@
 /**
  * 
  */
-package control_builder.control_getters;
+package control_builder.control_getters.single;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import control_builder.control_getters.ControlGetter;
 import controls.Button;
 import controls.Control;
 import object_models.pages.homepage.CoreData;

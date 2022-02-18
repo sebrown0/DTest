@@ -30,7 +30,9 @@ public class ControlGroup implements Control, DisplayedText{
 	private ControlFinder controlFinder;
 	private List<ControlData> controlData = new ArrayList<>();
 	
-	public ControlGroup(String name, WebDriver driver, By locator) {
+	public ControlGroup() {	}
+
+	public ControlGroup(WebDriver driver, By locator) {
 		this.driver = driver;
 		this.locator = locator;
 		this.cntrl = driver.findElement(locator);

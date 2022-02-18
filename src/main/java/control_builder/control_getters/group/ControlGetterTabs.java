@@ -1,12 +1,13 @@
 /**
  * 
  */
-package control_builder.control_getters;
+package control_builder.control_getters.group;
 
 import java.util.List;
 
 import org.openqa.selenium.By;
 
+import control_builder.control_getters.ControlGetter;
 import controls.Control;
 import controls.ControlGroup;
 import controls.adders.TabGroupAdder;
@@ -35,7 +36,7 @@ public final class ControlGetterTabs extends ControlGetterGroup {
 	@Override
 	public Control getControl() {
 		return 
-			new ControlGroup(super.getName(), driver, findBy)
+			new ControlGroup(driver, findBy)
 				.addElements(tabs, new TabGroupAdder());
 	}
 

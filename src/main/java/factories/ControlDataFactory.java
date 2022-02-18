@@ -7,12 +7,12 @@ import org.openqa.selenium.By;
 
 import context_manager.ContextManager;
 import control_builder.control_data.ControlData;
-import control_builder.control_getters.ControlGetterButton;
-import control_builder.control_getters.ControlGetterComboSelectOnly;
-import control_builder.control_getters.ControlGetterComboWriteAndSelect;
-import control_builder.control_getters.ControlGetterGrid;
-import control_builder.control_getters.ControlGetterSelect;
-import control_builder.control_getters.ControlGetterTextOut;
+import control_builder.control_getters.single.ControlGetterButton;
+import control_builder.control_getters.single.ControlGetterComboSelectOnly;
+import control_builder.control_getters.single.ControlGetterComboWriteAndSelect;
+import control_builder.control_getters.single.ControlGetterGrid;
+import control_builder.control_getters.single.ControlGetterSelect;
+import control_builder.control_getters.single.ControlGetterTextOut;
 import controls.ControlName;
 import enums.control_names.CommonControlNames;
 import object_models.dk_grid.KeyStrategyRow;

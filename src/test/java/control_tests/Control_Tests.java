@@ -49,12 +49,11 @@ class Control_Tests {
 		menu = homepagePayroll.getLeftMenu();
 		// Load the employee details page.
 		salDetails = (SalaryDetails) menu.clickParent("Employees").clickAndLoad(SalaryDetails.class).get();
-
 	}
 
 	@AfterAll
 	static void tearDown() {		
-//		homepagePayroll.close();
+		homepagePayroll.close();
 	}
 	
 	@Test
@@ -105,5 +104,17 @@ class Control_Tests {
 		ComboSelectFromList reason = 
 				(ComboSelectFromList) salDetails.getControlByTitle("Reason").get();
 		assertTrue(reason != null);
+	}
+	
+	@Test
+	void get_newBtn_faFa() {
+		ControlGroup footerBtns =
+			(ControlGroup) salDetails
+				.getPanelControl()
+				.getControl("FooterBtns")
+				.get();
+		
+		Button newRec = (Button) footerBtns.getControlByTitle("NewRec").get();
+		assertEquals("fa fa-plus", newRec.getFaFaText());
 	}
 }

@@ -1,15 +1,14 @@
 /**
  * 
  */
-package control_builder.control_getters;
+package control_builder.control_getters.group;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
-
+import control_builder.control_getters.ControlGetter;
 import controls.Control;
 import controls.ControlGroup;
-import controls.adders.InputGroup;
+import controls.adders.RowAdder;
 import object_models.pages.homepage.CoreData;
 
 /**
@@ -19,18 +18,18 @@ import object_models.pages.homepage.CoreData;
  * @since 1.0
  *
  */
-public class ControlGetterInputGroup extends ControlGetterGroup {
+public class ControlGetterRow extends ControlGetterGroup {
 	private List<ControlGetter> cntrls;
 	
-	public ControlGetterInputGroup(String name, CoreData coreData, By findBy) {
-		super(name, coreData, findBy);				
+	public ControlGetterRow(String name, CoreData coreData) {
+		super(name, coreData);				
 	}
 	
 	@Override
 	public Control getControl() {
 		return 
-			new ControlGroup(getName(), driver, findBy)
-				.addElements(cntrls, new InputGroup(findBy));
+			new ControlGroup()
+				.addElements(cntrls, new RowAdder());
 	}
 
 	@Override
