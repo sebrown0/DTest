@@ -6,7 +6,6 @@ package object_models.dk_grid;
 import java.time.Duration;
 import java.util.Optional;
 
-import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextManager;
 import controls.Control;
+import controls.getters.ElementGetter;
 import enums.GridButtonNames;
 import object_models.dialog.DialogOkCancel;
 import object_models.dk_grid.buttons.GridButton;
@@ -35,6 +35,7 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 
 	private WebElement myContainer;
 	private WebDriver driver;
+	private By locator;
 	private KeyStrategyRow keyStrategyRows;
 	private WebDriverWait wait;		 
 	private ContextManager contextManager;
@@ -42,8 +43,9 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 	private boolean toolBarLoaded;
 	private boolean contentLoaded;
 	
-	public DkGrid(WebDriver driver, KeyStrategyRow keyStrategyRows, ContextManager cm) {
+	public DkGrid(WebDriver driver, By locator, KeyStrategyRow keyStrategyRows, ContextManager cm) {
 		this.driver = driver;
+		this.locator = locator;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		this.setGridElement(driver);
 		this.setColumnHeaders();
@@ -160,9 +162,24 @@ public class DkGrid <T extends KeyStrategyRow> implements Control {
 	
 	@Override // Control
 	public boolean isAvailable() {
-		LogManager.getLogger().error("NOT IMPLEMENTED");		
-		return false;
+		myContainer = new ElementGetter(driver).getElementIfClickable(this);
+		return (myContainer != null) ? true : false;
 	}	
+	
+	@Override //Control
+	public By getLocator() {
+		return locator;
+	}
+
+	@Override //Control
+	public WebDriver getDriver() {
+		return driver;
+	}	
+
+	@Override //Control
+	public WebElement getElement() {
+		return myContainer;
+	}
 	/*
 	 * Was having problems with reloading content.
 	 * Changing the selector for the content seems 

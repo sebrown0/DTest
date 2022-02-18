@@ -1,8 +1,11 @@
 package object_models.dk_grid;
 
-import org.apache.logging.log4j.LogManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import controls.Control;
+import controls.getters.ElementGetter;
 import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
 
@@ -14,13 +17,15 @@ import object_models.panels.JsPanelWithIFrame;
  */
 public final class DkGridEmployeeDetails extends JsPanelWithIFrame implements Control {	
 	private DkGrid<FindRowByEmpId> grid;
+	private By locator;
 	
 	public static final String PANEL_TITLE = "Employee Details";	
 
-	public DkGridEmployeeDetails(CoreData coreData) {
+	public DkGridEmployeeDetails(CoreData coreData, By locator) {
 		super(coreData, PANEL_TITLE);
 		
-		grid = new DkGrid<>(driver, new FindRowByEmpId(), super.manager);
+		this.locator = locator;		
+		grid = new DkGrid<>(driver, locator, new FindRowByEmpId(), super.manager);
 	}
 	
 	// Grid
@@ -30,8 +35,24 @@ public final class DkGridEmployeeDetails extends JsPanelWithIFrame implements Co
 	
 	@Override // Control
 	public boolean isAvailable() {
-		LogManager.getLogger().error("NOT IMPLEMENTED");		
-		return false;
+		return 
+				(new ElementGetter(driver).getElementIfClickable(this) != null) 
+					? true : false;
 	}
 	
+	@Override //Control
+	public By getLocator() {
+		return locator;
+	}
+
+	@Override //Control
+	public WebDriver getDriver() {
+		return driver;
+	}	
+
+	@Override //Control
+	public WebElement getElement() {
+		//Doesn't have an element. TODO - why?
+		return null;
+	}
 }

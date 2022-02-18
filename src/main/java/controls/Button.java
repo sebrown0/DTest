@@ -3,14 +3,12 @@
  */
 package controls;
 
-import java.time.Duration;
-
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import controls.getters.ElementGetter;
 
 /**
  * @author SteveBrown
@@ -25,17 +23,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class Button implements Control, HasToolTip, HasFaFa, DisplayedText {
 	private WebDriver driver;
-	private By btnLocator;
+	private By locator;
 	private WebElement btn;
 	
-	public Button(WebDriver driver, WebElement btn) {
+	public Button(WebDriver driver, By locator, WebElement btn) {
 		this.driver = driver;
+		this.locator = locator;
 		this.btn = btn;
 	}
 	
-	public Button(WebDriver driver, By btnLocator) {
+	public Button(WebDriver driver, By locator) {
 		this.driver = driver;
-		this.btnLocator = btnLocator;
+		this.locator = locator;
 	}
 
 	@Override //HasToolTip
@@ -112,22 +111,25 @@ public class Button implements Control, HasToolTip, HasFaFa, DisplayedText {
 	
 	@Override //Control
 	public boolean isAvailable() {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-		try {
-			if(btn == null && btnLocator != null) {
-				btn = wait.until(ExpectedConditions.elementToBeClickable(btnLocator));	
-			}else if(btn != null){
-				btn = wait.until(ExpectedConditions.elementToBeClickable(btn));
-			}else {
-				return false;
-			}			
-			return true;
-		} catch (Exception e) {
-			LogManager.getLogger().error("Unable to find btn [" + e + "]");
-			return false;
-		}		
+		btn = new ElementGetter(driver).getElementIfClickable(this);
+		return (btn != null) ? true : false;
+	}
+	
+	@Override //Control
+	public By getLocator() {
+		return locator;
 	}
 
+	@Override //Control
+	public WebDriver getDriver() {
+		return driver;
+	}
+	
+	@Override //Control
+	public WebElement getElement() {
+		return btn;
+	}
+	
 	public boolean click() {		
 		if(isAvailable()) {
 			btn.click();
@@ -135,4 +137,6 @@ public class Button implements Control, HasToolTip, HasFaFa, DisplayedText {
 		}
 		return false;
 	}
+
+	
 }

@@ -3,21 +3,19 @@
  */
 package controls;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import control_builder.control_data.ControlData;
 import control_builder.control_getters.ControlGetter;
+import controls.adders.ControlAdder;
 import controls.finder.ControlFinder;
+import controls.getters.ElementGetter;
 
 /**
  * @author SteveBrown
@@ -54,20 +52,23 @@ public class ControlGroup implements Control, DisplayedText{
 	
 	@Override //Control
 	public boolean isAvailable() {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-		try {
-			if(cntrl == null && locator != null) {
-				cntrl = wait.until(ExpectedConditions.elementToBeClickable(locator));	
-			}else if(cntrl != null){
-				cntrl = wait.until(ExpectedConditions.elementToBeClickable(cntrl));
-			}else {
-				return false;
-			}			
-			return true;
-		} catch (Exception e) {
-			LogManager.getLogger().error("Unable to find control [" + e + "]");
-			return false;
-		}		
+		cntrl = new ElementGetter(driver).getElementIfClickable(this);
+		return (cntrl != null) ? true : false;	
+	}
+	
+	@Override //Control
+	public By getLocator() {
+		return locator;
+	}
+
+	@Override //Control
+	public WebDriver getDriver() {
+		return driver;
+	}
+
+	@Override //Control
+	public WebElement getElement() {
+		return cntrl;
 	}
 	
 	@Override //DisplayedText
@@ -78,5 +79,4 @@ public class ControlGroup implements Control, DisplayedText{
 			return null;
 		}		
 	}
-	
 }

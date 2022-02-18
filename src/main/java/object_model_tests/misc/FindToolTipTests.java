@@ -12,8 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import controls.Button;
-import controls.Control;
-import controls.InputGroup;
+import controls.ControlGroup;
 import object_models.left_menu.common.LeftMenu;
 import object_models.modules.payroll.left_menu.employees.SalaryDetails;
 import object_models.pages.UserLoginPage;
@@ -55,15 +54,14 @@ class FindToolTipTests {
 		
 	@Test @Order(1)
 	void select_existingRecords_forEmployee() {
-		InputGroup grp =  (InputGroup) salDetails.getControl("group_1").get();
+		ControlGroup grp = 
+				(ControlGroup) salDetails
+						.getPanelControl()
+						.getControl("EmpLookup")
+						.get();			
+		Button empList = (Button) grp.getControlByTitle("ExistingRecords").get();
 		
-		grp
-			.getElementByTitle("existing_records")
-			.ifPresent(e -> {
-				Control c = e.getControl();
-				Button b = (Button) c;
-				assertEquals("Grid View for existing records", b.getToolTipText());
-			});		 	
+		assertEquals("Grid View for existing records", empList.getToolTipText());		 	
 	}	
 	
 	@AfterAll

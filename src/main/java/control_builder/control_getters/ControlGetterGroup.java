@@ -17,9 +17,6 @@ import object_models.pages.homepage.CoreData;
  */
 public abstract class ControlGetterGroup extends ControlGetter {
 
-	public ControlGetterGroup(String name, CoreData coreData) {
-		super(name, coreData);
-	}
 	public ControlGetterGroup(String name, CoreData coreData, By findBy) {
 		super(name, coreData, findBy);				
 	}

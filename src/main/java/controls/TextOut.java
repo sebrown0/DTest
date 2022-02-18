@@ -9,6 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import controls.getters.ElementGetter;
+
 /**
  * @author SteveBrown
  * @version 1.0
@@ -16,22 +18,23 @@ import org.openqa.selenium.WebElement;
  * @since 1.0
  */
 public class TextOut implements Control, DisplayedText {
+	private WebDriver driver;
+	private By locator;
 	private WebElement text;
 	private Logger logger = LogManager.getLogger(this.getClass());
-	
-	public TextOut(WebElement text) {
-		this.text = text;
-	}
-	
+		
 	public TextOut(WebDriver driver, By findBy) {
-		setTextOut(driver, findBy);		
+		this.driver = driver;
+		this.locator = findBy;
+		
+		setTextOut();		
 	}	
 
-	private void setTextOut(WebDriver driver, By findBy) {
+	private void setTextOut() {
 		try {
-			this.text = driver.findElement(findBy);	
+			this.text = driver.findElement(locator);	
 		} catch (Exception e) {
-			logger.error("Could not find [TextOut] using [" + findBy + "]");
+			logger.error("Could not find [TextOut] using [" + locator + "]");
 		}
 	}
 	
@@ -54,9 +57,24 @@ public class TextOut implements Control, DisplayedText {
 		return "";
 	}
 
-	@Override
+	@Override //Control
 	public boolean isAvailable() {
-		logger.error("NOT IMPLEMENTED");		
-		return false;
+		text = new ElementGetter(driver).getElementIfClickable(this);
+		return (text != null) ? true : false;
+	}
+
+	@Override //Control
+	public By getLocator() {
+		return locator;
+	}
+
+	@Override //Control
+	public WebDriver getDriver() {
+		return driver;
 	}	
+
+	@Override //Control
+	public WebElement getElement() {
+		return text;
+	}
 }

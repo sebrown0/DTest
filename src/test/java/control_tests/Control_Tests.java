@@ -16,7 +16,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import controls.Button;
 import controls.ComboSelectFromList;
 import controls.ControlGroup;
-import controls.InputGroup;
+import controls.TextOut;
 import logging.TestResultLogger;
 import object_models.left_menu.common.LeftMenu;
 import object_models.modules.payroll.left_menu.employees.SalaryDetails;
@@ -59,8 +59,8 @@ class Control_Tests {
 	
 	@Test
 	void get_btnEmployeeList() {
-		InputGroup grp = 
-			(InputGroup) salDetails
+		ControlGroup grp = 
+			(ControlGroup) salDetails
 					.getPanelControl()
 					.getControl("EmpLookup")
 					.get();
@@ -68,7 +68,19 @@ class Control_Tests {
 		Button empList = (Button) grp.getControlByTitle("EmployeeList").get();
 		assertEquals("Search Employee", empList.getToolTipText());
 	}
-
+	
+	@Test
+	void get_date() {
+		ControlGroup datePicker = 
+			(ControlGroup) salDetails
+					.getPanelControl()
+					.getControl("DatePicker")
+					.get();
+		
+		TextOut date = (TextOut) datePicker.getControlByTitle("Date").get();
+		assertTrue(date.isAvailable());
+	}
+	
 	@Test
 	void get_tabSalaryDetails() {
 		ControlGroup tabs = 

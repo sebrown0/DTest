@@ -3,12 +3,13 @@
  */
 package object_models.controls;
 
-import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import controls.ComboSelectFromOptions;
 import controls.Control;
+import controls.getters.ElementGetter;
 import object_models.forms.FormWithIFrame;
 import object_models.pages.homepage.CoreData;
 
@@ -25,13 +26,15 @@ import object_models.pages.homepage.CoreData;
 public final class EmployeeSelection extends FormWithIFrame implements Control {
 	private WebElement topLevelContainer;
 	private WebElement table;	
+	private By locator;
 	
 	public static final String MENU_TITLE = "Select from a list of employees within the chosen company";
 	public static final String PANEL_TITLE = "Employees";
 
-	public EmployeeSelection(CoreData coreData) {
+	public EmployeeSelection(CoreData coreData, By locator) {
 		super(coreData, PANEL_TITLE, "_iframex-IPORTAL_HR_EMPLOYEEDETAILS_EXT");
 
+		this.locator = locator;
 //		super.switchToIFrame();		
 		setMyContainers();		
 	}
@@ -53,7 +56,7 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 	
 	private ComboSelectFromOptions getSelectBox(String id) {
 		WebElement select = topLevelContainer.findElement(By.cssSelector("select[name='" + id + "']")); 
-		return new ComboSelectFromOptions(super.coreData, select); 
+		return new ComboSelectFromOptions(super.coreData, select, locator); 
 	}
 
 	@Override
@@ -65,7 +68,22 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 	
 	@Override // Control
 	public boolean isAvailable() {
-		LogManager.getLogger().error("NOT IMPLEMENTED");		
-		return false;
+		table = new ElementGetter(driver).getElementIfClickable(this);
+		return (table != null) ? true : false;
 	}	
+	
+	@Override //Control
+	public By getLocator() {
+		return locator;
+	}
+
+	@Override //Control
+	public WebDriver getDriver() {
+		return driver;
+	}	
+
+	@Override //Control
+	public WebElement getElement() {
+		return table;
+	}
 }

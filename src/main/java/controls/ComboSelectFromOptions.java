@@ -3,6 +3,7 @@
  */
 package controls;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import object_models.pages.homepage.CoreData;
@@ -15,8 +16,8 @@ import object_models.pages.homepage.CoreData;
  */
 public class ComboSelectFromOptions extends Combo {
 
-	public ComboSelectFromOptions(CoreData coreData, WebElement combo) {
-		super(coreData, combo);	
+	public ComboSelectFromOptions(CoreData coreData, WebElement combo, By locator) {
+		super(coreData, combo, locator);	
 	}
 
 }

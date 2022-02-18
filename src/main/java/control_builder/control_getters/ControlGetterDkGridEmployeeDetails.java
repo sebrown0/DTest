@@ -22,7 +22,7 @@ public final class ControlGetterDkGridEmployeeDetails extends ControlGetter {
 	@Override
 	public Control getControl() {
 		driver.findElement(findBy).click();
-		return new DkGridEmployeeDetails(super.coreData);
+		return new DkGridEmployeeDetails(super.coreData, findBy);
 	}
 
 }

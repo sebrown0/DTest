@@ -58,7 +58,6 @@ public final class GlobalAdjustments extends JsPanelWithIFrame implements JsPane
 								CommonControlNames.DEPARTMENT,								
 								By.cssSelector("span[data-select2-id='13']"), 
 								By.id("select2-DEPS_SELx-results")).getControlData(),
-
 						
 						controlFactory.buildDefaultComboWriteAndSelect(
 								GlobalAdjustmentControlNames.VIEW_ADJUSTMENT_TYPE,
@@ -89,8 +88,11 @@ public final class GlobalAdjustments extends JsPanelWithIFrame implements JsPane
 						/*
 						 *  TODO - Other btns
 						 */
-							
-						controlFactory.buildGrid(new FindRowByEmpCode(), manager).getControlData()
+					
+						controlFactory
+							//TODO - Is the Locator correct. It doesn't include the toolbar.
+							.buildGrid(new FindRowByEmpCode(), manager, By.id("dkrGrid"))		
+							.getControlData()
 															
 		);			
 		super.buildPanelControls(myControls);				
@@ -103,7 +105,11 @@ public final class GlobalAdjustments extends JsPanelWithIFrame implements JsPane
 		btn.ifPresent(b -> {			
 			if(cntrlName.getName().equalsIgnoreCase(GlobalAdjustmentControlNames.ACCEPT_CRITERIA.getName())) {
 				super.logger.debug("Reloading grid after updating criteria");
-				super.updateControl(CommonControlNames.DK_GRID, new ControlGetterGrid<FindRowByEmpCode>(CommonControlNames.DK_GRID.getName(), coreData, new FindRowByEmpCode()));
+				super.updateControl(
+						CommonControlNames.DK_GRID, 
+						new ControlGetterGrid<FindRowByEmpCode>(
+								//Have to pass locator but is null for now.
+								CommonControlNames.DK_GRID.getName(), null, coreData, new FindRowByEmpCode()));
 				loadGrid();
 			}
 		});

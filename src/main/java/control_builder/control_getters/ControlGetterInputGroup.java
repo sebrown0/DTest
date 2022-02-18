@@ -5,8 +5,11 @@ package control_builder.control_getters;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
+
 import controls.Control;
-import controls.InputGroup;
+import controls.ControlGroup;
+import controls.adders.InputGroup;
 import object_models.pages.homepage.CoreData;
 
 /**
@@ -19,13 +22,15 @@ import object_models.pages.homepage.CoreData;
 public class ControlGetterInputGroup extends ControlGetterGroup {
 	private List<ControlGetter> cntrls;
 	
-	public ControlGetterInputGroup(String name, CoreData coreData) {
-		super(name, coreData);		
+	public ControlGetterInputGroup(String name, CoreData coreData, By findBy) {
+		super(name, coreData, findBy);				
 	}
-
+	
 	@Override
 	public Control getControl() {
-		return new InputGroup(findBy).addElements(cntrls);
+		return 
+			new ControlGroup(getName(), driver, findBy)
+				.addElements(cntrls, new InputGroup(findBy));
 	}
 
 	@Override

@@ -77,7 +77,7 @@ public class PayrollLeftMenuElementFactory implements MenuElementFactory {
 			element = new Documents(coreData);
 			break;			
 		case EmployeeList.MENU_TITLE:
-			element = new EmployeeList(coreData);
+			element = new EmployeeList(coreData); 
 			break;
 			
 		// Employees

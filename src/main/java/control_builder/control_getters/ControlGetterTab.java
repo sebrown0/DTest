@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 
 import controls.Control;
 import controls.ControlGroup;
-import controls.Tab;
+import controls.adders.TabAdder;
 import object_models.pages.homepage.CoreData;
 
 /**
@@ -25,7 +25,7 @@ public final class ControlGetterTab extends ControlGetterGroup {
 	private By findBy;
 	
 	public ControlGetterTab(String name, CoreData coreData, By findBy) {
-		super(name, coreData);
+		super(name, coreData, findBy);
 		
 		this.name = name;
 		this.findBy = findBy;	
@@ -41,7 +41,7 @@ public final class ControlGetterTab extends ControlGetterGroup {
 	public Control getControl() {
 		return 
 			new ControlGroup(name, driver, findBy)
-				.addElements(cntrls, new Tab());
+				.addElements(cntrls, new TabAdder());
 	}
 	
 }

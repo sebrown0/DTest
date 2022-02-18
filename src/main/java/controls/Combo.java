@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import controls.getters.ElementGetter;
 import object_models.helpers.DriverWait;
 import object_models.helpers.text_utils.TextExtractor;
 import object_models.helpers.text_utils.TextSanitiser;
@@ -22,29 +23,31 @@ import object_models.pages.homepage.CoreData;
  */
 public abstract class Combo implements Control {
 	private WebElement combo;
-	private By comboLocator;
+	private By locator;
 	
 	protected By findParentBy;	
 	protected boolean isOpen = false;	
 	protected WebDriver driver;
 	
-	public Combo(CoreData coreData, WebElement combo) {
-		this.combo = combo;
-		this.driver = coreData.getWebDriver();		
-	}	
-	public Combo(CoreData coreData, By findBy) {
+	public Combo(CoreData coreData, By locator) {
 		this.driver = coreData.getWebDriver();
-		this.comboLocator = findBy;
+		this.locator = locator;
 	}
+	public Combo(CoreData coreData, WebElement combo,  By locator) {
+		this.combo = combo;
+		this.driver = coreData.getWebDriver();
+		this.locator = locator;
+	}	
+	
 	
 	protected WebElement getComboElement() {
 		if(combo == null) {
 			if(findParentBy == null) {
-				combo = DriverWait.getElementAfterWait(driver, comboLocator);	
+				combo = DriverWait.getElementAfterWait(driver, locator);	
 			}else {
 				WebElement prnt = driver.findElement(findParentBy);
 				prnt.click();
-				combo = DriverWait.getElementAfterWait(driver, comboLocator);	
+				combo = DriverWait.getElementAfterWait(driver, locator);	
 			}			
 		}
 		return combo;
@@ -72,10 +75,25 @@ public abstract class Combo implements Control {
 		return LogManager.getLogger();
 	}
 	
-	@Override // Control
+	@Override //Control
 	public boolean isAvailable() {
-		LogManager.getLogger().error("NOT IMPLEMENTED");		
-		return false;
+		combo = new ElementGetter(driver).getElementIfClickable(this);
+		return (combo != null) ? true : false;
+	}
+	
+	@Override //Control
+	public By getLocator() {
+		return locator;
+	}
+
+	@Override //Control
+	public WebDriver getDriver() {
+		return driver;
+	}
+
+	@Override //Control
+	public WebElement getElement() {
+		return combo;
 	}
 	public void setFindParentBy(By findParentBy) {
 		this.findParentBy = findParentBy;

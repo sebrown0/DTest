@@ -23,7 +23,7 @@ public final class ControlGetterDropdownCombo extends ControlGetter {
 	@Override
 	public Control getControl() {
 		super.driver.findElement(findBy).click();
-		return new DropdownCombo(super.coreData);
+		return new DropdownCombo(super.coreData, findBy);
 	}
 
 }

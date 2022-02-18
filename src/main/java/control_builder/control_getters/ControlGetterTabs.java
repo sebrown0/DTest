@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 
 import controls.Control;
 import controls.ControlGroup;
-import controls.TabGroup;
+import controls.adders.TabGroupAdder;
 import object_models.pages.homepage.CoreData;
 
 /**
@@ -36,7 +36,7 @@ public final class ControlGetterTabs extends ControlGetterGroup {
 	public Control getControl() {
 		return 
 			new ControlGroup(super.getName(), driver, findBy)
-				.addElements(tabs, new TabGroup());
+				.addElements(tabs, new TabGroupAdder());
 	}
 
 }

@@ -36,11 +36,11 @@ public class ControlDataFactory {
 		this.coreData = coreData;
 	}
 	
-	public <T extends KeyStrategyRow> ControlDataFactory buildGrid(T keyStrategy, ContextManager cm) {
+	public <T extends KeyStrategyRow> ControlDataFactory buildGrid(T keyStrategy, ContextManager cm, By locator) {
 		controlData = 
 				new ControlData(
 						CommonControlNames.DK_GRID, 
-						new ControlGetterGrid<T>(CommonControlNames.DK_GRID.getName(), coreData, keyStrategy));		
+						new ControlGetterGrid<T>(CommonControlNames.DK_GRID.getName(), locator, coreData, keyStrategy));		
 		
 		return this;
 	}

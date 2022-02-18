@@ -17,6 +17,7 @@ import control_builder.control_getters.ControlGetterGroup;
 import control_builder.control_getters.ControlGetterInputGroup;
 import control_builder.control_getters.ControlGetterTab;
 import control_builder.control_getters.ControlGetterTabs;
+import control_builder.control_getters.ControlGetterTextOut;
 import dynamic_tests.annotations.TestControl;
 import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
@@ -74,8 +75,16 @@ public class SalaryDetails extends JsPanelWithIFrame {
 //				new ControlGetterButton("", coreData, By.cssSelector(""));
 		
 		ControlGetterGroup empLookup =  
-				new ControlGetterInputGroup("EmpLookup", coreData)
+				new ControlGetterInputGroup("EmpLookup", coreData, By.cssSelector("div[class='input-group']"))
 					.addControls(Arrays.asList(employeeList, salaryHistory, combos, grid_view, existing_records, documents));
+		
+		ControlGetter date = 
+				new ControlGetterTextOut("Date", coreData, By.cssSelector("input[id='DATE']"));
+//		ControlGetter datePicker =
+//				new controlgetterDatePicker.....
+		ControlGetterGroup datePicker = 
+				new ControlGetterInputGroup("DatePicker", coreData, By.cssSelector("div[class='input-group date datepicker']"))
+					.addControls(Arrays.asList(date));
 							
 		ControlGetter reason = 
 			new ControlGetterComboSelectOnly(
@@ -93,6 +102,7 @@ public class SalaryDetails extends JsPanelWithIFrame {
 			List.of(					
 				new ControlData(empLookup),
 				new ControlData(tabs),
+				new ControlData(datePicker),
 				new ControlData(new ControlGetterButton("calendar", coreData, By.cssSelector("i[class='fa fa-calendar fa-fw']"))),
 				new ControlData(new ControlGetterButton("new", coreData, By.cssSelector("button[name='NEW1']"))),
 				new ControlData(new ControlGetterButton("save", coreData, By.cssSelector("button[name='SAVE']"))),

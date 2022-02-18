@@ -26,10 +26,10 @@ public class ControlGetterButton extends ControlGetter {
 		this.btn = new Button(driver, findBy);
 	}
 	
-	public ControlGetterButton(String name, CoreData coreData, WebElement elButton) {
+	public ControlGetterButton(String name, CoreData coreData, By findBy, WebElement elButton) {
 		super(name, coreData);
 		
-		this.btn = new Button(coreData.getWebDriver(), elButton);
+		this.btn = new Button(coreData.getWebDriver(), findBy, elButton);
 	}
 	
 	@Override
