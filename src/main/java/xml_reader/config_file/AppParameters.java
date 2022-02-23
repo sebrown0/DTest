@@ -12,4 +12,5 @@ package xml_reader.config_file;
 public interface AppParameters {
 	String getModule();	
 	String getCompany();
+	String getUri();
 }

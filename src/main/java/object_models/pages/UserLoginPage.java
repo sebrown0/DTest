@@ -3,8 +3,6 @@
  */
 package object_models.pages;
 
-import static providers.URIProvider.LOGIN_PAGE_URI;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -44,15 +42,15 @@ public class UserLoginPage extends LoadablePage {
 	private By byBtnLogin = By.className("login100-form-btn");	
 	
 	// Just login.
-	public UserLoginPage(WebDriver driver) {
-		super(driver, "None", LOGIN_PAGE_URI);		
+	public UserLoginPage(WebDriver driver, String loginPageUri) {
+		super(driver, "None", loginPageUri);		
 		
 		setCoreData();
 	}	
 	// Login with ModuleElements so a HomePage can be returned.
-	public UserLoginPage(WebDriver driver, HomePageElements homePageElements) {
-		super(driver, "None", LOGIN_PAGE_URI);
-	
+	public UserLoginPage(WebDriver driver, String loginPageUri, HomePageElements homePageElements) {
+		super(driver, "None", loginPageUri);		
+		
 		setCoreData();
 		setHomePageElements(homePageElements);
 	}

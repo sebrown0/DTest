@@ -27,24 +27,31 @@ import object_models.top_right_nav_bar.all_elements.NavBarUserManagment;
 import object_models.top_right_nav_bar.all_elements.NavBarVisualReports;
 import object_models.top_right_nav_bar.common.NavBarElement;
 import object_models.top_right_nav_bar.quick_links.QuickLinks;
+import parameter_resolvers.ConfigParameterResolver;
 import providers.XMLFileProvider;
 import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
-@ExtendWith(TestResultLogger.class)
+@ExtendWith({
+	ConfigParameterResolver.class, 
+	TestResultLogger.class
+})
 class TopRightNavBar_Personnel_ElementsTests {	
 	private static HomePage hp;
 	private static WebDriver driver;
 	private static UserLoginPage userLogin;
 	private static ConfigReader configReader;	
+	private static String uri;
 	
 	@BeforeAll	
 	static void setup() throws NullDriverException {	
 		configReader = new ConfigReader(XMLFileProvider.PROD_CONFIG_FILE_PATH);
 		// Get a web driver as specified in the config.xml		
 		driver = configReader.getDriver();
+		// Get the login URI.
+		uri = configReader.getUri();
 		// Get a login page, with the required module loaded.
-		userLogin = new UserLoginPage(driver, new PayrollModuleElements(new Company("Mars Incorporated Ltd")));
+		userLogin = new UserLoginPage(driver, uri, new PayrollModuleElements(new Company("Mars Incorporated Ltd")));
 		// Get a home page after successful login
 		hp = userLogin.loginValidUser(UserProvider.userPortal());		
 	}

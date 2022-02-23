@@ -33,4 +33,8 @@ public class ConfigFileContents {
 	public static String getCompany(XMLFile xmlFile) {
 		 return xmlFile.getElement("Company").getTextContent();
 	}
+
+	public static String getUri(XMLFile xmlFile) {
+		return xmlFile.getElement("URI").getTextContent();
+	}
 }

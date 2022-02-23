@@ -24,23 +24,26 @@ class ModuleLoaderTests {
 	private static WebDriver driver;
 	private static UserLoginPage userLogin;
 	private static ConfigReader configReader;
+	private static String uri;
 	
 	@BeforeAll	
 	static void setUpBeforeClass() throws Exception {		
 		configReader = new ConfigReader(XMLFileProvider.PROD_CONFIG_FILE_PATH);
 		// Get a web driver as specified in the config.xml		
 		driver = configReader.getDriver();
+		// Get the login URI.
+		uri = configReader.getUri();
 	}
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-//		driver.quit();
+		driver.quit();
 	}
 	
 	@Test @Order(1)
 	void loadHomePage_withPayrollModule() {
 		// Get a login page, with the required module loaded.
-		userLogin = new UserLoginPage(driver, new PayrollModuleElements(new Company("Mars Incorporated Ltd")));
+		userLogin = new UserLoginPage(driver, uri, new PayrollModuleElements(new Company("Mars Incorporated Ltd")));
 		// Get a home page after successful login
 		hp = userLogin.loginValidUser(UserProvider.userPortal());		
 		assertTrue(hp != null);

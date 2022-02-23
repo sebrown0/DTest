@@ -47,7 +47,8 @@ public class DynamicTestItem {
 		this.hp = hp;
 		this.coreData = hp;
 		this.item = item;
-		this.elements = item.getAllElements();
+		System.out.println("DynamicTestItem -> item.getAllElements() is not implemented !!!!!!" ); // TODO - remove or log 	
+//		this.elements = item.getAllElements();
 	}
 
 	public void addTests() {

@@ -19,6 +19,7 @@ class QuickLinkTests {
 	private static WebDriver driver;
 	@SuppressWarnings("unused")
 	private static TopRightNavBar navBar;
+	private static String uri;
 	
 	@BeforeAll	
 	static void setup() throws NullDriverException {
@@ -26,12 +27,13 @@ class QuickLinkTests {
 		
 		// Get a web driver as specified in the config.xml		
 		driver = configReader.getDriver();
+		uri = configReader.getUri();
 		// Get a login page, with the required module loaded.
 		
 		/*
 		 * ADD CONTEXT MANAGER
 		 */
-		UserLoginPage userLogin = new UserLoginPage(driver, new PayrollModuleElements(new Company("Mars Incorporated Ltd")));
+		UserLoginPage userLogin = new UserLoginPage(driver, uri, new PayrollModuleElements(new Company("Mars Incorporated Ltd")));
 		/*
 		 * ADD CONTEXT MANAGER
 		 */

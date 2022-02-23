@@ -33,7 +33,11 @@ public class LoginPageResolverPayroll extends LoginPageResolver {
 		ConfigReader reader = (ConfigReader) ec.getStore(Namespace.GLOBAL).get(ConfigParameterResolver.CONFIG_PARAM_ID);		
 		WebDriver driver = reader.getDriver();
 		LogManager.getLogger(LoginPageResolverPayroll.class).debug("Loging in with default company");
-		return new UserLoginPage(driver, new PayrollModuleElements(new Company(reader.getCompany())));
+		return 
+				new UserLoginPage(
+						driver,
+						reader.getUri(),
+						new PayrollModuleElements(new Company(reader.getCompany())));
 	}
 
 }

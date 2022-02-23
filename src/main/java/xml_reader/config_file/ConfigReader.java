@@ -53,4 +53,10 @@ public class ConfigReader implements WebDriverGetter, ResultWritterGetter, AppPa
 	public String getCompany() {
 		return ConfigFileContents.getCompany(xmlFile);
 	}
+
+	@Override
+	public String getUri() {
+		String res = ConfigFileContents.getUri(xmlFile); 
+		return res;
+	}
 }

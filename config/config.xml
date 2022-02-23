@@ -10,6 +10,7 @@
 	<ApplicationUnderTest>
 		<Name>Dakar 2021</Name>
 		<Version>1.0.0</Version>
+        <URI>http://deploy.dakarhr.com/DakarHR.php</URI>
 			<AppParams>
 				<Module>Payroll</Module>
 				<Company>Mars Incorporated Ltd</Company>

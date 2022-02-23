@@ -32,20 +32,27 @@ import xml_reader.config_file.ConfigReader;
 })
 class UserLoginTest { // <- TEST SUITE
 	private static WebDriver driver;
-
+	private static String uri;
+	
 	@BeforeAll
 	static void setUpBeforeClass(ConfigReader configReader) throws Exception {
 		// Get a web driver as specified in the config.xml		
 		driver = configReader.getDriver(); // <- APP CONFIG
+		uri = configReader.getUri();
 	}
 	
 	@ParameterizedTest
-	@MethodSource("test_data.UserProvider#validPortalUser") // <- TEST DATA
+//	/DTest/src/main/resources/test_data/UserProvider.java
+	@MethodSource("DTest.src.main.resources.test_data.UserProvider#validPortalUser") // <- TEST DATA
 	@Tag("R20")
 	@Tag("T3834")	
 	void validUserLogin(User user) {		
 		// Supply valid user, login and check home page is loaded.
-		UserLoginPage userLogin = new UserLoginPage(driver, new PayrollModuleElements(new Company("Mars Incorporated Ltd"))); // <- POM		
+		UserLoginPage userLogin = 
+				new UserLoginPage(
+						driver, 
+						uri, 
+						new PayrollModuleElements(new Company("Mars Incorporated Ltd"))); // <- POM		
 		HomePage hp = userLogin.loginValidUser(user); // <- FLUENT API
 		assertTrue(hp != null); // <- TEST VERIFICATION & TEST LOGGING
 	}
@@ -56,7 +63,7 @@ class UserLoginTest { // <- TEST SUITE
 	@Tag("T3835")
 	void invalidUserLogin(User user) {
 		// Supply invalid user, login (fail) and home page is NOT loaded.
-		UserLoginPage userLogin = new UserLoginPage(driver);
+		UserLoginPage userLogin = new UserLoginPage(driver, "http://deploy.dakarhr.com/DakarHR.php");
 		HomePage hp = userLogin.loginValidUser(user); 
 		assertTrue(hp == null);
 	}

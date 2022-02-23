@@ -1,28 +1,22 @@
 package object_models.modules.payroll.left_menu.employees;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Arrays;
+import static org.junit.jupiter.api.Assertions.fail;
 import java.util.List;
-
-import org.junit.jupiter.api.DynamicTest;
+import java.util.Arrays;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-import control_builder.control_data.ControlData;
+import control_builder.*;
+import site_mapper.annotations.SiteMap;
+import org.junit.jupiter.api.DynamicTest;
+import dynamic_tests.annotations.TestControl;
 import control_builder.control_getters.ControlGetter;
 import control_builder.control_getters.group.ControlGetterGroup;
+import object_models.panels.JsPanelWithIFrame;
+import control_builder.control_data.ControlData;
+import object_models.pages.homepage.CoreData;
+import control_builder.control_getters.single.ControlGetterButton;
 import control_builder.control_getters.group.ControlGetterInputGroup;
 import control_builder.control_getters.group.ControlGetterRow;
-import control_builder.control_getters.group.ControlGetterTab;
-import control_builder.control_getters.group.ControlGetterTabs;
-import control_builder.control_getters.single.ControlGetterButton;
-import control_builder.control_getters.single.ControlGetterComboSelectOnly;
-import control_builder.control_getters.single.ControlGetterTextOut;
-import dynamic_tests.annotations.TestControl;
-import object_models.pages.homepage.CoreData;
-import object_models.panels.JsPanelWithIFrame;
-import site_mapper.annotations.SiteMap;
 
 /**
 * Generated Class.
@@ -30,165 +24,52 @@ import site_mapper.annotations.SiteMap;
 * Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
 * Author:  SteveBrown
 * Version: 1.0.0
-* Created: 09/02/2022 16:27:24
+* Created: 23/02/2022 11:53:53
 */
 
 public class SalaryDetails extends JsPanelWithIFrame {
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="23/02/2022")
 	public static final String PANEL_TITLE = "Employee Salary Details";
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="23/02/2022")
 	public static final String MENU_TITLE = "Salary Details";
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="23/02/2022")
 	public static final String MENU_PARENT_NAME = "Employees";
 
-	@FunctionalInterface
-	interface Title {
-		WebElement getElement(String title);
-	}
-	
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="23/02/2022")
 	public SalaryDetails(CoreData coreData){
 		super(coreData, PANEL_TITLE);
 		buildMyControls();
 	}
 
-	/*
-	 * IF WE HAVE CONTROLS (THE SalaryDetailsControls.java FILE IS THERE)
-	 * 'BUILD THEM'.
-	 */
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="23/02/2022")
 	private void buildMyControls() {
-		ControlGetter employeeList = 
-				new ControlGetterButton("EmployeeList", coreData, By.cssSelector("div[title='Search Employee']"));
-		ControlGetter salaryHistory = 
-				new ControlGetterButton("SalaryHistory", coreData, By.cssSelector("div[title='View Salary History']"));
-		ControlGetter combos = 
-				new ControlGetterButton("Combos", coreData, By.cssSelector("div[title='Combos']"));
-		ControlGetter grid_view = 
-				new ControlGetterButton("GridView", coreData, By.cssSelector("div[title='Grid View for this Employee']"));
-		ControlGetter existing_records = 
-				new ControlGetterButton("ExistingRecords", coreData, By.cssSelector("div[title='Grid View for existing records']"));
-		ControlGetter documents = 
-				new ControlGetterButton("Documents", coreData, By.cssSelector("div[title='No Documents Attached']"));
-				
-		ControlGetterGroup empLookup =  
-				new ControlGetterInputGroup("EmpLookup", coreData, By.cssSelector("div[class='input-group']"))
-					.addControls(Arrays.asList(employeeList, salaryHistory, combos, grid_view, existing_records, documents));
-		
-		ControlGetter date = 
-				new ControlGetterTextOut("Date", coreData, By.cssSelector("input[id='DATE']"));
-//		ControlGetter datePicker =
-//				new controlgetterDatePicker.....
-		ControlGetterGroup datePicker = 
-				new ControlGetterInputGroup("DatePicker", coreData, By.cssSelector("div[class='input-group date datepicker']"))
-					.addControls(Arrays.asList(date));
-							
-		ControlGetter reason = 
-			new ControlGetterComboSelectOnly(
-				"Reason", coreData,  By.cssSelector("span[id='select2-REASON-container']"), null);
-		
-		ControlGetterGroup salaryDetails = 
-				new ControlGetterTab("SalaryDetails", coreData, By.cssSelector("a[id='tab-tab1']"))
-					.addControls(Arrays.asList(reason));
-		
-		ControlGetterGroup tabs = 
-				new ControlGetterTabs("Tabs", coreData, By.cssSelector("ul[class='nav nav-tabs']"))
-					.addControls(Arrays.asList(salaryDetails));
-				
-		ControlGetter calendar = 
-				new ControlGetterButton("Calendar", coreData, By.cssSelector("i[class='fa fa-calendar fa-fw']"));
-		ControlGetter newRec = 
-				new ControlGetterButton("NewRec", coreData, By.cssSelector("button[name='NEW1']"));
-		ControlGetter save = 
-				new ControlGetterButton("Save", coreData, By.cssSelector("button[name='SAVE']"));
-		ControlGetter search = 
-				new ControlGetterButton("Search", coreData, By.cssSelector("button[name='QBF1']"));
-		ControlGetter delete = 
-				new ControlGetterButton("Delete", coreData, By.cssSelector("button[name='DELETE1']"));
-		ControlGetter clear = 
-				new ControlGetterButton("Clear", coreData, By.cssSelector("button[name='CLEAR1']"));
-		ControlGetter print = 
-				new ControlGetterButton("Print", coreData, By.cssSelector("button[name='PRINT1']"));
-		
-		ControlGetterGroup footerBtns =
-				new ControlGetterRow("FooterBtns", coreData)
-					.addControls(Arrays.asList(calendar, newRec, save, search, delete, clear, print));
-		
+		ControlGetter calendar =
+			new ControlGetterButton("Calendar", coreData, By.cssSelector("i[class='fa fa-calendar fa-fw']"));
+		ControlGetter newRec =
+			new ControlGetterButton("NewRec", coreData, By.cssSelector("button[name='NEW1']"));
+		ControlGetter save =
+			new ControlGetterButton("Save", coreData, By.cssSelector("button[name='SAVE']"));
+		ControlGetter search =
+			new ControlGetterButton("Search", coreData, By.cssSelector("button[name='QBF1']"));
+		ControlGetter delete =
+			new ControlGetterButton("Delete", coreData, By.cssSelector("button[name='DELETE1']"));
+		ControlGetter clear =
+			new ControlGetterButton("Clear", coreData, By.cssSelector("button[name='CLEAR1']"));
+		ControlGetter print =
+			new ControlGetterButton("Print", coreData, By.cssSelector("button[name='PRINT1']"));
+		ControlGetterGroup footerButtons =
+			new ControlGetterRow("FooterButtons", coreData)
+				.addControls(Arrays.asList(newRec, save, search, delete, clear, print));
+		ControlGetterGroup empLookup =
+			new ControlGetterInputGroup("EmpLookup", coreData, By.cssSelector("div[class='input-group date datepicker']"))
+				.addControls(Arrays.asList(calendar));
 		var myControls =
-			List.of(					
+			List.of(
 				new ControlData(empLookup),
-				new ControlData(tabs),
-				new ControlData(datePicker),
-				new ControlData(footerBtns)							
+				new ControlData(footerButtons)
 			);
-						
 		super.buildPanelControls(myControls);
 	}
-	
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonNew () {
-		return DynamicTest.dynamicTest("[buttonNew] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonSave () {
-		return DynamicTest.dynamicTest("[buttonSave] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonSearch () {
-		return DynamicTest.dynamicTest("[buttonSearch] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonDelete () {
-		return DynamicTest.dynamicTest("[buttonDelete] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonClear () {
-		return DynamicTest.dynamicTest("[buttonClear] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonPrint () {
-		return DynamicTest.dynamicTest("[buttonPrint] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonEmployee_list () {
-		return DynamicTest.dynamicTest("[buttonEmployee_list] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonSalary_history () {
-		return DynamicTest.dynamicTest("[buttonSalary_history] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonCombos () {
-		return DynamicTest.dynamicTest("[buttonCombos] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonGrid_view () {
-		return DynamicTest.dynamicTest("[buttonGrid_view] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonExisting_records () {
-		return DynamicTest.dynamicTest("[buttonExisting_records] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonDocuments () {
-		return DynamicTest.dynamicTest("[buttonDocuments] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonCalendar () {
-		return DynamicTest.dynamicTest("[buttonCalendar] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
+
 
 }
