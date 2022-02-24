@@ -3,7 +3,10 @@
  */
 package controls;
 
+import java.util.Map;
 import java.util.Optional;
+
+import control_builder.control_getters.ControlGetter;
 
 /**
  * @author SteveBrown
@@ -12,5 +15,6 @@ import java.util.Optional;
  * @since 1.0
  */
 public interface ControlTest {
-	public Optional<Control> getControl(String cntrlName);
+	Optional<Control> getControl(String cntrlName);
+	Map<String, ControlGetter> getControls();
 }

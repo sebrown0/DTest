@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.DynamicTest;
 
 import controls.ControlTestData;
+import dynamic_tests.mappers.TestNode;
 import object_models.pages.homepage.CoreData;
 import object_models.pages.homepage.HomePage;
 import site_mapper.elements.ElementCreation;
@@ -28,8 +29,8 @@ public class ElementTestButton extends ElementTest {
 	private String toolTipText;	
 	
 	public ElementTestButton(
-		HomePage hp, CoreData coreData, MenuItem item, ElementCreation e) {
-		super(hp, item, "button", e.getElementName());
+		TestNode testNode, HomePage hp, CoreData coreData, MenuItem item, ElementCreation e) {
+		super(testNode, hp, item, "button", e.getElementName());
 	
 		text = e.getText();
 		fafa = e.getFafa();
@@ -54,7 +55,7 @@ public class ElementTestButton extends ElementTest {
 				DynamicTest.dynamicTest(
 					"Is [" + super.getName() +"] button [FaFa] correct?", 
 					() -> {							
-						System.out.println("->" + super.getName()); // TODO - remove or log 	
+//						System.out.println("->" + super.getName()); // TODO - remove or log 	
 						String faFaActual = ControlTestData.getFaFaText(super.getControl());
 						assertEquals(fafa, faFaActual);
 					}

@@ -39,14 +39,14 @@ public class DynamicTestFactory {
 	 * 
 	 * Get the test for the element.
 	 */
-	public Optional<TestElement> getTest(ElementCreation el) {		
+	public Optional<TestElement> getTest(TestNode testNode, ElementCreation el) {		
 		String elementType = el.getElementType();
 		Optional<TestElement> test = null;
 		 	
 		switch (elementType) {
 			case "button" -> {
 				test = Optional.of(
-						new ElementTestButton(hp, coreData, item, el));				
+						new ElementTestButton(testNode, hp, coreData, item, el));				
 			}
 			default -> { 
 				throw new IllegalArgumentException("Unexpected value: " + elementType); 

@@ -5,6 +5,7 @@ package object_models.panels;
 
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
@@ -133,6 +134,10 @@ public abstract class JsPanel implements
 		manager.switchToStateInCurrentContext(StateIframe.class); 
 		manager.setLatestCallingStateToCurrent();
 		return panelControl;
+	}
+	@Override //ControlTest
+	public Map<String, ControlGetter> getControls() {
+		return panelControl.getControls();
 	}
 	
 	public Optional<Control> getControl(ControlName cntrlName){		

@@ -105,7 +105,7 @@ public class DynamicTestItem implements TreeVisitor {
 						if(includedElements.isIncluded(el.getElementType())) {
 							addTestToItemContainer(
 									//PASS FINDER!!!!!!!!!!
-									testFactory.getTest(el)
+									testFactory.getTest(tn, el)
 //									DynamicTestFactory.getTest(tn, hp, coreData, item)
 							);
 						}	

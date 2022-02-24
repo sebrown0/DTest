@@ -160,8 +160,10 @@
                 <ToolTip text="Grid View for this Employee"/>                
                 <Function isDefaultPass="true" />
               </Element>
-              &existingGridViewBtn;              
+              &existingGridViewBtn;
+              <!--               
               &documentsBtn;
+               -->
             </Container>
             <Container type="InputGroup" name="DatePicker">
               <Locator by="css" text="div[class='input-group date datepicker']"/>v
@@ -189,12 +191,14 @@
                
           <FooterElements>
             <Container type="row" name="FooterButtons">
-              &newBtn;
-              &saveBtn;
               &searchBtn;
-              &deleteBtn;
               &clearBtn;
+              <!-- 
+              &newBtn;
+              &saveBtn;              
+              &deleteBtn;              
               &printBtn;
+               -->
             </Container>    
           </FooterElements>      
            

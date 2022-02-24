@@ -35,7 +35,6 @@ public class PageControl {
 	public Optional<Control> getControl(ControlName cntrlName){
 		String cntrlKey = cntrlName.getName();
 		return getControl(cntrlKey);
-
 	}
 	public Optional<Control> getControl(String cntrlKey){
 //should be group_1 not employee_list
@@ -54,6 +53,10 @@ public class PageControl {
 			controls.remove(key);
 			controls.put(key, updatedCntrl);	
 		}
+	}
+
+	public Map<String, ControlGetter> getControls() {
+		return controls;
 	}
 	
 }

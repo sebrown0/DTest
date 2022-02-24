@@ -3,12 +3,8 @@
  */
 package dynamic_tests.mappers;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 import site_mapper.jaxb.pom.Element;
 

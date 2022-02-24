@@ -56,6 +56,25 @@ class Control_Tests {
 	static void tearDown() {		
 		homepagePayroll.close();
 	}
+
+	@Test
+	void ZZZZZZZZZZZZZZZZZZZget_reasonFrom_SalDetails() {
+		ControlGroup grpTabs = 
+				(ControlGroup) salDetails
+						.getPanelControl()
+						.getControl("Tabs")
+						.get();
+		
+		ControlGroup grpTabSalDetails = 
+			(ControlGroup) grpTabs
+				.getControlByTitle("SalaryDetails")
+				.get(); 
+
+		TextSelect reason = 
+			(TextSelect) grpTabSalDetails.getControlByTitle("Reason").get();
+		
+		assertTrue(reason != null);
+	}
 	
 	@Test
 	void get_reasonFrom_SalDetails() {
