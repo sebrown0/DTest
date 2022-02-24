@@ -20,10 +20,10 @@ import object_models.pages.homepage.CoreData;
  * or don't have a list to select from.
  * 
  */
-public final class ControlGetterSelect extends ControlGetter {
+public final class ControlGetterTextSelect extends ControlGetter {
 	private Control cntrl;
 		
-	public ControlGetterSelect(String name, CoreData coreData, By findBy) {
+	public ControlGetterTextSelect(String name, CoreData coreData, By findBy) {
 		super(name, coreData, findBy);
 		
 		cntrl = new TextSelect(super.driver, super.findBy);

@@ -27,7 +27,8 @@ public class ElementTestButton extends ElementTest {
 	private String fafa;	
 	private String toolTipText;	
 	
-	public ElementTestButton(HomePage hp, CoreData coreData, MenuItem item, ElementCreation e) {
+	public ElementTestButton(
+		HomePage hp, CoreData coreData, MenuItem item, ElementCreation e) {
 		super(hp, item, "button", e.getElementName());
 	
 		text = e.getText();

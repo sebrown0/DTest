@@ -54,10 +54,10 @@ public class ElementLoader {
 			if(e instanceof ControlTest) {
 				ct = (ControlTest) e;
 			}else {
-				System.out.println("***** getControlTest() 1 *****"); // TODO - remove or log
+				System.out.println("ElementLoader -> ***** getControlTest() 1 *****"); // TODO - remove or log
 			}
 		}else {
-			System.out.println("***** getControlTest() 2 *****"); // TODO - remove or log 	
+			System.out.println("ElementLoader -> ***** getControlTest() 2 *****"); // TODO - remove or log 	
 			// TODO - THROW ERROR??
 		}
 		return ct;

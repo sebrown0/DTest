@@ -133,6 +133,12 @@
             </FooterElements>              
         </MenuItem>
         -->
+        
+        <!-- ELEMENT NAMES SHOULD PascalCase -->
+        <!-- 
+          ELEMENT TYPES SHOULD PascalCase & MATH THE CONTROL NAME
+          IN  /DTest/src/main/java/controls/...
+        -->
         <MenuItem name="Salary Details" package="Employees" class="SalaryDetails">          
           <Type name="JsPanelWithIFrame">
             <JsPanelWithIFrame panelTitle = "Employee Salary Details" /> 
@@ -142,14 +148,14 @@
               <Locator by="css" text="div[class='input-group']"/>
               &empListBtn;
               <Element>
-                <Details type="button" name="salary_history" text="" fafa="fa fa-list"/>
+                <Details type="Button" name="SalaryHistory" text="" fafa="fa fa-list"/>
                 <Locator by="css" text="div[title='View Salary History']"/>
                 <ToolTip text="View Salary History"/>                
                 <Function isDefaultPass="true" />
               </Element>
               &combosBtn;
               <Element>
-                <Details type="button" name="grid_view" text="" fafa="fa fw fa-table"/>
+                <Details type="Button" name="GridView" text="" fafa="fa fw fa-table"/>
                 <Locator by="css" text="div[title='Grid View for this Employee']"/>
                 <ToolTip text="Grid View for this Employee"/>                
                 <Function isDefaultPass="true" />
@@ -157,13 +163,29 @@
               &existingGridViewBtn;              
               &documentsBtn;
             </Container>
-            <Container type="InputGroup" name="EmpLookup">
+            <Container type="InputGroup" name="DatePicker">
               <Locator by="css" text="div[class='input-group date datepicker']"/>v
               &calendarBtn;
             </Container>                
           </HeaderElements>
-            <!-- -->         
-          <BodyElements></BodyElements>
+               
+          <BodyElements>
+            <Container type="Tabs" name="Tabs">
+              <Locator by="css" text="ul[class='nav nav-tabs']"/>
+              
+              <Container type="Tab" name="SalaryDetails">
+                <Locator by="css" text="a[id='tab-tab1']"/>
+                <Element>
+                  <Details type="TextSelect" name="Reason"/>
+                  <Locator by="css" text="span[id='select2-REASON-container']"/>              
+                </Element>
+              </Container>  
+              
+              <Container type="tab" name="Remarks">
+                <Locator by="css" text="a[id='tab-tab2']"/>                
+              </Container>  
+            </Container>     
+          </BodyElements> 
                
           <FooterElements>
             <Container type="row" name="FooterButtons">

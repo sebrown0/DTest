@@ -17,6 +17,7 @@ import controls.Button;
 import controls.ComboSelectFromList;
 import controls.ControlGroup;
 import controls.TextOut;
+import controls.TextSelect;
 import logging.TestResultLogger;
 import object_models.left_menu.common.LeftMenu;
 import object_models.modules.payroll.left_menu.employees.SalaryDetails;
@@ -54,6 +55,25 @@ class Control_Tests {
 	@AfterAll
 	static void tearDown() {		
 		homepagePayroll.close();
+	}
+	
+	@Test
+	void get_reasonFrom_SalDetails() {
+		ControlGroup grpTabs = 
+				(ControlGroup) salDetails
+						.getPanelControl()
+						.getControl("Tabs")
+						.get();
+		
+		ControlGroup grpTabSalDetails = 
+			(ControlGroup) grpTabs
+				.getControlByTitle("SalaryDetails")
+				.get(); 
+
+		TextSelect reason = 
+			(TextSelect) grpTabSalDetails.getControlByTitle("Reason").get();
+		
+		assertTrue(reason != null);
 	}
 	
 	@Test

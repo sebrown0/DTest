@@ -19,17 +19,27 @@ import site_mapper.jaxb.menu_items.MenuItem;
  * @since 1.0
  */
 public class DynamicTestFactory {
+	private HomePage hp;
+	private CoreData coreData;
+	private MenuItem item;
+	
 	/**
-	 * @param el: The Element from XML.
 	 * @param hp: Home page.
 	 * @param coreData: app data
 	 * @param item: menu item from xml, i.e. employee details.
+	 */
+	public DynamicTestFactory(HomePage hp, CoreData coreData, MenuItem item) {
+		this.hp = hp;
+		this.coreData = coreData;
+		this.item = item;
+	}
+
+	/**
+	 * @param el: The Element from XML.	 * 
 	 * 
 	 * Get the test for the element.
 	 */
-	public static Optional<TestElement> getTest(
-			ElementCreation el, HomePage hp, CoreData coreData, MenuItem item) {
-		
+	public Optional<TestElement> getTest(ElementCreation el) {		
 		String elementType = el.getElementType();
 		Optional<TestElement> test = null;
 		 	

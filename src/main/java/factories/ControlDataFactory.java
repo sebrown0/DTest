@@ -11,7 +11,7 @@ import control_builder.control_getters.single.ControlGetterButton;
 import control_builder.control_getters.single.ControlGetterComboSelectOnly;
 import control_builder.control_getters.single.ControlGetterComboWriteAndSelect;
 import control_builder.control_getters.single.ControlGetterGrid;
-import control_builder.control_getters.single.ControlGetterSelect;
+import control_builder.control_getters.single.ControlGetterTextSelect;
 import control_builder.control_getters.single.ControlGetterTextOut;
 import controls.ControlName;
 import enums.control_names.CommonControlNames;
@@ -102,7 +102,7 @@ public class ControlDataFactory {
 		controlData = 
 				new ControlData(
 						cntrlName, 
-						new ControlGetterSelect(cntrlName.getName(), coreData, containerLoc));
+						new ControlGetterTextSelect(cntrlName.getName(), coreData, containerLoc));
 		
 		return this;
 	}

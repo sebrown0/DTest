@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Element>
-  <Details type="button" name="employee_list" text="" fafa="fa fa-list"/>
+  <Details type="button" name="EmployeeList" text="" fafa="fa fa-list"/>
   <Locator by="css" text="div[title='Search Employee']"/>  
   <ToolTip text="Select from a list of employees within the chosen company"/>              
   <Function isDefaultPass="true" />

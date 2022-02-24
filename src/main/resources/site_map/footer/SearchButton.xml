@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Element>
-  <Details type="button" name="search" text="Search" fafa="fa fa-search"/>
+  <Details type="button" name="Search" text="Search" fafa="fa fa-search"/>
   <Locator by="css" text="button[name='QBF1']"/>                
   <Function isDefaultPass="true" />
 </Element>
