@@ -29,17 +29,15 @@ public class ElementTestButton extends ElementTest {
 	private String toolTipText;	
 	
 	public ElementTestButton(
-		TestNode testNode, HomePage hp, CoreData coreData, MenuItem item, ElementCreation e) {
+		TestNode testNode, HomePage hp, CoreData coreData, 
+		MenuItem item, ElementCreation e) {
 		super(testNode, hp, item, "button", e.getElementName());
 	
 		text = e.getText();
 		fafa = e.getFafa();
 		toolTipText = ((ElementDetails)e).getToolTipText();
 	}
-	/*
-	 * HAVE TO GERT THIS BEFORE WE GET HERE 
-	 * FROM THE IP GROUP!!!!!!!!!!!!!!!!!!!
-	 */
+	
 	@Override //TestElement
 	public List<DynamicTest> createTests() {
 //		Not using dynamic test methods at present.

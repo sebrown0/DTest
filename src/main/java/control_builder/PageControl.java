@@ -41,8 +41,8 @@ public class PageControl {
 		if(controls.containsKey(cntrlKey)) {
 			return (Optional<Control>) Optional.of(controls.get(cntrlKey).getControl());
 		}else {
-//			System.out.println("Could not find control [" + cntrlKey + "]");
-			LogManager.getLogger().error("Could not find control [" + cntrlKey + "]");			
+			System.out.println("PageControl: Could not find control [" + cntrlKey + "]");
+			LogManager.getLogger(PageControl.class).error("Could not find control [" + cntrlKey + "]");			
 			return Optional.empty();
 		}
 	}

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DynamicTest;
 import controls.ControlTestData;
 import dynamic_tests.mappers.TestNode;
 import object_models.pages.homepage.HomePage;
+import site_mapper.elements.ElementCreation;
 import site_mapper.jaxb.menu_items.MenuItem;
 
 /**
@@ -31,10 +32,13 @@ import site_mapper.jaxb.menu_items.MenuItem;
 public class ElementTestTextOut extends ElementTest {
 	private String textExpected;
 	
-	public ElementTestTextOut(TestNode testNode, HomePage hp, MenuItem item, String name, String textExpected) {
-		super(testNode, hp, item, "text_out", name);
+	//TODO Where do we get expected from???
+	public ElementTestTextOut(
+			TestNode testNode, HomePage hp, MenuItem item, 
+			 ElementCreation el) {
+		super(testNode, hp, item, "TextOut", el.getElementName());
 		
-		this.textExpected = textExpected;
+//		this.textExpected = textExpected;
 	}
 ;	
 

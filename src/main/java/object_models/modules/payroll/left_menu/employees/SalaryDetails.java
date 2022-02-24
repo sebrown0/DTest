@@ -27,7 +27,7 @@ import control_builder.control_getters.group.ControlGetterRow;
 * Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
 * Author:  SteveBrown
 * Version: 1.0.0
-* Created: 24/02/2022 09:24:39
+* Created: 24/02/2022 15:41:14
 */
 
 public class SalaryDetails extends JsPanelWithIFrame {
@@ -56,33 +56,28 @@ public class SalaryDetails extends JsPanelWithIFrame {
 			new ControlGetterButton("GridView", coreData, By.cssSelector("div[title='Grid View for this Employee']"));
 		ControlGetter existingRecords =
 			new ControlGetterButton("ExistingRecords", coreData, By.cssSelector("div[title='Grid View for existing records']"));
-		ControlGetter documents =
-			new ControlGetterButton("Documents", coreData, By.cssSelector("div[title='No Documents Attached']"));
 		ControlGetter calendar =
 			new ControlGetterButton("Calendar", coreData, By.cssSelector("i[class='fa fa-calendar fa-fw']"));
 		ControlGetter reason =
 			new ControlGetterTextSelect("Reason", coreData, By.cssSelector("span[id='select2-REASON-container']"));
-		ControlGetter newRec =
-			new ControlGetterButton("NewRec", coreData, By.cssSelector("button[name='NEW1']"));
-		ControlGetter save =
-			new ControlGetterButton("Save", coreData, By.cssSelector("button[name='SAVE']"));
+		ControlGetter grade =
+			new ControlGetterTextSelect("Grade", coreData, By.cssSelector("input[id='GRADE_CODE']"));
 		ControlGetter search =
 			new ControlGetterButton("Search", coreData, By.cssSelector("button[name='QBF1']"));
-		ControlGetter delete =
-			new ControlGetterButton("Delete", coreData, By.cssSelector("button[name='DELETE1']"));
 		ControlGetter clear =
 			new ControlGetterButton("Clear", coreData, By.cssSelector("button[name='CLEAR1']"));
-		ControlGetter print =
-			new ControlGetterButton("Print", coreData, By.cssSelector("button[name='PRINT1']"));
 		ControlGetterGroup footerButtons =
 			new ControlGetterRow("FooterButtons", coreData)
-				.addControls(Arrays.asList(newRec, save, search, delete, clear, print));
+				.addControls(Arrays.asList(search, clear));
 		ControlGetterGroup remarks =
 			new ControlGetterTab("Remarks", coreData, By.cssSelector("a[id='tab-tab2']"))
 				.addControls(Arrays.asList());
+		ControlGetterGroup gradeInput =
+			new ControlGetterInputGroup("GradeInput", coreData, By.xpath("//i[@class='fa fa-list']/ancestor::div[@class='input-group']"))
+				.addControls(Arrays.asList(grade));
 		ControlGetterGroup salaryDetails =
 			new ControlGetterTab("SalaryDetails", coreData, By.cssSelector("a[id='tab-tab1']"))
-				.addControls(Arrays.asList(reason));
+				.addControls(Arrays.asList(gradeInput, reason));
 		ControlGetterGroup tabs =
 			new ControlGetterTabs("Tabs", coreData, By.cssSelector("ul[class='nav nav-tabs']"))
 				.addControls(Arrays.asList(salaryDetails, remarks));
@@ -91,7 +86,7 @@ public class SalaryDetails extends JsPanelWithIFrame {
 				.addControls(Arrays.asList(calendar));
 		ControlGetterGroup empLookup =
 			new ControlGetterInputGroup("EmpLookup", coreData, By.cssSelector("div[class='input-group']"))
-				.addControls(Arrays.asList(employeeList, salaryHistory, combos, gridView, existingRecords, documents));
+				.addControls(Arrays.asList(employeeList, salaryHistory, combos, gridView, existingRecords));
 		var myControls =
 			List.of(
 				new ControlData(empLookup),

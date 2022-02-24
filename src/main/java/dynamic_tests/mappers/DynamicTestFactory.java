@@ -6,6 +6,7 @@ package dynamic_tests.mappers;
 import java.util.Optional;
 
 import dynamic_tests.elements.ElementTestButton;
+import dynamic_tests.elements.ElementTestTextOut;
 import dynamic_tests.elements.TestElement;
 import object_models.pages.homepage.CoreData;
 import object_models.pages.homepage.HomePage;
@@ -35,18 +36,24 @@ public class DynamicTestFactory {
 	}
 
 	/**
-	 * @param el: The Element from XML.	 * 
+	 * @param testNode: The test node.
+	 * @param el: The Element from XML.	  
 	 * 
 	 * Get the test for the element.
 	 */
 	public Optional<TestElement> getTest(TestNode testNode, ElementCreation el) {		
 		String elementType = el.getElementType();
+		String elementName = el.getElementName();
 		Optional<TestElement> test = null;
 		 	
 		switch (elementType) {
-			case "button" -> {
+			case "Button" -> {
 				test = Optional.of(
 						new ElementTestButton(testNode, hp, coreData, item, el));				
+			}
+			case "TextSelect" -> {
+				test = Optional.of(
+						new ElementTestTextOut(testNode, hp, item, el));						
 			}
 			default -> { 
 				throw new IllegalArgumentException("Unexpected value: " + elementType); 
