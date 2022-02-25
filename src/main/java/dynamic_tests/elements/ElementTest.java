@@ -30,10 +30,10 @@ public class ElementTest implements TestElement {
 	private ControlFinder controlFinder;
 	
 	public ElementTest(
-		TestNode testNode, HomePage hp, MenuItem item, 
-		String type, ElementCreation e) {
+		TestNode testNode, HomePage hp, 
+		MenuItem item, ElementCreation e) {
 
-		this.type = type;
+		this.type = e.getElementType();
 		this.elName = e.getElementName();
 		
 		controlFinder = new ControlFinder(testNode, hp, item, elName);

@@ -20,19 +20,19 @@ import site_mapper.jaxb.pom.ElementTestData;
  * 	Pass the container that has the control test.
  * @since 1.0
  */
-public class ElementTestTextOut implements TestAdder {
+public class ElementTestTextOut implements TestAdderWithData {
 	private ElementTestData dataIn;
-//	private ElementTestData dataOut;
+	private ElementTestData dataOut;
 
 	public ElementTestTextOut(ElementCreation el) {
-			this.dataIn = el.getTestDataIn();
-//			this.dataOut = el.getTestDataOut();
-		}
+		this.dataIn = el.getTestDataIn();
+		this.dataOut = el.getTestDataOut();
+	}
 
 	@Override
 	public void addTestsWith(ElementTestFactory testFactory) {
 		checkDataIn();
-		testFactory.createTextCheck("text");
+		testFactory.createTextCheck(this);
 	}
 	
 	private void checkDataIn() {
@@ -46,6 +46,15 @@ public class ElementTestTextOut implements TestAdder {
 				System.out.println("NO DATA FOUND!"); // TODO - remove or log 	
 			}
 		}
+	}
+
+	@Override
+	public ElementTestData getTestDataIn() {
+		return dataIn;
+	}
+	@Override
+	public ElementTestData getTestDataOut() {
+		return dataOut;
 	}
 
 }

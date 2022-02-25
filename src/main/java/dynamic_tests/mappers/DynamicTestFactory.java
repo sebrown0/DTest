@@ -7,7 +7,6 @@ import java.util.Optional;
 
 import dynamic_tests.elements.ElementTest;
 import dynamic_tests.elements.ElementTestButton;
-import dynamic_tests.elements.ElementTestFactory;
 import dynamic_tests.elements.ElementTestTextOut;
 import dynamic_tests.elements.TestElement;
 import object_models.pages.homepage.HomePage;
@@ -39,34 +38,23 @@ public class DynamicTestFactory {
 	 * 
 	 * Get the test for the element.
 	 */
-	public Optional<TestElement> getTest(
-		TestNode testNode, ElementCreation el) {
-		
-		String elType = el.getElementType();		
-//		Optional<TestElement> test = null;
-		
-		ElementTest test = new ElementTest(testNode, hp, item, elType, el);
+	public Optional<TestElement> getTest(TestNode testNode, ElementCreation el) {		
+		String elType = el.getElementType();				
+		ElementTest test = new ElementTest(testNode, hp, item, el);
 		 	
 		switch (elType) {
 			case "Button" -> {
 				test.addTests(new ElementTestButton(el));
-//				test = Optional.of(
-//						new ElementTestButton(testNode, hp, item, el));				
 			}
 			case "TextSelect" -> {
-				test.addTests(new ElementTestTextOut(el));
-//				test = Optional.of(
-//						new ElementTestTextOut(testNode, hp, item, el));						
+				test.addTests(new ElementTestTextOut(el));						
 			}
 			default -> { 
+				test = null;
 				throw new IllegalArgumentException("Unexpected value: " + elType); 
 			}
 		}	
 		return Optional.ofNullable(test);  		
 	}	
 	
-//	private String getTestData(ElementDetails elDetails) {
-//		ElementTestData data = elDetails.getTestData();
-//		return (data != null) ? data.getData()  : "";
-//	}
 }
