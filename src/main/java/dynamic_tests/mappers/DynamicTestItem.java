@@ -49,7 +49,7 @@ public class DynamicTestItem implements TreeVisitor {
 		this.includedElements = includedElements;
 		this.menuItemTests = menuItemContainers;
 		this.item = item;
-		this.testFactory = new DynamicTestFactory(hp, hp, item);
+		this.testFactory = new DynamicTestFactory(hp, item);
 		
 		getElements();
 	}
@@ -105,7 +105,7 @@ public class DynamicTestItem implements TreeVisitor {
 			
 	private void addTestToItemContainer(Optional<TestElement> test) {
 		test.ifPresent(t -> {	
-			menuItemTests.add(DynamicContainer.dynamicContainer(getKey(t), t.createTests())); 
+			menuItemTests.add(DynamicContainer.dynamicContainer(getKey(t), t.getTestList())); 
 		});
 	}
 		

@@ -5,10 +5,10 @@ package dynamic_tests.mappers;
 
 import java.util.Optional;
 
+import dynamic_tests.elements.ElementTest;
 import dynamic_tests.elements.ElementTestButton;
 import dynamic_tests.elements.ElementTestTextOut;
 import dynamic_tests.elements.TestElement;
-import object_models.pages.homepage.CoreData;
 import object_models.pages.homepage.HomePage;
 import site_mapper.elements.ElementCreation;
 import site_mapper.jaxb.menu_items.MenuItem;
@@ -21,17 +21,14 @@ import site_mapper.jaxb.menu_items.MenuItem;
  */
 public class DynamicTestFactory {
 	private HomePage hp;
-	private CoreData coreData;
 	private MenuItem item;
 	
 	/**
 	 * @param hp: Home page.
-	 * @param coreData: app data
 	 * @param item: menu item from xml, i.e. employee details.
 	 */
-	public DynamicTestFactory(HomePage hp, CoreData coreData, MenuItem item) {
+	public DynamicTestFactory(HomePage hp, MenuItem item) {
 		this.hp = hp;
-		this.coreData = coreData;
 		this.item = item;
 	}
 
@@ -45,22 +42,26 @@ public class DynamicTestFactory {
 		TestNode testNode, ElementCreation el) {
 		
 		String elType = el.getElementType();		
-		Optional<TestElement> test = null;
+//		Optional<TestElement> test = null;
+		
+		ElementTest test = new ElementTest(testNode, hp, item, elType, el);
 		 	
 		switch (elType) {
 			case "Button" -> {
-				test = Optional.of(
-						new ElementTestButton(testNode, hp, coreData, item, el));				
+				test.addTests(new ElementTestButton(testNode, hp, item, el));
+//				test = Optional.of(
+//						new ElementTestButton(testNode, hp, item, el));				
 			}
 			case "TextSelect" -> {
-				test = Optional.of(
-						new ElementTestTextOut(testNode, hp, item, el));						
+				test.addTests(new ElementTestTextOut(testNode, hp, item, el));
+//				test = Optional.of(
+//						new ElementTestTextOut(testNode, hp, item, el));						
 			}
 			default -> { 
 				throw new IllegalArgumentException("Unexpected value: " + elType); 
 			}
 		}	
-		return test;  		
+		return Optional.ofNullable(test);  		
 	}	
 	
 //	private String getTestData(ElementDetails elDetails) {

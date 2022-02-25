@@ -6,9 +6,11 @@ package dynamic_tests.elements;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.DynamicTest;
 
+import controls.Control;
 import controls.ControlTestData;
 import dynamic_tests.mappers.TestNode;
 import object_models.pages.homepage.HomePage;
@@ -30,38 +32,34 @@ import site_mapper.jaxb.pom.ElementTestData;
  * 	Pass the container that has the control test.
  * @since 1.0
  */
-public class ElementTestTextOut extends ElementTest {
+public class ElementTestTextOut implements TestAdder {
 	private ElementTestData dataIn;
 	private ElementTestData dataOut;
-	
-	//TODO Where do we get expected from???
+
 	public ElementTestTextOut(
-			TestNode testNode, HomePage hp, MenuItem item, 
-			 ElementCreation el) {
-		super(testNode, hp, item, "TextOut", el.getElementName());
+			TestNode testNode, HomePage hp, MenuItem item, ElementCreation el) {
+	
 
-		this.dataIn = el.getTestDataIn();
-		this.dataOut = el.getTestDataOut();
+			this.dataIn = el.getTestDataIn();
+			this.dataOut = el.getTestDataOut();
+		}
+
+	@Override
+	public void addTestTo(List<DynamicTest> testList, String elName, Optional<Control> cntrl) {
+		createTextCheck(testList, elName, cntrl);		
 	}
-;	
-
-	@Override //TestElement 
-	public List<DynamicTest> createTests() {
-		createTextCheck();
-		return super.getTests();		
-	}
-
+	
 	/*
 	 * this will have to be a check based on the data,
 	 * i.e. text or list.
 	 */
-	private void createTextCheck() {
-		super.getTests().add(
+	private void createTextCheck(List<DynamicTest> testList, String elName, Optional<Control> cntrl) {
+		testList.add(
 				DynamicTest.dynamicTest(
-					"Is [" + super.getName() +"] [text] correct?", 
+					"Is [" + elName +"] [text] correct?", 
 					() -> {							
 						checkDataIn();
-						String textActual = ControlTestData.getControlText(super.getControl());
+						String textActual = ControlTestData.getControlText(cntrl);
 						assertEquals("textExpected", textActual);
 					}
 				)
