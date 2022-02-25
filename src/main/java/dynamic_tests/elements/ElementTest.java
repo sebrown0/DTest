@@ -40,7 +40,9 @@ public class ElementTest implements TestElement {
 	}
 
 	public void addTests(TestAdder testAdder) {
-		testAdder.addTestTo(testList, elName, getControl());
+		ElementTestFactory testFactory = 
+			new ElementTestFactory(testList, elName, getControl());
+		testAdder.addTestsWith(testFactory);
 	}
 	
 	protected Optional<Control> getControl() {

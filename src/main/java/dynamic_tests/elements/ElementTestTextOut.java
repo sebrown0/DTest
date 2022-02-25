@@ -3,19 +3,7 @@
  */
 package dynamic_tests.elements;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.List;
-import java.util.Optional;
-
-import org.junit.jupiter.api.DynamicTest;
-
-import controls.Control;
-import controls.ControlTestData;
-import dynamic_tests.mappers.TestNode;
-import object_models.pages.homepage.HomePage;
 import site_mapper.elements.ElementCreation;
-import site_mapper.jaxb.menu_items.MenuItem;
 import site_mapper.jaxb.pom.ElementTestData;
 
 /**
@@ -34,38 +22,19 @@ import site_mapper.jaxb.pom.ElementTestData;
  */
 public class ElementTestTextOut implements TestAdder {
 	private ElementTestData dataIn;
-	private ElementTestData dataOut;
+//	private ElementTestData dataOut;
 
-	public ElementTestTextOut(
-			TestNode testNode, HomePage hp, MenuItem item, ElementCreation el) {
-	
-
+	public ElementTestTextOut(ElementCreation el) {
 			this.dataIn = el.getTestDataIn();
-			this.dataOut = el.getTestDataOut();
+//			this.dataOut = el.getTestDataOut();
 		}
 
 	@Override
-	public void addTestTo(List<DynamicTest> testList, String elName, Optional<Control> cntrl) {
-		createTextCheck(testList, elName, cntrl);		
+	public void addTestsWith(ElementTestFactory testFactory) {
+		checkDataIn();
+		testFactory.createTextCheck("text");
 	}
 	
-	/*
-	 * this will have to be a check based on the data,
-	 * i.e. text or list.
-	 */
-	private void createTextCheck(List<DynamicTest> testList, String elName, Optional<Control> cntrl) {
-		testList.add(
-				DynamicTest.dynamicTest(
-					"Is [" + elName +"] [text] correct?", 
-					() -> {							
-						checkDataIn();
-						String textActual = ControlTestData.getControlText(cntrl);
-						assertEquals("textExpected", textActual);
-					}
-				)
-			);
-	}
-
 	private void checkDataIn() {
 		if(dataIn != null) {
 			System.out.println("NEED TO INPUT THIS DATA!!");

@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import dynamic_tests.elements.ElementTest;
 import dynamic_tests.elements.ElementTestButton;
+import dynamic_tests.elements.ElementTestFactory;
 import dynamic_tests.elements.ElementTestTextOut;
 import dynamic_tests.elements.TestElement;
 import object_models.pages.homepage.HomePage;
@@ -48,12 +49,12 @@ public class DynamicTestFactory {
 		 	
 		switch (elType) {
 			case "Button" -> {
-				test.addTests(new ElementTestButton(testNode, hp, item, el));
+				test.addTests(new ElementTestButton(el));
 //				test = Optional.of(
 //						new ElementTestButton(testNode, hp, item, el));				
 			}
 			case "TextSelect" -> {
-				test.addTests(new ElementTestTextOut(testNode, hp, item, el));
+				test.addTests(new ElementTestTextOut(el));
 //				test = Optional.of(
 //						new ElementTestTextOut(testNode, hp, item, el));						
 			}
