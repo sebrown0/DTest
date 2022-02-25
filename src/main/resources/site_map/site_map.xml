@@ -180,7 +180,8 @@
                 <Locator by="css" text="a[id='tab-tab1']"/>
                 <Element>
                   <Details type="TextSelect" name="Reason"/>
-                  <Locator by="css" text="span[id='select2-REASON-container']"/>              
+                  <Locator by="css" text="span[id='select2-REASON-container']"/>     
+                  <TestDataIn list="Annual Review, Cost of Living"/>         
                 </Element>
                 <Container type="InputGroup" name="GradeInput">
                   <Locator by="xpath" text="//i[@class='fa fa-list']/ancestor::div[@class='input-group']"/>

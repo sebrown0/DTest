@@ -41,12 +41,13 @@ public class DynamicTestFactory {
 	 * 
 	 * Get the test for the element.
 	 */
-	public Optional<TestElement> getTest(TestNode testNode, ElementCreation el) {		
-		String elementType = el.getElementType();
-		String elementName = el.getElementName();
+	public Optional<TestElement> getTest(
+		TestNode testNode, ElementCreation el) {
+		
+		String elType = el.getElementType();		
 		Optional<TestElement> test = null;
 		 	
-		switch (elementType) {
+		switch (elType) {
 			case "Button" -> {
 				test = Optional.of(
 						new ElementTestButton(testNode, hp, coreData, item, el));				
@@ -56,9 +57,14 @@ public class DynamicTestFactory {
 						new ElementTestTextOut(testNode, hp, item, el));						
 			}
 			default -> { 
-				throw new IllegalArgumentException("Unexpected value: " + elementType); 
+				throw new IllegalArgumentException("Unexpected value: " + elType); 
 			}
 		}	
 		return test;  		
 	}	
+	
+//	private String getTestData(ElementDetails elDetails) {
+//		ElementTestData data = elDetails.getTestData();
+//		return (data != null) ? data.getData()  : "";
+//	}
 }

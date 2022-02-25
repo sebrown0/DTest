@@ -15,7 +15,7 @@ import site_mapper.jaxb.pom.Element;
  * 
  * TODO
  * ----
- * SPLIT INTO CHILD NODE AND PARENT NODE.
+ * SPLIT INTO CHILD NODE AND PARENT NODE?
  */
 public class TestNode {
 	private TestNode parent;

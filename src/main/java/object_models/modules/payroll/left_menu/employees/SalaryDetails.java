@@ -1,25 +1,22 @@
 package object_models.modules.payroll.left_menu.employees;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
+
 import org.openqa.selenium.By;
-import control_builder.*;
-import site_mapper.annotations.SiteMap;
-import org.junit.jupiter.api.DynamicTest;
-import dynamic_tests.annotations.TestControl;
+
+import control_builder.control_data.ControlData;
 import control_builder.control_getters.ControlGetter;
 import control_builder.control_getters.group.ControlGetterGroup;
-import object_models.panels.JsPanelWithIFrame;
-import control_builder.control_data.ControlData;
-import object_models.pages.homepage.CoreData;
-import control_builder.control_getters.single.ControlGetterButton;
 import control_builder.control_getters.group.ControlGetterInputGroup;
-import control_builder.control_getters.group.ControlGetterTabs;
-import control_builder.control_getters.single.ControlGetterTextSelect;
-import control_builder.control_getters.group.ControlGetterTab;
 import control_builder.control_getters.group.ControlGetterRow;
+import control_builder.control_getters.group.ControlGetterTab;
+import control_builder.control_getters.group.ControlGetterTabs;
+import control_builder.control_getters.single.ControlGetterButton;
+import control_builder.control_getters.single.ControlGetterTextSelect;
+import object_models.pages.homepage.CoreData;
+import object_models.panels.JsPanelWithIFrame;
+import site_mapper.annotations.SiteMap;
 
 /**
 * Generated Class.

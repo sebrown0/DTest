@@ -14,6 +14,7 @@ import dynamic_tests.mappers.TestNode;
 import object_models.pages.homepage.HomePage;
 import site_mapper.elements.ElementCreation;
 import site_mapper.jaxb.menu_items.MenuItem;
+import site_mapper.jaxb.pom.ElementTestData;
 
 /**
  * @author SteveBrown
@@ -30,15 +31,17 @@ import site_mapper.jaxb.menu_items.MenuItem;
  * @since 1.0
  */
 public class ElementTestTextOut extends ElementTest {
-	private String textExpected;
+	private ElementTestData dataIn;
+	private ElementTestData dataOut;
 	
 	//TODO Where do we get expected from???
 	public ElementTestTextOut(
 			TestNode testNode, HomePage hp, MenuItem item, 
 			 ElementCreation el) {
 		super(testNode, hp, item, "TextOut", el.getElementName());
-		
-//		this.textExpected = textExpected;
+
+		this.dataIn = el.getTestDataIn();
+		this.dataOut = el.getTestDataOut();
 	}
 ;	
 
@@ -48,18 +51,34 @@ public class ElementTestTextOut extends ElementTest {
 		return super.getTests();		
 	}
 
+	/*
+	 * this will have to be a check based on the data,
+	 * i.e. text or list.
+	 */
 	private void createTextCheck() {
 		super.getTests().add(
 				DynamicTest.dynamicTest(
 					"Is [" + super.getName() +"] [text] correct?", 
 					() -> {							
-//						String textActual = super.myControlTest().getControlText(getName());
+						checkDataIn();
 						String textActual = ControlTestData.getControlText(super.getControl());
-						assertEquals(textExpected, textActual);
+						assertEquals("textExpected", textActual);
 					}
 				)
 			);
 	}
 
+	private void checkDataIn() {
+		if(dataIn != null) {
+			System.out.println("NEED TO INPUT THIS DATA!!");
+			if(dataIn.getText() != null) {
+				System.out.println(dataIn.getText()); // TODO - remove or log 	
+			}else if (dataIn.getList() != null) {
+				dataIn.getList().forEach(item -> System.out.println(item));
+			}else {
+				System.out.println("NO DATA FOUND!"); // TODO - remove or log 	
+			}
+		}
+	}
 
 }
