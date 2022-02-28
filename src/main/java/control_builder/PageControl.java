@@ -4,15 +4,14 @@
 package control_builder;
 
 import java.util.Map;
-import java.util.Optional;
 import java.util.Map.Entry;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 
 import control_builder.control_getters.ControlGetter;
-import controls.Button;
+import control_builder.control_getters.group.ControlGetterGroup;
 import controls.Control;
-import controls.ControlGroup;
 import controls.ControlName;
 
 /**
@@ -70,6 +69,11 @@ public class PageControl {
 //		}
 		for(Entry<String, ControlGetter> entry : controls.entrySet()) {
 			var v = entry.getValue();
+			if(v instanceof ControlGetterGroup) {
+				var cntrlList = ((ControlGetterGroup) v).getControls();
+				System.out.println("is cntrlList"); // TODO - remove or log 	
+			}
+
 			System.out.println("->"); // TODO - remove or log 	
 		}
 		

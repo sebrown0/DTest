@@ -30,6 +30,7 @@ import control_builder.control_getters.ControlGetter;
 import controls.Control;
 import controls.ControlName;
 import controls.ControlTest;
+import controls.getters.ControlGetterFromPanel;
 import dynamic_tests.elements.SiteMapElement;
 import dynamic_tests.finders.MethodFinder;
 import dynamic_tests.finders.MethodGetter;
@@ -143,6 +144,12 @@ public abstract class JsPanel implements
 	public Optional<Control> getControl(ControlName cntrlName){		
 		manager.switchToStateInCurrentContext(StateIframe.class);
 		return panelControl.getControl(cntrlName);
+	}
+	
+	public Optional<Control> getControlFromPanel(String prnt, String child){		
+		return 
+			new ControlGetterFromPanel<>(this, prnt, child)
+				.getControl();
 	}
 	/*
 	 * TODO - CHECK TO SEE IF IT'S THE CURRENT CONTROL.
