@@ -61,7 +61,8 @@ public class CellChecker {
 	public Popup getPopupType() {
 		popupTopLevel.ifPresentOrElse(
 				p -> {
-					Optional<WebElement> popupChild = Optional.ofNullable(getChildElement(By.cssSelector("div[class='ag-popup-editor ag-ltr ag-popup-child']"), p));
+					Optional<WebElement> popupChild =
+							Optional.ofNullable(getChildElement(By.cssSelector("div[class='ag-popup-editor ag-ltr ag-popup-child']"), p));
 					popupChild.ifPresent(c -> {
 						if(!isSelect(c)) {
 							tryDatePicker(c);
@@ -81,7 +82,9 @@ public class CellChecker {
 	}
 		
 	private boolean isSelect(WebElement chld) {
-		Optional<WebElement> select = Optional.ofNullable(getChildElement(By.cssSelector("body > div.ag-theme-balham.ag-popup > div > span"), chld));
+		Optional<WebElement> select = 
+				Optional.ofNullable(
+						getChildElement(By.cssSelector("body > div.ag-theme-balham.ag-popup > div > span"), chld));
 		if(select.isPresent()) {			
 			setPopupToCombo(select.get());			
 			return true;
@@ -95,7 +98,9 @@ public class CellChecker {
 	}
 	
 	private boolean tryDatePicker(WebElement chld) {
-		Optional<WebElement> picker = Optional.ofNullable(getChildElement(By.cssSelector("div[class='datepicker datepicker-inline']"), chld));
+		Optional<WebElement> picker = 
+				Optional.ofNullable(getChildElement(
+						By.cssSelector("div[class='datepicker datepicker-inline']"), chld));
 		if(picker.isPresent()) {
 			popupType = new DatePickerPopup(driver);
 			return true;

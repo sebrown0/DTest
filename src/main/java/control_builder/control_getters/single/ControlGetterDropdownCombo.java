@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 
 import control_builder.control_getters.ControlGetter;
 import controls.Control;
-import object_models.controls.DropdownCombo;
+import object_models.modal_forms.DropdownCombo;
 import object_models.pages.homepage.CoreData;
 
 /**

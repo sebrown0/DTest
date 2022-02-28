@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_models.controls;
+package object_models.modal_forms.emp_selection;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import controls.ComboSelectFromOptions;
 import controls.Control;
+import controls.TextSelect;
 import controls.getters.ElementGetter;
 import object_models.forms.FormWithIFrame;
 import object_models.pages.homepage.CoreData;
@@ -23,7 +24,7 @@ import object_models.pages.homepage.CoreData;
  * and the user can select an employee from a list.
  * 
  */
-public final class EmployeeSelection extends FormWithIFrame implements Control {
+public final class EmployeeSelection extends FormWithIFrame implements Control, SelectEmployee {
 	private WebElement topLevelContainer;
 	private WebElement table;	
 	private By locator;
@@ -40,6 +41,7 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 	}
 		
 	public void clickRow(String rowNum) {				
+		setTable(); //Have to load the table again as the results have changed.
 		WebElement rw = table.findElement(By.id("RIZZ" + rowNum));
 		rw.click();
 		contextManager.deleteCurrentContextAndRevertToCallingContext();
@@ -54,6 +56,12 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 		return getSelectBox("SelectURLNCA2");
 	}	
 	
+	public TextSelect getSearchThisCompany() { 
+		return 
+			new TextSelect(
+					driver, By.cssSelector("input[name='PERF_NAME_SEARCH2']"));
+	}
+		
 	private ComboSelectFromOptions getSelectBox(String id) {
 		WebElement select = topLevelContainer.findElement(By.cssSelector("select[name='" + id + "']")); 
 		return new ComboSelectFromOptions(super.coreData, select, locator); 
@@ -62,7 +70,13 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 	@Override
 	public void setMyContainers() {
 		// These are in the form's iFrame, so will have to have switched to iFrame.
+		setTopLevel();
+		setTable();
+	}	
+	private void setTopLevel() {
 		topLevelContainer = driver.findElement(By.id("corners"));
+	}
+	private void setTable() {
 		table = driver.findElement(By.id("employeeListTable"));
 	}
 	
@@ -85,5 +99,10 @@ public final class EmployeeSelection extends FormWithIFrame implements Control {
 	@Override //Control
 	public WebElement getElement() {
 		return table;
+	}
+
+	@Override //SelectEmployee
+	public void ByCode(EmpSelectorBy selectBy) {
+		selectBy.selectEmployee();
 	}
 }

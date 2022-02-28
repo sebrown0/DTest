@@ -52,7 +52,8 @@ import object_models.pages.homepage.CoreData;
  */
 public abstract class JsPanel implements 
 	ContainerAction, ContextSetter, ContextIdGetter, 
-	StateFactorySetter, ControlTest, SiteMapElement, MethodGetter {
+	StateFactorySetter, ControlTest, SiteMapElement, 
+	MethodGetter, CoreData {
 	
 	protected WebDriver driver;
 	protected Logger logger;
@@ -243,14 +244,16 @@ public abstract class JsPanel implements
 	public String getContextExpectedName() {
 		return expectedTitle;
 	}
-
+	@Override // CoreData
+	public Logger getLogger() {
+		return logger;
+	}
 	@Override 	// StateFactorySetter
 	public ContextManager getContextManager() {
 		return manager;
 	}
 	@Override 	// StateFactorySetter
-	public
-	WebDriver getWebDriver() {
+	public WebDriver getWebDriver() {
 		return driver;
 	}	
 	@Override 	// StateFactorySetter

@@ -7,17 +7,21 @@ import org.openqa.selenium.By;
 
 import control_builder.control_getters.ControlGetter;
 import controls.Control;
-import object_models.controls.EmployeeSelection;
+import object_models.modal_forms.emp_selection.EmployeeSelection;
 import object_models.pages.homepage.CoreData;
 
 /**
- * @author Steve Brown
- *
+ * @author SteveBrown
+ * @version 1.0
+ * 	Initial
+ * @since 1.0
  */
 public final class ControlGetterEmployeeSelection extends ControlGetter {	
+	private static final String name = "EmployeeSelection";
+	private static final By locator = By.cssSelector("div[class='modal show']");
 	
-	public ControlGetterEmployeeSelection(String name, CoreData coreData, By findBy) {
-		super(name, coreData, findBy);
+	public ControlGetterEmployeeSelection(CoreData coreData) {
+		super(name, coreData, locator);
 	}
 
 	@Override

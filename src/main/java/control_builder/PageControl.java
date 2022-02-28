@@ -4,13 +4,11 @@
 package control_builder;
 
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 
 import control_builder.control_getters.ControlGetter;
-import control_builder.control_getters.group.ControlGetterGroup;
 import controls.Control;
 import controls.ControlName;
 
@@ -61,23 +59,23 @@ public class PageControl {
 		return controls;
 	}
 
-	public ControlGetter findFirst(String prnt, String child) {
-		ControlGetter controlGetter = null;
-//		boolean found = false;
-//		while(found == false) {
-//			
+//	public ControlGetter findFirst(String prnt, String child) {
+//		ControlGetter controlGetter = null;
+////		boolean found = false;
+////		while(found == false) {
+////			
+////		}
+//		for(Entry<String, ControlGetter> entry : controls.entrySet()) {
+//			var v = entry.getValue();
+//			if(v instanceof ControlGetterGroup) {
+//				var cntrlList = ((ControlGetterGroup) v).getControls();
+//				System.out.println("is cntrlList"); // TODO - remove or log 	
+//			}
+//
+//			System.out.println("->"); // TODO - remove or log 	
 //		}
-		for(Entry<String, ControlGetter> entry : controls.entrySet()) {
-			var v = entry.getValue();
-			if(v instanceof ControlGetterGroup) {
-				var cntrlList = ((ControlGetterGroup) v).getControls();
-				System.out.println("is cntrlList"); // TODO - remove or log 	
-			}
-
-			System.out.println("->"); // TODO - remove or log 	
-		}
-		
-		return controlGetter;
-	}
+//		
+//		return controlGetter;
+//	}
 	
 }

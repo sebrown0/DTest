@@ -3,8 +3,9 @@
  */
 package controls.data_inserters.emp_lookup;
 
+import control_builder.control_getters.single.ControlGetterEmployeeSelection;
 import controls.Button;
-import object_models.controls.EmployeeSelection;
+import object_models.modal_forms.emp_selection.EmployeeSelection;
 import object_models.panels.JsPanel;
 
 /**
@@ -15,6 +16,7 @@ import object_models.panels.JsPanel;
  */
 public class EmployeeLookup {
 	private JsPanel panel;
+	private ControlGetterEmployeeSelection empSelectionGetter;
 	private EmployeeSelection empSelection;
 	
 	public EmployeeLookup(JsPanel panel) {
@@ -28,16 +30,18 @@ public class EmployeeLookup {
 	
 	private void openEmployeeList() {
 		panel
-			.getControlFromPanel("EmpLookupZX", "EmployeeListXX")
+			.getControlFromPanel("EmpLookup", "EmployeeList")
 			.ifPresent(c -> { 
 				((Button)c).click();
-				empSelection = new EmployeeSelection(null, null);
+				empSelectionGetter = new ControlGetterEmployeeSelection(panel);
 			});
 	}
 	
 	private void selectEmployee() {
-		if(empSelection != null) {
+		if(empSelectionGetter != null) {
 			System.out.println("slect"); // TODO - remove or log 	
+			empSelection = (EmployeeSelection) empSelectionGetter.getControl();
+			
 		}
 	}
 }

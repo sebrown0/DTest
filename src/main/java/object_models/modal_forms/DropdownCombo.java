@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_models.controls;
+package object_models.modal_forms;
 
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;

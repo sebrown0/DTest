@@ -1,39 +1,35 @@
-/**
- * 
- */
-package dynamic_tests;
+package object_model_tests.forms;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.By;
 
-import controls.data_inserters.emp_lookup.EmployeeLookup;
+import control_builder.control_getters.single.ControlGetterEmployeeSelection;
+import controls.Button;
 import logging.TestResultLogger;
 import object_models.left_menu.common.LeftMenu;
+import object_models.modal_forms.emp_selection.EmployeeSelection;
+import object_models.modal_forms.emp_selection.SelectEmpByCode;
+import object_models.modal_forms.emp_selection.SelectEmployee;
 import object_models.modules.payroll.left_menu.employees.SalaryDetails;
 import object_models.pages.UserLoginPage;
-import object_models.pages.homepage.CoreData;
 import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
-/**
- * @author SteveBrown
- * @version 1.0
- * 	Initial
- * @since 1.0
- */
 @ExtendWith({ 
 	ConfigParameterResolver.class, 
 	TestResultLogger.class, 
 	LoginPageResolverPayroll.class })
-class EmployeeLookup_Tests {
+class EmployeeSelection_Tests {
 
 	private static SalaryDetails salDetails;
 	private static HomePage hp;
+	private static EmployeeSelection empSelection;
 
 	@BeforeAll
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
@@ -45,12 +41,26 @@ class EmployeeLookup_Tests {
 				.clickAndLoad(SalaryDetails.class)
 				.get();
 		
+		salDetails
+			.getControlFromPanel("EmpLookup", "EmployeeList")
+			.ifPresent(c -> { 
+				((Button)c).click();
+				empSelection = 
+						(EmployeeSelection) 
+							new ControlGetterEmployeeSelection(salDetails)
+								.getControl();
+			});		
+		
 	}
 	
 	@Test
 	void test() {
-		EmployeeLookup emplLookup = new EmployeeLookup(salDetails);
-		emplLookup.loadEmployee("XXX");
+		assertTrue(empSelection != null);
 	}
 
+	@Test
+	void askj() {
+		SelectEmployee selEmp = empSelection;
+		selEmp.ByCode(new SelectEmpByCode(empSelection, "Borg"));
+	}
 }
