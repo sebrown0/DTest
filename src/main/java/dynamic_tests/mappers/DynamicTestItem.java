@@ -5,21 +5,16 @@ package dynamic_tests.mappers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.DynamicContainer;
 
 import dynamic_tests.elements.IncludedElements;
-import dynamic_tests.elements.test_elements.DynamicTestFactory;
-import dynamic_tests.elements.test_elements.ElementTest;
-import dynamic_tests.elements.test_elements.TestElement;
 import object_models.pages.homepage.HomePage;
 import site_mapper.jaxb.containers.Container;
 import site_mapper.jaxb.containers.Node;
 import site_mapper.jaxb.containers.TreeVisitor;
 import site_mapper.jaxb.containers.TreeWalker;
 import site_mapper.jaxb.menu_items.MenuItem;
-import site_mapper.jaxb.pom.Element;
 
 /**
  * @author SteveBrown
@@ -36,15 +31,8 @@ public class DynamicTestItem implements TreeVisitor {
 	private List<TestNode> testNodes = new ArrayList<>();
 	private MenuItem item;
 	private List<DynamicContainer> menuItemTests;
-	private DynamicTestFactory testFactory = new DynamicTestFactory();
 	private HomePage hp;
 	
-	/** 
-	 * @param includedElements: all elements that are included in the test.
-	 * @param item: menu item from xml.
-	 * @param menuItemTests: List of tests for the item. 
-	 * @param hp: Home page.
-	 */
 	public DynamicTestItem(
 			IncludedElements includedElements, MenuItem item,	
 			List<DynamicContainer> menuItemContainers, HomePage hp) {
@@ -89,53 +77,12 @@ public class DynamicTestItem implements TreeVisitor {
 		return (children != null && children.size() > 0 ) ? true : false;
 	}
 
-//	public void addTests() {		
-//		if(testNodes != null) {			
-//			testNodes.forEach(tn -> {
-//				List<Element> els = tn.getElements();
-//				if(els != null) {
-//					els.forEach(el -> {
-//						if(includedElements.isIncluded(el.getElementType())) {
-//							ElementTest elTest = new ElementTest(tn, hp, item, el);
-//							testFactory.addElementSpecificTestsTo(elTest, el);
-//							addTestToItemContainer(elTest);
-//						}	
-//					});							
-//				}											
-//			});	
-//		}		
-//	}
 	public void addTests() {		
-		if(testNodes != null) 
-			addElementTestsForEachTestNode();		
-	}
-	
-	private void addElementTestsForEachTestNode() {
-		testNodes.forEach(tn -> addTestsForElements(tn));	
-	}
-		
-	private void addTestsForElements(TestNode tn) {
-		List<Element> els = tn.getElements();
-		if(els != null) {
-			els.forEach(el -> addTestForElement(tn, el));							
-		}			
-	}
-	
-	private void addTestForElement(TestNode tn, Element el) {
-		if(includedElements.isIncluded(el.getElementType())) {
-			ElementTest elTest = new ElementTest(tn, hp, item, el);
-			testFactory.addElementSpecificTestsTo(elTest, el);
-			addTestToItemContainer(elTest);
+		if(testNodes != null) {
+			NodeTestsCreator nodeTests = 
+					new NodeTestsCreator(testNodes, includedElements, item, hp, menuItemTests);
+			nodeTests.addElementTestsForEachTestNode();
 		}
 	}
-	
-	private void addTestToItemContainer(ElementTest t) {		
-		menuItemTests.add(
-				DynamicContainer.dynamicContainer(getKey(t), t.getTestList()));		
-	}
 		
-	private String getKey(TestElement e) {
-		return e.getType() + "." + e.getName();
-	}
-	
 }
