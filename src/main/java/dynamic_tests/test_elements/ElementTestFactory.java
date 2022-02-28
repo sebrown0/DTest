@@ -1,7 +1,7 @@
 /**
  * 
  */
-package dynamic_tests.elements.test_elements;
+package dynamic_tests.test_elements;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,6 +13,7 @@ import org.junit.jupiter.api.DynamicTest;
 
 import controls.Control;
 import controls.ControlTestData;
+import dynamic_tests.test_adders.TestAdderWithData;
 
 /**
  * @author SteveBrown

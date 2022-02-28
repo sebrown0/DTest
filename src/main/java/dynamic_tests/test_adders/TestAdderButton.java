@@ -1,8 +1,9 @@
 /**
  * 
  */
-package dynamic_tests.elements.test_elements;
+package dynamic_tests.test_adders;
 
+import dynamic_tests.test_elements.ElementTestFactory;
 import site_mapper.elements.ElementCreation;
 import site_mapper.elements.ElementDetails;
 
@@ -12,12 +13,12 @@ import site_mapper.elements.ElementDetails;
  * 	Initial
  * @since 1.0
  */
-public class ElementTestButton implements TestAdder {	
+public class TestAdderButton implements TestAdder {	
 	private String text;
 	private String fafa;	
 	private String toolTipText;
 	
-	public ElementTestButton(ElementCreation e) {				
+	public TestAdderButton(ElementCreation e) {				
 		text = e.getText();
 		fafa = e.getFafa();
 		toolTipText = ((ElementDetails)e).getToolTipText();		

@@ -1,8 +1,10 @@
 /**
  * 
  */
-package dynamic_tests.elements.test_elements;
+package dynamic_tests.test_elements;
 
+import dynamic_tests.test_adders.TestAdderButton;
+import dynamic_tests.test_adders.TestAdderTextOut;
 import site_mapper.elements.ElementCreation;
 
 /**
@@ -21,10 +23,10 @@ public class DynamicTestFactory {
 
 		switch (elType) {
 			case "Button" -> {
-				test.addTests(new ElementTestButton(el));
+				test.addTests(new TestAdderButton(el));
 			}
 			case "TextSelect", "TextOut" -> {
-				test.addTests(new ElementTestTextOut(el));						
+				test.addTests(new TestAdderTextOut(el));						
 			}
 			default -> { 
 				test = null;

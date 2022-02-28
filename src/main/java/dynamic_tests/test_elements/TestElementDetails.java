@@ -1,7 +1,7 @@
 /**
  * 
  */
-package dynamic_tests.elements.test_elements;
+package dynamic_tests.test_elements;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import org.junit.jupiter.api.DynamicTest;
  * Methods required from ElementTest.
  * 
  */
-public interface TestElement {
+public interface TestElementDetails {
 	String getName();
 	String getType();
 	List<DynamicTest> getTestList();

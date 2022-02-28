@@ -1,8 +1,9 @@
 /**
  * 
  */
-package dynamic_tests.elements.test_elements;
+package dynamic_tests.test_adders;
 
+import dynamic_tests.test_elements.ElementTestFactory;
 import site_mapper.elements.ElementCreation;
 import site_mapper.jaxb.pom.test_data.TestDataIn;
 import site_mapper.jaxb.pom.test_data.TestDataOut;
@@ -21,11 +22,11 @@ import site_mapper.jaxb.pom.test_data.TestDataOut;
  * 	Pass the container that has the control test.
  * @since 1.0
  */
-public class ElementTestTextOut implements TestAdderWithData {
+public class TestAdderTextOut implements TestAdderWithData {
 	private TestDataIn dataIn;
 	private TestDataOut dataOut;
 
-	public ElementTestTextOut(ElementCreation el) {
+	public TestAdderTextOut(ElementCreation el) {
 		this.dataIn = el.getTestDataIn();
 		this.dataOut = el.getTestDataOut();
 	}

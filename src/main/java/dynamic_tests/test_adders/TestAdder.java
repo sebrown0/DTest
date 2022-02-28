@@ -1,7 +1,9 @@
 /**
  * 
  */
-package dynamic_tests.elements.test_elements;
+package dynamic_tests.test_adders;
+
+import dynamic_tests.test_elements.ElementTestFactory;
 
 /**
  * @author SteveBrown

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package dynamic_tests.elements.test_elements;
+package dynamic_tests.test_elements;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DynamicTest;
 import controls.Control;
 import dynamic_tests.elements.ControlFinder;
 import dynamic_tests.mappers.TestNode;
+import dynamic_tests.test_adders.TestAdder;
 import object_models.pages.homepage.HomePage;
 import site_mapper.elements.ElementCreation;
 import site_mapper.jaxb.menu_items.MenuItem;
@@ -23,8 +24,11 @@ import site_mapper.jaxb.menu_items.MenuItem;
  * @version 1.1
  * 	Pass the container that has the control test.
  * @since 1.0
+ * 
+ * Is a bridge between the Element(SiteMapper -> POM) 
+ * and the test(s) for the element.
  */
-public class ElementTest implements TestElement {
+public class ElementTest implements TestElementDetails {
 	private String elName;
 	private String type;
 	private List<DynamicTest> testList = new ArrayList<>();	
@@ -50,15 +54,15 @@ public class ElementTest implements TestElement {
 		return controlFinder.getControl();
 	}
 
-	@Override //TestElement
+	@Override //TestElementDetails
 	public String getName() {
 		return elName;
 	}
-	@Override //TestElement
+	@Override //TestElementDetails
 	public String getType() {
 		return type;
 	}
-	@Override //TestElement
+	@Override //TestElementDetails
 	public List<DynamicTest> getTestList() {
 		return testList;
 	}

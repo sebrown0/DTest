@@ -8,9 +8,9 @@ import java.util.List;
 import org.junit.jupiter.api.DynamicContainer;
 
 import dynamic_tests.elements.IncludedElements;
-import dynamic_tests.elements.test_elements.DynamicTestFactory;
-import dynamic_tests.elements.test_elements.ElementTest;
-import dynamic_tests.elements.test_elements.TestElement;
+import dynamic_tests.test_elements.DynamicTestFactory;
+import dynamic_tests.test_elements.ElementTest;
+import dynamic_tests.test_elements.TestElementDetails;
 import object_models.pages.homepage.HomePage;
 import site_mapper.jaxb.menu_items.MenuItem;
 import site_mapper.jaxb.pom.Element;
@@ -18,7 +18,12 @@ import site_mapper.jaxb.pom.Element;
 /**
  * @author SteveBrown
  * @version 1.0
+ *  Initial
  * @since 1.0
+ * 
+ * Add the specific tests for each 
+ * test node in the item, 
+ * i.e. all the tests for a button in an input group.
  */
 public class NodeTestsCreator {
 
@@ -66,7 +71,7 @@ public class NodeTestsCreator {
 				DynamicContainer.dynamicContainer(getKey(t), t.getTestList()));		
 	}
 		
-	private String getKey(TestElement e) {
+	private String getKey(TestElementDetails e) {
 		return e.getType() + "." + e.getName();
 	}
 }
