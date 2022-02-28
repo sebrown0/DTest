@@ -5,11 +5,14 @@ package control_builder;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.Map.Entry;
 
 import org.apache.logging.log4j.LogManager;
 
 import control_builder.control_getters.ControlGetter;
+import controls.Button;
 import controls.Control;
+import controls.ControlGroup;
 import controls.ControlName;
 
 /**
@@ -57,6 +60,20 @@ public class PageControl {
 
 	public Map<String, ControlGetter> getControls() {
 		return controls;
+	}
+
+	public ControlGetter findFirst(String prnt, String child) {
+		ControlGetter controlGetter = null;
+//		boolean found = false;
+//		while(found == false) {
+//			
+//		}
+		for(Entry<String, ControlGetter> entry : controls.entrySet()) {
+			var v = entry.getValue();
+			System.out.println("->"); // TODO - remove or log 	
+		}
+		
+		return controlGetter;
 	}
 	
 }

@@ -17,7 +17,7 @@ import controls.getters.ElementGetter;
  * 	Initial
  * @since 1.0
  */
-public class TextOut implements Control, DisplayedText {
+public class TextOut implements Control, InsertText, DisplayedText {
 	private WebDriver driver;
 	private By locator;
 	private WebElement text;
@@ -76,5 +76,10 @@ public class TextOut implements Control, DisplayedText {
 	@Override //Control
 	public WebElement getElement() {
 		return text;
+	}
+
+	@Override //InsertText
+	public void insertText(String text) {
+		
 	}
 }

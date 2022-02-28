@@ -17,7 +17,8 @@ import object_models.pages.homepage.CoreData;
  * @since 1.0
  */
 public abstract class ControlGetterGroup extends ControlGetter {
-
+	protected List<ControlGetter> cntrls;
+	
 	public ControlGetterGroup(String name, CoreData coreData) {
 		super(name, coreData);				
 	}
@@ -25,5 +26,12 @@ public abstract class ControlGetterGroup extends ControlGetter {
 		super(name, coreData, findBy);				
 	}
 	
-	public abstract ControlGetterGroup addControls(List<ControlGetter> cntrls);	
+	public ControlGetterGroup addControls(List<ControlGetter> cntrls) {
+		this.cntrls = cntrls;
+		return this;
+	}
+	public List<ControlGetter> getControls() {
+		return cntrls;
+	}
+	
 }

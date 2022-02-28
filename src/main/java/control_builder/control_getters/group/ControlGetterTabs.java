@@ -3,11 +3,8 @@
  */
 package control_builder.control_getters.group;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
 
-import control_builder.control_getters.ControlGetter;
 import controls.Control;
 import controls.ControlGroup;
 import controls.adders.TabGroupAdder;
@@ -21,23 +18,16 @@ import object_models.pages.homepage.CoreData;
  *
  */
 public final class ControlGetterTabs extends ControlGetterGroup {
-	private List<ControlGetter> tabs;
-		
+	
 	public ControlGetterTabs(String name, CoreData coreData, By findBy) {
 		super(name, coreData, findBy);				
-	}
-
-	@Override
-	public ControlGetterGroup addControls(List<ControlGetter> tabs) {
-		this.tabs = tabs;
-		return this;
 	}
 	
 	@Override
 	public Control getControl() {
 		return 
 			new ControlGroup(driver, findBy)
-				.addElements(tabs, new TabGroupAdder());
+				.addElements(cntrls, new TabGroupAdder());
 	}
 
 }

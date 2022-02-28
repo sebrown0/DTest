@@ -62,7 +62,9 @@ public class ElementTestFactory {
 					 * 
 					 * -> WE NEED INTERFACE GetControlData CLASS DropDownControlData.
 					 */
-					String textActual = ControlTestData.getControlText(cntrl);
+					
+//					String textActual = ControlTestData.getControlText(cntrl);
+//					testData.getTestDataIn();
 					//get list or text!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //					assertEquals(testData.getTestDataOut().getText(), textActual);
 //					assertEquals(testData.getTestDataOut().getValue().getValue(), textActual);

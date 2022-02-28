@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import control_builder.PageControl;
 import controls.Button;
 import controls.ComboSelectFromList;
 import controls.ControlGroup;
@@ -58,8 +59,12 @@ class Control_Tests {
 	}
 
 	@Test
-	void asjkkkkkkkk() {
-//		salDetails.grade();
+	void getEmployeeList() {
+		PageControl pageControl = salDetails.getPanelControl();
+		final String PARENT = "EmpLookup";
+		final String CHILD = "EmployeeList";
+		
+		pageControl.findFirst(PARENT, CHILD);
 	}
 	@Test
 	void ZZZZZZZZZZZZZZZZZZZget_reasonFrom_SalDetails() {
