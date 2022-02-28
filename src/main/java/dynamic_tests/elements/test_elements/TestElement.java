@@ -1,7 +1,7 @@
 /**
  * 
  */
-package dynamic_tests.elements;
+package dynamic_tests.elements.test_elements;
 
 import java.util.List;
 

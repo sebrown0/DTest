@@ -10,7 +10,9 @@ import java.util.Optional;
 import org.junit.jupiter.api.DynamicContainer;
 
 import dynamic_tests.elements.IncludedElements;
-import dynamic_tests.elements.TestElement;
+import dynamic_tests.elements.test_elements.DynamicTestFactory;
+import dynamic_tests.elements.test_elements.ElementTest;
+import dynamic_tests.elements.test_elements.TestElement;
 import object_models.pages.homepage.HomePage;
 import site_mapper.jaxb.containers.Container;
 import site_mapper.jaxb.containers.Node;
@@ -34,7 +36,8 @@ public class DynamicTestItem implements TreeVisitor {
 	private List<TestNode> testNodes = new ArrayList<>();
 	private MenuItem item;
 	private List<DynamicContainer> menuItemTests;
-	private DynamicTestFactory testFactory;
+	private DynamicTestFactory testFactory = new DynamicTestFactory();
+	private HomePage hp;
 	
 	/** 
 	 * @param includedElements: all elements that are included in the test.
@@ -49,7 +52,7 @@ public class DynamicTestItem implements TreeVisitor {
 		this.includedElements = includedElements;
 		this.menuItemTests = menuItemContainers;
 		this.item = item;
-		this.testFactory = new DynamicTestFactory(hp, item);
+		this.hp = hp;
 		
 		getElements();
 	}
@@ -86,27 +89,49 @@ public class DynamicTestItem implements TreeVisitor {
 		return (children != null && children.size() > 0 ) ? true : false;
 	}
 
-	public void addTests() {
-		if(testNodes != null) {			
-			testNodes.forEach(tn -> {
-				List<Element> els = tn.getElements();
-				if(els != null) {
-					els.forEach(el -> {
-						if(includedElements.isIncluded(el.getElementType())) {
-							addTestToItemContainer(
-									testFactory.getTest(tn, el)
-							);
-						}	
-					});							
-				}											
-			});	
-		}		
+//	public void addTests() {		
+//		if(testNodes != null) {			
+//			testNodes.forEach(tn -> {
+//				List<Element> els = tn.getElements();
+//				if(els != null) {
+//					els.forEach(el -> {
+//						if(includedElements.isIncluded(el.getElementType())) {
+//							ElementTest elTest = new ElementTest(tn, hp, item, el);
+//							testFactory.addElementSpecificTestsTo(elTest, el);
+//							addTestToItemContainer(elTest);
+//						}	
+//					});							
+//				}											
+//			});	
+//		}		
+//	}
+	public void addTests() {		
+		if(testNodes != null) 
+			addElementTestsForEachTestNode();		
 	}
-			
-	private void addTestToItemContainer(Optional<TestElement> test) {
-		test.ifPresent(t -> {	
-			menuItemTests.add(DynamicContainer.dynamicContainer(getKey(t), t.getTestList())); 
-		});
+	
+	private void addElementTestsForEachTestNode() {
+		testNodes.forEach(tn -> addTestsForElements(tn));	
+	}
+		
+	private void addTestsForElements(TestNode tn) {
+		List<Element> els = tn.getElements();
+		if(els != null) {
+			els.forEach(el -> addTestForElement(tn, el));							
+		}			
+	}
+	
+	private void addTestForElement(TestNode tn, Element el) {
+		if(includedElements.isIncluded(el.getElementType())) {
+			ElementTest elTest = new ElementTest(tn, hp, item, el);
+			testFactory.addElementSpecificTestsTo(elTest, el);
+			addTestToItemContainer(elTest);
+		}
+	}
+	
+	private void addTestToItemContainer(ElementTest t) {		
+		menuItemTests.add(
+				DynamicContainer.dynamicContainer(getKey(t), t.getTestList()));		
 	}
 		
 	private String getKey(TestElement e) {

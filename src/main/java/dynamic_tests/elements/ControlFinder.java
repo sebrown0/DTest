@@ -33,7 +33,7 @@ public class ControlFinder {
 		this.name = name;
 	}
 
-	protected Optional<Control> getControl() {
+	public Optional<Control> getControl() {
 		Optional<Control> cntrl = null;
 		List<String> prntNames = testNode.getPrntNames();
 		ControlTest cntrlTest = loadTestsContainerAndGetAsControlTest();

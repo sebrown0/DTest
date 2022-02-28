@@ -19,7 +19,7 @@ import controls.getters.ElementGetter;
  * Where there are select boxes that cannot select,
  * or don't have a list to select from.
  */
-public class TextSelect implements Control {
+public class TextSelect implements Control, DisplayedText {
 	private WebElement text;
 	private WebDriver driver;
 	private By locator;

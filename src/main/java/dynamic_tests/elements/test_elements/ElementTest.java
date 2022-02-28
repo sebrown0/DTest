@@ -1,7 +1,7 @@
 /**
  * 
  */
-package dynamic_tests.elements;
+package dynamic_tests.elements.test_elements;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.DynamicTest;
 
 import controls.Control;
+import dynamic_tests.elements.ControlFinder;
 import dynamic_tests.mappers.TestNode;
 import object_models.pages.homepage.HomePage;
 import site_mapper.elements.ElementCreation;
@@ -63,7 +64,7 @@ public class ElementTest implements TestElement {
 	}
 		
 	/*
-	 * DON'T DELETE FOR TEST METHOD.
+	 * DON'T DELETE - FOR TEST METHOD.
 	 */
 //	//can the item be passed????????????????????????????????????????????
 //	protected void addTestMethod(String methodType, CoreData coreData) {

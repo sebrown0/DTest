@@ -1,10 +1,11 @@
 /**
  * 
  */
-package dynamic_tests.elements;
+package dynamic_tests.elements.test_elements;
 
 import site_mapper.elements.ElementCreation;
-import site_mapper.jaxb.pom.ElementTestData;
+import site_mapper.jaxb.pom.test_data.TestDataIn;
+import site_mapper.jaxb.pom.test_data.TestDataOut;
 
 /**
  * @author SteveBrown
@@ -21,8 +22,8 @@ import site_mapper.jaxb.pom.ElementTestData;
  * @since 1.0
  */
 public class ElementTestTextOut implements TestAdderWithData {
-	private ElementTestData dataIn;
-	private ElementTestData dataOut;
+	private TestDataIn dataIn;
+	private TestDataOut dataOut;
 
 	public ElementTestTextOut(ElementCreation el) {
 		this.dataIn = el.getTestDataIn();
@@ -36,24 +37,25 @@ public class ElementTestTextOut implements TestAdderWithData {
 	}
 	
 	private void checkDataIn() {
-		if(dataIn != null) {
-			System.out.println("NEED TO INPUT THIS DATA!!");
-			if(dataIn.getText() != null) {
-				System.out.println(dataIn.getText()); // TODO - remove or log 	
-			}else if (dataIn.getList() != null) {
-				dataIn.getList().forEach(item -> System.out.println(item));
-			}else {
-				System.out.println("NO DATA FOUND!"); // TODO - remove or log 	
-			}
-		}
+		//THIS IS A VALUE CHECKER FOR EITHER TEXT OR LIST... ETC.
+//		if(dataIn != null) {
+//			System.out.println("NEED TO INPUT THIS DATA!!");
+//			if(dataIn.getTestData()) != null) {
+//				System.out.println(dataIn.getText()); // TODO - remove or log 	
+//			}else if (dataIn.getList() != null) {
+//				dataIn.getList().forEach(item -> System.out.println(item));
+//			}else {
+//				System.out.println("NO DATA FOUND!"); // TODO - remove or log 	
+//			}
+//		}
 	}
 
 	@Override
-	public ElementTestData getTestDataIn() {
+	public TestDataIn getTestDataIn() {
 		return dataIn;
 	}
 	@Override
-	public ElementTestData getTestDataOut() {
+	public TestDataOut getTestDataOut() {
 		return dataOut;
 	}
 

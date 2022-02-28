@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE document 
-    [    
+    [ 
+      <!ENTITY formId SYSTEM 
+        'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/header/FormId.xml'>     
       <!ENTITY empListBtn SYSTEM 
         'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/header/EmpListButton.xml'>    
       <!ENTITY existingGridViewBtn SYSTEM 
@@ -70,7 +72,7 @@
   <IncludeElementsForTest>
     <Include>Button</Include>
     <Include>TextSelect</Include>
-    <!-- <Include>text_out</Include> -->
+    <Include>TextOut</Include>
   </IncludeElementsForTest>
   
   <Modules>
@@ -147,6 +149,7 @@
           <HeaderElements>
             <Container type="InputGroup" name="EmpLookup">
               <Locator by="css" text="div[class='input-group']"/>
+              &formId;
               &empListBtn;
               <Element>
                 <Details type="Button" name="SalaryHistory" text="" fafa="fa fa-list"/>
@@ -174,8 +177,7 @@
                
           <BodyElements>
             <Container type="Tabs" name="Tabs">
-              <Locator by="css" text="ul[class='nav nav-tabs']"/>
-              
+              <Locator by="css" text="ul[class='nav nav-tabs']"/>              
               <Container type="Tab" name="SalaryDetails">
                 <Locator by="css" text="a[id='tab-tab1']"/>
                 <Element>
@@ -211,8 +213,7 @@
             </Container>    
           </FooterElements>      
            
-        </MenuItem>           
-                   
+        </MenuItem>                              
       </Menu>
     </Menus>
    </Module>

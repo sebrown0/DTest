@@ -1,22 +1,26 @@
 package object_models.modules.payroll.left_menu.employees;
 
-import java.util.Arrays;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import java.util.List;
-
+import java.util.Arrays;
 import org.openqa.selenium.By;
-
-import control_builder.control_data.ControlData;
+import control_builder.*;
+import site_mapper.annotations.SiteMap;
+import org.junit.jupiter.api.DynamicTest;
+import dynamic_tests.annotations.TestControl;
 import control_builder.control_getters.ControlGetter;
 import control_builder.control_getters.group.ControlGetterGroup;
-import control_builder.control_getters.group.ControlGetterInputGroup;
-import control_builder.control_getters.group.ControlGetterRow;
-import control_builder.control_getters.group.ControlGetterTab;
-import control_builder.control_getters.group.ControlGetterTabs;
-import control_builder.control_getters.single.ControlGetterButton;
-import control_builder.control_getters.single.ControlGetterTextSelect;
-import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
-import site_mapper.annotations.SiteMap;
+import control_builder.control_data.ControlData;
+import object_models.pages.homepage.CoreData;
+import control_builder.control_getters.single.ControlGetterTextOut;
+import control_builder.control_getters.single.ControlGetterButton;
+import control_builder.control_getters.group.ControlGetterInputGroup;
+import control_builder.control_getters.group.ControlGetterTabs;
+import control_builder.control_getters.single.ControlGetterTextSelect;
+import control_builder.control_getters.group.ControlGetterTab;
+import control_builder.control_getters.group.ControlGetterRow;
 
 /**
 * Generated Class.
@@ -24,25 +28,27 @@ import site_mapper.annotations.SiteMap;
 * Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
 * Author:  SteveBrown
 * Version: 1.0.0
-* Created: 24/02/2022 15:41:14
+* Created: 28/02/2022 07:55:17
 */
 
 public class SalaryDetails extends JsPanelWithIFrame {
-	@SiteMap(author="SteveBrown", version="1.0.0", date="24/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="28/02/2022")
 	public static final String PANEL_TITLE = "Employee Salary Details";
-	@SiteMap(author="SteveBrown", version="1.0.0", date="24/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="28/02/2022")
 	public static final String MENU_TITLE = "Salary Details";
-	@SiteMap(author="SteveBrown", version="1.0.0", date="24/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="28/02/2022")
 	public static final String MENU_PARENT_NAME = "Employees";
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="24/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="28/02/2022")
 	public SalaryDetails(CoreData coreData){
 		super(coreData, PANEL_TITLE);
 		buildMyControls();
 	}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="24/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="28/02/2022")
 	private void buildMyControls() {
+		ControlGetter formID =
+			new ControlGetterTextOut("FormID", coreData, By.id("FORM_ID"));
 		ControlGetter employeeList =
 			new ControlGetterButton("EmployeeList", coreData, By.cssSelector("div[title='Search Employee']"));
 		ControlGetter salaryHistory =
@@ -83,7 +89,7 @@ public class SalaryDetails extends JsPanelWithIFrame {
 				.addControls(Arrays.asList(calendar));
 		ControlGetterGroup empLookup =
 			new ControlGetterInputGroup("EmpLookup", coreData, By.cssSelector("div[class='input-group']"))
-				.addControls(Arrays.asList(employeeList, salaryHistory, combos, gridView, existingRecords));
+				.addControls(Arrays.asList(formID, employeeList, salaryHistory, combos, gridView, existingRecords));
 		var myControls =
 			List.of(
 				new ControlData(empLookup),
