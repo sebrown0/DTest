@@ -36,10 +36,14 @@ import object_models.panels.JsPanelHeaderBar;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
  * @since 1.0
  *
  */
-public abstract class FormModal implements ContainerAction, ContextSetter, ContextIdGetter, StateFactorySetter{
+public abstract class FormModal implements 
+	ContainerAction, ContextSetter, ContextIdGetter, 
+	StateFactorySetter {
+	
 	protected WebDriver driver;
 	protected ContextManager contextManager;
 	protected PageTitle title;

@@ -36,17 +36,26 @@ public final class EmployeeSelection extends FormWithIFrame implements Control, 
 		super(coreData, PANEL_TITLE, "_iframex-IPORTAL_HR_EMPLOYEEDETAILS_EXT");
 
 		this.locator = locator;
-//		super.switchToIFrame();		
 		setMyContainers();		
 	}
 		
-	public void clickRow(String rowNum) {				
-		setTable(); //Have to load the table again as the results have changed.
-		WebElement rw = table.findElement(By.id("RIZZ" + rowNum));
-		rw.click();
+	public void selectRow(String rowNum) {
+		// Have to load the table again as the results may have changed.
+		setTable(); 
+		if(!rowSelected(rowNum)) {			
+			closeForm();
+		}
 		contextManager.deleteCurrentContextAndRevertToCallingContext();
 	}
 		
+	private boolean rowSelected(String rowNum) {
+		return new RowSelector().selectRow(table, rowNum); 
+	}
+	
+	private void closeForm() {
+		super.close();
+	}
+	
 	// Elements
 	public ComboSelectFromOptions companySelect() {
 		return getSelectBox("SelectURLNC1");
@@ -55,7 +64,7 @@ public final class EmployeeSelection extends FormWithIFrame implements Control, 
 	public ComboSelectFromOptions filterSelect() {
 		return getSelectBox("SelectURLNCA2");
 	}	
-	
+	 	
 	public TextSelect getSearchThisCompany() { 
 		return 
 			new TextSelect(
@@ -102,7 +111,7 @@ public final class EmployeeSelection extends FormWithIFrame implements Control, 
 	}
 
 	@Override //SelectEmployee
-	public void ByCode(EmpSelectorBy selectBy) {
+	public void UsingSelector(EmpSelectorBy selectBy) {
 		selectBy.selectEmployee();
 	}
 }

@@ -11,7 +11,7 @@ import controls.Button;
 import logging.TestResultLogger;
 import object_models.left_menu.common.LeftMenu;
 import object_models.modal_forms.emp_selection.EmployeeSelection;
-import object_models.modal_forms.emp_selection.SelectEmpByCode;
+import object_models.modal_forms.emp_selection.SelectEmpBySurname;
 import object_models.modal_forms.emp_selection.SelectEmployee;
 import object_models.modules.payroll.left_menu.employees.SalaryDetails;
 import object_models.pages.UserLoginPage;
@@ -61,6 +61,6 @@ class EmployeeSelection_Tests {
 	@Test
 	void askj() {
 		SelectEmployee selEmp = empSelection;
-		selEmp.ByCode(new SelectEmpByCode(empSelection, "Borg"));
+		selEmp.UsingSelector(new SelectEmpBySurname(empSelection, "Borg"));
 	}
 }

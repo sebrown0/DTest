@@ -96,7 +96,7 @@ public abstract class JsPanel implements
 		builder.addControls(panelControls);
 		panelControl = new PageControl(builder);		
 	}
-			
+		
 	/*
 	 * Causing errors, if the panel fails to load this could be the cause.
 	 */

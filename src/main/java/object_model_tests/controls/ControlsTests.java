@@ -69,7 +69,7 @@ class ControlsTests {
 	@Test @Order(1)
 	void employeeSelection_selectEmployee() {
 		EmployeeSelection empSelection = (EmployeeSelection) empDetailsPageControl.getControl(GroupControlNames.SELECT_EMP).get();
-		empSelection.clickRow("3");		
+		empSelection.selectRow("3");		
 		assertEquals("0134213A", empDetails.tab().basicDetails().iDCardNumber().getTextByValue());				
 	}	
 	@Test @Order(2)
