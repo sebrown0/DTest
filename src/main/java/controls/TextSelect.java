@@ -48,6 +48,7 @@ public class TextSelect implements Control, DisplayedText {
 		elTextSelect.sendKeys(Keys.ENTER);
 	}
 	
+	@Override //DisplayedText
 	public String getText() {
 		try {
 			WebElement option = elTextSelect.findElement(By.cssSelector("option[value*='java']"));			
@@ -57,6 +58,7 @@ public class TextSelect implements Control, DisplayedText {
 		}
 		return "";
 	}	
+	
 	
 	@Override //Control
 	public boolean isAvailable() {

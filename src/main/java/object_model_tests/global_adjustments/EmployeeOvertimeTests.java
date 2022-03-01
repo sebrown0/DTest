@@ -89,7 +89,8 @@ public class EmployeeOvertimeTests {
 	
 	@Test @Order(2)
 	void setCriteriaForEmployee_implictPass_ifCompletes() {
-		ComboWriteAndSelect cmbPayGroup = (ComboWriteAndSelect) globalAdjustments.getControl(PayrollControlNames.PAY_GROUP).get();
+		ComboWriteAndSelect cmbPayGroup = 
+				(ComboWriteAndSelect) globalAdjustments.getControl(PayrollControlNames.PAY_GROUP).get();
 		cmbPayGroup.click();		
 		cmbPayGroup.selectFullText(emp.getPayGroup());
 		

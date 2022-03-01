@@ -47,9 +47,12 @@ public class TextGetter {
 	}
 	
 	private String tryToGetTextByDifferentMethods() throws StaleElementReferenceException {
-		String res = elContainer.getAttribute("innerHTML");
+		String res = elContainer.getAttribute("value");
 		if(res == null || res.length() <= 0) {
-			res = elContainer.getAttribute("value");
+			res = elContainer.getAttribute("title");
+			if(res == null || res.length() <= 0) {
+				res = elContainer.getAttribute("innerHTML");
+			}
 		}
 		return res;
 	}

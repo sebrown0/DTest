@@ -3,11 +3,14 @@
  */
 package controls;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import controls.getters.TextGetter;
+import controls.reset.ReloadContainer;
 import object_models.element.ListBox;
 import object_models.pages.homepage.CoreData;
 
@@ -21,7 +24,7 @@ import object_models.pages.homepage.CoreData;
  * @since 1.0
  * 
  */
-public class ComboSelectFromList extends Combo {
+public class ComboSelectFromList extends Combo implements DisplayedTextList, ReloadContainer {
 	private By resultsBy;
 	private ListBox listBox;
 	
@@ -41,6 +44,22 @@ public class ComboSelectFromList extends Combo {
 			listBox = new ListBox(driver, resultsBy);
 		}
 		return listBox.getAlert();
+	}
+
+	@Override //DisplayedText
+	public String getText() {
+		return new TextGetter(getComboElement(), this).getText();
+	}
+
+	@Override //DisplayedTextList
+	public List<String> getTextList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override //ReloadContainer
+	public WebElement reloadContainer() {
+		return getComboElement();
 	}
 	
 }

@@ -83,6 +83,30 @@ public class ElementTestFactory {
 		return this;
 	}
 	
+	public ElementTestFactory createTextCheck_XXX(TestAdderWithData testData) {
+		testList.add(
+			DynamicTest.dynamicTest(
+				"Is [" + elName +"] text correct?", 
+				() -> {			
+					TestDataInput dataInserter = 
+							new TestDataInput(testData.getTestDataIn(), controlTest);
+					dataInserter.insertData();
+							
+					/*
+					 * this will have to be different for DisplayedText & DisplayedTextList
+					 */
+					String textActual = ControlTestData.getControlText(cntrl);
+					TestDataOut dataOut = testData.getTestDataOut();
+					if(dataOut != null) {
+						//this will have to be checked for Text or List!!!!!!!!!!!
+						assertEquals(dataOut.getTestData().getValue(), textActual);	
+					}else {
+						fail("No input data to compare with actual data.");
+					}					 	
+				}));
+		return this;
+	}
+	
 	public ElementTestFactory createToolTipCheck(String toolTipText) {
 		if(toolTipText != null && toolTipText.length()>0) {
 			testList.add(

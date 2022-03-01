@@ -8,11 +8,10 @@ import org.openqa.selenium.By;
 import context_manager.ContextManager;
 import control_builder.control_data.ControlData;
 import control_builder.control_getters.single.ControlGetterButton;
-import control_builder.control_getters.single.ControlGetterComboSelectOnly;
 import control_builder.control_getters.single.ControlGetterComboWriteAndSelect;
 import control_builder.control_getters.single.ControlGetterGrid;
-import control_builder.control_getters.single.ControlGetterTextSelect;
 import control_builder.control_getters.single.ControlGetterTextOut;
+import control_builder.control_getters.single.ControlGetterTextSelect;
 import controls.ControlName;
 import enums.control_names.CommonControlNames;
 import object_models.dk_grid.KeyStrategyRow;
@@ -54,14 +53,14 @@ public class ControlDataFactory {
 		return this;
 	}
 		
-	public ControlDataFactory buildComboSelectOnly(ControlName cntrlName, By containerLoc, By resultLoc) {		
-		controlData = 
-				new ControlData(
-						cntrlName, 
-						new ControlGetterComboSelectOnly(cntrlName.getName(), coreData, containerLoc, resultLoc));
-		
-		return this;
-	}
+//	public ControlDataFactory buildComboSelectOnly(ControlName cntrlName, By containerLoc, By resultLoc) {		
+//		controlData = 
+//				new ControlData(
+//						cntrlName, 
+//						new ControlGetterComboSelectOnly(cntrlName.getName(), coreData, containerLoc, resultLoc));
+//		
+//		return this;
+//	}
 	
 	public ControlDataFactory buildDefaultComboWriteAndSelect(ControlName cntrlName, By containerLoc, By resultLoc) {
 		TextWriterComboDefault writer = new TextWriterComboDefault(coreData);
