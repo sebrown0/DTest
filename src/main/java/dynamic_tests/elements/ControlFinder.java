@@ -60,26 +60,6 @@ public class ControlFinder {
 	public ControlTest getControlsClass() {
 		return cntrlTest;
 	}
-	
-//	public Optional<Control> getControl() {
-//		Optional<Control> cntrl = null;
-//		List<String> prntNames = testNode.getPrntNames();
-//		ControlTest cntrlTest = loadTestsContainerAndGetAsControlTest();
-//
-//		//should always be at least one name (the element's node)
-//		if(prntNames != null) {
-//			int idx = 0;
-//			String prntName = prntNames.get(idx);
-//			ControlGroup grp = (ControlGroup) cntrlTest.getControl(prntName).get();
-//			while(prntName != null && idx < prntNames.size()-1) {				
-//				idx++;
-//				prntName = prntNames.get(idx);
-//				grp = (ControlGroup) grp.getControlByTitle(prntName).get();				
-//			}
-//			cntrl = grp.getControlByTitle(name);			
-//		}
-//		return cntrl;
-//	}
 
 	private ControlTest loadTestsContainerAndGetAsControlTest() {		
 		if(controlTest == null) {

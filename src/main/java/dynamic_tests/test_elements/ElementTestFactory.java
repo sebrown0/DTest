@@ -16,6 +16,7 @@ import controls.ControlTest;
 import controls.ControlTestData;
 import dynamic_tests.elements.ControlFinder;
 import dynamic_tests.test_adders.TestAdderWithData;
+import dynamic_tests.test_data.TestDataInserter_XXXX;
 import site_mapper.jaxb.pom.test_data.TestDataOut;
 
 /**
@@ -69,7 +70,12 @@ public class ElementTestFactory {
 		testList.add(
 			DynamicTest.dynamicTest(
 				"Is [" + elName +"] text correct?", 
-				() -> {					
+				() -> {			
+					TestDataInserter_XXXX dataInserter = 
+							new TestDataInserter_XXXX(testData.getTestDataIn(), this);
+					dataInserter.insertData();
+							
+							
 					String textActual = ControlTestData.getControlText(cntrl);
 					TestDataOut dataOut = testData.getTestDataOut();
 					if(dataOut != null) {

@@ -17,6 +17,14 @@ import site_mapper.jaxb.pom.test_data.TestDataIn;
  * @version 1.0
  * 	Initial
  * @since 1.0
+ * 
+ * Get an object [TestDataInserter] for inserting data 
+ * into a control before a test.
+ * 
+ * All implementations of [TestDataInserter] must 
+ * have a constructor that accepts:
+ * 	ControlTest: the parent control, i.e. JsPanel.
+ *  String: the data to insert.  
  */
 public class DataInserterFactory {
 	private static final Logger LOGGER = 
@@ -34,7 +42,7 @@ public class DataInserterFactory {
 			if(clazz != null) {
 				Constructor<?> cnstr = getConstructor(clazz);	
 				if(cnstr != null) {
-					dataInsert = getDataInserter(cnstr, controlTest);
+					dataInsert = getDataInserter(cnstr, controlTest, dataIn.getTestData().getValue());
 				}
 			}
 		}
@@ -69,10 +77,12 @@ public class DataInserterFactory {
 		return cnstr;
 	}
 	
-	private static TestDataInserter getDataInserter(Constructor<?> cnstr, ControlTest controlTest) {
+	private static TestDataInserter getDataInserter(
+		Constructor<?> cnstr, ControlTest controlTest, String insertValue) {
+		
 		TestDataInserter dataInsert = null; 
 		try {
-			dataInsert = (TestDataInserter) cnstr.newInstance(controlTest, "Test");
+			dataInsert = (TestDataInserter) cnstr.newInstance(controlTest, insertValue);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			LOGGER.error("Could not get new instance of clazz");
 		}

@@ -31,15 +31,13 @@ public class ElementTest implements TestElementDetails {
 	private String type;
 	private List<DynamicTest> testList = new ArrayList<>();	
 	private ControlFinder controlFinder;
-//	private MenuItem item;
-	
+
 	public ElementTest(
 		TestNode testNode, HomePage hp, 
 		MenuItem item, ElementCreation e) {
 
 		this.type = e.getElementType();
 		this.elName = e.getElementName();
-//		this.item = item;
 		
 		controlFinder = new ControlFinder(testNode, hp, item, elName);
 	}
