@@ -34,18 +34,20 @@ public class DataInserterFactory {
 		ControlTest controlTest, TestDataIn dataIn) {
 		
 		TestDataInserter dataInsert = null;
-		
-		var insertWith = dataIn.getInsertWith();
-		if(insertWith != null) {
-			writeInitialLogMsg(insertWith);			
-			Class<?> clazz = getClass(insertWith);
-			if(clazz != null) {
-				Constructor<?> cnstr = getConstructor(clazz);	
-				if(cnstr != null) {
-					dataInsert = getDataInserter(cnstr, controlTest, dataIn.getTestData().getValue());
+
+		if(dataIn != null) {
+			var insertWith = dataIn.getInsertWith();
+			if(insertWith != null) {
+				writeInitialLogMsg(insertWith);			
+				Class<?> clazz = getClass(insertWith);
+				if(clazz != null) {
+					Constructor<?> cnstr = getConstructor(clazz);	
+					if(cnstr != null) {
+						dataInsert = getDataInserter(cnstr, controlTest, dataIn.getTestData().getValue());
+					}
 				}
-			}
-		}
+			}	
+		}		
 		return dataInsert;
 	}
 	

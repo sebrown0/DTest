@@ -37,7 +37,7 @@ public class ArgumentChecker {
 	public ArgumentChecker withArgs(String[] args) throws InvalidArgumentException{
 		this.args = args;
 		if(args.length != 2) {
-			throw new InvalidArgumentException(getErrMsg());
+			throw new InvalidArgumentException(ArgumentChecker.class, getErrMsg());
 		}else {
 			moduleName = capitalliseFirstChar(args[0]);
 			testFileName = capitalliseFirstChar(args[1]);	
@@ -61,7 +61,7 @@ public class ArgumentChecker {
 		if(allArgsOk()) {
 			return Optional.of(new AppArguments(moduleName, testFileName, testPackage));
 		}else {
-			throw new InvalidArgumentException(getErrMsg());
+			throw new InvalidArgumentException(ArgumentChecker.class, getErrMsg());
 		}
 	}
 	

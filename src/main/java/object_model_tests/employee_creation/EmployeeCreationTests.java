@@ -83,8 +83,8 @@ class EmployeeCreationTests {
 		// Open employee details and check the code.
 		EmployeeDetails empDetails = (EmployeeDetails) homepage.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
 		TextOut empDetailsCode = (TextOut) empDetails.getPanelControl().getControl(EmployeeControlNames.EMP_CODE).get();		
-		assertFalse(empDetailsCode.getTextByValue().equals(randomEmpCode));
-		assertTrue(empDetailsCode.getTextByValue().equalsIgnoreCase(randomEmpCode));
+		assertFalse(empDetailsCode.getText().equals(randomEmpCode));
+		assertTrue(empDetailsCode.getText().equalsIgnoreCase(randomEmpCode));
 		empDetails.close();
 	}
 
@@ -103,8 +103,8 @@ class EmployeeCreationTests {
 		// Open employee details and check the code.
 		EmployeeDetails empDetails = (EmployeeDetails) homepage.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
 		TextOut empDetailsCode = (TextOut) empDetails.getPanelControl().getControl(EmployeeControlNames.EMP_CODE).get();
-		assertFalse(empDetailsCode.getTextByValue().equals(randomEmpCode));
-		assertTrue(empDetailsCode.getTextByValue().equalsIgnoreCase(randomEmpCode + "_space"));
+		assertFalse(empDetailsCode.getText().equals(randomEmpCode));
+		assertTrue(empDetailsCode.getText().equalsIgnoreCase(randomEmpCode + "_space"));
 		empDetails.close();
 	}
 	
@@ -123,8 +123,8 @@ class EmployeeCreationTests {
 		// Open employee details and check the code.
 		EmployeeDetails empDetails = (EmployeeDetails) homepage.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
 		TextOut empDetailsCode = (TextOut) empDetails.getPanelControl().getControl(EmployeeControlNames.EMP_CODE).get();
-		assertFalse(empDetailsCode.getTextByValue().equals(randomEmpCode));
-		assertEquals(randomEmpCode + "_M", empDetailsCode.getTextByValue());
+		assertFalse(empDetailsCode.getText().equals(randomEmpCode));
+		assertEquals(randomEmpCode + "_M", empDetailsCode.getText());
 		empDetails.close();
 		/*
 		 * LAST TEST CLOSE APP

@@ -10,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import controls.getters.ElementGetter;
+import controls.getters.TextGetter;
+import controls.reset.ReloadContainer;
 
 /**
  * @author SteveBrown
@@ -17,19 +19,19 @@ import controls.getters.ElementGetter;
  * 	Initial
  * @since 1.0
  */
-public class TextOut implements Control, DisplayedText {
+public class TextOut implements Control, DisplayedText, ReloadContainer {
 	private WebDriver driver;
 	private By locator;
 	private WebElement text;
 	private Logger logger = LogManager.getLogger(this.getClass());
-		
+			
 	public TextOut(WebDriver driver, By findBy) {
 		this.driver = driver;
 		this.locator = findBy;
 		
 		setTextOut();		
 	}	
-
+	
 	private void setTextOut() {
 		try {
 			this.text = driver.findElement(locator);	
@@ -38,25 +40,11 @@ public class TextOut implements Control, DisplayedText {
 		}
 	}
 	
-	public String getTextByValue() {
-		try {
-			return text.getAttribute("value");
-		} catch (Exception e) {
-			logger.error("Could not get text by value");
-		}
-		return "";
-	}	
-	
 	@Override //DisplayedText
 	public String getText() {
-		try {
-			return text.getAttribute("innerHTML");
-		} catch (Exception e) {
-			logger.error("Could not get text by value");
-		}
-		return "";
+		return new TextGetter(text, this).getText();
 	}
-
+		
 	@Override //Control
 	public boolean isAvailable() {
 		text = new ElementGetter(driver).getElementIfClickable(this);
@@ -75,6 +63,12 @@ public class TextOut implements Control, DisplayedText {
 
 	@Override //Control
 	public WebElement getElement() {
+		return text;
+	}
+
+	@Override //ReloadContainer
+	public WebElement reloadContainer() {
+		setTextOut();
 		return text;
 	}
 

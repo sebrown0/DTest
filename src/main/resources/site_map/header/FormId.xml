@@ -4,6 +4,9 @@
   <Locator by="id" text="FORM_ID"/>   
   <TestDataIn insertWith="EmployeeLookupByName">                     
     <Text value="Borg"/>
-  </TestDataIn>  
+  </TestDataIn>
+  <TestDataOut>                     
+    <Text value="0123456M"/>
+  </TestDataOut>    
   <Function isDefaultPass="true"/>
 </Element>

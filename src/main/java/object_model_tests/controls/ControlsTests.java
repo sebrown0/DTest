@@ -75,7 +75,8 @@ class ControlsTests {
 	@Test @Order(2)
 	void textOut_checkCode() {
 		TextOut textOut = (TextOut) empDetailsPageControl.getControl(EmployeeControlNames.EMP_CODE).get();
-		assertEquals(emp.getEmpCode(), textOut.getTextByValue());		
+//		assertEquals(emp.getEmpCode(), textOut.getTextByValue());		
+		assertEquals(emp.getEmpCode(), textOut.getText());
 	}	
 	@Test @Order(3)
 	void openCombos() {		

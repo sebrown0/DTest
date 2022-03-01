@@ -80,13 +80,13 @@ class EmployeeDetailsTests {
 	void checkCode() {
 		PageControl control = empDetails.getPanelControl();
 		TextOut textOut = (TextOut) control.getControl(EmployeeControlNames.EMP_CODE).get();
-		assertEquals(emp.getEmpCode(), textOut.getTextByValue());		
+		assertEquals(emp.getEmpCode(), textOut.getText());		
 	}	
 	@Test @Order(3)
 	void checkEmployeeName() {
 		PageControl control = empDetails.getPanelControl();
 		TextOut textOut = (TextOut) control.getControl(EmployeeControlNames.EMP_NAME).get();
-		assertEquals(emp.getFullName(), textOut.getTextByValue().trim());
+		assertEquals(emp.getFullName(), textOut.getText().trim());
 	}
 	@Test @Order(4)
 	void openCombos() {		

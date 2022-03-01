@@ -15,9 +15,9 @@ import org.apache.logging.log4j.Logger;
 public class InvalidArgumentException extends Exception {
 	private static final long serialVersionUID = 1L;
 	
-	public InvalidArgumentException(String errMsg) {
+	public InvalidArgumentException(Class<?> clazz, String errMsg) {
 		super(errMsg);
-		Logger logger = LogManager.getLogger(this.getClass().getSimpleName());	
+		Logger logger = LogManager.getLogger(clazz.getClass());	
 		logger.info(errMsg);
 	}
 }

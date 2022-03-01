@@ -3,11 +3,6 @@
  */
 package dynamic_tests.test_adders;
 
-import java.util.Optional;
-
-import controls.ControlTest;
-import controls.data_inserters.DataInserterFactory;
-import controls.data_inserters.TestDataInserter;
 import dynamic_tests.test_elements.ElementTestFactory;
 import site_mapper.elements.ElementCreation;
 import site_mapper.jaxb.pom.test_data.TestDataIn;
@@ -25,36 +20,19 @@ public class TestAdderTextOut implements TestAdderWithData {
 
 	public TestAdderTextOut(ElementCreation el) {
 		this.dataIn = el.getTestDataIn();
-		//check if needed!!!!!!!!!!!!!!!!!!
 		this.dataOut = el.getTestDataOut();
 	}
 
-	@Override
+	@Override //TestAdder
 	public void addTestsWith(ElementTestFactory testFactory) {
-//		checkDataIn(testFactory);
 		testFactory.createTextCheck(this);
 	}
 	
-//	private void checkDataIn(ElementTestFactory testFactory) {		
-//		if(dataIn != null) {
-//			getDataInserter(testFactory)
-//				.ifPresent(inserter -> inserter.insertData());
-//		}
-//	}
-	
-//	private Optional<TestDataInserter> getDataInserter(ElementTestFactory testFactory) {
-//		ControlTest controlTest = testFactory.getControlTest();
-//		return	
-//			Optional.ofNullable(
-//					DataInserterFactory.getDataInserter(controlTest, dataIn));
-//	}
-	
-	
-	@Override
+	@Override //TestAdderWithData
 	public TestDataIn getTestDataIn() {
 		return dataIn;
 	}
-	@Override
+	@Override //TestAdderWithData
 	public TestDataOut getTestDataOut() {
 		return dataOut;
 	}
