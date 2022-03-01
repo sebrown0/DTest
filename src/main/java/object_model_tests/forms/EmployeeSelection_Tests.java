@@ -2,9 +2,12 @@ package object_model_tests.forms;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import control_builder.control_getters.single.ControlGetterEmployeeSelection;
 import controls.Button;
@@ -21,6 +24,15 @@ import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
+/**
+ * @author SteveBrown
+ * @version 1.0
+ * 	Initial
+ * @since 1.0
+ * 
+ * Test the different ways of selecting
+ * an employee from the employee selection form.
+ */
 @ExtendWith({ 
 	ConfigParameterResolver.class, 
 	TestResultLogger.class, 
@@ -53,14 +65,22 @@ class EmployeeSelection_Tests {
 		
 	}
 	
+	@AfterAll
+	public static void teardown() {
+		hp.close();
+	}
+	
 	@Test
 	void test() {
 		assertTrue(empSelection != null);
 	}
 
 	@Test
-	void askj() {
+	void test_bySurname() {
 		SelectEmployee selEmp = empSelection;
 		selEmp.UsingSelector(new SelectEmpBySurname(empSelection, "Borg"));
+		
+		WebElement res = hp.getWebDriver().findElement(By.cssSelector("input[name='XNAME']"));
+		assertTrue(res.getAttribute("value").contains("Borg"));
 	}
 }

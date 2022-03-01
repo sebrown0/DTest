@@ -33,6 +33,7 @@ public class TestNode {
 		this.name = name;
 		this.elements = elements;
 		addParentName();
+		
 	}
 	// Child with no elements.
 	public TestNode(String name, TestNode parent) {

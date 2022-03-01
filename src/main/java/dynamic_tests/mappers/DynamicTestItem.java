@@ -41,7 +41,7 @@ public class DynamicTestItem implements TreeVisitor {
 		this.menuItemTests = menuItemContainers;
 		this.item = item;
 		this.hp = hp;
-		
+		 	
 		getElements();
 	}
 	
@@ -80,7 +80,8 @@ public class DynamicTestItem implements TreeVisitor {
 	public void addTests() {		
 		if(testNodes != null) {
 			NodeTestsCreator nodeTests = 
-					new NodeTestsCreator(testNodes, includedElements, item, hp, menuItemTests);
+				new NodeTestsCreator(
+					testNodes, includedElements, item, hp, menuItemTests);
 			nodeTests.addElementTestsForEachTestNode();
 		}
 	}

@@ -5,11 +5,9 @@ package dynamic_tests.test_elements;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.DynamicTest;
 
-import controls.Control;
 import dynamic_tests.elements.ControlFinder;
 import dynamic_tests.mappers.TestNode;
 import dynamic_tests.test_adders.TestAdder;
@@ -33,6 +31,7 @@ public class ElementTest implements TestElementDetails {
 	private String type;
 	private List<DynamicTest> testList = new ArrayList<>();	
 	private ControlFinder controlFinder;
+//	private MenuItem item;
 	
 	public ElementTest(
 		TestNode testNode, HomePage hp, 
@@ -40,20 +39,17 @@ public class ElementTest implements TestElementDetails {
 
 		this.type = e.getElementType();
 		this.elName = e.getElementName();
+//		this.item = item;
 		
 		controlFinder = new ControlFinder(testNode, hp, item, elName);
 	}
 
 	public void addTests(TestAdder testAdder) {
 		ElementTestFactory testFactory = 
-			new ElementTestFactory(testList, elName, getControl());
+			new ElementTestFactory(testList, elName, controlFinder);
 		testAdder.addTestsWith(testFactory);
 	}
 	
-	protected Optional<Control> getControl() {
-		return controlFinder.getControl();
-	}
-
 	@Override //TestElementDetails
 	public String getName() {
 		return elName;

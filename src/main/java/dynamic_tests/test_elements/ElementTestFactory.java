@@ -4,7 +4,7 @@
 package dynamic_tests.test_elements;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,8 +12,11 @@ import java.util.Optional;
 import org.junit.jupiter.api.DynamicTest;
 
 import controls.Control;
+import controls.ControlTest;
 import controls.ControlTestData;
+import dynamic_tests.elements.ControlFinder;
 import dynamic_tests.test_adders.TestAdderWithData;
+import site_mapper.jaxb.pom.test_data.TestDataOut;
 
 /**
  * @author SteveBrown
@@ -24,14 +27,31 @@ import dynamic_tests.test_adders.TestAdderWithData;
 public class ElementTestFactory {
 	private List<DynamicTest> testList;
 	private String elName;
-	private Optional<Control> cntrl;
+	private ControlFinder cntrlFinder;
+	
+	private Optional<Control> cntrl;	
+	private ControlTest controlTest;
 	
 	public ElementTestFactory(
-		List<DynamicTest> testList, String elName, Optional<Control> cntrl) {
-		
-		this.testList = testList;
-		this.elName = elName;		
-		this.cntrl = cntrl;
+			List<DynamicTest> testList, 
+			String elName, 
+			ControlFinder cntrlFinder) {
+			
+			this.testList = testList;
+			this.elName = elName;
+			this.cntrlFinder = cntrlFinder;			
+
+			getControlAndParent();
+		}
+	
+	private void getControlAndParent() {
+		this.cntrl = cntrlFinder.loadControl().getControl();
+		this.controlTest = cntrlFinder.getControlsClass();
+	}
+	//check if we need this in here or goes straight
+	//to the TestAdder??????????????????????????????
+	public ControlTest getControlTest() {
+		return controlTest;
 	}
 	
 	public ElementTestFactory createTextCheck(String textExpected) {
@@ -49,26 +69,15 @@ public class ElementTestFactory {
 		testList.add(
 			DynamicTest.dynamicTest(
 				"Is [" + elName +"] text correct?", 
-				() -> {							
-					/*
-					 * 1) Have to get the data, is it list or text?
-					 * 2) Is there input data? If so we have to put it in! 
-					 * 			A) If it's text we can (try to) put it into the control, i.e. text box.
-					 * 			B) If it's a list HAVE TO HAVE AN INPUT METHOD FROM XML!!
-					 * 3) Is there output data? If so we have to get it!
-					 * 			A) If it's text we can (try to) get it from the control.
-					 * 			B) If it's a list HAVE TO HAVE A GET METHOD FROM XML!!
-					 * 					i) For a dropdown this is span[class='select2-results']//ul[class='select2-results__options'] -> li
-					 * 
-					 * -> WE NEED INTERFACE GetControlData CLASS DropDownControlData.
-					 */
-					
-//					String textActual = ControlTestData.getControlText(cntrl);
-//					testData.getTestDataIn();
-					//get list or text!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//					assertEquals(testData.getTestDataOut().getText(), textActual);
-//					assertEquals(testData.getTestDataOut().getValue().getValue(), textActual);
-					assertTrue(true);
+				() -> {					
+					String textActual = ControlTestData.getControlText(cntrl);
+					TestDataOut dataOut = testData.getTestDataOut();
+					if(dataOut != null) {
+						//this will have to be checked for Text or List!!!!!!!!!!!
+						assertEquals(dataOut.getTestData().getValue(), textActual);	
+					}else {
+						fail("No input data to compare with actual data.");
+					}					 	
 				}));
 		return this;
 	}

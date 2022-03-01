@@ -9,16 +9,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import control_builder.PageControl;
 import controls.ControlGroup;
-import controls.InsertText;
 import controls.TextOut;
-import dynamic_tests.test_adders.TestAdderTextOut;
-import dynamic_tests.test_adders.TestAdderWithData;
-import dynamic_tests.test_data.TestDataVerifier;
 import logging.TestResultLogger;
 import object_models.left_menu.common.LeftMenu;
-import object_models.modules.payroll.left_menu.employees.EmployeeDetails;
 import object_models.modules.payroll.left_menu.employees.SalaryDetails;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
@@ -41,11 +35,10 @@ import xml_reader.config_file.ConfigReader;
 	TestResultLogger.class, 
 	LoginPageResolverPayroll.class })
 class TestDataTests {
-	private static SalaryDetails salDetails;
-	private static PageControl pageControl;
-	
+	private static SalaryDetails salDetails;	
 	private static Element el = new Element();
 	private static TestDataIn dataIn = new TestDataIn();
+	
 	@BeforeAll
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
 		HomePage homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());		
@@ -56,9 +49,10 @@ class TestDataTests {
 				.clickAndLoad(SalaryDetails.class)
 				.get();
 
-		pageControl = salDetails.getPanelControl();
+		dataIn
+			.setTestData(new TestDataText().setValue("some test data [in]"))
+			.setInsertWith("EmployeeLookupByName");
 		
-		dataIn.setTestData(new TestDataText().setValue("some test data [in]"));
 		el
 			.setName("FormId")
 			.setType("TextOut")
@@ -76,19 +70,20 @@ class TestDataTests {
 		TextOut formId = (TextOut) grp.getControlByTitle("FormID").get();
 		assertTrue(formId != null);
 	}
-	@Test
-	void test() {
-		ControlGroup grp = 
-				(ControlGroup) salDetails
-						.getPanelControl()
-						.getControl("EmpLookup")
-						.get();
-		
-		InsertText formId = (TextOut) grp.getControlByTitle("FormID").get();
-		formId.insertText("");
-		TestAdderWithData textOut = new TestAdderTextOut(el);
-		TestDataVerifier dataVerifier = new TestDataVerifier(textOut);
-		dataVerifier.verifyDataFor();
-	}
+	
+//	@Test
+//	void test() {
+//		ControlGroup grp = 
+//				(ControlGroup) salDetails
+//						.getPanelControl()
+//						.getControl("EmpLookup")
+//						.get();
+//		
+////		InsertText formId = (TextOut) grp.getControlByTitle("FormID").get();
+////		formId.insertText("");
+//		TestAdderWithData textOut = new TestAdderTextOut(el);
+//		TestDataVerifier dataVerifier = new TestDataVerifier(textOut);
+//		dataVerifier.verifyDataFor();
+//	}
 
 }

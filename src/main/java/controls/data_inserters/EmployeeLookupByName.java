@@ -1,11 +1,11 @@
 /**
  * 
  */
-package controls.data_inserters.emp_lookup;
+package controls.data_inserters;
 
 import control_builder.control_getters.single.ControlGetterEmployeeSelection;
 import controls.Button;
-import controls.data_inserters.TestDataInserter;
+import controls.ControlTest;
 import object_models.modal_forms.emp_selection.EmployeeSelection;
 import object_models.modal_forms.emp_selection.SelectEmpBySurname;
 import object_models.modal_forms.emp_selection.SelectEmployee;
@@ -40,8 +40,8 @@ public class EmployeeLookupByName implements TestDataInserter {
 	private EmployeeSelection empSelection;
 	private String empName;
 	
-	public EmployeeLookupByName(JsPanel panel, String empName) {
-		this.panel = panel;
+	public EmployeeLookupByName(ControlTest controlTest, String empName) {
+		this.panel = (JsPanel) controlTest;
 		this.empName = empName;
 	}
 

@@ -25,6 +25,8 @@ public class ControlFinder {
 	private MenuItem item;
 	private HomePage hp;	
 	private ControlTest controlTest;
+	private Optional<Control> cntrl = null;
+	private ControlTest cntrlTest;
 	
 	public ControlFinder(TestNode testNode, HomePage hp, MenuItem item, String name) {		
 		this.testNode = testNode;
@@ -33,10 +35,10 @@ public class ControlFinder {
 		this.name = name;
 	}
 
-	public Optional<Control> getControl() {
-		Optional<Control> cntrl = null;
+	public ControlFinder loadControl() {
 		List<String> prntNames = testNode.getPrntNames();
-		ControlTest cntrlTest = loadTestsContainerAndGetAsControlTest();
+		
+		cntrlTest = loadTestsContainerAndGetAsControlTest();
 
 		//should always be at least one name (the element's node)
 		if(prntNames != null) {
@@ -49,9 +51,35 @@ public class ControlFinder {
 				grp = (ControlGroup) grp.getControlByTitle(prntName).get();				
 			}
 			cntrl = grp.getControlByTitle(name);			
-		}
+		}	
+		return this;
+	}
+	public Optional<Control> getControl() {
 		return cntrl;
 	}
+	public ControlTest getControlsClass() {
+		return cntrlTest;
+	}
+	
+//	public Optional<Control> getControl() {
+//		Optional<Control> cntrl = null;
+//		List<String> prntNames = testNode.getPrntNames();
+//		ControlTest cntrlTest = loadTestsContainerAndGetAsControlTest();
+//
+//		//should always be at least one name (the element's node)
+//		if(prntNames != null) {
+//			int idx = 0;
+//			String prntName = prntNames.get(idx);
+//			ControlGroup grp = (ControlGroup) cntrlTest.getControl(prntName).get();
+//			while(prntName != null && idx < prntNames.size()-1) {				
+//				idx++;
+//				prntName = prntNames.get(idx);
+//				grp = (ControlGroup) grp.getControlByTitle(prntName).get();				
+//			}
+//			cntrl = grp.getControlByTitle(name);			
+//		}
+//		return cntrl;
+//	}
 
 	private ControlTest loadTestsContainerAndGetAsControlTest() {		
 		if(controlTest == null) {

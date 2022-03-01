@@ -12,8 +12,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import controls.data_inserters.EmployeeLookupByName;
 import controls.data_inserters.TestDataInserter;
-import controls.data_inserters.emp_lookup.EmployeeLookupByName;
 import logging.TestResultLogger;
 import object_models.left_menu.common.LeftMenu;
 import object_models.modules.payroll.left_menu.employees.SalaryDetails;
