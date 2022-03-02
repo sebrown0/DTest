@@ -74,6 +74,7 @@
     <Include>TextSelect</Include>
     <Include>TextOut</Include>
     <Include>ComboSelectOnly</Include>    
+    <Include>Label</Include>
   </IncludeElementsForTest>
   
   <Modules>
@@ -81,68 +82,7 @@
    <Module name="payroll">   
     <Menus>
       <Menu name="Left" package="left_menu">
-    <!-- 
-      	<MenuItem name="Employee Details" package="Employees" class="EmployeeDetails">          
-		  <Type name="JsPanelWithIFrame">
-			<JsPanelWithIFrame panelTitle = "Employee Details" /> 
-          </Type>
-          <HeaderElements>
-            &empListBtn;
-            &combosBtn;
-            &existingGridViewBtn;
-            &documentsBtn;
-          </HeaderElements>
-              
-          <BodyElements></BodyElements>
-                
-          <FooterElements>
-            &saveBtn;
-            &searchBtn;
-            &clearBtn;
-            &printBtn;
-          </FooterElements>
-		</MenuItem>
-     
-        <MenuItem name="Contact Numbers" package="Employees" class="ContactNumbers">          
-		  <Type name="JsPanelWithIFrame">
-			<JsPanelWithIFrame panelTitle = "Employee Contact Details" /> 
-		  </Type>         
-          <HeaderElements>
-            &empListBtn;
-            &existingGridViewBtn;
-          </HeaderElements>
-          
-          <BodyElements></BodyElements>
-            
-          <FooterElements>
-            &saveBtn;
-            &clearBtn;
-          </FooterElements>              
-		</MenuItem>
-    
-        <MenuItem name="Banks" package="Employees" class="Banks">          
-          <Type name="JsPanelWithIFrame">
-          <JsPanelWithIFrame panelTitle = "Employee Banks and Unions Details" /> 
-          </Type>         
-            <HeaderElements>
-              &empListBtn;
-              &existingGridViewBtn;
-            </HeaderElements>
-            
-            <BodyElements></BodyElements>
-              
-            <FooterElements>
-              &saveBtn;
-              &clearBtn;
-            </FooterElements>              
-        </MenuItem>
-        -->
-        
-        <!-- ELEMENT NAMES SHOULD PascalCase -->
-        <!-- 
-          ELEMENT TYPES SHOULD PascalCase & MATH THE CONTROL NAME
-          IN  /DTest/src/main/java/controls/...
-        -->
+   
         <MenuItem name="Salary Details" package="Employees" class="SalaryDetails">          
           <Type name="JsPanelWithIFrame">
             <JsPanelWithIFrame panelTitle = "Employee Salary Details" /> 
@@ -182,6 +122,10 @@
               <Container type="Tab" name="SalaryDetails">
                 <Locator by="css" text="a[id='tab-tab1']"/>
                 <Element>
+                  <Details type="Label" name="LabelReason" text="Reason"/>
+                  <Locator by="css" text="label[for='REASON']"/>              
+                </Element>
+                <Element>
                   <Details type="ComboSelectOnly" name="Reason"/>
                   <Locator by="css" text="span[id='select2-REASON-container']"/>
                   <Locator by="css" text="span[id='select2-REASON-results']"/>                      
@@ -212,7 +156,6 @@
               &saveBtn;              
               &deleteBtn;              
               &printBtn;
-              <!--  -->
             </Container>    
           </FooterElements>      
            

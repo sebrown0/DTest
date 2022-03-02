@@ -5,6 +5,7 @@ package dynamic_tests.test_elements;
 
 import dynamic_tests.test_adders.TestAdderButton;
 import dynamic_tests.test_adders.TestAdderComboSelectOnly;
+import dynamic_tests.test_adders.TestAdderLabel;
 import dynamic_tests.test_adders.TestAdderTextOut;
 import site_mapper.elements.ElementCreation;
 
@@ -31,6 +32,9 @@ public class DynamicTestFactory {
 			}
 			case "ComboSelectOnly" -> {
 				test.addTests(new TestAdderComboSelectOnly(el));						
+			}
+			case "Label" -> {
+				test.addTests(new TestAdderLabel(el));						
 			}
 			default -> { 
 				test = null;

@@ -18,6 +18,7 @@ import control_builder.control_getters.single.ControlGetterTextOut;
 import control_builder.control_getters.single.ControlGetterButton;
 import control_builder.control_getters.group.ControlGetterInputGroup;
 import control_builder.control_getters.group.ControlGetterTabs;
+import control_builder.control_getters.single.ControlGetterLabel;
 import control_builder.control_getters.single.ControlGetterComboSelectOnly;
 import control_builder.control_getters.group.ControlGetterTab;
 import control_builder.control_getters.single.ControlGetterTextSelect;
@@ -29,24 +30,24 @@ import control_builder.control_getters.group.ControlGetterRow;
 * Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
 * Author:  SteveBrown
 * Version: 1.0.0
-* Created: 01/03/2022 16:04:22
+* Created: 02/03/2022 12:47:56
 */
 
 public class SalaryDetails extends JsPanelWithIFrame {
-	@SiteMap(author="SteveBrown", version="1.0.0", date="01/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="02/03/2022")
 	public static final String PANEL_TITLE = "Employee Salary Details";
-	@SiteMap(author="SteveBrown", version="1.0.0", date="01/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="02/03/2022")
 	public static final String MENU_TITLE = "Salary Details";
-	@SiteMap(author="SteveBrown", version="1.0.0", date="01/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="02/03/2022")
 	public static final String MENU_PARENT_NAME = "Employees";
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="01/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="02/03/2022")
 	public SalaryDetails(CoreData coreData){
 		super(coreData, PANEL_TITLE);
 		buildMyControls();
 	}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="01/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="02/03/2022")
 	private void buildMyControls() {
 		ControlGetter formID =
 			new ControlGetterTextOut("FormID", coreData, By.id("FORM_ID"));
@@ -62,6 +63,8 @@ public class SalaryDetails extends JsPanelWithIFrame {
 			new ControlGetterButton("ExistingRecords", coreData, By.cssSelector("div[title='Grid View for existing records']"));
 		ControlGetter calendar =
 			new ControlGetterButton("Calendar", coreData, By.cssSelector("i[class='fa fa-calendar fa-fw']"));
+		ControlGetter labelReason =
+			new ControlGetterLabel("LabelReason", coreData, By.cssSelector("label[for='REASON']"));
 		ControlGetter reason =
 			new ControlGetterComboSelectOnly("Reason", coreData, By.cssSelector("span[id='select2-REASON-container']"), By.cssSelector("span[id='select2-REASON-results']"));
 		ControlGetter grade =
@@ -89,7 +92,7 @@ public class SalaryDetails extends JsPanelWithIFrame {
 				.addControls(Arrays.asList(grade));
 		ControlGetterGroup salaryDetails =
 			new ControlGetterTab("SalaryDetails", coreData, By.cssSelector("a[id='tab-tab1']"))
-				.addControls(Arrays.asList(gradeInput, reason));
+				.addControls(Arrays.asList(gradeInput, labelReason, reason));
 		ControlGetterGroup tabs =
 			new ControlGetterTabs("Tabs", coreData, By.cssSelector("ul[class='nav nav-tabs']"))
 				.addControls(Arrays.asList(salaryDetails, remarks));
