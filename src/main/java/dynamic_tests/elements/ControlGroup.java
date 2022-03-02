@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controls;
+package dynamic_tests.elements;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,8 @@ import control_builder.control_getters.ControlGetter;
 import controls.adders.ControlAdder;
 import controls.finder.ControlFinder;
 import controls.getters.ElementGetter;
+import controls.interfaces.Control;
+import controls.interfaces.DisplayedText;
 
 /**
  * @author SteveBrown

@@ -9,7 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import controls.ControlTest;
+import controls.interfaces.ControlTest;
 import site_mapper.jaxb.pom.test_data.TestDataIn;
 
 /**

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controls;
+package controls.combos;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import controls.getters.TextGetter;
+import controls.interfaces.DisplayedTextList;
 import controls.reset.ReloadContainer;
 import object_models.element.ListBox;
 import object_models.pages.homepage.CoreData;

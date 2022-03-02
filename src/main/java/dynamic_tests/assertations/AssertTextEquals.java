@@ -9,9 +9,9 @@ import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 
-import controls.Control;
-import controls.ControlTest;
-import controls.ControlTestData;
+import controls.data.ControlTestData;
+import controls.interfaces.Control;
+import controls.interfaces.ControlTest;
 import dynamic_tests.test_adders.TestAdderWithData;
 import site_mapper.jaxb.pom.test_data.TestDataOut;
 

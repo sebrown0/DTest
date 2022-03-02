@@ -3,7 +3,7 @@
  */
 package enums;
 
-import controls.ControlName;
+import controls.interfaces.ControlName;
 
 /**
  * @author SteveBrown

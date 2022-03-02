@@ -7,10 +7,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import controls.ComboSelectFromOptions;
-import controls.Control;
-import controls.TextSelect;
+import controls.combos.ComboSelectFromOptions;
 import controls.getters.ElementGetter;
+import controls.interfaces.Control;
+import controls.with_text.TextSelect;
 import object_models.forms.FormWithIFrame;
 import object_models.pages.homepage.CoreData;
 

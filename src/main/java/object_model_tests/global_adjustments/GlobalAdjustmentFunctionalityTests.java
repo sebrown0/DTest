@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import controls.Button;
-import controls.ComboSelectFromList;
-import controls.ComboWriteAndSelect;
+import controls.button.Button;
+import controls.combos.ComboSelectFromList;
+import controls.combos.ComboWriteAndSelect;
 import enums.control_names.CommonControlNames;
 import enums.control_names.EmployeeControlNames;
 import enums.control_names.GlobalAdjustmentControlNames;

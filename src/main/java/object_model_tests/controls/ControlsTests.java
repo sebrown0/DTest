@@ -15,7 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import context_manager.ContextManager;
 import control_builder.PageControl;
-import controls.TextOut;
+import controls.with_text.TextOut;
 import dto.Employee;
 import enums.control_names.EmployeeControlNames;
 import enums.control_names.GroupControlNames;

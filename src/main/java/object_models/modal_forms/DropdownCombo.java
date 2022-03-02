@@ -10,8 +10,8 @@ import org.openqa.selenium.WebElement;
 
 import context_manager.ContextId;
 import context_manager.states.StateHeaderForm;
-import controls.Control;
 import controls.getters.ElementGetter;
+import controls.interfaces.Control;
 import object_models.forms.FormHeader;
 import object_models.forms.FormWithIFrame;
 import object_models.helpers.Header;

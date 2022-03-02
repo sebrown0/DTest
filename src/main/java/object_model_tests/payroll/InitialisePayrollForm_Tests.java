@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import controls.TextSelect;
+import controls.with_text.TextSelect;
 import enums.control_names.CommonControlNames;
 import enums.control_names.PayrollControlNames;
 import exceptions.PayrollAlreadyInitialisedException;

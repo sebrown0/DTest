@@ -1,9 +1,14 @@
 /**
  * 
  */
-package controls;
+package controls.data;
 
 import java.util.Optional;
+
+import controls.interfaces.Control;
+import controls.interfaces.DisplayedText;
+import controls.interfaces.HasFaFa;
+import controls.interfaces.HasToolTip;
 
 /**
  * @author SteveBrown

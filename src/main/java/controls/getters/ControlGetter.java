@@ -5,7 +5,7 @@ package controls.getters;
 
 import java.util.Optional;
 
-import controls.Control;
+import controls.interfaces.Control;
 
 /**
  * @author SteveBrown

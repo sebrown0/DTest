@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controls;
+package controls.button;
 
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
@@ -9,6 +9,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import controls.getters.ElementGetter;
+import controls.interfaces.Control;
+import controls.interfaces.DisplayedText;
+import controls.interfaces.HasFaFa;
+import controls.interfaces.HasToolTip;
 
 /**
  * @author SteveBrown
@@ -47,23 +51,11 @@ public class Button implements Control, HasToolTip, HasFaFa, DisplayedText {
 		return res;
 	}
 	
-	/**
-	 * @param el: the current element (btn is the root).
-	 * @param attempts: number of attempts to find title from parent.
-	 * @return the title if found.
-	 * 
-	 * Go through the button's parents recursively until the
-	 * title attribute is found, for n attempts.
-	 */
-	private String getTipFromTitle(WebElement el, int attempts) {
-//		WebElement prnt = el.findElement(By.xpath(".."));		
-//		var title = prnt.getAttribute("title");
-		
+	private String getTipFromTitle(WebElement el, int attempts) {		
 		var title = btn.getAttribute("title");
 		if(title != null && title.length()>0) {
 			return title;				
 		}				
-//		return getTipFromTitle(prnt, --attempts);
 		return "NO TOOL TIP FOUND";
 	}
 	

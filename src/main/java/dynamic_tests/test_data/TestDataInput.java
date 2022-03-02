@@ -5,9 +5,9 @@ package dynamic_tests.test_data;
 
 import java.util.Optional;
 
-import controls.ControlTest;
 import controls.data_inserters.DataInserterFactory;
 import controls.data_inserters.TestDataInserter;
+import controls.interfaces.ControlTest;
 import exceptions.InvalidArgumentException;
 import site_mapper.jaxb.pom.test_data.TestData;
 import site_mapper.jaxb.pom.test_data.TestDataIn;

@@ -13,8 +13,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context_manager.ContextManager;
-import controls.Control;
 import controls.getters.ElementGetter;
+import controls.interfaces.Control;
 import enums.GridButtonNames;
 import object_models.dialog.DialogOkCancel;
 import object_models.dk_grid.buttons.GridButton;

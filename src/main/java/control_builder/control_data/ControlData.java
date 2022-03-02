@@ -4,7 +4,7 @@
 package control_builder.control_data;
 
 import control_builder.control_getters.ControlGetter;
-import controls.ControlName;
+import controls.interfaces.ControlName;
 
 /**
  * @author Steve Brown

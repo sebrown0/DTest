@@ -6,8 +6,8 @@ package controls.getters;
 import java.util.Optional;
 
 import control_builder.PageControl;
-import controls.Control;
-import controls.ControlGroup;
+import controls.interfaces.Control;
+import dynamic_tests.elements.ControlGroup;
 import logging.WriteErrorToLog;
 import object_models.panels.JsPanel;
 

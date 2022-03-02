@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controls;
+package controls.interfaces;
 
 /**
  * @author SteveBrown

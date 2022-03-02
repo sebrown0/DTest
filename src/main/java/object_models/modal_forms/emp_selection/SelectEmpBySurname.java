@@ -3,7 +3,7 @@
  */
 package object_models.modal_forms.emp_selection;
 
-import controls.TextSelect;
+import controls.with_text.TextSelect;
 
 /**
  * @author SteveBrown

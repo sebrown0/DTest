@@ -5,8 +5,8 @@ package object_models.panels;
 
 import java.util.Optional;
 
-import controls.Control;
-import controls.ControlName;
+import controls.interfaces.Control;
+import controls.interfaces.ControlName;
 
 /**
  * @author SteveBrown

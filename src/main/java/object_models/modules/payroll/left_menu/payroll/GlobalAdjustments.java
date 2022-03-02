@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.openqa.selenium.By;
 
 import control_builder.control_getters.single.ControlGetterGrid;
-import controls.Control;
-import controls.ControlName;
+import controls.interfaces.Control;
+import controls.interfaces.ControlName;
 import enums.control_names.CommonControlNames;
 import enums.control_names.EmployeeControlNames;
 import enums.control_names.GlobalAdjustmentControlNames;

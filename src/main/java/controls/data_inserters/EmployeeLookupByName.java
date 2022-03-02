@@ -4,8 +4,8 @@
 package controls.data_inserters;
 
 import control_builder.control_getters.single.ControlGetterEmployeeSelection;
-import controls.Button;
-import controls.ControlTest;
+import controls.button.Button;
+import controls.interfaces.ControlTest;
 import object_models.modal_forms.emp_selection.EmployeeSelection;
 import object_models.modal_forms.emp_selection.SelectEmpBySurname;
 import object_models.modal_forms.emp_selection.SelectEmployee;

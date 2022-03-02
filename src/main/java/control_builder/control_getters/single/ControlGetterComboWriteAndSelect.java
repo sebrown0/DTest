@@ -6,8 +6,8 @@ package control_builder.control_getters.single;
 import org.openqa.selenium.By;
 
 import control_builder.control_getters.ControlGetter;
-import controls.ComboWriteAndSelect;
-import controls.Control;
+import controls.combos.ComboWriteAndSelect;
+import controls.interfaces.Control;
 import object_models.helpers.text_writer.TextWriter;
 import object_models.pages.homepage.CoreData;
 

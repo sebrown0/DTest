@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controls;
+package controls.with_text;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,44 +11,47 @@ import org.openqa.selenium.WebElement;
 
 import controls.getters.ElementGetter;
 import controls.getters.TextGetter;
+import controls.interfaces.Control;
+import controls.interfaces.DisplayedText;
 import controls.reset.ReloadContainer;
 
 /**
  * @author SteveBrown
  * @version 1.0
- * 	Initial
  * @since 1.0
  */
-public class TextOut implements Control, DisplayedText, ReloadContainer {
+public abstract class ControlWithText implements Control, DisplayedText, ReloadContainer {
+
 	private WebDriver driver;
-	private By locator;
-	private WebElement text;
+	private By locator;	
 	private Logger logger = LogManager.getLogger(this.getClass());
+	
+	protected WebElement elContainer;
 			
-	public TextOut(WebDriver driver, By findBy) {
+	public ControlWithText(WebDriver driver, By locator) {
 		this.driver = driver;
-		this.locator = findBy;
+		this.locator = locator;
 		
-		setTextOut();		
+		setElementContainer();		
 	}	
 	
-	private void setTextOut() {
+	private void setElementContainer() {
 		try {
-			this.text = driver.findElement(locator);	
+			this.elContainer = driver.findElement(locator);	
 		} catch (Exception e) {
-			logger.error("Could not find [TextOut] using [" + locator + "]");
+			logger.error("Could not find control using [" + locator + "]");
 		}
 	}
 	
 	@Override //DisplayedText
 	public String getText() {
-		return new TextGetter(text, this).getText();
+		return new TextGetter(elContainer, this).getText();
 	}
 		
 	@Override //Control
 	public boolean isAvailable() {
-		text = new ElementGetter(driver).getElementIfClickable(this);
-		return (text != null) ? true : false;
+		elContainer = new ElementGetter(driver).getElementIfClickable(this);
+		return (elContainer != null) ? true : false;
 	}
 
 	@Override //Control
@@ -63,13 +66,12 @@ public class TextOut implements Control, DisplayedText, ReloadContainer {
 
 	@Override //Control
 	public WebElement getElement() {
-		return text;
+		return elContainer;
 	}
 
 	@Override //ReloadContainer
 	public WebElement reloadContainer() {
-		setTextOut();
-		return text;
+		setElementContainer();
+		return elContainer;
 	}
-
 }

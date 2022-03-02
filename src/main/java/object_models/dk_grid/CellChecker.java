@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import controls.PopupComboSelect;
+import controls.combos.PopupComboSelect;
 import object_models.date_picker.DatePickerPopup;
 import object_models.pages.homepage.CoreData;
 

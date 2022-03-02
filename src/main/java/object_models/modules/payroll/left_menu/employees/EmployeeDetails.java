@@ -7,8 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import context_manager.states.StateIframe;
-import controls.ComboSelectFromList;
-import controls.TextOut;
+import controls.combos.ComboSelectFromList;
+import controls.with_text.TextOut;
 import dynamic_tests.annotations.TestControl;
 import object_models.element.TextInOut;
 import object_models.pages.homepage.CoreData;

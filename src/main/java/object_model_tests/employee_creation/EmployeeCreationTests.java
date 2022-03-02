@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import controls.TextOut;
+import controls.with_text.TextOut;
 import dto.Employee;
 import enums.control_names.EmployeeControlNames;
 import logging.TestResultLogger;

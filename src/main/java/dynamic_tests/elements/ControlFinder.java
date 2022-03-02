@@ -6,9 +6,8 @@ package dynamic_tests.elements;
 import java.util.List;
 import java.util.Optional;
 
-import controls.Control;
-import controls.ControlGroup;
-import controls.ControlTest;
+import controls.interfaces.Control;
+import controls.interfaces.ControlTest;
 import dynamic_tests.mappers.TestNode;
 import object_models.pages.homepage.HomePage;
 import site_mapper.jaxb.menu_items.MenuItem;

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 import control_builder.control_data.ControlData;
 import control_builder.control_getters.ControlGetter;
-import controls.Control;
+import controls.interfaces.Control;
 
 /**
  * @author SteveBrown

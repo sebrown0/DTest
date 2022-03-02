@@ -6,7 +6,7 @@ package object_models.modules.common;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import controls.ComboSelectFromOptions;
+import controls.combos.ComboSelectFromOptions;
 import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
 

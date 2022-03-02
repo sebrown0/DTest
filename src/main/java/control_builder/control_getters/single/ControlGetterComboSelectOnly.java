@@ -6,8 +6,8 @@ package control_builder.control_getters.single;
 import org.openqa.selenium.By;
 
 import control_builder.control_getters.ControlGetter;
-import controls.ComboSelectFromList;
-import controls.Control;
+import controls.combos.ComboSelectFromList;
+import controls.interfaces.Control;
 import object_models.pages.homepage.CoreData;
 
 /**

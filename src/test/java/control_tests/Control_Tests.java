@@ -13,11 +13,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import controls.Button;
-import controls.ComboSelectFromList;
-import controls.ControlGroup;
-import controls.TextOut;
-import controls.TextSelect;
+import controls.button.Button;
+import controls.combos.ComboSelectFromList;
+import controls.with_text.TextOut;
+import controls.with_text.TextSelect;
+import dynamic_tests.elements.ControlGroup;
 import logging.TestResultLogger;
 import object_models.left_menu.common.LeftMenu;
 import object_models.modules.payroll.left_menu.employees.SalaryDetails;

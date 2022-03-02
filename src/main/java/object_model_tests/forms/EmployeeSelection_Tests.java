@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import control_builder.control_getters.single.ControlGetterEmployeeSelection;
-import controls.Button;
+import controls.button.Button;
 import logging.TestResultLogger;
 import object_models.left_menu.common.LeftMenu;
 import object_models.modal_forms.emp_selection.EmployeeSelection;

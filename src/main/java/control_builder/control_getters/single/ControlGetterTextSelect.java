@@ -6,8 +6,8 @@ package control_builder.control_getters.single;
 import org.openqa.selenium.By;
 
 import control_builder.control_getters.ControlGetter;
-import controls.Control;
-import controls.TextSelect;
+import controls.interfaces.Control;
+import controls.with_text.TextSelect;
 import object_models.pages.homepage.CoreData;
 
 /**

@@ -6,7 +6,7 @@ package control_builder.control_getters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import controls.Control;
+import controls.interfaces.Control;
 import object_models.pages.homepage.CoreData;
 
 /**

@@ -3,7 +3,7 @@
  */
 package dynamic_tests.test_elements;
 
-import controls.ControlTest;
+import controls.interfaces.ControlTest;
 import dynamic_tests.test_adders.TestAdderWithData;
 import dynamic_tests.test_data.TestDataInput;
 

@@ -5,9 +5,9 @@ package control_builder.control_getters.group;
 
 import org.openqa.selenium.By;
 
-import controls.Control;
-import controls.ControlGroup;
 import controls.adders.TabGroupAdder;
+import controls.interfaces.Control;
+import dynamic_tests.elements.ControlGroup;
 import object_models.pages.homepage.CoreData;
 
 /**

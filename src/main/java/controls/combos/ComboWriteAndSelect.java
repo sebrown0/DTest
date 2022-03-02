@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controls;
+package controls.combos;
 
 import org.openqa.selenium.By;
 

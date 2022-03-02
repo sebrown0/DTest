@@ -4,8 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import controls.Control;
 import controls.getters.ElementGetter;
+import controls.interfaces.Control;
 import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;
 

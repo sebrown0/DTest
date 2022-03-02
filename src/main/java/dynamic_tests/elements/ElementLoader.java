@@ -5,7 +5,7 @@ package dynamic_tests.elements;
 
 import java.util.Optional;
 
-import controls.ControlTest;
+import controls.interfaces.ControlTest;
 import dynamic_tests.finders.ClassFinder;
 import object_models.pages.homepage.HomePage;
 import site_mapper.elements.ElementClass;
