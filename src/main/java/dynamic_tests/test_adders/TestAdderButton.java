@@ -4,7 +4,6 @@
 package dynamic_tests.test_adders;
 
 import dynamic_tests.test_elements.ElementTestFactory;
-import site_mapper.elements.ElementCreation;
 import site_mapper.elements.ElementDetails;
 
 /**
@@ -13,23 +12,22 @@ import site_mapper.elements.ElementDetails;
  * 	Initial
  * @since 1.0
  */
-public class TestAdderButton implements TestAdder {	
-	private String text;
-	private String fafa;	
+public class TestAdderButton implements TestAdder {		
 	private String toolTipText;
+	private ElementDetails elDetails;
 	
-	public TestAdderButton(ElementCreation e) {				
-		text = e.getText();
-		fafa = e.getFafa();
-		toolTipText = ((ElementDetails)e).getToolTipText();		
+	public TestAdderButton(ElementDetails e) {
+		this.elDetails = e;		
+		toolTipText = e.getToolTipText();		
 	}
 		
 	@Override
 	public void addTestsWith(ElementTestFactory testFactory) {
 		testFactory
-			.createButtonFaFaCheck(fafa)
-			.createTextCheck(text)
-			.createToolTipCheck(toolTipText);		
+			.createTests(
+					new TestAdderTextCheck(elDetails),
+					new TestAdderFaFa(), 
+					new TestAdderToolTip(toolTipText));		
 	}
 	
 }

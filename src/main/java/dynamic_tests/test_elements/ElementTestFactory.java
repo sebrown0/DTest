@@ -6,6 +6,7 @@ package dynamic_tests.test_elements;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,8 @@ import controls.ControlTestData;
 import dynamic_tests.assertations.AssertTextEquals;
 import dynamic_tests.elements.ControlFinder;
 import dynamic_tests.test_adders.TestAdderWithData;
+import dynamic_tests.test_adders.XXTestAdder;
+import site_mapper.elements.ElementDetails;
 
 /**
  * @author SteveBrown
@@ -28,24 +31,53 @@ import dynamic_tests.test_adders.TestAdderWithData;
  */
 public class ElementTestFactory {
 	private List<DynamicTest> testList;
-	private String elName;
+	private ElementDetails elDetails;	
 	private ControlFinder cntrlFinder;
 	
+	private String elName;
 	private Optional<Control> cntrl;	
 	private ControlTest controlTest;
 	private final Logger LOGGER = LogManager.getLogger(ElementTestFactory.class);
 	
+	public void createTests(XXTestAdder...testAdders) {
+		if(testAdders != null) {
+			List<XXTestAdder> adders = Arrays.asList(testAdders);
+			adders.forEach(
+					adder -> 
+						testList.add(
+								adder
+									.setElementName(elName)
+									.setCntrl(cntrl.get())
+									.setElementDetails(elDetails)
+									.setControlTest(controlTest)
+									.addTest()));
+		}
+	}
+
 	public ElementTestFactory(
 			List<DynamicTest> testList, 
-			String elName, 
+			ElementDetails elDetails, 
 			ControlFinder cntrlFinder) {
 			
 			this.testList = testList;
-			this.elName = elName;
+			this.elDetails = elDetails;
+			this.elName = elDetails.getElementName();
 			this.cntrlFinder = cntrlFinder;			
 
 			getControlAndParent();
 		}
+	
+//	public ElementTestFactory(
+//			List<DynamicTest> testList, 
+//			String elName, 
+//			ControlFinder cntrlFinder) {
+//			
+//			this.testList = testList;
+//			this.elName = elName;
+//			this.cntrlFinder = cntrlFinder;			
+//
+//			getControlAndParent();
+//		}
 	
 	private void getControlAndParent() {
 		this.cntrl = cntrlFinder.loadControl().getControl();

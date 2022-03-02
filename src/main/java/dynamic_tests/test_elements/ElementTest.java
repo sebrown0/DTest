@@ -13,6 +13,7 @@ import dynamic_tests.mappers.TestNode;
 import dynamic_tests.test_adders.TestAdder;
 import object_models.pages.homepage.HomePage;
 import site_mapper.elements.ElementCreation;
+import site_mapper.elements.ElementDetails;
 import site_mapper.jaxb.menu_items.MenuItem;
 
 /**
@@ -27,6 +28,8 @@ import site_mapper.jaxb.menu_items.MenuItem;
  * and the test(s) for the element.
  */
 public class ElementTest implements TestElementDetails {
+	private ElementDetails elDetails;
+	
 	private String elName;
 	private String type;
 	private List<DynamicTest> testList = new ArrayList<>();	
@@ -36,6 +39,7 @@ public class ElementTest implements TestElementDetails {
 		TestNode testNode, HomePage hp, 
 		MenuItem item, ElementCreation e) {
 
+		this.elDetails = e;
 		this.type = e.getElementType();
 		this.elName = e.getElementName();
 		
@@ -44,7 +48,7 @@ public class ElementTest implements TestElementDetails {
 
 	public void addTests(TestAdder testAdder) {
 		ElementTestFactory testFactory = 
-			new ElementTestFactory(testList, elName, controlFinder);
+			new ElementTestFactory(testList, elDetails, controlFinder);
 		testAdder.addTestsWith(testFactory);
 	}
 	
