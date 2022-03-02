@@ -20,6 +20,13 @@ import controls.reset.ReloadContainer;
  * If the control is not loaded or stale
  * it's reloaded using ReloadContainer. 
  */
+
+/*
+ * TODO
+ * ----
+ * Make this abstract/interface for different text getters,
+ * i.e. Single line, List etc...
+ */
 public class TextGetter {
 	private WebElement elContainer;
 	private int attempts = 0;

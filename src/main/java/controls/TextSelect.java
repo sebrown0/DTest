@@ -50,6 +50,7 @@ public class TextSelect implements Control, DisplayedText {
 	
 	@Override //DisplayedText
 	public String getText() {
+		//TODO - CHANGE THIS FOR new TextGetter(getComboElement(), this).getText();
 		try {
 			WebElement option = elTextSelect.findElement(By.cssSelector("option[value*='java']"));			
 			return option.getText();

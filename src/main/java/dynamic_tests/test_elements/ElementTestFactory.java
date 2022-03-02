@@ -9,15 +9,16 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.DynamicTest;
 
 import controls.Control;
 import controls.ControlTest;
 import controls.ControlTestData;
+import dynamic_tests.assertations.AssertTextEquals;
 import dynamic_tests.elements.ControlFinder;
 import dynamic_tests.test_adders.TestAdderWithData;
-import dynamic_tests.test_data.TestDataInput;
-import site_mapper.jaxb.pom.test_data.TestDataOut;
 
 /**
  * @author SteveBrown
@@ -32,6 +33,7 @@ public class ElementTestFactory {
 	
 	private Optional<Control> cntrl;	
 	private ControlTest controlTest;
+	private final Logger LOGGER = LogManager.getLogger(ElementTestFactory.class);
 	
 	public ElementTestFactory(
 			List<DynamicTest> testList, 
@@ -55,8 +57,9 @@ public class ElementTestFactory {
 			DynamicTest.dynamicTest(
 				"Is [" + elName +"] text correct?", 
 				() -> {							
-					String textActual = ControlTestData.getControlText(cntrl);
-					assertEquals(textExpected, textActual);
+					new 
+						AssertTextEquals(controlTest, cntrl)
+							.assertTextEquals(textExpected);
 				}));
 		return this;
 	}
@@ -66,43 +69,21 @@ public class ElementTestFactory {
 			DynamicTest.dynamicTest(
 				"Is [" + elName +"] text correct?", 
 				() -> {			
-					TestDataInput dataInserter = 
-							new TestDataInput(testData.getTestDataIn(), controlTest);
-					dataInserter.insertData();
-							
-							
-					String textActual = ControlTestData.getControlText(cntrl);
-					TestDataOut dataOut = testData.getTestDataOut();
-					if(dataOut != null) {
-						//this will have to be checked for Text or List!!!!!!!!!!!
-						assertEquals(dataOut.getTestData().getValue(), textActual);	
-					}else {
-						fail("No input data to compare with actual data.");
-					}					 	
+					TestDataInserter.insertAnyTestData(testData, controlTest);
+					new 
+						AssertTextEquals(controlTest, cntrl)
+							.assertTextEquals(testData); 	
 				}));
 		return this;
 	}
-	
-	public ElementTestFactory createTextCheck_XXX(TestAdderWithData testData) {
+		
+	public ElementTestFactory createTextListCheck(TestAdderWithData testData) {
 		testList.add(
 			DynamicTest.dynamicTest(
 				"Is [" + elName +"] text correct?", 
 				() -> {			
-					TestDataInput dataInserter = 
-							new TestDataInput(testData.getTestDataIn(), controlTest);
-					dataInserter.insertData();
-							
-					/*
-					 * this will have to be different for DisplayedText & DisplayedTextList
-					 */
-					String textActual = ControlTestData.getControlText(cntrl);
-					TestDataOut dataOut = testData.getTestDataOut();
-					if(dataOut != null) {
-						//this will have to be checked for Text or List!!!!!!!!!!!
-						assertEquals(dataOut.getTestData().getValue(), textActual);	
-					}else {
-						fail("No input data to compare with actual data.");
-					}					 	
+					fail("ElementTestFactory.createTextListCheck not implemented.");
+					LOGGER.error("ElementTestFactory.createTextListCheck not implemented.");
 				}));
 		return this;
 	}
