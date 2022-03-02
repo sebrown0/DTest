@@ -105,10 +105,8 @@
                 <ToolTip text="Grid View for this Employee"/>                
                 <Function isDefaultPass="true" />
               </Element>
-              &existingGridViewBtn;
-              <!--               
-              &documentsBtn;
-               -->
+              &existingGridViewBtn;               
+              &documentsBtn;               
             </Container>
             <Container type="InputGroup" name="DatePicker">
               <Locator by="css" text="div[class='input-group date datepicker']"/>v
@@ -121,10 +119,45 @@
               <Locator by="css" text="ul[class='nav nav-tabs']"/>              
               <Container type="Tab" name="SalaryDetails">
                 <Locator by="css" text="a[id='tab-tab1']"/>
+                
+                <!-- LABELS -->
                 <Element>
                   <Details type="Label" name="LabelReason" text="Reason"/>
                   <Locator by="css" text="label[for='REASON']"/>              
                 </Element>
+                <Element>
+                  <Details type="Label" name="LabelGrade" text="Grade"/>
+                  <Locator by="css" text="label[for='GRADE_CODE']"/>              
+                </Element>
+                <Element>
+                  <Details type="Label" name="LabelStepLevel" text="Step Level"/>
+                  <Locator by="css" text="label[for='STEP_LEVEL']"/>              
+                </Element>
+                <Element>
+                  <Details type="Label" name="LabelAnnualSalary" text="Annual Salary"/>
+                  <Locator by="css" text="label[for='ANNUAL_SALARY_FIXED']"/>              
+                </Element>
+                <Element>
+                  <Details type="Label" name="LabelNICategory" text="NI Category"/>
+                  <Locator by="css" text="label[for='NI_CATEGORY']"/>              
+                </Element>
+                <Element>
+                  <Details type="Label" name="LabelIncrement" text="Increment"/>
+                  <Locator by="css" text="label[for='INCREMENT_CODE']"/>              
+                </Element>
+                <Element>
+                  <Details type="Label" name="LabelAnnualSalaryReduced" text="Annual Salary Reduced"/>
+                  <Locator by="css" text="label[for='ANNUAL_SALARY_REDUCED']"/>              
+                </Element>
+                <Element>
+                  <Details type="Label" name="LabelGradeDescription" text="Grade Description"/>
+                  <Locator by="css" text="label[for='GRADE_DESC']"/>              
+                </Element>
+                <Element>
+                  <Details type="Label" name="LabelYear" text="Year"/>
+                  <Locator by="css" text="label[for='INCREMENT_YEAR']"/>              
+                </Element>
+                <!-- CONTROLS  -->
                 <Element>
                   <Details type="ComboSelectOnly" name="Reason"/>
                   <Locator by="css" text="span[id='select2-REASON-container']"/>
@@ -133,6 +166,26 @@
                     <Text value="Starter"/>
                   </TestDataOut>                     
                 </Element>
+                <Element>
+                  <Details type="ComboSelectOnly" name="NICategory"/>
+                  <Locator by="css" text="span[id='select2-NI_CATEGORY-container'"/>
+                  <Locator by="css" text="span[id='select2-NI_CATEGORY-results']"/>                  
+                </Element>
+                <Element>
+                  <Details type="TextOut" name="AnnualSalaryReduced"/>
+                  <Locator by="css" text="input[id='ANNUAL_SALARY_REDUCED']"/>            
+                </Element>
+                <Element>
+                  <Details type="TextOut" name="GradeDesc"/>
+                  <Locator by="css" text="input[id='GRADE_DESC']"/>            
+                </Element>
+                <Element>
+                  <Details type="ComboSelectOnly" name="Year"/>
+                  <Locator by="css" text="span[id='select2-INCREMENT_YEAR-container'"/>
+                  <Locator by="css" text="span[id='select2-INCREMENT_YEAR-results']"/>                  
+                </Element>
+                
+                <!-- GROUPS  -->
                 <Container type="InputGroup" name="GradeInput">
                   <Locator by="xpath" text="//i[@class='fa fa-list']/ancestor::div[@class='input-group']"/>
                   <Element>

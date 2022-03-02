@@ -45,7 +45,7 @@ public class TextGetter {
 			attempts++;
 			try {
 				res = tryToGetTextByDifferentMethods();	
-			}catch(StaleElementReferenceException e) {
+			}catch(StaleElementReferenceException | NullPointerException e) {
 				elContainer = reloader.reloadContainer();
 				getText();
 			}			
@@ -53,7 +53,7 @@ public class TextGetter {
 		return res;
 	}
 	
-	private String tryToGetTextByDifferentMethods() throws StaleElementReferenceException {
+	private String tryToGetTextByDifferentMethods() throws StaleElementReferenceException, NullPointerException {
 		String res = elContainer.getAttribute("value");
 		if(res == null || res.length() <= 0) {
 			res = elContainer.getAttribute("title");

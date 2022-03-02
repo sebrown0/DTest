@@ -4,15 +4,19 @@
 package dynamic_tests.assertations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import controls.data.ControlTestData;
 import controls.interfaces.Control;
 import controls.interfaces.ControlTest;
 import dynamic_tests.test_adders.TestAdderWithData;
+import site_mapper.jaxb.pom.test_data.TestData;
+import site_mapper.jaxb.pom.test_data.TestDataList;
 import site_mapper.jaxb.pom.test_data.TestDataOut;
 
 /**
@@ -33,6 +37,8 @@ public class AssertTextEquals {
 	private Optional<Control> cntrl;
 	private String textActual;
 	
+	private final Logger LOGGER = LogManager.getLogger(AssertTextEquals.class);
+	
 	public AssertTextEquals(ControlTest controlTest, Optional<Control> cntrl) {
 		this.controlTest = controlTest;
 		this.cntrl = cntrl;
@@ -51,22 +57,25 @@ public class AssertTextEquals {
 		assertEquals(expected, textActual);
 	}
 	
-	public void assertTextEquals(TestAdderWithData testData) {
+	public void assertTextEquals(TestAdderWithData testAdder) {
 		setTextActual();
 		
-		TestDataOut dataOut = testData.getTestDataOut();
+		TestDataOut dataOut = testAdder.getTestDataOut();
 		if(dataOut != null) {
-			//this will have to be checked for Text or List!!!!!!!!!!!
-//			assertEquals(dataOut.getTestData().getValue(), textActual);
-			runAssert(dataOut.getTestData().getValue());
+			TestData testData = dataOut.getTestData();
+			if(testData instanceof TestDataList) {
+				LOGGER.error("TestDataList not implemented");
+				assertTrue(false);
+			}else {
+				runAssert(testData.getValue());	
+			}			
 		}else {
-			LogManager.getLogger(AssertTextEquals.class)
+			LOGGER
 				.info(
 					String.format(
 							"No test data to check expected result for [%s - %s]", 
 							controlTest.getClass().getSimpleName(), cntrl.get().getClass().getSimpleName()));
 		}				
 	}
-
 
 }

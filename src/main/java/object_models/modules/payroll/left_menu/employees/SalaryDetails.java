@@ -30,7 +30,7 @@ import control_builder.control_getters.group.ControlGetterRow;
 * Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
 * Author:  SteveBrown
 * Version: 1.0.0
-* Created: 02/03/2022 12:47:56
+* Created: 02/03/2022 14:06:04
 */
 
 public class SalaryDetails extends JsPanelWithIFrame {
@@ -61,12 +61,38 @@ public class SalaryDetails extends JsPanelWithIFrame {
 			new ControlGetterButton("GridView", coreData, By.cssSelector("div[title='Grid View for this Employee']"));
 		ControlGetter existingRecords =
 			new ControlGetterButton("ExistingRecords", coreData, By.cssSelector("div[title='Grid View for existing records']"));
+		ControlGetter documents =
+			new ControlGetterButton("Documents", coreData, By.cssSelector("div[title='No Documents Attached']"));
 		ControlGetter calendar =
 			new ControlGetterButton("Calendar", coreData, By.cssSelector("i[class='fa fa-calendar fa-fw']"));
 		ControlGetter labelReason =
 			new ControlGetterLabel("LabelReason", coreData, By.cssSelector("label[for='REASON']"));
+		ControlGetter labelGrade =
+			new ControlGetterLabel("LabelGrade", coreData, By.cssSelector("label[for='GRADE_CODE']"));
+		ControlGetter labelStepLevel =
+			new ControlGetterLabel("LabelStepLevel", coreData, By.cssSelector("label[for='STEP_LEVEL']"));
+		ControlGetter labelAnnualSalary =
+			new ControlGetterLabel("LabelAnnualSalary", coreData, By.cssSelector("label[for='ANNUAL_SALARY_FIXED']"));
+		ControlGetter labelNICategory =
+			new ControlGetterLabel("LabelNICategory", coreData, By.cssSelector("label[for='NI_CATEGORY']"));
+		ControlGetter labelIncrement =
+			new ControlGetterLabel("LabelIncrement", coreData, By.cssSelector("label[for='INCREMENT_CODE']"));
+		ControlGetter labelAnnualSalaryReduced =
+			new ControlGetterLabel("LabelAnnualSalaryReduced", coreData, By.cssSelector("label[for='ANNUAL_SALARY_REDUCED']"));
+		ControlGetter labelGradeDescription =
+			new ControlGetterLabel("LabelGradeDescription", coreData, By.cssSelector("label[for='GRADE_DESC']"));
+		ControlGetter labelYear =
+			new ControlGetterLabel("LabelYear", coreData, By.cssSelector("label[for='INCREMENT_YEAR']"));
 		ControlGetter reason =
 			new ControlGetterComboSelectOnly("Reason", coreData, By.cssSelector("span[id='select2-REASON-container']"), By.cssSelector("span[id='select2-REASON-results']"));
+		ControlGetter nICategory =
+			new ControlGetterComboSelectOnly("NICategory", coreData, By.cssSelector("span[id='select2-NI_CATEGORY-container'"), By.cssSelector("span[id='select2-NI_CATEGORY-results']"));
+		ControlGetter annualSalaryReduced =
+			new ControlGetterTextOut("AnnualSalaryReduced", coreData, By.cssSelector("input[id='ANNUAL_SALARY_REDUCED']"));
+		ControlGetter gradeDesc =
+			new ControlGetterTextOut("GradeDesc", coreData, By.cssSelector("input[id='GRADE_DESC']"));
+		ControlGetter year =
+			new ControlGetterComboSelectOnly("Year", coreData, By.cssSelector("span[id='select2-INCREMENT_YEAR-container'"), By.cssSelector("span[id='select2-INCREMENT_YEAR-results']"));
 		ControlGetter grade =
 			new ControlGetterTextSelect("Grade", coreData, By.cssSelector("input[id='GRADE_CODE']"));
 		ControlGetter search =
@@ -92,7 +118,7 @@ public class SalaryDetails extends JsPanelWithIFrame {
 				.addControls(Arrays.asList(grade));
 		ControlGetterGroup salaryDetails =
 			new ControlGetterTab("SalaryDetails", coreData, By.cssSelector("a[id='tab-tab1']"))
-				.addControls(Arrays.asList(gradeInput, labelReason, reason));
+				.addControls(Arrays.asList(gradeInput, labelReason, labelGrade, labelStepLevel, labelAnnualSalary, labelNICategory, labelIncrement, labelAnnualSalaryReduced, labelGradeDescription, labelYear, reason, nICategory, annualSalaryReduced, gradeDesc, year));
 		ControlGetterGroup tabs =
 			new ControlGetterTabs("Tabs", coreData, By.cssSelector("ul[class='nav nav-tabs']"))
 				.addControls(Arrays.asList(salaryDetails, remarks));
@@ -101,7 +127,7 @@ public class SalaryDetails extends JsPanelWithIFrame {
 				.addControls(Arrays.asList(calendar));
 		ControlGetterGroup empLookup =
 			new ControlGetterInputGroup("EmpLookup", coreData, By.cssSelector("div[class='input-group']"))
-				.addControls(Arrays.asList(formID, employeeList, salaryHistory, combos, gridView, existingRecords));
+				.addControls(Arrays.asList(formID, employeeList, salaryHistory, combos, gridView, existingRecords, documents));
 		var myControls =
 			List.of(
 				new ControlData(empLookup),
