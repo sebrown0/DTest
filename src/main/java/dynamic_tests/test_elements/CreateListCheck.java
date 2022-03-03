@@ -24,6 +24,7 @@ public class CreateListCheck extends TestCreator {
 	public CreateListCheck(
 		ControlFinder cntrlFinder, List<DynamicTest> testList, 
 		ControlTest controlTest) {
+		
 		super(cntrlFinder, testList, controlTest);
 
 	}

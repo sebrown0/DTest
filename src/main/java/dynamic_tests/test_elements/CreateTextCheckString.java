@@ -19,15 +19,14 @@ import dynamic_tests.elements.ControlFinder;
  */
 public class CreateTextCheckString extends TestCreator {
 	private String textExpected;
-	private ElementTestFactory tf;
 	
 	public CreateTextCheckString(
 		ControlFinder cntrlFinder, List<DynamicTest> testList, 
-		ControlTest controlTest, String textExpected, ElementTestFactory tf) {
+		ControlTest controlTest, String textExpected) {
+		
 		super(cntrlFinder, testList, controlTest);
 
-		this.textExpected = textExpected;
-		this.tf = tf;
+		this.textExpected = textExpected;	
 	}
 	
 	@Override
@@ -36,7 +35,6 @@ public class CreateTextCheckString extends TestCreator {
 		DynamicTest.dynamicTest(
 			"Is [" + elName +"] text correct?", 
 			() -> {
-//				tf.loadItem();
 				getControlAndParent();
 				new 
 					AssertTextEquals(controlTest, cntrl)

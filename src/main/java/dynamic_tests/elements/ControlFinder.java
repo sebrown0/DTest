@@ -36,21 +36,10 @@ public class ControlFinder {
 		this.tf = tf;
 	}
 
-	private void loadConatiner() {
-		if(tf.isItemIsNotLoaded()) {
-			cntrlTest = loadTestsContainerAndGetAsControlTest();
-			tf.setControlTest(cntrlTest);
-			tf.isItemIsNotLoaded(false);
-		}else {
-			cntrlTest = tf.getControlTest();
-		}
-		
-	}
 	public ControlFinder loadControl() {
 		List<String> prntNames = testNode.getPrntNames();
 		//do once for each item
-		loadConatiner();
-
+		loadContainerIfNecessary();
 
 		//should always be at least one name (the element's node)
 		if(prntNames != null) {
@@ -66,22 +55,32 @@ public class ControlFinder {
 		}	
 		return this;
 	}
-	public Optional<Control> getControl() {
-		return cntrl;
+	
+	private void loadContainerIfNecessary() {
+		if(tf.itemIsNotLoaded()) {
+			cntrlTest = loadTestsContainerAndGetAsControlTest();
+			tf.setControlTest(cntrlTest);
+			tf.isItemIsNotLoaded(false);
+		}else {
+			cntrlTest = tf.getControlTest();
+		}		
 	}
-	public ControlTest getControlsClass() {
-		return cntrlTest;
-	}
-
+	
 	private ControlTest loadTestsContainerAndGetAsControlTest() {		
 		if(cntrlTest == null) {
 			cntrlTest = getControlTest();
 		}
 		return cntrlTest;
 	}
-	/////////////
+
 	private ControlTest getControlTest() {
 		return ElementLoader.getControlTest(item, hp);
 	}
 	
+	public Optional<Control> getControl() {
+		return cntrl;
+	}
+	public ControlTest getControlsClass() {
+		return cntrlTest;
+	}
 }

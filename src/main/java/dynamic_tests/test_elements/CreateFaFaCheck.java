@@ -25,6 +25,7 @@ public class CreateFaFaCheck extends TestCreator {
 	public CreateFaFaCheck(
 		ControlFinder cntrlFinder, List<DynamicTest> testList, 
 		ControlTest controlTest, String faFa) {
+		
 		super(cntrlFinder, testList, controlTest);
 
 		this.faFa = faFa;
