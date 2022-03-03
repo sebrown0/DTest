@@ -36,7 +36,7 @@ public class CreateTextCheckString extends TestCreator {
 		DynamicTest.dynamicTest(
 			"Is [" + elName +"] text correct?", 
 			() -> {
-				tf.loadItem();
+//				tf.loadItem();
 				getControlAndParent();
 				new 
 					AssertTextEquals(controlTest, cntrl)

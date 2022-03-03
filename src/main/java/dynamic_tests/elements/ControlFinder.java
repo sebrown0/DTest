@@ -34,13 +34,13 @@ public class ControlFinder {
 		this.name = name;
 	}
 
-	public void loadConatiner() {
+	private void loadConatiner() {
 		cntrlTest = loadTestsContainerAndGetAsControlTest();
 	}
 	public ControlFinder loadControl() {
 		List<String> prntNames = testNode.getPrntNames();
 		//do once for each item
-//		loadConatiner();
+		loadConatiner();
 
 
 		//should always be at least one name (the element's node)

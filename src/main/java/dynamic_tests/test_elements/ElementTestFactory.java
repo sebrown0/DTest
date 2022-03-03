@@ -32,13 +32,13 @@ public class ElementTestFactory {
 		System.out.println("Creating factory for: " + item.getName()); // TODO - remove or log 
 	}
 	
-	public void loadItem() {
-		if(itemIsNotLoaded) {
-			itemIsNotLoaded = false;
-			cntrlFinder.loadConatiner();
-			System.out.println("Load item: " + item.getName()); // TODO - remove or log 	
-		}
-	}
+//	public void loadItem() {
+//		if(itemIsNotLoaded) {
+//			itemIsNotLoaded = false;
+//			cntrlFinder.loadConatiner();
+//			System.out.println("Load item: " + item.getName()); // TODO - remove or log 	
+//		}
+//	}
 			
 	public ElementTestFactory createTextCheck(String textExpected) {
 		new CreateTextCheckString(cntrlFinder, testList, controlTest, textExpected, this).createTest(elName);
