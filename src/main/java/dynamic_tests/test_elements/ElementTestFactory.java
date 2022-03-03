@@ -28,18 +28,23 @@ public class ElementTestFactory {
 //	private final Logger LOGGER = LogManager.getLogger(ElementTestFactory.class);
 
 	public ElementTestFactory(MenuItem item) {
-		this.item = item;
-		System.out.println("Creating factory for: " + item.getName()); // TODO - remove or log 
+		this.item = item;	 
 	}
+
+	public void isItemIsNotLoaded(boolean itemIsNotLoaded) {
+		this.itemIsNotLoaded = itemIsNotLoaded;
+	}
+	public boolean isItemIsNotLoaded() {
+		return itemIsNotLoaded;
+	}
+
+	public ControlTest getControlTest() {
+		return controlTest;
+	}
+	public void setControlTest(ControlTest controlTest) {
+		this.controlTest = controlTest;
+	}		
 	
-//	public void loadItem() {
-//		if(itemIsNotLoaded) {
-//			itemIsNotLoaded = false;
-//			cntrlFinder.loadConatiner();
-//			System.out.println("Load item: " + item.getName()); // TODO - remove or log 	
-//		}
-//	}
-			
 	public ElementTestFactory createTextCheck(String textExpected) {
 		new CreateTextCheckString(cntrlFinder, testList, controlTest, textExpected, this).createTest(elName);
 		return this;
@@ -75,6 +80,5 @@ public class ElementTestFactory {
 		this.cntrlFinder = cntrlFinder;
 		return this;
 	}
-
 	
 }

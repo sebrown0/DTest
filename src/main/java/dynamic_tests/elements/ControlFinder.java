@@ -9,6 +9,7 @@ import java.util.Optional;
 import controls.interfaces.Control;
 import controls.interfaces.ControlTest;
 import dynamic_tests.mappers.TestNode;
+import dynamic_tests.test_elements.ElementTestFactory;
 import object_models.pages.homepage.HomePage;
 import site_mapper.jaxb.menu_items.MenuItem;
 
@@ -23,19 +24,27 @@ public class ControlFinder {
 	private TestNode testNode;
 	private MenuItem item;
 	private HomePage hp;	
-	private ControlTest controlTest;
 	private Optional<Control> cntrl = null;
 	private ControlTest cntrlTest;
+	private ElementTestFactory tf;
 	
-	public ControlFinder(TestNode testNode, HomePage hp, MenuItem item, String name) {		
+	public ControlFinder(TestNode testNode, HomePage hp, MenuItem item, String name, ElementTestFactory tf) {		
 		this.testNode = testNode;
 		this.hp = hp;
 		this.item = item;
 		this.name = name;
+		this.tf = tf;
 	}
 
 	private void loadConatiner() {
-		cntrlTest = loadTestsContainerAndGetAsControlTest();
+		if(tf.isItemIsNotLoaded()) {
+			cntrlTest = loadTestsContainerAndGetAsControlTest();
+			tf.setControlTest(cntrlTest);
+			tf.isItemIsNotLoaded(false);
+		}else {
+			cntrlTest = tf.getControlTest();
+		}
+		
 	}
 	public ControlFinder loadControl() {
 		List<String> prntNames = testNode.getPrntNames();
@@ -65,10 +74,10 @@ public class ControlFinder {
 	}
 
 	private ControlTest loadTestsContainerAndGetAsControlTest() {		
-		if(controlTest == null) {
-			controlTest = getControlTest();
+		if(cntrlTest == null) {
+			cntrlTest = getControlTest();
 		}
-		return controlTest;
+		return cntrlTest;
 	}
 	/////////////
 	private ControlTest getControlTest() {

@@ -41,7 +41,7 @@ public class ElementTest implements TestElementDetails {
 		this.elName = e.getElementName();
 		this.testFactory = testFactory;
 		
-		controlFinder = new ControlFinder(testNode, hp, item, elName);
+		controlFinder = new ControlFinder(testNode, hp, item, elName, testFactory);
 	}
 
 	public void addTests(TestAdder testAdder) {
