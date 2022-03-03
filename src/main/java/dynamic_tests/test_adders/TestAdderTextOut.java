@@ -19,6 +19,9 @@ public class TestAdderTextOut implements TestAdderWithData {
 	private TestDataOut dataOut;
 
 	public TestAdderTextOut(ElementCreation el) {
+		if(el.getElementName().equals("Grade")) {
+			System.out.println("->");
+		}
 		this.dataIn = el.getTestDataIn();
 		this.dataOut = el.getTestDataOut();
 	}

@@ -41,7 +41,7 @@ class DynamicTestsFromSiteMapperTests {
 
 	@AfterAll
 	public static void tearDown() {
-		hp.close();
+//		hp.close();
 	}
 
 	@TestFactory

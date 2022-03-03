@@ -10,6 +10,7 @@ import org.junit.jupiter.api.DynamicContainer;
 import dynamic_tests.elements.IncludedElements;
 import dynamic_tests.test_elements.DynamicTestFactory;
 import dynamic_tests.test_elements.ElementTest;
+import dynamic_tests.test_elements.ElementTestFactory;
 import dynamic_tests.test_elements.TestElementDetails;
 import object_models.pages.homepage.HomePage;
 import site_mapper.jaxb.menu_items.MenuItem;
@@ -46,21 +47,21 @@ public class NodeTestsCreator {
 		this.menuItemTests = menuItemTests;
 	}
 
-	public NodeTestsCreator addElementTestsForEachTestNode() {
-		testNodes.forEach(tn -> addTestsForElements(tn));	
+	public NodeTestsCreator addElementTestsForEachTestNode(ElementTestFactory tf) {
+		testNodes.forEach(tn -> addTestsForElements(tn, tf));	
 		return this;
 	}
 		
-	private void addTestsForElements(TestNode tn) {
+	private void addTestsForElements(TestNode tn, ElementTestFactory tf) {
 		List<Element> els = tn.getElements();
 		if(els != null) {
-			els.forEach(el -> addTestForElement(tn, el));							
+			els.forEach(el -> addTestForElement(tn, el, tf));							
 		}			
 	}
 	
-	private void addTestForElement(TestNode tn, Element el) {
+	private void addTestForElement(TestNode tn, Element el, ElementTestFactory tf) {
 		if(includedElements.isIncluded(el.getElementType())) {
-			ElementTest elTest = new ElementTest(tn, hp, item, el);
+			ElementTest elTest = new ElementTest(tn, hp, item, el, tf);
 			testFactory.addElementSpecificTestsTo(elTest, el);
 			addTestToItemContainer(elTest);
 		}

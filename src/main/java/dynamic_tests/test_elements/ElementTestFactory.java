@@ -3,22 +3,14 @@
  */
 package dynamic_tests.test_elements;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.util.List;
-import java.util.Optional;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.DynamicTest;
 
-import controls.data.ControlTestData;
-import controls.interfaces.Control;
 import controls.interfaces.ControlTest;
-import dynamic_tests.assertations.AssertTextEquals;
 import dynamic_tests.elements.ControlFinder;
 import dynamic_tests.test_adders.TestAdderWithData;
+import site_mapper.jaxb.menu_items.MenuItem;
 
 /**
  * @author SteveBrown
@@ -29,87 +21,60 @@ import dynamic_tests.test_adders.TestAdderWithData;
 public class ElementTestFactory {
 	private List<DynamicTest> testList;
 	private String elName;
-	private ControlFinder cntrlFinder;
-	
-	private Optional<Control> cntrl;	
+	private ControlFinder cntrlFinder;	
 	private ControlTest controlTest;
-	private final Logger LOGGER = LogManager.getLogger(ElementTestFactory.class);
-	
-	public ElementTestFactory(
-			List<DynamicTest> testList, 
-			String elName, 
-			ControlFinder cntrlFinder) {
-			
-			this.testList = testList;
-			this.elName = elName;
-			this.cntrlFinder = cntrlFinder;			
+	private MenuItem item;	
+	private boolean itemIsNotLoaded = true;
+//	private final Logger LOGGER = LogManager.getLogger(ElementTestFactory.class);
 
-			getControlAndParent();
+	public ElementTestFactory(MenuItem item) {
+		this.item = item;
+		System.out.println("Creating factory for: " + item.getName()); // TODO - remove or log 
+	}
+	
+	public void loadItem() {
+		if(itemIsNotLoaded) {
+			itemIsNotLoaded = false;
+			cntrlFinder.loadConatiner();
+			System.out.println("Load item: " + item.getName()); // TODO - remove or log 	
 		}
-	
-	private void getControlAndParent() {
-		this.cntrl = cntrlFinder.loadControl().getControl();
-		this.controlTest = cntrlFinder.getControlsClass();
 	}
-	
+			
 	public ElementTestFactory createTextCheck(String textExpected) {
-		testList.add(
-			DynamicTest.dynamicTest(
-				"Is [" + elName +"] text correct?", 
-				() -> {							
-					new 
-						AssertTextEquals(controlTest, cntrl)
-							.assertTextEquals(textExpected);
-				}));
+		new CreateTextCheckString(cntrlFinder, testList, controlTest, textExpected, this).createTest(elName);
 		return this;
 	}
-	
 	public ElementTestFactory createTextCheck(TestAdderWithData testData) {
-		testList.add(
-			DynamicTest.dynamicTest(
-				"Is [" + elName +"] text correct?", 
-				() -> {			
-					TestDataInserter.insertAnyTestData(testData, controlTest);
-					new 
-						AssertTextEquals(controlTest, cntrl)
-							.assertTextEquals(testData); 	
-				}));
+		new CreateTextCheckTestData(cntrlFinder, testList, controlTest, testData).createTest(elName);;
 		return this;
 	}
-		
-	public ElementTestFactory createTextListCheck(TestAdderWithData testData) {
-		testList.add(
-			DynamicTest.dynamicTest(
-				"Is [" + elName +"] text correct?", 
-				() -> {			
-					fail("ElementTestFactory.createTextListCheck not implemented.");
-					LOGGER.error("ElementTestFactory.createTextListCheck not implemented.");
-				}));
-		return this;
-	}
-	
 	public ElementTestFactory createToolTipCheck(String toolTipText) {
-		if(toolTipText != null && toolTipText.length()>0) {
-			testList.add(
-				DynamicTest.dynamicTest(
-					"Is [" + elName +"] tool tip correct?", 
-					() -> {							
-						String textActual = ControlTestData.getControlToolTip(cntrl);
-						assertEquals(toolTipText, textActual);
-					}));			
-		}	
+		new CreateToolTipCheck(cntrlFinder, testList, controlTest, toolTipText);
 		return this;
 	}
-	
-	public ElementTestFactory createButtonFaFaCheck(String faFa) {				
-		testList.add(
-			DynamicTest.dynamicTest(
-				"Is [" + elName +"] FaFa correct?", 
-				() -> {						 	
-					String faFaActual = ControlTestData.getFaFaText(cntrl);
-					assertEquals(faFa, faFaActual);
-				}));
+	public ElementTestFactory createButtonFaFaCheck(String faFa) {
+		new CreateFaFaCheck(cntrlFinder, testList, controlTest, faFa);
 		return this;
 	}
+	public ElementTestFactory createTextListCheck(TestAdderWithData testData) {
+		new CreateListCheck(cntrlFinder, testList, controlTest);
+		return this;
+	}
+
+	public ElementTestFactory setTestList(List<DynamicTest> testList) {
+		this.testList = testList;
+		return this;
+	}
+
+	public ElementTestFactory setElementName(String elName) {
+		this.elName = elName;
+		return this;
+	}
+
+	public ElementTestFactory setCntrlFinder(ControlFinder cntrlFinder) {
+		this.cntrlFinder = cntrlFinder;
+		return this;
+	}
+
 	
 }

@@ -31,20 +31,24 @@ public class ElementTest implements TestElementDetails {
 	private String type;
 	private List<DynamicTest> testList = new ArrayList<>();	
 	private ControlFinder controlFinder;
-
+	private ElementTestFactory testFactory;
+	
 	public ElementTest(
 		TestNode testNode, HomePage hp, 
-		MenuItem item, ElementCreation e) {
+		MenuItem item, ElementCreation e, ElementTestFactory testFactory) {
 
 		this.type = e.getElementType();
 		this.elName = e.getElementName();
+		this.testFactory = testFactory;
 		
 		controlFinder = new ControlFinder(testNode, hp, item, elName);
 	}
 
 	public void addTests(TestAdder testAdder) {
-		ElementTestFactory testFactory = 
-			new ElementTestFactory(testList, elName, controlFinder);
+		testFactory 
+			.setCntrlFinder(controlFinder)
+			.setElementName(elName)
+			.setTestList(testList);
 		testAdder.addTestsWith(testFactory);
 	}
 	

@@ -34,10 +34,14 @@ public class ControlFinder {
 		this.name = name;
 	}
 
+	public void loadConatiner() {
+		cntrlTest = loadTestsContainerAndGetAsControlTest();
+	}
 	public ControlFinder loadControl() {
 		List<String> prntNames = testNode.getPrntNames();
-		
-		cntrlTest = loadTestsContainerAndGetAsControlTest();
+		//do once for each item
+//		loadConatiner();
+
 
 		//should always be at least one name (the element's node)
 		if(prntNames != null) {
@@ -66,7 +70,7 @@ public class ControlFinder {
 		}
 		return controlTest;
 	}
-	
+	/////////////
 	private ControlTest getControlTest() {
 		return ElementLoader.getControlTest(item, hp);
 	}

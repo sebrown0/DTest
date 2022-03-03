@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.DynamicContainer;
 
 import dynamic_tests.elements.IncludedElements;
+import dynamic_tests.test_elements.ElementTestFactory;
 import object_models.pages.homepage.HomePage;
 import site_mapper.jaxb.containers.Container;
 import site_mapper.jaxb.containers.Node;
@@ -78,11 +79,11 @@ public class DynamicTestItem implements TreeVisitor {
 	}
 
 	public void addTests() {		
-		if(testNodes != null) {
+		if(testNodes != null) {				
 			NodeTestsCreator nodeTests = 
 				new NodeTestsCreator(
 					testNodes, includedElements, item, hp, menuItemTests);
-			nodeTests.addElementTestsForEachTestNode();
+			nodeTests.addElementTestsForEachTestNode(new ElementTestFactory(item));
 		}
 	}
 		
