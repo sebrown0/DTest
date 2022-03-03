@@ -1,13 +1,21 @@
 package object_models.modules.payroll.left_menu.employees;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.DynamicTest;
-
-import dynamic_tests.annotations.TestControl;
-import object_models.pages.homepage.CoreData;
-import object_models.panels.JsPanelWithIFrame;
+import static org.junit.jupiter.api.Assertions.fail;
+import java.util.List;
+import java.util.Arrays;
+import org.openqa.selenium.By;
+import control_builder.*;
 import site_mapper.annotations.SiteMap;
+import org.junit.jupiter.api.DynamicTest;
+import dynamic_tests.annotations.TestControl;
+import control_builder.control_getters.ControlGetter;
+import control_builder.control_getters.group.ControlGetterGroup;
+import object_models.panels.JsPanelWithIFrame;
+import control_builder.control_data.ControlData;
+import object_models.pages.homepage.CoreData;
+import control_builder.control_getters.single.ControlGetterTextOut;
+import control_builder.control_getters.group.ControlGetterInputGroup;
 
 /**
 * Generated Class.
@@ -15,53 +23,36 @@ import site_mapper.annotations.SiteMap;
 * Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
 * Author:  SteveBrown
 * Version: 1.0.0
-* Created: 09/02/2022 14:50:52
+* Created: 03/03/2022 08:56:45
 */
 
 public class ContactNumbers extends JsPanelWithIFrame {
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="03/03/2022")
 	public static final String PANEL_TITLE = "Employee Contact Details";
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="03/03/2022")
 	public static final String MENU_TITLE = "Contact Numbers";
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="03/03/2022")
 	public static final String MENU_PARENT_NAME = "Employees";
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="03/03/2022")
 	public ContactNumbers(CoreData coreData){
 		super(coreData, PANEL_TITLE);
-//		buildMyControls();
+		buildMyControls();
 	}
 
-//	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-//	private void buildMyControls() {
-//		var myControls =
-//			List.of(
-//				new ControlData("save", new ControlGetterButton(coreData, By.cssSelector("button[name='SAVE']"))),
-//				new ControlData("clear", new ControlGetterButton(coreData, By.cssSelector("button[name='CLEAR1']"))),
-//				new ControlData("employee_list", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fa-list']"))),
-//				new ControlData("existing_records", new ControlGetterButton(coreData, By.cssSelector("i[class='fa fw fa-table']")))
-//			);
-//		super.buildPanelControls(myControls);
-//	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonSave () {
-		return DynamicTest.dynamicTest("[buttonSave] *NOT IMPLEMENTED*", () -> assertTrue(true));
+	@SiteMap(author="SteveBrown", version="1.0.0", date="03/03/2022")
+	private void buildMyControls() {
+		ControlGetter formID =
+			new ControlGetterTextOut("FormID", coreData, By.id("FORM_ID"));
+		ControlGetterGroup empLookup =
+			new ControlGetterInputGroup("EmpLookup", coreData, By.cssSelector("div[class='input-group']"))
+				.addControls(Arrays.asList(formID));
+		var myControls =
+			List.of(
+				new ControlData(empLookup)
+			);
+		super.buildPanelControls(myControls);
 	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonClear () {
-		return DynamicTest.dynamicTest("[buttonClear] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonEmployee_list () {
-		return DynamicTest.dynamicTest("[buttonEmployee_list] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonExisting_records () {
-		return DynamicTest.dynamicTest("[buttonExisting_records] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
+
 
 }

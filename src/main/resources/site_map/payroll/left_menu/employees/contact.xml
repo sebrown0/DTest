@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<MenuItem name="Contact Numbers" package="Employees" class="ContactNumbers">          
+  <Type name="JsPanelWithIFrame">
+    <JsPanelWithIFrame panelTitle = "Employee Contact Details" /> 
+  </Type>         
+  <HeaderElements>
+    <Container type="InputGroup" name="EmpLookup">
+      <Locator by="css" text="div[class='input-group']"/>
+      <Element>
+        <Details type="TextOut" name="FormID" text=""/>
+        <Locator by="id" text="FORM_ID"/>   
+        <TestDataIn insertWith="EmployeeLookupByName">                     
+          <Text value="Borg"/>
+        </TestDataIn>
+        <TestDataOut>                     
+          <Text value="0123456M"/>
+        </TestDataOut>    
+        <Function isDefaultPass="true"/>
+      </Element>             
+    </Container>                
+  </HeaderElements>    
+</MenuItem>       
