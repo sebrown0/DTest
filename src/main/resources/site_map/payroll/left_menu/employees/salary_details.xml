@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<MenuItem name="Salary Details" package="Employees" class="SalaryDetails">          
+  <Type name="JsPanelWithIFrame">
+    <JsPanelWithIFrame panelTitle = "Employee Salary Details" /> 
+  </Type>         
+  <HeaderElements>
+    <Container type="InputGroup" name="EmpLookup">
+      <Locator by="css" text="div[class='input-group']"/>
+      <Element>
+        <Details type="TextOut" name="FormID" text=""/>
+        <Locator by="id" text="FORM_ID"/>   
+        <TestDataIn insertWith="EmployeeLookupByName">                     
+          <Text value="Borg"/>
+        </TestDataIn>
+        <TestDataOut>                     
+          <Text value="0123456M"/>
+        </TestDataOut>    
+        <Function isDefaultPass="true"/>
+      </Element>
+      <Element>
+        <Details type="button" name="EmployeeList" text="" fafa="fa fa-list"/>
+        <Locator by="css" text="div[title='Search Employee']"/>  
+        <ToolTip text="Select from a list of employees within the chosen company"/>              
+        <Function isDefaultPass="true" />
+      </Element>
+      <Element>
+        <Details type="Button" name="SalaryHistory" text="" fafa="fa fa-list"/>
+        <Locator by="css" text="div[title='View Salary History']"/>
+        <ToolTip text="View Salary History"/>                
+        <Function isDefaultPass="true" />
+      </Element>
+      <Element>
+        <Details type="button" name="Combos" text="" fafa="fa fa-window-maximize"/>
+        <Locator by="css" text="div[title='Combos']"/>
+        <ToolTip text="Combos"/>                
+        <Function isDefaultPass="true"/>
+      </Element>
+      <Element>
+        <Details type="Button" name="GridView" text="" fafa="fa fw fa-table"/>
+        <Locator by="css" text="div[title='Grid View for this Employee']"/>
+        <ToolTip text="Grid View for this Employee"/>                
+        <Function isDefaultPass="true" />
+      </Element>
+      <Element>
+        <Details type="button" name="ExistingRecords" text="" fafa="fa fw fa-table"/>
+        <Locator by="css" text="div[title='Grid View for existing records']"/>
+        <ToolTip text="Grid View for existing records"/>                
+        <Function isDefaultPass="true" />
+      </Element>          
+      <Element>
+        <Details type="button" name="Documents" text="" fafa="fa fa-file-o"/>
+        <Locator by="css" text="div[title='No Documents Attached']"/>
+        <ToolTip text="No Documents Attached"/>                
+        <Function isDefaultPass="true"/>
+      </Element>            
+    </Container>
+    <Container type="InputGroup" name="DatePicker">
+      <Locator by="css" text="div[class='input-group date datepicker']"/>
+      <Element>
+        <Details type="button" name="Calendar" text="" fafa="fa fa-calendar fa-fw"/>
+        <Locator by="css" text="i[class='fa fa-calendar fa-fw']"/>         
+        <Function isDefaultPass="true" />
+      </Element>
+    </Container>                
+  </HeaderElements>
+       
+  <BodyElements>
+    <Container type="Tabs" name="Tabs">
+      <Locator by="css" text="ul[class='nav nav-tabs']"/>              
+      <Container type="Tab" name="SalaryDetails">
+        <Locator by="css" text="a[id='tab-tab1']"/>
+        
+        <!-- LABELS -->
+        <Element>
+          <Details type="Label" name="LabelReason" text="Reason"/>
+          <Locator by="css" text="label[for='REASON']"/>              
+        </Element>
+        <Element>
+          <Details type="Label" name="LabelGrade" text="Grade"/>
+          <Locator by="css" text="label[for='GRADE_CODE']"/>              
+        </Element>
+        <Element>
+          <Details type="Label" name="LabelStepLevel" text="Step Level"/>
+          <Locator by="css" text="label[for='STEP_LEVEL']"/>              
+        </Element>
+        <Element>
+          <Details type="Label" name="LabelAnnualSalary" text="Annual Salary"/>
+          <Locator by="css" text="label[for='ANNUAL_SALARY_FIXED']"/>              
+        </Element>
+        <Element>
+          <Details type="Label" name="LabelNICategory" text="NI Category"/>
+          <Locator by="css" text="label[for='NI_CATEGORY']"/>              
+        </Element>
+        <Element>
+          <Details type="Label" name="LabelIncrement" text="Increment"/>
+          <Locator by="css" text="label[for='INCREMENT_CODE']"/>              
+        </Element>
+        <Element>
+          <Details type="Label" name="LabelAnnualSalaryReduced" text="Annual Salary Reduced"/>
+          <Locator by="css" text="label[for='ANNUAL_SALARY_REDUCED']"/>              
+        </Element>
+        <Element>
+          <Details type="Label" name="LabelGradeDescription" text="Grade Description"/>
+          <Locator by="css" text="label[for='GRADE_DESC']"/>              
+        </Element>
+        <Element>
+          <Details type="Label" name="LabelYear" text="Year"/>
+          <Locator by="css" text="label[for='INCREMENT_YEAR']"/>              
+        </Element>
+        
+        <!-- CONTROLS  -->
+        <Element>
+          <Details type="ComboSelectOnly" name="Reason"/>
+          <Locator by="css" text="span[id='select2-REASON-container']"/>
+          <Locator by="css" text="span[id='select2-REASON-results']"/>                      
+          <TestDataOut>                     
+            <Text value="Starter"/>
+          </TestDataOut>                     
+        </Element>
+        <Element>
+          <Details type="ComboSelectOnly" name="NICategory"/>
+          <Locator by="css" text="span[id='select2-NI_CATEGORY-container'"/>
+          <Locator by="css" text="span[id='select2-NI_CATEGORY-results']"/>                  
+        </Element>
+        <Element>
+          <Details type="TextOut" name="AnnualSalaryReduced"/>
+          <Locator by="css" text="input[id='ANNUAL_SALARY_REDUCED']"/>            
+        </Element>
+        <Element>
+          <Details type="TextOut" name="GradeDesc"/>
+          <Locator by="css" text="input[id='GRADE_DESC']"/>            
+        </Element>
+        <Element>
+          <Details type="ComboSelectOnly" name="Year"/>
+          <Locator by="css" text="span[id='select2-INCREMENT_YEAR-container'"/>
+          <Locator by="css" text="span[id='select2-INCREMENT_YEAR-results']"/>                  
+        </Element>
+        
+        <!-- GROUPS  -->
+        <Container type="InputGroup" name="GradeInput">
+          <Locator by="xpath" text="//i[@class='fa fa-list']/ancestor::div[@class='input-group']"/>
+          <Element>
+            <Details type="TextSelect" name="Grade"/>
+            <Locator by="css" text="input[id='GRADE_CODE']"/>              
+          </Element>
+        </Container>  
+      </Container>  
+      
+      <Container type="tab" name="Remarks">
+        <Locator by="css" text="a[id='tab-tab2']"/>                
+      </Container>  
+    </Container>     
+  </BodyElements> 
+       
+  <FooterElements>
+    <Container type="row" name="FooterButtons">
+      <Element>
+        <Details type="button" name="Search" text="Search" fafa="fa fa-search"/>
+        <Locator by="css" text="button[name='QBF1']"/>                
+        <Function isDefaultPass="true" />
+      </Element>
+      <Element>
+        <Details type="button" name="Clear" text="Clear" fafa="fa fa-file-o"/>
+        <Locator by="css" text="button[name='CLEAR1']"/>                
+        <Function isDefaultPass="true" />
+      </Element>              
+      <Element>
+        <Details type="button" name="NewRec" text="New" fafa="fa fa-plus"/>
+        <Locator by="css" text="button[name='NEW1']"/>                
+        <Function isDefaultPass="true" />
+      </Element>
+      <Element>
+        <Details type="button" name="Save" text="Save" fafa="fa fa-save"/>
+        <Locator by="css" text="button[name='SAVE']"/>                
+        <Function isDefaultPass="true" />
+      </Element>         
+      <Element>
+        <Details type="button" name="Delete" text="Delete" fafa="fa fa-trash"/>
+        <Locator by="css" text="button[name='DELETE1']"/>                
+        <Function isDefaultPass="true" />
+      </Element>        
+      <Element>
+        <Details type="button" name="Print" text="Print" fafa="fa fa-print"/>
+        <Locator by="css" text="button[name='PRINT1']"/>                
+        <Function isDefaultPass="true" />
+      </Element>
+    </Container>    
+  </FooterElements>         
+</MenuItem>       
