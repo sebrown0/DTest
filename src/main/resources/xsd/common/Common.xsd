@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+  xmlns:cmn="com.sitemapper.common"
+  xmlns:el="com.sitemapper.element" 
+  targetNamespace="com.sitemapper.common"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified">
+  <xs:import 
+    schemaLocation="C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/xsd/element/Element.xsd"
+    namespace="com.sitemapper.element" />
+        
+  <xs:complexType name="Locator">
+    <xs:attribute name="By" type="xs:string" /> 
+    <xs:attribute name="Text" type="xs:string" />
+  </xs:complexType>
+  
+  <xs:complexType name="JsPanelWithIFrame">
+    <xs:attribute name="PanelTitle" type="xs:string" />
+  </xs:complexType>    
+</xs:schema>

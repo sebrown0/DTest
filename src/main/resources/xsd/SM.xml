@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sm:SiteMap 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                                                
+  xsi:schemaLocation="C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/xsd/SiteMap SiteMap.xsd"
+  xmlns:sm="com.sitemapper.sitemap">
+  
+  <sm:Info>
+    <Author>SteveBrown</Author>
+    <Version>1.0.0</Version>
+    <CreationMethod>IgnoreExisting</CreationMethod>  
+    <RootDir>C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/java</RootDir>
+    <ParentPackage>object_models/modules</ParentPackage>
+    <ElementLibrary>C:/Users/SteveBrown/eclipse-workspace/2021/DTest</ElementLibrary> 
+  </sm:Info>
+  
+  <sm:pp>
+  </sm:pp>
+  
+</sm:SiteMap>

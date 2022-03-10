@@ -46,9 +46,11 @@ class DynamicTestsFromSiteMapperTests {
 
 	@TestFactory
 	DynamicContainer runTests() {
-		DynamicTestApp app = 
+		app.xml_content.DynamicTestApp content = DynamicTestMapper.getDynamicTestContent(XML_SOURCE).get(); 
+//		System.out.println(content.toString()); // TODO - remove or log 	
+		DynamicTestApp app =  
 				new DynamicTestApp(
-						DynamicTestMapper.getDynamicTestContent(XML_SOURCE).get(), 
+						content, 
 						hp);		
 		return app.getAppTests();
 	}

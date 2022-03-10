@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<SiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+  xsi:schemaLocation="Root/SiteMap SiteMap.xsd"
+  xmlns:s="Root"
+  >
+  
+  <s:Info>
+    <s:Author>SteveBrown</s:Author>
+    <s:Version>1</s:Version>
+    <s:CreationMethod>IgnoreExisting</s:CreationMethod>
+    <s:RootDir>C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/java</s:RootDir>
+    <s:ParentPackage>object_models/modules</s:ParentPackage>
+    <s:ElementLibrary>C:/Users/SteveBrown/eclipse-workspace/2021/DTest</s:ElementLibrary>
+  </s:Info>
+</SiteMap>

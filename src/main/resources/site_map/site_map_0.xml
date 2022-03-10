@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<SiteMap xmlns:xi="http://www.w3.org/2001/XInclude" >
+  <Info>
+    <Author>SteveBrown</Author>
+    <Version>1.0.0</Version>
+    
+    <!-- 
+      CreationMethod
+      ==============
+      How the class files are created. Possible values are:
+      1. OverwriteExisting existing files.
+      2. DiffExisting: only write differences between new and existing.
+      3. IgnoreExisting: ignore existing files.
+    -->
+    <CreationMethod>IgnoreExisting</CreationMethod>    
+    
+    <!-- 
+      RootDir
+      =======
+      Top level package/directory. This has the ParentPackage under it.
+     -->
+  <RootDir>C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/java</RootDir>
+    
+    <!-- 
+      ParentPackage
+      =============
+      The package under the RootDir, to where the class files are written.
+     -->
+    <ParentPackage>object_models/modules</ParentPackage>
+    
+    <!-- 
+      ElementLibrary
+      ==============
+      Where to find generic elements/imports, i.e. JsPanelWithIFrame/CoreData, used in the created class file. 
+      At present this is in DTest, but this will be moved into a separate project [ElementLibrary?].  
+     -->
+    <ElementLibrary>C:/Users/SteveBrown/eclipse-workspace/2021/DTest</ElementLibrary>        
+  </Info>
+  
+  <!-- TODO The included elements should be in separate file. -->
+  <IncludeElementsForTest>
+    <Include>Button</Include>
+    <Include>TextSelect</Include>
+    <Include>TextOut</Include>
+    <Include>ComboSelectOnly</Include>    
+    <Include>Label</Include>
+  </IncludeElementsForTest>
+  
+  <Modules>
+  
+   <Module name="payroll">   
+    <Menus>
+      <Menu name="Left" package="left_menu">
+      
+        <xi:include parse="text" href="C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map2.xml"></xi:include>
+        
+<!--        
+     <MenuItem name="Contact Numbers" package="Employees" class="ContactNumbers">          
+          <Type name="JsPanelWithIFrame">
+            <JsPanelWithIFrame panelTitle = "Employee Contact Details" /> 
+          </Type>         
+          <HeaderElements>
+            <Container type="InputGroup" name="EmpLookup">
+              <Locator by="css" text="div[class='input-group']"/>
+              <Element>
+                <Details type="TextOut" name="FormID" text=""/>
+                <Locator by="id" text="FORM_ID"/>   
+                <TestDataIn insertWith="EmployeeLookupByName">                     
+                  <Text value="Borg"/>
+                </TestDataIn>
+                <TestDataOut>                     
+                  <Text value="0123456M"/>
+                </TestDataOut>    
+                <Function isDefaultPass="true"/>
+              </Element>             
+            </Container>                
+          </HeaderElements>    
+        </MenuItem> 
+         -->
+      </Menu>
+    </Menus>
+   </Module>
+   
+  </Modules>
+</SiteMap>
