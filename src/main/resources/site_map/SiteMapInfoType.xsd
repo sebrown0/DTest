@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  
+  targetNamespace="SiteMapInfoType"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified"
+  >
+      
+  <xs:complexType name = "SiteMapInfoType">
+    <xs:sequence>              
+      <xs:element name="Author" type="xs:string"/>
+      <xs:element name="Version" type="xs:string"/>
+      <xs:element name="CreationMethod" type="xs:string"/>
+      <xs:element name="RootDir" type="xs:string"/>
+      <xs:element name="ParentPackage" type="xs:string"/>
+      <xs:element name="ElementLibrary" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+    
+</xs:schema>
