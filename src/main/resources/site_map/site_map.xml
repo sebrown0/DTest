@@ -5,6 +5,7 @@
   xmlns="Root"
   xmlns:inf="SiteMapInfo"
   xmlns:inc="IncludeElementsInTest"
+  xmlns:el="Element"
   >
   
   <Info>
@@ -36,10 +37,10 @@
               <Container type="InputGroup" name="EmpLookup">
                 <Locator by="css" text="div[class='input-group']"/>
                 <Element>
-                  <Details type="Button" name="SalaryHistory" text="" fafa="fa fa-list"/>
-                  <Locator by="css" text="div[title='View Salary History']"/>
-                  <ToolTip text="View Salary History"/>                
-                  <Function isDefaultPass="true" />
+                  <el:Details type="Button" name="SalaryHistory" text="" fafa="fa fa-list"/>
+                  <el:Locator by="css" text="div[title='View Salary History']"/>
+                  <el:ToolTip text="View Salary History"/>                
+                  <el:Function isDefaultPass="true" />
                 </Element>            
               </Container>                
             </HeaderElements>   
