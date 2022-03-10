@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  
+  targetNamespace="Root"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified"
+  >
+
+  <xs:element name="SiteMap">
+    <xs:complexType>
+      <xs:sequence>
+        
+        <xs:element name="Info">    
+          <xs:complexType>
+            <xs:sequence>              
+              <xs:element name="Author" type="xs:string"/>
+              <xs:element name="Version" type="xs:string"/>
+              <xs:element name="CreationMethod" type="xs:string"/>
+              <xs:element name="RootDir" type="xs:string"/>
+              <xs:element name="ParentPackage" type="xs:string"/>
+              <xs:element name="ElementLibrary" type="xs:string"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        
+        <xs:element name="IncludeElementsForTest">
+          <xs:complexType>
+            <xs:sequence>              
+              <xs:element name="Include" type="xs:string" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>          
+        
+        <xs:element name="Modules">
+          <xs:complexType>
+            <xs:sequence>
+            
+            
+              <xs:element name="Module" maxOccurs="unbounded">
+                
+                <xs:complexType>
+                  <xs:sequence>
+                                    
+                    <xs:element name="Menus">
+                      <xs:complexType>
+                        <xs:sequence>
+                                               
+                          <xs:element name="Menu">
+                            <xs:complexType>
+                              <xs:sequence>
+                                                                                      
+                                <xs:element name="MenuItem">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      
+                                      <xs:element name="Type">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="JsPanelWithIFrame">
+                                              <xs:complexType>
+                                                <xs:attribute name="panelTitle" type="xs:string"/>
+                                              </xs:complexType>                                                 
+                                            </xs:element>
+                                          </xs:sequence>
+                                          <xs:attribute name="name" type="xs:string"/>  
+                                        </xs:complexType>                                        
+                                      </xs:element>
+                                      
+                                      <xs:element name="HeaderElements" minOccurs="0" maxOccurs="1">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                          
+                                          <xs:element name="Container">
+                                            <xs:complexType>
+                                              <xs:sequence>
+                                              
+                                                <xs:element name="Locator">
+                                                  <xs:complexType>                                                    
+                                                    <xs:attribute name="by" type="xs:string"/>
+                                                    <xs:attribute name="text" type="xs:string"/>
+                                                  </xs:complexType>
+                                                </xs:element>
+                                                
+                                                <xs:element name="Element" minOccurs="1" maxOccurs="unbounded">
+                                                  <xs:complexType>                                                    
+                                                    <xs:sequence>
+                                                      <xs:element name="Details">
+                                                        <xs:complexType>
+                                                          <xs:attribute name="type" type="xs:string"/>
+                                                          <xs:attribute name="name" type="xs:string"/>    
+                                                          <xs:attribute name="text" type="xs:string"/>
+                                                          <xs:attribute name="fafa" type="xs:string"/>    
+                                                        </xs:complexType>
+                                                      </xs:element>
+                                                      <xs:element name="Locator">
+                                                        <xs:complexType>                                                    
+                                                          <xs:attribute name="by" type="xs:string"/>
+                                                          <xs:attribute name="text" type="xs:string"/>
+                                                        </xs:complexType>
+                                                      </xs:element>   
+
+                            <xs:element name="ToolTip">
+                                                        <xs:complexType>                                                    
+                                                          <xs:attribute name="text" type="xs:string"/>
+                                                        </xs:complexType>
+                                                      </xs:element>
+
+                            <xs:element name="Function">
+                                                        <xs:complexType>                                                    
+                                                          <xs:attribute name="isDefaultPass" type="xs:string"/>
+                                                        </xs:complexType>
+                                                      </xs:element>   
+                                                   
+                                                    </xs:sequence>                       
+                                                  </xs:complexType>
+                                                </xs:element>        
+                                                                                            
+                                              </xs:sequence>
+                                              <xs:attribute name="type" type="xs:string"/>
+                                              <xs:attribute name="name" type="xs:string"/>
+                                            </xs:complexType>
+                                          </xs:element>
+                                          
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      
+                                      <xs:element name="BodyElements" minOccurs="0" maxOccurs="1">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                          
+                                          <xs:element name="Container">
+                                            <xs:complexType>
+                                              <xs:sequence>
+                                              
+                                                <xs:element name="Locator">
+                                                  <xs:complexType>                                                    
+                                                    <xs:attribute name="by" type="xs:string"/>
+                                                    <xs:attribute name="text" type="xs:string"/>
+                                                  </xs:complexType>
+                                                </xs:element>
+                                                
+                                                <xs:element name="Element" minOccurs="1" maxOccurs="unbounded">
+                                                  <xs:complexType>                                                    
+                                                    <xs:sequence>
+                                                      <xs:element name="Details">
+                                                        <xs:complexType>
+                                                          <xs:attribute name="type" type="xs:string"/>
+                                                          <xs:attribute name="name" type="xs:string"/>    
+                                                          <xs:attribute name="text" type="xs:string"/>
+                                                          <xs:attribute name="fafa" type="xs:string"/>    
+                                                        </xs:complexType>
+                                                      </xs:element>
+                                                      <xs:element name="Locator">
+                                                        <xs:complexType>                                                    
+                                                          <xs:attribute name="by" type="xs:string"/>
+                                                          <xs:attribute name="text" type="xs:string"/>
+                                                        </xs:complexType>
+                                                      </xs:element>                                                      
+                                                    </xs:sequence>                       
+                                                  </xs:complexType>
+                                                </xs:element>        
+                                                                                            
+                                              </xs:sequence>
+                                              <xs:attribute name="type" type="xs:string"/>
+                                              <xs:attribute name="name" type="xs:string"/>
+                                            </xs:complexType>
+                                          </xs:element>
+                                          
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      
+                                    </xs:sequence>
+                                    <xs:attribute name="name" type="xs:string"/>
+                                    <xs:attribute name="package" type="xs:string"/>
+                                    <xs:attribute name="class" type="xs:string"/>
+                                  </xs:complexType>
+                                </xs:element>
+                                
+                                
+                              </xs:sequence>
+                              <xs:attribute name="name" type="xs:string"/>
+                              <xs:attribute name="package" type="xs:string"/>
+                            </xs:complexType>
+                          </xs:element>
+                          
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  
+                    
+                  </xs:sequence>
+                  <xs:attribute name="name" type="xs:string"/>
+                </xs:complexType>                
+              </xs:element>
+            
+              
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        
+      </xs:sequence>
+    </xs:complexType>  
+  </xs:element>
+  
+</xs:schema>
