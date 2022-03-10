@@ -3,32 +3,28 @@
   targetNamespace="Root"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   elementFormDefault="qualified"
-  xmlns:info="SiteMapInfoType">
+  xmlns:inf="SiteMapInfo"
+  xmlns:inc="IncludeElementsInTest"
+  >
   
   <xs:import 
     schemaLocation="SiteMapInfoType.xsd" 
-    namespace="SiteMapInfoType"/>
+    namespace="SiteMapInfo"/>
   
+  <xs:import 
+    schemaLocation="IncludeElementsForTestType.xsd" 
+    namespace="IncludeElementsInTest"/>
 
   <xs:element name="SiteMap">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="Info" type="info:SiteMapInfoType"></xs:element>
-      
-        
-        <xs:element name="IncludeElementsForTest">
-          <xs:complexType>
-            <xs:sequence>              
-              <xs:element name="Include" type="xs:string" maxOccurs="unbounded"/>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>          
-        
+        <xs:element name="Info" type="inf:SiteMapInfoType" />         
+        <xs:element name="IncludeElementsForTest" type="inc:IncludeElementsForTestType" />
+                            
         <xs:element name="Modules">
           <xs:complexType>
             <xs:sequence>
-            
-            
+                        
               <xs:element name="Module" maxOccurs="unbounded">
                 
                 <xs:complexType>

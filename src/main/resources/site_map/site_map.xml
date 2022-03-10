@@ -3,7 +3,8 @@
 <SiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
   xsi:schemaLocation="Root SiteMap.xsd"
   xmlns="Root"
-  xmlns:inf="SiteMapInfoType"
+  xmlns:inf="SiteMapInfo"
+  xmlns:inc="IncludeElementsInTest"
   >
   
   <Info>
@@ -16,11 +17,11 @@
   </Info>
   
   <IncludeElementsForTest>
-    <Include>Button</Include>
-    <Include>TextSelect</Include>
-    <Include>TextOut</Include>
-    <Include>ComboSelectOnly</Include>    
-    <Include>Label</Include>
+    <inc:Include>Button</inc:Include>
+    <inc:Include>TextSelect</inc:Include>
+    <inc:Include>TextOut</inc:Include>
+    <inc:Include>ComboSelectOnly</inc:Include>    
+    <inc:Include>Label</inc:Include>
   </IncludeElementsForTest>
   
   <Modules>

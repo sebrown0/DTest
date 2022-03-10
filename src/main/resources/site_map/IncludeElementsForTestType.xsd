@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema  
-  targetNamespace="IncludeElementsForTestType"
+  targetNamespace="IncludeElementsInTest"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   elementFormDefault="qualified"
   >
   
-  <xs:complexType name="IncludeElementsForTest">
+  <xs:complexType name="IncludeElementsForTestType">
     <xs:sequence>              
       <xs:element name="Include" type="xs:string" maxOccurs="unbounded"/>
     </xs:sequence>
