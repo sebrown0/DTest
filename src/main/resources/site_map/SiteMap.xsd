@@ -5,9 +5,8 @@
   elementFormDefault="qualified"
   xmlns:inf="SiteMapInfo"
   xmlns:inc="IncludeElementsInTest"
-  xmlns:el="Element"
-  >
-  
+  xmlns:itm="MenuItem"
+  >  
   <xs:import 
     schemaLocation="SiteMapInfoType.xsd" 
     namespace="SiteMapInfo"/>
@@ -16,10 +15,10 @@
     schemaLocation="IncludeElementsForTestType.xsd" 
     namespace="IncludeElementsInTest"/>
     
-   <xs:import 
-    schemaLocation="ElementType.xsd" 
-    namespace="Element"/>
-
+  <xs:import 
+    schemaLocation="MenuItemType.xsd" 
+    namespace="MenuItem"/>
+        
   <xs:element name="SiteMap">
     <xs:complexType>
       <xs:sequence>
@@ -42,59 +41,7 @@
                           <xs:element name="Menu">
                             <xs:complexType>
                               <xs:sequence>                            
-                                <xs:element name="MenuItem">
-                                  <xs:complexType>
-                                    <xs:sequence>
-                                                                 
-                                      <xs:element name="Type">
-                                        <xs:complexType>
-                                          <xs:sequence>
-                                            <xs:element name="JsPanelWithIFrame">
-                                              <xs:complexType>
-                                                <xs:attribute name="panelTitle" type="xs:string"/>
-                                              </xs:complexType>                                                 
-                                            </xs:element>
-                                          </xs:sequence>
-                                          <xs:attribute name="name" type="xs:string"/>  
-                                        </xs:complexType>                                        
-                                      </xs:element>
-                                      
-                                      <xs:element name="HeaderElements" minOccurs="0" maxOccurs="1">
-                                        <xs:complexType>
-                                          <xs:sequence>
-                                          
-                                          <xs:element name="Container">
-                                            <xs:complexType>
-                                              <xs:sequence>
-                                              
-                                                <xs:element name="Locator">
-                                                  <xs:complexType>                                                    
-                                                    <xs:attribute name="by" type="xs:string"/>
-                                                    <xs:attribute name="text" type="xs:string"/>
-                                                  </xs:complexType>
-                                                </xs:element>
-                                                
-                                                <xs:element name="Element" type="el:ElementType"/>     
-                                                                                            
-                                              </xs:sequence>
-                                              <xs:attribute name="type" type="xs:string"/>
-                                              <xs:attribute name="name" type="xs:string"/>
-                                              
-                                            </xs:complexType>
-                                          </xs:element>
-                                          
-                                          </xs:sequence>
-                                        </xs:complexType>
-                                      </xs:element>
-                                      
-                                      
-                                      
-                                    </xs:sequence>
-                                    <xs:attribute name="name" type="xs:string"/>
-                                    <xs:attribute name="package" type="xs:string"/>
-                                    <xs:attribute name="class" type="xs:string"/>                                  
-                                  </xs:complexType>
-                                </xs:element>  
+                                  <xs:element name="MenuItem" type="itm:MenuItemType" maxOccurs="unbounded"/>
                               </xs:sequence>
                               <xs:attribute name="name" type="xs:string"/>
                               <xs:attribute name="package" type="xs:string"/>

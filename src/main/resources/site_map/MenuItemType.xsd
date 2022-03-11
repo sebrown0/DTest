@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  
+  targetNamespace="MenuItem"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified"
+  xmlns:cnt="Container"  
+  >
+
+ <xs:import 
+  schemaLocation="ContainerType.xsd" 
+  namespace="Container"/>
+  
+  <xs:complexType name="MenuItemType">
+    <xs:sequence>                                 
+      <xs:element name="Type">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="JsPanelWithIFrame">
+              <xs:complexType>
+                <xs:attribute name="panelTitle" type="xs:string"/>
+              </xs:complexType>                                                 
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="name" type="xs:string"/>  
+        </xs:complexType>                                        
+      </xs:element>
+      
+      <xs:element name="HeaderElements" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Container" type="cnt:ContainerType" minOccurs="1" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="package" type="xs:string"/>
+    <xs:attribute name="class" type="xs:string"/>                                  
+  </xs:complexType>
+
+</xs:schema>
+  

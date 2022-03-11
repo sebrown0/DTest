@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  
+  targetNamespace="Container"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified"
+  xmlns:loc="Locator"
+  xmlns:elm="Element"
+  >
+  
+ <xs:import 
+  schemaLocation="LocatorType.xsd" 
+  namespace="Locator"/>
+
+ <xs:import 
+  schemaLocation="ElementType.xsd" 
+  namespace="Element"/>
+   
+  <xs:complexType name="ContainerType">
+    <xs:sequence>
+      <xs:element name="Locator" type="loc:LocatorType"/>
+      <xs:element name="Element" type="elm:ElementType"/>
+    </xs:sequence>      
+    <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="name" type="xs:string"/>    
+  </xs:complexType>
+          
+
+</xs:schema>
+  
