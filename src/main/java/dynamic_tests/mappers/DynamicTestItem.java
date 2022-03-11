@@ -50,9 +50,9 @@ public class DynamicTestItem implements TreeVisitor {
 		TreeWalker treeWalker = 
 				new TreeWalker(
 						this,
-						new Node(item.getHeader()),
-						new Node(item.getBody()),
-						new Node(item.getFooter()));
+						new Node(item.getHeaderContainer()),
+						new Node(item.getBodyContainer()),
+						new Node(item.getFooterContainer()));
 						
 		treeWalker.traverseTree();	
 	}
