@@ -6,7 +6,8 @@
   xmlns:loc="Locator"
   xmlns:elm="Element"
   xmlns:cnt="Container"
-  >
+  xmlns:fun="Function"
+ >
   
  <xs:import 
   schemaLocation="LocatorType.xsd" 
@@ -15,25 +16,21 @@
  <xs:import 
   schemaLocation="ElementType.xsd" 
   namespace="Element"/>
+  
+ <xs:import 
+  schemaLocation="FunctionType.xsd" 
+  namespace="Function"/>
    
-  <xs:complexType name="ContainerType">
-    
+  <xs:complexType name="ContainerType">    
     <xs:sequence>
       <xs:element name="Locator" type="loc:LocatorType" minOccurs="1" maxOccurs="1" />      
       <xs:element name="Container" type="cnt:ContainerType" minOccurs="0" maxOccurs="unbounded" />
-      <xs:element name="Element" type="elm:ElementType" minOccurs="0" maxOccurs="unbounded" />      
-    </xs:sequence>
-    
-    <!-- 
-    <xs:sequence>
-      <xs:element name="Locator" type="loc:LocatorType"/>
-      <xs:element name="Element" type="elm:ElementType"/>
-    </xs:sequence>
-     -->      
+      <xs:element name="Element" type="elm:ElementType" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="Function" type="fun:FunctionType" minOccurs="0" maxOccurs="1" />            
+    </xs:sequence>       
     <xs:attribute name="type" type="xs:string"/>
     <xs:attribute name="name" type="xs:string"/>    
-  </xs:complexType>
-          
+  </xs:complexType>          
 
 </xs:schema>
   

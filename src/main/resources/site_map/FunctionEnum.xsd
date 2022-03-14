@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  
+  targetNamespace="FunctionEnum"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified"  
+ >
+  
+  <xs:simpleType name="FuncEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CONTAINER" />
+      <xs:enumeration value="ELEMENT" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema> 

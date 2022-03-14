@@ -8,6 +8,7 @@
   xmlns:el="Element"
   xmlns:itm="MenuItem"
   xmlns:cnt="Container"
+  xmlns:fun="Function"
   >
   
   <Info>
@@ -51,7 +52,7 @@
           
            <itm:BodyElements>
             <itm:Container type="Tabs" name="Tabs">
-              <cnt:Locator by="css" text="ul[class='nav nav-tabs']"/>              
+              <cnt:Locator by="css" text="ul[class='nav nav-tabs']"/>
               <cnt:Container type="Tab" name="SalaryDetails">
                 <cnt:Locator by="css" text="a[id='tab-tab1']"/>
                 <!-- LABELS -->
@@ -59,7 +60,8 @@
                   <el:Details type="Label" name="LabelReason" text="Reason"/>
                   <el:Locator by="css" text="label[for='REASON']"/>              
                 </cnt:Element> 
-              </cnt:Container>     
+              </cnt:Container>
+              <cnt:Function name="Tabsfunction" type="CONTAINER" isDefaultPass="false"/>     
             </itm:Container>     
           </itm:BodyElements> 
           <!--  -->
