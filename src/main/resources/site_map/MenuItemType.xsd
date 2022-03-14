@@ -33,6 +33,14 @@
         </xs:complexType>
       </xs:element>
       
+      <xs:element name="BodyElements" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Container" type="cnt:ContainerType" minOccurs="1" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      
     </xs:sequence>
     <xs:attribute name="name" type="xs:string"/>
     <xs:attribute name="package" type="xs:string"/>

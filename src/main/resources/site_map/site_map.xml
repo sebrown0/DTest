@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 
-<!DOCTYPE document 
-    [ 
-      <!ENTITY SiteMapInfo SYSTEM 
-        'file:C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/preamble/SiteMapInfo.xml'>   
-          
-    ]
->
-
 <SiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
   xsi:schemaLocation="Root SiteMap.xsd"
   xmlns="Root"
@@ -20,7 +12,7 @@
   
   <Info>
     <inf:Author>SteveBrown</inf:Author>
-    <inf:Version>1</inf:Version>
+    <inf:Version>1.0.0</inf:Version>
     <inf:CreationMethod>IgnoreExisting</inf:CreationMethod>
     <inf:RootDir>C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/java</inf:RootDir>
     <inf:ParentPackage>object_models/modules</inf:ParentPackage>
@@ -43,6 +35,7 @@
             <itm:Type name="JsPanelWithIFrame">
               <itm:JsPanelWithIFrame panelTitle="Employee Salary Details" /> 
             </itm:Type>
+            
             <itm:HeaderElements>
               <itm:Container type="InputGroup" name="EmpLookup">
                 <cnt:Locator by="css" text="div[class='input-group']"/> 
@@ -54,28 +47,25 @@
                 </cnt:Element>
               </itm:Container>                              
             </itm:HeaderElements>   
+          
+          
+           <itm:BodyElements>
+            <itm:Container type="Tabs" name="Tabs">
+              <cnt:Locator by="css" text="ul[class='nav nav-tabs']"/>              
+              <cnt:Container type="Tab" name="SalaryDetails">
+                <cnt:Locator by="css" text="a[id='tab-tab1']"/>
+                <!-- LABELS -->
+                <cnt:Element>
+                  <el:Details type="Label" name="LabelReason" text="Reason"/>
+                  <el:Locator by="css" text="label[for='REASON']"/>              
+                </cnt:Element> 
+              </cnt:Container>     
+            </itm:Container>     
+          </itm:BodyElements> 
+          <!--  -->
           </MenuItem>
         </Menu>
       </Menus>
     </Module>
   </Modules>
 </SiteMap>
-
-         <!--
-<MenuItem name="Salary Details" package="Employees" class="SalaryDetails">
-            <Type name="JsPanelWithIFrame">
-              <JsPanelWithIFrame panelTitle = "Employee Salary Details" /> 
-            </Type>
-            <HeaderElements>
-              <Container type="InputGroup" name="EmpLookup">
-                <Locator by="css" text="div[class='input-group']"/>
-                <Element>
-                  <el:Details type="Button" name="SalaryHistory" text="" fafa="fa fa-list"/>
-                  <el:Locator by="css" text="div[title='View Salary History']"/>
-                  <el:ToolTip text="View Salary History"/>                
-                  <el:Function isDefaultPass="true" />
-                </Element>            
-              </Container>                
-            </HeaderElements>   
-          </MenuItem>
-           --> 

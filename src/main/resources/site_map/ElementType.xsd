@@ -12,7 +12,7 @@
   
   <xs:complexType name="ElementType">                                                    
     <xs:sequence>
-      <xs:element name="Details">
+      <xs:element name="Details" minOccurs="1" maxOccurs="1" >
         <xs:complexType>
           <xs:attribute name="type" type="xs:string"/>
           <xs:attribute name="name" type="xs:string"/>    
@@ -20,14 +20,14 @@
           <xs:attribute name="fafa" type="xs:string"/>    
         </xs:complexType>
       </xs:element>
-      <xs:element name="Locator" type="loc:LocatorType" />
+      <xs:element name="Locator" type="loc:LocatorType"  minOccurs="1" maxOccurs="1" />
         
-      <xs:element name="ToolTip">
+      <xs:element name="ToolTip"  minOccurs="0" maxOccurs="1" >
         <xs:complexType>                                                    
           <xs:attribute name="text" type="xs:string"/>
         </xs:complexType>
       </xs:element>
-      <xs:element name="Function">
+      <xs:element name="Function" minOccurs="0" maxOccurs="1" >
         <xs:complexType>                                                    
           <xs:attribute name="isDefaultPass" type="xs:string"/>
         </xs:complexType>
