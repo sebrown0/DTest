@@ -1,7 +1,7 @@
 /**
  * 
  */
-package dynamic_tests.mappers;
+package dynamic_tests.mappers.functions;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -12,9 +12,8 @@ import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.DynamicContainer;
 import org.junit.jupiter.api.DynamicTest;
 
-import dynamic_tests.finders.ClassFinder;
 import dynamic_tests.finders.MethodFinder;
-import site_mapper.elements.ElementClass;
+import dynamic_tests.mappers.TestNode;
 import site_mapper.jaxb.pom.ElementFunction;
 
 /**
@@ -31,24 +30,20 @@ import site_mapper.jaxb.pom.ElementFunction;
  * This returns the dynamic test for the container.
  * The DT is added to the DynamicContainer for the node.
  */
-public class ContainerFunctionTest {
-	private ElementClass item;
-	private List<DynamicContainer> menuItemTests;
-	
-	private Object obj;
+public class ContainerFunctionTest extends FunctionTest{
+	private TestNode tn;
 	private Method meth;
-	private DynamicTest dt;
+	private ElementFunction f;
 	
-	public ContainerFunctionTest(ElementClass item, List<DynamicContainer> menuItemTests) {
-		this.item = item;
-		this.menuItemTests = menuItemTests;
+	public ContainerFunctionTest(Object obj, String itemName, List<DynamicContainer> menuItemTests) {
+		super(obj, itemName, menuItemTests);
 	}
 	
-	public void addContainerFunctionTest(TestNode tn) {
-		ElementFunction f = tn.getFunc();
+	@Override
+	public void addFunctionTest() {
+		f = tn.getFunc();
 		if(f != null) {
-			getObjectFromMenuItem();
-			getMethodFromObject(tn, f);
+			getMethodsFromObject();
 			if(meth != null) {	
 				getDynamicTestFromMethod();				
 				if(dt != null) {
@@ -57,18 +52,19 @@ public class ContainerFunctionTest {
 			}else {
 				LogManager
 					.getLogger(ContainerFunctionTest.class)
-					.debug(String.format("[%s] has no test function", tn.getName()));
+					.debug(String.format("[%s] has no test function", itemName));
 			}		
 		}				
 	}
 	
-	private void getObjectFromMenuItem() {
-		obj = ClassFinder.getInstantiatedObject(item);
+	@Override
+	protected void getMethodsFromObject() {
+		meth = 
+			MethodFinder.getTestMethodOfTypeWithName(
+					obj.getClass(), "container", "Container" + tn.getName() + "FunctionTest");
 	}
-	private void getMethodFromObject(TestNode tn, ElementFunction f) {
-		meth = MethodFinder.getTestMethodOfTypeWithName(obj.getClass(), "container", tn.getName()+f.getName());
-	}
-	private void getDynamicTestFromMethod() {		
+	@Override
+	protected void getDynamicTestFromMethod() {		
 		try {
 			dt = (DynamicTest) meth.invoke(obj);
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
@@ -77,11 +73,17 @@ public class ContainerFunctionTest {
 				.error(String.format("Error getting DT for method [%s]", meth.getName()));
 		}
 	}
-	private void addTestToList() {
+	@Override
+	protected void addTestToList() {
 		menuItemTests.add(
 				DynamicContainer.dynamicContainer(
 					"Functions", 
 					Arrays.asList(dt)				
 					));		
+	}
+
+	public FunctionTest setTestNode(TestNode tn) {
+		this.tn = tn;
+		return this;
 	}
 }

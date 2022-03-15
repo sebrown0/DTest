@@ -36,18 +36,18 @@ class DynamicTestsFromSiteMapperTests {
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) throws Exception {
 		hp = userLogin.loginValidUser(UserProvider.userPortal());
-	}
-	
+	}	
 
 	@AfterAll
 	public static void tearDown() {
-//		hp.close();
+		hp.close();
 	}
 
 	@TestFactory	 
 	DynamicContainer runTests() {
-		app.xml_content.DynamicTestApp content = DynamicTestMapper.getDynamicTestContent(XML_SOURCE).get();
-		System.out.println(content.toString()); // TODO - remove or log 	
+		app.xml_content.DynamicTestApp content = 
+				DynamicTestMapper.getDynamicTestContent(XML_SOURCE).get();
+		
 		DynamicTestApp app = 
 				new DynamicTestApp(
 						content, 

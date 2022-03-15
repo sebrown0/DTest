@@ -6,7 +6,6 @@ package dynamic_tests.mappers;
 import java.util.ArrayList;
 import java.util.List;
 
-import site_mapper.jaxb.containers.Container;
 import site_mapper.jaxb.node.Node;
 import site_mapper.jaxb.pom.Element;
 import site_mapper.jaxb.pom.ElementFunction;
@@ -14,6 +13,7 @@ import site_mapper.jaxb.pom.ElementFunction;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
  * @since 1.0
  * 
  * TODO
@@ -32,21 +32,13 @@ public class TestNode {
 		this.name = name;
 		addParentName();
 	}
-	// Root with elements.
-//	public TestNode(String name, List<Element> elements) {		
-//		this.name = name;
-//		this.elements = elements;
-//		addParentName();
-//		
-//	}
 	// Child with no elements.
 	public TestNode(String name, TestNode parent) {
 		this.parent = parent;
 		this.name = name;
 		
 		addParentName();
-	}
-	
+	}	
 	// Child with elements.
 	public TestNode(TestNode parent, Node node) {
 		this.parent = parent;
@@ -56,19 +48,6 @@ public class TestNode {
 		
 		addParentName();
 	}
-	
-//	private ElementFunction getFunction(Node node) {
-//		Container c = node.getCurrentContainer();
-//		return (c != null) ? c.getFunction() : null;
-//	}
-//	public TestNode(String name, TestNode parent, List<Element> elements, ElementFunction func) {
-//		this.parent = parent;
-//		this.name = name;
-//		this.elements = elements;
-//		this.func = func;
-//		
-//		addParentName();
-//	}
 	
 	private void addParentName() {
 		prntNames = new ArrayList<>();

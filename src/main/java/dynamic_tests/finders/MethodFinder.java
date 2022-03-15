@@ -51,7 +51,6 @@ public class MethodFinder {
 	public static List<Method> getTestMethodsOfType(final Class<?> clazz, final String type) {
     final List<Method> methods = new ArrayList<Method>();   
     for (final Method method : clazz.getDeclaredMethods()) {
-    	System.out.println("->" + method.getName()); // TODO - remove or log 	
       if (method.isAnnotationPresent(TestControl.class)) {
       	TestControl ann = method.getAnnotation(TestControl.class);      	
       	if(ann.type().equals(type)) {

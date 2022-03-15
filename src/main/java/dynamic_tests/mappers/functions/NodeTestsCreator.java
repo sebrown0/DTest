@@ -1,13 +1,15 @@
 /**
  * 
  */
-package dynamic_tests.mappers;
+package dynamic_tests.mappers.functions;
 
 import java.util.List;
 
 import org.junit.jupiter.api.DynamicContainer;
 
 import dynamic_tests.elements.IncludedElements;
+import dynamic_tests.finders.ClassFinder;
+import dynamic_tests.mappers.TestNode;
 import dynamic_tests.test_elements.DynamicTestFactory;
 import dynamic_tests.test_elements.ElementTest;
 import dynamic_tests.test_elements.ElementTestFactory;
@@ -27,13 +29,13 @@ import site_mapper.jaxb.pom.Element;
  * i.e. all the tests for a button in an input group.
  */
 public class NodeTestsCreator {
-
 	private List<TestNode> testNodes;
 	private IncludedElements includedElements;
 	private MenuItem item;;
 	private HomePage hp;
 	private List<DynamicContainer> menuItemTests;
 	
+	private Object obj;
 	private DynamicTestFactory testFactory = new DynamicTestFactory();
 	
 	public NodeTestsCreator(
@@ -48,22 +50,26 @@ public class NodeTestsCreator {
 	}
 
 	public NodeTestsCreator addTestsForEachTestNode(ElementTestFactory tf) {
+		obj = ClassFinder.getInstantiatedObject(item);
 		addElementFunctionTests();
-		ContainerFunctionTest funcTest = new ContainerFunctionTest(item, menuItemTests); 
+		ContainerFunctionTest funcTest = 
+			new ContainerFunctionTest(obj, item.getName(), menuItemTests); 
 		
 		testNodes.forEach(tn -> { 			
-			addContainerFunctionTest(funcTest, tn); 	
+			addContainerFunctionTest(funcTest.setTestNode(tn)); 	
 			addTestsForElements(tn, tf);			
 		});	
 		return this;
 	}
 
-	private void addContainerFunctionTest(ContainerFunctionTest funcTest, TestNode tn) {
-		funcTest.addContainerFunctionTest(tn);		
+	private void addContainerFunctionTest(FunctionTest funcTest) {
+		funcTest.addFunctionTest();		
 	}
 	private void addElementFunctionTests() {
-		ElementFunctionTest elmntTest = new ElementFunctionTest(item, menuItemTests);
-		elmntTest.addContainerFunctionTest();		
+		ElementFunctionTest elmntTest = 
+			new ElementFunctionTest(obj, item.getName(), menuItemTests);
+		
+		elmntTest.addFunctionTest();		
 	}		
 	private void addTestsForElements(TestNode tn, ElementTestFactory tf) {
 		List<Element> els = tn.getElements();

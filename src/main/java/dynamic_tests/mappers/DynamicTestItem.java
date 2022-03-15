@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.DynamicContainer;
 
 import dynamic_tests.elements.IncludedElements;
+import dynamic_tests.mappers.functions.NodeTestsCreator;
 import dynamic_tests.test_elements.ElementTestFactory;
 import object_models.pages.homepage.HomePage;
 import site_mapper.jaxb.containers.Container;
@@ -79,7 +80,6 @@ public class DynamicTestItem implements TreeVisitor {
 
 	public void addTests() {		
 		if(testNodes != null) {				
-//			System.out.println("->" + item.getf); // TODO - remove or log 	
 			NodeTestsCreator nodeTests = 
 				new NodeTestsCreator(
 					testNodes, includedElements, item, hp, menuItemTests);
