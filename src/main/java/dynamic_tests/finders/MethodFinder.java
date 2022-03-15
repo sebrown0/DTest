@@ -53,8 +53,7 @@ public class MethodFinder {
     for (final Method method : clazz.getDeclaredMethods()) {
     	System.out.println("->" + method.getName()); // TODO - remove or log 	
       if (method.isAnnotationPresent(TestControl.class)) {
-      	TestControl ann = method.getAnnotation(TestControl.class);
-      	
+      	TestControl ann = method.getAnnotation(TestControl.class);      	
       	if(ann.type().equals(type)) {
       		methods.add(method);
       	}            

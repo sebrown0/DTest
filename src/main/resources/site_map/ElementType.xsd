@@ -4,11 +4,16 @@
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   elementFormDefault="qualified"
   xmlns:loc="Locator"
+  xmlns:fun="Function"
   >
   
  <xs:import 
   schemaLocation="LocatorType.xsd" 
   namespace="Locator"/>
+  
+ <xs:import 
+  schemaLocation="FunctionType.xsd" 
+  namespace="Function"/>
   
   <xs:complexType name="ElementType">                                                    
     <xs:sequence>
@@ -27,11 +32,7 @@
           <xs:attribute name="text" type="xs:string"/>
         </xs:complexType>
       </xs:element>
-      <xs:element name="Function" minOccurs="0" maxOccurs="1" >
-        <xs:complexType>                                                    
-          <xs:attribute name="isDefaultPass" type="xs:string"/>
-        </xs:complexType>
-      </xs:element>                                                      
+      <xs:element name="Function" type="fun:FunctionType" minOccurs="0" maxOccurs="1" />                                                        
     </xs:sequence>                       
   </xs:complexType>  
   

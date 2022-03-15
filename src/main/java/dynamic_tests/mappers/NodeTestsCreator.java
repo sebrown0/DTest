@@ -47,8 +47,10 @@ public class NodeTestsCreator {
 		this.menuItemTests = menuItemTests;
 	}
 
-	public NodeTestsCreator addElementTestsForEachTestNode(ElementTestFactory tf) {
+	public NodeTestsCreator addTestsForEachTestNode(ElementTestFactory tf) {
+		addElementFunctionTests();
 		ContainerFunctionTest funcTest = new ContainerFunctionTest(item, menuItemTests); 
+		
 		testNodes.forEach(tn -> { 			
 			addContainerFunctionTest(funcTest, tn); 	
 			addTestsForElements(tn, tf);			
@@ -59,7 +61,10 @@ public class NodeTestsCreator {
 	private void addContainerFunctionTest(ContainerFunctionTest funcTest, TestNode tn) {
 		funcTest.addContainerFunctionTest(tn);		
 	}
-			
+	private void addElementFunctionTests() {
+		ElementFunctionTest elmntTest = new ElementFunctionTest(item, menuItemTests);
+		elmntTest.addContainerFunctionTest();		
+	}		
 	private void addTestsForElements(TestNode tn, ElementTestFactory tf) {
 		List<Element> els = tn.getElements();
 		if(els != null) {

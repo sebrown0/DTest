@@ -44,7 +44,7 @@
                   <el:Details type="Button" name="SalaryHistory" text="" fafa="fa fa-list"/>
                   <el:Locator by="css" text="div[title='View Salary History']"/>
                   <el:ToolTip text="View Salary History"/>                
-                  <el:Function isDefaultPass="true" />
+                  <el:Function type="element" subtype="button" isDefaultPass="false"/>
                 </cnt:Element>
               </itm:Container>                              
             </itm:HeaderElements>   
@@ -58,10 +58,11 @@
                 <!-- LABELS -->
                 <cnt:Element>
                   <el:Details type="Label" name="LabelReason" text="Reason"/>
-                  <el:Locator by="css" text="label[for='REASON']"/>              
+                  <el:Locator by="css" text="label[for='REASON']"/>
+                  <el:Function type="element" subtype="label" isDefaultPass="false"/>                   
                 </cnt:Element> 
               </cnt:Container>
-              <cnt:Function name="functionTest" type="container" isDefaultPass="true"/>     
+              <cnt:Function type="container" isDefaultPass="true"/>     
             </itm:Container>     
           </itm:BodyElements> 
           <!--  -->
