@@ -7,8 +7,8 @@
   
   <xs:simpleType name="FuncEnum">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="CONTAINER" />
-      <xs:enumeration value="ELEMENT" />
+      <xs:enumeration value="container" />
+      <xs:enumeration value="element" />
     </xs:restriction>
   </xs:simpleType>
 </xs:schema> 

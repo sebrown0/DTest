@@ -61,7 +61,7 @@
                   <el:Locator by="css" text="label[for='REASON']"/>              
                 </cnt:Element> 
               </cnt:Container>
-              <cnt:Function name="Tabsfunction" type="CONTAINER" isDefaultPass="false"/>     
+              <cnt:Function name="functionTest" type="container" />     
             </itm:Container>     
           </itm:BodyElements> 
           <!--  -->

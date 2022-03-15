@@ -133,15 +133,15 @@ class MethodGetterTests {
 	}
 	
 	class AnnotatedClass{
-		@TestControl(type = "button")
+		@TestControl(type = "button", subtype = "")
 		public String buttonSave() {
 			return "buttonSave";
 		}
-		@TestControl(type = "button")
+		@TestControl(type = "button", subtype = "")
 		public String buttonClear() {
 			return "buttonClear";
 		}
-		@TestControl(type = "text_out")
+		@TestControl(type = "text_out", subtype = "")
 		public String testEmpCode() {
 			return "text_out";
 		}

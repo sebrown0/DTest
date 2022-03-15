@@ -26,26 +26,25 @@ import control_builder.control_getters.group.ControlGetterTab;
 * Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
 * Author:  SteveBrown
 * Version: 1.0.0
-* Created: 14/03/2022 14:08:50
+* Created: 15/03/2022 10:35:46
 */
 
 public class SalaryDetails extends JsPanelWithIFrame {
-	@SiteMap(author="SteveBrown", version="1.0.0", date="14/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="15/03/2022")
 	public static final String PANEL_TITLE = "Employee Salary Details";
-	@SiteMap(author="SteveBrown", version="1.0.0", date="14/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="15/03/2022")
 	public static final String MENU_TITLE = "Salary Details";
-	@SiteMap(author="SteveBrown", version="1.0.0", date="14/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="15/03/2022")
 	public static final String MENU_PARENT_NAME = "Employees";
 
+	@SiteMap(author="SteveBrown", version="1.0.0", date="15/03/2022")
 	public SalaryDetails(){}
-	
-	@SiteMap(author="SteveBrown", version="1.0.0", date="14/03/2022")
+
+	@SiteMap(author="SteveBrown", version="1.0.0", date="15/03/2022")
 	public SalaryDetails(CoreData coreData){
 		super(coreData, PANEL_TITLE);
 		buildMyControls();
-	}
-
-	@SiteMap(author="SteveBrown", version="1.0.0", date="14/03/2022")
+	}	@SiteMap(author="SteveBrown", version="1.0.0", date="15/03/2022")
 	private void buildMyControls() {
 		ControlGetter salaryHistory =
 			new ControlGetterButton("SalaryHistory", coreData, By.cssSelector("div[title='View Salary History']"));
@@ -68,10 +67,10 @@ public class SalaryDetails extends JsPanelWithIFrame {
 		super.buildPanelControls(myControls);
 	}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="14/03/2022")
-	@TestControl(type="CONTAINER")
-	public DynamicTest aTypeTabsfunction () {
-		return DynamicTest.dynamicTest("[aTypeTabsfunction]", () -> fail("*NOT IMPLEMENTED*"));
+	@SiteMap(author="SteveBrown", version="1.0.0", date="15/03/2022")
+	@TestControl(type="container", subtype="none")
+	public DynamicTest TabsFunctionTest () {
+		return DynamicTest.dynamicTest("[TabsFunctionTest]", () -> fail("*NOT IMPLEMENTED*"));
 	}
 
 }

@@ -43,25 +43,6 @@ public class Banks extends JsPanelWithIFrame {
 //			);
 //		super.buildPanelControls(myControls);
 //	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonSave () {
-		return DynamicTest.dynamicTest("[buttonSave] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonClear () {
-		return DynamicTest.dynamicTest("[buttonClear] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonEmployee_list () {
-		return DynamicTest.dynamicTest("[buttonEmployee_list] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="09/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonExisting_records () {
-		return DynamicTest.dynamicTest("[buttonExisting_records] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
+	
 
 }

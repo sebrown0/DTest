@@ -55,46 +55,6 @@ public class EmployeeDetails extends JsPanelWithIFrame {
 //			);
 //		super.buildPanelControls(myControls);
 //	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonSave () {
-		return DynamicTest.dynamicTest("[buttonSave] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonSearch () {
-		return DynamicTest.dynamicTest("[buttonSearch] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonClear () {
-		return DynamicTest.dynamicTest("[buttonClear] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonPrint () {
-		return DynamicTest.dynamicTest("[buttonPrint] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonEmployee_list () {
-		return DynamicTest.dynamicTest("[buttonEmployee_list] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonCombos () {
-		return DynamicTest.dynamicTest("[buttonCombos] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonExisting_records () {
-		return DynamicTest.dynamicTest("[buttonExisting_records] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
-	@SiteMap(author="SteveBrown", version="1.0.0", date="08/02/2022")
-	@TestControl(type="button")
-	public DynamicTest buttonDocuments () {
-		return DynamicTest.dynamicTest("[buttonDocuments] *NOT IMPLEMENTED*", () -> assertTrue(true));
-	}
 
 	public EmpDetailsTabs tab() {
 		manager.switchToStateInCurrentContext(StateIframe.class);
