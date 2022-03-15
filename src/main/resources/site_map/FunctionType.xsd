@@ -3,18 +3,23 @@
   targetNamespace="Function"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   elementFormDefault="qualified"
-  xmlns:func="FunctionEnum"
+  xmlns:funcType="FunctionTypeEnum"
+  xmlns:funcSubtype="FunctionSubtypeEnum"
   >
       
   <xs:import 
-    schemaLocation="FunctionEnum.xsd" 
-    namespace="FunctionEnum"/>
-          
+    schemaLocation="FunctionTypeEnum.xsd" 
+    namespace="FunctionTypeEnum"/>
+  
+  <xs:import 
+    schemaLocation="FunctionSubtypeEnum.xsd" 
+    namespace="FunctionSubtypeEnum"/>
+            
   <xs:complexType name = "FunctionType">
     <xs:attribute name="name" type="xs:string"/>
     <xs:attribute name="isDefaultPass" type="xs:boolean" default="false" />
-    <xs:attribute name="type" type="func:FuncEnum" />
-    <xs:attribute name="subtype" type="xs:string" default="none" />              
+    <xs:attribute name="type" type="funcType:FuncEnum" />
+    <xs:attribute name="subtype" type="funcSubtype:FuncSubtypeEnum" default="none" />              
   </xs:complexType>
     
 </xs:schema>

@@ -39,7 +39,7 @@ public class MethodFinder {
     for (final Method m : clazz.getDeclaredMethods()) {
       if (m.isAnnotationPresent(TestControl.class)) {
       	TestControl ann = m.getAnnotation(TestControl.class);
-      	if(ann.type().equals(type) && m.getName().equals(name)) {
+      	if(ann.type().equalsIgnoreCase(type) && m.getName().equalsIgnoreCase(name)) {
       		method = m;
       		break;
       	}            

@@ -3,17 +3,11 @@
  */
 package dynamic_tests.mappers;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.DynamicContainer;
-import org.junit.jupiter.api.DynamicTest;
 
 import dynamic_tests.elements.IncludedElements;
-import dynamic_tests.finders.ClassFinder;
-import dynamic_tests.finders.MethodFinder;
 import dynamic_tests.test_elements.DynamicTestFactory;
 import dynamic_tests.test_elements.ElementTest;
 import dynamic_tests.test_elements.ElementTestFactory;
@@ -21,7 +15,6 @@ import dynamic_tests.test_elements.TestElementDetails;
 import object_models.pages.homepage.HomePage;
 import site_mapper.jaxb.menu_items.MenuItem;
 import site_mapper.jaxb.pom.Element;
-import site_mapper.jaxb.pom.ElementFunction;
 
 /**
  * @author SteveBrown
@@ -55,72 +48,18 @@ public class NodeTestsCreator {
 	}
 
 	public NodeTestsCreator addElementTestsForEachTestNode(ElementTestFactory tf) {
-		testNodes.forEach(tn -> { 
-			
-			addContainerFunctionTest(tn); 	
-			addTestsForElements(tn, tf);
-			
+		ContainerFunctionTest funcTest = new ContainerFunctionTest(item, menuItemTests); 
+		testNodes.forEach(tn -> { 			
+			addContainerFunctionTest(funcTest, tn); 	
+			addTestsForElements(tn, tf);			
 		});	
 		return this;
 	}
-	
-//	private void addContainerFunctionTest(TestNode tn) {
-//		ElementFunction f = tn.getFunc();
-//		if(f != null) {
-//			System.out.println(tn.getName() + "\n" + f.toString()); // TODO - remove or log	
-//			menuItemTests.add(
-//				DynamicContainer.dynamicContainer(
-//					"Functions", 
-//					List.of(DynamicTest.dynamicTest("Is [" + f.getName() +"] FUNCTION correct?", 
-//						() -> {	fail("!! NOT IMPLEMENTED !!"); })))				
-//					);					
-//		}				
-//	}
 
-	private void addContainerFunctionTest(TestNode tn) {
-		ElementFunction f = tn.getFunc();
-		if(f != null) {
-			System.out.println(tn.getName() + "\n" + f.toString()); // TODO - remove or log
-			Object obj = ClassFinder.getClazz(item);
-//			Class clazz = 
-			List<DynamicTest> tests = new ArrayList<>();
-			
-			List<Method> methods = MethodFinder.getTestMethodsOfType(obj.getClass(), "CONTAINER");
-			if(methods != null) {
-				for(Method m : methods) {
-					tests.add(getTest(null, m));	
-				}				
-			}
-			
-			
-			menuItemTests.add(
-				DynamicContainer.dynamicContainer(
-					"Functions", 
-					tests				
-					));					
-		}				
+	private void addContainerFunctionTest(ContainerFunctionTest funcTest, TestNode tn) {
+		funcTest.addContainerFunctionTest(tn);		
 	}
-	
-	private DynamicTest getTest(Class<?> clazz, Method m) {
-		try {
-			return (DynamicTest) m.invoke(clazz);
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-//	private void addContainerFunctionTest(TestNode tn) {
-//		ElementFunction f = tn.getFunc();
-//		if(f != null) {
-//			System.out.println(tn.getName() + "\n" + f.toString()); // TODO - remove or log	
-//			menuItemTests.add(
-//					MethodFinder.getTestMethodsOfType(tn.getClass(), "button"))					
-//		}				
-//	}
-	
-		
+			
 	private void addTestsForElements(TestNode tn, ElementTestFactory tf) {
 		List<Element> els = tn.getElements();
 		if(els != null) {

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  
+  targetNamespace="FunctionSubtypeEnum"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified"  
+ >
+  
+  <xs:simpleType name="FuncSubtypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="none" />
+      <xs:enumeration value="button" />
+      <xs:enumeration value="label" />
+      <xs:enumeration value="combo" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema> 
