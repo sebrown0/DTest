@@ -26,7 +26,7 @@ import control_builder.control_getters.group.ControlGetterTab;
 * Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
 * Author:  SteveBrown
 * Version: 1.0.0
-* Created: 15/03/2022 14:06:10
+* Created: 15/03/2022 15:21:40
 */
 
 public class SalaryDetails extends JsPanelWithIFrame {
@@ -70,7 +70,7 @@ public class SalaryDetails extends JsPanelWithIFrame {
 	@SiteMap(author="SteveBrown", version="1.0.0", date="15/03/2022")
 	@TestControl(type="element", subtype="Button")
 	public DynamicTest ButtonSalaryHistoryFunctionTest () {
-		return DynamicTest.dynamicTest("[ButtonSalaryHistoryFunctionTest]", () -> assertTrue(true));
+		return DynamicTest.dynamicTest("[ButtonSalaryHistoryFunctionTest]", () -> fail("*NOT IMPLEMENTED*"));
 	}
 
 	@SiteMap(author="SteveBrown", version="1.0.0", date="15/03/2022")
