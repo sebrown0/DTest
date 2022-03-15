@@ -3,6 +3,9 @@
  */
 package dynamic_tests.finders;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import org.apache.logging.log4j.LogManager;
 
 import site_mapper.elements.ElementClass;
@@ -18,12 +21,25 @@ import site_mapper.elements.ElementClass;
  * @since 1.0
  */
 public class ClassFinder {
-	private static String ROOT = "object_models";
-	//object_models.module_payroll.left_menu.employees.Banks
-	
-	//object_models/modules/payroll/left_menu/employees/Banks.java
-	//"object_models.payroll.left_menu.employees.Banks" (id=108)	
+	private static String ROOT = "object_models";	
 
+	public static Object getInstantiatedObject(ElementClass nodeClass){		
+		final Class<?> clazz = getClazz(nodeClass);
+		Object obj = null;
+		
+		Constructor<?> cnstr;
+		try {
+			cnstr = clazz.getConstructor();
+			obj = cnstr.newInstance();
+		} catch (
+				NoSuchMethodException | SecurityException | InstantiationException | 
+				IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+
+			LogManager.getLogger().error("Could not instantiate class for [" + nodeClass + "]");
+		}		
+		return 	obj;
+	}
+	
 	public static Class<?> getClazz(ElementClass nodeClass){		
 		try {
 			String className = getPathToClass(nodeClass);
@@ -33,7 +49,7 @@ public class ClassFinder {
 		}
 		return null;
 	}
-	//object_models.modules.null.left_menu.employees.  package object_models.modules.payroll.left_menu.employees;
+	
 	public static String getPathToClass(ElementClass nodeClass) {
 		return getPathInLowerCase(nodeClass) + "." + nodeClass.getClassName();
 	}

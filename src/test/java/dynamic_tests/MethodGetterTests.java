@@ -111,6 +111,27 @@ class MethodGetterTests {
 		assertTrue(dt.getDisplayName().contains(METHOD_NAME));
 	}
 	
+	@Test
+	void getMethod_from_InsantiatedObject_using_classFinder() throws 
+		NoSuchMethodException, SecurityException, InstantiationException, 
+		IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		
+		final String METHOD_NAME = "aTypeTabsfunction";
+		
+		TestElement salDetails = 
+			new MenuItem()
+				.setTestModuleName("payroll")
+				.setTestMenuName("left_menu")
+				.setTestPackage("Employees")
+				.setTestClassName("SalaryDetails");
+		
+		SalaryDetails sal = (SalaryDetails) ClassFinder.getInstantiatedObject((ElementClass) salDetails);	
+		
+		Method m = MethodFinder.getTestMethodOfTypeWithName(sal.getClass(), "CONTAINER", METHOD_NAME);
+		DynamicTest dt = (DynamicTest) m.invoke(sal);
+		assertTrue(dt.getDisplayName().contains(METHOD_NAME));
+	}
+	
 	class AnnotatedClass{
 		@TestControl(type = "button")
 		public String buttonSave() {
