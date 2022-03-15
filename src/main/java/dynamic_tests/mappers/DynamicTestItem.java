@@ -12,10 +12,11 @@ import dynamic_tests.elements.IncludedElements;
 import dynamic_tests.test_elements.ElementTestFactory;
 import object_models.pages.homepage.HomePage;
 import site_mapper.jaxb.containers.Container;
-import site_mapper.jaxb.containers.Node;
-import site_mapper.jaxb.containers.TreeVisitor;
-import site_mapper.jaxb.containers.TreeWalker;
 import site_mapper.jaxb.menu_items.MenuItem;
+import site_mapper.jaxb.node.Node;
+import site_mapper.jaxb.node.ParentNode;
+import site_mapper.jaxb.tree.TreeVisitor;
+import site_mapper.jaxb.tree.TreeWalker;
 
 /**
  * @author SteveBrown
@@ -50,18 +51,16 @@ public class DynamicTestItem implements TreeVisitor {
 		TreeWalker treeWalker = 
 				new TreeWalker(
 						this,
-						new Node(item.getHeaderContainer()),
-						new Node(item.getBodyContainer()),
-						new Node(item.getFooterContainer()));
+						new ParentNode(item.getHeaderContainer()),
+						new ParentNode(item.getBodyContainer()),
+						new ParentNode(item.getFooterContainer()));
 						
 		treeWalker.traverseTree();	
 	}
 
 	@Override //TreeVisitor
 	public void addNode(Node node) {
-		TestNode testNode = 
-			new TestNode(
-					node.getName(), lastTestNode, node.getElements());
+		TestNode testNode =	new TestNode(lastTestNode, node);
 		testNodes.add(testNode);
 		setLastNode(testNode, node);				
 	}
@@ -80,6 +79,7 @@ public class DynamicTestItem implements TreeVisitor {
 
 	public void addTests() {		
 		if(testNodes != null) {				
+//			System.out.println("->" + item.getf); // TODO - remove or log 	
 			NodeTestsCreator nodeTests = 
 				new NodeTestsCreator(
 					testNodes, includedElements, item, hp, menuItemTests);

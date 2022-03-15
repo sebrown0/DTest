@@ -37,6 +37,8 @@ public class SalaryDetails extends JsPanelWithIFrame {
 	@SiteMap(author="SteveBrown", version="1.0.0", date="14/03/2022")
 	public static final String MENU_PARENT_NAME = "Employees";
 
+	public SalaryDetails(){}
+	
 	@SiteMap(author="SteveBrown", version="1.0.0", date="14/03/2022")
 	public SalaryDetails(CoreData coreData){
 		super(coreData, PANEL_TITLE);
@@ -67,7 +69,7 @@ public class SalaryDetails extends JsPanelWithIFrame {
 	}
 
 	@SiteMap(author="SteveBrown", version="1.0.0", date="14/03/2022")
-	@TestControl(type="aType")
+	@TestControl(type="CONTAINER")
 	public DynamicTest aTypeTabsfunction () {
 		return DynamicTest.dynamicTest("[aTypeTabsfunction]", () -> fail("*NOT IMPLEMENTED*"));
 	}

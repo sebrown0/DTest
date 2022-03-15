@@ -6,15 +6,22 @@ package dynamic_tests;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
 
 import dynamic_tests.annotations.TestControl;
+import dynamic_tests.finders.ClassFinder;
 import dynamic_tests.finders.MethodFinder;
 import object_models.modules.payroll.left_menu.employees.EmployeeDetails;
+import object_models.modules.payroll.left_menu.employees.SalaryDetails;
+import site_mapper.elements.ElementClass;
+import site_mapper.jaxb.menu_items.MenuItem;
+import site_mapper.jaxb.menu_items.TestElement;
 
 /**
  * @author SteveBrown
@@ -60,6 +67,48 @@ class MethodGetterTests {
 			e.printStackTrace();
 		}
 		assertEquals("buttonSave", s);
+	}
+	
+	@Test
+	void getInsantiatedObject() throws 
+		NoSuchMethodException, SecurityException, InstantiationException, 
+		IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		
+		TestElement salDetails = 
+			new MenuItem()
+				.setTestModuleName("payroll")
+				.setTestMenuName("left_menu")
+				.setTestPackage("Employees")
+				.setTestClassName("SalaryDetails");
+		
+		Class<?> clazz = ClassFinder.getClazz((ElementClass) salDetails);	
+		Constructor<?> cnstr = clazz.getConstructor();
+		SalaryDetails sal = (SalaryDetails) cnstr.newInstance();	
+		
+		assertTrue(sal != null);
+	}
+	
+	@Test
+	void getMethod_from_InsantiatedObject() throws 
+		NoSuchMethodException, SecurityException, InstantiationException, 
+		IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		
+		final String METHOD_NAME = "aTypeTabsfunction";
+		
+		TestElement salDetails = 
+			new MenuItem()
+				.setTestModuleName("payroll")
+				.setTestMenuName("left_menu")
+				.setTestPackage("Employees")
+				.setTestClassName("SalaryDetails");
+		
+		Class<?> clazz = ClassFinder.getClazz((ElementClass) salDetails);	
+		Constructor<?> cnstr = clazz.getConstructor();
+		SalaryDetails sal = (SalaryDetails) cnstr.newInstance();	
+		
+		Method m = MethodFinder.getTestMethodOfTypeWithName(sal.getClass(), "CONTAINER", METHOD_NAME);
+		DynamicTest dt = (DynamicTest) m.invoke(sal);
+		assertTrue(dt.getDisplayName().contains(METHOD_NAME));
 	}
 	
 	class AnnotatedClass{
