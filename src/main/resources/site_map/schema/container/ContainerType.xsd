@@ -10,15 +10,15 @@
  >
   
  <xs:import 
-  schemaLocation="LocatorType.xsd" 
+  schemaLocation="file:///C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/common/LocatorType.xsd" 
   namespace="Locator"/>
 
  <xs:import 
-  schemaLocation="ElementType.xsd" 
+  schemaLocation="file:///C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/element/ElementType.xsd" 
   namespace="Element"/>
   
  <xs:import 
-  schemaLocation="FunctionType.xsd" 
+  schemaLocation="file:///C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/function/FunctionType.xsd" 
   namespace="Function"/>
    
   <xs:complexType name="ContainerType">    

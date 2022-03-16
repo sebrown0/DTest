@@ -16,7 +16,7 @@
     namespace="FunctionSubtypeEnum"/>
             
   <xs:complexType name = "FunctionType">
-    <xs:attribute name="isDefaultPass" type="xs:boolean" default="false" />
+    <xs:attribute name="isDefaultPass" type="xs:boolean" default="true" />
     <xs:attribute name="type" type="funcType:FuncEnum" />
     <xs:attribute name="subtype" type="funcSubtype:FuncSubtypeEnum" default="none" />              
   </xs:complexType>

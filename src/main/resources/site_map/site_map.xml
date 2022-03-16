@@ -16,7 +16,7 @@
   <Info>
     <inf:Author>SteveBrown</inf:Author>
     <inf:Version>1.0.0</inf:Version>
-    <inf:CreationMethod>IgnoreExisting</inf:CreationMethod>
+    <inf:CreationMethod>OverwriteExisting</inf:CreationMethod>
     <inf:RootDir>C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/java</inf:RootDir>
     <inf:ParentPackage>object_models/modules</inf:ParentPackage>
     <inf:ElementLibrary>C:/Users/SteveBrown/eclipse-workspace/2021/DTest</inf:ElementLibrary>
@@ -40,47 +40,85 @@
             </itm:Type>
             
             <itm:HeaderElements>
+  
               <itm:Container type="InputGroup" name="EmpLookup">
-                <cnt:Locator by="css" text="div[class='input-group']"/> 
-                
-                 <cnt:Element>
-                  <el:Details type="TextOut" name="FormID" />
-                  <el:Locator by="id" text="FORM_ID"/>   
-                  <el:Function type="element" subtype="textout" isDefaultPass="true"/>
-                  <el:TestDataIn insertWith="EmployeeLookupByName">                     
-                    <din:Text value="Borg"/>
-                  </el:TestDataIn>
-                  <el:TestDataOut>                     
-                    <dout:Text value="0123456M"/>
-                  </el:TestDataOut>                        
-                </cnt:Element>
-                
+                <cnt:Locator by="css" text="div[class='input-group']"/>                 
+                  <cnt:Element>
+                    <el:Details type="TextOut" name="FormID" />
+                    <el:Locator by="id" text="FORM_ID"/>   
+                    <el:Function type="element" subtype="textout" isDefaultPass="true"/>
+                    <el:TestDataIn insertWith="EmployeeLookupByName">                     
+                      <din:Text value="Borg"/>
+                    </el:TestDataIn>
+                    <el:TestDataOut>                     
+                      <dout:Text value="0123456M"/>
+                    </el:TestDataOut>                        
+                  </cnt:Element>
+                <cnt:Element>
+                  <el:Details type="button" name="EmployeeList" text="" fafa="fa fa-list"/>
+                  <el:Locator by="css" text="div[title='Search Employee']"/>  
+                  <el:ToolTip text="Select from a list of employees within the chosen company"/>              
+                  <el:Function type="element" subtype="textout" isDefaultPass="true" />
+                </cnt:Element>                
                 <cnt:Element>
                   <el:Details type="Button" name="SalaryHistory" text="" fafa="fa fa-list"/>
                   <el:Locator by="css" text="div[title='View Salary History']"/>
                   <el:ToolTip text="View Salary History"/>                
                   <el:Function type="element" subtype="button" isDefaultPass="false"/>
                 </cnt:Element>
-              </itm:Container>                              
+                <cnt:Element>
+                  <el:Details type="button" name="Combos" text="" fafa="fa fa-window-maximize"/>
+                  <el:Locator by="css" text="div[title='Combos']"/>
+                  <el:ToolTip text="Combos"/>                
+                  <el:Function type="element" subtype="button"/>
+                </cnt:Element>
+                <cnt:Element>
+                  <el:Details type="Button" name="GridView" text="" fafa="fa fw fa-table"/>
+                  <el:Locator by="css" text="div[title='Grid View for this Employee']"/>
+                  <el:ToolTip text="Grid View for this Employee"/>                
+                  <el:Function type="element" subtype="button" />
+                </cnt:Element>
+                <cnt:Element>
+                  <el:Details type="button" name="ExistingRecords" text="" fafa="fa fw fa-table"/>
+                  <el:Locator by="css" text="div[title='Grid View for existing records']"/>
+                  <el:ToolTip text="Grid View for existing records"/>                
+                  <el:Function type="element" subtype="button" />
+                </cnt:Element>
+                <cnt:Element>
+                  <el:Details type="button" name="Documents" text="" fafa="fa fa-file-o"/>
+                  <el:Locator by="css" text="div[title='No Documents Attached']"/>
+                  <el:ToolTip text="No Documents Attached"/>                
+                  <el:Function type="element" subtype="button" />
+                </cnt:Element>
+              </itm:Container>
+              
+              <itm:Container type="InputGroup" name="DatePicker">
+                <cnt:Locator by="css" text="div[class='input-group date datepicker']"/>
+                <cnt:Element>
+                  <el:Details type="button" name="Calendar" text="" fafa="fa fa-calendar fa-fw"/>
+                  <el:Locator by="css" text="i[class='fa fa-calendar fa-fw']"/>         
+                  <el:Function type="element" subtype="button" />
+                </cnt:Element>
+              </itm:Container>                
+             
             </itm:HeaderElements>   
           
           
-           <itm:BodyElements>
-            <itm:Container type="Tabs" name="Tabs">
-              <cnt:Locator by="css" text="ul[class='nav nav-tabs']"/>
-              <cnt:Container type="Tab" name="SalaryDetails">
-                <cnt:Locator by="css" text="a[id='tab-tab1']"/>
-                <!-- LABELS -->
-                <cnt:Element>
-                  <el:Details type="Label" name="LabelReason" text="Reason"/>
-                  <el:Locator by="css" text="label[for='REASON']"/>
-                  <el:Function type="element" subtype="label" isDefaultPass="false"/>                   
-                </cnt:Element> 
-              </cnt:Container>
-              <cnt:Function type="container" isDefaultPass="true"/>     
-            </itm:Container>     
-          </itm:BodyElements> 
-          <!--  -->
+            <itm:BodyElements>
+              <itm:Container type="Tabs" name="Tabs">
+                <cnt:Locator by="css" text="ul[class='nav nav-tabs']"/>
+                <cnt:Container type="Tab" name="SalaryDetails">
+                  <cnt:Locator by="css" text="a[id='tab-tab1']"/>
+                  <!-- LABELS -->
+                  <cnt:Element>
+                    <el:Details type="Label" name="LabelReason" text="Reason"/>
+                    <el:Locator by="css" text="label[for='REASON']"/>
+                    <el:Function type="element" subtype="label" isDefaultPass="false"/>                   
+                  </cnt:Element> 
+                </cnt:Container>
+                <cnt:Function type="container" isDefaultPass="true"/>     
+              </itm:Container>     
+            </itm:BodyElements>
           </MenuItem>
         </Menu>
       </Menus>

@@ -10,19 +10,19 @@
   >
   
  <xs:import 
-  schemaLocation="LocatorType.xsd" 
+  schemaLocation="file:///C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/common/LocatorType.xsd" 
   namespace="Locator"/>
 
  <xs:import 
-  schemaLocation="FunctionType.xsd" 
+  schemaLocation="file:///C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/function/FunctionType.xsd" 
   namespace="Function"/>
  
  <xs:import 
-  schemaLocation="TestDataIn.xsd"  
+  schemaLocation="file:///C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/data/TestDataIn.xsd"  
   namespace="TestDataIn" />
      
  <xs:import 
-  schemaLocation="TestDataOut.xsd"  
+  schemaLocation="file:///C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/data/TestDataOut.xsd"  
   namespace="TestDataOut" />
   
   <xs:complexType name="ElementType">                                                    

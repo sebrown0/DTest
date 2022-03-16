@@ -8,15 +8,15 @@
   xmlns:itm="MenuItem"
   >  
   <xs:import 
-    schemaLocation="SiteMapInfoType.xsd" 
+    schemaLocation="file:///C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/info/SiteMapInfoType.xsd" 
     namespace="SiteMapInfo"/>
   
   <xs:import 
-    schemaLocation="IncludeElementsForTestType.xsd" 
+    schemaLocation="file:///C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/info/IncludeElementsForTestType.xsd" 
     namespace="IncludeElementsInTest"/>
     
   <xs:import 
-    schemaLocation="MenuItemType.xsd" 
+    schemaLocation="file:///C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/menu/MenuItemType.xsd" 
     namespace="MenuItem"/>
         
   <xs:element name="SiteMap">

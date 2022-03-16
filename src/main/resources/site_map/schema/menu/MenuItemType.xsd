@@ -7,7 +7,7 @@
   >
 
  <xs:import 
-  schemaLocation="ContainerType.xsd" 
+  schemaLocation="file:///C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/container/ContainerType.xsd" 
   namespace="Container"/>
   
   <xs:complexType name="MenuItemType">
