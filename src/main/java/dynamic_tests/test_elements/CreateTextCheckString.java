@@ -6,6 +6,9 @@ package dynamic_tests.test_elements;
 import java.util.List;
 
 import org.junit.jupiter.api.DynamicTest;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import controls.interfaces.ControlTest;
 import dynamic_tests.assertations.AssertTextEquals;
@@ -39,6 +42,10 @@ public class CreateTextCheckString extends TestCreator {
 				new 
 					AssertTextEquals(controlTest, cntrl)
 						.assertTextEquals(textExpected);
+				
+//				WebDriver d = super.cntrlFinder.ZZZ_getDriver();
+//				WebElement el = d.findElement(By.cssSelector("input[id='FORM_id']"));
+//				System.out.println("->" + el.getText()); // TODO - remove or log 	
 			}));		
 	}
 		

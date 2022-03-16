@@ -61,7 +61,7 @@ public class EmployeeLookupByName implements TestDataInserter {
 	}
 	
 	private void loadForm(Button btn) {
-		btn.click();
+		btn.click();		
 	}
 	
 	private void setForm() {

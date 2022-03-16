@@ -23,7 +23,7 @@
    
   <xs:complexType name="ContainerType">    
     <xs:sequence>
-      <xs:element name="Locator" type="loc:LocatorType" minOccurs="1" maxOccurs="1" />      
+      <xs:element name="Locator" type="loc:LocatorType" minOccurs="0" maxOccurs="1" />      
       <xs:element name="Container" type="cnt:ContainerType" minOccurs="0" maxOccurs="unbounded" />
       <xs:element name="Element" type="elm:ElementType" minOccurs="0" maxOccurs="unbounded" />
       <xs:element name="Function" type="fun:FunctionType" minOccurs="0" maxOccurs="1" />            

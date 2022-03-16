@@ -24,7 +24,17 @@ public class IncludedTests implements IncludedElements {
 
 	@Override
 	public boolean isIncluded(String value) {
-		return elements.contains(value);
+		return testInclude(value);
 	}
 
+	private boolean testInclude(String value) {
+		boolean res=false;
+		for(String s : elements) {
+			if(s.equalsIgnoreCase(value)) {
+				res = true;
+				break;
+			}
+		}
+		return res;
+	}
 }

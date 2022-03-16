@@ -12,7 +12,7 @@
   
   <xs:complexType name="MenuItemType">
     <xs:sequence>                                 
-      <xs:element name="Type">
+      <xs:element name="Type" minOccurs="1" maxOccurs="1">
         <xs:complexType>
           <xs:sequence>
             <xs:element name="JsPanelWithIFrame">
@@ -23,28 +23,12 @@
           </xs:sequence>
           <xs:attribute name="name" type="xs:string"/>  
         </xs:complexType>                                        
-      </xs:element>
-      
-      <xs:element name="HeaderElements" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="Container" type="cnt:ContainerType" minOccurs="1" maxOccurs="unbounded" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      
-      <xs:element name="BodyElements" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="Container" type="cnt:ContainerType" minOccurs="1" maxOccurs="unbounded" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      
+      </xs:element>      
+      <xs:element name="Container" type="cnt:ContainerType" minOccurs="0" maxOccurs="unbounded" />      
     </xs:sequence>
-    <xs:attribute name="name" type="xs:string"/>
-    <xs:attribute name="package" type="xs:string"/>
-    <xs:attribute name="class" type="xs:string"/>                                  
+    <xs:attribute name="name" type="xs:string" use="required" />
+    <xs:attribute name="package" type="xs:string" use="required" />
+    <xs:attribute name="class" type="xs:string" use="required" />                                  
   </xs:complexType>
 
 </xs:schema>

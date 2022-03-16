@@ -26,7 +26,7 @@ public final class ControlGetterEmployeeSelection extends ControlGetter {
 
 	@Override
 	public Control getControl() {
-		super.driver.findElement(findBy).click();
+//		super.driver.findElement(findBy).click();
 		return new EmployeeSelection(super.coreData, findBy);
 	}
 	

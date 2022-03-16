@@ -24,7 +24,7 @@ public class DynamicTestFactory {
 		String elType = el.getElementType();				
 //System.out.println("->" + el.getElementName()); // TODO - remove or log 	
 		switch (elType) {
-			case "Button" -> {
+			case "button", "Button" -> {
 				test.addTests(new TestAdderButton(el));
 			}
 			case "TextSelect", "TextOut" -> {
@@ -33,7 +33,7 @@ public class DynamicTestFactory {
 			case "ComboSelectOnly" -> {
 				test.addTests(new TestAdderComboSelectOnly(el));						
 			}
-			case "Label" -> {
+			case "label", "Label" -> {
 				test.addTests(new TestAdderLabel(el));						
 			}
 			default -> { 

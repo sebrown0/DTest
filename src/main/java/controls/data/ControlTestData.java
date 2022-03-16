@@ -5,6 +5,8 @@ package controls.data;
 
 import java.util.Optional;
 
+import org.openqa.selenium.WebElement;
+
 import controls.interfaces.Control;
 import controls.interfaces.DisplayedText;
 import controls.interfaces.HasFaFa;
@@ -41,7 +43,7 @@ public class ControlTestData {
 				DisplayedText displayedText = (DisplayedText) o;
 				cntrlText = displayedText.getText();
 			}			
-		}	
+		}			
 		return cntrlText;
 	}
 	

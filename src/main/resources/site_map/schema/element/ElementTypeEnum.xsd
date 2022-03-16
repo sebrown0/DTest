@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  
+  targetNamespace="ElementType"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified"
+  >  
+      
+  <xs:simpleType name="ElementTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Button" />
+      <xs:enumeration value="TextSelect" />
+      <xs:enumeration value="TextOut" />
+      <xs:enumeration value="Label" />
+      <xs:enumeration value="ComboSelectOnly" />      
+    </xs:restriction>
+  </xs:simpleType>
+      
+</xs:schema>

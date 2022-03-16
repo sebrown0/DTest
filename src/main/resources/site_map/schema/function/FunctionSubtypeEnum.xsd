@@ -3,15 +3,20 @@
   targetNamespace="FunctionSubtypeEnum"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   elementFormDefault="qualified"  
+  xmlns:t="ElementType"
+  xmlns:n="EnumNone"            
  >
   
+  <xs:import 
+    schemaLocation="file:///C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/element/ElementTypeEnum.xsd"  
+    namespace="ElementType" />
+    
+  <xs:import 
+    schemaLocation="file:///C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/common/EnumNone.xsd"  
+    namespace="EnumNone" />
+      
   <xs:simpleType name="FuncSubtypeEnum">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="none" />
-      <xs:enumeration value="button" />
-      <xs:enumeration value="label" />
-      <xs:enumeration value="combo" />
-      <xs:enumeration value="textout" />
-    </xs:restriction>
+    <xs:union memberTypes="t:ElementTypeEnum n:EnumNoneType" />
   </xs:simpleType>
+  
 </xs:schema> 

@@ -19,7 +19,7 @@ import dynamic_tests.elements.ControlFinder;
  * @since 1.0
  */
 public abstract class TestCreator {
-	private ControlFinder cntrlFinder;
+	protected ControlFinder cntrlFinder;
 	
 	protected List<DynamicTest> testList;
 	protected Optional<Control> cntrl;	

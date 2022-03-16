@@ -52,6 +52,10 @@ public class DynamicTestMenu {
 		}
 		return DynamicContainer.dynamicContainer(menu.getName(), menuTestItems);
 	}
+
+	private void addMenuItemTestsToMenuContainer(MenuItem item, List<DynamicContainer> menuItemTestContainers) {
+		menuTestItems.add(DynamicContainer.dynamicContainer(item.getName(), menuItemTestContainers));
+	}
 	
   private List<DynamicContainer> getTestsForMenuItem(MenuItem item) {
   	List<DynamicContainer> menuItemTestContainers = new ArrayList<>();		
@@ -64,8 +68,5 @@ public class DynamicTestMenu {
  		return menuItemTestContainers;
   }
 
-	private void addMenuItemTestsToMenuContainer(MenuItem item, List<DynamicContainer> menuItemTestContainers) {
-		menuTestItems.add(DynamicContainer.dynamicContainer(item.getName(), menuItemTestContainers));
-	}
 	
 }
