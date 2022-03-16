@@ -9,6 +9,8 @@
   xmlns:itm="MenuItem"
   xmlns:cnt="Container"
   xmlns:fun="Function"
+  xmlns:din="TestDataIn"
+  xmlns:dout="TestDataOut"    
   >
   
   <Info>
@@ -40,6 +42,19 @@
             <itm:HeaderElements>
               <itm:Container type="InputGroup" name="EmpLookup">
                 <cnt:Locator by="css" text="div[class='input-group']"/> 
+                
+                 <cnt:Element>
+                  <el:Details type="TextOut" name="FormID" />
+                  <el:Locator by="id" text="FORM_ID"/>   
+                  <el:Function type="element" subtype="textout" isDefaultPass="true"/>
+                  <el:TestDataIn insertWith="EmployeeLookupByName">                     
+                    <din:Text value="Borg"/>
+                  </el:TestDataIn>
+                  <el:TestDataOut>                     
+                    <dout:Text value="0123456M"/>
+                  </el:TestDataOut>                        
+                </cnt:Element>
+                
                 <cnt:Element>
                   <el:Details type="Button" name="SalaryHistory" text="" fafa="fa fa-list"/>
                   <el:Locator by="css" text="div[title='View Salary History']"/>

@@ -14,6 +14,7 @@ import control_builder.control_getters.group.ControlGetterGroup;
 import object_models.panels.JsPanelWithIFrame;
 import control_builder.control_data.ControlData;
 import object_models.pages.homepage.CoreData;
+import control_builder.control_getters.single.ControlGetterTextOut;
 import control_builder.control_getters.single.ControlGetterButton;
 import control_builder.control_getters.group.ControlGetterInputGroup;
 import control_builder.control_getters.group.ControlGetterTabs;
@@ -26,7 +27,7 @@ import control_builder.control_getters.group.ControlGetterTab;
 * Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
 * Author:  SteveBrown
 * Version: 1.0.0
-* Created: 15/03/2022 15:21:40
+* Created: 15/03/2022 16:20:02
 */
 
 public class SalaryDetails extends JsPanelWithIFrame {
@@ -46,6 +47,8 @@ public class SalaryDetails extends JsPanelWithIFrame {
 		buildMyControls();
 	}	@SiteMap(author="SteveBrown", version="1.0.0", date="15/03/2022")
 	private void buildMyControls() {
+		ControlGetter formID =
+			new ControlGetterTextOut("FormID", coreData, By.id("FORM_ID"));
 		ControlGetter salaryHistory =
 			new ControlGetterButton("SalaryHistory", coreData, By.cssSelector("div[title='View Salary History']"));
 		ControlGetter labelReason =
@@ -58,13 +61,19 @@ public class SalaryDetails extends JsPanelWithIFrame {
 				.addControls(Arrays.asList(salaryDetails));
 		ControlGetterGroup empLookup =
 			new ControlGetterInputGroup("EmpLookup", coreData, By.cssSelector("div[class='input-group']"))
-				.addControls(Arrays.asList(salaryHistory));
+				.addControls(Arrays.asList(formID, salaryHistory));
 		var myControls =
 			List.of(
 				new ControlData(empLookup),
 				new ControlData(tabs)
 			);
 		super.buildPanelControls(myControls);
+	}
+
+	@SiteMap(author="SteveBrown", version="1.0.0", date="15/03/2022")
+	@TestControl(type="element", subtype="TextOut")
+	public DynamicTest TextOutFormIDFunctionTest () {
+		return DynamicTest.dynamicTest("[TextOutFormIDFunctionTest] *NOT IMPLEMENTED*", () -> assertTrue(true));
 	}
 
 	@SiteMap(author="SteveBrown", version="1.0.0", date="15/03/2022")

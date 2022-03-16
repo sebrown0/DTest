@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  
+  targetNamespace="TestDataIn"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified"
+  xmlns:txt="Text"  
+  >
+  
+  <xs:import 
+    schemaLocation= "TextType.xsd" 
+    namespace="Text"/>
+  
+  <xs:complexType name="TestDataInType">
+    <xs:sequence>      
+      <xs:element name="Text" type="txt:TextType" />
+    </xs:sequence>
+    <xs:attribute name="insertWith" type="xs:string" />
+  </xs:complexType>
+</xs:schema>

@@ -3,17 +3,27 @@
   targetNamespace="Element"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   elementFormDefault="qualified"
-  xmlns:loc="Locator"
+  xmlns:loc="Locator"    
   xmlns:fun="Function"
+  xmlns:din="TestDataIn"
+  xmlns:dout="TestDataOut"    
   >
   
  <xs:import 
   schemaLocation="LocatorType.xsd" 
   namespace="Locator"/>
-  
+
  <xs:import 
   schemaLocation="FunctionType.xsd" 
   namespace="Function"/>
+ 
+ <xs:import 
+  schemaLocation="TestDataIn.xsd"  
+  namespace="TestDataIn" />
+     
+ <xs:import 
+  schemaLocation="TestDataOut.xsd"  
+  namespace="TestDataOut" />
   
   <xs:complexType name="ElementType">                                                    
     <xs:sequence>
@@ -25,14 +35,15 @@
           <xs:attribute name="fafa" type="xs:string"/>    
         </xs:complexType>
       </xs:element>
-      <xs:element name="Locator" type="loc:LocatorType"  minOccurs="1" maxOccurs="1" />
-        
+      <xs:element name="Locator" type="loc:LocatorType"  minOccurs="1" maxOccurs="1" />        
       <xs:element name="ToolTip"  minOccurs="0" maxOccurs="1" >
         <xs:complexType>                                                    
           <xs:attribute name="text" type="xs:string"/>
         </xs:complexType>
       </xs:element>
-      <xs:element name="Function" type="fun:FunctionType" minOccurs="0" maxOccurs="1" />                                                        
+      <xs:element name="Function" type="fun:FunctionType" minOccurs="0" maxOccurs="1" />    
+      <xs:element name="TestDataIn" type="din:TestDataInType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="TestDataOut" type="dout:TestDataOutType" minOccurs="0" maxOccurs="1" />                                                                 
     </xs:sequence>                       
   </xs:complexType>  
   
