@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  
+  targetNamespace="Modules"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified"
+  xmlns:mod="Module"
+  > 
+  
+  <xs:import 
+    schemaLocation="file:///C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/module/ModuleType.xsd" 
+    namespace="Module"/>
+    
+  <xs:complexType name="ModulesType">
+    <xs:sequence>
+      <xs:element name="Module" type="mod:ModuleType" minOccurs="1" maxOccurs="unbounded"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
+</xs:schema>

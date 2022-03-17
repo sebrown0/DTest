@@ -10,7 +10,11 @@
   xmlns:cnt="Container"
   xmlns:fun="Function"
   xmlns:din="TestDataIn"
-  xmlns:dout="TestDataOut"    
+  xmlns:dout="TestDataOut"
+  xmlns:menus="Menus"
+  xmlns:menu="Menu"
+  xmlns:mod="Module"
+  xmlns:mods="Modules"                
   >
   
   <Info>
@@ -31,19 +35,16 @@
   </IncludeElementsForTest>
   
   <Modules>
-    <Module name="payroll">
-      <Menus>
-        <Menu name="Left" package="left_menu">
-        <!-- -->  
-          <MenuItem name="Salary Details" package="Employees" class="SalaryDetails">
+    <mods:Module name="payroll">
+      <mod:Menus>        
+        <menus:Menu name="Left" package="left_menu">        
+          <menu:MenuItem name="Salary Details" package="Employees" class="SalaryDetails">
             <itm:Type name="JsPanelWithIFrame">
               <itm:JsPanelWithIFrame panelTitle="Employee Salary Details" /> 
-            </itm:Type>
-            
+            </itm:Type>            
             <itm:Container type="ItemGroup" name="HeaderElements">  
               <cnt:Container type="InputGroup" name="EmpLookup">
-                <cnt:Locator by="css" text="div[class='input-group']"/>        
-                <!-- -->          
+                <cnt:Locator by="css" text="div[class='input-group']"/>
                   <cnt:Element>
                     <el:Details type="TextOut" name="FormID" />
                     <el:Locator by="id" text="FORM_ID"/>   
@@ -121,9 +122,9 @@
               </cnt:Container>     
             </itm:Container>
             
-          </MenuItem>
+          </menu:MenuItem>
          
-          <MenuItem name="Contact Numbers" package="Employees" class="ContactNumbers">
+          <menu:MenuItem name="Contact Numbers" package="Employees" class="ContactNumbers">
             <itm:Type name="JsPanelWithIFrame">
               <itm:JsPanelWithIFrame panelTitle="Employee Contact Details" /> 
             </itm:Type>
@@ -143,9 +144,9 @@
                 </cnt:Element>
               </cnt:Container>
             </itm:Container>
-          </MenuItem>
-        </Menu>
-      </Menus>
-    </Module>
+          </menu:MenuItem>
+        </menus:Menu>
+      </mod:Menus>
+    </mods:Module>
   </Modules>
 </SiteMap>

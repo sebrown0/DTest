@@ -38,7 +38,7 @@ public class TestDataInput {
 			getDataInserter().ifPresent(inserter -> inserter.insertData());	
 		} catch (InvalidArgumentException e) {
 			// Report to the screen so we know.
-			System.out.println(e); // TODO - remove or log 	
+			System.out.println("TestDataInput -> " + e); // TODO - remove or log 	
 		}
 	}
 	
