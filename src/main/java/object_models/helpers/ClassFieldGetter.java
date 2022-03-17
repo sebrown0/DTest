@@ -62,7 +62,7 @@ public class ClassFieldGetter {
 		try {
 			originalName = Optional.ofNullable((String) clazz.getField("ORIGINAL_NAME").get(null));
 		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
-			logger.error("Failed to get element original using reflection");
+			logger.error("Failed to get element's original name using reflection");
 		}
 	}
 		

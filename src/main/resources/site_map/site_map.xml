@@ -37,6 +37,9 @@
   <Modules>
     <mods:Module name="payroll">
       <mod:Menus>        
+
+
+
         <menus:Menu name="Left" package="left_menu">        
           <menu:MenuItem name="Salary Details" package="Employees" class="SalaryDetails">
             <itm:Type name="JsPanelWithIFrame">
@@ -45,19 +48,19 @@
             <itm:Container type="ItemGroup" name="HeaderElements">  
               <cnt:Container type="InputGroup" name="EmpLookup">
                 <cnt:Locator by="css" text="div[class='input-group']"/>
-                  <cnt:Element>
-                    <el:Details type="TextOut" name="FormID" />
-                    <el:Locator by="id" text="FORM_ID"/>   
-                    <el:Function type="element" subtype="TextOut" isDefaultPass="true"/>
-                    <!-- 
-                    <el:TestDataIn insertWith="EmployeeLookupByName">                     
-                      <din:Text value="Borg"/>
-                    </el:TestDataIn>
-                    <el:TestDataOut>                     
-                      <dout:Text value="0123456M"/>
-                    </el:TestDataOut>
-                     -->                        
-                  </cnt:Element>
+                <cnt:Element>
+                  <el:Details type="TextOut" name="FormID" />
+                  <el:Locator by="id" text="FORM_ID"/>   
+                  <el:Function type="element" subtype="TextOut" isDefaultPass="true"/>
+                  <!-- 
+                  <el:TestDataIn insertWith="EmployeeLookupByName">                     
+                    <din:Text value="Borg"/>
+                  </el:TestDataIn>
+                  <el:TestDataOut>                     
+                    <dout:Text value="0123456M"/>
+                  </el:TestDataOut>
+                  -->
+                </cnt:Element>
                    
                 <cnt:Element>
                   <el:Details type="Button" name="EmployeeList" text="" fafa="fa fa-list"/>
@@ -123,7 +126,7 @@
             </itm:Container>
             
           </menu:MenuItem>
-         
+
           <menu:MenuItem name="Contact Numbers" package="Employees" class="ContactNumbers">
             <itm:Type name="JsPanelWithIFrame">
               <itm:JsPanelWithIFrame panelTitle="Employee Contact Details" /> 
@@ -143,6 +146,30 @@
                   </el:TestDataOut>                        
                 </cnt:Element>
               </cnt:Container>
+            </itm:Container>
+          </menu:MenuItem>
+        </menus:Menu>
+         
+        <menus:Menu name="TopRightNav" package="top_right_nav">
+          <menu:MenuItem name="Employee Creation" package="Employees" class="EmployeeCreation">
+            <itm:Type name="JsPanelWithIFrame">
+              <itm:JsPanelWithIFrame panelTitle="Employee Creation Wizard" /> 
+            </itm:Type>
+            <itm:Container type="ItemGroup" name="FooterElements">
+              <cnt:Container type="InputGroup" name="PageFooterBtns">
+                <cnt:Locator by="css" text="ul[role='menu']"/>        
+                <cnt:Element>
+                  <el:Details type="Button" name="Back" text="BACK"/>
+                  <el:Locator by="css" text="a[href='#previous']"/>
+                  <el:Function type="element" subtype="Button" isDefaultPass="true" />
+                </cnt:Element>
+                <cnt:Element>
+                  <el:Details type="Button" name="Next" text="CONTINUE"/>
+                  <el:Locator by="css" text="a[href='#next']"/>
+                  <el:Function type="element" subtype="Button" isDefaultPass="true" />
+                </cnt:Element>      
+              </cnt:Container>
+                
             </itm:Container>
           </menu:MenuItem>
         </menus:Menu>

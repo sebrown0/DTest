@@ -45,11 +45,12 @@ public class TopRightNavBarLoader {
 	 */
 	private Optional<ContainerAction> loadElement(ClassFieldGetter fieldGetter) {
 		Optional<ContainerAction> elementContainer = Optional.empty();		
-		Optional<String> elementName = fieldGetter.getOriginalName();
+//		Optional<String> elementName = fieldGetter.getOriginalName();
+		Optional<String> elementName = fieldGetter.getMenuItemName();
 				
 		if(elementName.isPresent()) {
 			String name = elementName.get();
-			NavBarElement e =  navBarElements.getElement(elementName.get());
+			NavBarElement e =  navBarElements.getElement(name);
 					
 			logger.info("Loading [" + name + "]");
 			

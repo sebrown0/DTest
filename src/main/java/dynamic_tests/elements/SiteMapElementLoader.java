@@ -22,7 +22,7 @@ import site_mapper.elements.ElementClass;
  * 
  */
 public class SiteMapElementLoader {
-	private static String[] parts;
+//	private static String[] parts;
 	private static String packageName;
 	
 	public static SiteMapElement getAndLoadSiteMapElement(ElementClass nodeClass, HomePage hp, Class<?> clazz) {		
@@ -70,17 +70,23 @@ public class SiteMapElementLoader {
 	private static boolean isSiteMapElement(ContainerAction element) {
 		return (element instanceof SiteMapElement) ? true : false;
 	}
-	private static boolean isTopRightNavBar() {
-		if(parts != null) {
-			return (parts[0].equals("top_right_nav_bar")) ? true : false;
-		}else {
-			return false;
-		} 
+	/*
+	 * TODO - FIND A BETTER WAY TO CHECK IF IT'S TR NAV.
+	 */
+	private static boolean isTopRightNavBar() {		
+		return (packageName.contains("top_right_nav")) ? true : false;		 
 	}
+
 	private static SiteMapElement loadTopRightNavBar(HomePage hp, Class<?> clazz) {
-		// TODO - Add top-right nav-bar.
-		System.out.println("ERROR: NOT IMPLEMENTED FOR TOP-RGHT NAV-BAR"); // TODO - remove or log
-		LogFactory.getAppLog(SiteMapElementLoader.class).error("NOT IMPLEMENTED FOR TOP-RGHT NAV-BAR");
+//		LogFactory.getAppLog(SiteMapElementLoader.class).error("NOT IMPLEMENTED FOR TOP-RGHT NAV-BAR");
+
+		Optional<ContainerAction> topRightNavItem = hp.getTopRightNavBar().clickAndLoad(clazz); 
+		if(topRightNavItem.isPresent()) {
+			ContainerAction element = topRightNavItem.get();
+			if(isSiteMapElement(element)) {
+				return (SiteMapElement) element;
+			}
+		}		
 		return null;
 	}
 }
