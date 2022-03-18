@@ -14,9 +14,9 @@ import context_manager.states.State;
 import context_manager.states.StateTopRightNavBar;
 import object_models.forms.ContainerAction;
 import object_models.helpers.title.WebElementTitleChecker;
-import object_models.top_right_nav_bar.all_elements.NavBarElementGetter;
-import object_models.top_right_nav_bar.all_elements.NavBarElementStrategy;
-import object_models.top_right_nav_bar.quick_links.QuickLinks;
+import object_models.modules.common.nav.nav_bar_elements.NavBarElementGetter;
+import object_models.modules.common.nav.nav_bar_elements.NavBarElementStrategy;
+import object_models.modules.common.nav.quick_links.QuickLinks;
 
 /**
  * @author SteveBrown

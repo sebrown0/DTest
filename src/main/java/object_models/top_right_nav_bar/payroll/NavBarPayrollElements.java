@@ -9,22 +9,22 @@ import java.util.stream.Stream;
 
 import org.openqa.selenium.WebDriver;
 
+import object_models.modules.common.nav.nav_bar_elements.NavBarDakarIntelligence;
+import object_models.modules.common.nav.nav_bar_elements.NavBarElementStrategy;
+import object_models.modules.common.nav.nav_bar_elements.NavBarEmpGridView;
+import object_models.modules.common.nav.nav_bar_elements.NavBarEmployeeCVPayroll;
+import object_models.modules.common.nav.nav_bar_elements.NavBarEmployeeCreation;
+import object_models.modules.common.nav.nav_bar_elements.NavBarMyCoLastViewed;
+import object_models.modules.common.nav.nav_bar_elements.NavBarNewEmployments;
+import object_models.modules.common.nav.nav_bar_elements.NavBarNotifications;
+import object_models.modules.common.nav.nav_bar_elements.NavBarTerminations;
+import object_models.modules.common.nav.nav_bar_elements.NavBarUserAvatar;
+import object_models.modules.common.nav.nav_bar_elements.NavBarUserManagment;
+import object_models.modules.common.nav.nav_bar_elements.NavBarVisualReports;
+import object_models.modules.common.nav.quick_links.QuickLinks;
+import object_models.modules.common.nav.quick_links.QuickLinksPayroll;
 import object_models.pages.homepage.CoreData;
-import object_models.top_right_nav_bar.all_elements.NavBarDakarIntelligence;
-import object_models.top_right_nav_bar.all_elements.NavBarElementStrategy;
-import object_models.top_right_nav_bar.all_elements.NavBarEmpGridView;
-import object_models.top_right_nav_bar.all_elements.NavBarEmployeeCVPayroll;
-import object_models.top_right_nav_bar.all_elements.NavBarEmployeeCreation;
-import object_models.top_right_nav_bar.all_elements.NavBarMyCoLastViewed;
-import object_models.top_right_nav_bar.all_elements.NavBarNewEmployments;
-import object_models.top_right_nav_bar.all_elements.NavBarNotifications;
-import object_models.top_right_nav_bar.all_elements.NavBarTerminations;
-import object_models.top_right_nav_bar.all_elements.NavBarUserAvatar;
-import object_models.top_right_nav_bar.all_elements.NavBarUserManagment;
-import object_models.top_right_nav_bar.all_elements.NavBarVisualReports;
 import object_models.top_right_nav_bar.common.NavBarElement;
-import object_models.top_right_nav_bar.quick_links.QuickLinks;
-import object_models.top_right_nav_bar.quick_links.QuickLinksPayroll;
 
 /**
  * @author Steve Brown

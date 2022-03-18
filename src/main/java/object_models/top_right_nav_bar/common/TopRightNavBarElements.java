@@ -11,7 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import object_models.top_right_nav_bar.all_elements.NavBarElementStrategy;
+import object_models.modules.common.nav.nav_bar_elements.NavBarElementStrategy;
 
 /**
  * @author Steve Brown

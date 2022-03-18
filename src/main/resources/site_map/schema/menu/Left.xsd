@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  
+  targetNamespace="LeftMenu"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified"
+  xmlns:itm="MenuItem"
+  > 
+    
+  <xs:import 
+    schemaLocation="file:///C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/menu/MenuItemType.xsd" 
+    namespace="MenuItem"/>
+    
+  <xs:complexType name="Left">
+    <xs:sequence>                                
+      <xs:element name="MenuItem" type="itm:MenuItemType" maxOccurs="unbounded"/>    
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

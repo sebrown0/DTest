@@ -7,10 +7,10 @@ import context_manager.ContextManager;
 import context_manager.contexts.Context;
 import entities.company.Company;
 import object_models.left_menu.common.LeftMenu;
+import object_models.modules.common.nav.nav_bar_elements.NavBarElementStrategy;
+import object_models.modules.common.nav.quick_links.QuickLink;
 import object_models.pages.homepage.CoreData;
 import object_models.pages.homepage.HomePage;
-import object_models.top_right_nav_bar.all_elements.NavBarElementStrategy;
-import object_models.top_right_nav_bar.quick_links.QuickLink;
 
 /**
  * @author SteveBrown

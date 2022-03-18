@@ -18,15 +18,15 @@ import object_models.forms.ContainerAction;
 import object_models.helpers.IFrame;
 import object_models.helpers.title.PageTitle;
 import object_models.left_menu.common.LeftMenu;
+import object_models.modules.common.nav.nav_bar_elements.NavBarElementStrategy;
+import object_models.modules.common.nav.quick_links.QuickLink;
+import object_models.modules.common.nav.quick_links.QuickLinkPersonnel;
 import object_models.pages.homepage.CoreData;
 import object_models.pages.homepage.HomePage;
 import object_models.pages.homepage.HomePagePersonnel;
 import object_models.pages.homepage.loader.HomePageElements;
 import object_models.panels.JsPanelHeaderBar;
-import object_models.top_right_nav_bar.all_elements.NavBarElementStrategy;
 import object_models.top_right_nav_bar.personnel.NavBarPersonnelElements;
-import object_models.top_right_nav_bar.quick_links.QuickLink;
-import object_models.top_right_nav_bar.quick_links.QuickLinkPersonnel;
 import providers.ModuleNames;
 
 
