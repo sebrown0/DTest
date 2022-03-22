@@ -2,20 +2,16 @@
 
 
 <tns:Child type="A Child" 
- 
 	xmlns:tns="prnt" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="sch sch.xsd "	
->	
-  
-  
-</tns:Child>	
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"	
+/>	
   
 
 
 <!-- 
 
-
+  xsi:schemaLocation="sch sch.xsd "
+  
 <!DOCTYPE document 
     [ 
       <!ENTITY cont2 SYSTEM 

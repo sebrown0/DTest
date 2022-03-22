@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<!DOCTYPE content 
+    [ 
+      <!ENTITY cont SYSTEM 
+        'file:C:/Users/Brown/eclipse-workspace/2021/DTest/src/main/java/a/Content.xml'>
+             
+      <!ENTITY cont2 SYSTEM 
+        'file:C:/Users/Brown/eclipse-workspace/2021/DTest/src/main/java/a/Content2.xml'>   
+    ]
+>
+
+<tns:content 
+  xmlns:tns="root"
+  xmlns:c="content" 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="sch sch.xsd "
+  >
+  
+  <xs:import 
+    schemaLocation="file:///C:/Users/Brown/eclipse-workspace/2021/DTest/src/main/java/a/prnt.xsd" 
+    namespace="prnt"
+  />
+<!-- --> 
+	<c:Parent type="A Parent 1">    
+  		&cont;  
+  	</c:Parent>
+  
+  	<c:Parent type="A Parent 2">
+    	&cont2;  
+  	</c:Parent>
+   
+</tns:content>
+
+<!-- 
+
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<!DOCTYPE content 
+    [ 
+      <!ENTITY cont SYSTEM 
+        'file:C:/Users/Brown/eclipse-workspace/2021/DTest/src/main/java/a/Content.xml'>
+             
+      <!ENTITY cont2 SYSTEM 
+        'file:C:/Users/Brown/eclipse-workspace/2021/DTest/src/main/java/a/Content2.xml'>   
+    ]
+>
+
+<tns:content 
+  xmlns:tns="root"
+  xmlns:c="content" 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="sch sch.xsd "
+  >
+  
+  <xs:import 
+    schemaLocation="file:///C:/Users/Brown/eclipse-workspace/2021/DTest/src/main/java/a/prnt.xsd" 
+    namespace="prnt"
+  />
+
+  <c:Parent type="A Parent 1">    
+      &cont;  
+    </c:Parent>
+  
+    <c:Parent type="A Parent 2">
+      &cont2;  
+    </c:Parent>
+  
+</tns:content>
+
+ -->

@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Optional;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -68,9 +69,13 @@ public class SiteMapContentGetter <T extends XmlContent> {
 		unmarshaller = jc.createUnmarshaller();
     unmarshaller.setProperty("eclipselink.media-type", "application/xml");      
     unmarshaller.setProperty(UnmarshallerProperties.DISABLE_SECURE_PROCESSING, Boolean.TRUE);
+    //
+//    unmarshaller.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, Boolean.TRUE);
+//    unmarshaller.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, Boolean.TRUE);
         
-    SAXParserFactory spf = SAXParserFactory.newInstance();
-
+//final SAXParserFactory factory = SAXParserFactory.newInstance("com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl", ClassLoader.getSystemClassLoader());    
+//    SAXParserFactory spf = SAXParserFactory.newInstance();
+    SAXParserFactory  spf = SAXParserFactory.newInstance("com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl", ClassLoader.getSystemClassLoader());
     spf.setXIncludeAware(true);
     spf.setNamespaceAware(true);
     try {
@@ -83,8 +88,11 @@ public class SiteMapContentGetter <T extends XmlContent> {
     
     SAXParser saxParser = null;
 		try {
+//			final SAXParserFactory factory = SAXParserFactory.newInstance("com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl", ClassLoader.getSystemClassLoader());
+			
 			saxParser = spf.newSAXParser();
 			saxParser.setProperty(JAXP_SCHEMA_LANGUAGE, W3C_XML_SCHEMA);
+			
 		} catch (ParserConfigurationException | SAXException e1) {			
 			e1.printStackTrace();
 		}    

@@ -12,10 +12,49 @@
     namespace="prnt"/>
 
  	<xs:element name="root">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="Parent" type="p:ParentType" minOccurs="1" maxOccurs="unbounded" />
-			</xs:sequence>
+            
+	 <xs:complexType>
+	   <xs:sequence>
+         <xs:element name="content">  
+           <xs:complexType>
+             <xs:sequence> 
+		       <xs:element name="Parent" type="p:ParentType" minOccurs="1" maxOccurs="unbounded" />
+             </xs:sequence>
+          </xs:complexType>
+             
+		 </xs:element>
+    
+    	</xs:sequence>
 		</xs:complexType>
+      
+
+
 	</xs:element>
 </xs:schema>
+
+
+<!--
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  targetNamespace="sch" 
+  elementFormDefault="qualified"
+  xmlns:tns="sch"
+  xmlns:p="prnt"
+>
+
+  <xs:import 
+    schemaLocation="file:///C:/Users/Brown/eclipse-workspace/2021/DTest/src/main/java/a/prnt.xsd" 
+    namespace="prnt"/>
+
+  <xs:element name="root">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Parent" type="p:ParentType" minOccurs="1" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+ 
+ -->

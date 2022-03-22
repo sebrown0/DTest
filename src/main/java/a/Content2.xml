@@ -4,14 +4,15 @@
  
 	xmlns:tns="prnt" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="sch sch.xsd "	
->	
+	
+/>	
   
-</tns:Child>	
+	
   
 
 
-<!-- 
+<!--
+xsi:schemaLocation="sch sch.xsd "  
 <p:Child xmlns:p="prnt"> type="A Child" </p:Child>
 <p:Child xmlns:p="prnt"> type="A Child" </p:Child>
 

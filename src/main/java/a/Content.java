@@ -8,18 +8,11 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import site_mapper.jaxb.pom.Module;
 import site_mapper.jaxb.pom.SiteMapInfo;
 
-@XmlRootElement(name="root", namespace="sch")
-public class Root implements XmlContent{
-	@XmlElement(name="Content", namespace="sch")
-	Content content;
+@XmlRootElement(name="content")//, namespace="root")
+public class Content implements XmlContent{	
+	@XmlElement(name="Parent", namespace="content")
+	List<Parent> parent;
 
-	public Content getContent() {
-		return content;
-	}
-	
-//	@XmlElement(name="Parent", namespace="sch")
-//	List<Parent> parent;
-//
 	@Override
 	public SiteMapInfo getSiteMapInfo() {
 		// TODO Auto-generated method stub
@@ -31,9 +24,9 @@ public class Root implements XmlContent{
 		// TODO Auto-generated method stub
 		return null;
 	}
-//
-//	public List<Parent> getParent() {
-//		return parent;
-//	}
+
+	public List<Parent> getParent() {
+		return parent;
+	}
 
 }
