@@ -6,18 +6,19 @@
   xmlns:inf="SiteMapInfo"
   xmlns:inc="IncludeElementsInTest"  
   xmlns:mods="Modules"  
+  xmlns:xxx="file:///C:/Users/Brown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/info/SiteMapInfoType.xsd"
   >
     
   <xs:import 
-    schemaLocation="file:///C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/info/SiteMapInfoType.xsd" 
+    schemaLocation="file:///C:/Users/Brown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/info/SiteMapInfoType.xsd" 
     namespace="SiteMapInfo"/>
   
   <xs:import 
-    schemaLocation="file:///C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/info/IncludeElementsForTestType.xsd" 
+    schemaLocation="file:///C:/Users/Brown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/info/IncludeElementsForTestType.xsd" 
     namespace="IncludeElementsInTest"/>
   
   <xs:import 
-    schemaLocation="file:///C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/module/ModulesType.xsd" 
+    schemaLocation="file:///C:/Users/Brown/eclipse-workspace/2021/DTest/src/main/resources/site_map/schema/module/ModulesType.xsd" 
     namespace="Modules"/>
          
   <xs:element name="SiteMap">

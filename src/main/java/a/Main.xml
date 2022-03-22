@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE sch:root 
+    [ 
+      <!ENTITY cont SYSTEM 
+        'file:C:/Users/Brown/eclipse-workspace/2021/DTest/src/main/java/a/Content.xml'>
+             
+      <!ENTITY cont2 SYSTEM 
+        'file:C:/Users/Brown/eclipse-workspace/2021/DTest/src/main/java/a/Content2.xml'>   
+    ]
+>
+
+<tns:root 
+	xmlns:p="prnt" 
+	xmlns:p1="chld" 
+	xmlns:tns="sch" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="sch sch.xsd "
+	xmlns:xi="http://www.w3.org/2001/XInclude"	
+>
+
+	<tns:Parent type="A Parent 1">    
+  		&cont;  
+  	</tns:Parent>
+  
+  	<tns:Parent type="A Parent 2">
+    	&cont2;  
+  	</tns:Parent>
+  
+</tns:root>

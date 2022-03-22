@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="prnt"  
+	elementFormDefault="qualified"
+	xmlns:c="chld"
+>
+
+  <xs:import 
+    schemaLocation="file:///C:/Users/Brown/eclipse-workspace/2021/DTest/src/main/java/a/chld.xsd" 
+    namespace="chld"/>
+
+	<xs:complexType name="ParentType">
+		<xs:sequence>
+			<xs:element name="Child" type="c:ChildType"/>
+		</xs:sequence>
+		<xs:attribute name="type" type="xs:string"/>
+	</xs:complexType>
+</xs:schema>
