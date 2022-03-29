@@ -23,27 +23,27 @@ import control_builder.control_getters.group.ControlGetterInputGroup;
 * Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
 * Author:  SteveBrown
 * Version: 1.0.0
-* Created: 18/03/2022 16:56:24
+* Created: 29/03/2022 11:03:18
 */
 
 public class ContactNumbers extends JsPanelWithIFrame {
-	@SiteMap(author="SteveBrown", version="1.0.0", date="18/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="29/03/2022")
 	public static final String PANEL_TITLE = "Employee Contact Details";
-	@SiteMap(author="SteveBrown", version="1.0.0", date="18/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="29/03/2022")
 	public static final String MENU_TITLE = "Contact Numbers";
-	@SiteMap(author="SteveBrown", version="1.0.0", date="18/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="29/03/2022")
 	public static final String MENU_PARENT_NAME = "Employees";
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="18/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="29/03/2022")
 	public ContactNumbers(){}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="18/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="29/03/2022")
 	public ContactNumbers(CoreData coreData){
 		super(coreData, PANEL_TITLE);
 		buildMyControls();
 	}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="18/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="29/03/2022")
 	private void buildMyControls() {
 		ControlGetter formID =
 			new ControlGetterTextOut("FormID", coreData, By.id("FORM_ID"));
@@ -57,7 +57,7 @@ public class ContactNumbers extends JsPanelWithIFrame {
 		super.buildPanelControls(myControls);
 	}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="18/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="29/03/2022")
 	@TestControl(type="element", subtype="TextOut")
 	public DynamicTest TextOutFormIDFunctionTest () {
 		return DynamicTest.dynamicTest("[TextOutFormIDFunctionTest] *NOT IMPLEMENTED*", () -> assertTrue(true));
