@@ -1,182 +1,188 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-
-<SiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
-  xsi:schemaLocation="Root SiteMap.xsd"
-  xmlns="Root"
-  xmlns:inf="SiteMapInfo"
-  xmlns:inc="IncludeElementsInTest"
-  xmlns:el="Element"
-  xmlns:itm="MenuItem"
-  xmlns:cnt="Container"
-  xmlns:fun="Function"
-  xmlns:din="TestDataIn"
-  xmlns:dout="TestDataOut"
-  xmlns:menus="Menus"
-  xmlns:menu="Menu"
-  xmlns:mod="Module"
-  xmlns:mods="Modules"            
-  xmlns:lftMen="LeftMenu"    
-  xmlns:topMen="TopRightMenu"
-  >
+<?xml version="1.0" encoding="UTF-8"?>
+<SiteMap 
+  xmlns="Root" 
+  xmlns:cnt="Container" 
   
+  xmlns:din="TestDataIn" 
+  xmlns:dout="TestDataOut" 
+  
+  xmlns:td="TestData"
+  xmlns:el="Element" 
+  xmlns:fun="Function" 
+  xmlns:inc="IncludeElementsInTest" 
+  xmlns:inf="SiteMapInfo" 
+  xmlns:itm="MenuItem" 
+  xmlns:itmType="MenuItemType" 
+  xmlns:menu="Menu" 
+  xmlns:menus="Menus"
+  xmlns:mod="Module" 
+  xmlns:mods="Modules" 
+  
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="Root file:/C:/SiteMapperXML/Schema/main/SiteMap.xsd">
+    
   <Info>
-    <inf:Author>SteveBrown</inf:Author>
-    <inf:Version>1.0.0</inf:Version>
-    <inf:CreationMethod>IgnoreExisting</inf:CreationMethod>
-    <inf:RootDir>C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/java</inf:RootDir>
-    <inf:ParentPackage>object_models/modules</inf:ParentPackage>
-    <inf:ElementLibrary>C:/Users/SteveBrown/eclipse-workspace/2021/DTest</inf:ElementLibrary>
+      <inf:Author>SteveBrown</inf:Author>
+      <inf:Version>1.0.0</inf:Version>
+      <inf:CreationMethod>IgnoreExisting</inf:CreationMethod>
+      <inf:RootDir>C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/java</inf:RootDir>
+      <inf:ParentPackage>object_models/modules</inf:ParentPackage>
+      <inf:ElementLibrary>C:/Users/SteveBrown/eclipse-workspace/2021/DTest</inf:ElementLibrary>
   </Info>
   
   <IncludeElementsForTest>
-    <inc:Include>Button</inc:Include>
-    <inc:Include>TextSelect</inc:Include>
-    <inc:Include>TextOut</inc:Include>
-    <inc:Include>ComboSelectOnly</inc:Include>    
-    <inc:Include>Label</inc:Include>
+      <inc:Include>Button</inc:Include>
+      <inc:Include>TextSelect</inc:Include>
+      <inc:Include>TextOut</inc:Include>
+      <inc:Include>ComboSelectOnly</inc:Include>    
+      <inc:Include>Label</inc:Include>
   </IncludeElementsForTest>
-  
+    
   <Modules>
-    <mods:Module name="payroll">
-      <mod:Menus>
-        <menus:Menu>    
-          <menu:Left>    
-            <lftMen:MenuItem name="Salary Details" package="Employees" class="SalaryDetails">
-              <itm:Type name="JsPanelWithIFrame">
-                <itm:JsPanelWithIFrame panelTitle="Employee Salary Details" /> 
-              </itm:Type>            
-              <itm:Container type="ItemGroup" name="HeaderElements">  
-                <cnt:Container type="InputGroup" name="EmpLookup">
-                  <cnt:Locator by="css" text="div[class='input-group']"/>
-                  <cnt:Element>
-                    <el:Details type="TextOut" name="FormID" />
-                    <el:Locator by="id" text="FORM_ID"/>   
-                    <el:Function type="element" subtype="TextOut" isDefaultPass="true"/>
-                    <!-- 
-                    <el:TestDataIn insertWith="EmployeeLookupByName">                     
-                      <din:Text value="Borg"/>
-                    </el:TestDataIn>
-                    <el:TestDataOut>                     
-                      <dout:Text value="0123456M"/>
-                    </el:TestDataOut>
-                    -->
-                  </cnt:Element>
-                     
-                  <cnt:Element>
-                    <el:Details type="Button" name="EmployeeList" text="" fafa="fa fa-list"/>
-                    <el:Locator by="css" text="div[title='Search Employee']"/>  
-                    <el:ToolTip text="Select from a list of employees within the chosen company"/>              
-                    <el:Function type="element" subtype="TextOut" isDefaultPass="true" />
-                  </cnt:Element>                
-                  <cnt:Element>
-                    <el:Details type="Button" name="SalaryHistory" text="" fafa="fa fa-list"/>
-                    <el:Locator by="css" text="div[title='View Salary History']"/>
-                    <el:ToolTip text="View Salary History"/>                
-                    <el:Function type="element" subtype="Button" isDefaultPass="false"/>
-                  </cnt:Element>
-                  <cnt:Element>
-                    <el:Details type="Button" name="Combos" text="" fafa="fa fa-window-maximize"/>
-                    <el:Locator by="css" text="div[title='Combos']"/>
-                    <el:ToolTip text="Combos"/>                
-                    <el:Function type="element" subtype="Button" isDefaultPass="true" />
-                  </cnt:Element>
-                  <cnt:Element>
-                    <el:Details type="Button" name="GridView" text="" fafa="fa fw fa-table"/>
-                    <el:Locator by="css" text="div[title='Grid View for this Employee']"/>
-                    <el:ToolTip text="Grid View for this Employee"/>                
-                    <el:Function type="element" subtype="Button" isDefaultPass="true" />
-                  </cnt:Element>
-                  <cnt:Element>
-                    <el:Details type="Button" name="ExistingRecords" text="" fafa="fa fw fa-table"/>
-                    <el:Locator by="css" text="div[title='Grid View for existing records']"/>
-                    <el:ToolTip text="Grid View for existing records"/>                
-                    <el:Function type="element" subtype="Button" isDefaultPass="true" />
-                  </cnt:Element>
-                  <cnt:Element>
-                    <el:Details type="Button" name="Documents" text="" fafa="fa fa-file-o"/>
-                    <el:Locator by="css" text="div[title='No Documents Attached']"/>
-                    <el:ToolTip text="No Documents Attached"/>                
-                    <el:Function type="element" subtype="Button" isDefaultPass="true" />
-                  </cnt:Element>
-                </cnt:Container>
-                
-                <cnt:Container type="InputGroup" name="DatePicker">
-                  <cnt:Locator by="css" text="div[class='input-group date datepicker']"/>                
-                  <cnt:Element>
-                    <el:Details type="Button" name="Calendar" text="" fafa="fa fa-calendar fa-fw"/>
-                    <el:Locator by="css" text="i[class='fa fa-calendar fa-fw']"/>         
-                    <el:Function type="element" subtype="Button" isDefaultPass="true" />
-                  </cnt:Element>                                
-                </cnt:Container>             
-              </itm:Container>   
-            
-              <itm:Container type="ItemGroup" name="BodyElements">            
-                <cnt:Container type="Tabs" name="Tabs">
-                  <cnt:Locator by="css" text="ul[class='nav nav-tabs']"/>
-                  <cnt:Container type="Tab" name="SalaryDetails">
-                    <cnt:Locator by="css" text="a[id='tab-tab1']"/>
-                    
-                    <cnt:Element>
-                      <el:Details type="Label" name="LabelReason" text="Reason"/>
-                      <el:Locator by="css" text="label[for='REASON']"/>                   
-                    </cnt:Element> 
-                  </cnt:Container>
-                  <cnt:Function type="container" isDefaultPass="true"/>     
-                </cnt:Container>     
-              </itm:Container>
+      <mods:Module name="payroll">
+          <mod:Menus>        
+            <menus:Menu>
               
-            </lftMen:MenuItem>
-  
-            <lftMen:MenuItem name="Contact Numbers" package="Employees" class="ContactNumbers">
-              <itm:Type name="JsPanelWithIFrame">
-                <itm:JsPanelWithIFrame panelTitle="Employee Contact Details" /> 
-              </itm:Type>
-              <itm:Container type="ItemGroup" name="HeaderElements">
-                <cnt:Container type="InputGroup" name="EmpLookup">
-                  <cnt:Locator by="css" text="div[class='input-group']"/>                 
-                  <cnt:Element>
-                    <el:Details type="TextOut" name="FormID" />
-                    <el:Locator by="id" text="FORM_ID"/>   
-                    <el:Function type="element" subtype="TextOut" isDefaultPass="true"/>
-                    <el:TestDataIn insertWith="EmployeeLookupByName">                     
-                      <din:Text value="Borg"/>
-                    </el:TestDataIn>
-                    <el:TestDataOut>                     
-                      <dout:Text value="0123456M"/>
-                    </el:TestDataOut>                        
-                  </cnt:Element>
-                </cnt:Container>
-              </itm:Container>
-            </lftMen:MenuItem>
-          </menu:Left>
-        </menus:Menu>
-         
-        <menus:Menu>
-          <menu:TopRight>   
-            <topMen:MenuItem name="Employee Creation" package="Employees" class="EmployeeCreation">
-              <itm:Type name="JsPanelWithIFrame">
-                <itm:JsPanelWithIFrame panelTitle="Employee Creation Wizard" /> 
-              </itm:Type>
-              <itm:Container type="ItemGroup" name="FooterElements">
-                <cnt:Container type="InputGroup" name="PageFooterBtns">
-                  <cnt:Locator by="css" text="ul[role='menu']"/>        
-                  <cnt:Element>
-                    <el:Details type="Button" name="Back" text="BACK"/>
-                    <el:Locator by="css" text="a[href='#previous']"/>
-                    <el:Function type="element" subtype="Button" isDefaultPass="true" />
-                  </cnt:Element>
-                  <cnt:Element>
-                    <el:Details type="Button" name="Next" text="CONTINUE"/>
-                    <el:Locator by="css" text="a[href='#next']"/>
-                    <el:Function type="element" subtype="Button" isDefaultPass="true" />
-                  </cnt:Element>      
-                </cnt:Container>
+              <menu:Left name="Left" package="left_menu"> 
+                  <MenuItem xmlns="Menu" xmlns:ct="Container" xmlns:et="ElementType" xmlns:mit="MenuItemType" xsi:schemaLocation="MenuItem file:/C:/SiteMapperXML/Schema/menu/MenuItem.xsd" name="Salary Details" package="Employees" class="SalaryDetails" xml:base="file:/C:/SiteMapperXML/XML/payroll/left_menu/employees/SalaryDetails.xml">            
+                      <mit:Type name="JsPanelWithIFrame">
+                          <mit:JsPanelWithIFrame panelTitle="Employee Salary Details"/> 
+                      </mit:Type>            
+                      <mit:Container type="Item" name="HeaderElements">  
+                          <ct:Container type="InputGroup" name="EmpLookup">
+                              <ct:Locator by="css" text="div[class='input-group']"/>
+                              
+                              <ct:Element xsi:schemaLocation="Container file:/C:/SiteMapperXML/Schema/container/ContainerElement.xsd" xml:base="/C:/SiteMapperXML/XML/header/FormId.xml">                                  
+                                  <et:Details type="TextOut" name="FormID" text=""/>
+                                  <et:Locator by="id" text="FORM_ID"/>
+                                  
+                                  <et:TestData>
+                                    <et:In>
+                                      <td:Data>
+                                        <td:item id="name" value="Borg" insertWith="EmployeeLookupByName"/>
+                                        <td:item id="code" value="0123456M"/>  
+                                      </td:Data>
+                                    </et:In>
+                                    
+                                    <et:Out>
+                                      <td:Data>
+                                        <td:item id="nccccame" value="htyyuBorg" insertWith="EmployeeLookupByName"/>
+                                        <td:item id="codbthgghghe" value="01yuuyyu23456M"/>  
+                                      </td:Data>
+                                    </et:Out>
+                                                                        
+                                  </et:TestData>          
+                                  <!-- NO TOOLTIP?? -->          
+                                  <!--                         
+                                  <et:TestDataIn xmlns:dt="DataType" xmlns:td="TestData" xsi:schemaLocation="TestDataIn file:/C:/SiteMapperXML/Schema/data/TestDataIn.xsd" xml:base="/C:/SiteMapperXML/XML/data/EmployeeData.xml">                                      
+                                      <et:Data>            
+                                          <td:item id="name" value="Borg" insertWith="EmployeeLookupByName"/>
+                                          <td:item id="code" value="0123456M"/>        
+                                      </et:Data>                                      
+                                  </et:TestDataIn>
+                                   -->                                  
+                                  <et:Function isDefaultPass="true" type="Element"/>
+                              </ct:Element>
+                              <ct:Element xsi:schemaLocation="Container file:/C:/SiteMapperXML/Schema/container/ContainerElement.xsd" xml:base="/C:/SiteMapperXML/XML/header/EmpListButton.xml">                                  
+                                  <et:Details type="Button" name="EmployeeList" text="" fafa="fa fa-list"/>
+                                  <et:Locator by="css" text="div[title='Search Employee']"/>                
+                                  <et:ToolTip text="Select from a list of employees within the chosen company"/>
+                                  <et:Function isDefaultPass="true" type="Element"/>
+                              </ct:Element>
+                              <ct:Element>
+                                  <et:Details type="Button" name="SalaryHistory" text="" fafa="fa fa-list"/>
+                                  <et:Locator by="css" text="div[title='View Salary History']"/>
+                                  <et:ToolTip text="View Salary History"/>                
+                                  <et:Function type="Element" subtype="Button" isDefaultPass="false"/>
+                              </ct:Element>
+                              <ct:Element xsi:schemaLocation="Container file:/C:/SiteMapperXML/Schema/container/ContainerElement.xsd" xml:base="/C:/SiteMapperXML/XML/header/CombosButton.xml">                                  
+                                  <et:Details type="Button" name="Combos" text="" fafa="fa fa-window-maximize"/>
+                                  <et:Locator by="css" text="div[title='Combos']"/>                
+                                  <et:ToolTip text="Combos"/>
+                                  <et:Function isDefaultPass="true" type="Element"/>
+                              </ct:Element>
+
+                              <ct:Element>
+                                  <et:Details type="Button" name="GridView" text="" fafa="fa fw fa-table"/>
+                                  <et:Locator by="css" text="div[title='Grid View for this Employee']"/>
+                                  <et:ToolTip text="Grid View for this Employee"/>                
+                                  <et:Function type="Element" subtype="Button" isDefaultPass="true"/>
+                              </ct:Element>                              
+                              <ct:Element xsi:schemaLocation="Container file:/C:/SiteMapperXML/Schema/container/ContainerElement.xsd" xml:base="/C:/SiteMapperXML/XML/header/ExistingGridViewButton.xml">  
+                                  
+                                  <et:Details type="Button" name="ExistingRecords" text="" fafa="fa fw fa-table"/>
+                                  <et:Locator by="css" text="div[title='Grid View for existing records']"/>                
+                                  <et:ToolTip text="Grid View for existing records"/>
+                                  <et:Function isDefaultPass="true" type="Element"/>
+                                  
+                              </ct:Element>            
+                              <ct:Element xsi:schemaLocation="Container file:/C:/SiteMapperXML/Schema/container/ContainerElement.xsd" xml:base="/C:/SiteMapperXML/XML/header/DocumentsButton.xml">                                  
+                                  <et:Details type="Button" name="Documents" text="" fafa="fa fa-file-o"/>
+                                  <et:Locator by="css" text="div[title='No Documents Attached']"/>                
+                                  <et:ToolTip text="No Documents Attached"/>
+                                  <et:Function isDefaultPass="true" type="Element"/>
+                              </ct:Element>
+                          </ct:Container>
+                          
+                          <ct:Container type="InputGroup" name="DatePicker">
+                              <ct:Locator by="css" text="div[class='input-group date datepicker']"/>                
+                              <ct:Element xsi:schemaLocation="Container file:/C:/SiteMapperXML/Schema/container/ContainerElement.xsd" xml:base="/C:/SiteMapperXML/XML/header/CalendarButton.xml">  
+                                  
+                                  <et:Details type="Button" name="Calendar" text="" fafa="fa fa-calendar fa-fw"/>
+                                  <et:Locator by="css" text="i[class='fa fa-calendar fa-fw']"/>                
+                                  <et:Function isDefaultPass="true" type="Element"/>
+                              </ct:Element>                                
+                          </ct:Container>             
+                      </mit:Container>   
+                      
+                      <mit:Container type="Item" name="BodyElements">            
+                          <ct:Container type="Tabs" name="Tabs">
+                              <ct:Locator by="css" text="ul[class='nav nav-tabs']"/>
+                              <ct:Container type="Tab" name="SalaryDetails">
+                                  <ct:Locator by="css" text="a[id='tab-tab1']"/>
+                                  
+                                  <ct:Element>
+                                      <et:Details type="Label" name="LabelReason" text="Reason"/>
+                                      <et:Locator by="css" text="label[for='REASON']"/>                   
+                                  </ct:Element> 
+                              </ct:Container>
+                              <ct:Function type="Container" isDefaultPass="true"/>     
+                          </ct:Container>     
+                      </mit:Container>
+                      
+                  </MenuItem>
                   
-              </itm:Container>
-            </topMen:MenuItem>
-          </menu:TopRight>
-        </menus:Menu>
-      </mod:Menus>
-    </mods:Module>
+                  <MenuItem xmlns="Menu" xmlns:ct="Container" xmlns:et="ElementType" xmlns:mit="MenuItemType" xsi:schemaLocation="MenuItem file:/C:/SiteMapperXML/Schema/menu/MenuItem.xsd" name="Contact Numbers" package="Employees" class="ContactNumbers" xml:base="file:/C:/SiteMapperXML/XML/payroll/left_menu/employees/Contact.xml">  
+                      
+                      <mit:Type name="JsPanelWithIFrame">
+                          <mit:JsPanelWithIFrame panelTitle="Employee Contact Details"/>
+                      </mit:Type>
+                      <mit:Container type="Item" name="HeaderElements">
+                          <ct:Container type="InputGroup" name="EmpLookup">
+                              <ct:Locator by="css" text="div[class='input-group']"/>
+                              <ct:Element xsi:schemaLocation="Container file:/C:/SiteMapperXML/Schema/container/ContainerElement.xsd" xml:base="/C:/SiteMapperXML/XML/header/FormId.xml">  
+                                  
+                                  <et:Details type="TextOut" name="FormID" text=""/>
+                                  <et:Locator by="id" text="FORM_ID"/>          
+                                  <!-- NO TOOLTIP?? -->
+                                  
+                                  <et:TestDataIn xmlns:dt="DataType" xmlns:td="TestData" xsi:schemaLocation="TestDataIn file:/C:/SiteMapperXML/Schema/data/TestDataIn.xsd" xml:base="/C:/SiteMapperXML/XML/data/EmployeeData.xml">                                     
+                                      <et:Data>            
+                                          <td:item id="name" value="Borg" insertWith="EmployeeLookupByName"/>
+                                          <td:item id="code" value="0123456M"/>        
+                                      </et:Data>
+                                  </et:TestDataIn>
+                                  
+                                  <et:Function isDefaultPass="true" type="Element"/>
+                              </ct:Element>
+                          </ct:Container>
+                      </mit:Container>
+                  </MenuItem> 
+                  
+                  
+              </menu:Left>
+            </menus:Menu>
+          </mod:Menus>
+      </mods:Module>
   </Modules>
 </SiteMap>

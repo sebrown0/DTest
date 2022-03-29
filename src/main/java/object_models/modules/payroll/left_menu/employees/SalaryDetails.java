@@ -27,7 +27,7 @@ import control_builder.control_getters.group.ControlGetterTab;
 * Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
 * Author:  SteveBrown
 * Version: 1.0.0
-* Created: 29/03/2022 11:03:18
+* Created: 29/03/2022 13:02:26
 */
 
 public class SalaryDetails extends JsPanelWithIFrame {
@@ -138,7 +138,7 @@ public class SalaryDetails extends JsPanelWithIFrame {
 	}
 
 	@SiteMap(author="SteveBrown", version="1.0.0", date="29/03/2022")
-	@TestControl(type="container", subtype="none")
+	@TestControl(type="Container", subtype="none")
 	public DynamicTest ContainerTabsFunctionTest () {
 		return DynamicTest.dynamicTest("[ContainerTabsFunctionTest] *NOT IMPLEMENTED*", () -> assertTrue(true));
 	}
