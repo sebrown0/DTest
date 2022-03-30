@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_models.left_menu.common;
+package object_models.common.nav;
 
 import java.util.List;
 import java.util.Map;

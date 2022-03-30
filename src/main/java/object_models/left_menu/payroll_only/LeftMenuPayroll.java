@@ -10,9 +10,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import object_models.common.nav.LeftMenuElements;
 import object_models.left_menu.additional_hours.ApplyAdditionalHours;
 import object_models.left_menu.additional_hours.Authorisation;
-import object_models.left_menu.common.LeftMenuElements;
 import object_models.modules.common.EmployeeList;
 import object_models.modules.payroll.Documents;
 import object_models.modules.payroll.MonthlyReports;
@@ -230,19 +230,19 @@ public class LeftMenuPayroll implements LeftMenuElements {
 		}).collect(Collectors.toMap(d -> (String) d[0], d -> ((Optional<List<String>>) d[1])));		
 	}
 			
-	public static class MenuItem {
-		private String parentName;
-		private Optional<List<String>> childNames;
-		
-		public MenuItem(String parentName, Optional<List<String>> childNames) {
-			this.parentName = parentName;
-			this.childNames = childNames;
-		}
-		public String getParentName() {
-			return parentName;
-		}
-		public Optional<List<String>> getChildNames() {
-			return childNames;
-		}		
-	}	
+//	public static class MenuItem {
+//		private String parentName;
+//		private Optional<List<String>> childNames;
+//		
+//		public MenuItem(String parentName, Optional<List<String>> childNames) {
+//			this.parentName = parentName;
+//			this.childNames = childNames;
+//		}
+//		public String getParentName() {
+//			return parentName;
+//		}
+//		public Optional<List<String>> getChildNames() {
+//			return childNames;
+//		}		
+//	}	
 }
