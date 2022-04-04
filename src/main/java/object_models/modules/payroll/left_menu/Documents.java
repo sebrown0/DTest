@@ -23,27 +23,27 @@ import control_builder.control_getters.group.ControlGetterInputGroup;
 * Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
 * Author:  SteveBrown
 * Version: 1.0.0
-* Created: 30/03/2022 16:27:24
+* Created: 04/04/2022 11:08:55
 */
 
 public class Documents extends JsPanelWithIFrame {
-	@SiteMap(author="SteveBrown", version="1.0.0", date="30/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="04/04/2022")
 	public static final String PANEL_TITLE = "Employee Salary Details";
-	@SiteMap(author="SteveBrown", version="1.0.0", date="30/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="04/04/2022")
 	public static final String MENU_TITLE = "Documents";
-	@SiteMap(author="SteveBrown", version="1.0.0", date="30/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="04/04/2022")
 	public static final String MENU_PARENT_NAME = "";
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="30/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="04/04/2022")
 	public Documents(){}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="30/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="04/04/2022")
 	public Documents(CoreData coreData){
 		super(coreData, PANEL_TITLE);
 		buildMyControls();
 	}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="30/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="04/04/2022")
 	private void buildMyControls() {
 		ControlGetter formID =
 			new ControlGetterTextOut("FormID", coreData, By.id("FORM_ID"));
@@ -57,7 +57,7 @@ public class Documents extends JsPanelWithIFrame {
 		super.buildPanelControls(myControls);
 	}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="30/03/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="04/04/2022")
 	@TestControl(type="element", subtype="TextOut")
 	public DynamicTest TextOutFormIDFunctionTest () {
 		return DynamicTest.dynamicTest("[TextOutFormIDFunctionTest] *NOT IMPLEMENTED*", () -> assertTrue(true));
