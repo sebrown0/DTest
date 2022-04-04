@@ -14,11 +14,11 @@ import object_models.common.nav.LeftMenuElements;
 import object_models.left_menu.additional_hours.ApplyAdditionalHours;
 import object_models.left_menu.additional_hours.Authorisation;
 import object_models.modules.common.EmployeeList;
-import object_models.modules.payroll.Documents;
-import object_models.modules.payroll.MonthlyReports;
-import object_models.modules.payroll.PayrollStatistics;
-import object_models.modules.payroll.SettingsPayroll;
-import object_models.modules.payroll.YearlyReports;
+import object_models.modules.payroll.left_menu.Documents;
+import object_models.modules.payroll.left_menu.MonthlyReports;
+import object_models.modules.payroll.left_menu.PayrollStatistics;
+import object_models.modules.payroll.left_menu.SettingsPayroll;
+import object_models.modules.payroll.left_menu.YearlyReports;
 import object_models.modules.payroll.left_menu.absence_statistics.EmployeeAccruals;
 import object_models.modules.payroll.left_menu.absence_statistics.OtherAbsenceStatistics;
 import object_models.modules.payroll.left_menu.bulk_updates.ColaSalaryUpdates;
@@ -75,7 +75,7 @@ import object_models.modules.payroll.left_menu.reports.Payslips;
  * 	Key = menu item name, i.e. Employees.
  *	Val = Optional list of sub-menu names. 
  */
-public class LeftMenuPayroll implements LeftMenuElements {
+public class ZZZ_LeftMenuPayroll implements LeftMenuElements {
 
 	private static final List<String> EMPLOYEE_LIST = Arrays.asList(
 			EmployeeList.MENU_TITLE

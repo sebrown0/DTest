@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.openqa.selenium.WebDriver;
-import object_models.top_right_nav_bar.common.NavBarElement;
+import object_models.modules.common.nav.NavBarElement;
 import object_models.pages.homepage.CoreData;
 import object_models.modules.common.nav.nav_bar_elements.NavBarElementStrategy;
 import object_models.modules.common.nav.quick_links.QuickLinks;
@@ -17,7 +17,7 @@ import object_models.modules.common.nav.nav_bar_elements.NavBarEmployeeCreation;
 * Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
 * Author:  SteveBrown
 * Version: 1.0.0
-* Created: 04/04/2022 15:49:20
+* Created: 04/04/2022 16:22:30
 */
 
 public class NavBarPayrollElements implements NavBarElementStrategy {

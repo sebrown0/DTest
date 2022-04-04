@@ -10,7 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import logging.TestResultLogger;
 import object_models.helpers.MenuChecker;
 import object_models.left_menu.common.LeftMenu;
-import object_models.left_menu.payroll_only.LeftMenuPayroll;
+import object_models.modules.payroll.left_menu.LeftMenuPayroll;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;

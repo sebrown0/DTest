@@ -1,4 +1,4 @@
-package object_models.modules.payroll;
+package object_models.modules.payroll.left_menu;
 
 import object_models.pages.homepage.CoreData;
 import object_models.panels.JsPanelWithIFrame;

@@ -33,12 +33,12 @@ import object_models.pages.homepage.CoreData;
  * 	Key: 	Name of the element.
  * 	Value:	Object representing the element.
  */
-public class NavBarPayrollElements implements NavBarElementStrategy {
+public class ZZZ_NavBarPayrollElements implements NavBarElementStrategy {
 	private Map<String, NavBarElement> elements;	
 	private WebDriver driver;
 	private CoreData coreData;
 	
-	public NavBarPayrollElements(CoreData coreData) {
+	public ZZZ_NavBarPayrollElements(CoreData coreData) {
 		this.coreData = coreData;
 		this.driver = coreData.getWebDriver();
 		setElements();
