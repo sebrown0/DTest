@@ -8,8 +8,8 @@ import org.openqa.selenium.WebElement;
 
 import object_models.drop_down_forms.top_right_nav_bar.NewEmployments;
 import object_models.helpers.Closable;
+import object_models.modules.common.nav.NavBarElement;
 import object_models.pages.homepage.CoreData;
-import object_models.top_right_nav_bar.common.NavBarElement;
 
 /**
  * @author Steve Brown

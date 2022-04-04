@@ -6,7 +6,7 @@ package object_models.modules.common.nav.nav_bar_elements;
 import java.util.Optional;
 
 import object_models.forms.ContainerAction;
-import object_models.top_right_nav_bar.common.NavBarElement;
+import object_models.modules.common.nav.NavBarElement;
 
 /**
  * @author SteveBrown

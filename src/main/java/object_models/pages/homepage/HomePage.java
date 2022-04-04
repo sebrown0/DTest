@@ -22,9 +22,9 @@ import object_models.forms.ModalCloser;
 import object_models.helpers.DriverWait;
 import object_models.left_menu.common.LeftMenu;
 import object_models.left_nav_bar.LeftNavBar;
+import object_models.modules.common.nav.NavBarElement;
 import object_models.pages.Page;
 import object_models.pages.homepage.loader.ExistingHomePageLoader;
-import object_models.top_right_nav_bar.common.NavBarElement;
 import object_models.top_right_nav_bar.common.TopRightNavBar;;
 
 /**

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package object_models.top_right_nav_bar.common;
+package object_models.modules.common.nav;
 
 import java.time.Duration;
 
