@@ -43,6 +43,7 @@ public class ClassFinder {
 	public static Class<?> getClazz(ElementClass nodeClass){		
 		try {
 			String className = getPathToClass(nodeClass);
+			//object_models.modules.payroll.top_right_nav.employees.EmployeeCreationWizard
 			return Class.forName(className);
 		} catch (ClassNotFoundException e) {
 			LogManager.getLogger().error("Could not get class for [" + nodeClass + "]");
@@ -59,7 +60,7 @@ public class ClassFinder {
 				nodeClass.getModuleName() + "." + 
 				nodeClass.getParentPackage() + 
 				getPackage(nodeClass);
-
+//object_models.modules.payroll.top_right_nav.Employees
 		return path.toLowerCase();
 	}
 	private static String getPackage(ElementClass nodeClass) {

@@ -6,8 +6,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import object_models.common.nav.LeftMenuElements;
+
+import object_models.modules.payroll.left_menu.Documents;
 import object_models.modules.payroll.left_menu.employees.SalaryDetails;
 /**
 * Generated Class.
@@ -15,7 +16,7 @@ import object_models.modules.payroll.left_menu.employees.SalaryDetails;
 * Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
 * Author:  SteveBrown
 * Version: 1.0.0
-* Created: 04/04/2022 16:22:30
+* Created: 05/04/2022 13:22:49
 */
 
 public class LeftMenuPayroll implements LeftMenuElements {
