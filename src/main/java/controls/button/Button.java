@@ -5,6 +5,7 @@ package controls.button;
 
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -78,10 +79,14 @@ public class Button implements Control, HasToolTip, HasFaFa, DisplayedText {
 		return isFaFa(checkFaFa);
 	}
 	private boolean currentElementContainsFaFaClass() {
-		WebElement elmntFaFa = btn.findElement(By.tagName("i"));
-		if(elmntFaFa != null ) {
-			return isFaFa(elmntFaFa.getAttribute("class"));
-		}
+		try {
+			WebElement elmntFaFa = btn.findElement(By.tagName("i"));
+			if(elmntFaFa != null ) {
+				return isFaFa(elmntFaFa.getAttribute("class"));
+			}	
+		}catch (NoSuchElementException e) { 	
+			//Do nothing. The button doesn't have a FaFa.
+		}		
 		return false;
 	}
 	private boolean isFaFa(String checkFaFaStr) {

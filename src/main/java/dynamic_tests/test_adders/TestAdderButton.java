@@ -26,10 +26,9 @@ public class TestAdderButton implements TestAdder {
 		
 	@Override
 	public void addTestsWith(ElementTestFactory testFactory) {
-		testFactory
-			.createButtonFaFaCheck(fafa)
-			.createTextCheck(text)
-			.createToolTipCheck(toolTipText);		
+		if(fafa != null) testFactory.createButtonFaFaCheck(fafa); 
+		if(text != null) testFactory.createTextCheck(text);
+		if(toolTipText != null) testFactory.createToolTipCheck(toolTipText);					
 	}
 	
 }
