@@ -23,12 +23,12 @@ import control_builder.control_getters.group.ControlGetterInputGroup;
 * Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
 * Author:  SteveBrown
 * Version: 1.0.0
-* Created: 05/04/2022 13:22:49
+* Created: 05/04/2022 14:22:30
 */
 
 public class Documents extends JsPanelWithIFrame {
 	@SiteMap(author="SteveBrown", version="1.0.0", date="05/04/2022")
-	public static final String PANEL_TITLE = "Employee Salary Details";
+	public static final String PANEL_TITLE = "Employee Document Management";
 	@SiteMap(author="SteveBrown", version="1.0.0", date="05/04/2022")
 	public static final String MENU_TITLE = "Documents";
 	@SiteMap(author="SteveBrown", version="1.0.0", date="05/04/2022")

@@ -12,25 +12,30 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
- * @author Steve Brown
+ * @author SteveBrown
+ * @version 1.0
+ * 	Initial
+ * @since 1.0
  *
+ * Get the JsPanel ID for a given (expected) panel title.
  */
-public class JsPanelId {
-	private static Optional<String> panelId = Optional.empty();
+public class JsPanelId {	
 	
-	public static Optional<String> getPanelIdForTitle(WebDriver driver, String expectedTitle) {		
+	public static Optional<String> getPanelIdForTitle(WebDriver driver, String expectedTitle) {
+		Optional<String> panelId = Optional.empty();
 		try {
-			List<WebElement> panelIds = driver.findElements(By.cssSelector("div[id^=jsPanel"));//.getAttribute("id");
-			panelIds.forEach(id -> {
-				String title = id.findElement(By.cssSelector("span[class='jsPanel-title']")).getText();
+			List<WebElement> panelIds = driver.findElements(By.cssSelector("div[id^=jsPanel"));
+			for(WebElement id : panelIds) {
+				var title = id.findElement(By.cssSelector("span[class='jsPanel-title']")).getText();
 				if(title.equalsIgnoreCase(expectedTitle)) {
 					panelId = Optional.of(id.getAttribute("id"));
-//					System.out.println("Found id for ->" + expectedTitle + "=" + title + "->" + id.getAttribute("id"));	
+					break;
 				}				
-			});			
+			}
 		} catch (Exception e) {
 			LogManager.getLogger().error("Could not set panel id for [" + expectedTitle + "]");
 		}
 		return panelId;
 	}
+	
 }

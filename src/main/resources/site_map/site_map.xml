@@ -36,7 +36,7 @@
           xmlns:mit="MenuItemType" xsi:schemaLocation="MenuItem file:/C:/SiteMapperXML/Schema/menu/MenuItem.xsd"            
           name="Documents" class="Documents">
           <mit:Type name="JsPanelWithIFrame">
-            <mit:JsPanelWithIFrame panelTitle="Employee Salary Details"/>
+            <mit:JsPanelWithIFrame panelTitle="Employee Document Management"/>
           </mit:Type>
           <mit:Container type="Item" name="HeaderElements">
             <ct:Container type="InputGroup" name="EmpLookup">

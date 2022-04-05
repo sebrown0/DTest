@@ -6,8 +6,6 @@ package dynamic_tests.elements;
 import java.util.List;
 import java.util.Optional;
 
-import org.openqa.selenium.WebDriver;
-
 import controls.interfaces.Control;
 import controls.interfaces.ControlTest;
 import dynamic_tests.mappers.TestNode;
@@ -36,10 +34,6 @@ public class ControlFinder {
 		this.item = item;
 		this.name = name;
 		this.tf = tf;
-	}
-	
-	public WebDriver ZZZ_getDriver() {
-		return hp.getWebDriver();
 	}
 
 	public ControlFinder loadControl() {
