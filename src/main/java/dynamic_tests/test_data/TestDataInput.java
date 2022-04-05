@@ -35,25 +35,31 @@ public class TestDataInput {
 
 	public void insertData() {
 	
-		Data testData = dataIn.getData();
-		List<TestDataItem> testDataList = testData.getTestDataList();
-		testDataList.forEach(itm -> {
-			try {
-				checkDataIn(itm);
-			} catch (InvalidArgumentException e) {
-				// Report to the screen so we know.
-				System.out.println("TestDataInput -> " + e); // TODO - remove or log 	
-			}
-			
-			getDataInserter(0).ifPresent(inserter -> inserter.insertData());	
-		});
-		
+		if(dataIn != null) {
+			Data testData = dataIn.getData();
+			if(testData != null) {
+				List<TestDataItem> testDataList = testData.getTestDataList();
+				testDataList.forEach(itm -> {
+					try {
+						checkDataIn(itm);
+					} catch (InvalidArgumentException e) {
+						// Report to the screen so we know.
+						System.out.println("TestDataInput -> " + e); // TODO - remove or log 	
+					}
+					
+					getDataInserter(0).ifPresent(inserter -> inserter.insertData());	
+				});	
+			}		
+		}			
 	}
 	
-	private void checkDataIn(TestDataItem item) throws InvalidArgumentException {		
-		if(dataIn != null) {
-//			TestData testData = dataIn.getTestData();
-			
+	private void checkDataIn(TestDataItem item) throws InvalidArgumentException {
+		/*
+		 * TODO 
+		 * Update this with proper checks.
+		 * dataIn is already checked above.
+		 */
+		if(dataIn != null) {		
 			if(isValidTestDataIn(item)) {				
 					throw new InvalidArgumentException(
 							TestDataInput.class, 
