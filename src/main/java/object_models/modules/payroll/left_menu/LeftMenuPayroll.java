@@ -6,9 +6,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import object_models.common.nav.LeftMenuElements;
 
-import object_models.modules.payroll.left_menu.Documents;
+import object_models.common.nav.LeftMenuElements;
 import object_models.modules.payroll.left_menu.employees.SalaryDetails;
 /**
 * Generated Class.
