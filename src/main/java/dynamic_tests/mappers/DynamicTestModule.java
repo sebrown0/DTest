@@ -29,13 +29,18 @@ public class DynamicTestModule {
 		List<MenuType> menus = module.getMenus();
 		if(menus != null) {
 			var moduleName = module.getName();
-			menus.forEach(m -> {
-				moduleMenus.add(
-						new DynamicTestMenu(m, includedElements, hp, moduleName).getMenuContainers()
-				);
-	  	});
+			
+			menus.stream()
+				.filter(m-> m != null)
+				.forEach(m -> {
+					moduleMenus.add(
+							new DynamicTestMenu(m, includedElements, hp, moduleName).getMenuContainers()
+					);
+				});
+			
 			return DynamicContainer.dynamicContainer(moduleName, moduleMenus);
 		}  	
+		
 		return null;
 	}
 
