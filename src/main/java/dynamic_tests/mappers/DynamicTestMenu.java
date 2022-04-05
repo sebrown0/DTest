@@ -12,7 +12,7 @@ import org.junit.jupiter.api.DynamicContainer;
 import dynamic_tests.elements.IncludedElements;
 import object_models.pages.homepage.HomePage;
 import site_mapper.jaxb.menu_items.MenuItem;
-import site_mapper.jaxb.pom.Menu;
+import site_mapper.jaxb.pom.menu.MenuType;
 
 /**
  * @author SteveBrown
@@ -22,13 +22,13 @@ import site_mapper.jaxb.pom.Menu;
  */
 public class DynamicTestMenu {
   private List<DynamicContainer> menuTestItems = new ArrayList<>();  
-  private Menu menu;
+  private MenuType menu;
   private IncludedElements includedElements;
   private HomePage hp;
   private String moduleName;  
   private String menuName;
   
-  public DynamicTestMenu(Menu menu, IncludedElements includedElements, HomePage hp, String moduleName) {
+  public DynamicTestMenu(MenuType menu, IncludedElements includedElements, HomePage hp, String moduleName) {
 		this.menu = menu;
 		this.includedElements = includedElements;
 		this.hp = hp;

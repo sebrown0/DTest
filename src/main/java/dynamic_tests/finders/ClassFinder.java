@@ -50,17 +50,20 @@ public class ClassFinder {
 		return null;
 	}
 	
-	public static String getPathToClass(ElementClass nodeClass) {
+	private static String getPathToClass(ElementClass nodeClass) {
 		return getPathInLowerCase(nodeClass) + "." + nodeClass.getClassName();
 	}
-	public static String getPathInLowerCase(ElementClass nodeClass) {
+	private static String getPathInLowerCase(ElementClass nodeClass) {
 		String path = 
 				ROOT + ".modules." +
 				nodeClass.getModuleName() + "." + 
-				nodeClass.getParentPackage() + "." + 
-				nodeClass.getPackage();
-		
+				nodeClass.getParentPackage() + 
+				getPackage(nodeClass);
+
 		return path.toLowerCase();
 	}
-	
+	private static String getPackage(ElementClass nodeClass) {
+		var pckge = nodeClass.getPackage();
+		return (pckge != null) ? "." + pckge : "";
+	}
 }

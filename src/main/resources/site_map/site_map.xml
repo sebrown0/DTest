@@ -47,7 +47,7 @@
                 <et:TestData>
                   <et:In>
                     <td:item id="name" value="Borg" insertWith="EmployeeLookupByName"/>
-                    <td:item id="code" value="0123456M"/>
+                    <td:item id="code" value="0123456M"/> <!-- TODO insertWith is REQUIRED?? -->
                   </et:In>
                 </et:TestData>
                 <et:Function isDefaultPass="true" type="Element"/>
@@ -148,9 +148,12 @@
         <menu:MenuItem
           xmlns="Menu"
           xmlns:ct="Container"
-          xmlns:et="ElementType"
+          xmlns:et="ElementType"          
           xmlns:mit="MenuItemType" xsi:schemaLocation="MenuItem file:/C:/SiteMapperXML/Schema/menu/MenuItem.xsd" 
             name="Employee Creation" package="Employees" class="EmployeeCreationWizard" fafa="fa fa-plus" returns="EmployeeCreationWizard" tooltip="Employee Creation">
+          
+          <!-- WHY IS THIS IN package="Employees" -->
+          
           <mit:Type name="JsPanelWithIFrame">
             <mit:JsPanelWithIFrame panelTitle="Employee Creation Wizard" />
           </mit:Type>

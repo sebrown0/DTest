@@ -5,6 +5,8 @@ package dynamic_tests;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,8 +22,10 @@ import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;
 import site_mapper.jaxb.pom.Element;
+import site_mapper.jaxb.pom.test_data.Data;
+import site_mapper.jaxb.pom.test_data.TestData;
 import site_mapper.jaxb.pom.test_data.TestDataIn;
-import site_mapper.jaxb.pom.test_data.TestDataText;
+import site_mapper.jaxb.pom.test_data.TestDataItem;
 import xml_reader.config_file.ConfigReader;
 
 /**
@@ -48,15 +52,23 @@ class TestDataTests {
 				.clickParent("Employees")
 				.clickAndLoad(SalaryDetails.class)
 				.get();
+		
+		TestDataItem testDataItem = new TestDataItem();
+		testDataItem
+			.setId("name")
+			.setInsertWith("EmployeeLookupByName")
+			.setValue("a name");
+		
+		Data data = new Data();
+		data.setTestDataList(Arrays.asList(testDataItem));
 
 		dataIn
-			.setTestData(new TestDataText().setValue("some test data [in]"))
-			.setInsertWith("EmployeeLookupByName");
+			.setData(data);
 		
 		el
 			.setName("FormId")
 			.setType("TextOut")
-			.setTestDataIn(dataIn);
+			.setTestData(new TestData().setTestDataIn(dataIn));
 	}
 	
 	@Test
