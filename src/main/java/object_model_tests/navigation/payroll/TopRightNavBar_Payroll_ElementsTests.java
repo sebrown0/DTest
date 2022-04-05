@@ -13,7 +13,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import logging.TestResultLogger;
 import object_models.employee.EmployeeCv;
 import object_models.employee.EmployeeGridView;
-import object_models.employee_creation.EmployeeCreationWizard;
 import object_models.helpers.Closable;
 import object_models.modules.common.nav.NavBarElement;
 import object_models.modules.common.nav.nav_bar_elements.NavBarDakarIntelligence;
@@ -27,6 +26,7 @@ import object_models.modules.common.nav.nav_bar_elements.NavBarTerminations;
 import object_models.modules.common.nav.nav_bar_elements.NavBarUserAvatar;
 import object_models.modules.common.nav.nav_bar_elements.NavBarUserManagment;
 import object_models.modules.common.nav.nav_bar_elements.NavBarVisualReports;
+import object_models.modules.payroll.top_right_nav.employees.EmployeeCreation;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePagePayroll;
 import object_models.reports.DakarIntelligence;
@@ -69,7 +69,7 @@ class TopRightNavBar_Payroll_ElementsTests {
 	@Order(1)
 	void clickEmployeeCreation() {
 		NavBarElement empCr = navBar.getNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
-		EmployeeCreationWizard wiz = (EmployeeCreationWizard) empCr.clickElement();
+		EmployeeCreation wiz = (EmployeeCreation) empCr.clickElement();
 		wiz.close();
 		assertEquals(NavBarEmployeeCreation.ORIGINAL_NAME, empCr.getOriginalName());
 	}

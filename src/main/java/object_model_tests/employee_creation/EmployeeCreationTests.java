@@ -20,6 +20,7 @@ import object_models.forms.FormFadeShow;
 import object_models.modules.common.nav.NavBarElement;
 import object_models.modules.common.nav.nav_bar_elements.NavBarEmployeeCreation;
 import object_models.modules.payroll.left_menu.employees.EmployeeDetails;
+import object_models.modules.payroll.top_right_nav.employees.EmployeeCreation;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
@@ -37,7 +38,7 @@ import xml_reader.config_file.ConfigReader;
 	LoginPageResolverPayroll.class })
 class EmployeeCreationTests {
 	private static HomePage homepage;
-	private static EmployeeCreationWizard wizard; 
+	private static EmployeeCreation empCreation; 
 	private static Employee emp;
 	private static NavBarElement navEmpWizard;
 	
@@ -56,18 +57,18 @@ class EmployeeCreationTests {
 		emp = empProvider.getEmployeeWithRequiredFields("1");
 		
 		// GET THE EMPLOYEE WIZARD
-		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();
+		empCreation = (EmployeeCreation) navEmpWizard.clickElement();
 		
 		// CHECK THAT THE WIZARD IS LOADED.
-		assertTrue(wizard.getContextExpectedName().equals("Employee Creation Wizard"));
+		assertTrue(empCreation.getContextExpectedName().equals("Employee Creation Wizard"));
 		
 		// THE EMP EXISTS SO THE RESULT SHOULD BE AN ERROR FORM.
-		FormFadeShow frm = wizard.createEmployeeAndGetConfirmation(emp);
+		FormFadeShow frm = empCreation.getEmployeeCreationWizard().createEmployeeAndGetConfirmation(emp);
 		assertEquals("Data Error", frm.getTitle().getExpected());
 		
 		//CLOSE THE ERROR FORM AND WIZARD
 		frm.close();
-		wizard.close();		
+		empCreation.close();		
 	}
 
 	@Test @Order(2)
@@ -77,9 +78,9 @@ class EmployeeCreationTests {
 		emp = empProvider.getAnyEmpWithRandomCode();		
 		String randomEmpCode = emp.getEmpCode();
 		// Open the wizard and create the emp
-		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();		
-		wizard.createEmployeeAndGetConfirmation(emp);
-		wizard.close();
+		empCreation = (EmployeeCreation) navEmpWizard.clickElement();		
+		empCreation.getEmployeeCreationWizard().createEmployeeAndGetConfirmation(emp);
+		empCreation.close();
 		// Open employee details and check the code.
 		EmployeeDetails empDetails = (EmployeeDetails) homepage.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
 		TextOut empDetailsCode = (TextOut) empDetails.getPanelControl().getControl(EmployeeControlNames.EMP_CODE).get();		
@@ -97,9 +98,9 @@ class EmployeeCreationTests {
 		String randomEmpCodeWithSpace = randomEmpCode + " _space";
 		emp.setEmpCode(randomEmpCodeWithSpace);
 		// Open the wizard and create the emp
-		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();		
-		wizard.createEmployeeAndGetConfirmation(emp);
-		wizard.close();
+		empCreation = (EmployeeCreation) navEmpWizard.clickElement();		
+		empCreation.getEmployeeCreationWizard().createEmployeeAndGetConfirmation(emp);
+		empCreation.close();
 		// Open employee details and check the code.
 		EmployeeDetails empDetails = (EmployeeDetails) homepage.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
 		TextOut empDetailsCode = (TextOut) empDetails.getPanelControl().getControl(EmployeeControlNames.EMP_CODE).get();
@@ -117,9 +118,9 @@ class EmployeeCreationTests {
 		String randomEmpCodeWithSymbol = randomEmpCode + "_(M)";
 		emp.setEmpCode(randomEmpCodeWithSymbol);
 		// Open the wizard and create the emp
-		wizard = (EmployeeCreationWizard) navEmpWizard.clickElement();		
-		wizard.createEmployeeAndGetConfirmation(emp);
-		wizard.close();
+		empCreation = (EmployeeCreation) navEmpWizard.clickElement();		
+		empCreation.getEmployeeCreationWizard().createEmployeeAndGetConfirmation(emp);
+		empCreation.close();
 		// Open employee details and check the code.
 		EmployeeDetails empDetails = (EmployeeDetails) homepage.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
 		TextOut empDetailsCode = (TextOut) empDetails.getPanelControl().getControl(EmployeeControlNames.EMP_CODE).get();

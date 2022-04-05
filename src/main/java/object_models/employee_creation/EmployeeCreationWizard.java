@@ -19,7 +19,6 @@ import control_mapping.PageMapper;
 import dto.Employee;
 import object_models.forms.FormFadeShow;
 import object_models.pages.homepage.CoreData;
-import object_models.panels.JsPanelWithIFrame;
 
 /**
  * @author SteveBrown
@@ -27,16 +26,18 @@ import object_models.panels.JsPanelWithIFrame;
  * @since 1.0
  *
  */
-public class EmployeeCreationWizard extends JsPanelWithIFrame {	
+public class EmployeeCreationWizard {	
 	private Logger logger = LogManager.getLogger();
 	private PageMapper mapper;
 	private PageMap pageMap;
+	private WebDriver driver;
+	private CoreData coreData;
 	
 	public static final String PANEL_TITLE = "Employee Creation Wizard";		
 	
 	public EmployeeCreationWizard(CoreData coreData) {
-		super(coreData, PANEL_TITLE);
-		
+		this.coreData = coreData;
+		driver = coreData.getWebDriver();		
 		mapper = new PageMapper(new MappingStrategyWizard(driver));
 		pageMap = mapper.mapControls().getPageMap();			
 	}
@@ -46,7 +47,7 @@ public class EmployeeCreationWizard extends JsPanelWithIFrame {
 		logger.debug("Creating employee with wizard");		
 		executeSteps(emp);
 		
-		FormFadeShow frm = new FormFadeShow(super.coreData);
+		FormFadeShow frm = new FormFadeShow(coreData);
 		frm.close();
 	}
 	// Use this if we want the confirmation form.
@@ -68,7 +69,7 @@ public class EmployeeCreationWizard extends JsPanelWithIFrame {
 		return step.getNext();
 	}	
 	private FormFadeShow getConfirmationForm() {		
-		return new FormFadeShow(super.coreData);
+		return new FormFadeShow(coreData);
 	}
 	
 	/*

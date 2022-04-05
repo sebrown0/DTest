@@ -5,9 +5,9 @@ package object_models.modules.common.nav.nav_bar_elements;
 
 import org.openqa.selenium.By;
 
-import object_models.employee_creation.EmployeeCreationWizard;
 import object_models.helpers.Closable;
 import object_models.modules.common.nav.NavBarElement;
+import object_models.modules.payroll.top_right_nav.employees.EmployeeCreation;
 import object_models.pages.homepage.CoreData;
 import object_models.strategies.click.ClickUsingJavaScript;
 
@@ -31,7 +31,7 @@ public class NavBarAuthorisations extends NavBarElement {
 	@Override
 	public Closable clickElement() {
 		ClickUsingJavaScript.performClick(driver, LOCATOR);
-		return new EmployeeCreationWizard(super.coreData);
+		return new EmployeeCreation(super.coreData);
 	}
 
 }

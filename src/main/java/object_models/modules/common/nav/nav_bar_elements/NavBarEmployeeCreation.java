@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import object_models.helpers.Closable;
 import object_models.pages.homepage.CoreData;
 import object_models.modules.common.nav.NavBarElement;
-import object_models.employee_creation.EmployeeCreationWizard;
+import object_models.modules.payroll.top_right_nav.employees.EmployeeCreation;
 
 /**
 * Generated Class.
@@ -13,7 +13,7 @@ import object_models.employee_creation.EmployeeCreationWizard;
 * Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
 * Author:  SteveBrown
 * Version: 1.0.0
-* Created: 05/04/2022 13:22:49
+* Created: 05/04/2022 15:51:13
 */
 public class NavBarEmployeeCreation extends NavBarElement {
 	public static final String ORIGINAL_NAME = "Employee Creation";
@@ -27,7 +27,7 @@ public class NavBarEmployeeCreation extends NavBarElement {
 		WebElement el = 
 			super.getNavBar().findElement(By.xpath(".//li/a/i[contains(@class, 'fa fa-plus')]"));
 		el.click();
-		return new EmployeeCreationWizard(coreData);
+		return new EmployeeCreation(coreData);
 	}
 
 }

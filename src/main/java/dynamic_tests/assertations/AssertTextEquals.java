@@ -63,10 +63,14 @@ public class AssertTextEquals {
 		if(dataOut != null) {
 			Data testData = dataOut.getData();
 			//TODO
-			TestDataItem testDataItem = testData.getTestDataList().get(0);
+			if(testData != null) {
+				TestDataItem testDataItem = testData.getTestDataList().get(0);
+				if(testDataItem != null) {
+					runAssert(testDataItem.getValue());	
+				}
+//			runAssert(testData.getValue());						
+			}
 			
-//			runAssert(testData.getValue());	
-			runAssert(testDataItem.getValue());
 					
 		}else {
 			LOGGER

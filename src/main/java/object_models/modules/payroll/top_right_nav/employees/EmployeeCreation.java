@@ -16,6 +16,7 @@ import control_builder.control_data.ControlData;
 import object_models.pages.homepage.CoreData;
 import control_builder.control_getters.single.ControlGetterButton;
 import control_builder.control_getters.group.ControlGetterInputGroup;
+import object_models.employee_creation.EmployeeCreationWizard;
 
 /**
 * Generated Class.
@@ -23,7 +24,7 @@ import control_builder.control_getters.group.ControlGetterInputGroup;
 * Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
 * Author:  SteveBrown
 * Version: 1.0.0
-* Created: 05/04/2022 13:22:49
+* Created: 05/04/2022 15:51:13
 */
 
 public class EmployeeCreation extends JsPanelWithIFrame {
@@ -59,7 +60,9 @@ public class EmployeeCreation extends JsPanelWithIFrame {
 		super.buildPanelControls(myControls);
 	}
 
-/* Placeholder for missing library [ZEmployeeCreationWizard]*/
+	public EmployeeCreationWizard getEmployeeCreationWizard() {
+		return new EmployeeCreationWizard(coreData);
+	}
 
 	@SiteMap(author="SteveBrown", version="1.0.0", date="05/04/2022")
 	@TestControl(type="element", subtype="Button")
