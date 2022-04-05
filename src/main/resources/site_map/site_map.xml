@@ -150,7 +150,8 @@
           xmlns:ct="Container"
           xmlns:et="ElementType"          
           xmlns:mit="MenuItemType" xsi:schemaLocation="MenuItem file:/C:/SiteMapperXML/Schema/menu/MenuItem.xsd" 
-            name="Employee Creation" package="Employees" class="EmployeeCreation" library="EmployeeCreationWizard" fafa="fa fa-plus" returns="EmployeeCreationWizard" tooltip="Employee Creation">
+            name="Employee Creation" package="Employees" class="EmployeeCreation" library="EmployeeCreationWizard" 
+            fafa="fa fa-plus" tooltip="Employee Creation">
           
           <!-- WHY IS THIS IN package="Employees" -->
           
