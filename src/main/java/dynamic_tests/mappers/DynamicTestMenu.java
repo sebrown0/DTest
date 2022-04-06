@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.DynamicContainer;
 
+import dynamic_tests.common.XmlInfo;
 import dynamic_tests.elements.IncludedElements;
 import object_models.pages.homepage.HomePage;
 import site_mapper.jaxb.menu_items.MenuItem;
@@ -23,14 +24,16 @@ import site_mapper.jaxb.pom.menu.MenuType;
 public class DynamicTestMenu {
   private List<DynamicContainer> menuTestItems = new ArrayList<>();  
   private MenuType menu;
+  private XmlInfo testInfo;
   private IncludedElements includedElements;
   private HomePage hp;
   private String moduleName;  
   private String menuName;
   
-  public DynamicTestMenu(MenuType menu, IncludedElements includedElements, HomePage hp, String moduleName) {
+  public DynamicTestMenu(MenuType menu, XmlInfo testInfo, HomePage hp, String moduleName) {
 		this.menu = menu;
-		this.includedElements = includedElements;
+		this.testInfo = testInfo;
+		this.includedElements = testInfo.getIncludedElements();
 		this.hp = hp;
 		this.moduleName = moduleName;
 	}
@@ -62,7 +65,7 @@ public class DynamicTestMenu {
   	item.setTestModuleName(moduleName).setTestMenuName(menuName);  	
  
  		new 
- 			DynamicTestItem(includedElements, item, menuItemTestContainers, hp)
+ 			DynamicTestItem(testInfo, item, menuItemTestContainers, hp)
  				.addTests();	
  		
  		return menuItemTestContainers;

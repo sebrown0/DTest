@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.DynamicContainer;
 
+import dynamic_tests.common.XmlInfo;
 import dynamic_tests.elements.IncludedElements;
 import dynamic_tests.mappers.functions.NodeTestsCreator;
 import dynamic_tests.test_elements.ElementTestFactory;
@@ -30,6 +31,7 @@ import site_mapper.jaxb.tree.TreeWalker;
  */
 public class DynamicTestItem implements TreeVisitor {
 	private IncludedElements includedElements;
+	private XmlInfo testInfo;
 	private TestNode lastTestNode;
 	private List<TestNode> testNodes = new ArrayList<>();
 	private MenuItem item;
@@ -37,10 +39,11 @@ public class DynamicTestItem implements TreeVisitor {
 	private HomePage hp;
 	
 	public DynamicTestItem(
-			IncludedElements includedElements, MenuItem item,	
-			List<DynamicContainer> menuItemContainers, HomePage hp) {
+		XmlInfo testInfo, MenuItem item,	
+		List<DynamicContainer> menuItemContainers, HomePage hp) {
 		
-		this.includedElements = includedElements;
+		this.includedElements = testInfo.getIncludedElements();
+		this.testInfo = testInfo;
 		this.menuItemTests = menuItemContainers;
 		this.item = item;
 		this.hp = hp;
@@ -83,7 +86,7 @@ public class DynamicTestItem implements TreeVisitor {
 			NodeTestsCreator nodeTests = 
 				new NodeTestsCreator(
 					testNodes, includedElements, item, hp, menuItemTests);
-			nodeTests.addTestsForEachTestNode(new ElementTestFactory());
+			nodeTests.addTestsForEachTestNode(new ElementTestFactory(testInfo));
 		}
 	}
 		

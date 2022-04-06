@@ -36,16 +36,7 @@ public class CreateFaFaCheck extends TestCreator {
 		testList.add(
 			DynamicTest.dynamicTest(
 				"Is [" + elName +"] FaFa correct?", 
-				() -> {						 	
-					if(elName.equalsIgnoreCase("EmployeeList")) {
-						System.out.println("->"); // TODO - remove or log 	
-					}
-					
-					
-//				WebDriver d = super.cntrlFinder.ZZZ_getDriver();
-//				WebElement el = d.findElement(By.cssSelector("input[id='FORM_id']"));
-//				System.out.println("->" + el.getText()); // TODO - remove or log 	
-					
+				() -> {
 					getControlAndParent();
 					String faFaActual = ControlTestData.getFaFaText(cntrl);
 					assertEquals(faFa, faFaActual);

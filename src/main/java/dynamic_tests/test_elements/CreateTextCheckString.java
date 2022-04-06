@@ -6,12 +6,10 @@ package dynamic_tests.test_elements;
 import java.util.List;
 
 import org.junit.jupiter.api.DynamicTest;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import controls.interfaces.ControlTest;
 import dynamic_tests.assertations.AssertTextEquals;
+import dynamic_tests.common.XmlInfo;
 import dynamic_tests.elements.ControlFinder;
 
 /**
@@ -22,13 +20,15 @@ import dynamic_tests.elements.ControlFinder;
  */
 public class CreateTextCheckString extends TestCreator {
 	private String textExpected;
+	private XmlInfo testInfo;
 	
-	public CreateTextCheckString(
+	public CreateTextCheckString(XmlInfo testInfo,
 		ControlFinder cntrlFinder, List<DynamicTest> testList, 
 		ControlTest controlTest, String textExpected) {
 		
 		super(cntrlFinder, testList, controlTest);
 
+		this.testInfo = testInfo;
 		this.textExpected = textExpected;	
 	}
 	
@@ -39,13 +39,14 @@ public class CreateTextCheckString extends TestCreator {
 			"Is [" + elName +"] text correct?", 
 			() -> {
 				getControlAndParent();
+				
+				//Has side effect -> the test result in testResultData is set according to the test result. 
 				new 
-					AssertTextEquals(controlTest, cntrl)
+					AssertTextEquals(testInfo.getTestReportStrategy(), controlTest, cntrl)
 						.assertTextEquals(textExpected);
 				
-//				WebDriver d = super.cntrlFinder.ZZZ_getDriver();
-//				WebElement el = d.findElement(By.cssSelector("input[id='FORM_id']"));
-//				System.out.println("->" + el.getText()); // TODO - remove or log 	
+				
+//				result.addTestData(null);
 			}));		
 	}
 		

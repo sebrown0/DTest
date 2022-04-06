@@ -5,6 +5,7 @@
   xmlns:td="TestData"
   xmlns:inc="IncludeElementsInTest"
   xmlns:inf="SiteMapInfo"
+  xmlns:dyn="DynamicTestInfo"
   xmlns:menu="Menu"  
   xmlns:mod="Module"
   xmlns:mods="Modules"
@@ -19,6 +20,10 @@
     <inf:ParentPackage>object_models/modules</inf:ParentPackage>
     <inf:ElementLibrary>C:/Users/SteveBrown/eclipse-workspace/2021/DTest</inf:ElementLibrary>
   </Info>
+  <DynamicTestInfo>
+    <dyn:ReportStrategy>Junit</dyn:ReportStrategy>
+    <dyn:ReportResults>All</dyn:ReportResults>  
+  </DynamicTestInfo>
   <IncludeElementsForTest>
     <inc:Include>Button</inc:Include>
     <inc:Include>TextSelect</inc:Include>

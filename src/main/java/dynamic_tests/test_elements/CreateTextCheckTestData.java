@@ -11,6 +11,7 @@ import controls.interfaces.ControlTest;
 import dynamic_tests.assertations.AssertTextEquals;
 import dynamic_tests.elements.ControlFinder;
 import dynamic_tests.test_adders.TestAdderWithData;
+import dynamic_tests.test_results.DynamicTestData;
 
 /**
  * @author SteveBrown
@@ -37,8 +38,9 @@ public class CreateTextCheckTestData extends TestCreator {
 				() -> {
 					getControlAndParent();
 					TestDataInserter.insertAnyTestData(testData, controlTest);
+//					DynamicTestData testResultData = new DynamicTestData();
 					new 
-						AssertTextEquals(controlTest, cntrl)
+						AssertTextEquals(null, controlTest, cntrl)
 							.assertTextEquals(testData); 	
 				}));	
 	}

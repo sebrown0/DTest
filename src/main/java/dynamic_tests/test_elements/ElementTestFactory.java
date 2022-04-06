@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.DynamicTest;
 
 import controls.interfaces.ControlTest;
+import dynamic_tests.common.XmlInfo;
 import dynamic_tests.elements.ControlFinder;
 import dynamic_tests.test_adders.TestAdderWithData;
 
@@ -23,10 +24,17 @@ public class ElementTestFactory implements TestContainerLoader {
 	private ControlFinder cntrlFinder;	
 	private ControlTest controlTest;
 	private boolean itemIsNotLoaded = true;
-//	private final Logger LOGGER = LogManager.getLogger(ElementTestFactory.class);
+	
+	private final XmlInfo testInfo;
+		
+	public ElementTestFactory(XmlInfo testInfo) {
+		this.testInfo = testInfo;
+	}
 	
 	public ElementTestFactory createTextCheck(String textExpected) {
-		new CreateTextCheckString(cntrlFinder, testList, controlTest, textExpected).createTest(elName);
+//		DynamicTestReportStrategy strat = new DynamicTestReportStrategyJunit();
+//		strat = new DynamicTestReportStrategyConsole();
+		new CreateTextCheckString(testInfo, cntrlFinder, testList, controlTest, textExpected).createTest(elName);
 		return this;
 	}
 	public ElementTestFactory createTextCheck(TestAdderWithData testData) {

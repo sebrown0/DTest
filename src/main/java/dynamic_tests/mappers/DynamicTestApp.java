@@ -7,8 +7,9 @@ import java.util.Optional;
 import org.junit.jupiter.api.DynamicContainer;
 
 import app.xml_content.XmlTestContent;
-import dynamic_tests.elements.IncludedElements;
-import dynamic_tests.elements.IncludedTests;
+import dynamic_tests.common.DynamicTestInfoSetter;
+import dynamic_tests.common.XmlDynamicTestContent;
+import dynamic_tests.common.XmlInfo;
 import object_models.pages.homepage.HomePage;
 import site_mapper.jaxb.pom.Module;
 
@@ -25,7 +26,7 @@ public class DynamicTestApp {
 	private final HomePage hp;
 	
 	private List<DynamicContainer> moduleMenus = new ArrayList<>();;
-	private IncludedElements includedElements;
+	private XmlInfo xmlInfo;
 	
 	public DynamicTestApp(XmlTestContent content, HomePage hp) {
 		this.content = content;
@@ -34,19 +35,18 @@ public class DynamicTestApp {
 
 	public DynamicContainer getAppTests() {		
 		if(homepageOk(hp) && content != null) {			
-			setIncludedElements();						
+			setXmlInfo();
 			getModules().ifPresent( mods ->{
 				mods.forEach(m -> {					
 					moduleMenus.add(
-							new DynamicTestModule().getModuleContainers(m, includedElements, hp)
+							new DynamicTestModule().getModuleContainers(m, xmlInfo, hp)
 					);
 		  	});
 			});
-		}
-		  	
+		}		  	
 		return DynamicContainer.dynamicContainer("ROOT", moduleMenus);
 	}
-	 
+
 	private Optional<List<Module>> getModules(){
 		return Optional.ofNullable(content.getModules());
 	}
@@ -54,12 +54,10 @@ public class DynamicTestApp {
 	private boolean homepageOk(HomePage homePage) {	
 		return (homePage != null) ? true : false;
 	}
+
+	private void setXmlInfo() {
+		xmlInfo = new XmlDynamicTestContent(new DynamicTestInfoSetter(content));
+	}
 	
-	private void setIncludedElements() {
-		includedElements = 
-				new IncludedTests(getIncludedTypes());
-	}
-	private List<String> getIncludedTypes(){
-		return content.getIncludeElementsForTest();
-	}
+
 }
