@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.DynamicTest;
 
 import controls.interfaces.ControlTest;
+import dynamic_tests.common.XmlInfo;
 import dynamic_tests.elements.ControlFinder;
 
 /**
@@ -21,11 +22,11 @@ import dynamic_tests.elements.ControlFinder;
  */
 public class CreateListCheck extends TestCreator {
 	
-	public CreateListCheck(
+	public CreateListCheck(XmlInfo testInfo,
 		ControlFinder cntrlFinder, List<DynamicTest> testList, 
 		ControlTest controlTest) {
 		
-		super(cntrlFinder, testList, controlTest);
+		super(testInfo, cntrlFinder, testList, controlTest);
 
 	}
 	

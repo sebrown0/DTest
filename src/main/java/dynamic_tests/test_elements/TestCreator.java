@@ -10,6 +10,7 @@ import org.junit.jupiter.api.DynamicTest;
 
 import controls.interfaces.Control;
 import controls.interfaces.ControlTest;
+import dynamic_tests.common.XmlInfo;
 import dynamic_tests.elements.ControlFinder;
 
 /**
@@ -20,14 +21,16 @@ import dynamic_tests.elements.ControlFinder;
  */
 public abstract class TestCreator {
 	protected ControlFinder cntrlFinder;
-	
+	protected XmlInfo testInfo;
 	protected List<DynamicTest> testList;
 	protected Optional<Control> cntrl;	
 	protected ControlTest controlTest;
 	
 	public TestCreator(
-		ControlFinder cntrlFinder, List<DynamicTest> testList, ControlTest controlTest) {
+		XmlInfo testInfo, ControlFinder cntrlFinder, 
+		List<DynamicTest> testList, ControlTest controlTest) {
 		
+		this.testInfo = testInfo;
 		this.cntrlFinder = cntrlFinder;
 		this.testList = testList;
 		this.controlTest = controlTest;

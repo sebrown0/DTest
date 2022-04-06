@@ -3,14 +3,14 @@
  */
 package dynamic_tests.test_elements;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.List;
 
 import org.junit.jupiter.api.DynamicTest;
 
 import controls.data.ControlTestData;
 import controls.interfaces.ControlTest;
+import dynamic_tests.assertations.AssertTextEquals;
+import dynamic_tests.common.XmlInfo;
 import dynamic_tests.elements.ControlFinder;
 
 /**
@@ -20,28 +20,32 @@ import dynamic_tests.elements.ControlFinder;
  * @since 1.0
  */
 public class CreateToolTipCheck extends TestCreator {
-	private String toolTipText;
+	private String toolTipTextExpected;
+	private AssertTextEquals assertEquals;
 	
-	public CreateToolTipCheck(
+	public CreateToolTipCheck(XmlInfo testInfo,
 		ControlFinder cntrlFinder, List<DynamicTest> testList, 
 		ControlTest controlTest, String toolTipText) {
-		super(cntrlFinder, testList, controlTest);
+		super(testInfo, cntrlFinder, testList, controlTest);
 
-		this.toolTipText = toolTipText;
+		this.toolTipTextExpected = toolTipText;
 	}
 	
 	@Override
 	public void createTest(String elName) {		
-		if(toolTipText != null && toolTipText.length()>0) {
+		if(toolTipTextExpected != null && toolTipTextExpected.length()>0) {
 			testList.add(
 				DynamicTest.dynamicTest(
 					"Is [" + elName +"] tool tip correct?", 
-					() -> {							
-						getControlAndParent();
-						String textActual = ControlTestData.getControlToolTip(cntrl);
-						assertEquals(toolTipText, textActual);
-					}));			
+					() ->	executeTest()));			
 		}
+	}
+	
+	private void executeTest() {
+		getControlAndParent();
+		String toolTipTextActual = ControlTestData.getControlToolTip(cntrl);
+		assertEquals = new AssertTextEquals(testInfo.getTestReportStrategy(), controlTest, cntrl);
+		assertEquals.assertTextEquals(toolTipTextExpected, toolTipTextActual);	
 	}
 		
 }

@@ -3,9 +3,6 @@
  */
 package dynamic_tests.assertations;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
@@ -15,7 +12,6 @@ import controls.data.ControlTestData;
 import controls.interfaces.Control;
 import controls.interfaces.ControlTest;
 import dynamic_tests.test_adders.TestAdderWithData;
-import dynamic_tests.test_results.DynamicTestData;
 import dynamic_tests.test_results.DynamicTestFail;
 import dynamic_tests.test_results.DynamicTestPass;
 import dynamic_tests.test_strategy.DynamicTestReportStrategy;
@@ -52,6 +48,11 @@ public class AssertTextEquals {
 		this.cntrl = cntrl;
 	}
 	
+	public void assertTextEquals(String textExpected, String textActual) {
+		this.textActual = textActual;
+		runAssert(textExpected);
+	}
+	
 	public void assertTextEquals(String textExpected) {
 		setTextActual();
 		runAssert(textExpected);
@@ -61,6 +62,7 @@ public class AssertTextEquals {
 		textActual = ControlTestData.getControlText(cntrl);
 	}
 	
+	//TODO - move to own class.
 	public void runAssert(String expected) {
 //		DynamicTestResult result = null;
 		
@@ -68,21 +70,15 @@ public class AssertTextEquals {
 		
 //		System.out.println("Actual [" + textActual + "]" ); // TODO - remove or log 	
 //		System.out.println("Expected [" + expected + "]\n" ); // TODO - remove or log
-		expected+="**";
+		
+//		expected+="**";
 		
 		if(textActual.equals(expected)) {
 			strat.reportResult(new DynamicTestPass());
-//			testResultData.setResult(new DynamicTestPass());			
-//			assertTrue(true);
 		}else {
 			strat.reportResult(new DynamicTestFail());
-//			testResultData.setResult(new DynamicTestFail());
-//			assertEquals(expected, textActual);
-			
-//			fail(String.format("Expected [%s] but was [%s]", expected, textActual));
 		}
-		
-//		assertEquals(expected, textActual);
+
 	}
 	
 	public void assertTextEquals(TestAdderWithData testAdder) {

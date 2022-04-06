@@ -1,8 +1,11 @@
 package dynamic_tests.common;
 
+import org.apache.logging.log4j.LogManager;
+
 import dynamic_tests.elements.IncludedElements;
 import dynamic_tests.elements.IncludedTests;
 import dynamic_tests.test_strategy.DynamicTestReportStrategy;
+import dynamic_tests.test_strategy.DynamicTestReportStrategyConsole;
 import dynamic_tests.test_strategy.DynamicTestReportStrategyJunit;
 /**
  * @author SteveBrown
@@ -14,7 +17,7 @@ import dynamic_tests.test_strategy.DynamicTestReportStrategyJunit;
  */
 public class XmlDynamicTestContent implements XmlInfo { 
 	private IncludedElements includedElements;
-	private DynamicTestInfoSetter dynamicTestInfo;
+	private DynamicTestInfoTransformer dynamicTestInfo;
 	private DynamicTestReportStrategy strat;
 	
 	private final DynamicTestInfoFromXml infoFromXml;
@@ -39,8 +42,15 @@ public class XmlDynamicTestContent implements XmlInfo {
 		if(stratType.equalsIgnoreCase("junit")) {
 			strat = new DynamicTestReportStrategyJunit();
 		}else if(stratType.equalsIgnoreCase("console")) {
-			System.out.println("XmlDynamicTestContent.getTestReportStrategy for [CONSOLE] NOT IMPLEMENTED."); // TODO - remove or log 	
-		}			
+			strat = new DynamicTestReportStrategyConsole(); 	
+		}else {
+			LogManager
+				.getLogger(XmlDynamicTestContent.class)
+				.error(
+					String.format(
+							"Dynamic test reporting strategy not implemented for type [%s] (from XML)", 
+							stratType));
+		}
 	}
 
 	private void setIncludedElements() {

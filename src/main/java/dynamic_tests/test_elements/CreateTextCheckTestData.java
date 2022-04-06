@@ -9,9 +9,9 @@ import org.junit.jupiter.api.DynamicTest;
 
 import controls.interfaces.ControlTest;
 import dynamic_tests.assertations.AssertTextEquals;
+import dynamic_tests.common.XmlInfo;
 import dynamic_tests.elements.ControlFinder;
 import dynamic_tests.test_adders.TestAdderWithData;
-import dynamic_tests.test_results.DynamicTestData;
 
 /**
  * @author SteveBrown
@@ -22,10 +22,10 @@ import dynamic_tests.test_results.DynamicTestData;
 public class CreateTextCheckTestData extends TestCreator {
 	private TestAdderWithData testData;
 	
-	public CreateTextCheckTestData(
+	public CreateTextCheckTestData(XmlInfo testInfo,
 		ControlFinder cntrlFinder, List<DynamicTest> testList, 
 		ControlTest controlTest, TestAdderWithData testData) {
-		super(cntrlFinder, testList, controlTest);
+		super(testInfo, cntrlFinder, testList, controlTest);
 
 		this.testData = testData;
 	}

@@ -11,6 +11,7 @@ import controls.interfaces.ControlTest;
 import dynamic_tests.assertations.AssertTextEquals;
 import dynamic_tests.common.XmlInfo;
 import dynamic_tests.elements.ControlFinder;
+import dynamic_tests.test_results.DynamicTestData;
 
 /**
  * @author SteveBrown
@@ -20,15 +21,16 @@ import dynamic_tests.elements.ControlFinder;
  */
 public class CreateTextCheckString extends TestCreator {
 	private String textExpected;
-	private XmlInfo testInfo;
-	
-	public CreateTextCheckString(XmlInfo testInfo,
+	private AssertTextEquals assertEquals;
+	private DynamicTestData testData;
+
+	public CreateTextCheckString(
+		XmlInfo testInfo, DynamicTestData testData,
 		ControlFinder cntrlFinder, List<DynamicTest> testList, 
 		ControlTest controlTest, String textExpected) {
 		
-		super(cntrlFinder, testList, controlTest);
+		super(testInfo, cntrlFinder, testList, controlTest);
 
-		this.testInfo = testInfo;
 		this.textExpected = textExpected;	
 	}
 	
@@ -37,17 +39,14 @@ public class CreateTextCheckString extends TestCreator {
 		testList.add(
 		DynamicTest.dynamicTest(
 			"Is [" + elName +"] text correct?", 
-			() -> {
-				getControlAndParent();
-				
-				//Has side effect -> the test result in testResultData is set according to the test result. 
-				new 
-					AssertTextEquals(testInfo.getTestReportStrategy(), controlTest, cntrl)
-						.assertTextEquals(textExpected);
-				
-				
-//				result.addTestData(null);
-			}));		
+			() ->	executeTest()));			
 	}
 		
+	private void executeTest() {
+		getControlAndParent();				
+		assertEquals = 
+				new AssertTextEquals(testInfo.getTestReportStrategy(), controlTest, cntrl);
+		assertEquals.assertTextEquals(textExpected);		
+	}
+	
 }

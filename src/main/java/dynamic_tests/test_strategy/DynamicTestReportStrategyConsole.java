@@ -3,8 +3,6 @@
  */
 package dynamic_tests.test_strategy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import dynamic_tests.test_results.DynamicTestFail;
 import dynamic_tests.test_results.DynamicTestPass;
 import dynamic_tests.test_results.DynamicTestResult;

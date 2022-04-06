@@ -29,8 +29,7 @@ public class DynamicTestModule {
 		moduleMenus = new ArrayList<>();
 		List<MenuType> menus = module.getMenus();
 		if(menus != null) {
-			var moduleName = module.getName();
-			
+			var moduleName = module.getName();			
 			menus.stream()
 				.filter(m-> m != null)
 				.forEach(m -> {

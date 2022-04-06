@@ -12,11 +12,14 @@ import site_mapper.jaxb.pom.DynamicTestInfo;
  * @author SteveBrown
  * @version 1.0
  * @since 1.0
+ * 
+ * Take the XML content and transform it into
+ * that required for dynamic tests.
  */
-public class DynamicTestInfoSetter implements DynamicTestInfoFromXml {
+public class DynamicTestInfoTransformer implements DynamicTestInfoFromXml {
 	private XmlTestContent content;
 		
-	public DynamicTestInfoSetter(XmlTestContent content) {
+	public DynamicTestInfoTransformer(XmlTestContent content) {
 		this.content = content;
 	}
 	

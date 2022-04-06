@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.DynamicContainer;
 
 import app.xml_content.XmlTestContent;
-import dynamic_tests.common.DynamicTestInfoSetter;
+import dynamic_tests.common.DynamicTestInfoTransformer;
 import dynamic_tests.common.XmlDynamicTestContent;
 import dynamic_tests.common.XmlInfo;
 import object_models.pages.homepage.HomePage;
@@ -56,7 +56,7 @@ public class DynamicTestApp {
 	}
 
 	private void setXmlInfo() {
-		xmlInfo = new XmlDynamicTestContent(new DynamicTestInfoSetter(content));
+		xmlInfo = new XmlDynamicTestContent(new DynamicTestInfoTransformer(content));
 	}
 	
 
