@@ -11,11 +11,10 @@ import site_mapper.jaxb.menu_items.MenuItem;
  * @since 1.0
  */
 public class DynamicTestData {
-	private String testName;
+	private String testType;
 	private String elementName;
 	private String expectedResult;
 	private String actualResult;
-	private DynamicTestResult result;
 	
 	private final String testSuiteName;	
 
@@ -23,32 +22,12 @@ public class DynamicTestData {
 		this.testSuiteName = menuItem.getClassName();
 	}
 
-	public DynamicTestResult getResult() {
-		return result;
-	}
-
-	public void setResult(DynamicTestResult result) {
-		this.result = result;
-	}
-
 	public String getTestSuiteName() {
 		return testSuiteName;
 	}
 
-	public String getTestName() {
-		return testName;
-	}
-
-	public void setTestName(String testName) {
-		this.testName = testName;
-	}
-
 	public String getElementName() {
 		return elementName;
-	}
-
-	public void setElementName(String elementName) {
-		this.elementName = elementName;
 	}
 
 	public String getExpectedResult() {
@@ -59,6 +38,15 @@ public class DynamicTestData {
 		return actualResult;
 	}
 
+	public String getElementType() {
+		return testType;
+	}
+	
+	public DynamicTestData setElementName(String elementName) {
+		this.elementName = elementName;
+		return this;
+	}
+
 	public DynamicTestData setExpectedResult(String expectedResult) {
 		this.expectedResult = expectedResult;
 		return this;
@@ -66,6 +54,11 @@ public class DynamicTestData {
 
 	public DynamicTestData setActualResult(String actualResult) {
 		this.actualResult = actualResult;
+		return this;
+	}
+
+	public DynamicTestData setTestType(String testType) {
+		this.testType = testType;
 		return this;
 	}
 		

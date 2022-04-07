@@ -9,7 +9,6 @@ package dynamic_tests.test_results;
  * @since 1.0
  */
 public interface DynamicTestResult {
-//	void addTestData(DynamicTestData data);
 	String getExpected();
 	String getActual();
 }

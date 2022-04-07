@@ -40,7 +40,7 @@ public class CreateTextCheckTestData implements ElementTestCreator {
 		TestDataInserter.insertAnyTestData(testAdderWithData, controlTest);
 		new 
 			AssertTextEquals(null, controlTest, testData, cntrl)
-				.assertTextEquals(testAdderWithData);
+				.assertTextEquals("TestDataCheck", testAdderWithData);
 	}
 
 	@Override

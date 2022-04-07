@@ -3,7 +3,9 @@
  */
 package dynamic_tests.test_strategy;
 
-import dynamic_tests.test_results.DynamicTestResult;
+import dynamic_tests.test_results.DynamicTestFail;
+import dynamic_tests.test_results.DynamicTestIgnored;
+import dynamic_tests.test_results.DynamicTestPass;
 
 /**
  * @author SteveBrown
@@ -11,5 +13,7 @@ import dynamic_tests.test_results.DynamicTestResult;
  * @since 1.0
  */
 public interface DynamicTestReportStrategy {
-	void reportResult(DynamicTestResult result);
+	void reportPass(DynamicTestPass result);
+	void reportFail(DynamicTestFail result);
+	void reportIgnored(DynamicTestIgnored result);
 }

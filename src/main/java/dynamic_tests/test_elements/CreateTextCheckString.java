@@ -39,8 +39,9 @@ public class CreateTextCheckString implements ElementTestCreator {
 	@Override
 	public void executeTest(Optional<Control> cntrl) {
 		assertEquals = 
-				new AssertTextEquals(testInfo.getTestReportStrategy(), controlTest, testData, cntrl);
-		assertEquals.assertTextEquals(textExpected);		
+			new AssertTextEquals(
+				testInfo.getTestReportStrategy(), controlTest, testData, cntrl);
+		assertEquals.assertTextEquals("TextCheck", textExpected);		
 	}
 
 	@Override

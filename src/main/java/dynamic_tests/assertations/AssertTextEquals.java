@@ -39,7 +39,7 @@ public class AssertTextEquals {
 	private Optional<Control> cntrl;
 	private String textActual;
 	private String textExpected;
-	
+	private String testElmntType;
 	private DynamicTestReportStrategy strat;
 	
 	private final Logger LOGGER = LogManager.getLogger(AssertTextEquals.class);
@@ -54,13 +54,15 @@ public class AssertTextEquals {
 		this.cntrl = cntrl;
 	}
 	
-	public void assertTextEquals(String textExpected, String textActual) {
+	public void assertTextEquals(String testElmntType, String textExpected, String textActual) {
+		this.testElmntType = testElmntType;
 		this.textActual = textActual;
 		this.textExpected = textExpected;
 		runAssert();
 	}
 	
-	public void assertTextEquals(String textExpected) {
+	public void assertTextEquals(String testElmntType, String textExpected) {
+		this.testElmntType = testElmntType;
 		this.textExpected = textExpected;
 		setTextActual();
 		runAssert();
@@ -72,23 +74,22 @@ public class AssertTextEquals {
 	
 	private void updateTestData() {
 		testData
+			.setTestType(testElmntType)
 			.setExpectedResult(textExpected)
 			.setActualResult(textActual);
 	}
-	//TODO - move to own class.
+
 	private void runAssert() {
 		updateTestData();
 		if(textActual.equals(textExpected)) {
-			strat.reportResult(new DynamicTestPass(testData));
+			strat.reportPass(new DynamicTestPass(testData));
 		}else {
-			strat.reportResult(new DynamicTestFail(testData));
+			strat.reportFail(new DynamicTestFail(testData));
 		}
-
 	}
 	
-	public void assertTextEquals(TestAdderWithData testAdder) {
-		setTextActual();
-		
+	public void assertTextEquals(String testElmntType, TestAdderWithData testAdder) {
+		this.testElmntType = testElmntType;
 		TestDataOut dataOut = testAdder.getTestDataOut();
 		if(dataOut != null) {
 			Data testData = dataOut.getData();

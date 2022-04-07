@@ -25,5 +25,9 @@ public class DynamicTestResultType implements DynamicTestResult {
 		return data.getActualResult();
 	}
 
+	public DynamicTestData getData() {
+		return data;
+	}
+
 
 }

@@ -40,8 +40,9 @@ public class CreateFaFaCheck implements ElementTestCreator {
 	public void executeTest(Optional<Control> cntrl) {
 		String faFaActual = ControlTestData.getFaFaText(cntrl);		
 		assertEquals = 
-				new AssertTextEquals(testInfo.getTestReportStrategy(), controlTest, testData, cntrl);
-		assertEquals.assertTextEquals(faFaExpected, faFaActual);		
+			new AssertTextEquals(
+				testInfo.getTestReportStrategy(), controlTest, testData, cntrl);
+		assertEquals.assertTextEquals("FaFaCheck", faFaExpected, faFaActual);		
 	}
 
 	@Override

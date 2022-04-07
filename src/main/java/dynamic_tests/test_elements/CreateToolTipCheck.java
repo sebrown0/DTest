@@ -41,7 +41,7 @@ public class CreateToolTipCheck implements ElementTestCreator {
 		String toolTipTextActual = ControlTestData.getControlToolTip(cntrl);
 		assertEquals = 
 				new AssertTextEquals(testInfo.getTestReportStrategy(), controlTest, testData, cntrl);
-		assertEquals.assertTextEquals(toolTipTextExpected, toolTipTextActual);		
+		assertEquals.assertTextEquals("ToolTipCheck", toolTipTextExpected, toolTipTextActual);		
 	}
 
 	@Override
