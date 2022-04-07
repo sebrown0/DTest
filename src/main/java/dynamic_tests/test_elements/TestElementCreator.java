@@ -7,8 +7,9 @@ import java.util.Optional;
 
 import controls.interfaces.Control;
 import controls.interfaces.ControlTest;
+import dynamic_tests.assertations.AssertTextEquals;
 import dynamic_tests.common.XmlInfo;
-import dynamic_tests.test_results.DynamicTestData;
+import dynamic_tests.test_results.DynamicTestSuiteData;
 
 /**
  * @author SteveBrown
@@ -18,24 +19,32 @@ import dynamic_tests.test_results.DynamicTestData;
  * Create the test for the element.
  */
 public abstract class TestElementCreator {	
-	protected String elmntName;
+	protected TestElementDetails testElementDetails;
 	protected String textExpected;	
-	protected DynamicTestData testData;	
+	protected DynamicTestSuiteData testData;	
 	protected XmlInfo testInfo;	
 	protected ControlTest controlTest;
+	protected AssertTextEquals assertEquals;
 	
 	public TestElementCreator(
-			String elmntName,
-			XmlInfo testInfo, DynamicTestData testData, 
+			TestElementDetails testElementDetails,
+			XmlInfo testInfo, DynamicTestSuiteData testData, 
 			ControlTest controlTest, String textExpected) {
 
-			this.elmntName = elmntName;
+			this.testElementDetails = testElementDetails;
 			this.testInfo = testInfo;
 			this.testData = testData;
 			this.textExpected = textExpected;
-			this.controlTest = controlTest;
+			this.controlTest = controlTest;			
+			this.assertEquals = new AssertTextEquals(testInfo, controlTest, testData);
 		}
+		
+	protected abstract String getMessage();
+	protected abstract void executeTest(Optional<Control> cntrl);
+	protected abstract void setTestType();
 	
-	public abstract String getMessage();
-	public abstract void executeTest(Optional<Control> cntrl);
+	public void createTestExecutor(Optional<Control> cntrl) {
+		setTestType();
+		executeTest(cntrl);
+	}
 }

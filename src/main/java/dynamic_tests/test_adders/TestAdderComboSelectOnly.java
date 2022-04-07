@@ -4,6 +4,7 @@
 package dynamic_tests.test_adders;
 
 import dynamic_tests.test_elements.ElementTestFactory;
+import dynamic_tests.test_elements.TestElementDetails;
 import site_mapper.elements.ElementCreation;
 import site_mapper.jaxb.pom.test_data.TestDataIn;
 import site_mapper.jaxb.pom.test_data.TestDataOut;
@@ -15,35 +16,21 @@ import site_mapper.jaxb.pom.test_data.TestDataOut;
  * @since 1.0
  */
 public class TestAdderComboSelectOnly implements TestAdderWithData {
-	private String elName;
 	private TestDataIn dataIn;
 	private TestDataOut dataOut;
 
 	public TestAdderComboSelectOnly(ElementCreation el) {
-		this.elName = el.getElementName();
 		this.dataIn = el.getTestDataIn();
 		this.dataOut = el.getTestDataOut();
 	}
 
 	@Override //TestAdder
-	public void addTestsWith(ElementTestFactory testFactory) {
+	public void addTestsWith(ElementTestFactory testFactory, TestElementDetails details) {
 		if(dataOut != null) {			
-			testFactory.createTextCheck(elName, this);			
+			testFactory.createTextCheck(details, this);			
 		}		
 	}
-	
-//	@Override //TestAdder
-//	public void addTestsWith(ElementTestFactory testFactory) {
-//		if(dataOut != null) {
-//			TestData testData = dataOut.getTestData();
-//			if(testData instanceof TestDataList) {
-//				testFactory.createTextListCheck(this);		
-//			}else {
-//				testFactory.createTextCheck(this);
-//			}
-//		}		
-//	}
-	
+		
 	@Override //TestAdderWithData
 	public TestDataIn getTestDataIn() {
 		return dataIn;

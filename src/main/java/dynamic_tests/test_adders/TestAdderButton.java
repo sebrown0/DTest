@@ -4,6 +4,7 @@
 package dynamic_tests.test_adders;
 
 import dynamic_tests.test_elements.ElementTestFactory;
+import dynamic_tests.test_elements.TestElementDetails;
 import site_mapper.elements.ElementCreation;
 import site_mapper.elements.ElementDetails;
 
@@ -27,10 +28,10 @@ public class TestAdderButton implements TestAdder {
 	}
 		
 	@Override
-	public void addTestsWith(ElementTestFactory testFactory) {
-		if(fafa != null) testFactory.createButtonFaFaCheck(elName, fafa); 
-		if(text != null) testFactory.createTextCheck(elName, text);
-		if(toolTipText != null) testFactory.createToolTipCheck(elName, toolTipText);					
+	public void addTestsWith(ElementTestFactory testFactory, TestElementDetails details) {
+		if(fafa != null) testFactory.createButtonFaFaCheck(details, fafa); 
+		if(text != null) testFactory.createTextCheck(details, text);
+		if(toolTipText != null) testFactory.createToolTipCheck(details, toolTipText);					
 	}
 	
 }

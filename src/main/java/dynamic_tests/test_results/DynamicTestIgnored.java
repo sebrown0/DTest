@@ -3,6 +3,8 @@
  */
 package dynamic_tests.test_results;
 
+import dynamic_tests.assertations.ReportData;
+
 /**
  * @author SteveBrown
  * @version 1.0
@@ -10,7 +12,7 @@ package dynamic_tests.test_results;
  */
 public class DynamicTestIgnored extends DynamicTestResultType {
 
-	public DynamicTestIgnored(DynamicTestData data) {
+	public DynamicTestIgnored(ReportData data) {
 		super(data);
 
 	}

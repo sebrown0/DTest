@@ -10,7 +10,7 @@ import controls.interfaces.ControlTest;
 import dynamic_tests.assertations.AssertTextEquals;
 import dynamic_tests.common.XmlInfo;
 import dynamic_tests.test_adders.TestAdderWithData;
-import dynamic_tests.test_results.DynamicTestData;
+import dynamic_tests.test_results.DynamicTestSuiteData;
 
 /**
  * @author SteveBrown
@@ -21,24 +21,30 @@ import dynamic_tests.test_results.DynamicTestData;
 @SuppressWarnings("unused")
 public class CreateListCheck extends TestElementCreator {	
 	private TestAdderWithData testAdderWithData;
-	private AssertTextEquals assertEquals;
-	
-	public CreateListCheck(String elmntName, XmlInfo testInfo, DynamicTestData testData, ControlTest controlTest,
+		
+	public CreateListCheck(TestElementDetails testElementDetails, XmlInfo testInfo, DynamicTestSuiteData testData, ControlTest controlTest,
 			TestAdderWithData testAdderWithData) {
-		super(elmntName, testInfo, testData, controlTest, null);
+		super(testElementDetails, testInfo, testData, controlTest, null);
 
 		this.testAdderWithData = testAdderWithData;
 	}
 
 		
 	@Override
-	public void executeTest(Optional<Control> cntrl) {
+	protected void executeTest(Optional<Control> cntrl) {
 		//noit implemented			
 	}
 
 	@Override
-	public String getMessage() {
-		return "Is [" + testData.getElementName() +"] text correct?";
+	protected String getMessage() {
+		System.out.println("CreateListCheck.getMessage->NOT IMPLEMENTED"); // TODO - remove or log 	
+		//noit implemented			
+//		return "Is [" + testData.getElementName() +"] text correct?";
+		return "";
 	}
-			
+
+	@Override
+	protected void setTestType() {
+		 testElementDetails.setElementTestType("ListCheck");		
+	}
 }

@@ -4,6 +4,7 @@
 package dynamic_tests.test_adders;
 
 import dynamic_tests.test_elements.ElementTestFactory;
+import dynamic_tests.test_elements.TestElementDetails;
 
 /**
  * @author SteveBrown
@@ -15,5 +16,5 @@ import dynamic_tests.test_elements.ElementTestFactory;
  * to ElementTest, using the factory.
  */
 public interface TestAdder {
-	void addTestsWith(ElementTestFactory testFactory);
+	void addTestsWith(ElementTestFactory testFactory, TestElementDetails details);
 }

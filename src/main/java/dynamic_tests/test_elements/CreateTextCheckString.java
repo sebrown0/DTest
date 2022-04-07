@@ -7,9 +7,8 @@ import java.util.Optional;
 
 import controls.interfaces.Control;
 import controls.interfaces.ControlTest;
-import dynamic_tests.assertations.AssertTextEquals;
 import dynamic_tests.common.XmlInfo;
-import dynamic_tests.test_results.DynamicTestData;
+import dynamic_tests.test_results.DynamicTestSuiteData;
 
 /**
  * @author SteveBrown
@@ -19,25 +18,32 @@ import dynamic_tests.test_results.DynamicTestData;
  */
 
 public class CreateTextCheckString extends TestElementCreator {
-	private AssertTextEquals assertEquals;
-	
+		
 	public CreateTextCheckString(
-			String elmntName, XmlInfo testInfo, DynamicTestData testData, 
+			TestElementDetails testElementDetails, XmlInfo testInfo, DynamicTestSuiteData testData, 
 			ControlTest controlTest, String textExpected) {
-		super(elmntName, testInfo, testData, controlTest, textExpected);
+		super(testElementDetails, testInfo, testData, controlTest, textExpected);
 
 	}
 	
 	@Override
-	public void executeTest(Optional<Control> cntrl) {
-		assertEquals = 
-			new AssertTextEquals(testInfo, controlTest, testData, cntrl);
-		assertEquals.assertTextEquals(elmntName, "TextCheck", textExpected);		
+	public void executeTest(Optional<Control> cntrl) {		
+//		assertEquals.getTextActualAndAssertTextEquals(testElementDetails, textExpected, cntrl);		
+		
+		assertEquals.getTextActualAndAssertTextEquals(
+			testElementDetails, 
+			new TestElementData().setTextExpected(textExpected), 
+			cntrl);
 	}
 
 	@Override
 	public String getMessage() {
-		return "Is [" + testData.getElementName() +"] text correct?";
+		return "Is [" + testElementDetails.getName() +"] text correct?";
+	}
+
+	@Override
+	protected void setTestType() {
+		 testElementDetails.setElementTestType("TextCheck");		
 	}
 
 }

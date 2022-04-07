@@ -92,6 +92,6 @@ public class NodeTestsCreator {
 	}
 		
 	private String getKey(TestElementDetails e) {
-		return e.getType() + "." + e.getName();
+		return e.getElementType() + "." + e.getName();
 	}
 }

@@ -4,6 +4,7 @@
 package dynamic_tests.test_adders;
 
 import dynamic_tests.test_elements.ElementTestFactory;
+import dynamic_tests.test_elements.TestElementDetails;
 import site_mapper.elements.ElementCreation;
 
 /**
@@ -20,7 +21,7 @@ public class TestAdderLabel implements TestAdder {
 	}
 
 	@Override //TestAdder
-	public void addTestsWith(ElementTestFactory testFactory) {
-		testFactory.createTextCheck(el.getElementName(), el.getText());
+	public void addTestsWith(ElementTestFactory testFactory, TestElementDetails details) {
+		testFactory.createTextCheck(details, el.getText());
 	}
 }

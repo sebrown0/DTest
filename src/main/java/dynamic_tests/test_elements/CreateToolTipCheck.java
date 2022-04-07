@@ -8,9 +8,8 @@ import java.util.Optional;
 import controls.data.ControlTestData;
 import controls.interfaces.Control;
 import controls.interfaces.ControlTest;
-import dynamic_tests.assertations.AssertTextEquals;
 import dynamic_tests.common.XmlInfo;
-import dynamic_tests.test_results.DynamicTestData;
+import dynamic_tests.test_results.DynamicTestSuiteData;
 
 /**
  * @author SteveBrown
@@ -18,28 +17,32 @@ import dynamic_tests.test_results.DynamicTestData;
  * 	Initial
  * @since 1.0
  */
-public class CreateToolTipCheck extends TestElementCreator {
-	private AssertTextEquals assertEquals;
+public class CreateToolTipCheck extends TestElementCreator {	
 
 	public CreateToolTipCheck(
-		String elmntName, XmlInfo testInfo, DynamicTestData testData, 
+		TestElementDetails testElementDetails, XmlInfo testInfo, DynamicTestSuiteData testData, 
 		ControlTest controlTest, String textExpected) {
 		
-		super(elmntName, testInfo, testData, controlTest, textExpected);
+		super(testElementDetails, testInfo, testData, controlTest, textExpected);
 		
 	}
 	
 	@Override
-	public void executeTest(Optional<Control> cntrl) {
+	protected void executeTest(Optional<Control> cntrl) {
 		String toolTipTextActual = ControlTestData.getControlToolTip(cntrl);
-		assertEquals = 
-				new AssertTextEquals(testInfo, controlTest, testData, cntrl);
-		assertEquals.assertTextEquals(elmntName, "ToolTipCheck", textExpected, toolTipTextActual);		
+		assertEquals.assertTextEquals(
+			testElementDetails, 
+			new TestElementData().setTextExpected(textExpected).setTextActual(toolTipTextActual), 
+			cntrl);
 	}
 
 	@Override
-	public String getMessage() {
-		return "Is [" + testData.getElementName() +"] tool tip correct?";
+	protected String getMessage() {
+		return "Is [" + testElementDetails.getName() +"] tool tip correct?";
 	}
-
+	
+	@Override
+	protected void setTestType() {
+		 testElementDetails.setElementTestType("ToolTipCheck");		
+	}
 }

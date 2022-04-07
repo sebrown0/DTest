@@ -21,8 +21,7 @@ public class DynamicTestFactory {
 	 * Get the test for the element.
 	 */
 	public void addElementSpecificTestsTo(ElementTest test, ElementCreation el) {		
-		String elType = el.getElementType();				
-//System.out.println("->" + el.getElementName()); // TODO - remove or log 	
+		String elType = el.getElementType();
 		switch (elType) {
 			case "button", "Button" -> {
 				test.addTests(new TestAdderButton(el));

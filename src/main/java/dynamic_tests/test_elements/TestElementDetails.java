@@ -17,11 +17,17 @@ import org.junit.jupiter.api.DynamicTest;
  * 	Remove or update createTests() & getTests().
  * @since 1.0
  * 
- * Methods required from ElementTest.
+ * Data required from ElementTest.
  * 
  */
 public interface TestElementDetails {
 	String getName();
-	String getType();
+	String getElementType();
+	String getElementTestType();
+	String getTestBelongsTo();
+	
 	List<DynamicTest> getTestList();
+	
+	void setElementTestType(String type);	
+	
 }

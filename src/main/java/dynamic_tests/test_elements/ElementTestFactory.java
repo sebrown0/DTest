@@ -8,12 +8,10 @@ import java.util.List;
 import org.junit.jupiter.api.DynamicTest;
 
 import controls.interfaces.ControlTest;
-import dynamic_tests.common.DynamicTestInfoFromXml;
 import dynamic_tests.common.XmlInfo;
 import dynamic_tests.elements.ControlFinder;
 import dynamic_tests.test_adders.TestAdderWithData;
-import dynamic_tests.test_results.DynamicTestData;
-import site_mapper.jaxb.pom.DynamicTestInfo;
+import dynamic_tests.test_results.DynamicTestSuiteData;
 
 /**
  * @author SteveBrown
@@ -33,40 +31,42 @@ public class ElementTestFactory implements TestContainerLoader {
 	private ControlFinder cntrlFinder;	
 	private ControlTest controlTest;
 	private boolean itemIsNotLoaded = true;
-	private DynamicTestData testData;	
+	private DynamicTestSuiteData testData;	
 	private TestCreator testCreator;	
+//	private TestElementDetails testElementDetails;
 	
 	private final XmlInfo testInfo;
-			
-	public ElementTestFactory(XmlInfo testInfo, DynamicTestData testData) {
+	
+	
+	public ElementTestFactory(XmlInfo testInfo, DynamicTestSuiteData testData) {
 		this.testInfo = testInfo;		
 		this.testData = testData;				
 	}
 	
-	public ElementTestFactory createTextCheck(String elName, String textExpected) {
+	public ElementTestFactory createTextCheck(TestElementDetails details, String textExpected) {
 		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
-		testCreator.createTest(new CreateTextCheckString(elName, testInfo, testData, controlTest, textExpected), testList);		
+		testCreator.createTest(new CreateTextCheckString(details, testInfo, testData, controlTest, textExpected), testList);		
 		return this;
 	}
-	public ElementTestFactory createTextCheck(String elName, TestAdderWithData testAdderWithData) {
+	public ElementTestFactory createTextCheck(TestElementDetails details, TestAdderWithData testAdderWithData) {
 		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
-		testCreator.createTest(new CreateTextCheckTestData(elName, testInfo, testData, controlTest, testAdderWithData), testList);		
+		testCreator.createTest(new CreateTextCheckTestData(details, testInfo, testData, controlTest, testAdderWithData), testList);		
 		return this;
 	}
-	public ElementTestFactory createToolTipCheck(String elName, String toolTipText) {
+	public ElementTestFactory createToolTipCheck(TestElementDetails details, String toolTipText) {
 		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
-		testCreator.createTest(new CreateToolTipCheck(elName, testInfo, testData, controlTest, toolTipText), testList);		
+		testCreator.createTest(new CreateToolTipCheck(details, testInfo, testData, controlTest, toolTipText), testList);		
 		return this;
 	}
-	public ElementTestFactory createButtonFaFaCheck(String elName, String faFa) {
+	public ElementTestFactory createButtonFaFaCheck(TestElementDetails details, String faFa) {
 		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
-		testCreator.createTest(new CreateFaFaCheck(elName, testInfo, testData, controlTest, faFa), testList);		
+		testCreator.createTest(new CreateFaFaCheck(details, testInfo, testData, controlTest, faFa), testList);		
 		return this;
 	}
-	public ElementTestFactory createTextListCheck(String elName, TestAdderWithData testAdderWithData) {
+	public ElementTestFactory createTextListCheck(TestElementDetails details, TestAdderWithData testAdderWithData) {
 		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
 		//NOT IMPLEMENTED
-		testCreator.createTest(new CreateListCheck(elName, testInfo, testData, controlTest, testAdderWithData), testList);		
+		testCreator.createTest(new CreateListCheck(details, testInfo, testData, controlTest, testAdderWithData), testList);		
 		return this;
 	}
 
@@ -75,8 +75,8 @@ public class ElementTestFactory implements TestContainerLoader {
 		return this;
 	}
 
-//	public ElementTestFactory setElementName(String elName) {
-//		testData.setElementName(elName);
+//	public ElementTestFactory setTestElementDetails(TestElementDetails testElementDetails) {
+//		this.testElementDetails = testElementDetails;
 //		return this;
 //	}
 

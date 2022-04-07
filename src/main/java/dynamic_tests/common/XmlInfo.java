@@ -18,6 +18,5 @@ import dynamic_tests.test_strategy.DynamicTestReportStrategy;
 public interface XmlInfo {
 	IncludedElements getIncludedElements();	
 	List<String> getReportOnTests();
-//	DynamicTestInfoFromXml getDynamicTestInfo();
 	DynamicTestReportStrategy getTestReportStrategy();
 }

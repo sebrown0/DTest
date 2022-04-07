@@ -28,7 +28,7 @@ public class DynamicTestReportStrategyJunit implements DynamicTestReportStrategy
 
 	@Override
 	public void reportFail(DynamicTestFail result) {
-		assertEquals(result.getExpected(), result.getActual());
+		assertEquals(result.getReportData().getExpected(), result.getReportData().getActual());
 	}
 
 	@Override

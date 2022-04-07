@@ -44,7 +44,7 @@ public class TestCreator {
 				elementTestCreator.getMessage(), 
 			() ->	{ 
 				getControlAndParent();
-				elementTestCreator.executeTest(cntrl); 
+				elementTestCreator.createTestExecutor(cntrl); 
 			}));			
 	}
 

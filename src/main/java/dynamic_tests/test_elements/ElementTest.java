@@ -28,7 +28,9 @@ import site_mapper.jaxb.menu_items.MenuItem;
  */
 public class ElementTest implements TestElementDetails {
 	private String elName;
-	private String type;
+	private String elType;
+	private String elTestType;
+	private String elmntsParent;
 	private List<DynamicTest> testList = new ArrayList<>();	
 	private ControlFinder controlFinder;
 	private ElementTestFactory testFactory;
@@ -37,9 +39,10 @@ public class ElementTest implements TestElementDetails {
 		TestNode testNode, HomePage hp, 
 		MenuItem item, ElementCreation e, ElementTestFactory testFactory) {
 
-		this.type = e.getElementType();
+		this.elType = e.getElementType();
 		this.elName = e.getElementName();
 		this.testFactory = testFactory;
+		this.elmntsParent = item.getName();
 		
 		controlFinder = new ControlFinder(testNode, hp, item, elName, testFactory);
 	}
@@ -47,9 +50,9 @@ public class ElementTest implements TestElementDetails {
 	public void addTests(TestAdder testAdder) {
 		testFactory 
 			.setCntrlFinder(controlFinder)
-//			.setElementName(elName)
+//			.setTestElementDetails(this)
 			.setTestList(testList);
-		testAdder.addTestsWith(testFactory);
+		testAdder.addTestsWith(testFactory, this);
 	}
 	
 	@Override //TestElementDetails
@@ -57,12 +60,27 @@ public class ElementTest implements TestElementDetails {
 		return elName;
 	}
 	@Override //TestElementDetails
-	public String getType() {
-		return type;
+	public String getElementType() {
+		return elType;
 	}
 	@Override //TestElementDetails
 	public List<DynamicTest> getTestList() {
 		return testList;
+	}
+
+	@Override //TestElementDetails
+	public String getElementTestType() {
+		return elTestType;
+	}
+
+	@Override //TestElementDetails
+	public void setElementTestType(String type) {
+		this.elTestType = type;
+	}
+
+	@Override
+	public String getTestBelongsTo() {
+		return elmntsParent;
 	}
 		
 	/*

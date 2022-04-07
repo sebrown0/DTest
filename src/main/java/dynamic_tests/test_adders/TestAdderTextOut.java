@@ -4,6 +4,7 @@
 package dynamic_tests.test_adders;
 
 import dynamic_tests.test_elements.ElementTestFactory;
+import dynamic_tests.test_elements.TestElementDetails;
 import site_mapper.elements.ElementCreation;
 import site_mapper.jaxb.pom.test_data.TestDataIn;
 import site_mapper.jaxb.pom.test_data.TestDataOut;
@@ -26,8 +27,8 @@ public class TestAdderTextOut implements TestAdderWithData {
 	}
 
 	@Override //TestAdder
-	public void addTestsWith(ElementTestFactory testFactory) {
-		testFactory.createTextCheck(elName, this);
+	public void addTestsWith(ElementTestFactory testFactory, TestElementDetails details) {
+		testFactory.createTextCheck(details, this);
 	}
 	
 	@Override //TestAdderWithData
