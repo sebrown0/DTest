@@ -38,7 +38,7 @@ public class TestCreator {
 		this.controlTest = controlTest;
 	}
 	
-	public void createTest(ElementTestCreator elementTestCreator, List<DynamicTest> testList) {
+	public void createTest(TestElementCreator elementTestCreator, List<DynamicTest> testList) {
 		testList.add(
 		DynamicTest.dynamicTest(
 				elementTestCreator.getMessage(), 

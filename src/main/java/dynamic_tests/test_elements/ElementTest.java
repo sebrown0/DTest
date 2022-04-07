@@ -47,7 +47,7 @@ public class ElementTest implements TestElementDetails {
 	public void addTests(TestAdder testAdder) {
 		testFactory 
 			.setCntrlFinder(controlFinder)
-			.setElementName(elName)
+//			.setElementName(elName)
 			.setTestList(testList);
 		testAdder.addTestsWith(testFactory);
 	}

@@ -8,10 +8,12 @@ import java.util.List;
 import org.junit.jupiter.api.DynamicTest;
 
 import controls.interfaces.ControlTest;
+import dynamic_tests.common.DynamicTestInfoFromXml;
 import dynamic_tests.common.XmlInfo;
 import dynamic_tests.elements.ControlFinder;
 import dynamic_tests.test_adders.TestAdderWithData;
 import dynamic_tests.test_results.DynamicTestData;
+import site_mapper.jaxb.pom.DynamicTestInfo;
 
 /**
  * @author SteveBrown
@@ -33,37 +35,38 @@ public class ElementTestFactory implements TestContainerLoader {
 	private boolean itemIsNotLoaded = true;
 	private DynamicTestData testData;	
 	private TestCreator testCreator;	
-	private final XmlInfo testInfo;	
-		
+	
+	private final XmlInfo testInfo;
+			
 	public ElementTestFactory(XmlInfo testInfo, DynamicTestData testData) {
-		this.testInfo = testInfo;
-		this.testData = testData;		
+		this.testInfo = testInfo;		
+		this.testData = testData;				
 	}
 	
-	public ElementTestFactory createTextCheck(String textExpected) {
+	public ElementTestFactory createTextCheck(String elName, String textExpected) {
 		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
-		testCreator.createTest(new CreateTextCheckString(testInfo, testData, controlTest, textExpected), testList);		
+		testCreator.createTest(new CreateTextCheckString(elName, testInfo, testData, controlTest, textExpected), testList);		
 		return this;
 	}
-	public ElementTestFactory createTextCheck(TestAdderWithData testAdderWithData) {
+	public ElementTestFactory createTextCheck(String elName, TestAdderWithData testAdderWithData) {
 		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
-		testCreator.createTest(new CreateTextCheckTestData(testInfo, testData, controlTest, testAdderWithData), testList);		
+		testCreator.createTest(new CreateTextCheckTestData(elName, testInfo, testData, controlTest, testAdderWithData), testList);		
 		return this;
 	}
-	public ElementTestFactory createToolTipCheck(String toolTipText) {
+	public ElementTestFactory createToolTipCheck(String elName, String toolTipText) {
 		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
-		testCreator.createTest(new CreateToolTipCheck(testInfo, testData, controlTest, toolTipText), testList);		
+		testCreator.createTest(new CreateToolTipCheck(elName, testInfo, testData, controlTest, toolTipText), testList);		
 		return this;
 	}
-	public ElementTestFactory createButtonFaFaCheck(String faFa) {
+	public ElementTestFactory createButtonFaFaCheck(String elName, String faFa) {
 		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
-		testCreator.createTest(new CreateFaFaCheck(testInfo, testData, controlTest, faFa), testList);		
+		testCreator.createTest(new CreateFaFaCheck(elName, testInfo, testData, controlTest, faFa), testList);		
 		return this;
 	}
-	public ElementTestFactory createTextListCheck(TestAdderWithData testAdderWithData) {
+	public ElementTestFactory createTextListCheck(String elName, TestAdderWithData testAdderWithData) {
 		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
 		//NOT IMPLEMENTED
-		testCreator.createTest(new CreateListCheck(testInfo, testData, controlTest, testAdderWithData), testList);		
+		testCreator.createTest(new CreateListCheck(elName, testInfo, testData, controlTest, testAdderWithData), testList);		
 		return this;
 	}
 
@@ -72,10 +75,10 @@ public class ElementTestFactory implements TestContainerLoader {
 		return this;
 	}
 
-	public ElementTestFactory setElementName(String elName) {
-		testData.setElementName(elName);
-		return this;
-	}
+//	public ElementTestFactory setElementName(String elName) {
+//		testData.setElementName(elName);
+//		return this;
+//	}
 
 	public ElementTestFactory setCntrlFinder(ControlFinder cntrlFinder) {
 		this.cntrlFinder = cntrlFinder;

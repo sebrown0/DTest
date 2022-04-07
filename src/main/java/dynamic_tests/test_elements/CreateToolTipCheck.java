@@ -18,30 +18,23 @@ import dynamic_tests.test_results.DynamicTestData;
  * 	Initial
  * @since 1.0
  */
-public class CreateToolTipCheck implements ElementTestCreator {
-	private String toolTipTextExpected;
+public class CreateToolTipCheck extends TestElementCreator {
 	private AssertTextEquals assertEquals;
-	
-	private DynamicTestData testData;	
-	private XmlInfo testInfo;	
-	private ControlTest controlTest;
-	
+
 	public CreateToolTipCheck(
-			XmlInfo testInfo, DynamicTestData testData, 
-			ControlTest controlTest, String toolTipText) {
+		String elmntName, XmlInfo testInfo, DynamicTestData testData, 
+		ControlTest controlTest, String textExpected) {
 		
-		this.testInfo = testInfo;
-		this.testData = testData;
-		this.controlTest = controlTest;
-		this.toolTipTextExpected = toolTipText;
+		super(elmntName, testInfo, testData, controlTest, textExpected);
+		
 	}
 	
 	@Override
 	public void executeTest(Optional<Control> cntrl) {
 		String toolTipTextActual = ControlTestData.getControlToolTip(cntrl);
 		assertEquals = 
-				new AssertTextEquals(testInfo.getTestReportStrategy(), controlTest, testData, cntrl);
-		assertEquals.assertTextEquals("ToolTipCheck", toolTipTextExpected, toolTipTextActual);		
+				new AssertTextEquals(testInfo, controlTest, testData, cntrl);
+		assertEquals.assertTextEquals(elmntName, "ToolTipCheck", textExpected, toolTipTextActual);		
 	}
 
 	@Override

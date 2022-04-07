@@ -18,31 +18,23 @@ import dynamic_tests.test_results.DynamicTestData;
  * 	Initial
  * @since 1.0
  */
-public class CreateFaFaCheck implements ElementTestCreator {
+public class CreateFaFaCheck extends TestElementCreator  {
 	private AssertTextEquals assertEquals;
 	
-	private String faFaExpected;
-	private DynamicTestData testData;	
-	private XmlInfo testInfo;	
-	private ControlTest controlTest;
-	
 	public CreateFaFaCheck(
-		XmlInfo testInfo, DynamicTestData testData, 
-		ControlTest controlTest, String faFa) {
+		String elmntName, XmlInfo testInfo, DynamicTestData testData, 
+		ControlTest controlTest, String textExpected) {
 		
-		this.testInfo = testInfo;
-		this.testData = testData;
-		this.faFaExpected = faFa;
-		this.controlTest = controlTest;
+		super(elmntName, testInfo, testData, controlTest, textExpected);
+		
 	}
 	
 	@Override
 	public void executeTest(Optional<Control> cntrl) {
 		String faFaActual = ControlTestData.getFaFaText(cntrl);		
 		assertEquals = 
-			new AssertTextEquals(
-				testInfo.getTestReportStrategy(), controlTest, testData, cntrl);
-		assertEquals.assertTextEquals("FaFaCheck", faFaExpected, faFaActual);		
+			new AssertTextEquals(testInfo, controlTest, testData, cntrl);
+		assertEquals.assertTextEquals(elmntName, "FaFaCheck", textExpected, faFaActual);		
 	}
 
 	@Override

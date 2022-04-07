@@ -15,10 +15,12 @@ import site_mapper.jaxb.pom.test_data.TestDataOut;
  * @since 1.0
  */
 public class TestAdderComboSelectOnly implements TestAdderWithData {
+	private String elName;
 	private TestDataIn dataIn;
 	private TestDataOut dataOut;
 
 	public TestAdderComboSelectOnly(ElementCreation el) {
+		this.elName = el.getElementName();
 		this.dataIn = el.getTestDataIn();
 		this.dataOut = el.getTestDataOut();
 	}
@@ -26,7 +28,7 @@ public class TestAdderComboSelectOnly implements TestAdderWithData {
 	@Override //TestAdder
 	public void addTestsWith(ElementTestFactory testFactory) {
 		if(dataOut != null) {			
-			testFactory.createTextCheck(this);			
+			testFactory.createTextCheck(elName, this);			
 		}		
 	}
 	

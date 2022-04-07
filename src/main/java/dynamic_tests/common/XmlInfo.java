@@ -3,6 +3,8 @@
  */
 package dynamic_tests.common;
 
+import java.util.List;
+
 import dynamic_tests.elements.IncludedElements;
 import dynamic_tests.test_strategy.DynamicTestReportStrategy;
 
@@ -15,6 +17,7 @@ import dynamic_tests.test_strategy.DynamicTestReportStrategy;
  */
 public interface XmlInfo {
 	IncludedElements getIncludedElements();	
-	DynamicTestInfoFromXml getDynamicTestInfo();
+	List<String> getReportOnTests();
+//	DynamicTestInfoFromXml getDynamicTestInfo();
 	DynamicTestReportStrategy getTestReportStrategy();
 }

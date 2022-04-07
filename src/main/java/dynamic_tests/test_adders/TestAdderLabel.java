@@ -21,6 +21,6 @@ public class TestAdderLabel implements TestAdder {
 
 	@Override //TestAdder
 	public void addTestsWith(ElementTestFactory testFactory) {
-		testFactory.createTextCheck(el.getText());
+		testFactory.createTextCheck(el.getElementName(), el.getText());
 	}
 }

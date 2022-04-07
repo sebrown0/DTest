@@ -22,7 +22,7 @@
   </Info>
   <DynamicTestInfo>
     <dyn:ReportStrategy>Console</dyn:ReportStrategy>
-    <dyn:ReportResults>All</dyn:ReportResults>  
+    <dyn:ReportResults>Fails</dyn:ReportResults>  
   </DynamicTestInfo>
   <IncludeElementsForTest>
     <inc:Include>Button</inc:Include>

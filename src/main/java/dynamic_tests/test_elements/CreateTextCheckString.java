@@ -18,30 +18,21 @@ import dynamic_tests.test_results.DynamicTestData;
  * @since 1.0
  */
 
-public class CreateTextCheckString implements ElementTestCreator {
+public class CreateTextCheckString extends TestElementCreator {
 	private AssertTextEquals assertEquals;
 	
-	private String textExpected;	
-	private DynamicTestData testData;	
-	private XmlInfo testInfo;	
-	private ControlTest controlTest;
-	
 	public CreateTextCheckString(
-		XmlInfo testInfo, DynamicTestData testData, 
-		ControlTest controlTest, String textExpected) {
+			String elmntName, XmlInfo testInfo, DynamicTestData testData, 
+			ControlTest controlTest, String textExpected) {
+		super(elmntName, testInfo, testData, controlTest, textExpected);
 
-		this.testInfo = testInfo;
-		this.testData = testData;
-		this.textExpected = textExpected;
-		this.controlTest = controlTest;
 	}
 	
 	@Override
 	public void executeTest(Optional<Control> cntrl) {
 		assertEquals = 
-			new AssertTextEquals(
-				testInfo.getTestReportStrategy(), controlTest, testData, cntrl);
-		assertEquals.assertTextEquals("TextCheck", textExpected);		
+			new AssertTextEquals(testInfo, controlTest, testData, cntrl);
+		assertEquals.assertTextEquals(elmntName, "TextCheck", textExpected);		
 	}
 
 	@Override

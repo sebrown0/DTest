@@ -15,20 +15,19 @@ import site_mapper.jaxb.pom.test_data.TestDataOut;
  * @since 1.0
  */
 public class TestAdderTextOut implements TestAdderWithData {
+	private String elName;
 	private TestDataIn dataIn;
 	private TestDataOut dataOut;
 
-	public TestAdderTextOut(ElementCreation el) {
-		if(el.getElementName().equals("Grade")) {
-			System.out.println("->");
-		}
+	public TestAdderTextOut(ElementCreation el) {		
+		this.elName = el.getElementName();
 		this.dataIn = el.getTestDataIn();
 		this.dataOut = el.getTestDataOut();
 	}
 
 	@Override //TestAdder
 	public void addTestsWith(ElementTestFactory testFactory) {
-		testFactory.createTextCheck(this);
+		testFactory.createTextCheck(elName, this);
 	}
 	
 	@Override //TestAdderWithData

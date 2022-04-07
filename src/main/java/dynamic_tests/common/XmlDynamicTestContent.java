@@ -1,5 +1,8 @@
 package dynamic_tests.common;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 
 import dynamic_tests.elements.IncludedElements;
@@ -17,19 +20,10 @@ import dynamic_tests.test_strategy.DynamicTestReportStrategyJunit;
  */
 public class XmlDynamicTestContent implements XmlInfo { 
 	private IncludedElements includedElements;
-	private DynamicTestInfoTransformer dynamicTestInfo;
 	private DynamicTestReportStrategy strat;
 	
 	private final DynamicTestInfoFromXml infoFromXml;
-	/**
-	 * 
-	 * @param includedElements 
-	 * 	The elements that are to be included in tests.
-	 * @param dynamicTestInfo  
-	 * 	Info about the dynamic tests. 
-	 * 	The JAXB object is passed and the details copied from it. 
-	 */
-	
+		
 	public XmlDynamicTestContent(DynamicTestInfoFromXml infoFromXml) {
 		this.infoFromXml = infoFromXml;
 		
@@ -62,12 +56,12 @@ public class XmlDynamicTestContent implements XmlInfo {
 		return includedElements;
 	}
 	@Override
-	public DynamicTestInfoFromXml getDynamicTestInfo() {		
-		return dynamicTestInfo;
-	}
-	@Override
 	public DynamicTestReportStrategy getTestReportStrategy() {	
 		return strat;
+	}
+	@Override
+	public List<String> getReportOnTests() {		
+		return Arrays.asList(infoFromXml.getDynamicTestInfo().getReportResults());
 	}	
 	
 }

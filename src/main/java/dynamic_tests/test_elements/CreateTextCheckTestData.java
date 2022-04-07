@@ -18,49 +18,29 @@ import dynamic_tests.test_results.DynamicTestData;
  * 	Initial
  * @since 1.0
  */
-public class CreateTextCheckTestData implements ElementTestCreator {
+public class CreateTextCheckTestData extends TestElementCreator {
 	private TestAdderWithData testAdderWithData;		
-	private DynamicTestData testData;	
-	@SuppressWarnings("unused")
-	private XmlInfo testInfo;	
-	private ControlTest controlTest;
 	
 	public CreateTextCheckTestData(
-		XmlInfo testInfo, DynamicTestData testData, 
-		ControlTest controlTest, TestAdderWithData testAdderWithData) {
-	
-		this.testInfo = testInfo;
-		this.testData = testData;		
-		this.controlTest = controlTest;
+		String elmntName, XmlInfo testInfo, DynamicTestData testData, 
+		ControlTest controlTest,	TestAdderWithData testAdderWithData) {
+		
+		super(elmntName, testInfo, testData, controlTest, null);
+		
 		this.testAdderWithData = testAdderWithData;
 	}
-	
+
 	@Override
 	public void executeTest(Optional<Control> cntrl) {
 		TestDataInserter.insertAnyTestData(testAdderWithData, controlTest);
 		new 
 			AssertTextEquals(null, controlTest, testData, cntrl)
-				.assertTextEquals("TestDataCheck", testAdderWithData);
+				.assertTextEquals(elmntName, "TestDataCheck", testAdderWithData);
 	}
 
 	@Override
 	public String getMessage() {
 		return "Is [" + testData.getElementName() +"] text correct?";
 	}
-	
-//	@Override
-//	public void createTest(String elName) {
-//		testList.add(
-//			DynamicTest.dynamicTest(
-//				"Is [" + elName +"] text correct?", 
-//				() -> {
-//					getControlAndParent();
-//					TestDataInserter.insertAnyTestData(testData, controlTest);
-////					DynamicTestData testResultData = new DynamicTestData();
-//					new 
-//						AssertTextEquals(null, controlTest, cntrl)
-//							.assertTextEquals(testData); 	
-//				}));	
-//	}
 		
 }

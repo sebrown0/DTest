@@ -18,49 +18,27 @@ import dynamic_tests.test_results.DynamicTestData;
  * 	Initial
  * @since 1.0
  */
-public class CreateListCheck implements ElementTestCreator {
+@SuppressWarnings("unused")
+public class CreateListCheck extends TestElementCreator {	
+	private TestAdderWithData testAdderWithData;
 	private AssertTextEquals assertEquals;
 	
-	private String textExpected;	
-	private DynamicTestData testData;	
-	private XmlInfo testInfo;	
-	private ControlTest controlTest;
-	private TestAdderWithData testAdderWithData;
-	
-	public CreateListCheck(
-		XmlInfo testInfo, DynamicTestData testData, 
-		ControlTest controlTest, TestAdderWithData testAdderWithData) {
+	public CreateListCheck(String elmntName, XmlInfo testInfo, DynamicTestData testData, ControlTest controlTest,
+			TestAdderWithData testAdderWithData) {
+		super(elmntName, testInfo, testData, controlTest, null);
 
-		this.testInfo = testInfo;
-		this.testData = testData;
 		this.testAdderWithData = testAdderWithData;
-		this.controlTest = controlTest;
 	}
-	
+
+		
 	@Override
 	public void executeTest(Optional<Control> cntrl) {
-		//noit implemented
-//		assertEquals = 
-//				new AssertTextEquals(testInfo.getTestReportStrategy(), controlTest, cntrl);
-//		assertEquals.assertTextEquals(textExpected);		
+		//noit implemented			
 	}
 
 	@Override
 	public String getMessage() {
 		return "Is [" + testData.getElementName() +"] text correct?";
 	}
-	
-//	@Override
-//	public void createTest(String elName) {		
-//		testList.add(
-//			DynamicTest.dynamicTest(
-//				"Is [" + elName +"] text correct?", 
-//				() -> {			
-//					fail("ElementTestFactory.createTextListCheck not implemented.");
-//					LogManager
-//						.getLogger(CreateListCheck.class)
-//						.error("ElementTestFactory.createTextListCheck not implemented.");
-//				}));
-//	}
-		
+			
 }

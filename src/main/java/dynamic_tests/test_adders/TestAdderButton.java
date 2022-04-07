@@ -13,12 +13,14 @@ import site_mapper.elements.ElementDetails;
  * 	Initial
  * @since 1.0
  */
-public class TestAdderButton implements TestAdder {	
+public class TestAdderButton implements TestAdder {
+	private String elName;
 	private String text;
 	private String fafa;	
 	private String toolTipText;
 	
-	public TestAdderButton(ElementCreation e) {				
+	public TestAdderButton(ElementCreation e) {
+		elName = e.getElementName();
 		text = e.getText();
 		fafa = e.getFafa();
 		toolTipText = ((ElementDetails)e).getToolTipText();		
@@ -26,9 +28,9 @@ public class TestAdderButton implements TestAdder {
 		
 	@Override
 	public void addTestsWith(ElementTestFactory testFactory) {
-		if(fafa != null) testFactory.createButtonFaFaCheck(fafa); 
-		if(text != null) testFactory.createTextCheck(text);
-		if(toolTipText != null) testFactory.createToolTipCheck(toolTipText);					
+		if(fafa != null) testFactory.createButtonFaFaCheck(elName, fafa); 
+		if(text != null) testFactory.createTextCheck(elName, text);
+		if(toolTipText != null) testFactory.createToolTipCheck(elName, toolTipText);					
 	}
 	
 }
