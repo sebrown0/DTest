@@ -53,17 +53,5 @@ public class TestCreator {
 		this.cntrl = cntrlFinder.loadControl().getControl();
 		this.controlTest = cntrlFinder.getControlsClass();
 	}
-
-//	public void setCntrlFinder(ControlFinder cntrlFinder) {
-//		this.cntrlFinder = cntrlFinder;
-//	}
-//
-//	public void setTestList(List<DynamicTest> testList) {
-//		this.testList = testList;
-//	}
-//
-//	public void setControlTest(ControlTest controlTest) {
-//		this.controlTest = controlTest;
-//	}	
-
+	
 }

@@ -14,5 +14,5 @@ public interface ReportData {
 	String getElementType();
 	String getExpected();
 	String getActual();
-	Object getElementTestType();
+	String getElementTestType();
 }

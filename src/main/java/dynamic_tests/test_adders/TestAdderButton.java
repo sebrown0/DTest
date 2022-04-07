@@ -15,13 +15,11 @@ import site_mapper.elements.ElementDetails;
  * @since 1.0
  */
 public class TestAdderButton implements TestAdder {
-	private String elName;
 	private String text;
 	private String fafa;	
 	private String toolTipText;
 	
 	public TestAdderButton(ElementCreation e) {
-		elName = e.getElementName();
 		text = e.getText();
 		fafa = e.getFafa();
 		toolTipText = ((ElementDetails)e).getToolTipText();		

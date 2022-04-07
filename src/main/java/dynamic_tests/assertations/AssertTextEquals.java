@@ -39,11 +39,8 @@ public class AssertTextEquals implements ReportData {
 	@SuppressWarnings("unused")
 	private ControlTest controlTest;
 	private Optional<Control> cntrl;
-//	private String testElmntName;
 	private TestElementData testElementData;
-	private TestElementDetails testElementDetails;
-	
-//	private String testElmntType;
+	private TestElementDetails testElementDetails;	
 	private List<String> includeInReport;
 	private DynamicTestReportStrategy strat;
 	
@@ -73,7 +70,7 @@ public class AssertTextEquals implements ReportData {
 		return testElementDetails.getElementType();
 	}
 	@Override
-	public Object getElementTestType() {
+	public String getElementTestType() {
 		return testElementDetails.getElementTestType();
 	}	
 	@Override
@@ -103,17 +100,8 @@ public class AssertTextEquals implements ReportData {
 	private void setTextActual() {
 		testElementData.setTextActual(ControlTestData.getControlText(cntrl));
 	}
-	
-//	private void updateTestData() {
-////		testData
-//////			.setElementName(testElmntName)
-////			.setTestType(testElmntType)
-////			.setExpectedResult(textExpected)
-////			.setActualResult(textActual);
-//	}
 
 	private void runAssert() {
-//		updateTestData();
 		if(getActual().equals(getExpected())) {
 			if(isIncludedInReport("Passed")) {
 				strat.reportPass(new DynamicTestPass(this));	

@@ -50,7 +50,6 @@ public class ElementTest implements TestElementDetails {
 	public void addTests(TestAdder testAdder) {
 		testFactory 
 			.setCntrlFinder(controlFinder)
-//			.setTestElementDetails(this)
 			.setTestList(testList);
 		testAdder.addTestsWith(testFactory, this);
 	}

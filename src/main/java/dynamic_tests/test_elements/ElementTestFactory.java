@@ -32,6 +32,7 @@ public class ElementTestFactory implements TestContainerLoader {
 	private ControlTest controlTest;
 	private boolean itemIsNotLoaded = true;
 	private DynamicTestSuiteData testData;	
+	@SuppressWarnings("unused")
 	private TestCreator testCreator;	
 
 	private final XmlInfo testInfo;
@@ -41,43 +42,34 @@ public class ElementTestFactory implements TestContainerLoader {
 		this.testData = testData;				
 	}
 	
-	private void createChecker(TestElementCreator elementTestCreator) {
-		testCreator = 
-			new TestCreator(cntrlFinder, testList, controlTest)
-				.createTest(elementTestCreator, testList);
-	}
 	public ElementTestFactory createTextCheck(TestElementDetails details, String textExpected) {
-//		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
-//		testCreator.createTest(new CreateTextCheckString(details, testInfo, testData, controlTest, textExpected), testList);	
 		createChecker(new CreateTextCheckString(details, testInfo, testData, controlTest, textExpected));
 		return this;
 	}
 	public ElementTestFactory createTextCheck(TestElementDetails details, TestAdderWithData testAdderWithData) {
-//		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
-//		testCreator.createTest(new CreateTextCheckTestData(details, testInfo, testData, controlTest, testAdderWithData), testList);
 		createChecker(new CreateTextCheckTestData(details, testInfo, testData, controlTest, testAdderWithData));
 		return this;
 	}
 	public ElementTestFactory createToolTipCheck(TestElementDetails details, String toolTipText) {
-//		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
-//		testCreator.createTest(new CreateToolTipCheck(details, testInfo, testData, controlTest, toolTipText), testList);
 		createChecker(new CreateToolTipCheck(details, testInfo, testData, controlTest, toolTipText));
 		return this;
 	}
 	public ElementTestFactory createButtonFaFaCheck(TestElementDetails details, String faFa) {
-//		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
-//		testCreator.createTest(new CreateFaFaCheck(details, testInfo, testData, controlTest, faFa), testList);
 		createChecker(new CreateFaFaCheck(details, testInfo, testData, controlTest, faFa));
 		return this;
 	}
 	public ElementTestFactory createTextListCheck(TestElementDetails details, TestAdderWithData testAdderWithData) {
-//		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
-//		testCreator.createTest(new CreateListCheck(details, testInfo, testData, controlTest, testAdderWithData), testList);
 		//NOT IMPLEMENTED
 		createChecker(new CreateListCheck(details, testInfo, testData, controlTest, testAdderWithData));
 		return this;
 	}
 
+	private void createChecker(TestElementCreator elementTestCreator) {
+		testCreator = 
+			new TestCreator(cntrlFinder, testList, controlTest)
+				.createTest(elementTestCreator, testList);
+	}
+	
 	public ElementTestFactory setTestList(List<DynamicTest> testList) {
 		this.testList = testList;
 		return this;
