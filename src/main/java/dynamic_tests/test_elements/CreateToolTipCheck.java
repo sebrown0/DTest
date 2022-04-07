@@ -48,22 +48,5 @@ public class CreateToolTipCheck implements ElementTestCreator {
 	public String getMessage() {
 		return "Is [" + testData.getElementName() +"] tool tip correct?";
 	}
-	
-//	@Override
-//	public void createTest(String elName) {		
-//		if(toolTipTextExpected != null && toolTipTextExpected.length()>0) {
-//			testList.add(
-//				DynamicTest.dynamicTest(
-//					"Is [" + elName +"] tool tip correct?", 
-//					() ->	executeTest()));			
-//		}
-//	}
-//	
-//	private void executeTest() {
-//		getControlAndParent();
-//		String toolTipTextActual = ControlTestData.getControlToolTip(cntrl);
-//		assertEquals = new AssertTextEquals(testInfo.getTestReportStrategy(), controlTest, cntrl);
-//		assertEquals.assertTextEquals(toolTipTextExpected, toolTipTextActual);	
-//	}
-		
+
 }

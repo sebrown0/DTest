@@ -18,17 +18,21 @@ import dynamic_tests.test_results.DynamicTestData;
  * @version 1.0
  * 	Initial
  * @since 1.0
+ * 
+ * Make a TestCreator for a specific element.
+ * 
+ * NOTE: Each element requires a new test.
+ * This factory 'belongs' to the test item
+ * that is probably a panel that will have
+ * multiple elements.
  */
 public class ElementTestFactory implements TestContainerLoader {
 	private List<DynamicTest> testList;
-//	private String elName;
 	private ControlFinder cntrlFinder;	
 	private ControlTest controlTest;
 	private boolean itemIsNotLoaded = true;
-	private DynamicTestData testData;
-	
-	private TestCreator testCreator;
-	
+	private DynamicTestData testData;	
+	private TestCreator testCreator;	
 	private final XmlInfo testInfo;	
 		
 	public ElementTestFactory(XmlInfo testInfo, DynamicTestData testData) {
@@ -70,7 +74,6 @@ public class ElementTestFactory implements TestContainerLoader {
 
 	public ElementTestFactory setElementName(String elName) {
 		testData.setElementName(elName);
-//		this.elName = elName;
 		return this;
 	}
 

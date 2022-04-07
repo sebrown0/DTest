@@ -77,14 +77,6 @@ public class AssertTextEquals {
 	}
 	//TODO - move to own class.
 	private void runAssert() {
-//		DynamicTestResult result = null;
-		
-//		Control c = cntrl.get();
-		
-//		System.out.println("Actual [" + textActual + "]" ); // TODO - remove or log 	
-//		System.out.println("Expected [" + expected + "]\n" ); // TODO - remove or log
-		
-//		expected+="**";
 		updateTestData();
 		if(textActual.equals(textExpected)) {
 			strat.reportResult(new DynamicTestPass(testData));

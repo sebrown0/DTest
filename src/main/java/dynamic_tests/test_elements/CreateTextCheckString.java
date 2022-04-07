@@ -17,7 +17,7 @@ import dynamic_tests.test_results.DynamicTestData;
  * 	Initial
  * @since 1.0
  */
-//public class CreateTextCheckString extends TestCreator {
+
 public class CreateTextCheckString implements ElementTestCreator {
 	private AssertTextEquals assertEquals;
 	
@@ -48,14 +48,4 @@ public class CreateTextCheckString implements ElementTestCreator {
 		return "Is [" + testData.getElementName() +"] text correct?";
 	}
 
-	
-	
-//@Override
-//public void createTest(String elName, List<DynamicTest> testList) {
-//	this.elName = elName;
-//	testList.add(
-//	DynamicTest.dynamicTest(
-//		"Is [" + elName +"] text correct?", 
-//		() ->	executeTest()));			
-//}
 }

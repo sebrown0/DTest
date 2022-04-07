@@ -17,20 +17,22 @@ import dynamic_tests.elements.ControlFinder;
  * @version 1.0
  * 	Initial
  * @since 1.0
+ * 
+ * Create (add to list) test for control.
+ * The test's message & execution is got
+ * from the ElementTestCreator, i.e. CreateToolTipCheck.
+ *  
  */
 public class TestCreator {
 	protected ControlFinder cntrlFinder;
-//	protected XmlInfo testInfo;
 	protected List<DynamicTest> testList;
 	protected Optional<Control> cntrl;	
 	protected ControlTest controlTest;
 	
-	public TestCreator(
-//		XmlInfo testInfo, 
+	public TestCreator( 
 		ControlFinder cntrlFinder, 
 		List<DynamicTest> testList, ControlTest controlTest) {
 		
-//		this.testInfo = testInfo;
 		this.cntrlFinder = cntrlFinder;
 		this.testList = testList;
 		this.controlTest = controlTest;
@@ -49,19 +51,18 @@ public class TestCreator {
 	protected void getControlAndParent() {
 		this.cntrl = cntrlFinder.loadControl().getControl();
 		this.controlTest = cntrlFinder.getControlsClass();
-	}	
-	
-//	public void createTestX(String elName, ElementTestCreator creator) {
-//		creator.createTest(elName, testList);
+	}
+
+//	public void setCntrlFinder(ControlFinder cntrlFinder) {
+//		this.cntrlFinder = cntrlFinder;
 //	}
-//	
-//	private void executeTest() {
-//		getControlAndParent();				
-//		assertEquals = 
-//				new AssertTextEquals(testInfo.getTestReportStrategy(), controlTest, cntrl);
-//		assertEquals.assertTextEquals(textExpected);		
+//
+//	public void setTestList(List<DynamicTest> testList) {
+//		this.testList = testList;
 //	}
-	
-	
-//	public abstract void createTest(String elName);
+//
+//	public void setControlTest(ControlTest controlTest) {
+//		this.controlTest = controlTest;
+//	}	
+
 }
