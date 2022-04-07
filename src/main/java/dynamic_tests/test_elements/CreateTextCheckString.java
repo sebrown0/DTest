@@ -28,8 +28,6 @@ public class CreateTextCheckString extends TestElementCreator {
 	
 	@Override
 	public void executeTest(Optional<Control> cntrl) {		
-//		assertEquals.getTextActualAndAssertTextEquals(testElementDetails, textExpected, cntrl);		
-		
 		assertEquals.getTextActualAndAssertTextEquals(
 			testElementDetails, 
 			new TestElementData().setTextExpected(textExpected), 

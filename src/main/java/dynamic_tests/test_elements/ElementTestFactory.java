@@ -33,40 +33,48 @@ public class ElementTestFactory implements TestContainerLoader {
 	private boolean itemIsNotLoaded = true;
 	private DynamicTestSuiteData testData;	
 	private TestCreator testCreator;	
-//	private TestElementDetails testElementDetails;
-	
+
 	private final XmlInfo testInfo;
-	
 	
 	public ElementTestFactory(XmlInfo testInfo, DynamicTestSuiteData testData) {
 		this.testInfo = testInfo;		
 		this.testData = testData;				
 	}
 	
+	private void createChecker(TestElementCreator elementTestCreator) {
+		testCreator = 
+			new TestCreator(cntrlFinder, testList, controlTest)
+				.createTest(elementTestCreator, testList);
+	}
 	public ElementTestFactory createTextCheck(TestElementDetails details, String textExpected) {
-		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
-		testCreator.createTest(new CreateTextCheckString(details, testInfo, testData, controlTest, textExpected), testList);		
+//		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
+//		testCreator.createTest(new CreateTextCheckString(details, testInfo, testData, controlTest, textExpected), testList);	
+		createChecker(new CreateTextCheckString(details, testInfo, testData, controlTest, textExpected));
 		return this;
 	}
 	public ElementTestFactory createTextCheck(TestElementDetails details, TestAdderWithData testAdderWithData) {
-		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
-		testCreator.createTest(new CreateTextCheckTestData(details, testInfo, testData, controlTest, testAdderWithData), testList);		
+//		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
+//		testCreator.createTest(new CreateTextCheckTestData(details, testInfo, testData, controlTest, testAdderWithData), testList);
+		createChecker(new CreateTextCheckTestData(details, testInfo, testData, controlTest, testAdderWithData));
 		return this;
 	}
 	public ElementTestFactory createToolTipCheck(TestElementDetails details, String toolTipText) {
-		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
-		testCreator.createTest(new CreateToolTipCheck(details, testInfo, testData, controlTest, toolTipText), testList);		
+//		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
+//		testCreator.createTest(new CreateToolTipCheck(details, testInfo, testData, controlTest, toolTipText), testList);
+		createChecker(new CreateToolTipCheck(details, testInfo, testData, controlTest, toolTipText));
 		return this;
 	}
 	public ElementTestFactory createButtonFaFaCheck(TestElementDetails details, String faFa) {
-		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
-		testCreator.createTest(new CreateFaFaCheck(details, testInfo, testData, controlTest, faFa), testList);		
+//		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
+//		testCreator.createTest(new CreateFaFaCheck(details, testInfo, testData, controlTest, faFa), testList);
+		createChecker(new CreateFaFaCheck(details, testInfo, testData, controlTest, faFa));
 		return this;
 	}
 	public ElementTestFactory createTextListCheck(TestElementDetails details, TestAdderWithData testAdderWithData) {
-		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
+//		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
+//		testCreator.createTest(new CreateListCheck(details, testInfo, testData, controlTest, testAdderWithData), testList);
 		//NOT IMPLEMENTED
-		testCreator.createTest(new CreateListCheck(details, testInfo, testData, controlTest, testAdderWithData), testList);		
+		createChecker(new CreateListCheck(details, testInfo, testData, controlTest, testAdderWithData));
 		return this;
 	}
 
@@ -74,11 +82,6 @@ public class ElementTestFactory implements TestContainerLoader {
 		this.testList = testList;
 		return this;
 	}
-
-//	public ElementTestFactory setTestElementDetails(TestElementDetails testElementDetails) {
-//		this.testElementDetails = testElementDetails;
-//		return this;
-//	}
 
 	public ElementTestFactory setCntrlFinder(ControlFinder cntrlFinder) {
 		this.cntrlFinder = cntrlFinder;

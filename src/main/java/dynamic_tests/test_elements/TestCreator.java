@@ -38,7 +38,7 @@ public class TestCreator {
 		this.controlTest = controlTest;
 	}
 	
-	public void createTest(TestElementCreator elementTestCreator, List<DynamicTest> testList) {
+	public TestCreator createTest(TestElementCreator elementTestCreator, List<DynamicTest> testList) {
 		testList.add(
 		DynamicTest.dynamicTest(
 				elementTestCreator.getMessage(), 
@@ -46,6 +46,7 @@ public class TestCreator {
 				getControlAndParent();
 				elementTestCreator.createTestExecutor(cntrl); 
 			}));			
+		return this;
 	}
 
 	protected void getControlAndParent() {
