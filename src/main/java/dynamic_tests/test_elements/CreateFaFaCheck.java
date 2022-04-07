@@ -3,15 +3,14 @@
  */
 package dynamic_tests.test_elements;
 
-import java.util.List;
-
-import org.junit.jupiter.api.DynamicTest;
+import java.util.Optional;
 
 import controls.data.ControlTestData;
+import controls.interfaces.Control;
 import controls.interfaces.ControlTest;
 import dynamic_tests.assertations.AssertTextEquals;
 import dynamic_tests.common.XmlInfo;
-import dynamic_tests.elements.ControlFinder;
+import dynamic_tests.test_results.DynamicTestData;
 
 /**
  * @author SteveBrown
@@ -19,31 +18,35 @@ import dynamic_tests.elements.ControlFinder;
  * 	Initial
  * @since 1.0
  */
-public class CreateFaFaCheck extends TestCreator {
-	private String faFaExpected;
+public class CreateFaFaCheck implements ElementTestCreator {
 	private AssertTextEquals assertEquals;
 	
-	public CreateFaFaCheck(XmlInfo testInfo,
-		ControlFinder cntrlFinder, List<DynamicTest> testList, 
+	private String faFaExpected;
+	private DynamicTestData testData;	
+	private XmlInfo testInfo;	
+	private ControlTest controlTest;
+	
+	public CreateFaFaCheck(
+		XmlInfo testInfo, DynamicTestData testData, 
 		ControlTest controlTest, String faFa) {
 		
-		super(testInfo, cntrlFinder, testList, controlTest);
-
+		this.testInfo = testInfo;
+		this.testData = testData;
 		this.faFaExpected = faFa;
+		this.controlTest = controlTest;
 	}
 	
 	@Override
-	public void createTest(String elName) {		
-		testList.add(
-			DynamicTest.dynamicTest(
-				"Is [" + elName +"] FaFa correct?", 
-				() ->	executeTest()));			
-	}
-		
-	private void executeTest() {
-		getControlAndParent();
+	public void executeTest(Optional<Control> cntrl) {
 		String faFaActual = ControlTestData.getFaFaText(cntrl);		
-		assertEquals = new AssertTextEquals(testInfo.getTestReportStrategy(), controlTest, cntrl);
-		assertEquals.assertTextEquals(faFaExpected, faFaActual);	
+		assertEquals = 
+				new AssertTextEquals(testInfo.getTestReportStrategy(), controlTest, testData, cntrl);
+		assertEquals.assertTextEquals(faFaExpected, faFaActual);		
 	}
+
+	@Override
+	public String getMessage() {
+		return "Is [" + testData.getElementName() +"] FaFa correct?";
+	}
+	
 }

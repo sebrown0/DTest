@@ -8,11 +8,11 @@ package dynamic_tests.test_results;
  * @version 1.0
  * @since 1.0
  */
-public class DynamicTestPass extends DynamicTestResultType {
+public class DynamicTestIgnored extends DynamicTestResultType {
 
-	public DynamicTestPass(DynamicTestData data) {
+	public DynamicTestIgnored(DynamicTestData data) {
 		super(data);
 
 	}
-
+	
 }

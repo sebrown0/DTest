@@ -21,37 +21,45 @@ import dynamic_tests.test_results.DynamicTestData;
  */
 public class ElementTestFactory implements TestContainerLoader {
 	private List<DynamicTest> testList;
-	private String elName;
+//	private String elName;
 	private ControlFinder cntrlFinder;	
 	private ControlTest controlTest;
 	private boolean itemIsNotLoaded = true;
 	private DynamicTestData testData;
 	
+	private TestCreator testCreator;
+	
 	private final XmlInfo testInfo;	
 		
 	public ElementTestFactory(XmlInfo testInfo, DynamicTestData testData) {
 		this.testInfo = testInfo;
-		this.testData = testData;
+		this.testData = testData;		
 	}
 	
 	public ElementTestFactory createTextCheck(String textExpected) {
-		new CreateTextCheckString(testInfo, testData, cntrlFinder, testList, controlTest, textExpected).createTest(elName);
+		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
+		testCreator.createTest(new CreateTextCheckString(testInfo, testData, controlTest, textExpected), testList);		
 		return this;
 	}
-	public ElementTestFactory createTextCheck(TestAdderWithData testData) {
-		new CreateTextCheckTestData(testInfo, cntrlFinder, testList, controlTest, testData).createTest(elName);
+	public ElementTestFactory createTextCheck(TestAdderWithData testAdderWithData) {
+		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
+		testCreator.createTest(new CreateTextCheckTestData(testInfo, testData, controlTest, testAdderWithData), testList);		
 		return this;
 	}
 	public ElementTestFactory createToolTipCheck(String toolTipText) {
-		new CreateToolTipCheck(testInfo, cntrlFinder, testList, controlTest, toolTipText).createTest(elName);
+		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
+		testCreator.createTest(new CreateToolTipCheck(testInfo, testData, controlTest, toolTipText), testList);		
 		return this;
 	}
 	public ElementTestFactory createButtonFaFaCheck(String faFa) {
-		new CreateFaFaCheck(testInfo, cntrlFinder, testList, controlTest, faFa).createTest(elName);
+		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
+		testCreator.createTest(new CreateFaFaCheck(testInfo, testData, controlTest, faFa), testList);		
 		return this;
 	}
-	public ElementTestFactory createTextListCheck(TestAdderWithData testData) {
-		new CreateListCheck(testInfo, cntrlFinder, testList, controlTest).createTest(elName);
+	public ElementTestFactory createTextListCheck(TestAdderWithData testAdderWithData) {
+		testCreator = new TestCreator(cntrlFinder, testList, controlTest);
+		//NOT IMPLEMENTED
+		testCreator.createTest(new CreateListCheck(testInfo, testData, controlTest, testAdderWithData), testList);		
 		return this;
 	}
 
@@ -61,7 +69,8 @@ public class ElementTestFactory implements TestContainerLoader {
 	}
 
 	public ElementTestFactory setElementName(String elName) {
-		this.elName = elName;
+		testData.setElementName(elName);
+//		this.elName = elName;
 		return this;
 	}
 

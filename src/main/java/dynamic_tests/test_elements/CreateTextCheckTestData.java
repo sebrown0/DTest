@@ -3,15 +3,14 @@
  */
 package dynamic_tests.test_elements;
 
-import java.util.List;
+import java.util.Optional;
 
-import org.junit.jupiter.api.DynamicTest;
-
+import controls.interfaces.Control;
 import controls.interfaces.ControlTest;
 import dynamic_tests.assertations.AssertTextEquals;
 import dynamic_tests.common.XmlInfo;
-import dynamic_tests.elements.ControlFinder;
 import dynamic_tests.test_adders.TestAdderWithData;
+import dynamic_tests.test_results.DynamicTestData;
 
 /**
  * @author SteveBrown
@@ -19,30 +18,49 @@ import dynamic_tests.test_adders.TestAdderWithData;
  * 	Initial
  * @since 1.0
  */
-public class CreateTextCheckTestData extends TestCreator {
-	private TestAdderWithData testData;
+public class CreateTextCheckTestData implements ElementTestCreator {
+	private TestAdderWithData testAdderWithData;		
+	private DynamicTestData testData;	
+	@SuppressWarnings("unused")
+	private XmlInfo testInfo;	
+	private ControlTest controlTest;
 	
-	public CreateTextCheckTestData(XmlInfo testInfo,
-		ControlFinder cntrlFinder, List<DynamicTest> testList, 
-		ControlTest controlTest, TestAdderWithData testData) {
-		super(testInfo, cntrlFinder, testList, controlTest);
-
-		this.testData = testData;
+	public CreateTextCheckTestData(
+		XmlInfo testInfo, DynamicTestData testData, 
+		ControlTest controlTest, TestAdderWithData testAdderWithData) {
+	
+		this.testInfo = testInfo;
+		this.testData = testData;		
+		this.controlTest = controlTest;
+		this.testAdderWithData = testAdderWithData;
 	}
 	
 	@Override
-	public void createTest(String elName) {
-		testList.add(
-			DynamicTest.dynamicTest(
-				"Is [" + elName +"] text correct?", 
-				() -> {
-					getControlAndParent();
-					TestDataInserter.insertAnyTestData(testData, controlTest);
-//					DynamicTestData testResultData = new DynamicTestData();
-					new 
-						AssertTextEquals(null, controlTest, cntrl)
-							.assertTextEquals(testData); 	
-				}));	
+	public void executeTest(Optional<Control> cntrl) {
+		TestDataInserter.insertAnyTestData(testAdderWithData, controlTest);
+		new 
+			AssertTextEquals(null, controlTest, testData, cntrl)
+				.assertTextEquals(testAdderWithData);
 	}
+
+	@Override
+	public String getMessage() {
+		return "Is [" + testData.getElementName() +"] text correct?";
+	}
+	
+//	@Override
+//	public void createTest(String elName) {
+//		testList.add(
+//			DynamicTest.dynamicTest(
+//				"Is [" + elName +"] text correct?", 
+//				() -> {
+//					getControlAndParent();
+//					TestDataInserter.insertAnyTestData(testData, controlTest);
+////					DynamicTestData testResultData = new DynamicTestData();
+//					new 
+//						AssertTextEquals(null, controlTest, cntrl)
+//							.assertTextEquals(testData); 	
+//				}));	
+//	}
 		
 }

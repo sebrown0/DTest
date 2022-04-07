@@ -12,6 +12,7 @@ import controls.data.ControlTestData;
 import controls.interfaces.Control;
 import controls.interfaces.ControlTest;
 import dynamic_tests.test_adders.TestAdderWithData;
+import dynamic_tests.test_results.DynamicTestData;
 import dynamic_tests.test_results.DynamicTestFail;
 import dynamic_tests.test_results.DynamicTestPass;
 import dynamic_tests.test_strategy.DynamicTestReportStrategy;
@@ -33,37 +34,49 @@ import site_mapper.jaxb.pom.test_data.TestDataOut;
  * 
  */
 public class AssertTextEquals {
-//	private DynamicTestData testResultData;
+	private DynamicTestData testData;
 	private ControlTest controlTest;
 	private Optional<Control> cntrl;
 	private String textActual;
+	private String textExpected;
 	
 	private DynamicTestReportStrategy strat;
 	
 	private final Logger LOGGER = LogManager.getLogger(AssertTextEquals.class);
 	
-	public AssertTextEquals(DynamicTestReportStrategy strat, ControlTest controlTest, Optional<Control> cntrl) {
+	public AssertTextEquals(
+		DynamicTestReportStrategy strat, ControlTest controlTest, 
+		DynamicTestData testData, Optional<Control> cntrl) {
+		
 		this.strat = strat;
 		this.controlTest = controlTest;
+		this.testData = testData;
 		this.cntrl = cntrl;
 	}
 	
 	public void assertTextEquals(String textExpected, String textActual) {
 		this.textActual = textActual;
-		runAssert(textExpected);
+		this.textExpected = textExpected;
+		runAssert();
 	}
 	
 	public void assertTextEquals(String textExpected) {
+		this.textExpected = textExpected;
 		setTextActual();
-		runAssert(textExpected);
+		runAssert();
 	}
 
 	private void setTextActual() {
 		textActual = ControlTestData.getControlText(cntrl);
 	}
 	
+	private void updateTestData() {
+		testData
+			.setExpectedResult(textExpected)
+			.setActualResult(textActual);
+	}
 	//TODO - move to own class.
-	public void runAssert(String expected) {
+	private void runAssert() {
 //		DynamicTestResult result = null;
 		
 //		Control c = cntrl.get();
@@ -72,11 +85,11 @@ public class AssertTextEquals {
 //		System.out.println("Expected [" + expected + "]\n" ); // TODO - remove or log
 		
 //		expected+="**";
-		
-		if(textActual.equals(expected)) {
-			strat.reportResult(new DynamicTestPass());
+		updateTestData();
+		if(textActual.equals(textExpected)) {
+			strat.reportResult(new DynamicTestPass(testData));
 		}else {
-			strat.reportResult(new DynamicTestFail());
+			strat.reportResult(new DynamicTestFail(testData));
 		}
 
 	}
@@ -91,7 +104,8 @@ public class AssertTextEquals {
 			if(testData != null) {
 				TestDataItem testDataItem = testData.getTestDataList().get(0);
 				if(testDataItem != null) {
-					runAssert(testDataItem.getValue());	
+					this.textExpected = testDataItem.getValue();
+					runAssert();	
 				}
 //			runAssert(testData.getValue());						
 			}					

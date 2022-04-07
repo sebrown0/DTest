@@ -121,7 +121,7 @@
               <ct:Element xsi:schemaLocation="Container file:/C:/SiteMapperXML/Schema/container/ContainerElement.xsd" xml:base="/C:/SiteMapperXML/XML/header/DocumentsButton.xml">
                 <et:Details type="Button" name="Documents" text="" fafa="fa fa-file-o"/>
                 <et:Locator by="css" text="div[title='No Documents Attached']"/>
-                <et:ToolTip text="No Documents Attached"/>
+                <et:ToolTip text="XXXNo Documents Attached"/>
                 <et:Function isDefaultPass="true" type="Element"/>
               </ct:Element>
             </ct:Container>

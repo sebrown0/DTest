@@ -3,16 +3,14 @@
  */
 package dynamic_tests.test_elements;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import java.util.Optional;
 
-import java.util.List;
-
-import org.apache.logging.log4j.LogManager;
-import org.junit.jupiter.api.DynamicTest;
-
+import controls.interfaces.Control;
 import controls.interfaces.ControlTest;
+import dynamic_tests.assertations.AssertTextEquals;
 import dynamic_tests.common.XmlInfo;
-import dynamic_tests.elements.ControlFinder;
+import dynamic_tests.test_adders.TestAdderWithData;
+import dynamic_tests.test_results.DynamicTestData;
 
 /**
  * @author SteveBrown
@@ -20,27 +18,49 @@ import dynamic_tests.elements.ControlFinder;
  * 	Initial
  * @since 1.0
  */
-public class CreateListCheck extends TestCreator {
+public class CreateListCheck implements ElementTestCreator {
+	private AssertTextEquals assertEquals;
 	
-	public CreateListCheck(XmlInfo testInfo,
-		ControlFinder cntrlFinder, List<DynamicTest> testList, 
-		ControlTest controlTest) {
-		
-		super(testInfo, cntrlFinder, testList, controlTest);
+	private String textExpected;	
+	private DynamicTestData testData;	
+	private XmlInfo testInfo;	
+	private ControlTest controlTest;
+	private TestAdderWithData testAdderWithData;
+	
+	public CreateListCheck(
+		XmlInfo testInfo, DynamicTestData testData, 
+		ControlTest controlTest, TestAdderWithData testAdderWithData) {
 
+		this.testInfo = testInfo;
+		this.testData = testData;
+		this.testAdderWithData = testAdderWithData;
+		this.controlTest = controlTest;
 	}
 	
 	@Override
-	public void createTest(String elName) {		
-		testList.add(
-			DynamicTest.dynamicTest(
-				"Is [" + elName +"] text correct?", 
-				() -> {			
-					fail("ElementTestFactory.createTextListCheck not implemented.");
-					LogManager
-						.getLogger(CreateListCheck.class)
-						.error("ElementTestFactory.createTextListCheck not implemented.");
-				}));
+	public void executeTest(Optional<Control> cntrl) {
+		//noit implemented
+//		assertEquals = 
+//				new AssertTextEquals(testInfo.getTestReportStrategy(), controlTest, cntrl);
+//		assertEquals.assertTextEquals(textExpected);		
 	}
+
+	@Override
+	public String getMessage() {
+		return "Is [" + testData.getElementName() +"] text correct?";
+	}
+	
+//	@Override
+//	public void createTest(String elName) {		
+//		testList.add(
+//			DynamicTest.dynamicTest(
+//				"Is [" + elName +"] text correct?", 
+//				() -> {			
+//					fail("ElementTestFactory.createTextListCheck not implemented.");
+//					LogManager
+//						.getLogger(CreateListCheck.class)
+//						.error("ElementTestFactory.createTextListCheck not implemented.");
+//				}));
+//	}
 		
 }

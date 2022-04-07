@@ -3,6 +3,7 @@
  */
 package dynamic_tests.test_strategy;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dynamic_tests.test_results.DynamicTestFail;
@@ -20,8 +21,8 @@ public class DynamicTestReportStrategyJunit implements DynamicTestReportStrategy
 	public void reportResult(DynamicTestResult result) {
 		if(result instanceof DynamicTestPass) {
 			assertTrue(true);
-		}else if(result instanceof DynamicTestFail) {
-			assertTrue(false);
+		}else if(result instanceof DynamicTestFail) {			
+			assertEquals(result.getExpected(), result.getActual());
 		}
 	}
 
