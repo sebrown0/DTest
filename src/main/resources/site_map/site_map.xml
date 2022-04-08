@@ -21,7 +21,7 @@
     <inf:ElementLibrary>C:/Users/SteveBrown/eclipse-workspace/2021/DTest</inf:ElementLibrary>
   </Info>
   <DynamicTestInfo>
-    <dyn:ReportStrategy>Console</dyn:ReportStrategy>
+    <dyn:ReportStrategy>Junit</dyn:ReportStrategy>
     <dyn:ReportResults>All</dyn:ReportResults>  
   </DynamicTestInfo>
   <IncludeElementsForTest>
