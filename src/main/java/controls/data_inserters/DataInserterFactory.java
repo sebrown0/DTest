@@ -11,8 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import controls.interfaces.ControlTest;
-import site_mapper.jaxb.pom.test_data.Data;
-import site_mapper.jaxb.pom.test_data.TestDataIn;
+import site_mapper.jaxb.pom.test_data.TestData;
 import site_mapper.jaxb.pom.test_data.TestDataItem;
 
 /**
@@ -33,44 +32,34 @@ public class DataInserterFactory {
 	private static final Logger LOGGER = 
 			LogManager.getLogger(DataInserterFactory.class);
 		
-	public static TestDataInserter getDataInserter(int forListItem, ControlTest controlTest, TestDataIn dataIn) {
+	public static TestDataInserter getDataInserter(int forListItem, ControlTest controlTest, TestData testData) {
 		
 //		TestDataInserter dataInsert = null;
 
-		if(dataIn != null) {
-			Data data = dataIn.getData();
-			if(data != null) {
-				List<TestDataItem> items = data.getTestDataList();
+		/*
+		 * WE HAVE TO KNOW IF IT'S FOR IN OR OUT!!!!!
+		 * 
+		 * WHO IS CALLING THIS?
+		 * CAN THE LIST BE PASSED AND THIS JUST DOES THE INSERT?
+		 */
+		if(testData != null) {			
+				List<TestDataItem> items = testData.getTestDataIn();
 				if(items != null && items.size() >= forListItem) {
 					TestDataItem testDataItem = items.get(forListItem); 
-					return getDataInserter(testDataItem, controlTest, dataIn);
-//					var insertWith = testDataItem.getInsertWith();
-//					if(insertWith != null) {
-//						writeInitialLogMsg(insertWith);			
-//						Class<?> clazz = getClass(insertWith);
-//						if(clazz != null) {
-//							Constructor<?> cnstr = getConstructor(clazz);	
-//							if(cnstr != null) {
-//								dataInsert = getDataInserter(cnstr, controlTest, testDataItem.getValue());
-//								return dataInsert;
-//							}
-//						}
-//					}	
+//					return getDataInserter(testDataItem, controlTest, testData);
+
 				}else {
 					//LOG
 				}
 			}else {
 				//LOG
 			}
-		}else {
-			//LOG
-		}
+		
 		LOGGER.error("Error with data to insert");
 		return null;
 	}
 	
-	public static TestDataInserter getDataInserter(
-			TestDataItem testDataItem, ControlTest controlTest, TestDataIn dataIn) {		
+	public static TestDataInserter getDataInserter(TestDataItem testDataItem, ControlTest controlTest) {		
 			
 			TestDataInserter dataInsert = null;
 

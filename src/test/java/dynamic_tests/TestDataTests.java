@@ -3,6 +3,7 @@
  */
 package dynamic_tests;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -11,7 +12,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import controls.with_text.TextOut;
+import controls.data.InsertItem;
+import controls.interfaces.DisplayedText;
 import dynamic_tests.elements.ControlGroup;
 import logging.TestResultLogger;
 import object_models.left_menu.common.LeftMenu;
@@ -22,9 +24,7 @@ import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;
 import site_mapper.jaxb.pom.Element;
-import site_mapper.jaxb.pom.test_data.Data;
 import site_mapper.jaxb.pom.test_data.TestData;
-import site_mapper.jaxb.pom.test_data.TestDataIn;
 import site_mapper.jaxb.pom.test_data.TestDataItem;
 import xml_reader.config_file.ConfigReader;
 
@@ -38,10 +38,12 @@ import xml_reader.config_file.ConfigReader;
 	ConfigParameterResolver.class, 
 	TestResultLogger.class, 
 	LoginPageResolverPayroll.class })
-class TestDataTests {
+class TestDataTests {	
+	private static TestDataItem testDataItem;
+	
 	private static SalaryDetails salDetails;	
 	private static Element el = new Element();
-	private static TestDataIn dataIn = new TestDataIn();
+	private static TestData dataIn = new TestData();
 	
 	@BeforeAll
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
@@ -53,49 +55,65 @@ class TestDataTests {
 				.clickAndLoad(SalaryDetails.class)
 				.get();
 		
-		TestDataItem testDataItem = new TestDataItem();
+		testDataItem = new TestDataItem();
 		testDataItem
 			.setId("name")
-			.setInsertWith("EmployeeLookupByName")
-			.setValue("a name");
-		
-		Data data = new Data();
-		data.setTestDataList(Arrays.asList(testDataItem));
+//			.setInsertWith("EmployeeLookupByName")
+			.setInsertWith("")
+			.setValue("borg");	
 
-		dataIn
-			.setData(data);
-		
-		el
-			.setName("FormId")
-			.setType("TextOut")
-			.setTestData(new TestData().setTestDataIn(dataIn));
 	}
 	
 	@Test
-	void getFormId() {
+	void getFormId_asInsertItem() {
 		ControlGroup grp = 
 				(ControlGroup) salDetails
 						.getPanelControl()
 						.getControl("EmpLookup")
 						.get();
 		
-		TextOut formId = (TextOut) grp.getControlByTitle("FormID").get();
-		assertTrue(formId != null);
+		InsertItem insertItemIntoFormId = 
+				(InsertItem) grp.getControlByTitle("FormID").get();
+		
+		insertItemIntoFormId.insert(testDataItem);
+		assertTrue(insertItemIntoFormId != null);
+	}
+	
+	@Test
+	void getGrade_asInsertItem() {
+		ControlGroup grp = 
+				(ControlGroup) salDetails
+						.getPanelControl()
+						.getControl("SalaryDetails")
+						.get();
+		
+		InsertItem insertItemIntoFormId = 
+				(InsertItem) grp.getControlByTitle("Grade").get();
+		
+		insertItemIntoFormId.insert(testDataItem);
+		
+		DisplayedText cntrl = (DisplayedText) insertItemIntoFormId;
+		assertEquals("borg", cntrl.getText());
+	}
+	
+	@Test
+	void test_testDataItem() {		
+		assertEquals("borg", testDataItem.getValue());
+	}	
+
+	@Test
+	void test_testData() {				
+		TestData data = new TestData();	
+		data.setTestDataIn(Arrays.asList(testDataItem));
+		
+		assertEquals("borg", data.getTestDataIn().get(0).getValue());
 	}
 	
 //	@Test
-//	void test() {
-//		ControlGroup grp = 
-//				(ControlGroup) salDetails
-//						.getPanelControl()
-//						.getControl("EmpLookup")
-//						.get();
+//	void test_dataInserter() {
+//		DataInserter dataInserter = new DataInserterItem(testDataItem);
+//		dataInserter.insertData(salDetails);
 //		
-////		InsertText formId = (TextOut) grp.getControlByTitle("FormID").get();
-////		formId.insertText("");
-//		TestAdderWithData textOut = new TestAdderTextOut(el);
-//		TestDataVerifier dataVerifier = new TestDataVerifier(textOut);
-//		dataVerifier.verifyDataFor();
 //	}
-
+	
 }

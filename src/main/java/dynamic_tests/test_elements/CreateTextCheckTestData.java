@@ -31,7 +31,7 @@ public class CreateTextCheckTestData extends TestElementCreator {
 
 	@Override
 	protected void executeTest(Optional<Control> cntrl) {
-		TestDataInserter.insertAnyTestData(testAdderWithData, controlTest);		
+		ZZZ_TestDataInserter.insertAnyTestData(testAdderWithData, controlTest);		
 		assertEquals.assertTextEquals(testElementDetails, testAdderWithData, cntrl);		
 	}
 

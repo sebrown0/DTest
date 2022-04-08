@@ -13,8 +13,7 @@ import controls.data_inserters.DataInserterFactory;
 import controls.data_inserters.EmployeeLookupByName;
 import controls.data_inserters.TestDataInserter;
 import object_models.panels.JsPanel;
-import site_mapper.jaxb.pom.test_data.Data;
-import site_mapper.jaxb.pom.test_data.TestDataIn;
+import site_mapper.jaxb.pom.test_data.TestData;
 import site_mapper.jaxb.pom.test_data.TestDataItem;
 
 
@@ -37,15 +36,13 @@ class DataInserterFactory_Tests {
 			.setInsertWith("EmployeeLookupByName")
 			.setValue("a name");
 		
-		Data data = new Data();
-		data.setTestDataList(Arrays.asList(testDataItem));
 		
-		TestDataIn dataIn = 
-			new TestDataIn()
-				.setData(data);
+		
+		TestData testData = new TestData();
+		testData.setTestDataIn(Arrays.asList(testDataItem));
 		
 		TestDataInserter dataInserter = 
-				DataInserterFactory.getDataInserter(FIRST_ITEM, NULL_PANEL, dataIn);
+				DataInserterFactory.getDataInserter(FIRST_ITEM, NULL_PANEL, testData);
 		
 		assertTrue(dataInserter instanceof EmployeeLookupByName);
 	}

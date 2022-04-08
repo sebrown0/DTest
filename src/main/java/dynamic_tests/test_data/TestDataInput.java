@@ -6,12 +6,13 @@ package dynamic_tests.test_data;
 import java.util.List;
 import java.util.Optional;
 
+import javax.xml.crypto.Data;
+
 import controls.data_inserters.DataInserterFactory;
 import controls.data_inserters.TestDataInserter;
 import controls.interfaces.ControlTest;
 import exceptions.InvalidArgumentException;
-import site_mapper.jaxb.pom.test_data.Data;
-import site_mapper.jaxb.pom.test_data.TestDataIn;
+import site_mapper.jaxb.pom.test_data.TestData;
 import site_mapper.jaxb.pom.test_data.TestDataItem;
 
 /**
@@ -25,21 +26,23 @@ import site_mapper.jaxb.pom.test_data.TestDataItem;
  * to insert the data.
  */
 public class TestDataInput {	
-	private TestDataIn dataIn;
+	private TestData dataIn;
 	private ControlTest controlTest;
 		
-	public TestDataInput(TestDataIn dataIn, ControlTest controlTest) {
+	public TestDataInput(TestData dataIn, ControlTest controlTest) {
 		this.dataIn = dataIn;
 		this.controlTest = controlTest;
 	}
 
 	public void insertData() {
-	
-		if(dataIn != null) {
-			Data testData = dataIn.getData();
-			if(testData != null) {
-				List<TestDataItem> testDataList = testData.getTestDataList();
-				testDataList.forEach(itm -> {
+		/*
+		 * this is not necessarily correct.
+		 * WE SHOULD BE PASSING THE LIST NOT GETTING IN OR OUT.
+		 */
+		
+			if(dataIn != null) {
+				
+				dataIn.getTestDataIn().forEach(itm -> {
 					try {
 						checkDataIn(itm);
 					} catch (InvalidArgumentException e) {
@@ -51,7 +54,7 @@ public class TestDataInput {
 				});	
 			}		
 		}			
-	}
+	
 	
 	private void checkDataIn(TestDataItem item) throws InvalidArgumentException {
 		/*

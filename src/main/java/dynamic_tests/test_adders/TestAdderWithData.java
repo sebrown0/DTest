@@ -3,8 +3,7 @@
  */
 package dynamic_tests.test_adders;
 
-import site_mapper.jaxb.pom.test_data.TestDataIn;
-import site_mapper.jaxb.pom.test_data.TestDataOut;
+import dynamic_tests.test_elements.DataInserter;
 
 /**
  * @author SteveBrown
@@ -13,6 +12,5 @@ import site_mapper.jaxb.pom.test_data.TestDataOut;
  * @since 1.0
  */
 public interface TestAdderWithData extends TestAdder {
-	TestDataIn getTestDataIn();
-	TestDataOut getTestDataOut();
+	DataInserter getDataInserter();
 }

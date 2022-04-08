@@ -46,7 +46,7 @@ public class ContactNumbers extends JsPanelWithIFrame {
 	@SiteMap(author="SteveBrown", version="1.0.0", date="29/03/2022")
 	private void buildMyControls() {
 		ControlGetter formID =
-			new ControlGetterTextOut("FormID", coreData, By.id("FORM_ID"));
+			new ControlGetterTextOut("FormID", coreData, By.id("FORM_ID"), this);
 		ControlGetterGroup empLookup =
 			new ControlGetterInputGroup("EmpLookup", coreData, By.cssSelector("div[class='input-group']"))
 				.addControls(Arrays.asList(formID));

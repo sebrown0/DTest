@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 
 import control_builder.control_getters.ControlGetter;
 import controls.interfaces.Control;
+import controls.interfaces.ControlTest;
 import controls.with_text.TextOut;
 import object_models.pages.homepage.CoreData;
 
@@ -18,9 +19,9 @@ import object_models.pages.homepage.CoreData;
 public final class ControlGetterTextOut extends ControlGetter {
 	private Control cntrl;
 	
-	public ControlGetterTextOut(String name, CoreData coreData, By findBy) {
+	public ControlGetterTextOut(String name, CoreData coreData, By findBy, ControlTest controlTest) {
 		super(name, coreData, findBy);
-		this.cntrl = new TextOut(super.driver, super.findBy);
+		this.cntrl = new TextOut(super.driver, super.findBy, controlTest);
 	}
 
 	@Override

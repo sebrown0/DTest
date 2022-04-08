@@ -22,7 +22,7 @@
   </Info>
   <DynamicTestInfo>
     <dyn:ReportStrategy>Console</dyn:ReportStrategy>
-    <dyn:ReportResults>Fails</dyn:ReportResults>  
+    <dyn:ReportResults>All</dyn:ReportResults>  
   </DynamicTestInfo>
   <IncludeElementsForTest>
     <inc:Include>Button</inc:Include>
@@ -47,12 +47,13 @@
             <ct:Container type="InputGroup" name="EmpLookup">
               <ct:Locator by="css" text="div[class='input-group']"/>
               <ct:Element xsi:schemaLocation="Container file:/C:/SiteMapperXML/Schema/container/ContainerElement.xsd" xml:base="/C:/SiteMapperXML/XML/header/FormId.xml">
+                <!-- THIS SHOULD BE TEXT SELECT OUT -->
                 <et:Details type="TextOut" name="FormID" text=""/>
                 <et:Locator by="id" text="FORM_ID"/>
                 <et:TestData>
                   <et:In>
                     <td:item id="name" value="Borg" insertWith="EmployeeLookupByName"/>
-                    <td:item id="code" value="0123456M"/> <!-- TODO insertWith is REQUIRED?? -->
+                    <td:item id="code" value="0123456M"/> <!-- TODO insertWith is REQUIRED?? NO HAVE A DEFAULT OF THE ELEMENT -->
                   </et:In>
                 </et:TestData>
                 <et:Function isDefaultPass="true" type="Element"/>
@@ -143,6 +144,15 @@
                   <et:Details type="Label" name="LabelReason" text="Reason"/>
                   <et:Locator by="css" text="label[for='REASON']"/>
                 </ct:Element>
+                <ct:Element>
+                  <et:Details name="Grade" type="TextOut"/>
+                  <et:Locator by="css" text="input[id='GRADE_CODE']" />
+                  <et:TestData>
+                    <et:In>
+                      <td:item id="grade" value="AGrade" />                  
+                    </et:In>                  
+                </et:TestData>
+                </ct:Element>   
               </ct:Container>
               <ct:Function type="Container" isDefaultPass="true"/>
             </ct:Container>

@@ -3,11 +3,14 @@
  */
 package dynamic_tests.test_adders;
 
+import java.util.List;
+
+import dynamic_tests.test_elements.DataInserter;
+import dynamic_tests.test_elements.DataInserterItem;
 import dynamic_tests.test_elements.ElementTestFactory;
 import dynamic_tests.test_elements.TestElementDetails;
 import site_mapper.elements.ElementCreation;
-import site_mapper.jaxb.pom.test_data.TestDataIn;
-import site_mapper.jaxb.pom.test_data.TestDataOut;
+import site_mapper.jaxb.pom.test_data.TestDataItem;
 
 /**
  * @author SteveBrown
@@ -16,28 +19,20 @@ import site_mapper.jaxb.pom.test_data.TestDataOut;
  * @since 1.0
  */
 public class TestAdderTextOut implements TestAdderWithData {
-	private String elName;
-	private TestDataIn dataIn;
-	private TestDataOut dataOut;
-
+	private TestDataItem dataIn;
+	
 	public TestAdderTextOut(ElementCreation el) {		
-		this.elName = el.getElementName();
-		this.dataIn = el.getTestDataIn();
-		this.dataOut = el.getTestDataOut();
+		this.dataIn = el.getTestDataIn().get(0);	
 	}
 
 	@Override //TestAdder
 	public void addTestsWith(ElementTestFactory testFactory, TestElementDetails details) {
 		testFactory.createTextCheck(details, this);
 	}
-	
+
 	@Override //TestAdderWithData
-	public TestDataIn getTestDataIn() {
-		return dataIn;
-	}
-	@Override //TestAdderWithData
-	public TestDataOut getTestDataOut() {
-		return dataOut;
+	public DataInserter getDataInserter() {
+		return new DataInserterItem(dataIn, null, null);
 	}
 
 }

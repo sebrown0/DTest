@@ -13,13 +13,14 @@ import dynamic_tests.test_data.TestDataInput;
  * 	Initial
  * @since 1.0
  */
-public class TestDataInserter {
+public class ZZZ_TestDataInserter {
 	public static void insertAnyTestData(
 		TestAdderWithData testData, ControlTest controlTest) {
 		
+//		TestDataInput dataInserter = 
+//				new TestDataInput(testData.getTestData(), controlTest);
 		TestDataInput dataInserter = 
-				new TestDataInput(testData.getTestDataIn(), controlTest);
-		
+				new TestDataInput(null, controlTest);
 		dataInserter.insertData();
 		
 	}

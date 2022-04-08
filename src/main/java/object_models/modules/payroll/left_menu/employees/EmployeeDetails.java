@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import context_manager.states.StateIframe;
 import controls.combos.ComboSelectFromList;
+import controls.interfaces.ControlTest;
 import controls.with_text.TextOut;
 import dynamic_tests.annotations.TestControl;
 import object_models.element.TextInOut;
@@ -97,7 +98,7 @@ public class EmployeeDetails extends JsPanelWithIFrame {
 				return new TextInOut(driver, By.id("SURNAME"));
 			}
 			public TextOut age() {
-				return new TextOut(driver, By.id("AGE"));
+				return new TextOut(driver, By.id("AGE"), (ControlTest) this);
 			}
 		}
 		
