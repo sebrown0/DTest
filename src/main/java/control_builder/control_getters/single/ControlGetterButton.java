@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import control_builder.control_getters.ControlGetter;
 import controls.button.Button;
 import controls.interfaces.Control;
+import controls.interfaces.ControlTest;
 import object_models.pages.homepage.CoreData;
 
 /**
@@ -21,7 +22,7 @@ import object_models.pages.homepage.CoreData;
 public class ControlGetterButton extends ControlGetter {
 	private Control btn;
 	
-	public ControlGetterButton(String name, CoreData coreData, By findBy) {
+	public ControlGetterButton(String name, CoreData coreData, By findBy, ControlTest controlTest) {
 		super(name, coreData, findBy);
 		
 		this.btn = new Button(driver, findBy);

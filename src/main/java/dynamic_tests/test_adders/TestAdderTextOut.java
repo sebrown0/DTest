@@ -3,8 +3,6 @@
  */
 package dynamic_tests.test_adders;
 
-import java.util.List;
-
 import dynamic_tests.test_elements.DataInserter;
 import dynamic_tests.test_elements.DataInserterItem;
 import dynamic_tests.test_elements.ElementTestFactory;
@@ -20,6 +18,7 @@ import site_mapper.jaxb.pom.test_data.TestDataItem;
  */
 public class TestAdderTextOut implements TestAdderWithData {
 	private TestDataItem dataIn;
+	private DataInserter dataInserter;
 	
 	public TestAdderTextOut(ElementCreation el) {		
 		this.dataIn = el.getTestDataIn().get(0);	
@@ -32,7 +31,8 @@ public class TestAdderTextOut implements TestAdderWithData {
 
 	@Override //TestAdderWithData
 	public DataInserter getDataInserter() {
-		return new DataInserterItem(dataIn, null, null);
+		if(dataInserter==null) dataInserter = new DataInserterItem(dataIn);
+		return dataInserter;
 	}
 
 }

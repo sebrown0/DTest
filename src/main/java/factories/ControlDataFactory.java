@@ -12,6 +12,7 @@ import control_builder.control_getters.single.ControlGetterComboWriteAndSelect;
 import control_builder.control_getters.single.ControlGetterGrid;
 import control_builder.control_getters.single.ControlGetterTextSelect;
 import controls.interfaces.ControlName;
+import controls.interfaces.ControlTest;
 import enums.control_names.CommonControlNames;
 import object_models.dk_grid.KeyStrategyRow;
 import object_models.helpers.text_writer.TextWriterComboDefault;
@@ -43,11 +44,11 @@ public class ControlDataFactory {
 		return this;
 	}
 	
-	public ControlDataFactory buildButton(ControlName cntrlName, By containerLoc) {
+	public ControlDataFactory buildButton(ControlName cntrlName, By containerLoc, ControlTest cntrolTest) {
 		controlData = 
 				new ControlData(
 						cntrlName, 
-						new ControlGetterButton(cntrlName.getName(), coreData, containerLoc));
+						new ControlGetterButton(cntrlName.getName(), coreData, containerLoc, cntrolTest));
 		
 		return this;
 	}

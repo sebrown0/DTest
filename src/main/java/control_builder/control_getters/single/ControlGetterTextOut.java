@@ -18,7 +18,7 @@ import object_models.pages.homepage.CoreData;
  */
 public final class ControlGetterTextOut extends ControlGetter {
 	private Control cntrl;
-	
+		
 	public ControlGetterTextOut(String name, CoreData coreData, By findBy, ControlTest controlTest) {
 		super(name, coreData, findBy);
 		this.cntrl = new TextOut(super.driver, super.findBy, controlTest);

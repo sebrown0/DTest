@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 
 import control_builder.control_getters.ControlGetter;
 import controls.interfaces.Control;
+import controls.interfaces.ControlTest;
 import controls.with_text.Label;
 import object_models.pages.homepage.CoreData;
 
@@ -20,7 +21,7 @@ import object_models.pages.homepage.CoreData;
 public final class ControlGetterLabel extends ControlGetter {
 	private Control cntrl;
 		
-	public ControlGetterLabel(String name, CoreData coreData, By findBy) {
+	public ControlGetterLabel(String name, CoreData coreData, By findBy, ControlTest controlTest) {
 		super(name, coreData, findBy);
 		
 		cntrl = new Label(super.driver, super.findBy);

@@ -8,6 +8,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 
 import control_builder.control_data.ControlData;
+import controls.interfaces.ControlTest;
 import enums.control_names.CommonControlNames;
 import enums.control_names.PayrollControlNames;
 import factories.ControlDataFactory;
@@ -25,8 +26,16 @@ import object_models.helpers.ElementControls;
  */
 public class InitialisePayrollControls implements ElementControls {
 	private ControlDataFactory controlFactory;
-
-	public InitialisePayrollControls(ControlDataFactory controlFactory) {
+	private ControlTest controlTest;
+	
+	/*
+	 * Passing ControlTest because buildButton requires it.
+	 * This is because dynamic tests require the ControlTest (panel)
+	 * to load/get the control for loading test data.
+	 * 
+	 * TODO - Replace this with site mapped version.
+	 */
+	public InitialisePayrollControls(ControlDataFactory controlFactory, ControlTest controlTest) {
 		this.controlFactory = controlFactory;		
 	}
 
@@ -54,13 +63,13 @@ public class InitialisePayrollControls implements ElementControls {
 			controlFactory
 				.buildButton(
 						CommonControlNames.CLOSE,
-						By.cssSelector("button[class='btn btn-primary']"))
+						By.cssSelector("button[class='btn btn-primary']"), controlTest)
 				.getControlData(),		
 				
 			controlFactory
 				.buildButton(
 						PayrollControlNames.INIT_PAYROLL,
-						By.cssSelector("div[type='button'][class='btn btn-warning']"))
+						By.cssSelector("div[type='button'][class='btn btn-warning']"), controlTest)
 				.getControlData()		
 		);	
 	}

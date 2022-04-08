@@ -31,36 +31,36 @@ public class ElementTestFactory implements TestContainerLoader {
 	private ControlFinder cntrlFinder;	
 	private ControlTest controlTest;
 	private boolean itemIsNotLoaded = true;
-	private DynamicTestSuiteData testData;	
+	private DynamicTestSuiteData testSuiteData;	
 	@SuppressWarnings("unused")
 	private TestCreator testCreator;	
 
 	private final XmlInfo testInfo;
 	
-	public ElementTestFactory(XmlInfo testInfo, DynamicTestSuiteData testData) {
+	public ElementTestFactory(XmlInfo testInfo, DynamicTestSuiteData testSuiteData) {
 		this.testInfo = testInfo;		
-		this.testData = testData;				
+		this.testSuiteData = testSuiteData;				
 	}
 	
 	public ElementTestFactory createTextCheck(TestElementDetails details, String textExpected) {
-		createChecker(new CreateTextCheckString(details, testInfo, testData, controlTest, textExpected));
+		createChecker(new CreateTextCheckString(details, testInfo, testSuiteData, controlTest, textExpected));
 		return this;
 	}
 	public ElementTestFactory createTextCheck(TestElementDetails details, TestAdderWithData testAdderWithData) {
-		createChecker(new CreateTextCheckTestData(details, testInfo, testData, controlTest, testAdderWithData));
+		createChecker(new CreateTextCheckTestData(details, testInfo, testSuiteData, controlTest, testAdderWithData));
 		return this;
 	}
 	public ElementTestFactory createToolTipCheck(TestElementDetails details, String toolTipText) {
-		createChecker(new CreateToolTipCheck(details, testInfo, testData, controlTest, toolTipText));
+		createChecker(new CreateToolTipCheck(details, testInfo, testSuiteData, controlTest, toolTipText));
 		return this;
 	}
 	public ElementTestFactory createButtonFaFaCheck(TestElementDetails details, String faFa) {
-		createChecker(new CreateFaFaCheck(details, testInfo, testData, controlTest, faFa));
+		createChecker(new CreateFaFaCheck(details, testInfo, testSuiteData, controlTest, faFa));
 		return this;
 	}
 	public ElementTestFactory createTextListCheck(TestElementDetails details, TestAdderWithData testAdderWithData) {
 		//NOT IMPLEMENTED
-		createChecker(new CreateListCheck(details, testInfo, testData, controlTest, testAdderWithData));
+		createChecker(new CreateListCheck(details, testInfo, testSuiteData, controlTest, testAdderWithData));
 		return this;
 	}
 

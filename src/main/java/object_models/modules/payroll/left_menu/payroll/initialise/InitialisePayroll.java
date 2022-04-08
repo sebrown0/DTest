@@ -51,7 +51,11 @@ public class InitialisePayroll extends FormWithIFrame implements PayrollElement 
 	}
 	
 	private void buildMyControls() {		
-		InitialisePayrollControls payrollControls = new InitialisePayrollControls(controlFactory);
+		/*
+		 * ControlTest is NULL.
+		 * Shouldn't matter becuase it's for dynamic tests. 
+		 */
+		InitialisePayrollControls payrollControls = new InitialisePayrollControls(controlFactory, null);
 		List<ControlData> myControls = payrollControls.getControls();		
 		super.buildFormControls(myControls);				
 	}

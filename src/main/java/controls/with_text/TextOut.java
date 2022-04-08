@@ -8,9 +8,8 @@ import org.openqa.selenium.WebDriver;
 
 import controls.data.InsertItem;
 import controls.interfaces.ControlTest;
+import dynamic_tests.test_adders.TestAdderWithData;
 import dynamic_tests.test_elements.DataInserter;
-import dynamic_tests.test_elements.DataInserterItem;
-import site_mapper.jaxb.pom.test_data.TestDataItem;
 
 /**
  * @author SteveBrown
@@ -28,14 +27,18 @@ public class TextOut extends ControlWithText implements InsertItem {
 	}
 
 	@Override
-	public void insert(TestDataItem item) {
-		DataInserter inserter = new DataInserterItem(item, controlTest, this);
+	public void insert(Object item, TestAdderWithData testAdder) {
+		DataInserter inserter = 
+				testAdder
+					.getDataInserter()
+						.setControl(this)
+						.setControlTest(controlTest);
+		
 		inserter.insertData();
 	}
+	
 	@Override
 	public void insert(String value) {
-		if(isAvailable()) {
-			elContainer.sendKeys(value);
-		}
+		setText(value);
 	}
 }

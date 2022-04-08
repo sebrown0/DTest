@@ -13,6 +13,7 @@ import controls.getters.ElementGetter;
 import controls.getters.TextGetter;
 import controls.interfaces.Control;
 import controls.interfaces.DisplayedText;
+import controls.interfaces.SetText;
 import controls.reset.ReloadContainer;
 
 /**
@@ -20,7 +21,7 @@ import controls.reset.ReloadContainer;
  * @version 1.0
  * @since 1.0
  */
-public abstract class ControlWithText implements Control, DisplayedText, ReloadContainer {
+public abstract class ControlWithText implements Control, SetText, DisplayedText, ReloadContainer {
 
 	private WebDriver driver;
 	private By locator;	
@@ -46,6 +47,14 @@ public abstract class ControlWithText implements Control, DisplayedText, ReloadC
 	@Override //DisplayedText
 	public String getText() {
 		return new TextGetter(elContainer, this).getText();
+	}
+	
+	@Override //SetText
+	public void setText(String value) {		
+		if(!isAvailable()) {
+			reloadContainer();			
+		}
+		elContainer.sendKeys(value);
 	}
 		
 	@Override //Control

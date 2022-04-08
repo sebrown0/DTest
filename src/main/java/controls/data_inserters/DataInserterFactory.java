@@ -32,6 +32,9 @@ public class DataInserterFactory {
 	private static final Logger LOGGER = 
 			LogManager.getLogger(DataInserterFactory.class);
 		
+	/*
+	 * THIS WILL PROBABLY GO....
+	 */
 	public static TestDataInserter getDataInserter(int forListItem, ControlTest controlTest, TestData testData) {
 		
 //		TestDataInserter dataInsert = null;

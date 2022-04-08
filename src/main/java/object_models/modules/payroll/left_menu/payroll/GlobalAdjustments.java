@@ -82,7 +82,7 @@ public final class GlobalAdjustments extends JsPanelWithIFrame implements JsPane
 						controlFactory
 							.buildButton(
 									GlobalAdjustmentControlNames.ACCEPT_CRITERIA, 
-									By.id("SEARCH"))
+									By.id("SEARCH"), this)
 							.getControlData(),
 							
 						/*

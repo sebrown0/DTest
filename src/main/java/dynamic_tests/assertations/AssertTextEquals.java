@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import controls.data.ControlTestData;
+import controls.data.InsertItem;
 import controls.interfaces.Control;
 import controls.interfaces.ControlTest;
 import dynamic_tests.common.XmlInfo;
@@ -20,6 +21,7 @@ import dynamic_tests.test_results.DynamicTestFail;
 import dynamic_tests.test_results.DynamicTestPass;
 import dynamic_tests.test_results.DynamicTestSuiteData;
 import dynamic_tests.test_strategy.DynamicTestReportStrategy;
+import site_mapper.jaxb.pom.test_data.TestDataItem;
 
 /**
  * @author SteveBrown
@@ -122,8 +124,22 @@ public class AssertTextEquals implements ReportData {
 		return false;
 	}
 	
+	/*
+	 * WHEN WE GET HERE WE NEED THE DataInserter TO BE INITIALISED WITH 
+	 * TestDataItem data, ControlTest controlTest, Control control
+	 */
 	public void assertTextEquals(TestElementDetails testElementDetails, TestAdderWithData testAdder, Optional<Control> cntrl) {
-		System.out.println("assertTextEquals->NOT IMPLEMENTED"); // TODO - remove or log 	
+		cntrl.ifPresent(c -> {
+			InsertItem insert = (InsertItem)c;
+			insert.insert(cntrl, testAdder);
+//			testAdder.getDataInserter().setControlTest(controlTest).setControl(c).insertData();
+//			InsertItem itemInserter =	(InsertItem) c;
+			//have to get testdataitem to here..
+//			itemInserter.insert(testAdder.);
+		});
+		
+		
+//		System.out.println("assertTextEquals->NOT IMPLEMENTED"); // TODO - remove or log 	
 //		this.testElmntName = testElementDetails.getName();
 //		this.testElmntType = testElementDetails.getElementType();
 //		this.cntrl = cntrl;

@@ -8,6 +8,7 @@ import java.time.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -58,7 +59,7 @@ public class ElementGetter {
 		WebElement res = null;
 		try {
 			res = wait.until(ExpectedConditions.elementToBeClickable(el));
-		}catch (TimeoutException e) {
+		}catch (TimeoutException | StaleElementReferenceException e) {
 			logger.error("Unable to find element [" + e + "]");		
 		}					
 		return res;
