@@ -12,7 +12,6 @@ import org.apache.logging.log4j.Logger;
 import controls.data.ControlTestData;
 import controls.data.InsertItem;
 import controls.interfaces.Control;
-import controls.interfaces.ControlTest;
 import dynamic_tests.common.XmlInfo;
 import dynamic_tests.test_adders.TestAdderWithData;
 import dynamic_tests.test_elements.TestElementData;
@@ -21,7 +20,6 @@ import dynamic_tests.test_results.DynamicTestFail;
 import dynamic_tests.test_results.DynamicTestPass;
 import dynamic_tests.test_results.DynamicTestSuiteData;
 import dynamic_tests.test_strategy.DynamicTestReportStrategy;
-import site_mapper.jaxb.pom.test_data.TestDataItem;
 
 /**
  * @author SteveBrown
@@ -37,9 +35,7 @@ import site_mapper.jaxb.pom.test_data.TestDataItem;
  * 
  */
 public class AssertTextEquals implements ReportData {
-	private DynamicTestSuiteData testSuiteData;
-	@SuppressWarnings("unused")
-	private ControlTest controlTest;
+	private DynamicTestSuiteData testSuiteData;	
 	private Optional<Control> cntrl;
 	private TestElementData testElementData;
 	private TestElementDetails testElementDetails;	
@@ -49,13 +45,9 @@ public class AssertTextEquals implements ReportData {
 	@SuppressWarnings("unused")
 	private final Logger LOGGER = LogManager.getLogger(AssertTextEquals.class);
 	
-	public AssertTextEquals(
-			final XmlInfo testInfo, ControlTest controlTest, 
-			DynamicTestSuiteData testData) {
-			
+	public AssertTextEquals(final XmlInfo testInfo, DynamicTestSuiteData testData) {			
 			this.strat = testInfo.getTestReportStrategy();
 			this.includeInReport = testInfo.getReportOnTests();
-			this.controlTest = controlTest;
 			this.testSuiteData = testData;			
 		}
 	
@@ -132,10 +124,6 @@ public class AssertTextEquals implements ReportData {
 		cntrl.ifPresent(c -> {
 			InsertItem insert = (InsertItem)c;
 			insert.insert(cntrl, testAdder);
-//			testAdder.getDataInserter().setControlTest(controlTest).setControl(c).insertData();
-//			InsertItem itemInserter =	(InsertItem) c;
-			//have to get testdataitem to here..
-//			itemInserter.insert(testAdder.);
 		});
 		
 		

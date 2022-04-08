@@ -6,7 +6,6 @@ package dynamic_tests.test_elements;
 import java.util.Optional;
 
 import controls.interfaces.Control;
-import controls.interfaces.ControlTest;
 import dynamic_tests.common.XmlInfo;
 import dynamic_tests.test_results.DynamicTestSuiteData;
 
@@ -20,9 +19,10 @@ import dynamic_tests.test_results.DynamicTestSuiteData;
 public class CreateTextCheckString extends TestElementCreator {
 		
 	public CreateTextCheckString(
-			TestElementDetails testElementDetails, XmlInfo testInfo, DynamicTestSuiteData testData, 
-			ControlTest controlTest, String textExpected) {
-		super(testElementDetails, testInfo, testData, controlTest, textExpected);
+			TestElementDetails testElementDetails, XmlInfo testInfo, 
+			DynamicTestSuiteData testData, String textExpected) {
+		
+		super(testElementDetails, testInfo, testData, textExpected);
 
 	}
 	

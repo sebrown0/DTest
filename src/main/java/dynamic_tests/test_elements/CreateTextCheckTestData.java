@@ -6,7 +6,6 @@ package dynamic_tests.test_elements;
 import java.util.Optional;
 
 import controls.interfaces.Control;
-import controls.interfaces.ControlTest;
 import dynamic_tests.common.XmlInfo;
 import dynamic_tests.test_adders.TestAdderWithData;
 import dynamic_tests.test_results.DynamicTestSuiteData;
@@ -21,10 +20,10 @@ public class CreateTextCheckTestData extends TestElementCreator {
 	private TestAdderWithData testAdderWithData;		
 	
 	public CreateTextCheckTestData(
-		TestElementDetails testElementDetails, XmlInfo testInfo, DynamicTestSuiteData testData, 
-		ControlTest controlTest,	TestAdderWithData testAdderWithData) {
+		TestElementDetails testElementDetails, XmlInfo testInfo, 
+		DynamicTestSuiteData testData, TestAdderWithData testAdderWithData) {
 		
-		super(testElementDetails, testInfo, testData, controlTest, null);
+		super(testElementDetails, testInfo, testData, null);
 		
 		this.testAdderWithData = testAdderWithData;
 	}

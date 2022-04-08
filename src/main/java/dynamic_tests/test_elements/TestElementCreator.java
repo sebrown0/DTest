@@ -6,7 +6,6 @@ package dynamic_tests.test_elements;
 import java.util.Optional;
 
 import controls.interfaces.Control;
-import controls.interfaces.ControlTest;
 import dynamic_tests.assertations.AssertTextEquals;
 import dynamic_tests.common.XmlInfo;
 import dynamic_tests.test_results.DynamicTestSuiteData;
@@ -23,20 +22,17 @@ public abstract class TestElementCreator {
 	protected String textExpected;	
 	protected DynamicTestSuiteData testData;	
 	protected XmlInfo testInfo;	
-	protected ControlTest controlTest;
 	protected AssertTextEquals assertEquals;
 	
 	public TestElementCreator(
-			TestElementDetails testElementDetails,
-			XmlInfo testInfo, DynamicTestSuiteData testData, 
-			ControlTest controlTest, String textExpected) {
+			TestElementDetails testElementDetails, XmlInfo testInfo, 
+			DynamicTestSuiteData testData, String textExpected) {
 
 			this.testElementDetails = testElementDetails;
 			this.testInfo = testInfo;
 			this.testData = testData;
-			this.textExpected = textExpected;
-			this.controlTest = controlTest;			
-			this.assertEquals = new AssertTextEquals(testInfo, controlTest, testData);
+			this.textExpected = textExpected;			
+			this.assertEquals = new AssertTextEquals(testInfo, testData);
 		}
 		
 	protected abstract String getMessage();

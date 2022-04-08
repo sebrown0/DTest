@@ -29,13 +29,9 @@ public class TestCreator {
 	protected Optional<Control> cntrl;	
 	protected ControlTest controlTest;
 	
-	public TestCreator( 
-		ControlFinder cntrlFinder, 
-		List<DynamicTest> testList, ControlTest controlTest) {
-		
+	public TestCreator(ControlFinder cntrlFinder,	List<DynamicTest> testList) {		
 		this.cntrlFinder = cntrlFinder;
 		this.testList = testList;
-		this.controlTest = controlTest;
 	}
 	
 	public TestCreator createTest(TestElementCreator elementTestCreator, List<DynamicTest> testList) {

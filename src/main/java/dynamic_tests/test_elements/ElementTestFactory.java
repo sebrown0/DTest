@@ -43,30 +43,30 @@ public class ElementTestFactory implements TestContainerLoader {
 	}
 	
 	public ElementTestFactory createTextCheck(TestElementDetails details, String textExpected) {
-		createChecker(new CreateTextCheckString(details, testInfo, testSuiteData, controlTest, textExpected));
+		createChecker(new CreateTextCheckString(details, testInfo, testSuiteData, textExpected));
 		return this;
 	}
 	public ElementTestFactory createTextCheck(TestElementDetails details, TestAdderWithData testAdderWithData) {
-		createChecker(new CreateTextCheckTestData(details, testInfo, testSuiteData, controlTest, testAdderWithData));
+		createChecker(new CreateTextCheckTestData(details, testInfo, testSuiteData, testAdderWithData));
 		return this;
 	}
 	public ElementTestFactory createToolTipCheck(TestElementDetails details, String toolTipText) {
-		createChecker(new CreateToolTipCheck(details, testInfo, testSuiteData, controlTest, toolTipText));
+		createChecker(new CreateToolTipCheck(details, testInfo, testSuiteData, toolTipText));
 		return this;
 	}
 	public ElementTestFactory createButtonFaFaCheck(TestElementDetails details, String faFa) {
-		createChecker(new CreateFaFaCheck(details, testInfo, testSuiteData, controlTest, faFa));
+		createChecker(new CreateFaFaCheck(details, testInfo, testSuiteData, faFa));
 		return this;
 	}
 	public ElementTestFactory createTextListCheck(TestElementDetails details, TestAdderWithData testAdderWithData) {
 		//NOT IMPLEMENTED
-		createChecker(new CreateListCheck(details, testInfo, testSuiteData, controlTest, testAdderWithData));
+		createChecker(new CreateListCheck(details, testInfo, testSuiteData, testAdderWithData));
 		return this;
 	}
 
 	private void createChecker(TestElementCreator elementTestCreator) {
 		testCreator = 
-			new TestCreator(cntrlFinder, testList, controlTest)
+			new TestCreator(cntrlFinder, testList)
 				.createTest(elementTestCreator, testList);
 	}
 	

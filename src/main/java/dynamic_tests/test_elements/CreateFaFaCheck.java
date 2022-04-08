@@ -7,7 +7,6 @@ import java.util.Optional;
 
 import controls.data.ControlTestData;
 import controls.interfaces.Control;
-import controls.interfaces.ControlTest;
 import dynamic_tests.common.XmlInfo;
 import dynamic_tests.test_results.DynamicTestSuiteData;
 
@@ -20,10 +19,10 @@ import dynamic_tests.test_results.DynamicTestSuiteData;
 public class CreateFaFaCheck extends TestElementCreator  {
 		
 	public CreateFaFaCheck(
-		TestElementDetails testElementDetails, XmlInfo testInfo, DynamicTestSuiteData testData, 
-		ControlTest controlTest, String textExpected) {
+		TestElementDetails testElementDetails, XmlInfo testInfo, 
+		DynamicTestSuiteData testData, String textExpected) {
 		
-		super(testElementDetails, testInfo, testData, controlTest, textExpected);
+		super(testElementDetails, testInfo, testData, textExpected);
 		
 	}
 	

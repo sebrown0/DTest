@@ -22,9 +22,11 @@ import dynamic_tests.test_results.DynamicTestSuiteData;
 public class CreateListCheck extends TestElementCreator {	
 	private TestAdderWithData testAdderWithData;
 		
-	public CreateListCheck(TestElementDetails testElementDetails, XmlInfo testInfo, DynamicTestSuiteData testData, ControlTest controlTest,
-			TestAdderWithData testAdderWithData) {
-		super(testElementDetails, testInfo, testData, controlTest, null);
+	public CreateListCheck(
+		TestElementDetails testElementDetails, XmlInfo testInfo, 
+		DynamicTestSuiteData testData, TestAdderWithData testAdderWithData) {
+		
+		super(testElementDetails, testInfo, testData, null);
 
 		this.testAdderWithData = testAdderWithData;
 	}
