@@ -3,16 +3,6 @@
  */
 package content;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
-import entities.company.Company;
-import enums.ContractType;
-import enums.EmployeeTitle;
-import enums.EmploymentType;
-import enums.Gender;
-import enums.TaxStatus;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
@@ -49,7 +39,7 @@ public class EmployeeOptionalData  {
 	@XmlElement(name="ContractType",namespace="EmpOptType")
 	private String contractType;	
 	@XmlElement(name="Company",namespace="EmpOptType")
-	private String Company;
+	private String company;
 	@XmlElement(name="Department",namespace="EmpOptType")
 	private String department;
 	@XmlElement(name="Schedule",namespace="EmpOptType")
@@ -69,168 +59,131 @@ public class EmployeeOptionalData  {
 //	private List<Allowance> Z_nonTaxablePermanentAllowances = new ArrayList<>();
 	
 	
-//	// Optional
-//	@Override //OptionalFields
-//	public String getStreet() {
-//		return street;
-//	}
-//	@Override //OptionalFields
-//	public EmployeeOptional setStreet(String street) {
-//		this.street = street;
-//		return this;
-//	}
-//	@Override //OptionalFields
-//	public String getPostCode() {
-//		return postCode;
-//	}
-//	@Override //OptionalFields
-//	public EmployeeOptional setPostCode(String postCode) {
-//		this.postCode = postCode;
-//		return this;
-//	}
-//	@Override //OptionalFields
-//	public String getBank() {
-//		return bank;
-//	}
-//	@Override //OptionalFields
-//	public EmployeeOptional setBank(String bank) {
-//		this.bank = bank;
-//		return this;
-//	}
-//	@Override //OptionalFields
-//	public String getIbanNumber() {
-//		return ibanNumber;
-//	}
-//	@Override //OptionalFields
-//	public EmployeeOptional setIbanNumber(String ibanNumber) {
-//		this.ibanNumber = ibanNumber;
-//		return this;
-//	}
-//	@Override //OptionalFields
-//	public String getEmailAddress() {
-//		return emailAddress;
-//	}
-//	@Override //OptionalFields
-//	public EmployeeOptional setEmailAddress(String emailAddress) {
-//		this.emailAddress = emailAddress;
-//		return this;
-//	}
-//	@Override //OptionalFields
-//	public String getMobileNumber() {
-//		return mobileNumber;
-//	}
-//	@Override //OptionalFields
-//	public EmployeeOptional setMobileNumber(String mobileNumber) {
-//		this.mobileNumber = mobileNumber;
-//		return this;
-//	}
-//	@Override //OptionalFields
-//	public TaxStatus getTaxStatus() {
-//		return taxStatus;
-//	}
-//	@Override //OptionalFields
-//	public EmployeeOptional setTaxStatus(TaxStatus taxStatus) {
-//		this.taxStatus = taxStatus;
-//		return this;
-//	}
-//	@Override //OptionalFields
-//	public ContractType getContractType() {
-//		return contractType;
-//	}
-//	@Override //OptionalFields
-//	public EmployeeOptional setContractType(ContractType contractType) {
-//		this.contractType = contractType;
-//		return this;
-//	}
-//	@Override //OptionalFields
-//	public Company getCompany() {
-//		return Company;
-//	}
-//	@Override //OptionalFields
-//	public EmployeeOptional setCompany(Company company) {
-//		Company = company;
-//		return this;
-//	}
-//	@Override //OptionalFields
-//	public String getDepartment() {
-//		return department;
-//	}
-//	@Override //OptionalFields
-//	public EmployeeOptional setDepartment(String department) {
-//		this.department = department;
-//		return this;
-//	}
-//	@Override //OptionalFields
-//	public String getSchedule() {
-//		return schedule;
-//	}
-//	@Override //OptionalFields
-//	public EmployeeOptional setSchedule(String schedule) {
-//		this.schedule = schedule;
-//		return this;
-//	}
-//	@Override //OptionalFields
-//	public EmploymentType getEmploymentType() {
-//		return employmentType;
-//	}
-//	@Override //OptionalFields
-//	public EmployeeOptional setEmploymentType(EmploymentType employmentType) {
-//		this.employmentType = employmentType;
-//		return this;
-//	}
-//	@Override //OptionalFields
-//	public boolean isSpecialPartTimer() {
-//		return isSpecialPartTimer;
-//	}
-//	@Override //OptionalFields
-//	public EmployeeOptional setSpecialPartTimer(boolean isSpecialPartTimer) {
-//		this.isSpecialPartTimer = isSpecialPartTimer;
-//		return this;
-//	}
-//	@Override //OptionalFields
-//	public String getGrade() {
-//		return grade;
-//	}
-//	@Override //OptionalFields
-//	public EmployeeOptional setGrade(String grade) {
-//		this.grade = grade;
-//		return this;
-//	}
-//	@Override //OptionalFields
-//	public String getCostCentre() {
-//		return costCentre;
-//	}
-//	@Override //OptionalFields
-//	public EmployeeOptional setCostCentre(String costCentre) {
-//		this.costCentre = costCentre;
-//		return this;
-//	}
-//	@Override //OptionalFields
+
+	public String getStreet() {
+		return street;
+	}	
+	public void setStreet(String street) {
+		this.street = street;	
+	}
+	
+	public String getPostCode() {
+		return postCode;
+	}	
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;	
+	}
+	
+	public String getBank() {
+		return bank;
+	}	
+	public void setBank(String bank) {
+		this.bank = bank;	
+	}
+	
+	public String getIbanNumber() {
+		return ibanNumber;
+	}	
+	public void setIbanNumber(String ibanNumber) {
+		this.ibanNumber = ibanNumber;	
+	}
+	
+	public String getEmailAddress() {
+		return emailAddress;
+	}	
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;	
+	}
+		
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;		
+	}
+	
+	public String getTaxStatus() {
+		return taxStatus;
+	}
+	public void setTaxStatus(String taxStatus) {
+		this.taxStatus = taxStatus;		
+	}
+	
+	public String getContractType() {
+		return contractType;
+	}
+	public void setContractType(String contractType) {
+		this.contractType = contractType;
+	}
+	
+	public String getCompany() {
+		return company;
+	}	
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	
+	public String getDepartment() {
+		return department;
+	}
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+	
+	public String getSchedule() {
+		return schedule;
+	}	
+	public void setSchedule(String schedule) {
+		this.schedule = schedule;		
+	}
+	
+	public String getEmploymentType() {
+		return employmentType;
+	}	
+	public void setEmploymentType(String employmentType) {
+		this.employmentType = employmentType;	
+	}	
+	public boolean isSpecialPartTimer() {
+		return isSpecialPartTimer;
+	}
+	
+	public void setSpecialPartTimer(boolean isSpecialPartTimer) {
+		this.isSpecialPartTimer = isSpecialPartTimer;	
+	}
+	
+	public String getGrade() {
+		return grade;
+	}	
+	public void setGrade(String grade) {
+		this.grade = grade;		
+	}
+	
+	public String getCostCentre() {
+		return costCentre;
+	}	
+	public void setCostCentre(String costCentre) {
+		this.costCentre = costCentre;		
+	}
+	
 //	public List<Allowance> getTaxablePermanentAllowances() {
-//		return Z_taxablePermanentAllowances;
+//		return taxablePermanentAllowances;
+//	}	
+//	public void setTaxablePermanentAllowances(List<Allowance> taxablePermanentAllowances) {
+//		this.taxablePermanentAllowances = taxablePermanentAllowances;		
 //	}
-//	@Override //OptionalFields
-//	public EmployeeOptional setTaxablePermanentAllowances(List<Allowance> taxablePermanentAllowances) {
-//		this.Z_taxablePermanentAllowances = taxablePermanentAllowances;
-//		return this;
-//	}
-//	@Override //OptionalFields
+	
 //	public List<Allowance> getNonTaxablePermanentAllowances() {
-//		return Z_nonTaxablePermanentAllowances;
+//		return nonTaxablePermanentAllowances;
+//	}	
+//	public void setNonTaxablePermanentAllowances(List<Allowance> nonTaxablePermanentAllowances) {
+//		this.nonTaxablePermanentAllowances = nonTaxablePermanentAllowances;	
 //	}
-//	@Override //OptionalFields
-//	public EmployeeOptional setNonTaxablePermanentAllowances(List<Allowance> nonTaxablePermanentAllowances) {
-//		this.Z_nonTaxablePermanentAllowances = nonTaxablePermanentAllowances;
-//		return this;
-//	}
-//	@Override
-//	public EmployeeOptional setEmployeeTitle(EmployeeTitle employeeTitle) {
-//		this.employeeTitle = employeeTitle;
-//		return this;
-//	}
-//	@Override
-//	public EmployeeTitle getEmployeeTitle() {
-//		return employeeTitle;
-//	}
+	
+	public void setEmployeeTitle(String employeeTitle) {
+		this.employeeTitle = employeeTitle;		
+	}	
+	public String getEmployeeTitle() {
+		return employeeTitle;
+	}
 	
 }

@@ -12,4 +12,13 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 public class EmployeeTestData {
 	@XmlElement(name = "Employee", namespace = "EmpTestData")
 	private List<EmployeeContent> employees;
+
+	public List<EmployeeContent> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(List<EmployeeContent> employees) {
+		this.employees = employees;
+	}
+		
 }
