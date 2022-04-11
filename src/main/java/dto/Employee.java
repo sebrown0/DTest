@@ -13,6 +13,10 @@ import enums.EmployeeTitle;
 import enums.EmploymentType;
 import enums.Gender;
 import enums.TaxStatus;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author SteveBrown
@@ -23,43 +27,77 @@ import enums.TaxStatus;
  * @since 1.0
  *
  */
+@XmlRootElement(name="Employee")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Employee implements EmployeeRequired, EmployeeOptional {
 	//Required
-	private String firstName; 
+	@XmlElement
+	private String firstName;
+	@XmlElement
 	private String lastName;
+	@XmlElement
 	private String empCode;
+	@XmlElement
 	private BigDecimal annualSalary;
+	@XmlElement
 	private BigDecimal hourlyRate;
-	private String idCardNumber;	
+	@XmlElement
+	private String idCardNumber;
+	@XmlElement
 	private String addressOne;
+	@XmlElement
 	private String town;
+	@XmlElement
 	private String country;
+	
 	private Gender gender;
+	@XmlElement
 	private String dateOfBirth;
+	@XmlElement
 	private String dateOfEmployement;
+	@XmlElement
 	private String taxNumber;
+	@XmlElement
 	private String niNumber;
+	@XmlElement
 	private String payGroup;
 	
 	//Optional
+	@XmlElement
 	private String street;
+	@XmlElement
 	private String postCode;
+	@XmlElement
 	private String bank;
+	@XmlElement
 	private String ibanNumber;
+	@XmlElement
 	private String emailAddress;
+	@XmlElement
 	private String mobileNumber;
-	private TaxStatus taxStatus;
+	
+	private TaxStatus taxStatus;	
 	private ContractType contractType;
+	
+	@XmlElement
 	private Company Company;
+	@XmlElement
 	private String department;
+	@XmlElement
 	private String schedule;
+	
 	private EmploymentType employmentType;
+	
 	private EmployeeTitle employeeTitle;
+	@XmlElement
 	private boolean isSpecialPartTimer;
+	@XmlElement
 	private String grade;
+	@XmlElement
 	private String costCentre;
-	private List<Allowance> taxablePermanentAllowances = new ArrayList<>();
-	private List<Allowance> nonTaxablePermanentAllowances = new ArrayList<>();
+	
+	private List<Allowance> Z_taxablePermanentAllowances = new ArrayList<>();
+	private List<Allowance> Z_nonTaxablePermanentAllowances = new ArrayList<>();
 	
 	// Employee/Helpers
 	public String getFullName() {
@@ -344,20 +382,20 @@ public class Employee implements EmployeeRequired, EmployeeOptional {
 	}
 	@Override //OptionalFields
 	public List<Allowance> getTaxablePermanentAllowances() {
-		return taxablePermanentAllowances;
+		return Z_taxablePermanentAllowances;
 	}
 	@Override //OptionalFields
 	public EmployeeOptional setTaxablePermanentAllowances(List<Allowance> taxablePermanentAllowances) {
-		this.taxablePermanentAllowances = taxablePermanentAllowances;
+		this.Z_taxablePermanentAllowances = taxablePermanentAllowances;
 		return this;
 	}
 	@Override //OptionalFields
 	public List<Allowance> getNonTaxablePermanentAllowances() {
-		return nonTaxablePermanentAllowances;
+		return Z_nonTaxablePermanentAllowances;
 	}
 	@Override //OptionalFields
 	public EmployeeOptional setNonTaxablePermanentAllowances(List<Allowance> nonTaxablePermanentAllowances) {
-		this.nonTaxablePermanentAllowances = nonTaxablePermanentAllowances;
+		this.Z_nonTaxablePermanentAllowances = nonTaxablePermanentAllowances;
 		return this;
 	}
 	@Override

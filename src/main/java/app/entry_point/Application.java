@@ -3,8 +3,6 @@
  */
 package app.entry_point;
 
-import app.start_up.StartUp;
-
 /**
  * @author SteveBrown
  * @version 1.0
@@ -19,9 +17,15 @@ public class Application {
 	 * 	[1] include test file (XML), i.e. login.xml
 	 * 
 	 **/
-	public static void main(String[] args) {			
-		StartUp startUp = new StartUp(args);
-		startUp.welcome().runTests().finish();
+	public static void main(String[] args) {
+//		System.out.println("HELLO");
+//		TempDynRunner temp = new TempDynRunner();
+//		temp.runTests();
+		
+//		DynamicTestsFromSiteMapperTests app = new DynamicTestsFromSiteMapperTests();
+//		app.runTests();
+//		StartUp startUp = new StartUp(args);
+//		startUp.welcome().runTests().finish();
 	}
 	
 }

@@ -48,6 +48,7 @@ public class DataInserterFactory {
 		if(testData != null) {			
 				List<TestDataItem> items = testData.getTestDataIn();
 				if(items != null && items.size() >= forListItem) {
+					@SuppressWarnings("unused")
 					TestDataItem testDataItem = items.get(forListItem); 
 //					return getDataInserter(testDataItem, controlTest, testData);
 

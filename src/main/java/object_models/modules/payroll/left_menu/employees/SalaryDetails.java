@@ -133,7 +133,7 @@ public class SalaryDetails extends JsPanelWithIFrame {
 	@SiteMap(author="SteveBrown", version="1.0.0", date="08/04/2022")
 	@TestControl(type="element", subtype="Button")
 	public DynamicTest ButtonDocumentsFunctionTest () {
-		return DynamicTest.dynamicTest("[ButtonDocumentsFunctionTest] *NOT IMPLEMENTED*", () -> assertTrue(true));
+		return DynamicTest.dynamicTest("[ButtonDocumentsFunctionTest] *NOT IMPLEMENTED*", () -> assertTrue(false));
 	}
 
 	@SiteMap(author="SteveBrown", version="1.0.0", date="08/04/2022")

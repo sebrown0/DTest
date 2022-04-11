@@ -21,15 +21,15 @@
     <inf:ElementLibrary>C:/Users/SteveBrown/eclipse-workspace/2021/DTest</inf:ElementLibrary>
   </Info>
   <DynamicTestInfo>
-    <dyn:ReportStrategy>Junit</dyn:ReportStrategy>
-    <dyn:ReportResults>All</dyn:ReportResults>  
+    <dyn:ReportStrategy>Console</dyn:ReportStrategy>
+    <dyn:ReportResults>Passed</dyn:ReportResults>  
   </DynamicTestInfo>
-  <IncludeElementsForTest>
-    <inc:Include>Button</inc:Include>
+  <IncludeElementsForTest>    
+    <inc:Include>Button</inc:Include>     
     <inc:Include>TextSelect</inc:Include>
     <inc:Include>TextOut</inc:Include>
-    <inc:Include>ComboSelectOnly</inc:Include>
-    <inc:Include>Label</inc:Include>
+    <inc:Include>ComboSelectOnly</inc:Include>    
+    <inc:Include>Label</inc:Include>     
   </IncludeElementsForTest>
   <Modules>
     <mods:Module name="payroll">
@@ -99,7 +99,7 @@
                 <et:Details type="Button" name="SalaryHistory" text="" fafa="fa fa-list"/>
                 <et:Locator by="css" text="div[title='View Salary History']"/>
                 <et:ToolTip text="View Salary History"/>
-                <et:Function type="Element" subtype="Button" isDefaultPass="false"/>
+                <et:Function type="Element" subtype="Button" isDefaultPass="false" />
               </ct:Element>
               <ct:Element xsi:schemaLocation="Container file:/C:/SiteMapperXML/Schema/container/ContainerElement.xsd" xml:base="/C:/SiteMapperXML/XML/header/CombosButton.xml">
                 <et:Details type="Button" name="Combos" text="" fafa="fa fa-window-maximize"/>
@@ -166,14 +166,14 @@
           xmlns:et="ElementType"          
           xmlns:mit="MenuItemType" xsi:schemaLocation="MenuItem file:/C:/SiteMapperXML/Schema/menu/MenuItem.xsd" 
             name="Employee Creation" package="Employees" class="EmployeeCreation" library="EmployeeCreationWizard" 
-            fafa="fa fa-plus" tooltip="Employee Creation">
+            fafa="fa fa-plus" tooltip="Employee Creation" >
           
           <!-- WHY IS THIS IN package="Employees" -->
           
           <mit:Type name="JsPanelWithIFrame">
             <mit:JsPanelWithIFrame panelTitle="Employee Creation Wizard" />
           </mit:Type>
-          <mit:Container type="Item" name="FooterElements">
+          <mit:Container type="Item" name="FooterElements" >
             <cnt:Container type="InputGroup" name="PageFooterBtns">
               <cnt:Locator by="css" text="ul[role='menu']"/>
               <cnt:Element>
