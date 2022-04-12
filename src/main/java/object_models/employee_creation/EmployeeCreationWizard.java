@@ -10,13 +10,13 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import content.EmployeeContent;
 import control_mapping.MapControl;
 import control_mapping.MapControlCombo;
 import control_mapping.MapControlText;
 import control_mapping.MappingStrategy;
 import control_mapping.PageMap;
 import control_mapping.PageMapper;
-import dto.Employee;
 import object_models.forms.FormFadeShow;
 import object_models.pages.homepage.CoreData;
 
@@ -43,7 +43,7 @@ public class EmployeeCreationWizard {
 	}
 	
 	// Use this if were not interested in the confirmation form.
-	public void createEmployeeIgnoreConfirmation(Employee emp)  {
+	public void createEmployeeIgnoreConfirmation(EmployeeContent emp)  {
 		logger.debug("Creating employee with wizard");		
 		executeSteps(emp);
 		
@@ -51,12 +51,12 @@ public class EmployeeCreationWizard {
 		frm.close();
 	}
 	// Use this if we want the confirmation form.
-	public FormFadeShow createEmployeeAndGetConfirmation(Employee emp)  {
+	public FormFadeShow createEmployeeAndGetConfirmation(EmployeeContent emp)  {
 		logger.debug("Creating employee with wizard. Returning confirmation form");		
 		executeSteps(emp);		
 		return getConfirmationForm();
 	}
-	private void executeSteps(Employee emp) {
+	private void executeSteps(EmployeeContent emp) {
 		WizardStepExecutor step1 = new WizardStepOne(pageMap, driver, 1);
 		WizardStepExecutor step2 = writeValuesForStepAndMoveNext(step1, emp);
 		WizardStepExecutor step3 = writeValuesForStepAndMoveNext(step2, emp);		
@@ -64,7 +64,7 @@ public class EmployeeCreationWizard {
 		WizardStepExecutor step5 = writeValuesForStepAndMoveNext(step4, emp);
 		step5.writeValues(emp).getNext();
 	}
-	private WizardStepExecutor writeValuesForStepAndMoveNext(WizardStepExecutor step, Employee emp) {
+	private WizardStepExecutor writeValuesForStepAndMoveNext(WizardStepExecutor step, EmployeeContent emp) {
 		step.writeValues(emp);
 		return step.getNext();
 	}	
@@ -92,11 +92,4 @@ public class EmployeeCreationWizard {
 		}		
 	}
 	
-//	@Override
-//	public void close() {		
-//		getContextManager().removeAndCloseContext(getMyContext());
-//		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("a[href='#previous']")));
-//	}
-
 }

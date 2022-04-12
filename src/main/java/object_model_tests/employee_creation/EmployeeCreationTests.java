@@ -1,7 +1,5 @@
 package object_model_tests.employee_creation;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -11,22 +9,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import controls.with_text.TextOut;
-import dto.Employee;
-import enums.control_names.EmployeeControlNames;
+import content.EmployeeContent;
 import logging.TestResultLogger;
 import object_models.forms.FormFadeShow;
 import object_models.modules.common.nav.NavBarElement;
 import object_models.modules.common.nav.nav_bar_elements.NavBarEmployeeCreation;
-import object_models.modules.payroll.left_menu.employees.EmployeeDetails;
 import object_models.modules.payroll.top_right_nav.employees.EmployeeCreation;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
+import providers.XMLFileProvider;
 import providers.employee.EmployeeFromXml;
-import providers.employee.EmployeeProvider;
-import providers.employee.RandomEmployeeProvider;
 import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
@@ -37,23 +31,31 @@ import xml_reader.config_file.ConfigReader;
 	LoginPageResolverPayroll.class })
 class EmployeeCreationTests {
 	private static HomePage homepage;
-	private static EmployeeCreation empCreation; 
-	private static Employee emp;
+	private static EmployeeCreation empCreation;
+	private static EmployeeContent emp;
 	private static NavBarElement navEmpWizard;
+	private static EmployeeFromXml empProvider;
 	
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
-		// Login to the homepage
-		homepage = userLogin.loginValidUser(UserProvider.userPortal());
+		// Login to the home page
+		homepage = 
+			userLogin.loginValidUser(UserProvider.userPortal());
+		
 		// Get the employee creation wizard from the nav bar.
-		navEmpWizard = homepage.getTopRightNavBarElement(NavBarEmployeeCreation.ORIGINAL_NAME).get();
+		navEmpWizard = 
+			homepage.getTopRightNavBarElement(
+					NavBarEmployeeCreation.ORIGINAL_NAME).get();
+
+		//load XML data.
+		empProvider = 
+				new EmployeeFromXml(XMLFileProvider.EMPLOYEE_TESTS_FILE_PATH);
 	}	
 
 	@Test @Order(1)
 	void createDuplicateEmployee_codeInUseFormShouldBeShown() {
-		// GET AN EMPLOYEE FROM XML
-		EmployeeProvider empProvider = new EmployeeFromXml(); 
-		emp = empProvider.getEmployeeWithRequiredFields("1");
+		// GET AN EMPLOYEE FROM XML				
+		emp = empProvider.getFirstEmployeeWithCompleteContent();
 		
 		// GET THE EMPLOYEE WIZARD
 		empCreation = (EmployeeCreation) navEmpWizard.clickElement();
@@ -63,73 +65,11 @@ class EmployeeCreationTests {
 		
 		// THE EMP EXISTS SO THE RESULT SHOULD BE AN ERROR FORM.
 		FormFadeShow frm = empCreation.getEmployeeCreationWizard().createEmployeeAndGetConfirmation(emp);
-		assertEquals("Data Error", frm.getTitle().getExpected());
+		assertTrue(frm.getTitle().getActual().contains("Data Error"));
 		
 		//CLOSE THE ERROR FORM AND WIZARD
 		frm.close();
 		empCreation.close();		
-	}
-
-	@Test @Order(2)
-	void createRandomEmployee_withLowerCaseCode_openEmpDetails_codeShouldBeInUpperCase() {
-		// Get an employee with random code
-		RandomEmployeeProvider empProvider = new EmployeeFromXml(); 
-		emp = empProvider.getAnyEmpWithRandomCode();		
-		String randomEmpCode = emp.getEmpCode();
-		// Open the wizard and create the emp
-		empCreation = (EmployeeCreation) navEmpWizard.clickElement();		
-		empCreation.getEmployeeCreationWizard().createEmployeeAndGetConfirmation(emp);
-		empCreation.close();
-		// Open employee details and check the code.
-		EmployeeDetails empDetails = (EmployeeDetails) homepage.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
-		TextOut empDetailsCode = (TextOut) empDetails.getPanelControl().getControl(EmployeeControlNames.EMP_CODE).get();		
-		assertFalse(empDetailsCode.getText().equals(randomEmpCode));
-		assertTrue(empDetailsCode.getText().equalsIgnoreCase(randomEmpCode));
-		empDetails.close();
-	}
-
-	@Test @Order(3)
-	void createRandomEmployee_withSpaceInCode_openEmpDetails_spaceShouldBeRemoved() {
-		// Get an employee with random code and add space.
-		RandomEmployeeProvider empProvider = new EmployeeFromXml(); 
-		emp = empProvider.getAnyEmpWithRandomCode();		
-		String randomEmpCode = emp.getEmpCode();
-		String randomEmpCodeWithSpace = randomEmpCode + " _space";
-		emp.setEmpCode(randomEmpCodeWithSpace);
-		// Open the wizard and create the emp
-		empCreation = (EmployeeCreation) navEmpWizard.clickElement();		
-		empCreation.getEmployeeCreationWizard().createEmployeeAndGetConfirmation(emp);
-		empCreation.close();
-		// Open employee details and check the code.
-		EmployeeDetails empDetails = (EmployeeDetails) homepage.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
-		TextOut empDetailsCode = (TextOut) empDetails.getPanelControl().getControl(EmployeeControlNames.EMP_CODE).get();
-		assertFalse(empDetailsCode.getText().equals(randomEmpCode));
-		assertTrue(empDetailsCode.getText().equalsIgnoreCase(randomEmpCode + "_space"));
-		empDetails.close();
-	}
-	
-	@Test @Order(4)
-	void createRandomEmployee_withSymbolInCode_openEmpDetails_symbolsShouldBeRemoved() {
-		// Get an employee with random code and add symbols.
-		RandomEmployeeProvider empProvider = new EmployeeFromXml(); 
-		emp = empProvider.getAnyEmpWithRandomCode();		
-		String randomEmpCode = emp.getEmpCode();
-		String randomEmpCodeWithSymbol = randomEmpCode + "_(M)";
-		emp.setEmpCode(randomEmpCodeWithSymbol);
-		// Open the wizard and create the emp
-		empCreation = (EmployeeCreation) navEmpWizard.clickElement();		
-		empCreation.getEmployeeCreationWizard().createEmployeeAndGetConfirmation(emp);
-		empCreation.close();
-		// Open employee details and check the code.
-		EmployeeDetails empDetails = (EmployeeDetails) homepage.getLeftMenu().clickAndLoad(EmployeeDetails.class).get();
-		TextOut empDetailsCode = (TextOut) empDetails.getPanelControl().getControl(EmployeeControlNames.EMP_CODE).get();
-		assertFalse(empDetailsCode.getText().equals(randomEmpCode));
-		assertEquals(randomEmpCode + "_M", empDetailsCode.getText());
-		empDetails.close();
-		/*
-		 * LAST TEST CLOSE APP
-		 */
-		homepage.close();
 	}
 		
 }

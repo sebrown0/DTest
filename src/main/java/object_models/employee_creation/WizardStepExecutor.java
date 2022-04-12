@@ -5,7 +5,7 @@ package object_models.employee_creation;
 
 import org.openqa.selenium.StaleElementReferenceException;
 
-import dto.Employee;
+import content.EmployeeContent;
 
 /**
  * @author SteveBrown
@@ -15,6 +15,8 @@ import dto.Employee;
  */
 public interface WizardStepExecutor {
 	int getStepNumber();
-	WizardStepExecutor writeValues(Employee emp) throws StaleElementReferenceException;
+	
+	WizardStepExecutor writeValues(EmployeeContent emp) throws StaleElementReferenceException;
+//	WizardStepExecutor writeValues(Employee emp) throws StaleElementReferenceException;
 	WizardStepExecutor getNext();
 }

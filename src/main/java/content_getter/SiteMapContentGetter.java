@@ -8,10 +8,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.sax.SAXSource;
-import javax.xml.transform.stream.StreamSource;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.eclipse.persistence.jaxb.UnmarshallerProperties;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -19,7 +16,6 @@ import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 import org.xml.sax.XMLReader;
 
-import app.xml_content.XmlContent;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
@@ -32,7 +28,7 @@ import jakarta.xml.bind.Unmarshaller;
  * @since 1.0
  */
 public class SiteMapContentGetter <T extends Object> {	
-	private Logger logger = LogManager.getLogger("site_mapper.app.log");
+//	private Logger logger = LogManager.getLogger("site_mapper.app.log");
 	private JAXBContext jc;
 	private Unmarshaller unmarshaller;	
 	private Optional<T> content = Optional.empty();	
@@ -57,7 +53,6 @@ public class SiteMapContentGetter <T extends Object> {
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
-//		setContent(clazz);
 		return content;
 	}
 	
@@ -110,33 +105,33 @@ public class SiteMapContentGetter <T extends Object> {
     
 	}
 	
-	private Optional<StreamSource> getSource() {
-		//TODO - Check source file.
-		return Optional.ofNullable(new StreamSource(XML_SOURCE));
-	}
+//	private Optional<StreamSource> getSource() {
+//		//TODO - Check source file.
+//		return Optional.ofNullable(new StreamSource(XML_SOURCE));
+//	}
 
-	private Optional<T> getUnmarshalledContent(StreamSource s, Class<T> clazz){
-		Optional<T> content = Optional.ofNullable(null);
-		try {
-			content = Optional.ofNullable(unmarshaller.unmarshal(s, clazz).getValue());			
-		} catch (JAXBException e) {
-			logger.error("Error unmarshalling source");
-		}	 
-		return content;
-	}
-
-	private void setContent(Class<T> clazz){
-		getSource().ifPresentOrElse(
-				src -> {
-					content = getUnmarshalledContent(src, clazz);								
-				}, 
-				new Runnable() {					
-					@Override
-					public void run() {
-						logger.error("Error getting the source [" + XML_SOURCE + "] for unmarshling");
-					}
-				});
-	}
+//	private Optional<T> getUnmarshalledContent(StreamSource s, Class<T> clazz){
+//		Optional<T> content = Optional.ofNullable(null);
+//		try {
+//			content = Optional.ofNullable(unmarshaller.unmarshal(s, clazz).getValue());			
+//		} catch (JAXBException e) {
+//			logger.error("Error unmarshalling source");
+//		}	 
+//		return content;
+//	}
+//
+//	private void setContent(Class<T> clazz){
+//		getSource().ifPresentOrElse(
+//				src -> {
+//					content = getUnmarshalledContent(src, clazz);								
+//				}, 
+//				new Runnable() {					
+//					@Override
+//					public void run() {
+//						logger.error("Error getting the source [" + XML_SOURCE + "] for unmarshling");
+//					}
+//				});
+//	}
 
 
 }

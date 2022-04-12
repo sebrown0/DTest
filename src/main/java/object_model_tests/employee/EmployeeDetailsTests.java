@@ -28,7 +28,7 @@ import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
-import providers.employee.EmployeeFromXml;
+import providers.employee.EmployeeFromXml_Old;
 import providers.employee.EmployeeProvider;
 import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
@@ -58,7 +58,7 @@ class EmployeeDetailsTests {
 		// Load the employee details page.
 		empDetails = (EmployeeDetails) menu.clickParent("Employees").clickAndLoad(EmployeeDetails.class).get();
 		// Get the employee we're going to use with required fields from the provider.
-		EmployeeProvider empProvider = new EmployeeFromXml();
+		EmployeeProvider empProvider = new EmployeeFromXml_Old();
 		emp = empProvider.getEmployeeWithRequiredFields("1");
 	}
 		

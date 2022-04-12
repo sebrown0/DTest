@@ -7,8 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import content.EmployeeContent;
 import control_mapping.PageMap;
-import dto.Employee;
 import object_models.helpers.Jquery;
 
 /**
@@ -27,7 +27,7 @@ public class WizardStepFive extends WizardStep {
 	}
 
 	@Override
-	public WizardStepExecutor writeValues(Employee emp) {		
+	public WizardStepExecutor writeValues(EmployeeContent emp) {		
 		pageMap.getTextBox("Annual Salary").writeInput(emp.getAnnualSalary().toPlainString());		
 		pageMap.getTextBox("Hourly Rate").writeInput(emp.getHourlyRate().toPlainString());
 		return this;

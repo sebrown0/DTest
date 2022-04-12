@@ -31,10 +31,13 @@ public interface EmployeeOptional extends EmployeeRequired{
 	String getMobileNumber();
 	EmployeeOptional setMobileNumber(String mobileNumber);
 	TaxStatus getTaxStatus();
+//	TaxStatus getTaxStatus();
 	EmployeeOptional setTaxStatus(TaxStatus taxStatus);
 	ContractType getContractType();
+//	String getContractType();
 	EmployeeOptional setEmployeeTitle(EmployeeTitle employeeTitle);
 	EmployeeTitle getEmployeeTitle();
+//	String getEmployeeTitle();
 	EmployeeOptional setContractType(ContractType contractType);
 	Company getCompany();
 	EmployeeOptional setCompany(Company company);
@@ -43,6 +46,7 @@ public interface EmployeeOptional extends EmployeeRequired{
 	String getSchedule();
 	EmployeeOptional setSchedule(String schedule);
 	EmploymentType getEmploymentType();
+//	String getEmploymentType();
 	EmployeeOptional setEmploymentType(EmploymentType employmentType); 
 	boolean isSpecialPartTimer();
 	EmployeeOptional setSpecialPartTimer(boolean isSpecialPartTimer);

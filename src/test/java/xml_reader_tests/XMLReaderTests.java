@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import dto.Employee;
 import enums.EmployeeTitle;
 import providers.XMLFileProvider;
-import providers.employee.EmployeeFromXml;
+import providers.employee.EmployeeFromXml_Old;
 import providers.employee.EmployeeProvider;
 import xml_reader.config_file.ConfigReader;
 
@@ -46,7 +46,7 @@ class XMLReaderTests {
 	
 	@Test
 	void getEmployee_withRequiredFields() {
-		EmployeeProvider empXml = new EmployeeFromXml();
+		EmployeeProvider empXml = new EmployeeFromXml_Old();
 		Employee emp = empXml.getEmployeeWithRequiredFields("VALID_WITH_REQUIRED_ONLY");
 		assertEquals("HS_2345", emp.getEmpCode());
 		assertEquals("123456", emp.getNiNumber());
@@ -54,7 +54,7 @@ class XMLReaderTests {
 	
 	@Test
 	void getEmployee_withAllFields() {
-		EmployeeProvider empXml = new EmployeeFromXml();
+		EmployeeProvider empXml = new EmployeeFromXml_Old();
 		Employee emp = empXml.getEmployeeWithAllFields("VALID_WITH_ALL_FIELDS");
 		assertEquals(EmployeeTitle.MRS, emp.getEmployeeTitle());
 	}

@@ -7,14 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import dto.Allowance;
-import dto.EmployeeOptional;
-import dto.EmployeeRequired;
 import entities.company.Company;
-import enums.ContractType;
-import enums.EmployeeTitle;
-import enums.EmploymentType;
-import enums.Gender;
-import enums.TaxStatus;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
@@ -31,313 +24,466 @@ import jakarta.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name="Employee", namespace = "EmpTestData")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class EmployeeContent implements EmployeeRequired, EmployeeOptional  {
+public class EmployeeContent {//implements EmployeeRequired, EmployeeOptional  {
 	@XmlElement(name="Required", namespace="Employee")
 	private EmployeeRequiredData required;
 	
 	@XmlElement(name="Optional", namespace="Employee")
 	private EmployeeOptionalData optional;
 	
-	@Override //RequiredFields
 	public String getFirstName() {
-		return required.getFirstName();
+		return getSanitised(required.getFirstName());
 	}
-	@Override //RequiredFields
-	public EmployeeRequired setFirstName(String firstName) {
-		required.setFirstName(firstName);
-		return this;
-	}
-	@Override //RequiredFields
+
 	public String getLastName() {
-		return required.getLastName();
+		return getSanitised(required.getLastName());
 	}
-	@Override //RequiredFields
-	public EmployeeRequired setLastName(String lastName) {
-		required.setLastName(lastName);
-		return this;
-	}
-	@Override //RequiredFields
-	public String getEmpCode() {
-		return required.getEmpCode();
-	}
-	@Override //RequiredFields
-	public EmployeeRequired setEmpCode(String empCode) {
+	//The only setter!
+	public void setEmpCode(String empCode) {
 		required.setEmpCode(empCode);
-		return this;
 	}
-	@Override //RequiredFields
+	
+	public String getEmpCode() {
+		return getSanitised(required.getEmpCode());
+	}
+
 	public BigDecimal getAnnualSalary() {
 		return required.getAnnualSalary();
 //		return BigDecimal.valueOf(Long.valueOf(required.getAnnualSalary()));
 	}
-	@Override //RequiredFields
-	public EmployeeRequired setAnnualSalary(BigDecimal annualSalary) {
-		required.setAnnualSalary(annualSalary);
-		return this;
-	}
-	@Override //RequiredFields
+
+	
 	public BigDecimal getHourlyRate() {
 		return required.getHourlyRate();
 	}
-	@Override //RequiredFields
-	public EmployeeRequired setHourlyRate(BigDecimal hourlyRate) {
-		required.setHourlyRate(hourlyRate);
-		return this;
-	}
-	@Override //RequiredFields
+
 	public String getIdCardNumber() {
-		return required.getIdCardNumber();
+		return getSanitised(required.getIdCardNumber());
 	}
-	@Override //RequiredFields
-	public EmployeeRequired setIdCardNumber(String idCardNumber) {
-		required.setIdCardNumber(idCardNumber);
-		return this;
-	}
-	@Override //RequiredFields
+
 	public String getAddressOne() {
-		return required.getAddressOne();
+		return getSanitised(required.getAddressOne());
 	}
-	@Override //RequiredFields
-	public EmployeeRequired setAddressOne(String addressOne) {
-		required.setAddressOne(addressOne);
-		return this;
-	}
-	@Override //RequiredFields
+
 	public String getTown() {
-		return required.getTown();
+		return getSanitised(required.getTown());
 	}
-	@Override //RequiredFields
-	public EmployeeRequired setTown(String town) {
-		required.setTown(town);
-		return this;
-	}
-	@Override //RequiredFields
+	
+	
 	public String getCountry() {
-		return required.getCountry();
+		return getSanitised(required.getCountry());
 	}
-	@Override //RequiredFields
-	public EmployeeRequired setCountry(String country) {
-		required.setCountry(country);
-		return this;
+
+	public String getGender() {		
+		return getSanitised(required.getGender());
 	}
-	@Override //RequiredFields
-	public Gender getGender() {		
-		return Gender.valueOf(required.getGender());
-	}
-	@Override //RequiredFields
-	public EmployeeRequired setGender(Gender gender) {
-		required.setGender(gender.name());
-		return this;
-	}
-	@Override //RequiredFields
+
 	public String getDateOfBirth() {
-		return required.getDateOfBirth();
+		return getSanitised(required.getDateOfBirth());
 	}
-	@Override //RequiredFields
-	public EmployeeRequired setDateOfBirth(String dateOfBirth) {
-		required.setDateOfBirth(dateOfBirth);
-		return this;
-	}
-	@Override //RequiredFields
+
 	public String getDateOfEmployement() {
-		return required.getDateOfEmployement();
+		return getSanitised(required.getDateOfEmployement());
 	}
-	@Override //RequiredFields
-	public EmployeeRequired setDateOfEmployement(String dateOfEmployement) {
-		required.setDateOfEmployement(dateOfEmployement);
-		return this;
-	}
-	@Override //RequiredFields
+
 	public String getTaxNumber() {
-		return required.getTaxNumber();
+		return getSanitised(required.getTaxNumber());
 	}
-	@Override //RequiredFields
-	public EmployeeRequired setTaxNumber(String taxNumber) {
-		required.setTaxNumber(taxNumber);
-		return this;
-	}
-	@Override //RequiredFields
+
 	public String getNiNumber() {
-		return required.getNiNumber();
+		return getSanitised(required.getNiNumber());
 	}
-	@Override //RequiredFields
-	public EmployeeRequired setNiNumber(String niNumber) {
-		required.setNiNumber(niNumber);
-		return this;
-	}
-	@Override //RequiredFields
+
 	public String getPayGroup() {
-		return required.getPayGroup();
+		return getSanitised(required.getPayGroup());
 	}
-	@Override //RequiredFields
-	public EmployeeRequired setPayGroup(String payGroup) {
-		required.setPayGroup(payGroup);
-		return this;
-	}
-	@Override
+
 	public String getStreet() {
-		return optional.getStreet();
+		return getSanitised(optional.getStreet());
 	}
-	@Override
-	public EmployeeOptional setStreet(String street) {
-		optional.setStreet(street);
-		return this;
-	}
-	@Override
+
 	public String getPostCode() {
-		return optional.getPostCode();
+		return getSanitised(optional.getPostCode());
 	}
-	@Override
-	public EmployeeOptional setPostCode(String postCode) {
-		optional.setPostCode(postCode);
-		return this;
-	}
-	@Override
+
 	public String getBank() {
-		return optional.getBank();
+		return getSanitised(optional.getBank());
 	}
-	@Override
-	public EmployeeOptional setBank(String bank) {
-		optional.setBank(bank);
-		return this;
-	}
-	@Override
+
 	public String getIbanNumber() {
-		return optional.getIbanNumber();
+		return getSanitised(optional.getIbanNumber());
 	}
-	@Override
-	public EmployeeOptional setIbanNumber(String ibanNumber) {
-		optional.setIbanNumber(ibanNumber);
-		return null;
-	}
-	@Override
+
 	public String getEmailAddress() {
-		return optional.getEmailAddress();
+		return getSanitised(optional.getEmailAddress());
 	}
-	@Override
-	public EmployeeOptional setEmailAddress(String emailAddress) {
-		optional.setEmailAddress(emailAddress);
-		return this;
-	}
-	@Override
+
 	public String getMobileNumber() {
-		return optional.getMobileNumber();
+		return getSanitised(optional.getMobileNumber());
 	}
-	@Override
-	public EmployeeOptional setMobileNumber(String mobileNumber) {
-		optional.setMobileNumber(mobileNumber);
-		return this;
+
+	public String getTaxStatus() {
+		return getSanitised(optional.getTaxStatus());
 	}
-	@Override
-	public TaxStatus getTaxStatus() {
-		return TaxStatus.valueOf(optional.getTaxStatus());
+
+	public String getContractType() {
+		return getSanitised(optional.getContractType());
 	}
-	@Override
-	public EmployeeOptional setTaxStatus(TaxStatus taxStatus) {
-		optional.setTaxStatus(taxStatus.name());
-		return this;
+
+	public String getEmployeeTitle() {
+		return getSanitised(optional.getEmployeeTitle());
 	}
-	@Override
-	public ContractType getContractType() {
-		return ContractType.valueOf(optional.getContractType());
-	}
-	@Override
-	public EmployeeOptional setEmployeeTitle(EmployeeTitle employeeTitle) {
-		optional.setEmployeeTitle(employeeTitle.name());
-		return this;
-	}
-	@Override
-	public EmployeeTitle getEmployeeTitle() {
-		return EmployeeTitle.valueOf(optional.getEmployeeTitle());
-	}
-	@Override
-	public EmployeeOptional setContractType(ContractType contractType) {
-		optional.setContractType(contractType.name());
-		return this;
-	}
-	@Override
+
 	public Company getCompany() {
 		// TODO Auto-generated method stub
 		return new Company("TODO-SPECIFY NAME AND PAYGROUP");
 	}
-	@Override
-	public EmployeeOptional setCompany(Company company) {
-		//TODO
-		optional.setCompany(company.getName());
-		return this;
-	}
-	@Override
+
 	public String getDepartment() {
-		return optional.getDepartment();
+		return getSanitised(optional.getDepartment());
 	}
-	@Override
-	public EmployeeOptional setDepartment(String department) {
-		optional.setDepartment(department);
-		return this;
-	}
-	@Override
+
 	public String getSchedule() {
-		return optional.getSchedule();
+		return getSanitised(optional.getSchedule());
 	}
-	@Override
-	public EmployeeOptional setSchedule(String schedule) {
-		optional.setSchedule(schedule);
-		return this;
+
+	public String getEmploymentType() {
+		return getSanitised(optional.getEmploymentType());
 	}
-	@Override
-	public EmploymentType getEmploymentType() {
-		return EmploymentType.valueOf(optional.getEmploymentType());
-	}
-	@Override
-	public EmployeeOptional setEmploymentType(EmploymentType employmentType) {
-		optional.setEmploymentType(employmentType.name());
-		return this;
-	}
-	@Override
+	
 	public boolean isSpecialPartTimer() {
 		return optional.isSpecialPartTimer();
 	}
-	@Override
-	public EmployeeOptional setSpecialPartTimer(boolean isSpecialPartTimer) {
-		optional.setSpecialPartTimer(isSpecialPartTimer);
-		return this;
-	}
-	@Override
+	
 	public String getGrade() {
-		return optional.getGrade();
+		return getSanitised(optional.getGrade());
 	}
-	@Override
-	public EmployeeOptional setGrade(String grade) {
-		optional.setGrade(grade);
-		return this;
-	}
-	@Override
+	
 	public String getCostCentre() {
-		return optional.getCostCentre();
+		return getSanitised(optional.getCostCentre());
 	}
-	@Override
-	public EmployeeOptional setCostCentre(String costCentre) {
-		optional.setCostCentre(costCentre);
-		return this;
-	}
-	@Override
+	
 	public List<Allowance> getTaxablePermanentAllowances() {
 		//TODO
 		return null;
 	}
-	@Override
-	public EmployeeOptional setTaxablePermanentAllowances(List<Allowance> taxablePermanentAllowances) {
-		// TODO Auto-generated method stub
-		return this;
-	}
-	@Override
+	
 	public List<Allowance> getNonTaxablePermanentAllowances() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	@Override
-	public EmployeeOptional setNonTaxablePermanentAllowances(List<Allowance> nonTaxablePermanentAllowances) {
-		// TODO Auto-generated method stub
-		return this;
+	
+//	@Override //RequiredFields
+//	public String getFirstName() {
+//		return getSanitised(required.getFirstName());
+//	}
+//	@Override //RequiredFields
+//	public EmployeeRequired setFirstName(String firstName) {
+//		required.setFirstName(firstName);
+//		return this;
+//	}
+//	@Override //RequiredFields
+//	public String getLastName() {
+//		return getSanitised(required.getLastName());
+//	}
+//	@Override //RequiredFields
+//	public EmployeeRequired setLastName(String lastName) {
+//		required.setLastName(lastName);
+//		return this;
+//	}
+//	@Override //RequiredFields
+//	public String getEmpCode() {
+//		return getSanitised(required.getEmpCode());
+//	}
+//	@Override //RequiredFields
+//	public EmployeeRequired setEmpCode(String empCode) {
+//		required.setEmpCode(empCode);
+//		return this;
+//	}
+//	@Override //RequiredFields
+//	public BigDecimal getAnnualSalary() {
+//		return required.getAnnualSalary();
+////		return BigDecimal.valueOf(Long.valueOf(required.getAnnualSalary()));
+//	}
+//	@Override //RequiredFields
+//	public EmployeeRequired setAnnualSalary(BigDecimal annualSalary) {
+//		required.setAnnualSalary(annualSalary);
+//		return this;
+//	}
+//	@Override //RequiredFields
+//	public BigDecimal getHourlyRate() {
+//		return required.getHourlyRate();
+//	}
+//	@Override //RequiredFields
+//	public EmployeeRequired setHourlyRate(BigDecimal hourlyRate) {
+//		required.setHourlyRate(hourlyRate);
+//		return this;
+//	}
+//	@Override //RequiredFields
+//	public String getIdCardNumber() {
+//		return getSanitised(required.getIdCardNumber());
+//	}
+//	@Override //RequiredFields
+//	public EmployeeRequired setIdCardNumber(String idCardNumber) {
+//		required.setIdCardNumber(idCardNumber);
+//		return this;
+//	}
+//	@Override //RequiredFields
+//	public String getAddressOne() {
+//		return getSanitised(required.getAddressOne());
+//	}
+//	@Override //RequiredFields
+//	public EmployeeRequired setAddressOne(String addressOne) {
+//		required.setAddressOne(addressOne);
+//		return this;
+//	}
+//	@Override //RequiredFields
+//	public String getTown() {
+//		return getSanitised(required.getTown());
+//	}
+//	@Override //RequiredFields
+//	public EmployeeRequired setTown(String town) {
+//		required.setTown(town);
+//		return this;
+//	}
+//	@Override //RequiredFields
+//	public String getCountry() {
+//		return getSanitised(required.getCountry());
+//	}
+//	@Override //RequiredFields
+//	public EmployeeRequired setCountry(String country) {
+//		required.setCountry(country);
+//		return this;
+//	}
+//	@Override //RequiredFields
+//	public String getGender() {		
+//		return getSanitised(required.getGender());
+//	}
+//	@Override //RequiredFields
+//	public EmployeeRequired setGender(Gender gender) {
+//		required.setGender(gender.name());
+//		return this;
+//	}
+//	@Override //RequiredFields
+//	public String getDateOfBirth() {
+//		return getSanitised(required.getDateOfBirth());
+//	}
+//	@Override //RequiredFields
+//	public EmployeeRequired setDateOfBirth(String dateOfBirth) {
+//		required.setDateOfBirth(dateOfBirth);
+//		return this;
+//	}
+//	@Override //RequiredFields
+//	public String getDateOfEmployement() {
+//		return getSanitised(required.getDateOfEmployement());
+//	}
+//	@Override //RequiredFields
+//	public EmployeeRequired setDateOfEmployement(String dateOfEmployement) {
+//		required.setDateOfEmployement(dateOfEmployement);
+//		return this;
+//	}
+//	@Override //RequiredFields
+//	public String getTaxNumber() {
+//		return getSanitised(required.getTaxNumber());
+//	}
+//	@Override //RequiredFields
+//	public EmployeeRequired setTaxNumber(String taxNumber) {
+//		required.setTaxNumber(taxNumber);
+//		return this;
+//	}
+//	@Override //RequiredFields
+//	public String getNiNumber() {
+//		return getSanitised(required.getNiNumber());
+//	}
+//	@Override //RequiredFields
+//	public EmployeeRequired setNiNumber(String niNumber) {
+//		required.setNiNumber(niNumber);
+//		return this;
+//	}
+//	@Override //RequiredFields
+//	public String getPayGroup() {
+//		return getSanitised(required.getPayGroup());
+//	}
+//	@Override //RequiredFields
+//	public EmployeeRequired setPayGroup(String payGroup) {
+//		required.setPayGroup(payGroup);
+//		return this;
+//	}
+//	@Override
+//	public String getStreet() {
+//		return getSanitised(optional.getStreet());
+//	}
+//	@Override
+//	public EmployeeOptional setStreet(String street) {
+//		optional.setStreet(street);
+//		return this;
+//	}
+//	@Override
+//	public String getPostCode() {
+//		return getSanitised(optional.getPostCode());
+//	}
+//	@Override
+//	public EmployeeOptional setPostCode(String postCode) {
+//		optional.setPostCode(postCode);
+//		return this;
+//	}
+//	@Override
+//	public String getBank() {
+//		return getSanitised(optional.getBank());
+//	}
+//	@Override
+//	public EmployeeOptional setBank(String bank) {
+//		optional.setBank(bank);
+//		return this;
+//	}
+//	@Override
+//	public String getIbanNumber() {
+//		return getSanitised(optional.getIbanNumber());
+//	}
+//	@Override
+//	public EmployeeOptional setIbanNumber(String ibanNumber) {
+//		optional.setIbanNumber(ibanNumber);
+//		return null;
+//	}
+//	@Override
+//	public String getEmailAddress() {
+//		return getSanitised(optional.getEmailAddress());
+//	}
+//	@Override
+//	public EmployeeOptional setEmailAddress(String emailAddress) {
+//		optional.setEmailAddress(emailAddress);
+//		return this;
+//	}
+//	@Override
+//	public String getMobileNumber() {
+//		return getSanitised(optional.getMobileNumber());
+//	}
+//	@Override
+//	public EmployeeOptional setMobileNumber(String mobileNumber) {
+//		optional.setMobileNumber(mobileNumber);
+//		return this;
+//	}
+//	@Override
+//	public String getTaxStatus() {
+//		return getSanitised(optional.getTaxStatus());
+//	}
+//	@Override
+//	public EmployeeOptional setTaxStatus(TaxStatus taxStatus) {
+//		optional.setTaxStatus(taxStatus.name());
+//		return this;
+//	}
+//	@Override
+//	public String getContractType() {
+//		return getSanitised(optional.getContractType());
+//	}
+//	@Override
+//	public EmployeeOptional setEmployeeTitle(EmployeeTitle employeeTitle) {
+//		optional.setEmployeeTitle(employeeTitle.name());
+//		return this;
+//	}
+//	@Override
+//	public String getEmployeeTitle() {
+//		return getSanitised(optional.getEmployeeTitle());
+//	}
+//	@Override
+//	public EmployeeOptional setContractType(ContractType contractType) {
+//		optional.setContractType(contractType.name());
+//		return this;
+//	}
+//	@Override
+//	public Company getCompany() {
+//		// TODO Auto-generated method stub
+//		return new Company("TODO-SPECIFY NAME AND PAYGROUP");
+//	}
+//	@Override
+//	public EmployeeOptional setCompany(Company company) {
+//		//TODO
+//		optional.setCompany(company.getName());
+//		return this;
+//	}
+//	@Override
+//	public String getDepartment() {
+//		return getSanitised(optional.getDepartment());
+//	}
+//	@Override
+//	public EmployeeOptional setDepartment(String department) {
+//		optional.setDepartment(department);
+//		return this;
+//	}
+//	@Override
+//	public String getSchedule() {
+//		return getSanitised(optional.getSchedule());
+//	}
+//	@Override
+//	public EmployeeOptional setSchedule(String schedule) {
+//		optional.setSchedule(schedule);
+//		return this;
+//	}
+//	@Override
+//	public String getEmploymentType() {
+//		return getSanitised(optional.getEmploymentType());
+//	}
+//	@Override
+//	public EmployeeOptional setEmploymentType(EmploymentType employmentType) {
+//		optional.setEmploymentType(employmentType.name());
+//		return this;
+//	}
+//	@Override
+//	public boolean isSpecialPartTimer() {
+//		return optional.isSpecialPartTimer();
+//	}
+//	@Override
+//	public EmployeeOptional setSpecialPartTimer(boolean isSpecialPartTimer) {
+//		optional.setSpecialPartTimer(isSpecialPartTimer);
+//		return this;
+//	}
+//	@Override
+//	public String getGrade() {
+//		return getSanitised(optional.getGrade());
+//	}
+//	@Override
+//	public EmployeeOptional setGrade(String grade) {
+//		optional.setGrade(grade);
+//		return this;
+//	}
+//	@Override
+//	public String getCostCentre() {
+//		return getSanitised(optional.getCostCentre());
+//	}
+//	@Override
+//	public EmployeeOptional setCostCentre(String costCentre) {
+//		optional.setCostCentre(costCentre);
+//		return this;
+//	}
+//	@Override
+//	public List<Allowance> getTaxablePermanentAllowances() {
+//		//TODO
+//		return null;
+//	}
+//	@Override
+//	public EmployeeOptional setTaxablePermanentAllowances(List<Allowance> taxablePermanentAllowances) {
+//		// TODO Auto-generated method stub
+//		return this;
+//	}
+//	@Override
+//	public List<Allowance> getNonTaxablePermanentAllowances() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//	@Override
+//	public EmployeeOptional setNonTaxablePermanentAllowances(List<Allowance> nonTaxablePermanentAllowances) {
+//		// TODO Auto-generated method stub
+//		return this;
+//	}
+		
+	public EmployeeRequiredData getRequired() {
+		return required;
+	}
+	public EmployeeOptionalData getOptional() {
+		return optional;
+	}
+	
+	private String getSanitised(String str) {
+		return str.replace("\"", "");
 	}
 }

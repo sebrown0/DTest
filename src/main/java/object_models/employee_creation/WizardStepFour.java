@@ -6,8 +6,8 @@ package object_models.employee_creation;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import content.EmployeeContent;
 import control_mapping.PageMap;
-import dto.Employee;
 import object_models.helpers.Jquery;
 
 /**
@@ -25,7 +25,7 @@ public class WizardStepFour extends WizardStep {
 	}
 
 	@Override
-	public WizardStepExecutor writeValues(Employee emp) {		
+	public WizardStepExecutor writeValues(EmployeeContent emp) {		
 		//DO NOTHING
 		return this;
 	}

@@ -42,8 +42,6 @@ public abstract class WizardStep implements WizardStepExecutor, WizardMove{
 		WebElement btnStep = driver.findElement(By.id("wizard-t-" + strStepNum));
 		btnStep.click();
 	
-		System.out.println("->" + btnStep.getText()); // TODO - remove or log
-		
 		By stepLocator = By.id("wizard-p-" + strStepNum);
 		new WebDriverWait(driver, Duration.ofSeconds(10))
 							.ignoring(StaleElementReferenceException.class)

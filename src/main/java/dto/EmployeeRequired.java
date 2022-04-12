@@ -31,7 +31,7 @@ public interface EmployeeRequired {
 	 EmployeeRequired setTown(String town); 
 	 String getCountry(); 
 	 EmployeeRequired setCountry(String country); 
-	 Gender getGender(); 
+	 Gender getGender();	 
 	 EmployeeRequired setGender(Gender gender); 
 	 String getDateOfBirth(); 
 	 EmployeeRequired setDateOfBirth(String dateOfBirth); 

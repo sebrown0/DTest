@@ -30,7 +30,7 @@ import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
-import providers.employee.EmployeeFromXml;
+import providers.employee.EmployeeFromXml_Old;
 import providers.employee.EmployeeProvider;
 import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
@@ -66,7 +66,7 @@ public class EmployeeOvertimeTests {
 //		RandomEmployeeProvider empProvider = new EmployeeFromXml(); 
 //		emp = empProvider.getAnyEmpWithRandomCode();
 		
-		EmployeeProvider empProvider = new EmployeeFromXml(); 
+		EmployeeProvider empProvider = new EmployeeFromXml_Old(); 
 		emp = empProvider.getEmployeeWithRequiredFields("1");
 		
 //		String randomEmpCode = emp.getEmpCode();

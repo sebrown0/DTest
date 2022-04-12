@@ -3,18 +3,15 @@
  */
 package providers.employee;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
-import dto.Employee;
-import providers.XMLFileProvider;
-import xml_file.XMLFile;
+import content.EmployeeContent;
+import content.EmployeeTestData;
+import content_getter.SiteMapContentGetter;
 
 /**
  * @author SteveBrown
@@ -25,16 +22,48 @@ import xml_file.XMLFile;
  * @since 1.0
  *
  */
-public class EmployeeFromXml implements EmployeeProvider, RandomEmployeeProvider {
-	private XMLFile xmlFile = new XMLFile(XMLFileProvider.EMPLOYEE_TESTS_FILE_PATH);
-	private Employee emp;
-	private Logger logger = LogManager.getLogger();
+public class EmployeeFromXml {//implements EmployeeProvider, RandomEmployeeProvider {
+	private List<EmployeeContent> content;
 	
-	@Override // RandomEmployeeProvider
-	public Employee getAnyEmpWithRandomCode() {
-		Employee fromXml = getEmployeeWithRequiredFields("1");
-		fromXml.setEmpCode(getRandomCode());
-		return fromXml;
+	@SuppressWarnings("unused")
+	private final Logger LOGGER = LogManager.getLogger(EmployeeFromXml.class);
+	
+	public EmployeeFromXml(final String XML_PATH) {
+		SiteMapContentGetter<EmployeeTestData> contentGetter = 
+			new SiteMapContentGetter<>(
+				XML_PATH, EmployeeTestData.class);
+			
+		contentGetter.getContent().ifPresent(c -> {
+			content = c.getEmployees();
+		});
+	}
+	
+	public EmployeeContent getFirstEmployee() {
+		EmployeeContent res = null;
+		if(content != null) {
+			res = content.get(0);
+		}
+		return res;
+	}
+	public EmployeeContent getFirstEmployeeWithCompleteContent() {
+		EmployeeContent res = null;
+		if(content != null) {
+			for(EmployeeContent c : content) {
+				if(c.getRequired() != null && c.getOptional() != null) {
+					res = c;
+					break;
+				}
+			}			
+		}
+		return res;
+	}
+//	@Override // RandomEmployeeProvider
+	public EmployeeContent getAnyEmpWithRandomCode() {
+		EmployeeContent emp = getFirstEmployeeWithCompleteContent();
+		if(emp != null) {
+			emp.setEmpCode(getRandomCode());
+		}
+		return emp;
 	}
 	
 	private String getRandomCode() {
@@ -47,53 +76,21 @@ public class EmployeeFromXml implements EmployeeProvider, RandomEmployeeProvider
 		return code;
 	}
 	
-	@Override // EmployeeProvider
-	public Employee getEmployeeWithAllFields(String recordId) {
-		return mapFields(
-				recordId, 
-				Arrays.asList(
-						new EmployeeRequiredFieldsMapper(getEmp()), 
-						new EmployeeOptionalFieldsMapper(getEmp())));
-	}
+//	@Override // EmployeeProvider
+//	public Employee getEmployeeW?ithAllFields(String recordId) {		
+//		return mapFields(
+//				recordId, 
+//				Arrays.asList(
+//						new EmployeeRequiredFieldsMapper(getEmp()), 
+//						new EmployeeOptionalFieldsMapper(getEmp())));
+//	}
 	
-	@Override // EmployeeProvider
-	public Employee getEmployeeWithRequiredFields(String recordId) {			  
-		return mapFields(
-				recordId, 
-				Arrays.asList(
-						new EmployeeRequiredFieldsMapper(getEmp())));
-	}
-	
-	private Employee mapFields(String recordId, java.util.List<EmployeeMapper> mappers) {
-		NodeList emps = getEmployees();
-	  for (int idx = 0; idx < emps.getLength(); idx++) {
-	  	Node n = emps.item(idx);
-	  	if (n.getNodeType() == Node.ELEMENT_NODE) {
-	  		Element el = (Element) n;	  		
-	  		String id = el.getAttribute("id");
-	  		if(id.equals(recordId)) {
-	  			logger.info("Getting employee XML record [" + id + "]");
-	  			mappers.forEach(m -> m.mapFields(n));
-	  			break;
-	  		}	  		
-	  	}
-	  }	  
-		return emp;
-	}
-	
-	private NodeList getEmployees() {
-		return getRoot().getElementsByTagName("Employee");	
-	}
-	
-	private Element getRoot() {
-		return xmlFile.getElement("Employees");
-	}
-		
-	private Employee getEmp() {
-		if(emp == null) {
-			emp = new Employee();
-		}
-		return emp;				
-	}
-		
+//	@Override // EmployeeProvider
+//	public Employee getEmployeeWithRequiredFields(String recordId) {
+//		return mapFields(
+//				recordId, 
+//				Arrays.asList(
+//						new EmployeeRequiredFieldsMapper(getEmp())));
+//	}
+			
 }

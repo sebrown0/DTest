@@ -6,8 +6,8 @@ package object_models.employee_creation;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 
+import content.EmployeeContent;
 import control_mapping.PageMap;
-import dto.Employee;
 
 /**
  * @author SteveBrown
@@ -24,7 +24,7 @@ public class WizardStepOne extends WizardStep {
 	}
 	
 	@Override
-	public WizardStepExecutor writeValues(Employee emp) throws StaleElementReferenceException {
+	public WizardStepExecutor writeValues(EmployeeContent emp) throws StaleElementReferenceException {
 		pageMap.getTextBox("Name").writeInput(emp.getFirstName());		
 		pageMap.getTextBox("Surname").writeInput(emp.getLastName());
 		pageMap.getTextBox("Identity Card Number").writeInput(emp.getIdCardNumber());

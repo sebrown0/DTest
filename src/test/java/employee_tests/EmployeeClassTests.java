@@ -13,7 +13,7 @@ import dto.EmployeeOptional;
 import dto.EmployeeRequired;
 import enums.EmploymentType;
 import enums.Gender;
-import providers.employee.EmployeeFromXml;
+import providers.employee.EmployeeFromXml_Old;
 import providers.employee.EmployeeProvider;
 import providers.employee.RandomEmployeeProvider;
 
@@ -33,7 +33,7 @@ class EmployeeClassTests {
 	}	
 	@Test
 	void empOne_fromXml() {
-		EmployeeProvider empProvider = new EmployeeFromXml(); 
+		EmployeeProvider empProvider = new EmployeeFromXml_Old(); 
 		Employee emp = empProvider.getEmployeeWithRequiredFields("1");
 		assertTrue(emp.getFullName().length() >= 1);
 	}
@@ -63,7 +63,7 @@ class EmployeeClassTests {
 	}
 	@Test
 	void empFromXml_withRandomCode() {
-		RandomEmployeeProvider empProvider = new EmployeeFromXml(); 
+		RandomEmployeeProvider empProvider = new EmployeeFromXml_Old(); 
 		Employee emp = empProvider.getAnyEmpWithRandomCode();
 		assertTrue(emp.getEmpCode().length() == 10);
 	}
