@@ -14,6 +14,7 @@ import dynamic_tests.test_elements.DynamicTestFactory;
 import dynamic_tests.test_elements.ElementTest;
 import dynamic_tests.test_elements.ElementTestFactory;
 import dynamic_tests.test_elements.TestElementDetails;
+import object_models.pages.homepage.CoreData;
 import object_models.pages.homepage.HomePage;
 import site_mapper.jaxb.menu_items.MenuItem;
 import site_mapper.jaxb.pom.Element;
@@ -50,7 +51,8 @@ public class NodeTestsCreator {
 	}
 
 	public NodeTestsCreator addTestsForEachTestNode(ElementTestFactory tf) {
-		obj = ClassFinder.getInstantiatedObject(item);
+//		obj = ClassFinder.getInstantiatedObject(item);
+		obj = ClassFinder.getInstantiatedObject(item, (CoreData)hp);
 		addElementFunctionTests();
 		ContainerFunctionTest funcTest = 
 			new ContainerFunctionTest(obj, item.getName(), menuItemTests); 

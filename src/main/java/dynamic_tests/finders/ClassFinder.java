@@ -8,6 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.apache.logging.log4j.LogManager;
 
+import object_models.pages.homepage.CoreData;
 import site_mapper.elements.ElementClass;
 
 /**
@@ -23,13 +24,31 @@ import site_mapper.elements.ElementClass;
 public class ClassFinder {
 	private static String ROOT = "object_models";	
 
+	public static Object getInstantiatedObject(ElementClass nodeClass, CoreData coreData){		
+		final Class<?> clazz = getClazz(nodeClass);
+		Object obj = null;
+		
+		Constructor<?> cnstr;
+		try {
+			cnstr = clazz.getConstructor(CoreData.class);
+			obj = cnstr.newInstance(coreData);
+		} catch (
+				NoSuchMethodException | SecurityException | InstantiationException | 
+				IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+System.out.println("->" + e.getMessage()); // TODO - remove or log 	
+			LogManager.getLogger().error("Could not instantiate class for [" + nodeClass + "]");
+		}		
+		return 	obj;
+	}
+	
 	public static Object getInstantiatedObject(ElementClass nodeClass){		
 		final Class<?> clazz = getClazz(nodeClass);
 		Object obj = null;
 		
 		Constructor<?> cnstr;
 		try {
-			cnstr = clazz.getConstructor();
+//			cnstr = clazz.getConstructor();
+			cnstr = clazz.getConstructor(CoreData.class);
 			obj = cnstr.newInstance();
 		} catch (
 				NoSuchMethodException | SecurityException | InstantiationException | 

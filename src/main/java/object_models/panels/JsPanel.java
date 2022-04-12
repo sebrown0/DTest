@@ -81,12 +81,15 @@ public abstract class JsPanel implements
 		this.builder = new ControlBuilder();
 		
 				
-		setPanelId();
-		setContainer();
-		setTitle(); //SHOULD THIS BE PART OF THE HEADER BAR???
-		setHeaderBar();
-		setContext();
-		setContextState();		
+		if(panelIdSetOk()){
+			setContainer();
+			setTitle(); //SHOULD THIS BE PART OF THE HEADER BAR???
+			setHeaderBar();
+			setContext();
+			setContextState();		
+		}else {
+			logger.error("Could not set panel id");
+		}
 	}
 	
 	// StateHeaderPanel needs an IFrame.
@@ -110,13 +113,20 @@ public abstract class JsPanel implements
 //		}						
 //	}
 	
-	private void setPanelId() {
+	private boolean panelIdSetOk() {
+		/*
+		 * WE DONT HAVE THE ID AS THE PANEL IS
+		 * NOT LOADED YET.
+		 * HOW DO WE GET IT OR IF IT'S NULL HAVE A CALLBACXK?
+		 */
 		panelId = JsPanelId.getPanelIdForTitle(driver, expectedTitle);		
+		return !panelId.isEmpty();
 	}
 	
 	private void setContainer() {
 		panelId.ifPresentOrElse(
-				id -> {	 container = driver.findElement(By.id(id)); }, 
+				id -> {	 
+					container = driver.findElement(By.id(id)); }, 
 				new PanelException("Could not set container for [" + expectedTitle + "]. No Panel ID present"));		
 	}
 	

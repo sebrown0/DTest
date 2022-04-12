@@ -63,15 +63,22 @@ public class Title implements PageTitle{
 	}
 	
 	private void setActualTitle(WebElement myContainer) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-		wait.until(ExpectedConditions.visibilityOf(myContainer));
-		WebElement e = myContainer.findElement(titleSelector);		
-		actualTitle = checkElement(e);
+		if(myContainer != null) {
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+			wait.until(ExpectedConditions.visibilityOf(myContainer));
+			WebElement e = myContainer.findElement(titleSelector);		
+			actualTitle = checkElement(e);	
+		}else {
+			actualTitle="ACTUAL TITLE NOT FOUND";
+			LogManager.getLogger(Title.class)
+				.error("Cannont get actual title as container is null");
+		}
+		
 	}
 	
 	private String checkElement(WebElement e) {
 		if(e == null) {
-			LogManager.getLogger().error("Web element for selector [" + titleSelector.toString() + "] is null");
+			LogManager.getLogger(Title.class).error("Web element for selector [" + titleSelector.toString() + "] is null");
 			return null;
 		}else {			
 			return e.getAttribute("textContent").trim();

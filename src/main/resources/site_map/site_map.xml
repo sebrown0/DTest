@@ -9,7 +9,7 @@
         <inf:ElementLibrary>C:/Users/SteveBrown/eclipse-workspace/2021/DTest</inf:ElementLibrary>
     </Info>
     <DynamicTestInfo>
-        <dyn:ReportStrategy>Console</dyn:ReportStrategy>
+        <dyn:ReportStrategy>Junit</dyn:ReportStrategy>
         <dyn:ReportResults>Fails</dyn:ReportResults>  
     </DynamicTestInfo>
     <IncludeElementsForTest>
@@ -22,6 +22,7 @@
     
     <Modules>
         <mods:Module name="payroll">
+        <!-- 
             <mod:LeftMenu>
                 
                 <MenuItem xmlns="Menu" xmlns:ct="Container" xmlns:et="ElementType" xmlns:mit="MenuItemType" xsi:schemaLocation="MenuItem file:/C:/SiteMapperXML/Schema/menu/MenuItem.xsd" name="Salary Details" package="Employees" class="SalaryDetails" xml:base="file:/C:/SiteMapperXML/XML/payroll/left_menu/employees/SalaryDetails.xml">
@@ -42,7 +43,7 @@
                                         <td:item id="name" value="Borg" insertWith="EmployeeLookupByName"/>      
                                     </et:In>
                                 </et:TestData>
-                                <!-- NO TOOLTIP?? -->   
+                                
                                 <et:Function isDefaultPass="true" type="Element"/>
                             </ct:Element>
                             <ct:Element xsi:schemaLocation="Container file:/C:/SiteMapperXML/Schema/container/ContainerElement.xsd" xml:base="/C:/SiteMapperXML/XML/header/EmpListButton.xml">  
@@ -136,14 +137,48 @@
                                         <td:item id="name" value="Borg" insertWith="EmployeeLookupByName"/>      
                                     </et:In>
                                 </et:TestData>
-                                <!-- NO TOOLTIP?? -->   
+                                
                                 <et:Function isDefaultPass="true" type="Element"/>
                             </ct:Element>
                         </ct:Container>
                     </mit:Container>
                 </MenuItem> 
             </mod:LeftMenu>
-            
+             -->
+            <mod:TopRightNav>
+        <menu:MenuItem
+          xmlns="Menu"
+          xmlns:ct="Container"
+          xmlns:et="ElementType"          
+          xmlns:mit="MenuItemType" xsi:schemaLocation="MenuItem file:/C:/SiteMapperXML/Schema/menu/MenuItem.xsd" 
+            name="Employee Creation" package="Employees" class="EmployeeCreation" 
+            library="EmployeeCreationWizard" fafa="fa fa-plus" 
+            returns="EmployeeCreationWizard" 
+            tooltip="Employee Creation">
+          
+          
+          <mit:Type name="JsPanelWithIFrame">
+            <mit:JsPanelWithIFrame panelTitle="Employee Creation Wizard" />
+          </mit:Type>
+          <mit:Container type="Item" name="FooterElements">
+            <cnt:Container type="InputGroup" name="PageFooterBtns">
+              <cnt:Locator by="css" text="ul[role='menu']"/>
+              <cnt:Element>
+                <et:Details type="Button" name="Back" text="BACK"/>
+                <et:Locator by="css" text="a[href='#previous']"/>
+                <et:Function type="Element" subtype="Button" isDefaultPass="true" />
+              </cnt:Element>
+              <cnt:Element>
+                <et:Details type="Button" name="Next" text="CONTINUE"/>
+                <et:Locator by="css" text="a[href='#next']"/>
+                <et:Function 
+                      type="Element" subtype="Button" isDefaultPass="true" 
+                      functionName="CreateExitingEmployee" functionMessage="Create existing employee"/>
+              </cnt:Element>
+            </cnt:Container>
+          </mit:Container>
+        </menu:MenuItem>
+      </mod:TopRightNav>
         </mods:Module>
     </Modules>
 </SiteMap>
