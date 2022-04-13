@@ -24,31 +24,31 @@ import control_builder.control_getters.group.ControlGetterTab;
 /**
 * Generated Class.
 * ----------------
-* Source:  C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/resources/site_map/site_map.xml
+* Source:  C:/Users/SteveBrown/eclipse-workspace/2021/AUT_DECOUPLE/src/main/resources/xml/site_map.xml
 * Author:  SteveBrown
 * Version: 1.0.0
-* Created: 12/04/2022 14:28:39
+* Created: 13/04/2022 09:31:28
 */
 
 @SuppressWarnings("unused")
 public class SalaryDetails extends JsPanelWithIFrame {
-	@SiteMap(author="SteveBrown", version="1.0.0", date="12/04/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="13/04/2022")
 	public static final String PANEL_TITLE = "Employee Salary Details";
-	@SiteMap(author="SteveBrown", version="1.0.0", date="12/04/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="13/04/2022")
 	public static final String MENU_TITLE = "Salary Details";
-	@SiteMap(author="SteveBrown", version="1.0.0", date="12/04/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="13/04/2022")
 	public static final String MENU_PARENT_NAME = "Employees";
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="12/04/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="13/04/2022")
 	public SalaryDetails(){}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="12/04/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="13/04/2022")
 	public SalaryDetails(CoreData coreData){
 		super(coreData, PANEL_TITLE);
 		buildMyControls();
 	}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="12/04/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="13/04/2022")
 	private void buildMyControls() {
 		ControlGetter formID =
 			new ControlGetterTextOut("FormID", coreData, By.id("FORM_ID"), this);
@@ -92,55 +92,55 @@ public class SalaryDetails extends JsPanelWithIFrame {
 
 
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="12/04/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="13/04/2022")
 	@TestControl(type="element", subtype="TextOut")
 	public DynamicTest TextOutFormIDFunctionTest () {
 		return DynamicTest.dynamicTest("[TextOutFormIDFunctionTest] *NOT IMPLEMENTED*", () -> assertTrue(true));
 	}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="12/04/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="13/04/2022")
 	@TestControl(type="element", subtype="Button")
 	public DynamicTest ButtonEmployeeListFunctionTest () {
 		return DynamicTest.dynamicTest("[ButtonEmployeeListFunctionTest] *NOT IMPLEMENTED*", () -> assertTrue(true));
 	}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="12/04/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="13/04/2022")
 	@TestControl(type="element", subtype="Button")
 	public DynamicTest ButtonSalaryHistoryFunctionTest () {
 		return DynamicTest.dynamicTest("[ButtonSalaryHistoryFunctionTest]", () -> fail("*NOT IMPLEMENTED*"));
 	}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="12/04/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="13/04/2022")
 	@TestControl(type="element", subtype="Button")
 	public DynamicTest ButtonCombosFunctionTest () {
 		return DynamicTest.dynamicTest("[ButtonCombosFunctionTest] *NOT IMPLEMENTED*", () -> assertTrue(true));
 	}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="12/04/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="13/04/2022")
 	@TestControl(type="element", subtype="Button")
 	public DynamicTest ButtonGridViewFunctionTest () {
 		return DynamicTest.dynamicTest("[ButtonGridViewFunctionTest] *NOT IMPLEMENTED*", () -> assertTrue(true));
 	}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="12/04/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="13/04/2022")
 	@TestControl(type="element", subtype="Button")
 	public DynamicTest ButtonExistingRecordsFunctionTest () {
 		return DynamicTest.dynamicTest("[ButtonExistingRecordsFunctionTest] *NOT IMPLEMENTED*", () -> assertTrue(true));
 	}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="12/04/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="13/04/2022")
 	@TestControl(type="element", subtype="Button")
 	public DynamicTest ButtonDocumentsFunctionTest () {
 		return DynamicTest.dynamicTest("[ButtonDocumentsFunctionTest] *NOT IMPLEMENTED*", () -> assertTrue(true));
 	}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="12/04/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="13/04/2022")
 	@TestControl(type="element", subtype="Button")
 	public DynamicTest ButtonCalendarFunctionTest () {
 		return DynamicTest.dynamicTest("[ButtonCalendarFunctionTest] *NOT IMPLEMENTED*", () -> assertTrue(true));
 	}
 
-	@SiteMap(author="SteveBrown", version="1.0.0", date="12/04/2022")
+	@SiteMap(author="SteveBrown", version="1.0.0", date="13/04/2022")
 	@TestControl(type="Container", subtype="none")
 	public DynamicTest ContainerTabsFunctionTest () {
 		return DynamicTest.dynamicTest("[ContainerTabsFunctionTest] *NOT IMPLEMENTED*", () -> assertTrue(true));
