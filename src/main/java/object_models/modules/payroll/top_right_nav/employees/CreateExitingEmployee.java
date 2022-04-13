@@ -17,7 +17,11 @@ import providers.employee.EmployeeFromXml;
 /**
  * @author SteveBrown
  * @version 1.0
+ * 	Initial
  * @since 1.0
+ * 
+ * Create an employee using the Employee Creation Wizard.
+ * 
  */
 public class CreateExitingEmployee implements TestFunction {
 

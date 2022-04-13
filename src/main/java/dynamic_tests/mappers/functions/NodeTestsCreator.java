@@ -18,6 +18,8 @@ import object_models.pages.homepage.CoreData;
 import object_models.pages.homepage.HomePage;
 import site_mapper.jaxb.menu_items.MenuItem;
 import site_mapper.jaxb.pom.Element;
+import site_mapper.jaxb.pom.ElementFunction;
+import site_mapper.jaxb.pom.content.EmployeeContent;
 
 /**
  * @author SteveBrown
@@ -53,7 +55,9 @@ public class NodeTestsCreator {
 	public NodeTestsCreator addTestsForEachTestNode(ElementTestFactory tf) {
 //		obj = ClassFinder.getInstantiatedObject(item);
 		obj = ClassFinder.getInstantiatedObject(item, (CoreData)hp);
+		
 		addElementFunctionTests();
+		
 		ContainerFunctionTest funcTest = 
 			new ContainerFunctionTest(obj, item.getName(), menuItemTests); 
 		
@@ -71,17 +75,30 @@ public class NodeTestsCreator {
 		ElementFunctionTest elmntTest = 
 			new ElementFunctionTest(obj, item.getName(), menuItemTests);
 		
-		elmntTest.addFunctionTest();		
-	}		
+		elmntTest.addFunctionTest();		//12/04 not doing anything
+	}
+//	private void addElementFunctionTests(Element el) {
+//		ElementFunctionTest elmntTest = 
+//			new ElementFunctionTest(obj, item.getName(), menuItemTests);
+//		
+//		elmntTest.addFunctionTest(el.getElementFunction());		//12/04 not doing anything
+//	}		
 	private void addTestsForElements(TestNode tn, ElementTestFactory tf) {
 		List<Element> els = tn.getElements();
 		if(els != null) {
-			els.forEach(el -> addTestForElement(tn, el, tf));							
+			els.forEach(el -> {				
+//				addElementFunctionTests(el);
+				addTestForElement(tn, el, tf);				
+			});							
 		}			
 	}
 	
 	private void addTestForElement(TestNode tn, Element el, ElementTestFactory tf) {
 		if(includedElements.isIncluded(el.getElementType())) {
+
+//			ElementFunction f = el.getElementFunction();
+//			EmployeeContent e = f.getEmployee();
+			
 			ElementTest elTest = new ElementTest(tn, hp, item, el, tf);
 			testFactory.addElementSpecificTestsTo(elTest, el);
 			addTestToItemContainer(elTest);

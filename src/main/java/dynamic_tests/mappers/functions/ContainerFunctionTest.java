@@ -86,4 +86,10 @@ public class ContainerFunctionTest extends FunctionTest{
 		this.tn = tn;
 		return this;
 	}
+//
+//	@Override
+//	public void addFunctionTest(ElementFunction func) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 }

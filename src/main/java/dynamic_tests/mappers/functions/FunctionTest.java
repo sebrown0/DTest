@@ -30,6 +30,7 @@ public abstract class FunctionTest {
 	}
 		
 	public abstract void addFunctionTest();
+//	public abstract void addFunctionTest(ElementFunction func);S
 	protected abstract void getMethodsFromObject();
 	protected abstract void getDynamicTestFromMethod();
 	protected abstract void addTestToList();

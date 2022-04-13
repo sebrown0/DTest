@@ -26,7 +26,8 @@ public class ElementFunctionTest extends FunctionTest{
 	private List<DynamicTest> tests = new ArrayList<>();
 	private Method currentMethod;
 	
-	public ElementFunctionTest(Object obj, String itemName, List<DynamicContainer> menuItemTests) {
+	public ElementFunctionTest(
+		Object obj, String itemName, List<DynamicContainer> menuItemTests) {
 		super(obj, itemName, menuItemTests);
 	}
 	
@@ -49,6 +50,25 @@ public class ElementFunctionTest extends FunctionTest{
 		}								
 	}
 	
+//	@Override
+//	public void addFunctionTest(ElementFunction elFunction) {		
+//		getMethodsFromObject();
+//		if(methods != null) {	
+//			methods.forEach(m -> {
+//				currentMethod = m;
+//				getDynamicTestFromMethod();				
+//				if(dt != null) {
+//					tests.add(dt);
+//				}		
+//			});
+//			addTestToList();
+//		}else {
+//			LogManager
+//				.getLogger(ElementFunctionTest.class)
+//				.debug(String.format("[%s] has no test element functions", itemName));
+//		}								
+//	}
+	
 	@Override
 	protected void getMethodsFromObject() {
 		methods = MethodFinder.getTestMethodsOfType(obj.getClass(), "element");
@@ -57,6 +77,9 @@ public class ElementFunctionTest extends FunctionTest{
 	@Override
 	protected void getDynamicTestFromMethod() {		
 		try {
+			/*
+			 * need to get the data(emp) to here.
+			 */
 			dt = (DynamicTest) currentMethod.invoke(obj);
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			LogManager

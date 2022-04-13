@@ -14,6 +14,8 @@ import dynamic_tests.test_adders.TestAdder;
 import object_models.pages.homepage.HomePage;
 import site_mapper.elements.ElementCreation;
 import site_mapper.jaxb.menu_items.MenuItem;
+import site_mapper.jaxb.pom.Element;
+import site_mapper.jaxb.pom.ElementFunction;
 
 /**
  * @author SteveBrown
@@ -35,6 +37,9 @@ public class ElementTest implements TestElementDetails {
 	private ControlFinder controlFinder;
 	private ElementTestFactory testFactory;
 	
+	//Added for demo 12/04/2022
+	private ElementFunction elFunction;
+	
 	public ElementTest(
 		TestNode testNode, HomePage hp, 
 		MenuItem item, ElementCreation e, ElementTestFactory testFactory) {
@@ -45,6 +50,8 @@ public class ElementTest implements TestElementDetails {
 		this.elmntsParent = item.getName();
 		
 		controlFinder = new ControlFinder(testNode, hp, item, elName, testFactory);
+				
+		elFunction = ((Element)e).getElementFunction();
 	}
 
 	public void addTests(TestAdder testAdder) {
