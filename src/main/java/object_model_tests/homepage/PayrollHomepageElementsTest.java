@@ -10,12 +10,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import library.dakar_hr.nav.quick_links.QuickLinksPayroll;
+import library.dakar_hr.top_right_nav_bar.ElementChecker;
+import library.dakar_hr.top_right_nav_bar.TopRightNavBar;
 import logging.TestResultLogger;
-import object_models.modules.common.nav.quick_links.QuickLinksPayroll;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
-import object_models.top_right_nav_bar.common.ElementChecker;
-import object_models.top_right_nav_bar.common.TopRightNavBar;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import providers.ModuleNames;

@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.DynamicContainer;
 
 import dynamic_tests.common.XmlInfo;
-import object_models.pages.homepage.HomePage;
+import library.dakar_hr.pages.homepage.HomePage;
 import site_mapper.jaxb.pom.Module;
 import site_mapper.jaxb.pom.menu.MenuType;
 

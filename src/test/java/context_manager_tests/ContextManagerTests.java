@@ -20,19 +20,20 @@ import context_manager.ContextManager;
 import context_manager.ContextState;
 import context_manager.contexts.Context;
 import context_manager.contexts.ContextPanel;
-import context_manager.contexts.ContextPayroll;
+import context_manager.contexts.IN_EL_ContextPayroll;
 import context_manager.states.State;
 import context_manager.states.StateHeaderPanel;
 import context_manager.states.StateLeftMenu;
 import context_manager.states.StateTop;
 import enums.control_names.GroupControlNames;
+import library.dakar_hr.left_menu.LeftMenu;
+import library.dakar_hr.modal_forms.employee_selection.EmployeeSelection;
+import library.dakar_hr.nav.nav_bar_elements.NavBarEmployeeCreation;
+import library.dakar_hr.top_right_nav_bar.TopRightNavBar;
 import logging.TestResultLogger;
 import object_models.employee_creation.EmployeeCreationWizard;
 import object_models.forms.ContainerAction;
 import object_models.forms.FormModal;
-import object_models.left_menu.common.LeftMenu;
-import object_models.modal_forms.emp_selection.EmployeeSelection;
-import object_models.modules.common.nav.nav_bar_elements.NavBarEmployeeCreation;
 import object_models.modules.payroll.left_menu.Documents;
 import object_models.modules.payroll.left_menu.MonthlyReports;
 import object_models.modules.payroll.left_menu.PayrollStatistics;
@@ -42,7 +43,6 @@ import object_models.modules.payroll.left_menu.employees.EmployeeDetails;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
 import object_models.panels.JsPanel;
-import object_models.top_right_nav_bar.common.TopRightNavBar;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;
@@ -163,7 +163,7 @@ class ContextManagerTests {
 		
 		manager.closeCurrentStateInCurrentContext();
 		manager.closeCurrentStateInCurrentContext();		
-		assertTrue(manager.getLastContext() instanceof ContextPayroll);		
+		assertTrue(manager.getLastContext() instanceof IN_EL_ContextPayroll);		
 	}
 
 	@Test	@Order(9)
@@ -187,7 +187,7 @@ class ContextManagerTests {
 	@Test	@Order(12)
 	void isStateInContext() {
 		ContextState conModule = manager.getContextThatIsFirstContext().get();
-		assertTrue(conModule instanceof ContextPayroll);
+		assertTrue(conModule instanceof IN_EL_ContextPayroll);
 	}
 
 	@Test	@Order(13)
@@ -209,7 +209,7 @@ class ContextManagerTests {
 		manager.removeLastContextFromQueue();
 		manager.removeLastContextFromQueue();
 		c = (Context) manager.getLastContext();		
-		assertTrue(c instanceof ContextPayroll);			 
+		assertTrue(c instanceof IN_EL_ContextPayroll);			 
 	}
 
 	@Test	@Order(15)

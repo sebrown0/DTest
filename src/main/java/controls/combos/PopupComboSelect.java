@@ -9,9 +9,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import exceptions.ElementDoesNotExistException;
-import object_models.dk_grid.Cell;
-import object_models.dk_grid.Popup;
-import object_models.helpers.text_writer.TextWriterComboDefault;
+import helpers.text_writer.TextWriterComboDefault;
+import object_models.el_dk_grid.Cell;
+import object_models.el_dk_grid.Popup;
 import object_models.pages.homepage.CoreData;
 
 /**

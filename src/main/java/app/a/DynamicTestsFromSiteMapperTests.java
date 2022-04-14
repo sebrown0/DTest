@@ -3,25 +3,20 @@
  */
 package app.a;
 
-import org.apache.logging.log4j.LogManager;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DynamicContainer;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
 import org.openqa.selenium.WebDriver;
 
 import app.xml_content.DynamicTestMapper;
 import dynamic_tests.mappers.DynamicTestApp;
-import entities.User;
-import entities.company.Company;
-import object_models.modules.payroll.PayrollModuleElements;
-import object_models.pages.UserLoginPage;
-import object_models.pages.homepage.HomePage;
+import library.dakar_hr.entities.company.Company;
+import library.dakar_hr.entities.user.User;
+import library.dakar_hr.helpers.login.UserLoginPage;
+import library.dakar_hr.object_models.modules.payroll.PayrollModuleElements;
+import library.dakar_hr.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
-import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 
 /**

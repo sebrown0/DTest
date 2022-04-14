@@ -3,8 +3,14 @@
  */
 package dynamic_tests.test_elements;
 
-import controls.interfaces.Control;
-import controls.interfaces.ControlTest;
+import library.common.controls.interfaces.Control;
+import library.common.controls.interfaces.ControlTest;
+
+//import controls.interfaces.Control;
+//import controls.interfaces.ControlTest;
+
+//import controls.interfaces.Control;
+//import controls.interfaces.ControlTest;
 
 /**
  * @author SteveBrown

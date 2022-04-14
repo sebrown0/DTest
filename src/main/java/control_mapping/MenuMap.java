@@ -12,7 +12,8 @@ import java.util.concurrent.Future;
 
 import org.openqa.selenium.WebElement;
 
-import object_models.left_menu.common.LeftMenuFactory;
+import library.dakar_hr.left_menu.LeftMenuFactory;
+
 
 /**
  * @author Steve Brown

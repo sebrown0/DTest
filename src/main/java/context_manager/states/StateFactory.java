@@ -10,8 +10,8 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import context_manager.ContextState;
-import object_models.helpers.IFrame;
-import object_models.panels.JsPanelHeaderBar;
+import library.common.interfaces.IFrame;
+import library.common.panels.JsPanelHeaderBar;
 
 /**
  * @author Steve Brown

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.DynamicContainer;
 
 import dynamic_tests.common.XmlInfo;
 import dynamic_tests.elements.IncludedElements;
-import object_models.pages.homepage.HomePage;
+import library.dakar_hr.pages.homepage.HomePage;
 import site_mapper.jaxb.menu_items.MenuItem;
 import site_mapper.jaxb.pom.menu.MenuType;
 

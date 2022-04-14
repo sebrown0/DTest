@@ -9,8 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import object_models.element.InputComboSelect;
-import object_models.element.InputWriter;
+import library.element.InputComboSelect;
+import library.element.InputWriter;
 
 /**
  * @author Steve Brown

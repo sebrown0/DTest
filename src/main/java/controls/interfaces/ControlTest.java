@@ -6,7 +6,7 @@ package controls.interfaces;
 import java.util.Map;
 import java.util.Optional;
 
-import control_builder.control_getters.ControlGetter;
+import control_getters.ControlGetter;
 
 /**
  * @author SteveBrown

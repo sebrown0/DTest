@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import object_models.helpers.AppDates;
+import helpers.AppDates;
 
 class AppDateTests {
 

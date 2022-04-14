@@ -7,11 +7,11 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import dto.Allowance;
-import entities.company.Company;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import library.dakar_hr.entities.company.Company;
 
 /**
  * @author SteveBrown

@@ -11,9 +11,9 @@ import org.openqa.selenium.WebElement;
 
 import controls.getters.ElementGetter;
 import controls.interfaces.Control;
-import object_models.helpers.DriverWait;
-import object_models.helpers.text_utils.TextExtractor;
-import object_models.helpers.text_utils.TextSanitiser;
+import helpers.DriverWait;
+import helpers.text_utils.TextExtractor;
+import helpers.text_utils.TextSanitiser;
 import object_models.pages.homepage.CoreData;
 
 /**

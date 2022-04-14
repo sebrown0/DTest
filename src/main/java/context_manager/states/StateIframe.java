@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 
 import context_manager.CallingState;
 import context_manager.ContextState;
-import object_models.helpers.IFrame;
+import library.common.interfaces.IFrame;
 
 /**
  * @author SteveBrown

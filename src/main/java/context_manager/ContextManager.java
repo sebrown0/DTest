@@ -14,8 +14,9 @@ import context_manager.states.State;
 import context_manager.states.StateLeftMenu;
 import context_manager.states.StateTopLeftNavBar;
 import context_manager.states.StateTopRightNavBar;
-import object_models.panels.JsPanel;
-import object_models.panels.PanelSwitcher;
+import library.common.panels.JsPanel;
+import library.common.panels.PanelSwitcher;
+
 
 /**  
  * @author SteveBrown

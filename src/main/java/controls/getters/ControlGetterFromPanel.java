@@ -5,7 +5,7 @@ package controls.getters;
 
 import java.util.Optional;
 
-import control_builder.PageControl;
+import common.PageControl;
 import controls.interfaces.Control;
 import dynamic_tests.elements.ControlGroup;
 import logging.WriteErrorToLog;

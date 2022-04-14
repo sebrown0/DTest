@@ -9,13 +9,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import control_builder.control_getters.single.ControlGetterEmployeeSelection;
+import control_getters.single.ControlGetterEmployeeSelection;
 import controls.button.Button;
+import library.dakar_hr.left_menu.LeftMenu;
+import library.dakar_hr.modal_forms.employee_selection.EmployeeSelection;
+import library.dakar_hr.modal_forms.employee_selection.SelectEmpBySurname;
+import library.dakar_hr.modal_forms.employee_selection.SelectEmployee;
 import logging.TestResultLogger;
-import object_models.left_menu.common.LeftMenu;
-import object_models.modal_forms.emp_selection.EmployeeSelection;
-import object_models.modal_forms.emp_selection.SelectEmpBySurname;
-import object_models.modal_forms.emp_selection.SelectEmployee;
 import object_models.modules.payroll.left_menu.employees.SalaryDetails;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;

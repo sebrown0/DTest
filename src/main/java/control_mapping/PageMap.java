@@ -6,7 +6,8 @@ package control_mapping;
 import java.util.HashMap;
 import java.util.Map;
 
-import object_models.element.InputWriter;
+import library.element.InputWriter;
+
 
 /**
  * @author Steve Brown

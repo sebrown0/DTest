@@ -10,10 +10,10 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import content.EmployeeContent;
+import library.dakar_hr.nav.NavBarElement;
+import library.dakar_hr.nav.nav_bar_elements.NavBarEmployeeCreation;
 import logging.TestResultLogger;
 import object_models.forms.FormFadeShow;
-import object_models.modules.common.nav.NavBarElement;
-import object_models.modules.common.nav.nav_bar_elements.NavBarEmployeeCreation;
 import object_models.modules.payroll.top_right_nav.employees.EmployeeCreation;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;

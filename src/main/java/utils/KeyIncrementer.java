@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import object_models.dk_grid.Cell;
-import object_models.dk_grid.Row;
+import object_models.el_dk_grid.Cell;
+import object_models.el_dk_grid.Row;
 
 /**
  * @author SteveBrown

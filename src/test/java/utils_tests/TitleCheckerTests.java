@@ -13,8 +13,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import helpers.MenuChecker;
 import listeners.TestResultLogger;
-import object_models.helpers.MenuChecker;
 
 /**
  * @author Steve Brown

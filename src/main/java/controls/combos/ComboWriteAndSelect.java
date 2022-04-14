@@ -5,10 +5,10 @@ package controls.combos;
 
 import org.openqa.selenium.By;
 
-import object_models.helpers.text_utils.RemoveX;
-import object_models.helpers.text_utils.TextExtractor;
-import object_models.helpers.text_utils.TextSanitiser;
-import object_models.helpers.text_writer.TextWriter;
+import helpers.text_utils.RemoveX;
+import helpers.text_utils.TextExtractor;
+import helpers.text_utils.TextSanitiser;
+import helpers.text_writer.TextWriter;
 import object_models.pages.homepage.CoreData;
 
 /**

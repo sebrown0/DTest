@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import object_models.helpers.text_utils.RemoveX;
-import object_models.helpers.text_utils.TextSanitiser;
+import helpers.text_utils.RemoveX;
+import helpers.text_utils.TextSanitiser;
 
 class TestSanitiserTests {
 

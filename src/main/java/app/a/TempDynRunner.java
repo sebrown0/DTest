@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import object_models.pages.homepage.HomePage;
+import library.dakar_hr.pages.homepage.HomePage;
 
 /**
  * @author SteveBrown

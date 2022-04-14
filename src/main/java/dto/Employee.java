@@ -7,16 +7,16 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import entities.company.Company;
-import enums.ContractType;
-import enums.EmployeeTitle;
-import enums.EmploymentType;
-import enums.Gender;
-import enums.TaxStatus;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import library.dakar_hr.entities.company.Company;
+import library.dakar_hr.enums.ContractType;
+import library.dakar_hr.enums.EmployeeTitle;
+import library.dakar_hr.enums.EmploymentType;
+import library.dakar_hr.enums.Gender;
+import library.dakar_hr.enums.TaxStatus;
 
 /**
  * @author SteveBrown

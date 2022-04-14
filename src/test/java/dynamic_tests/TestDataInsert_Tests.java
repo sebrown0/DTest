@@ -14,8 +14,8 @@ import org.openqa.selenium.WebElement;
 
 import controls.data_inserters.EmployeeLookupByName;
 import controls.data_inserters.TestDataInserter;
+import library.dakar_hr.left_menu.LeftMenu;
 import logging.TestResultLogger;
-import object_models.left_menu.common.LeftMenu;
 import object_models.modules.payroll.left_menu.employees.SalaryDetails;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;

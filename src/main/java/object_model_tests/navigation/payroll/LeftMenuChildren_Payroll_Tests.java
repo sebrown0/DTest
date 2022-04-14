@@ -9,12 +9,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import library.common.helpers.title.PageTitle;
+import library.dakar_hr.left_menu.LeftMenu;
 import logging.TestResultLogger;
 import object_models.forms.ContainerAction;
-import object_models.helpers.title.PageTitle;
 import object_models.left_menu.additional_hours.ApplyAdditionalHours;
 import object_models.left_menu.additional_hours.Authorisation;
-import object_models.left_menu.common.LeftMenu;
 import object_models.modules.common.EmployeeList;
 import object_models.modules.payroll.left_menu.Documents;
 import object_models.modules.payroll.left_menu.MonthlyReports;

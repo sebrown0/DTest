@@ -3,7 +3,7 @@
  */
 package controls.data_inserters;
 
-import control_builder.control_getters.single.ControlGetterEmployeeSelection;
+import control_getters.single.ControlGetterEmployeeSelection;
 import controls.button.Button;
 import controls.interfaces.ControlTest;
 import object_models.modal_forms.emp_selection.EmployeeSelection;

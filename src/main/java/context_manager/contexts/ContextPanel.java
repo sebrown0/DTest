@@ -4,9 +4,10 @@
 package context_manager.contexts;
 
 import context_manager.ContextIdGetter;
-import object_models.forms.ContainerAction;
-import object_models.pages.homepage.CoreData;
-import object_models.panels.JsPanelHeaderBar;
+import library.common.forms.ContainerAction;
+import library.common.panels.JsPanelHeaderBar;
+import library.dakar_hr.pages.homepage.CoreData;
+
 
 /**
  * @author SteveBrown

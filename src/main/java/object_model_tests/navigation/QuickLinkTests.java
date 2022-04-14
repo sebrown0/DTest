@@ -7,10 +7,10 @@ import org.openqa.selenium.WebDriver;
 
 import entities.company.Company;
 import exceptions.NullDriverException;
+import library.dakar_hr.top_right_nav_bar.TopRightNavBar;
 import object_models.modules.payroll.PayrollModuleElements;
 import object_models.pages.UserLoginPage;
 import object_models.pages.homepage.HomePage;
-import object_models.top_right_nav_bar.common.TopRightNavBar;
 import providers.XMLFileProvider;
 import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;

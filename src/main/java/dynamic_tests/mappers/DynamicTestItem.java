@@ -13,7 +13,7 @@ import dynamic_tests.elements.IncludedElements;
 import dynamic_tests.mappers.functions.NodeTestsCreator;
 import dynamic_tests.test_elements.ElementTestFactory;
 import dynamic_tests.test_results.DynamicTestSuiteData;
-import object_models.pages.homepage.HomePage;
+import library.dakar_hr.pages.homepage.HomePage;
 import site_mapper.jaxb.containers.Container;
 import site_mapper.jaxb.menu_items.MenuItem;
 import site_mapper.jaxb.node.Node;

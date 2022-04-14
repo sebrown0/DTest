@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import control_builder.control_data.ControlData;
-import control_builder.control_getters.ControlGetter;
+import control_data.ControlData;
+import control_getters.ControlGetter;
 import controls.interfaces.Control;
 
 /**

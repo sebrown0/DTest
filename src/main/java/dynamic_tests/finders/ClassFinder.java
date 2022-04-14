@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.apache.logging.log4j.LogManager;
 
-import object_models.pages.homepage.CoreData;
+import library.dakar_hr.pages.homepage.CoreData;
 import site_mapper.elements.ElementClass;
 
 /**

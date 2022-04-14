@@ -11,7 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import context_manager.states.State;
-import object_models.panels.JsPanel;
+import library.common.panels.JsPanel;
 
 /**
  * @author SteveBrown
