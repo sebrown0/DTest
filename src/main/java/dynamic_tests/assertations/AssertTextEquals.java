@@ -9,9 +9,6 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import controls.data.ControlTestData;
-import controls.data.InsertItem;
-import controls.interfaces.Control;
 import dynamic_tests.common.XmlInfo;
 import dynamic_tests.test_adders.TestAdderWithData;
 import dynamic_tests.test_elements.TestElementData;
@@ -20,6 +17,9 @@ import dynamic_tests.test_results.DynamicTestFail;
 import dynamic_tests.test_results.DynamicTestPass;
 import dynamic_tests.test_results.DynamicTestSuiteData;
 import dynamic_tests.test_strategy.DynamicTestReportStrategy;
+import library.common.controls.data.ControlTestData;
+import library.common.controls.data.InsertItem;
+import library.common.controls.interfaces.Control;
 
 /**
  * @author SteveBrown

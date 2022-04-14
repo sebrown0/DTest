@@ -5,7 +5,7 @@ package dto;
 
 import java.math.BigDecimal;
 
-import enums.Gender;
+import library.dakar_hr.enums.Gender;
 
 /**
  * @author SteveBrown

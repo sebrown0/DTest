@@ -8,15 +8,15 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import dto.EmployeeOptional;
-import entities.company.Company;
-import enums.ContractType;
-import enums.EmployeeTitle;
-import enums.EmploymentType;
-import enums.TaxStatus;
 import exceptions.EmployeeContractTypeException;
 import exceptions.EmployeeTaxStatusException;
 import exceptions.EmployeeTitleException;
 import exceptions.EmploymentTypeException;
+import library.dakar_hr.entities.company.Company;
+import library.dakar_hr.enums.ContractType;
+import library.dakar_hr.enums.EmployeeTitle;
+import library.dakar_hr.enums.EmploymentType;
+import library.dakar_hr.enums.TaxStatus;
 
 /**
  * @author SteveBrown

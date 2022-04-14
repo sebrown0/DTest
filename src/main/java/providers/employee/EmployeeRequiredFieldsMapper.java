@@ -8,7 +8,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import dto.EmployeeOptional;
-import enums.Gender;
+import library.dakar_hr.enums.Gender;
 
 /**
  * @author SteveBrown

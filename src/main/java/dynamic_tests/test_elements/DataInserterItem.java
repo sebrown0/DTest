@@ -6,11 +6,11 @@ package dynamic_tests.test_elements;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import controls.data.InsertItem;
-import controls.data_inserters.DataInserterFactory;
-import controls.data_inserters.TestDataInserter;
-import controls.interfaces.Control;
-import controls.interfaces.ControlTest;
+import library.common.controls.data.InsertItem;
+import library.common.controls.data_inserters.DataInserterFactory;
+import library.common.controls.data_inserters.TestDataInserter;
+import library.common.controls.interfaces.Control;
+import library.common.controls.interfaces.ControlTest;
 import site_mapper.jaxb.pom.test_data.TestDataItem;
 
 /**

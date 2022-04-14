@@ -10,10 +10,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import controls.button.Button;
-import controls.interfaces.Control;
-import controls.interfaces.ControlName;
-import object_models.panels.JsPanelControl;
+import library.common.controls.button.Button;
+import library.common.controls.interfaces.Control;
+import library.common.controls.interfaces.ControlName;
+import library.common.panels.JsPanelControl;
 
 /**
  * @author Steve Brown

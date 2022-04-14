@@ -3,8 +3,8 @@
  */
 package dto;
 
-import enums.GridButtonNames;
-import object_models.element.DataKey;
+import library.dakar_hr.enums.GridButtonNames;
+import library.element.DataKey;
 
 /**
  * @author Steve Brown

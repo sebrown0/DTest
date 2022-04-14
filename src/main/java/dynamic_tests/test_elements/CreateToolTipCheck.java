@@ -5,10 +5,10 @@ package dynamic_tests.test_elements;
 
 import java.util.Optional;
 
-import controls.data.ControlTestData;
-import controls.interfaces.Control;
 import dynamic_tests.common.XmlInfo;
 import dynamic_tests.test_results.DynamicTestSuiteData;
+import library.common.controls.data.ControlTestData;
+import library.common.controls.interfaces.Control;
 
 /**
  * @author SteveBrown

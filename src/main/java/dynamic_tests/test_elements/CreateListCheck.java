@@ -5,12 +5,10 @@ package dynamic_tests.test_elements;
 
 import java.util.Optional;
 
-import controls.interfaces.Control;
-import controls.interfaces.ControlTest;
-import dynamic_tests.assertations.AssertTextEquals;
 import dynamic_tests.common.XmlInfo;
 import dynamic_tests.test_adders.TestAdderWithData;
 import dynamic_tests.test_results.DynamicTestSuiteData;
+import library.common.controls.interfaces.Control;
 
 /**
  * @author SteveBrown

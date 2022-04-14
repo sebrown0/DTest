@@ -5,11 +5,11 @@ package dto;
 
 import java.util.List;
 
-import entities.company.Company;
-import enums.ContractType;
-import enums.EmployeeTitle;
-import enums.EmploymentType;
-import enums.TaxStatus;
+import library.dakar_hr.entities.company.Company;
+import library.dakar_hr.enums.ContractType;
+import library.dakar_hr.enums.EmployeeTitle;
+import library.dakar_hr.enums.EmploymentType;
+import library.dakar_hr.enums.TaxStatus;
 
 /**
  * @author SteveBrown

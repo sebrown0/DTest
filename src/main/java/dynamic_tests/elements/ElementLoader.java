@@ -5,9 +5,9 @@ package dynamic_tests.elements;
 
 import java.util.Optional;
 
-import controls.interfaces.ControlTest;
 import dynamic_tests.finders.ClassFinder;
-import object_models.pages.homepage.HomePage;
+import library.common.controls.interfaces.ControlTest;
+import library.dakar_hr.pages.homepage.HomePage;
 import site_mapper.elements.ElementClass;
 
 /**

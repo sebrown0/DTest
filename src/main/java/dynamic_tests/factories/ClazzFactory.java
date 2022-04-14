@@ -7,9 +7,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import dynamic_tests.finders.MethodFinder;
-import object_models.modules.payroll.left_menu.employees.EmployeeDetails;
-import object_models.pages.homepage.CoreData;
+import library.dakar_hr.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown
@@ -24,11 +22,11 @@ import object_models.pages.homepage.CoreData;
  */
 public class ClazzFactory {
 	
-	public static Object getClazz(final Class<?> target, final String methodType, final String methodName, final CoreData coreData) {
-		Method m = MethodFinder.getTestMethodOfTypeWithName(EmployeeDetails.class, methodType, methodName);
-		
-		return getClazz(m, coreData);
-	}
+//	public static Object getClazz(final Class<?> target, final String methodType, final String methodName, final CoreData coreData) {
+//		Method m = MethodFinder.getTestMethodOfTypeWithName(EmployeeDetails.class, methodType, methodName);
+//		
+//		return getClazz(m, coreData);
+//	}
 	
 	public static Object getClazz(Method m, CoreData coreData) {
 		Object clazz = null;

@@ -10,9 +10,9 @@ import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.openqa.selenium.WebDriver;
 
-import entities.company.Company;
-import object_models.modules.payroll.PayrollModuleElements;
-import object_models.pages.UserLoginPage;
+import library.dakar_hr.entities.company.Company;
+import library.dakar_hr.helpers.login.UserLoginPage;
+import library.dakar_hr.object_models.modules.payroll.PayrollModuleElements;
 import xml_reader.config_file.ConfigReader;
 
 /**

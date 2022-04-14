@@ -8,9 +8,9 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.DynamicTest;
 
-import controls.interfaces.Control;
-import controls.interfaces.ControlTest;
 import dynamic_tests.elements.ControlFinder;
+import library.common.controls.interfaces.Control;
+import library.common.controls.interfaces.ControlTest;
 
 /**
  * @author SteveBrown
