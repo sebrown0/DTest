@@ -9,60 +9,51 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import library.common.forms.ContainerAction;
 import library.common.helpers.title.PageTitle;
+import library.dakar_hr.helpers.login.UserLoginPage;
+import library.dakar_hr.helpers.payroll_initialise.InitialisePayroll;
 import library.dakar_hr.left_menu.LeftMenu;
+import library.dakar_hr.object_models.modules.common.EmployeeList;
+import library.dakar_hr.object_models.modules.payroll.left_menu.Documents;
+import library.dakar_hr.object_models.modules.payroll.left_menu.MonthlyReports;
+import library.dakar_hr.object_models.modules.payroll.left_menu.PayrollStatistics;
+import library.dakar_hr.object_models.modules.payroll.left_menu.SettingsPayroll;
+import library.dakar_hr.object_models.modules.payroll.left_menu.YearlyReports;
+import library.dakar_hr.object_models.modules.payroll.left_menu.absence_statistics.EmployeeAccruals;
+import library.dakar_hr.object_models.modules.payroll.left_menu.absence_statistics.OtherAbsenceStatistics;
+import library.dakar_hr.object_models.modules.payroll.left_menu.bulk_updates.ColaSalaryUpdates;
+import library.dakar_hr.object_models.modules.payroll.left_menu.bulk_updates.EmployeeCreation;
+import library.dakar_hr.object_models.modules.payroll.left_menu.employee_others.Fs3QuickView;
+import library.dakar_hr.object_models.modules.payroll.left_menu.employee_others.PayslipQuickView;
+import library.dakar_hr.object_models.modules.payroll.left_menu.employees.Banks;
+import library.dakar_hr.object_models.modules.payroll.left_menu.employees.CareerProgression;
+import library.dakar_hr.object_models.modules.payroll.left_menu.employees.ContactNumbers;
+import library.dakar_hr.object_models.modules.payroll.left_menu.employees.EmployeeDetails;
+import library.dakar_hr.object_models.modules.payroll.left_menu.employees.PermanentAllowances;
+import library.dakar_hr.object_models.modules.payroll.left_menu.employees.PreviousEmployement;
+import library.dakar_hr.object_models.modules.payroll.left_menu.employees.SalaryDetails;
+import library.dakar_hr.object_models.modules.payroll.left_menu.employees.Schedule;
+import library.dakar_hr.object_models.modules.payroll.left_menu.employees.Unions;
+import library.dakar_hr.object_models.modules.payroll.left_menu.payroll.CalculatePayroll;
+import library.dakar_hr.object_models.modules.payroll.left_menu.payroll.CalculationStatistics;
+import library.dakar_hr.object_models.modules.payroll.left_menu.payroll.CloseAndLockPayroll;
+import library.dakar_hr.object_models.modules.payroll.left_menu.payroll.DetailedAdjustments;
+import library.dakar_hr.object_models.modules.payroll.left_menu.payroll.ExcelPayrollUploads;
+import library.dakar_hr.object_models.modules.payroll.left_menu.payroll.GlobalAbsences;
+import library.dakar_hr.object_models.modules.payroll.left_menu.payroll.GlobalExtras;
+import library.dakar_hr.object_models.modules.payroll.left_menu.payroll.PayrollDetails;
+import library.dakar_hr.object_models.modules.payroll.left_menu.payroll.PayrollDetailsDrillDown;
+import library.dakar_hr.object_models.modules.payroll.left_menu.reports.AbsenceRelatedReports;
+import library.dakar_hr.object_models.modules.payroll.left_menu.reports.AdjustmentsReports;
+import library.dakar_hr.object_models.modules.payroll.left_menu.reports.ChequePrinting;
+import library.dakar_hr.object_models.modules.payroll.left_menu.reports.DirectCredits;
+import library.dakar_hr.object_models.modules.payroll.left_menu.reports.GlobalPayrollAnalysis;
+import library.dakar_hr.object_models.modules.payroll.left_menu.reports.HrRelatedReports;
+import library.dakar_hr.object_models.modules.payroll.left_menu.reports.PayrollReports;
+import library.dakar_hr.object_models.modules.payroll.left_menu.reports.Payslips;
+import library.dakar_hr.pages.homepage.HomePagePayroll;
 import logging.TestResultLogger;
-import object_models.forms.ContainerAction;
-import object_models.left_menu.additional_hours.ApplyAdditionalHours;
-import object_models.left_menu.additional_hours.Authorisation;
-import object_models.modules.common.EmployeeList;
-import object_models.modules.payroll.left_menu.Documents;
-import object_models.modules.payroll.left_menu.MonthlyReports;
-import object_models.modules.payroll.left_menu.PayrollStatistics;
-import object_models.modules.payroll.left_menu.SettingsPayroll;
-import object_models.modules.payroll.left_menu.YearlyReports;
-import object_models.modules.payroll.left_menu.absence_statistics.EmployeeAccruals;
-import object_models.modules.payroll.left_menu.absence_statistics.OtherAbsenceStatistics;
-import object_models.modules.payroll.left_menu.bulk_updates.ColaSalaryUpdates;
-import object_models.modules.payroll.left_menu.bulk_updates.EmployeeCreation;
-import object_models.modules.payroll.left_menu.employee_others.AbsenceEntitlements;
-import object_models.modules.payroll.left_menu.employee_others.AdvancesAndPayments;
-import object_models.modules.payroll.left_menu.employee_others.Covid19Supplement;
-import object_models.modules.payroll.left_menu.employee_others.Loans;
-import object_models.modules.payroll.left_menu.employee_others.Pensions;
-import object_models.modules.payroll.left_menu.employee_others.TaxArrears;
-import object_models.modules.payroll.left_menu.employee_statistics.Fs3QuickView;
-import object_models.modules.payroll.left_menu.employee_statistics.PayslipQuickView;
-import object_models.modules.payroll.left_menu.employees.Banks;
-import object_models.modules.payroll.left_menu.employees.CareerProgression;
-import object_models.modules.payroll.left_menu.employees.ContactNumbers;
-import object_models.modules.payroll.left_menu.employees.EmployeeDetails;
-import object_models.modules.payroll.left_menu.employees.PermanentAllowances;
-import object_models.modules.payroll.left_menu.employees.PreviousEmployement;
-import object_models.modules.payroll.left_menu.employees.SalaryDetails;
-import object_models.modules.payroll.left_menu.employees.Schedule;
-import object_models.modules.payroll.left_menu.employees.Unions;
-import object_models.modules.payroll.left_menu.payroll.CalculatePayroll;
-import object_models.modules.payroll.left_menu.payroll.CalculationStatistics;
-import object_models.modules.payroll.left_menu.payroll.CloseAndLockPayroll;
-import object_models.modules.payroll.left_menu.payroll.DetailedAdjustments;
-import object_models.modules.payroll.left_menu.payroll.ExcelPayrollUploads;
-import object_models.modules.payroll.left_menu.payroll.GlobalAbsences;
-import object_models.modules.payroll.left_menu.payroll.GlobalAdjustments;
-import object_models.modules.payroll.left_menu.payroll.GlobalExtras;
-import object_models.modules.payroll.left_menu.payroll.PayrollDetails;
-import object_models.modules.payroll.left_menu.payroll.PayrollDetailsDrillDown;
-import object_models.modules.payroll.left_menu.payroll.initialise.InitialisePayroll;
-import object_models.modules.payroll.left_menu.reports.AbsenceRelatedReports;
-import object_models.modules.payroll.left_menu.reports.AdjustmentsReports;
-import object_models.modules.payroll.left_menu.reports.ChequePrinting;
-import object_models.modules.payroll.left_menu.reports.DirectCredits;
-import object_models.modules.payroll.left_menu.reports.GlobalPayrollAnalysis;
-import object_models.modules.payroll.left_menu.reports.HrRelatedReports;
-import object_models.modules.payroll.left_menu.reports.PayrollReports;
-import object_models.modules.payroll.left_menu.reports.Payslips;
-import object_models.pages.UserLoginPage;
-import object_models.pages.homepage.HomePagePayroll;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;
@@ -172,53 +163,53 @@ public class LeftMenuChildren_Payroll_Tests {
 		closePanelAndParent(obj, "Employees");		
 	}
 	
-	@Test
-	void click_EmployeeOthers_and_get_AbsenceEntitlements() {
-		ContainerAction obj = loadAndCheckTitle("Employee Others", AbsenceEntitlements.class).get();
-		closePanelAndParent(obj, "Employee Others");
-	}
-	
-	@Test
-	void click_EmployeeOthers_and_get_AdvancesAndPayments() {
-		ContainerAction obj = loadAndCheckTitle("Employee Others", AdvancesAndPayments.class).get();
-		closePanelAndParent(obj, "Employee Others");		
-	}
-	
-	@Test
-	void click_EmployeeOthers_and_get_TaxArrears() {
-		ContainerAction obj = loadAndCheckTitle("Employee Others", TaxArrears.class).get();
-		closePanelAndParent(obj, "Employee Others");
-	}
-	
-	@Test
-	void click_EmployeeOthers_and_get_Loans() {
-		ContainerAction obj = loadAndCheckTitle("Employee Others", Loans.class).get();
-		closePanelAndParent(obj, "Employee Others");		
-	}
-	
-	@Test
-	void click_EmployeeOthers_and_get_Pensions() {
-		ContainerAction obj = loadAndCheckTitle("Employee Others", Pensions.class).get();
-		closePanelAndParent(obj, "Employee Others");
-	}
-	
-	@Test
-	void click_EmployeeOthers_and_get_Covid19Supplement() {
-		ContainerAction obj = loadAndCheckTitle("Additional Hours", Covid19Supplement.class).get();
-		closePanelAndParent(obj, "Employee Others");
-	}
-	
-	@Test
-	void click_AdditionalHours_and_get_ApplyAdditionalHours() {
-		ContainerAction obj = loadAndCheckTitle("Additional Hours", ApplyAdditionalHours.class).get();
-		closePanelAndParent(obj, "Additional Hours");
-	}
-	
-	@Test
-	void click_AdditionalHours_and_get_Authorisation() {
-		ContainerAction obj = loadAndCheckTitle("Additional Hours", Authorisation.class).get();
-		closePanelAndParent(obj, "Additional Hours");
-	}
+//	@Test
+//	void click_EmployeeOthers_and_get_AbsenceEntitlements() {
+//		ContainerAction obj = loadAndCheckTitle("Employee Others", AbsenceEntitlements.class).get();
+//		closePanelAndParent(obj, "Employee Others");
+//	}
+//	
+//	@Test
+//	void click_EmployeeOthers_and_get_AdvancesAndPayments() {
+//		ContainerAction obj = loadAndCheckTitle("Employee Others", AdvancesAndPayments.class).get();
+//		closePanelAndParent(obj, "Employee Others");		
+//	}
+//	
+//	@Test
+//	void click_EmployeeOthers_and_get_TaxArrears() {
+//		ContainerAction obj = loadAndCheckTitle("Employee Others", TaxArrears.class).get();
+//		closePanelAndParent(obj, "Employee Others");
+//	}
+//	
+//	@Test
+//	void click_EmployeeOthers_and_get_Loans() {
+//		ContainerAction obj = loadAndCheckTitle("Employee Others", Loans.class).get();
+//		closePanelAndParent(obj, "Employee Others");		
+//	}
+//	
+//	@Test
+//	void click_EmployeeOthers_and_get_Pensions() {
+//		ContainerAction obj = loadAndCheckTitle("Employee Others", Pensions.class).get();
+//		closePanelAndParent(obj, "Employee Others");
+//	}
+//	
+//	@Test
+//	void click_EmployeeOthers_and_get_Covid19Supplement() {
+//		ContainerAction obj = loadAndCheckTitle("Additional Hours", Covid19Supplement.class).get();
+//		closePanelAndParent(obj, "Employee Others");
+//	}
+//	
+//	@Test
+//	void click_AdditionalHours_and_get_ApplyAdditionalHours() {
+//		ContainerAction obj = loadAndCheckTitle("Additional Hours", ApplyAdditionalHours.class).get();
+//		closePanelAndParent(obj, "Additional Hours");
+//	}
+//	
+//	@Test
+//	void click_AdditionalHours_and_get_Authorisation() {
+//		ContainerAction obj = loadAndCheckTitle("Additional Hours", Authorisation.class).get();
+//		closePanelAndParent(obj, "Additional Hours");
+//	}
 	
 	@Test
 	void click_Payroll_and_get_InitialisePayroll() {
@@ -238,11 +229,11 @@ public class LeftMenuChildren_Payroll_Tests {
 		closePanelAndParent(obj, "Payroll");
 	}
 
-	@Test
-	void click_Payroll_and_get_GlobalAdjustments() {
-		ContainerAction obj = loadAndCheckTitle("Payroll", GlobalAdjustments.class).get();
-		closePanelAndParent(obj, "Payroll");
-	}
+//	@Test
+//	void click_Payroll_and_get_GlobalAdjustments() {
+//		ContainerAction obj = loadAndCheckTitle("Payroll", GlobalAdjustments.class).get();
+//		closePanelAndParent(obj, "Payroll");
+//	}
 	
 	@Test
 	void click_Payroll_and_get_GlobalAbsences() {

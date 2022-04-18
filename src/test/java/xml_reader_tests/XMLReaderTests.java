@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
 import dto.Employee;
-import enums.EmployeeTitle;
+import library.dakar_hr.enums.EmployeeTitle;
 import providers.XMLFileProvider;
 import providers.employee.EmployeeFromXml_Old;
 import providers.employee.EmployeeProvider;

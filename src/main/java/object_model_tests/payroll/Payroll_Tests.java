@@ -11,13 +11,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import entities.company.Company;
-import entities.payroll.CurrentPayPeriod;
-import entities.payroll.PayGroup;
-import entities.payroll.PayPeriod;
+import library.dakar_hr.entities.company.Company;
+import library.dakar_hr.entities.payroll.CurrentPayPeriod;
+import library.dakar_hr.entities.payroll.PayGroup;
+import library.dakar_hr.entities.payroll.PayPeriod;
+import library.dakar_hr.helpers.login.UserLoginPage;
+import library.dakar_hr.pages.homepage.HomePagePayroll;
 import logging.TestResultLogger;
-import object_models.pages.UserLoginPage;
-import object_models.pages.homepage.HomePagePayroll;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;
@@ -61,7 +61,7 @@ public final class Payroll_Tests {
 	
 	@Test	@Order(2)
 	void globalAdjustments() {
-		hp.openGlobalAdjustments();
+//		hp.openGlobalAdjustments();
 	}
 	
 	@AfterAll

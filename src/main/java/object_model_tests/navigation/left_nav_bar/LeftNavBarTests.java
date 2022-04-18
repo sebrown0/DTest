@@ -7,9 +7,9 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import library.dakar_hr.helpers.login.UserLoginPage;
+import library.dakar_hr.pages.homepage.HomePagePayroll;
 import logging.TestResultLogger;
-import object_models.pages.UserLoginPage;
-import object_models.pages.homepage.HomePagePayroll;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;

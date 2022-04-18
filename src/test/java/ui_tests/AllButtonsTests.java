@@ -11,9 +11,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import library.dakar_hr.helpers.login.UserLoginPage;
+import library.dakar_hr.pages.homepage.HomePage;
 import logging.TestResultLogger;
-import object_models.pages.UserLoginPage;
-import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;

@@ -10,13 +10,13 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import content.EmployeeContent;
+import library.common.forms.FormFadeShow;
+import library.dakar_hr.helpers.login.UserLoginPage;
 import library.dakar_hr.nav.NavBarElement;
 import library.dakar_hr.nav.nav_bar_elements.NavBarEmployeeCreation;
+import library.dakar_hr.object_models.modules.payroll.top_right_nav.employees.EmployeeCreation;
+import library.dakar_hr.pages.homepage.HomePage;
 import logging.TestResultLogger;
-import object_models.forms.FormFadeShow;
-import object_models.modules.payroll.top_right_nav.employees.EmployeeCreation;
-import object_models.pages.UserLoginPage;
-import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import providers.XMLFileProvider;

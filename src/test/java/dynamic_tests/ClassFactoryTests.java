@@ -9,11 +9,11 @@ import java.lang.reflect.Method;
 
 import org.junit.jupiter.api.Test;
 
+import core_data.CoreData;
+import core_data.CoreDataLoader;
 import dynamic_tests.factories.ClazzFactory;
 import dynamic_tests.finders.MethodFinder;
-import object_models.modules.payroll.left_menu.employees.EmployeeDetails;
-import object_models.pages.homepage.CoreData;
-import object_models.pages.homepage.CoreDataLoader;
+import library.dakar_hr.object_models.modules.payroll.left_menu.employees.EmployeeDetails;
 
 /**
  * @author SteveBrown

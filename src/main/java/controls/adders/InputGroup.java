@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 
+import control_builder.control_getters.ControlGetter;
 import control_data.ControlData;
-import control_getters.ControlGetter;
 
 /**
  * @author SteveBrown

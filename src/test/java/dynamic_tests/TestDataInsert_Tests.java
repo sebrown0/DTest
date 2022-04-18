@@ -12,13 +12,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import controls.data_inserters.EmployeeLookupByName;
-import controls.data_inserters.TestDataInserter;
+import library.common.controls.data_inserters.EmployeeLookupByName;
+import library.common.controls.data_inserters.TestDataInserter;
+import library.dakar_hr.helpers.login.UserLoginPage;
 import library.dakar_hr.left_menu.LeftMenu;
+import library.dakar_hr.object_models.modules.payroll.left_menu.employees.SalaryDetails;
+import library.dakar_hr.pages.homepage.HomePage;
 import logging.TestResultLogger;
-import object_models.modules.payroll.left_menu.employees.SalaryDetails;
-import object_models.pages.UserLoginPage;
-import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;

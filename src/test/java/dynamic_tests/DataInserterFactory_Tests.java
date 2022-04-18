@@ -9,10 +9,10 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import controls.data_inserters.DataInserterFactory;
-import controls.data_inserters.EmployeeLookupByName;
-import controls.data_inserters.TestDataInserter;
-import object_models.panels.JsPanel;
+import library.common.controls.data_inserters.DataInserterFactory;
+import library.common.controls.data_inserters.EmployeeLookupByName;
+import library.common.controls.data_inserters.TestDataInserter;
+import library.common.panels.JsPanel;
 import site_mapper.jaxb.pom.test_data.TestData;
 import site_mapper.jaxb.pom.test_data.TestDataItem;
 

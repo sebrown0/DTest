@@ -12,10 +12,10 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import entities.company.Company;
-import entities.payroll.CurrentPayPeriod;
-import entities.payroll.PayGroup;
-import entities.payroll.PayPeriod;
+import library.dakar_hr.entities.company.Company;
+import library.dakar_hr.entities.payroll.CurrentPayPeriod;
+import library.dakar_hr.entities.payroll.PayGroup;
+import library.dakar_hr.entities.payroll.PayPeriod;
 
 /**
  * @author SteveBrown

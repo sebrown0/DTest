@@ -4,7 +4,6 @@
 package dynamic_tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 
@@ -12,18 +11,17 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import controls.data.InsertItem;
-import controls.interfaces.DisplayedText;
 import dynamic_tests.elements.ControlGroup;
+import library.common.controls.data.InsertItem;
+import library.common.controls.interfaces.DisplayedText;
+import library.dakar_hr.helpers.login.UserLoginPage;
 import library.dakar_hr.left_menu.LeftMenu;
+import library.dakar_hr.object_models.modules.payroll.left_menu.employees.SalaryDetails;
+import library.dakar_hr.pages.homepage.HomePage;
 import logging.TestResultLogger;
-import object_models.modules.payroll.left_menu.employees.SalaryDetails;
-import object_models.pages.UserLoginPage;
-import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;
-import site_mapper.jaxb.pom.Element;
 import site_mapper.jaxb.pom.test_data.TestData;
 import site_mapper.jaxb.pom.test_data.TestDataItem;
 import xml_reader.config_file.ConfigReader;
@@ -42,8 +40,8 @@ class TestDataTests {
 	private static TestDataItem testDataItem;
 	
 	private static SalaryDetails salDetails;	
-	private static Element el = new Element();
-	private static TestData dataIn = new TestData();
+//	private static Element el = new Element();
+//	private static TestData dataIn = new TestData();
 	
 	@BeforeAll
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {

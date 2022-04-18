@@ -5,8 +5,8 @@ package controls.adders;
 
 import java.util.List;
 
+import control_builder.control_getters.ControlGetter;
 import control_data.ControlData;
-import control_getters.ControlGetter;
 
 /**
  * @author SteveBrown

@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.DynamicContainer;
 
+import core_data.CoreData;
 import dynamic_tests.elements.IncludedElements;
 import dynamic_tests.finders.ClassFinder;
 import dynamic_tests.mappers.TestNode;
@@ -14,7 +15,6 @@ import dynamic_tests.test_elements.DynamicTestFactory;
 import dynamic_tests.test_elements.ElementTest;
 import dynamic_tests.test_elements.ElementTestFactory;
 import dynamic_tests.test_elements.TestElementDetails;
-import library.dakar_hr.pages.homepage.CoreData;
 import library.dakar_hr.pages.homepage.HomePage;
 import site_mapper.jaxb.menu_items.MenuItem;
 import site_mapper.jaxb.pom.Element;

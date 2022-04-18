@@ -11,13 +11,13 @@ import control_builder.control_getters.single.ControlGetterComboWriteAndSelect;
 import control_builder.control_getters.single.ControlGetterGrid;
 import control_builder.control_getters.single.ControlGetterTextSelect;
 import control_data.ControlData;
+import core_data.CoreData;
 import helpers.text_writer.TextWriterComboDefault;
 import helpers.text_writer.TextWriterComboMulti;
 import library.common.controls.interfaces.ControlName;
 import library.common.controls.interfaces.ControlTest;
 import library.dakar_hr.dk_grid.KeyStrategyRow;
 import library.dakar_hr.enums.control_names.CommonControlNames;
-import library.dakar_hr.pages.homepage.CoreData;
 
 /**
  * @author SteveBrown

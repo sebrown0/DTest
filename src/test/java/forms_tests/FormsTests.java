@@ -10,13 +10,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import enums.control_names.GroupControlNames;
 import library.common.modal_forms.DropdownCombo;
+import library.dakar_hr.enums.control_names.GroupControlNames;
+import library.dakar_hr.helpers.login.UserLoginPage;
 import library.dakar_hr.left_menu.LeftMenu;
+import library.dakar_hr.object_models.modules.payroll.left_menu.employees.EmployeeDetails;
+import library.dakar_hr.pages.homepage.HomePage;
 import logging.TestResultLogger;
-import object_models.modules.payroll.left_menu.employees.EmployeeDetails;
-import object_models.pages.UserLoginPage;
-import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;

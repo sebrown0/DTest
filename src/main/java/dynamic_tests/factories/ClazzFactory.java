@@ -7,7 +7,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import library.dakar_hr.pages.homepage.CoreData;
+import core_data.CoreData;
 
 /**
  * @author SteveBrown

@@ -12,12 +12,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import entities.company.Company;
+import library.dakar_hr.entities.company.Company;
+import library.dakar_hr.helpers.login.UserLoginPage;
+import library.dakar_hr.helpers.payroll_initialise.InitialisePayroll;
 import library.dakar_hr.left_menu.LeftMenu;
+import library.dakar_hr.pages.homepage.HomePage;
 import logging.TestResultLogger;
-import object_models.modules.payroll.left_menu.payroll.initialise.InitialisePayroll;
-import object_models.pages.UserLoginPage;
-import object_models.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;

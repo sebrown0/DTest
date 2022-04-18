@@ -11,8 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import app.xml_content.DynamicTestMapper;
 import dynamic_tests.mappers.DynamicTestApp;
-import object_models.pages.UserLoginPage;
-import object_models.pages.homepage.HomePage;
+import library.dakar_hr.helpers.login.UserLoginPage;
+import library.dakar_hr.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;

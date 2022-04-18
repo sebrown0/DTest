@@ -11,12 +11,12 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import controls.button.Button;
 import dynamic_tests.elements.ControlGroup;
+import library.common.controls.button.Button;
+import library.dakar_hr.helpers.login.UserLoginPage;
 import library.dakar_hr.left_menu.LeftMenu;
-import object_models.modules.payroll.left_menu.employees.SalaryDetails;
-import object_models.pages.UserLoginPage;
-import object_models.pages.homepage.HomePage;
+import library.dakar_hr.object_models.modules.payroll.left_menu.employees.SalaryDetails;
+import library.dakar_hr.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;
