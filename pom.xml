@@ -35,6 +35,11 @@
     <!-- DAKAR - START -->
     <dependency>
       <groupId>com.dakar.automated_testing</groupId>
+      <artifactId>XMLReader</artifactId>
+      <version>1.0.0</version>
+    </dependency>    
+    <dependency>
+      <groupId>com.dakar.automated_testing</groupId>
       <artifactId>ElementLibrary</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
