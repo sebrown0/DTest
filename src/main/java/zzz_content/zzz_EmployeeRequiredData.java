@@ -1,7 +1,7 @@
 /**
  * 
  */
-package content;
+package zzz_content;
 
 import java.math.BigDecimal;
 
@@ -21,7 +21,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name="Required", namespace = "Employee")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class EmployeeRequiredData  {
+public class zzz_EmployeeRequiredData  {
 	//Required
 	@XmlElement(name="FirstName", namespace="EmpReqType")
 	private String firstName;

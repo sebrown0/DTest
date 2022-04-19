@@ -7,7 +7,7 @@ import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
 
-import library.dakar_hr.entities.user.User;
+import library.dto.entites.user.User;
 
 public class UserParameterResolver implements ParameterResolver{
 	private int idx;

@@ -13,7 +13,7 @@ import core_data.CoreData;
 import core_data.CoreDataLoader;
 import dynamic_tests.factories.ClazzFactory;
 import dynamic_tests.finders.MethodFinder;
-import library.dakar_hr.object_models.modules.payroll.left_menu.employees.EmployeeDetails;
+import library.object_models.modules.payroll.left_menu.employees.EmployeeDetails;
 
 /**
  * @author SteveBrown

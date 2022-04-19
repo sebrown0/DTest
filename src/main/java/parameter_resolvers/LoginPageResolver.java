@@ -8,7 +8,7 @@ import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
 
-import library.dakar_hr.helpers.login.UserLoginPage;
+import library.helpers.login.UserLoginPage;
 
 /**
  * @author Steve Brown

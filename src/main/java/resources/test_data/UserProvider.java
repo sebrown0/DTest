@@ -5,7 +5,7 @@ package resources.test_data;
 
 import java.util.stream.Stream;
 
-import library.dakar_hr.entities.user.User;
+import library.dto.entites.user.User;
 
 /**
  * @author Steve Brown

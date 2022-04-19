@@ -6,7 +6,7 @@ package dynamic_tests.elements;
 import java.util.Optional;
 
 import library.common.forms.ContainerAction;
-import library.dakar_hr.pages.homepage.HomePage;
+import library.pages.homepage.HomePage;
 import logging.LogFactory;
 import site_mapper.elements.ElementClass;
 

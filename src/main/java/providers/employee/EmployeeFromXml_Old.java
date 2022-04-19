@@ -12,12 +12,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import library.dakar_hr.dto.Employee;
-import library.dakar_hr.providers.employee.EmployeeMapper;
-import library.dakar_hr.providers.employee.EmployeeOptionalFieldsMapper;
-import library.dakar_hr.providers.employee.EmployeeProvider;
-import library.dakar_hr.providers.employee.EmployeeRequiredFieldsMapper;
-import library.dakar_hr.providers.employee.RandomEmployeeProvider;
+import library.dto.Employee;
+import library.providers.employee.EmployeeMapper;
+import library.providers.employee.EmployeeOptionalFieldsMapper;
+import library.providers.employee.EmployeeProvider;
+import library.providers.employee.EmployeeRequiredFieldsMapper;
+import library.providers.employee.RandomEmployeeProvider;
 import providers.XMLFileProvider;
 import xml_file.XMLFile;
 

@@ -11,11 +11,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import library.common.modal_forms.DropdownCombo;
-import library.dakar_hr.enums.control_names.GroupControlNames;
-import library.dakar_hr.helpers.login.UserLoginPage;
-import library.dakar_hr.left_menu.LeftMenu;
-import library.dakar_hr.object_models.modules.payroll.left_menu.employees.EmployeeDetails;
-import library.dakar_hr.pages.homepage.HomePage;
+import library.enums.control_names.GroupControlNames;
+import library.helpers.login.UserLoginPage;
+import library.left_menu.LeftMenu;
+import library.object_models.modules.payroll.left_menu.employees.EmployeeDetails;
+import library.pages.homepage.HomePage;
 import logging.TestResultLogger;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;

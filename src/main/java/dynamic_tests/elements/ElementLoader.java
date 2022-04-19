@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import dynamic_tests.finders.ClassFinder;
 import library.common.controls.interfaces.ControlTest;
-import library.dakar_hr.pages.homepage.HomePage;
+import library.pages.homepage.HomePage;
 import site_mapper.elements.ElementClass;
 
 /**

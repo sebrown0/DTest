@@ -1,4 +1,4 @@
-package content;
+package zzz_content;
 
 import java.util.List;
 
@@ -9,15 +9,15 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="Employees", namespace = "EmpTestData")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class EmployeeTestData {
+public class zzz_EmployeeTestData {
 	@XmlElement(name = "Employee", namespace = "EmpTestData")
-	private List<EmployeeContent> employees;
+	private List<zzz_EmployeeContent> employees;
 
-	public List<EmployeeContent> getEmployees() {
+	public List<zzz_EmployeeContent> getEmployees() {
 		return employees;
 	}
 
-	public void setEmployees(List<EmployeeContent> employees) {
+	public void setEmployees(List<zzz_EmployeeContent> employees) {
 		this.employees = employees;
 	}
 		

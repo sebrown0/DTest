@@ -7,22 +7,22 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import content.EmployeeContent;
-import content.EmployeeTestData;
 import content_getter.SiteMapContentGetter;
+import zzz_content.zzz_EmployeeContent;
+import zzz_content.zzz_EmployeeTestData;
 
 class EmpsFromXml_Tests {
 
 	@Test
 	void test() {
-		SiteMapContentGetter<EmployeeTestData> contentGetter = 
+		SiteMapContentGetter<zzz_EmployeeTestData> contentGetter = 
 			new SiteMapContentGetter<>(
-				"C:/DakarHrXml/XML/employee/MargeAndHomer.xml", EmployeeTestData.class);
+				"C:/DakarHrXml/XML/employee/MargeAndHomer.xml", zzz_EmployeeTestData.class);
 		
-		Optional<EmployeeTestData> emps = contentGetter.getContent();
+		Optional<zzz_EmployeeTestData> emps = contentGetter.getContent();
 
-		EmployeeTestData data = emps.get();
-		List<EmployeeContent> content = data.getEmployees();
+		zzz_EmployeeTestData data = emps.get();
+		List<zzz_EmployeeContent> content = data.getEmployees();
 		
 		assertTrue(content.get(0).getFirstName() != null);
 	}

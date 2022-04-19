@@ -15,7 +15,7 @@ import dynamic_tests.test_elements.DynamicTestFactory;
 import dynamic_tests.test_elements.ElementTest;
 import dynamic_tests.test_elements.ElementTestFactory;
 import dynamic_tests.test_elements.TestElementDetails;
-import library.dakar_hr.pages.homepage.HomePage;
+import library.pages.homepage.HomePage;
 import site_mapper.jaxb.menu_items.MenuItem;
 import site_mapper.jaxb.pom.Element;
 

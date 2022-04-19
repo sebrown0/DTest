@@ -9,20 +9,20 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import content.EmployeeContent;
 import library.common.forms.FormFadeShow;
-import library.dakar_hr.helpers.login.UserLoginPage;
-import library.dakar_hr.nav.NavBarElement;
-import library.dakar_hr.nav.nav_bar_elements.NavBarEmployeeCreation;
-import library.dakar_hr.object_models.modules.payroll.top_right_nav.employees.EmployeeCreation;
-import library.dakar_hr.pages.homepage.HomePage;
-import library.dakar_hr.providers.employee.EmployeeFromXml;
+import library.helpers.login.UserLoginPage;
+import library.nav.NavBarElement;
+import library.nav.nav_bar_elements.NavBarEmployeeCreation;
+import library.object_models.modules.payroll.top_right_nav.employees.EmployeeCreation;
+import library.pages.homepage.HomePage;
+import library.providers.employee.EmployeeFromXml;
 import logging.TestResultLogger;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import providers.XMLFileProvider;
 import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
+import zzz_content.zzz_EmployeeContent;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({ 
@@ -32,7 +32,7 @@ import xml_reader.config_file.ConfigReader;
 class EmployeeCreationTests {
 	private static HomePage homepage;
 	private static EmployeeCreation empCreation;
-	private static EmployeeContent emp;
+	private static zzz_EmployeeContent emp;
 	private static NavBarElement navEmpWizard;
 	private static EmployeeFromXml empProvider;
 	

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import library.dakar_hr.providers.ModuleNames;
+import library.providers.ModuleNames;
 
 /**
  * @author Steve Brown

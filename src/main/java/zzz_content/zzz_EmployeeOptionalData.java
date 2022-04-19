@@ -1,7 +1,7 @@
 /**
  * 
  */
-package content;
+package zzz_content;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -19,7 +19,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name="Optional", namespace = "Employee")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class EmployeeOptionalData  {	
+public class zzz_EmployeeOptionalData  {	
 	@XmlElement(name="Title",namespace="EmpOptType")
 	private String title;
 	@XmlElement(name="Street",namespace="EmpOptType")

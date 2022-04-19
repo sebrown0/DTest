@@ -8,13 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import library.dakar_hr.dto.Employee;
-import library.dakar_hr.dto.EmployeeOptional;
-import library.dakar_hr.dto.EmployeeRequired;
-import library.dakar_hr.enums.EmploymentType;
-import library.dakar_hr.enums.Gender;
-import library.dakar_hr.providers.employee.EmployeeProvider;
-import library.dakar_hr.providers.employee.RandomEmployeeProvider;
+import library.dto.Employee;
+import library.dto.EmployeeOptional;
+import library.dto.EmployeeRequired;
+import library.enums.EmploymentType;
+import library.enums.Gender;
+import library.providers.employee.EmployeeProvider;
+import library.providers.employee.RandomEmployeeProvider;
 import providers.employee.EmployeeFromXml_Old;
 
 /** 

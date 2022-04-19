@@ -1,7 +1,7 @@
 /**
  * 
  */
-package content;
+package zzz_content;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -10,8 +10,8 @@ import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
-import library.dakar_hr.dto.Allowance;
-import library.dakar_hr.entities.company.Company;
+import library.dto.Allowance;
+import library.dto.entites.company.Company;
 
 /**
  * @author SteveBrown
@@ -24,12 +24,12 @@ import library.dakar_hr.entities.company.Company;
  */
 @XmlRootElement(name="Employee", namespace = "EmpTestData")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class EmployeeContent {//implements EmployeeRequired, EmployeeOptional  {
+public class zzz_EmployeeContent {//implements EmployeeRequired, EmployeeOptional  {
 	@XmlElement(name="Required", namespace="Employee")
-	private EmployeeRequiredData required;
+	private zzz_EmployeeRequiredData required;
 	
 	@XmlElement(name="Optional", namespace="Employee")
-	private EmployeeOptionalData optional;
+	private zzz_EmployeeOptionalData optional;
 	
 	public String getFirstName() {
 		return getSanitised(required.getFirstName());
@@ -476,10 +476,10 @@ public class EmployeeContent {//implements EmployeeRequired, EmployeeOptional  {
 //		return this;
 //	}
 		
-	public EmployeeRequiredData getRequired() {
+	public zzz_EmployeeRequiredData getRequired() {
 		return required;
 	}
-	public EmployeeOptionalData getOptional() {
+	public zzz_EmployeeOptionalData getOptional() {
 		return optional;
 	}
 	

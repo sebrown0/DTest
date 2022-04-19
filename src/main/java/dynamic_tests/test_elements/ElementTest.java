@@ -11,7 +11,7 @@ import org.junit.jupiter.api.DynamicTest;
 import dynamic_tests.elements.ControlFinder;
 import dynamic_tests.mappers.TestNode;
 import dynamic_tests.test_adders.TestAdder;
-import library.dakar_hr.pages.homepage.HomePage;
+import library.pages.homepage.HomePage;
 import site_mapper.elements.ElementCreation;
 import site_mapper.jaxb.menu_items.MenuItem;
 import site_mapper.jaxb.pom.Element;
