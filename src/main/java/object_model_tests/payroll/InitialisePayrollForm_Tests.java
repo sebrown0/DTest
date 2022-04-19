@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import exceptions.PayrollAlreadyInitialisedException;
 import library.common.controls.with_text.TextSelect;
 import library.dakar_hr.enums.control_names.CommonControlNames;
 import library.dakar_hr.enums.control_names.PayrollControlNames;
+import library.dakar_hr.exceptions.PayrollAlreadyInitialisedException;
 import library.dakar_hr.helpers.login.UserLoginPage;
 import library.dakar_hr.helpers.payroll_initialise.InitialisePayroll;
 import library.dakar_hr.left_menu.LeftMenuLoadItem;

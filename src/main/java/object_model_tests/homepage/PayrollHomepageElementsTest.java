@@ -13,12 +13,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import library.dakar_hr.helpers.login.UserLoginPage;
 import library.dakar_hr.nav.quick_links.QuickLinksPayroll;
 import library.dakar_hr.pages.homepage.HomePage;
+import library.dakar_hr.providers.ModuleNames;
 import library.dakar_hr.top_right_nav_bar.ElementChecker;
 import library.dakar_hr.top_right_nav_bar.TopRightNavBar;
 import logging.TestResultLogger;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
-import providers.ModuleNames;
 import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 

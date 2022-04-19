@@ -1,32 +1,13 @@
 package object_model_tests.global_adjustments;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import helpers.text_utils.RemoveX;
-import library.common.controls.button.Button;
-import library.common.controls.combos.ComboSelectFromList;
-import library.common.controls.combos.ComboWriteAndSelect;
-import library.dakar_hr.enums.control_names.CommonControlNames;
-import library.dakar_hr.enums.control_names.EmployeeControlNames;
-import library.dakar_hr.enums.control_names.GlobalAdjustmentControlNames;
-import library.dakar_hr.enums.control_names.PayrollControlNames;
-import library.dakar_hr.helpers.login.UserLoginPage;
-import library.dakar_hr.pages.homepage.HomePage;
 import logging.TestResultLogger;
 //import object_models.modules.payroll.left_menu.payroll.GlobalAdjustments;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
-import resources.test_data.UserProvider;
-import xml_reader.config_file.ConfigReader;
 
 /**
  * @author SteveBrown

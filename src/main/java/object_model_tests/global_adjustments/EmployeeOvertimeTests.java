@@ -1,39 +1,13 @@
 package object_model_tests.global_adjustments;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import dto.Employee;
-import library.common.controls.combos.ComboWriteAndSelect;
-import library.common.controls.combos.PopupComboSelect;
-import library.dakar_hr.dk_grid.Cell;
-import library.dakar_hr.dk_grid.CellChecker;
-import library.dakar_hr.dk_grid.DkGrid;
-import library.dakar_hr.dk_grid.Row;
-import library.dakar_hr.enums.control_names.EmployeeControlNames;
-import library.dakar_hr.enums.control_names.GlobalAdjustmentControlNames;
-import library.dakar_hr.enums.control_names.PayrollControlNames;
-import library.dakar_hr.helpers.login.UserLoginPage;
-import library.dakar_hr.object_models.dialog.DialogOkCancel;
-import library.dakar_hr.pages.homepage.HomePage;
-import library.element.ElementButton;
 import logging.TestResultLogger;
 //import object_models.modules.payroll.left_menu.payroll.GlobalAdjustments;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
-import providers.employee.EmployeeFromXml_Old;
-import providers.employee.EmployeeProvider;
-import resources.test_data.UserProvider;
-import xml_reader.config_file.ConfigReader;
 
 /**
  * @author SteveBrown

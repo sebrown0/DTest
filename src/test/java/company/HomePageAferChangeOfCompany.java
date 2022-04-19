@@ -20,7 +20,7 @@ import library.dakar_hr.pages.homepage.HomePage;
 import logging.TestResultLogger;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
-import resources.test_data.UserProvider;
+import resources.test_data.ZZZ_UserProvider;
 import xml_reader.config_file.ConfigReader;
 
 /**
@@ -44,7 +44,7 @@ class HomePageAferChangeOfCompany {
 	
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLoginPayroll) {
-		currentHomepage = userLoginPayroll.loginValidUser(UserProvider.userPortal());
+		currentHomepage = userLoginPayroll.loginValidUser(ZZZ_UserProvider.userPortal());
 	}
 	
 	@AfterAll

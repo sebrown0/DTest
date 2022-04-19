@@ -35,14 +35,24 @@
     <!-- DAKAR - START -->
     <dependency>
       <groupId>com.dakar.automated_testing</groupId>
+      <artifactId>ElementLibrary</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.dakar.automated_testing</groupId>
       <artifactId>DTestCommon</artifactId>
-      <version>1.0.0</version>
+      <version>1.2.0</version>
     </dependency>
     <dependency>
       <groupId>com.dakar.automated_testing</groupId>
       <artifactId>ContextManager</artifactId>
       <version>1.0.0</version>
     </dependency>
+      <dependency>
+        <groupId>com.dakar.automated_testing</groupId>
+        <artifactId>SiteMapper</artifactId>
+        <version>1.0.0</version>
+      </dependency>
     <dependency>
       <groupId>com.dakar.automated_testing</groupId>
       <artifactId>ControlBuilder</artifactId>
@@ -55,6 +65,13 @@
       <artifactId>assertj-core</artifactId>
       <version>3.21.0</version>
       <scope>test</scope>
+    </dependency>
+    
+    <!-- TODO - find the module that's dependent on this.  -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.12.1</version>
     </dependency>
  
 	<dependency>

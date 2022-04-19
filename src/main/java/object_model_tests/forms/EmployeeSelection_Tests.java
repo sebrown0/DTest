@@ -21,7 +21,6 @@ import library.dakar_hr.pages.homepage.HomePage;
 import logging.TestResultLogger;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
-
 import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 

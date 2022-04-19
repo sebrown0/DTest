@@ -16,7 +16,7 @@ import java.util.stream.Stream;
  * 	Initial
  * @since 1.0
  */
-public class FileFinder {
+public class ZZZ_FileFinder {
 	private static Optional<String> filePath;
 	private static String result;
 	

@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import utils.StringUtil;
+import utils.text_utils.StringUtil;
 
 class StringUtilTests {
 

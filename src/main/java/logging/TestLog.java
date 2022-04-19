@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package logging;
 
 import java.time.LocalDateTime;

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import helpers.Closable;
+import library.common.helpers.element.Closable;
 import library.dakar_hr.helpers.login.UserLoginPage;
 import library.dakar_hr.nav.NavBarElement;
 import library.dakar_hr.nav.nav_bar_elements.NavBarEmployeeCreation;

@@ -11,7 +11,7 @@ import library.dakar_hr.entities.user.User;
  * @author Steve Brown
  *
  */
-public class UserProvider {
+public class ZZZ_UserProvider {
 
 	public static User userPortal() {
 		return new User("portal2", "123");

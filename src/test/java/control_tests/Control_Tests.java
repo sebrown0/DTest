@@ -25,7 +25,7 @@ import library.dakar_hr.pages.homepage.HomePage;
 import logging.TestResultLogger;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
-import resources.test_data.UserProvider;
+import resources.test_data.ZZZ_UserProvider;
 import xml_reader.config_file.ConfigReader;
 
 /**
@@ -45,7 +45,7 @@ class Control_Tests {
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) throws Exception {
 		// Login to the homepage
-		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());		
+		homepagePayroll = userLogin.loginValidUser(ZZZ_UserProvider.userPortal());		
 		// Load the menu.
 		menu = homepagePayroll.getLeftMenu();
 		// Load the employee details page.

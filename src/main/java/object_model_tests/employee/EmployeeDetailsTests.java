@@ -15,9 +15,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import context_manager.ContextManager;
 import control_builder.PageControl;
-import dto.Employee;
 import library.common.controls.with_text.TextOut;
 import library.common.modal_forms.DropdownCombo;
+import library.dakar_hr.dto.Employee;
 import library.dakar_hr.enums.control_names.EmployeeControlNames;
 import library.dakar_hr.enums.control_names.GroupControlNames;
 import library.dakar_hr.helpers.login.UserLoginPage;
@@ -25,11 +25,11 @@ import library.dakar_hr.left_menu.LeftMenu;
 import library.dakar_hr.object_models.modal_forms.emp_selection.EmployeeSelection;
 import library.dakar_hr.object_models.modules.payroll.left_menu.employees.EmployeeDetails;
 import library.dakar_hr.pages.homepage.HomePage;
+import library.dakar_hr.providers.employee.EmployeeProvider;
 import logging.TestResultLogger;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import providers.employee.EmployeeFromXml_Old;
-import providers.employee.EmployeeProvider;
 import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 

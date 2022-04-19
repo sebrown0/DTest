@@ -30,7 +30,7 @@ import library.element.ElementPointInTime;
 import logging.TestResultLogger;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
-import resources.test_data.UserProvider;
+import resources.test_data.ZZZ_UserProvider;
 import xml_reader.config_file.ConfigReader;
 
 
@@ -48,7 +48,7 @@ public class DkGridEmployeeDetailsTests {
 		
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
-		homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());
+		homepagePayroll = userLogin.loginValidUser(ZZZ_UserProvider.userPortal());
 		menuPayroll = homepagePayroll.getLeftMenu();
 		loadGrid();
 	}		

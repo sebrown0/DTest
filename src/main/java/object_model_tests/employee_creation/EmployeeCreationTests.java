@@ -16,11 +16,11 @@ import library.dakar_hr.nav.NavBarElement;
 import library.dakar_hr.nav.nav_bar_elements.NavBarEmployeeCreation;
 import library.dakar_hr.object_models.modules.payroll.top_right_nav.employees.EmployeeCreation;
 import library.dakar_hr.pages.homepage.HomePage;
+import library.dakar_hr.providers.employee.EmployeeFromXml;
 import logging.TestResultLogger;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import providers.XMLFileProvider;
-import providers.employee.EmployeeFromXml;
 import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
 

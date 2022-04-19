@@ -6,12 +6,6 @@ package dynamic_tests.test_elements;
 import library.common.controls.interfaces.Control;
 import library.common.controls.interfaces.ControlTest;
 
-//import controls.interfaces.Control;
-//import controls.interfaces.ControlTest;
-
-//import controls.interfaces.Control;
-//import controls.interfaces.ControlTest;
-
 /**
  * @author SteveBrown
  * @version 1.0

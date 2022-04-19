@@ -14,7 +14,7 @@ import java.util.List;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
 
-import dynamic_tests.annotations.TestControl;
+import annotations.TestControl;
 import dynamic_tests.finders.ClassFinder;
 import dynamic_tests.finders.MethodFinder;
 import library.dakar_hr.object_models.modules.payroll.left_menu.employees.EmployeeDetails;

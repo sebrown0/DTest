@@ -7,11 +7,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
-import dto.Employee;
+import library.dakar_hr.dto.Employee;
 import library.dakar_hr.enums.EmployeeTitle;
+import library.dakar_hr.providers.employee.EmployeeProvider;
 import providers.XMLFileProvider;
 import providers.employee.EmployeeFromXml_Old;
-import providers.employee.EmployeeProvider;
 import xml_reader.config_file.ConfigReader;
 
 /** 

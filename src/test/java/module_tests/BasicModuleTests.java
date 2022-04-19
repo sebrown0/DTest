@@ -3,11 +3,11 @@
  */
 package module_tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import providers.ModuleNames;
+import library.dakar_hr.providers.ModuleNames;
 
 /**
  * @author Steve Brown

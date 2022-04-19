@@ -15,7 +15,7 @@ import library.dakar_hr.helpers.login.UserLoginPage;
 import library.dakar_hr.object_models.modules.payroll.PayrollModuleElements;
 import library.dakar_hr.pages.homepage.HomePage;
 import providers.XMLFileProvider;
-import resources.test_data.UserProvider;
+import resources.test_data.ZZZ_UserProvider;
 import xml_reader.config_file.ConfigReader;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -45,7 +45,7 @@ class ModuleLoaderTests {
 		// Get a login page, with the required module loaded.
 		userLogin = new UserLoginPage(driver, uri, new PayrollModuleElements(new Company("Mars Incorporated Ltd")));
 		// Get a home page after successful login
-		hp = userLogin.loginValidUser(UserProvider.userPortal());		
+		hp = userLogin.loginValidUser(ZZZ_UserProvider.userPortal());		
 		assertTrue(hp != null);
 	}
 	

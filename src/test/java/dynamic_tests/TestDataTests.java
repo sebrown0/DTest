@@ -21,7 +21,7 @@ import library.dakar_hr.pages.homepage.HomePage;
 import logging.TestResultLogger;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
-import resources.test_data.UserProvider;
+import resources.test_data.ZZZ_UserProvider;
 import site_mapper.jaxb.pom.test_data.TestData;
 import site_mapper.jaxb.pom.test_data.TestDataItem;
 import xml_reader.config_file.ConfigReader;
@@ -45,7 +45,7 @@ class TestDataTests {
 	
 	@BeforeAll
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) {
-		HomePage homepagePayroll = userLogin.loginValidUser(UserProvider.userPortal());		
+		HomePage homepagePayroll = userLogin.loginValidUser(ZZZ_UserProvider.userPortal());		
 		LeftMenu menu = homepagePayroll.getLeftMenu();
 		salDetails = 
 			(SalaryDetails)	menu

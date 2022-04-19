@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import dynamic_tests.annotations.TestControl;
+import annotations.TestControl;
 
 /**
  * @author SteveBrown

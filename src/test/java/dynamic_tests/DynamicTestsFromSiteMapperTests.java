@@ -15,7 +15,7 @@ import library.dakar_hr.helpers.login.UserLoginPage;
 import library.dakar_hr.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
-import resources.test_data.UserProvider;
+import resources.test_data.ZZZ_UserProvider;
 import xml_reader.config_file.ConfigReader;
 
 /**
@@ -35,7 +35,7 @@ class DynamicTestsFromSiteMapperTests {
 	
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) throws Exception {
-		hp = userLogin.loginValidUser(UserProvider.userPortal());
+		hp = userLogin.loginValidUser(ZZZ_UserProvider.userPortal());
 	}	
 
 	@AfterAll
