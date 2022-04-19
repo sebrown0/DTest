@@ -10,6 +10,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import library.common.forms.FormFadeShow;
+import library.content.EmployeeContent;
 import library.helpers.login.UserLoginPage;
 import library.nav.NavBarElement;
 import library.nav.nav_bar_elements.NavBarEmployeeCreation;
@@ -22,7 +23,6 @@ import parameter_resolvers.LoginPageResolverPayroll;
 import providers.XMLFileProvider;
 import resources.test_data.UserProvider;
 import xml_reader.config_file.ConfigReader;
-import zzz_content.zzz_EmployeeContent;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith({ 
@@ -32,7 +32,7 @@ import zzz_content.zzz_EmployeeContent;
 class EmployeeCreationTests {
 	private static HomePage homepage;
 	private static EmployeeCreation empCreation;
-	private static zzz_EmployeeContent emp;
+	private static EmployeeContent emp;
 	private static NavBarElement navEmpWizard;
 	private static EmployeeFromXml empProvider;
 	
