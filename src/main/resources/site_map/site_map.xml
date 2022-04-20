@@ -25,7 +25,7 @@
     <inf:CreationMethod>OverwriteExisting</inf:CreationMethod>
     <inf:RootDir>C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/java</inf:RootDir>
     <inf:ParentPackage>object_models/modules</inf:ParentPackage>
-    <inf:ElementLibrary>C:/Users/SteveBrown/eclipse-workspace/2021/DTest</inf:ElementLibrary>
+    <inf:ElementLibrary>C:/Users/SteveBrown/eclipse-workspace/2021/DakarHR-Library</inf:ElementLibrary>
   </Info>
   
   <DynamicTestInfo>

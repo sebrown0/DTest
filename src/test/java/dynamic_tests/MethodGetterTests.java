@@ -18,7 +18,10 @@ import annotations.TestControl;
 import library.object_models.modules.payroll.left_menu.employees.EmployeeDetails;
 import library.object_models.modules.payroll.left_menu.employees.SalaryDetails;
 import root.finders.ClassFinder;
+import root.finders.ClassInstantiator;
 import root.finders.MethodFinder;
+import root.finders.PomClassFinder;
+import root.finders.PomInstantiator;
 import site_mapper.elements.ElementClass;
 import site_mapper.jaxb.menu_items.MenuItem;
 import site_mapper.jaxb.menu_items.TestElement;
@@ -30,7 +33,9 @@ import site_mapper.jaxb.menu_items.TestElement;
  * @since 1.0
  */
 class MethodGetterTests {
-
+	private static final String FROM_LIBRARY = 
+			"C:/Users/SteveBrown/eclipse-workspace/2021/DakarHR-Library";
+	
 	@Test
 	void getAllMethods() {		
 		List<Method> methods = MethodFinder.getMethodsAnnotatedWith(TestControl.class, AnnotatedClass.class);
@@ -81,7 +86,12 @@ class MethodGetterTests {
 				.setTestPackage("Employees")
 				.setTestClassName("SalaryDetails");
 		
-		Class<?> clazz = ClassFinder.getClazz((ElementClass) salDetails);	
+		ClassFinder finder = new PomClassFinder(FROM_LIBRARY, (ElementClass) salDetails);		
+		Class<?> clazz = finder.getClazz();
+		/*
+		 * THIS WON'T WORK WITHOUT GETTING THE obj USING 
+		 * AN INSTANTIATOR WITH CoreData OBJ, i.e. HomePage.
+		 */
 		Constructor<?> cnstr = clazz.getConstructor();
 		SalaryDetails sal = (SalaryDetails) cnstr.newInstance();	
 		
@@ -102,7 +112,12 @@ class MethodGetterTests {
 				.setTestPackage("Employees")
 				.setTestClassName("SalaryDetails");
 		
-		Class<?> clazz = ClassFinder.getClazz((ElementClass) salDetails);	
+		ClassFinder finder = new PomClassFinder(FROM_LIBRARY, (ElementClass) salDetails);		
+		Class<?> clazz = finder.getClazz();
+		/*
+		 * THIS WON'T WORK WITHOUT GETTING THE obj USING 
+		 * AN INSTANTIATOR WITH CoreData OBJ, i.e. HomePage.
+		 */	
 		Constructor<?> cnstr = clazz.getConstructor();
 		SalaryDetails sal = (SalaryDetails) cnstr.newInstance();	
 		
@@ -124,9 +139,20 @@ class MethodGetterTests {
 				.setTestMenuName("left_menu")
 				.setTestPackage("Employees")
 				.setTestClassName("SalaryDetails");
-		
-		SalaryDetails sal = (SalaryDetails) ClassFinder.getInstantiatedObject((ElementClass) salDetails);	
-		
+		/*
+		 * THIS WON'T WORK WITHOUT A
+		 * INSTANTITED CoreData OBJ, i.e. HomePage.
+		 */
+		ClassInstantiator instantiator = 
+				new PomInstantiator(
+					FROM_LIBRARY, 
+					(ElementClass) salDetails, 
+					null);
+		//	  ----
+					
+		Object obj = instantiator.getInstantiatedClass();
+		SalaryDetails sal = (SalaryDetails) obj;
+					
 		Method m = MethodFinder.getTestMethodOfTypeWithName(sal.getClass(), "CONTAINER", METHOD_NAME);
 		DynamicTest dt = (DynamicTest) m.invoke(sal);
 		assertTrue(dt.getDisplayName().contains(METHOD_NAME));
