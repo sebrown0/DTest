@@ -15,10 +15,10 @@ import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
 
 import annotations.TestControl;
-import dynamic_tests.finders.ClassFinder;
-import dynamic_tests.finders.MethodFinder;
 import library.object_models.modules.payroll.left_menu.employees.EmployeeDetails;
 import library.object_models.modules.payroll.left_menu.employees.SalaryDetails;
+import root.finders.ClassFinder;
+import root.finders.MethodFinder;
 import site_mapper.elements.ElementClass;
 import site_mapper.jaxb.menu_items.MenuItem;
 import site_mapper.jaxb.menu_items.TestElement;

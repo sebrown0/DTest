@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import dynamic_tests.elements.ControlGroup;
 import library.common.controls.button.Button;
 import library.helpers.login.UserLoginPage;
 import library.left_menu.LeftMenu;
@@ -20,6 +19,7 @@ import library.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;
+import root.elements.ControlGroup;
 import xml_reader.config_file.ConfigReader;
 
 /**

@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import dynamic_tests.mappers.TestNode;
+import root.mappers.TestNode;
 
 /**
  * @author SteveBrown

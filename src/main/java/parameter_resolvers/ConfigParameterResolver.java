@@ -19,6 +19,11 @@ import xml_reader.config_file.ConfigReader;
 public class ConfigParameterResolver implements ParameterResolver {
 	public static final String CONFIG_PARAM_ID = ConfigReader.class.getName() + ".PARAM_ID";
 	
+//	static {
+//		System.out.println("->"); 	
+//		System.out.println("->" + ConfigReader.class.getName()); // TODO - remove or log 	
+//	}
+	
 	@Override
 	public boolean supportsParameter(ParameterContext pc, ExtensionContext ec) throws ParameterResolutionException {    
       return pc.getParameter().getType().equals(ConfigReader.class);

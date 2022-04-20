@@ -33,38 +33,44 @@
   
   <dependencies>  	
     <!-- DAKAR - START -->
-    <!-- USING LIBRARY  -->
+    <!-- USING LIBRARY  
     <dependency>
       <groupId>com.dakar.automated_testing.libraries</groupId>
       <artifactId>DakarHR-Library</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
-    
+    -->
     <dependency>
       <groupId>com.dakar.automated_testing</groupId>
       <artifactId>XMLReader</artifactId>
       <version>1.0.0</version>
     </dependency>
+    
     <dependency>
       <groupId>com.dakar.automated_testing</groupId>
       <artifactId>DTestCommon</artifactId>
-      <version>1.2.0</version>
+      <version>1.2.1</version>
     </dependency>
+    
+    
+    <dependency>
+      <groupId>com.dakar.automated_testing</groupId>
+      <artifactId>SiteMapper</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+      <!--
+      
     <dependency>
       <groupId>com.dakar.automated_testing</groupId>
       <artifactId>ContextManager</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-      <dependency>
-        <groupId>com.dakar.automated_testing</groupId>
-        <artifactId>SiteMapper</artifactId>
-        <version>1.0.0</version>
-      </dependency>
+      <version>1.0.1</version>
+    </dependency> 
     <dependency>
       <groupId>com.dakar.automated_testing</groupId>
       <artifactId>ControlBuilder</artifactId>
       <version>1.0.0</version>
     </dependency>
+     -->
     <!-- DAKAR - END -->
 
     <dependency>

@@ -9,14 +9,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 
 import app.xml_content.DynamicTestMapper;
-import dynamic_tests.mappers.DynamicTestApp;
-import library.dakar_hr.entities.company.Company;
-import library.dakar_hr.entities.user.User;
-import library.dakar_hr.helpers.login.UserLoginPage;
-import library.dakar_hr.object_models.modules.payroll.PayrollModuleElements;
-import library.dakar_hr.pages.homepage.HomePage;
+import library.dto.entites.company.Company;
+import library.dto.entites.user.User;
+import library.helpers.login.UserLoginPage;
+import library.object_models.modules.payroll.PayrollModuleElements;
+import library.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
+import root.mappers.DynamicTestApp;
 import xml_reader.config_file.ConfigReader;
 
 /**

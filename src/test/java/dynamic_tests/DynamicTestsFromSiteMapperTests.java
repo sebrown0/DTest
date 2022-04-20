@@ -10,12 +10,13 @@ import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import app.xml_content.DynamicTestMapper;
-import dynamic_tests.mappers.DynamicTestApp;
+//import dynamic_tests.mappers.DynamicTestApp;
 import library.helpers.login.UserLoginPage;
 import library.pages.homepage.HomePage;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.ZZZ_UserProvider;
+import root.mappers.DynamicTestApp;
 import xml_reader.config_file.ConfigReader;
 
 /**
