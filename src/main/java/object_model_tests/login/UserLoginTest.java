@@ -42,11 +42,10 @@ class UserLoginTest { // <- TEST SUITE
 	}
 	
 	@ParameterizedTest
-//	/DTest/src/main/resources/test_data/UserProvider.java
-	@MethodSource("DTest.src.main.resources.test_data.UserProvider#validPortalUser") // <- TEST DATA
+	@MethodSource("resources.test_data.UserProvider#validPortalUser") // <- TEST DATA
 	@Tag("R20")
 	@Tag("T3834")	
-	void validUserLogin(User user) {		
+	void validUserLogin(User user) {
 		// Supply valid user, login and check home page is loaded.
 		UserLoginPage userLogin = 
 				new UserLoginPage(
@@ -58,7 +57,7 @@ class UserLoginTest { // <- TEST SUITE
 	}
 		
 	@ParameterizedTest
-	@MethodSource("test_data.UserProvider#invalidUser")
+	@MethodSource("resources.test_data.UserProvider#invalidUser")
 	@Tag("R20")
 	@Tag("T3835")
 	void invalidUserLogin(User user) {

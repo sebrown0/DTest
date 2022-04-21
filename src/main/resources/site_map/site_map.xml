@@ -23,7 +23,9 @@
     <inf:Author>SteveBrown</inf:Author>
     <inf:Version>1.0.0</inf:Version>
     <inf:CreationMethod>OverwriteExisting</inf:CreationMethod>
+    <!-- 
     <inf:RootDir>C:/Users/SteveBrown/eclipse-workspace/2021/DTest/src/main/java</inf:RootDir>
+     -->
     <inf:ParentPackage>object_models/modules</inf:ParentPackage>
     <inf:ElementLibrary>C:/Users/SteveBrown/eclipse-workspace/2021/DakarHR-Library</inf:ElementLibrary>
   </Info>
@@ -126,6 +128,7 @@
             </ct:Container>
           </mit:Container>
         </MenuItem>
+      <!--   
         <MenuItem
           xmlns="Menu"
           xmlns:ct="Container"
@@ -151,6 +154,8 @@
             </ct:Container>
           </mit:Container>
         </MenuItem>
+      
+       -->
       </mod:LeftMenu>
       <!-- 
       <mod:TopRightNav>

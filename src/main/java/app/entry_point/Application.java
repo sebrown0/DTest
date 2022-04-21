@@ -3,6 +3,8 @@
  */
 package app.entry_point;
 
+import app.start_up.StartUp;
+
 /**
  * @author SteveBrown
  * @version 1.0
@@ -24,8 +26,13 @@ public class Application {
 		
 //		DynamicTestsFromSiteMapperTests app = new DynamicTestsFromSiteMapperTests();
 //		app.runTests();
+		
 //		StartUp startUp = new StartUp(args);
 //		startUp.welcome().runTests().finish();
+		
+		String[] argss = {"Payroll", "login"};
+		StartUp startUp = new StartUp(argss);
+		startUp.welcome().runTests().finish();
 	}
 	
 }

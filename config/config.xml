@@ -20,7 +20,8 @@
 	<WebDriver>Google</WebDriver>
 	
 	<Reporting>
-		<Strategy>Log</Strategy>
+  <!-- Log -->
+		<Strategy>Console</Strategy>
 		<LogDir>./logs</LogDir>
 		<Level>All</Level>
 	</Reporting>
