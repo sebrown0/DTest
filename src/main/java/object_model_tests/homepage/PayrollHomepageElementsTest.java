@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import library.helpers.login.UserLoginPage;
-import library.nav.quick_links.QuickLinksPayroll;
+import library.object_models.modules.common.nav.quick_links.QuickLinksPayroll;
 import library.pages.homepage.HomePage;
 import library.providers.ModuleNames;
 import library.top_right_nav_bar.ElementChecker;

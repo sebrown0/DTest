@@ -3,6 +3,10 @@
  */
 package dynamic_tests;
 
+import java.util.Optional;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DynamicContainer;
@@ -12,6 +16,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import app.xml_content.DynamicTestMapper;
 import library.helpers.login.UserLoginPage;
 import library.pages.homepage.HomePage;
+import library.xml_file.FileLocator;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;
@@ -29,10 +34,7 @@ import xml_reader.config_file.ConfigReader;
 	LoginPageResolverPayroll.class })
 class DynamicTestsFromSiteMapperTests {
 	private static HomePage hp;	
-	
-	private static final String XML_SOURCE = 
-			"./src/main/resources/site_map/site_map.xml";
-	
+	private static final Logger LOGGER = LogManager.getLogger(DynamicTestsFromSiteMapperTests.class);
 	@BeforeAll	
 	public static void setup(ConfigReader configReader, UserLoginPage userLogin) throws Exception {
 		hp = userLogin.loginValidUser(UserProvider.userPortal());
@@ -40,19 +42,26 @@ class DynamicTestsFromSiteMapperTests {
 
 	@AfterAll
 	public static void tearDown() {
-		hp.close();
+		hp.close();		
 	}
 
 	@TestFactory	 
 	DynamicContainer runTests() {
-		app.xml_content.DynamicTestApp content = 
-				DynamicTestMapper.getDynamicTestContent(XML_SOURCE).get();
+		final Optional<String> XML_SOURCE = new FileLocator().getPathToFile();
 		
-		DynamicTestApp app = 
-				new DynamicTestApp(
-						content, 
-						hp);		
-		return app.getAppTests();
+		if(XML_SOURCE.isPresent()){
+			LOGGER.info(String.format("Get content for [%s]", XML_SOURCE.get()));
+			
+			app.xml_content.DynamicTestApp content = 
+					DynamicTestMapper.getDynamicTestContent(XML_SOURCE.get()).get();
+			
+			LOGGER.info("Got content. Getting tests");
+			
+			return new DynamicTestApp(content, hp).getAppTests();
+		}else {
+			LOGGER.error("Could not find XML source");
+		}
+		return null;		
 	}
 	
 }

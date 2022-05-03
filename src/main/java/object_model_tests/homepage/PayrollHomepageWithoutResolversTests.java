@@ -13,7 +13,7 @@ import factories.DriverFactory;
 import library.dto.entites.company.Company;
 import library.dto.entites.user.User;
 import library.helpers.login.UserLoginPage;
-import library.nav.quick_links.QuickLinksPayroll;
+import library.object_models.modules.common.nav.quick_links.QuickLinksPayroll;
 import library.object_models.modules.payroll.PayrollModuleElements;
 import library.pages.homepage.HomePage;
 import library.providers.ModuleNames;

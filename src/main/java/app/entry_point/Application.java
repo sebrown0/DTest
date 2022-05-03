@@ -13,6 +13,11 @@ import app.start_up.StartUp;
  */
 public class Application {
 		
+	public static void run(String[] args) {		
+		StartUp startUp = new StartUp(args);
+		startUp.welcome().runTests().finish();
+	}
+	
 	/**
 	 * @param args
 	 * 	[0] module, i.e. Payroll
