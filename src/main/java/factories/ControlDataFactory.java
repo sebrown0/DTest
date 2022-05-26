@@ -10,8 +10,8 @@ import control_builder.control_getters.single.ControlGetterComboWriteAndSelect;
 import control_builder.control_getters.single.ControlGetterTextSelect;
 import control_data.ControlData;
 import core_data.CoreData;
-import library.common.controls.interfaces.ControlName;
-import library.common.controls.interfaces.ControlTest;
+import element_library.common.controls.interfaces.ControlName;
+import element_library.common.controls.interfaces.ControlTest;
 import utils.text_writer.TextWriterComboDefault;
 import utils.text_writer.TextWriterComboMulti;
 
@@ -41,10 +41,10 @@ public class ControlDataFactory {
 //	}
 	
 	public ControlDataFactory buildButton(ControlName cntrlName, By containerLoc, ControlTest cntrolTest) {
-		controlData = 
-				new ControlData(
-						cntrlName, 
-						new ControlGetterButton(cntrlName.getName(), coreData, containerLoc, cntrolTest));
+//		controlData = 
+//				new ControlData(
+//						cntrlName, 
+//						new ControlGetterButton(cntrlName.getName(), coreData, containerLoc, cntrolTest));
 		
 		return this;
 	}
@@ -60,10 +60,10 @@ public class ControlDataFactory {
 	
 	public ControlDataFactory buildDefaultComboWriteAndSelect(ControlName cntrlName, By containerLoc, By resultLoc) {
 		TextWriterComboDefault writer = new TextWriterComboDefault(coreData);
-		controlData = 
-				new ControlData(
-						cntrlName, 
-						new ControlGetterComboWriteAndSelect(cntrlName.getName(), coreData,containerLoc,	resultLoc, writer));
+//		controlData = 
+//				new ControlData(
+//						cntrlName, 
+//						new ControlGetterComboWriteAndSelect(cntrlName.getName(), coreData,containerLoc,	resultLoc, writer));
 		
 		return this;
 	}
@@ -76,10 +76,10 @@ public class ControlDataFactory {
 								.findElement(containerLoc)
 								.findElement(By.cssSelector("input[class='select2-search__field']")));
 		
-		controlData = 
-				new ControlData(
-						cntrlName, 
-						new ControlGetterComboWriteAndSelect(cntrlName.getName(), coreData, containerLoc,	resultLoc, writer));
+//		controlData = 
+//				new ControlData(
+//						cntrlName, 
+//						new ControlGetterComboWriteAndSelect(cntrlName.getName(), coreData, containerLoc,	resultLoc, writer));
 		
 		return this;
 	}
@@ -94,10 +94,10 @@ public class ControlDataFactory {
 //	}
 	
 	public ControlDataFactory buildTextSelect(ControlName cntrlName, By containerLoc) {
-		controlData = 
-				new ControlData(
-						cntrlName, 
-						new ControlGetterTextSelect(cntrlName.getName(), coreData, containerLoc));
+//		controlData = 
+//				new ControlData(
+//						cntrlName, 
+//						new ControlGetterTextSelect(cntrlName.getName(), coreData, containerLoc));
 		
 		return this;
 	}

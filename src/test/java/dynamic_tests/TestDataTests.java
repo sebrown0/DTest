@@ -11,9 +11,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-//import dynamic_tests.elements.ControlGroup;
-import library.common.controls.data.InsertItem;
-import library.common.controls.interfaces.DisplayedText;
+import element_library.common.controls.data.InsertItem;
+import element_library.common.controls.interfaces.DisplayedText;
 import library.helpers.login.UserLoginPage;
 import library.left_menu.LeftMenu;
 import library.object_models.modules.payroll.left_menu.employees.SalaryDetails;

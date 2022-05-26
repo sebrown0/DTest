@@ -37,4 +37,8 @@ public class ConfigFileContents {
 	public static String getUri(XMLFile xmlFile) {
 		return xmlFile.getElement("URI").getTextContent();
 	}
+
+	public static String getSiteMapXmlLoc(XMLFile xmlFile) {
+		return xmlFile.getElement("SiteMapXMLLoc").getTextContent();
+	}
 }

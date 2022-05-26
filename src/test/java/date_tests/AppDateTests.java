@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import library.date_picker.AppDates;
+import element_library.date_picker.AppDates;
 
 class AppDateTests {
 

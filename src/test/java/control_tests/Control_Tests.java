@@ -13,10 +13,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import library.common.controls.button.Button;
-import library.common.controls.combos.ComboSelectFromList;
-import library.common.controls.with_text.TextOut;
-import library.common.controls.with_text.TextSelect;
+import element_library.common.controls.button.Button;
+import element_library.common.controls.combos.ComboSelectFromList;
+import element_library.common.controls.with_text.TextOut;
+import element_library.common.controls.with_text.TextSelect;
 import library.helpers.login.UserLoginPage;
 import library.left_menu.LeftMenu;
 import library.object_models.modules.payroll.left_menu.employees.SalaryDetails;

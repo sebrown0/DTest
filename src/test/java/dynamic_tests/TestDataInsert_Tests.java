@@ -12,7 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import library.common.controls.data_inserters.TestDataInserter;
+import element_library.common.controls.data_inserters.TestDataInserter;
 import library.data_inserters.EmployeeLookupByName;
 import library.helpers.login.UserLoginPage;
 import library.left_menu.LeftMenu;

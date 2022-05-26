@@ -15,8 +15,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import context_manager.ContextManager;
 import control_builder.PageControl;
-import library.common.controls.with_text.TextOut;
-import library.common.modal_forms.DropdownCombo;
+import element_library.common.controls.with_text.TextOut;
+import element_library.common.modal_forms.DropdownCombo;
 import library.dto.Employee;
 import library.enums.control_names.EmployeeControlNames;
 import library.enums.control_names.GroupControlNames;

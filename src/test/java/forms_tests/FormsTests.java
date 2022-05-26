@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import library.common.modal_forms.DropdownCombo;
+import element_library.common.modal_forms.DropdownCombo;
 import library.enums.control_names.GroupControlNames;
 import library.helpers.login.UserLoginPage;
 import library.left_menu.LeftMenu;

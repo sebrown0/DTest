@@ -5,6 +5,7 @@
 	  1. AUT details
 	  2. Browser/Webdriver
 	  3. Reporting  
+      4. Sitemapper
  -->
 <Config>
 	<ApplicationUnderTest>
@@ -25,4 +26,7 @@
 		<LogDir>./logs</LogDir>
 		<Level>All</Level>
 	</Reporting>
+    <SiteMapper>
+      <SiteMapXMLLoc>./src/main/resources/site_map/site_map.xml</SiteMapXMLLoc>
+    </SiteMapper>
 </Config>

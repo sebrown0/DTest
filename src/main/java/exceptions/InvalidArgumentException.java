@@ -18,6 +18,6 @@ public class InvalidArgumentException extends Exception {
 	public InvalidArgumentException(Class<?> clazz, String errMsg) {
 		super(errMsg);
 		Logger logger = LogManager.getLogger(clazz.getClass());	
-		logger.info(errMsg);
+		logger.error(errMsg);
 	}
 }

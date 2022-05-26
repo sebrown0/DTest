@@ -16,11 +16,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import app.xml_content.DynamicTestMapper;
 import library.helpers.login.UserLoginPage;
 import library.pages.homepage.HomePage;
-import library.xml_file.FileLocator;
 import parameter_resolvers.ConfigParameterResolver;
 import parameter_resolvers.LoginPageResolverPayroll;
 import resources.test_data.UserProvider;
 import root.mappers.DynamicTestApp;
+import xml_reader.XmlSourceResolver;
 import xml_reader.config_file.ConfigReader;
 
 /**
@@ -33,11 +33,16 @@ import xml_reader.config_file.ConfigReader;
 	ConfigParameterResolver.class,
 	LoginPageResolverPayroll.class })
 class DynamicTestsFromSiteMapperTests {
-	private static HomePage hp;	
-	private static final Logger LOGGER = LogManager.getLogger(DynamicTestsFromSiteMapperTests.class);
+	private static HomePage hp;
+	private static ConfigReader configReader;
+	
+	private static final Logger LOGGER = 
+			LogManager.getLogger(DynamicTestsFromSiteMapperTests.class);
+	
 	@BeforeAll	
-	public static void setup(ConfigReader configReader, UserLoginPage userLogin) throws Exception {
+	public static void setup(ConfigReader _configReader, UserLoginPage userLogin) throws Exception {
 		hp = userLogin.loginValidUser(UserProvider.userPortal());
+		configReader = _configReader;
 	}	
 
 	@AfterAll
@@ -46,14 +51,17 @@ class DynamicTestsFromSiteMapperTests {
 	}
 
 	@TestFactory	 
-	DynamicContainer runTests() {
-		final Optional<String> XML_SOURCE = new FileLocator().getPathToFile();
+	DynamicContainer runTests() {		
+		
+		XmlSourceResolver resolver = new XmlSourceResolver(configReader.getSiteMapXmlLocation());
+		final Optional<String> XML_SOURCE = resolver.getPathToFile();
 		
 		if(XML_SOURCE.isPresent()){
-			LOGGER.info(String.format("Get content for [%s]", XML_SOURCE.get()));
+			String src = XML_SOURCE.get();
+			LOGGER.info(String.format("Getting content for [%s]", src));
 			
 			app.xml_content.DynamicTestApp content = 
-					DynamicTestMapper.getDynamicTestContent(XML_SOURCE.get()).get();
+					DynamicTestMapper.getDynamicTestContent(src).get();
 			
 			LOGGER.info("Got content. Getting tests");
 			

@@ -3,7 +3,6 @@ package object_model_tests.login;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,8 +14,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import library.common.controls.combos.ComboWriteAndSelect;
-import library.common.controls.interfaces.Control;
+import element_library.common.controls.combos.ComboWriteAndSelect;
 import library.dto.entites.company.Company;
 import library.dto.entites.user.User;
 import library.helpers.login.UserLoginPage;

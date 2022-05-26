@@ -59,4 +59,10 @@ public class ConfigReader implements WebDriverGetter, ResultWritterGetter, AppPa
 		String res = ConfigFileContents.getUri(xmlFile); 
 		return res;
 	}
+
+	public String getSiteMapXmlLocation() {
+		String res = ConfigFileContents.getSiteMapXmlLoc(xmlFile); 
+		return res;
+	}
+
 }

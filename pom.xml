@@ -35,17 +35,20 @@
   <dependencies>  	
     <!-- DAKAR - START -->
     <!-- USING LIBRARY -->
-    <dependency>
-      <groupId>com.dakar.automated_testing.libraries</groupId>
-      <artifactId>ElementLibrary</artifactId>
-      <version>0.0.2-SNAPSHOT</version>
-    </dependency>
-      
+    <!--      
     <dependency>
       <groupId>com.dakar.automated_testing.libraries</groupId>
       <artifactId>DakarHR-Library</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
+    
+    
+    <dependency>
+      <groupId>com.dakar.automated_testing.libraries</groupId>
+      <artifactId>ElementLibrary</artifactId>
+      <version>0.0.2-SNAPSHOT</version>
+    </dependency> 
+     -->
     
     <dependency>
       <groupId>com.dakar.automated_testing</groupId>
